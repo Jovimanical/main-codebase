@@ -940,7 +940,7 @@ class Booking(BookingDetailMixin, BookingMixin, TimeStampedModel):
             d = d + relativedelta(days=w * 7)
         return d
 
-    def rebook_classes(self, include_today=True):
+    def rebook_classes(self, include_today=True,current_day=None):
         weekday_match = {
             "Monday": 0,
             "Tuesday": 1,
@@ -951,7 +951,7 @@ class Booking(BookingDetailMixin, BookingMixin, TimeStampedModel):
             "Sunday": 6,
         }
         weekdays, numbers = self.get_weekdays_and_no_of_weeks()
-        today = timezone.now()
+        today = current_day or timezone.now()
         sessions = []
         for i, x in enumerate(weekdays):
             weekday_no = weekday_match[x["weekday"]]

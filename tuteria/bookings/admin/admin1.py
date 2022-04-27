@@ -255,8 +255,10 @@ class BankTransferFilter(admin.SimpleListFilter):
             return queryset.filter(status=Booking.DELIVERED)
         return queryset
 
+
 class BookingTypeFilter(admin.SimpleListFilter):
     pass
+
 
 class BookingsEndingSoonFilter(admin.SimpleListFilter):
     title = _("ending_soon")  # or use _('country') for translated title
@@ -307,11 +309,18 @@ def export_owed_as_json(modeladmin, request, queryset):
 export_owed_as_json.short_description = "Total Amount Calculation"
 
 
+class NewInput(forms.DateInput):
+    input_type = "date"
+
+
 class UpdateActionForm(ActionForm):
-    dont_include_today = forms.BooleanField(required=False)
+    dont_include_today = forms.BooleanField(
+        required=False,
+    )
     remark = forms.CharField(
         widget=forms.Textarea(attrs=dict(rows=2, placeholder="remarks")), required=False
     )
+    start_date = forms.DateField(required=False, widget=NewInput())
     email = forms.EmailField(required=False)
     agent = forms.ModelChoiceField(
         required=False, queryset=Agent.objects.filter(type=Agent.CUSTOMER_SUCCESS)
@@ -333,7 +342,7 @@ class BookingAdmin(ImportExportMixin, admin.ModelAdmin):
         "remark",
         "agent",
         "till_booking_closes",
-        'transport_fare',
+        "transport_fare",
         "total_price",
         "booking_level",
         "refund_button",
@@ -532,10 +541,14 @@ class BookingAdmin(ImportExportMixin, admin.ModelAdmin):
             x.pay_tutor_for_classes_taught()
 
     def place_new_booking_between_client_and_tutor(self, request, queryset):
+        import datetime
         a = request.POST.get("dont_include_today")
+        today = request.POST.get('start_date')
+        if today:
+            today = datetime.datetime.strptime(today,"%Y-%m-%d")
         w = True if not a else False
         for x in queryset.all():
-            x.rebook_classes(include_today=w)
+            x.rebook_classes(include_today=w,current_day=today)
 
     def update_booking_level(self, request, queryset):
         for o in queryset:

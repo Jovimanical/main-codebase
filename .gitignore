@@ -81,3 +81,4 @@ compose/haproxy*
 .env
 venv_*
 venv*
+.pytest_cache

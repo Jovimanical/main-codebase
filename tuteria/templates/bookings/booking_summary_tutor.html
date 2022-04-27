@@ -271,7 +271,7 @@ Tunde on 08179265673.
                     <span class="rating">
                         {% if request.is_featured %}
                         {% for score in review.score_array %}<span>★</span>{% endfor %}
-                        {% else %}review.commenter.first_name
+                        {% else %}
                         {% for score in review.score_array %}<i class="glyphicon glyphicon-star"></i>
                         {% endfor %}
                         {% endif %}
@@ -403,7 +403,7 @@ Tunde on 08179265673.
     </div>
     {% endblock %}
     {% block request_section %}
-    <section class="row protection large-padding">
+    {% comment %} <section class="row protection large-padding">
         <div class="page-container-full">
             <div class="row">
                 <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
@@ -425,7 +425,7 @@ Tunde on 08179265673.
                 </div>
             </div>
         </div>
-    </section>
+    </section> {% endcomment %}
     {% endblock request_section %}
     {% block javascript %}
     {{ block.super }}

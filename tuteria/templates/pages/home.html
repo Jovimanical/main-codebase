@@ -793,7 +793,7 @@ section.value-proposition p {
 
 {% endblock %}
 {% block request_section %}
-<section class="row protection large-padding">
+{% comment %} <section class="row protection large-padding">
   <div class="page-container-full">
     <div class="row">
     {% if not request.user.is_tutor %}
@@ -834,7 +834,7 @@ section.value-proposition p {
  
   </div>
 </div>
-</section>
+</section> {% endcomment %}
 {% endblock request_section %}
 
 {% block javascript %}

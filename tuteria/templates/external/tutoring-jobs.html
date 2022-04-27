@@ -1,0 +1,279 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles bootstrap_pagination humanize add_attr cloudinary bootstrap3 %}
+{% block title %}Tutoring Jobs in {{ region }} | Tuteria Nigeria{% endblock title %}
+{% block css %}
+    {{ block.super }}
+    <style>
+    .carousel.fade .item .background {
+    height: 260px;
+    }
+    .content-carousel {
+    min-height: 210px;
+    }
+    @media(max-width: 768px){
+      .carousel.fade .item .background {
+      height: 330px;
+      }
+    }
+    @media (max-height: 650px) and (max-width: 430px){
+    .content-carousel {
+        min-height: 170px !important;
+    }
+  }
+    @media (max-width: 720px){
+    .content-carousel {
+        min-height: 170px !important;
+        height: 170px !important;
+    }
+  }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/tutoring-jobs.css' %}"/>
+
+{% endblock %}
+{% block carousel_content %}
+
+    <div class="col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center">
+        {% block custom_heading %}
+          <div class="row">
+            <div class="text-left">
+                <h2 class="myh2"><b class="white">Tutoring Jobs</b></h2>
+
+                <p>
+                   Find new tutoring opportunities in your area
+                </p>
+
+            </div>
+          </div>           
+
+        {% endblock custom_heading %}
+
+    </div>
+{% endblock %}
+{% block main_content %}
+<div class="row">
+  <div class="body-content clearfix">
+
+        <div class="bg-color2">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-sm-3 hidden-xs">
+                <div class="block-section-sm side-right">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <p><strong>Sort by: </strong></p>
+                    </div>
+                    <div class="col-xs-6">
+                      <p class="text-right">
+                        <strong>Relevance</strong> - <a href="#" class="link-black"><strong>Date</strong></a>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="result-filter">
+                    <h5 class="no-margin-top font-bold margin-b-20 "><a href="#s_collapse_1" data-toggle="collapse">Salary Estimate <i class="fa ic-arrow-toogle fa-angle-right pull-right"></i> </a></h5>
+                    <div class="collapse in" id="s_collapse_1">
+                      <div class="list-area">
+                        <ul class="list-unstyled">
+                          <li>
+                            <a href="#">$50,000+</a> (16947)
+                          </li>
+                          <li>
+                            <a href="#">$70,000+</a> (13915)
+                          </li>
+                          <li>
+                            <a href="#">$90,000+</a> (9398)
+                          </li>
+                          <li>
+                            <a href="#">$110,000+</a> (4112)
+                          </li>
+                          <li>
+                            <a href="#">$130,000+</a> (1864)
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <h5 class="font-bold  margin-b-20"><a href="#s_collapse_5" data-toggle="collapse">Job Type <i class="fa ic-arrow-toogle fa-angle-right pull-right"></i></a> </h5>
+                    <div class="collapse in" id="s_collapse_5">
+                      <div class="list-area">
+                        <ul class="list-unstyled ">
+                          <li>
+                            <a href="#">Full-time </a> (558)
+                          </li>
+                          <li>
+                            <a href="#">Part-time </a> (438)
+                          </li>
+                          <li>
+                            <a href="#">Contract </a> (313)
+                          </li>
+                          <li>
+                            <a href="#">Internship</a> (169)
+                          </li>
+                          <li>
+                            <a href="#">Temporary  </a> (156)
+                          </li>
+                        </ul>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-sm-9 col-xs-12">
+              
+                <!-- box listing -->
+                <div class="block-section-sm box-list-area">
+                  <div class="visible-xs">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <select name="" id="" class="form-control"><option value="">By State</option></select>
+                      </div>
+                      <div class="col-xs-6">                      
+                        <select name="" id="" class="form-control">
+                        <option value="">By Price</option></select>
+                      </div>
+                    </div>                    
+                    </div>
+                  <!-- desc top -->
+                  <div class="row hidden-xs">
+                    <div class="col-sm-6  ">
+                      <p class="font-head color-black">{{paginator.count}} open tutoring jobs in Lagos</p>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="text-right">
+                        Jobs {{page_obj.start_index}} to {{page_obj.end_index}} of {{paginator.count}}
+                      </p>
+                    </div>
+                  </div><!-- end desc top -->
+
+                  <div class="box-list">
+                    {% for job in object_list %}
+                    <!-- item list -->                    
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 mobile-padding">
+                        <div class="row">
+                        <div class="col-sm-9 col-md-9 col-lg-9">
+                          <h3 class="no-margin-top">
+                          <a href="{% url 'job-details' job.slug %}" class="">
+
+                          {% if job.is_parent_request %}Home Tutor in {{job.get_vicinity}}
+                            {% else %}{{job.request_subjects.0}} Student in {{job.get_vicinity}}
+                          {% endif %}</a></h3>
+                          <p class="">{{job.expectation}}</p>
+                          {% if job.request_subjects|length > 1 %}
+                             
+                          <div><span class="color-black brightgreen font-head">Subjects:</span> <span class="color-white-mute">{% for subject in job.request_subjects %}
+                            {{subject|title}} {% if not forloop.last %},
+                            {% endif %}
+                          {% endfor %}</span></div>
+                           {% endif %} 
+                          <div class="padding-bottom-25 {% if job.request_subjects|length > 1 %} padding-top-10 {% endif %}">
+                            <span class="brightblue font-head">Client: {{job.first_name}},</span> <span class="color-white-mute ">{{job.created|naturaltime}}</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-3 col-md-offset-1 col-lg-offset-1 col-md-2 col-lg-2 space-for-mobile">
+                          <a href="{% url 'job-details' job.slug %}" class="btn btn-primary col-xs-12 action-btn">
+                              View Job
+                          </a>
+                          <div class="text-center font-head text-danger col-xs-12 padding-top-10">
+                            {{job.remaining_slot}} slot left
+                          </div>
+                        </div>
+                          
+                        </div>                          
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end item list -->
+  
+                    {% endfor %}                    
+                  </div>
+                  <!-- pagination -->
+                    <div class="pagination-container pull-left margin-top-15">
+                        <nav class="pagination-margin">
+                            {% bootstrap_paginate page_obj range=5 first_label="&#x2190;" last_label="&#x2192;" show_prev_next="false" show_first_last="true" %}
+                        </nav>
+                    </div>
+              
+                  <!-- pagination -->
+                  
+                </div><!-- end box listing -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- modal need login -->
+        <div class="modal fade" id="modal-email">
+          <div class="modal-dialog modal-md">
+            <div class="modal-content">
+              <form>
+                <div class="modal-header ">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title">Send this job to yourself or a friend:</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>From my email address</label>
+                    <input type="email" class="form-control " placeholder="Enter Email">
+                  </div>
+                  <div class="form-group">
+                    <label>To email address</label>
+                    <input type="email" class="form-control " placeholder="Enter Email">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Comment (optional)</label>
+                    <textarea class="form-control" rows="6" placeholder="Something Comment"></textarea>
+                  </div>
+                  <div class="checkbox flat-checkbox">
+                    <label>
+                      <input type="checkbox"> 
+                      <span class="fa fa-check"></span>
+                      Send a copy to my email address?
+                    </label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-theme" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success btn-theme">Send</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div><!-- end modal  need login -->        
+  </div>
+</div>
+{% endblock %}
+{% block request_section %}{% endblock %}
+{% block footer %}
+<footer class="main-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <ul class="list-inline link-footer text-center-xs">
+          <li><a href="/">Home</a></li>
+          <li><a href="{% url 'why_use' %}">About Us</a></li>
+          <li><a href="{% url 'payment_policies' %}">Policies</a></li>
+          <li><a href="mailto:info@tuteria.com">Email Us</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 ">
+        <p class="text-center-xs hidden-lg hidden-md hidden-sm">Stay Connect</p>
+        <div class="socials text-right text-center-xs">
+          <a href="//facebook.com/tuteriacorp" target="_blank"><i class="fa fa-facebook"></i></a>
+          <a href="//twitter.com/tuteriacorp" target="_blank"><i class="fa fa-twitter"></i></a>
+          <a href="//plus.google.com/114015908906926908587/" target="_blank"><i class="fa fa-google-plus"></i></a>
+          {# <a href="#"><i class="fa fa-linkedin"></i></a> #}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock footer %}
+{% block bottom_footer %}
+{% endblock %}

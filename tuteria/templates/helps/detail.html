@@ -1,0 +1,47 @@
+{% extends 'helps/home.html' %}
+{% load template_utils %}
+{% load activelink %}
+{% block sidebar_topics %}
+{% for category in parents %}
+<li class="sub-item {% if object.category.parent_cat == category %}active{% endif %}">
+	<a href="javascript:void(0)">{{ category.name }}</a>
+	<ul class="nav nav-stacked">
+		{% for sub_category in category.sub_categories.all %}
+		<li class="">		
+			<a class="parentArticle {% if request.path == sub_category.get_absolute_url %}active{% endif %}" href="{{sub_category.get_absolute_url}}">
+				{{ sub_category.name }}
+			</a>
+			{# <ul class="spec nav-stacked {% if object.category.get_absolute_url != sub_category.get_absolute_url %}hide{% endif %}"> #}
+				{# {% for article in sub_category.article_set.all %} #}
+				{# <li><a class="{% if object == article %}active{% endif %}" href="{{article.get_absolute_url}}"> #}
+					{# {{article.question}}</a> #}
+				{# </li> #}
+				{# {% endfor %} #}
+			{# </ul> #}
+		</li>
+		{% endfor %}
+
+	</ul>
+</li>
+{% endfor %}
+{% endblock sidebar_topics %}
+{# {% block breadcrumb %} #}
+{# <ol class="breadcrumb"> #}
+	{# {% if object.category.parent %} #}
+	{# <li><a href="{{ object.category.parent.get_absolute_url }}">{{ object.category.parent.name }}</a></li> #}
+	{# {% endif %} #}
+	{# <li><a href="{{ object.category.get_absolute_url }}">{{object.category.name}}</a></li> #}
+	{# <li><a class="active" href="{{ object.get_absolute_url }}">{{ object.question }}</a></li> #}
+{# </ol> #}
+{# {% endblock breadcrumb %} #}
+{% block article_block %}
+<div class="row row-space-6 row-space-top-6 help-spacing">
+  <div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0 help-content text-copy navtree-content breadcrumbs-content">
+  <h1 class="h2">{{ object.question }}</h1>
+  <div class="text-copy" data-swiftype-index="true">
+	{% render_as_template object.body %}
+  </div>
+</div>
+</div>
+<div class="hp-padding-btm-30 row"></div>
+{% endblock %}

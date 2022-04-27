@@ -1,0 +1,69 @@
+{% load staticfiles activelink %}
+<div id="mobile_navigation" class="navbar navbar-subnav-1 {% if not mobile_display %}visible-xs {% else %}hidden{% endif %} {{ fixed_to_top }}">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            {% if not display_sidebar %}
+
+                <button type="button" class="navbar-toggle toggle-left hidden-lg" data-toggle="sidebar"
+                        data-target=".sidebar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            {% endif %}
+            <button type="button" class="hidden search toggle-right navbar-toggle" data-toggle="sidebar"
+                    data-target=".sidebar">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+            {% if btnn %}
+                <!--{% if user_profile %}
+    {% if user_profile.application_status < 2 %}
+    <a href="{% url 'registration:tutor_landing' %}"
+    class="changing_btn btn btn-tutor pull-right">Become
+    a tutor</a>
+    {% endif %}
+    {% if user_profile.application_status == user_profile.PENDING %}
+    <a href="{% url 'registration:tutor_landing' %}"
+    class="changing_btn btn btn-tutor pull-right">Pending
+    Review</a>
+    {% endif %}
+    {% if user_profile.application_status == user_profile.VERIFIED  and user_profile.failed_skills_count %}
+    <a href="{% url 'users:subject_creation_landing' %}"
+    class="btn btn-tutor pull-right changing_btn">Create Subject</a>
+    {% endif %}
+    {% else %}
+    <a href="{% url 'registration:tutor_landing' %}"
+    class="changing_btn btn btn-tutor pull-right">Become
+    a tutor</a>
+    {% endif %}-->
+
+            {% endif %}
+
+
+            <a id="mobile-logo" class="logo {% if search %}hidden{% endif %}"
+               href="{% if not making_booking %}{% url 'home' %}{% else %}javascript:void(0){% endif %}">
+                <span class="nav-logo"></span>
+            </a>
+
+            {% if search %}
+                <form action="{% url 'skill_search' %}" id="{{ form_id }}" class=" navbar-form navbar-left" method="get"
+                      name="search-form">
+                    <div class="input-group top-search">
+                        <input type="text" id="mobile_search_form22" required="true" name="query"
+                               class="gui-input form-control "
+                               placeholder="{{ search_placeholder }}">
+        <span class="input-group-btn" style="width:0px;">
+
+        </span>
+        <span class="input-group-btn">
+        <button class="btn" style="" type="submit"><i
+                class="glyphicon glyphicon-search"></i></button>
+        </span>
+                    </div>
+                </form>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>

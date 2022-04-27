@@ -1,0 +1,14 @@
+version: '2'
+services:
+  app:
+    env_file:
+      - ./env/test.env
+    image: registry.gitlab.com/tuteria/tuteria
+    restart: always
+    command: /scripts/invoke.sh
+
+  flask:
+    image: registry.gitlab.com/tuteria/tuteria-admin
+    env_file:
+      - ./env/test.env
+    restart: always

@@ -1,0 +1,107 @@
+{% extends 'skills/includes/base_booking_list.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary activelink humanize %}
+{% block title %}My Requests - Tuteria{% endblock title %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        @media (min-height: 800px) {
+            .space_eater {
+                height: 200px;
+            }
+        }
+    </style>
+{% endblock css %}
+{% block db_summary %}
+    
+{% endblock db_summary %}
+{% block sidebar %}
+    <div class="visible-xs row">
+        <div class="header-2 visible-xs">
+            <div class="navy">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{% url 'users:user_bookings' %}"
+                           aria-selected="{% ifactive 'users:requests' %}true{% else %}false{% endifactive %}"
+                           class="sidenav-item">My Requests</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs row">
+        <div class="sidenav ">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="{% url 'users:user_bookings' %}"
+                       aria-selected="{% ifactive 'users:requests' %}true{% else %}false{% endifactive %}"
+                       class="sidenav-item">My Requests</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock sidebar %}
+{#{% load activelink %}#}
+{% block page_title %}<h4>Manage Requests</h4>{% endblock %}
+
+{% block object_table %}
+    {% if object_list|length > 0 %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                <td>Slug</td>
+                    <td> Subject</td>
+                    <td> Budget</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for req in object_list %}
+                    <tr>
+                        <td>
+                        {% if req.request.approved and not req.booking %}
+                                <a href="{{req.get_absolute_url}}">{{req.slug}}</a>
+                            {% else %}
+                                <span>{{req.slug}}</span>
+                            {% endif %}
+                        </td>
+                        <td class="db-title">
+                            {% if req.request.approved and not req.booking %}
+                                <a href="{{req.get_absolute_url}}">{{ req.display_name }}</a>
+                            {% else %}
+                                <span>{{ req.display_name }} {% if req.status == req.PAYED %}
+                                    (Paid) {% endif %}</span>
+                            {% endif %} 
+                        </td>
+
+                        <td class="db-amount">{{req.budget|intcomma}}</td>
+
+                        <td class="db-amount"></td>
+
+                        <td class="status">                            
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+            <h5 class="text-center">You have not placed any request here. <a href="{% url 'how_it_works' %}">Proceed to place a request</a> </h5>
+
+    {% endif %}
+{% endblock object_table %}
+{% block footer2 %}{% endblock %}
+{% block request_section %}{% endblock request_section %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>window.currentPage = "SubjectList";
+    </script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+{% endblock javascript %}

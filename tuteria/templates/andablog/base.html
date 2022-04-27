@@ -1,0 +1,83 @@
+{% extends '_layouts/base-external.html' %}
+{% load staticfiles %}
+{% block sub_nav %}{% endblock %}
+{% block fixed %}
+
+{% endblock fixed %}
+{% block nav %}
+        {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block mixpanel %} {% endblock mixpanel %}
+{% block tag_manager %} {% endblock tag_manager %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/andablog.css' %}">
+    <link href="/css/launch.css" rel="stylesheet">
+    <link href="{% static "css/blog.css" %}" rel="stylesheet">
+    <style>
+    .bg8 {
+        {% if featured_article %}
+            background: {{featured_article.background_color}} url('{{MEDIA_URL}}{{ featured_article.image }}') no-repeat center bottom;
+            /*background-size: 562px 315px !important;*/
+            background-size: cover;
+        {% endif %}
+    /*background-image: url('{{STATIC_URL}}img/backgrounds/trust.jpg');*/
+    /*background-size: 100% !important;*/
+    }
+    .article-metadata {
+        color: #939393 !important;
+        font-size: 17px;
+    }
+    @media(max-width: 768px){
+         .article-metadata {
+            font-size: 15px !important;
+        }
+    }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <section id="bodyWrap">
+
+            <!--for post image + bg hex-->
+            {% block blog_heading %}
+            <!--{% if featured_article %}-->
+
+            <!--<section class="blog-featured bg8"> 
+                <div class="container-fluid">
+                    <div class="link">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <h2 class="post-title">{{featured_article.article.title}}</h2>
+                                <p class="meta">
+                                    <a href="https://twitter.com/tuteriacorp" target="_blank">{{featured_article.article.author.first_name}}</a>
+                                    &nbsp;|&nbsp; {{featured_article.article.published_timestamp|date:"DATE_FORMAT"}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>-->
+            <!-- /featured -->
+
+            <!--{% endif %}-->
+                
+            {% endblock blog_heading %}
+            {% block andablog_content %}
+            {% endblock andablog_content %}
+
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block notification_tawk %}
+{% endblock notification_tawk %}
+{% block referral %}{% endblock %}

@@ -1,0 +1,60 @@
+services:
+  webserver:
+    build: sandbox/webserver
+    ports:
+      - "80:80"
+      - "443:443"
+
+  redis:
+    image: redis
+    volumes:
+      - /var/lib/redis
+      - /var/log/redis/
+    expose:
+      - "6379"
+
+  rabbitmq:
+    image: tutum/rabbitmq
+    env_file:
+      - ./env/rabbit.env
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  dbdata:
+    image: busybox
+    command: "true"
+    volumes:
+      - /var/lib/postgresql/data
+      - /tmp/ 
+      - /var/tuteria
+
+  db:
+    image: postgres
+    env_file:
+      - ./env/db.env
+
+  celery:
+    build: sandbox/celery
+    env_file:
+      - './env/dev.env'
+    volumes:
+      - '/tuteria/tuteria:/home/app'
+      - '/tuteria/sandbox/celery/conf.d:/etc/supervisor/conf.d'
+
+  flower:
+    image: tuteria/dev
+    command: su -m app -c "celery -A config flower --port=5555"
+    ports:
+      - "5555:5555"
+    env_file:
+      - ./env/dev.env
+    volumes:
+      - '/tuteria/tuteria:/home/app'
+
+  dev:
+    image: gbozee/tuteria 
+    hostname: tuteria_dev
+    domainname: tuteria_dev.com
+    restart: always 
+version: "2"

@@ -1,0 +1,365 @@
+{% extends '_layouts/base-external.html' %}
+{% load staticfiles %}
+{% block fixed %}{% endblock %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/cancellation.css' %}"/>
+{% endblock %}
+{% block sub_nav %}{% endblock %}
+{% block login_form %}{% endblock %}
+{% block content %}
+<div class="container row-space-top-11 row-space-8">
+  <h1 class="row-space-2">Cancellation Policies</h1>
+
+  <p class="text-lead">
+    Tuteria allows tutors to choose among three standardized cancellation policies (Flexible, Moderate, and Strict) that we will enforce to protect both clients and tutors when lessons are booked or canceled. The Long Term cancellation policy automatically applies to all bookings of 24 hours or more. Each subject and booking on our site will clearly state the cancellation policy. Clients may cancel and review any penalties by viewing their 'Bookings Made' and then clicking 'Cancel' on the appropriate booking.
+  </p>
+
+  <div class="panel" role="tabpanel">
+    <ul class="panel-heading panel-sections tabs tabs-header" role="tablist" data-permalink="true">
+      <li>
+        <a href="#flexible" aria-controls="flexible"
+           aria-selected="true" class="tab-item" role="tab" data-toggle="tab">Flexible</a>
+      </li>
+      <li>
+        <a href="#moderate" aria-controls="moderate"
+           aria-selected="false" class="tab-item" role="tab" data-toggle="tab">Moderate</a>
+      </li>
+      <li>
+        <a href="#strict"
+           aria-controls="strict" aria-selected="false" class="tab-item" data-toggle="tab" role="tab">Strict</a>
+      </li>
+      <li>
+        <a href="#long-term" aria-controls="long-term" data-toggle="tab"
+           aria-selected="false" class="tab-item" role="tab">Long Term</a>
+      </li>
+    </ul>
+
+    <div id="flexible" class="panel-body tab-panel" role="tabpanel" aria-hidden="false">
+      <h3 class="padding-space-top-3 row-space-3">Flexible: 6 hours notice required for full refund</h3>
+      <ul>
+        <li>Lessons not taught are always refunded.</li>
+        <li>The Tuteria booking fee is non-refundable.</li>
+        <li>If there is a complaint from either party, notice must be given to Tuteria within 24 hours after lesson starts.
+        </li>
+        <li>Tuteria will mediate when necessary, and has the final say in all disputes.</li>
+        <li>Clients are expected to have discussed with tutors ahead of cancellation.</li>
+        <li>A lesson is officially canceled when the client clicks the 'Cancel' button on the
+          cancellation confirmation page, which they can find in Dashboard &gt; Bookings &gt; Cancel.
+        </li>
+        <li>Cancellation policies may be superseded by the Refund Policy, safety cancellations, or
+          extenuating circumstances. Please review these exceptions.
+        </li>
+      </ul>
+
+      <div class="hidden-xs timeline-container hide-phone">
+        <div class="row-fluid row-flush clearfix">
+          <div class="col-sm-4 span4 timeline-segment-refundable timeline-segment">
+            <div class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                6 hrs earlier
+              </div>
+
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">
+                Fri, Dec 08
+                <br>12:00 PM
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-partly-refundable">
+            <div id="second-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson starts
+              </div>
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Fri, Dec 08
+                <br>6:00 PM
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-nonrefundable">
+            <div id="third-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson ends
+              </div>
+
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Fri, Dec 08
+                <br>8:00 PM
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-fineprint">
+          Example
+        </div>
+      </div>
+
+      <div class="row-fluid row-flush clearfix space2">
+        <div class="col-sm-4 span4">
+          <p>For a full refund, cancellation must be made at least 6 hours before the start time on the day of the lesson. For example, if a lesson is scheduled for Friday, 6pm to 8pm cancel at least by Friday, 12pm of that same week before the lesson starts.</p>
+        </div>
+        <div class="col-sm-4 span4">
+          <p>If the client cancels a single lesson less than 6 hours before it commences, the cost of the first hour is
+            non-refundable but remaining hours are 100% refunded.</p>
+        </div>
+        <div class="col-sm-4 span4">
+          <p>If a booking contains more than one session and the client cancels the entire booking before it starts, 10% of the booking cost is non-refundable while 90% is refunded.</p>
+        </div>
+      </div>
+
+
+      <br>
+
+    </div>
+    <div id="moderate" class="panel-body tab-panel" role="tabpanel" aria-hidden="true">
+
+
+      <h3 class="padding-space-top-3 row-space-3">Moderate: 12 hours notice require for full refund</h3>
+      <ul>
+        <li>Lessons not taught are always refunded.</li>
+        <li>The Tuteria booking fee is non-refundable.</li>
+        <li>If there is a complaint from either party, notice must be given to Tuteria within 24 hours after lesson starts.
+        </li>
+        <li>Tuteria will mediate when necessary, and has the final say in all disputes.</li>
+        <li>Clients are expected to have discussed with tutors ahead of cancellation.</li>
+        <li>A lesson is officially canceled when the client clicks the 'Cancel' button on the
+          cancellation confirmation page, which they can find in Dashboard &gt; Bookings &gt; Cancel.
+        </li>
+        <li>Cancellation policies may be superseded by the Refund Policy, safety cancellations, or
+          extenuating circumstances. Please review these exceptions.
+        </li>
+      </ul>
+
+      <div class="timeline-container hidden-xs">
+        <div class="row-fluid row-flush clearfix">
+          <div class="col-sm-4 span4 timeline-segment-refundable timeline-segment">
+            <div class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                12 hrs earlier
+              </div>
+
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">
+                Fri, Dec 08
+                <br>6:00 AM
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-partly-refundable">
+            <div id="second-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson starts
+              </div>
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Fri, Dec 08
+                <br>6:00 PM
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-nonrefundable">
+            <div id="third-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson ends
+              </div>
+
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Fri, Dec 08
+                <br>8:00 PM
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-fineprint">
+          Example
+        </div>
+      </div>
+
+      <div class="row-fluid row-flush clearfix space2">
+        <div class="col-sm-4 span4">
+          <p>For a full refund, cancellation must be made at least 12 hours before the start time on the day of the lesson. For example, if a lesson is scheduled for Friday, 6pm to 8pm cancel at least by Friday, 6am of that same week before the lesson starts.</p>
+        </div>
+        <div class="col-sm-4 span4">
+          <p>If the client cancels a single lesson less than 12 hours before it commences, the cost of the first hour is
+            non-refundable while remaining hours are 90% refunded.</p>
+        </div>
+        <div class="col-sm-4 span4">
+          <p>If a booking contains more than one session and the client cancels the entire booking before it starts, 15% of the booking cost is non-refundable while 85% is refunded.</p>
+        </div>
+      </div>
+
+
+      <br>
+
+    </div>
+    <div id="strict" class="panel-body tab-panel" role="tabpanel" aria-hidden="true">
+
+
+      <h3 class="padding-space-top-3 row-space-3">Strict: 24 hours notice required for full refund</h3>
+      <ul>
+        <li>Lessons not taught are always refunded.</li>
+        <li>The Tuteria booking fee is non-refundable.</li>
+        <li>If there is a complaint from either party, notice must be given to Tuteria within 24 hours after lesson starts.
+        </li>
+        <li>Tuteria will mediate when necessary, and has the final say in all disputes.</li>
+        <li>Clients are expected to have discussed with tutors ahead of cancellation.</li>
+        <li>A lesson is officially canceled when the client clicks the 'Cancel' button on the
+          cancellation confirmation page, which they can find in Dashboard &gt; Bookings &gt; Cancel.
+        </li>
+        <li>Cancellation policies may be superseded by the Refund Policy, safety cancellations, or
+          extenuating circumstances. Please review these exceptions.
+        </li>
+      </ul>
+
+      <div class="timeline-container hidden-xs">
+        <div class="row-fluid row-flush clearfix">
+          <div class="col-sm-4 span4 timeline-segment-refundable timeline-segment">
+            <div class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                24 hrs earlier
+              </div>
+
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">
+                Thu, Dec 07
+                <br>6:00 PM
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-nonrefundable">
+            <div id="second-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson starts
+              </div>
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Fri, Dec 08
+                <br>6:00 PM
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-nonrefundable">
+            <div id="third-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson ends
+              </div>
+
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Fri, Dec 08
+                <br>8:00 PM
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-fineprint">
+          Example
+        </div>
+      </div>
+
+      <div class="row-fluid row-flush clearfix space2">
+        <div class="col-sm-4 span4">
+          <p>For a full refund, cancellation must be made at least 24 hours before the start time on the day of the lesson. For example, if a lesson is scheduled for Friday, 6pm to 8pm cancel at least by Thursday, 6pm of that same week before the lesson starts.</p>
+        </div>
+        <div class="col-sm-4 span4">
+          <p>If the client cancels a single lesson less than 24 hours before it commences, the cost of the first hour is
+            non-refundable while remaining hours are 80% refunded.</p>
+        </div>
+        <div class="col-sm-4 span4">
+          <p>If a booking contains more than one session and the client cancels the entire booking before it starts, 20% of the booking cost is non-refundable while 80% is refunded.</p>
+        </div>
+      </div>
+
+
+      <br>
+
+    </div>
+    <div id="long-term" class="panel-body tab-panel" role="tabpanel" aria-hidden="true">
+
+
+      <h3 class="padding-space-top-3 row-space-3">Long Term: 30% down payment required for all bookings</h3>
+      <ul>
+        <li>Note: The Long Term cancellation policy automatically applies to all bookings of 24 hours or more.</li>
+        <li>Lessons not taught are always refunded.</li>
+        <li>The Tuteria booking fee is non-refundable.</li>
+        <li>If there is a complaint from either party, notice must be given to Tuteria within 24 hours after lesson starts.
+        </li>
+        <li>Tuteria will mediate when necessary, and has the final say in all disputes.</li>
+        <li>Clients are expected to have discussed with tutors ahead of cancellation.</li>
+        <li>A lesson is officially canceled when the client clicks the 'Cancel' button on the
+          cancellation confirmation page, which they can find in Dashboard &gt; Bookings &gt; Cancel.
+        </li>
+        <li>Cancellation policies may be superseded by the Refund Policy, safety cancellations, or
+          extenuating circumstances. Please review these exceptions.
+        </li>
+      </ul>
+
+      <div class="timeline-container hidden-xs">
+        <div class="row-fluid row-flush clearfix">
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-partly-refundable">
+            <div id="second-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson starts
+              </div>
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Fri, Dec 08
+                <br>6:00 PM
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 span4 timeline-segment timeline-segment-nonrefundable">
+            <div id="third-point" class="timeline-point">
+              <div class="tooltip tooltip-bottom-middle dark-caret-bottom-middle tooltip-fixed timeline-point-tooltip">
+                Lesson ends
+              </div>
+
+              <div class="timeline-point-marker"></div>
+              <div class="timeline-point-label">Mon, Jan 06
+                <br>8:00 PM
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-fineprint">
+          Example
+        </div>
+      </div>
+
+      <div class="row-fluid row-flush clearfix space2">
+        <div class="col-sm-4 span4">
+          <p>If the client books a long term lesson and decides to cancel the long term agreement before the
+            start date, 30% of payment is credited to the tutor while 70% is refunded.</p>
+        </div>
+        <div class="col-sm-4 span4">
+          <p>If the client books a long term lesson and decides to cancel the long term agreement or any session during the lesson, 30% of payment is credited to the tutor while 70% is refunded to client.</p>
+        </div>
+      </div>
+
+
+      <br>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript%}
+{{block.super}}
+<script>
+  window.currentPage = "Cancellation";
+</script>
+<script src="{% static 'js/static_pages.bundle.js'%}">
+
+</script>
+{% endblock %}

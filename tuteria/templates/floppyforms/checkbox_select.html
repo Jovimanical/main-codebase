@@ -1,0 +1,26 @@
+<div class="col-sm-12">
+	{% for group_name, choices in optgroups %}
+	<div class="panel-group" id="{{group_name|slugify}}" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingOne{{group_name|slugify}}">
+				<h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{group_name|slugify}}" class="center-block" aria-expanded="true" 
+	        aria-controls="collapseOne"> {{group_name}} </a>
+	      </h4>
+			</div>
+		</div>
+		<div id="collapse{{group_name|slugify}}" class="panel-collapse collapse {% if forloop.counter == 1 %}in {% else %}{% endif %}" role="tabpanel" aria-labelledby="headingOne{{group_name|slugify}}">
+			<div class="panel-body">
+				<div class="checkbox">
+					{% for choice in choices %}
+					<div class="col-sm-4 checkbox-space">
+						<label for="{{group_name|slugify}}{{ attrs.id }}_{{ forloop.counter }}">
+					<input {% if choice.0 in value %}checked="checked" {% endif %}type="checkbox" id="{{group_name|slugify}}{{ attrs.id }}_{{ forloop.counter }}" name="{{ name }}" value="{{ choice.0 }}"> {{ choice.1 }}</label>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>

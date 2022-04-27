@@ -1,0 +1,152 @@
+{% load add_attr i18n activelink %}
+<form action="{{ request.path }}" method="post" id="base_request_form" novalidate>
+    {% csrf_token %}
+
+    
+    {% if input_subject == True %}
+        <div class="form-group {% if form.request_subjects.errors %}has-error{% endif %}">
+            <label class="control-label">Enter one subject you want to learn</label>
+            {{ form.request_subjects|add_attributes:"class:form-control input-sm,required:true" }}
+            {% if form.request_subjects.errors %}
+                <span class="help-block">{{ form.request_subjects.errors|join:"<br \>" }}</span>
+            {% endif %}
+        </div>
+
+    {% endif %}
+    <div class="form-group {% if form.home_address.errors %}has-error{% endif %}">
+        <label for="id_home_address" class="control-label">Where do you stay?</label>
+        {{ form.home_address|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please enter your home address" }}
+        {% if form.home_address.errors %}
+        <span class="help-block">{{ form.home_address.errors|join:"<br \>" }}</span>
+        {% endif %}
+        {{ form.latitude|add_attributes:"type:hidden" }}{{ form.longitude|add_attributes:"type:hidden" }}
+    </div>
+    <div class="row">
+        <div class="col-xs-7 col-sm-7 col-md-7">
+            <div class="form-group {% if form.vicinity.errors %}has-error{% endif %}">
+                <!--<label for="id_{{ form.state.name }}"
+                class="control-label">{{ form.state.label }}</label>-->
+
+                {{ form.vicinity|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Input a town/city,placeholder:City or Nearest bustop" }}
+
+                {% if form.vicinity.errors %}
+                <span class="help-block">{{ form.vicinity.errors|join:"<br \>" }}</span>
+                {% endif %}
+            </div>            
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5">
+            <div class="form-group {% if form.state.errors %}has-error{% endif %}">
+                {{ form.state|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please select a state" }}
+                {% if form.state.errors %}
+                <span class="help-block">{{ form.state.errors|join:"<br \>" }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="region-section" class="form-group hidden">
+        <label>Select LGA/Region:</label>
+            {% if lagos %}
+            <select id="lagos_area" class="hidden form-control" name="area">
+                <option value="">Select City</option>
+                {% for area in lagos %}
+                <option value="{{area}}">{{area}}</option>
+                {% endfor %}
+                <option value="others">I don't know</option>
+            </select>
+            
+            {% endif %}
+            {% if abuja %}
+            <select name="area" id="abuja_area" class="hidden form-control">
+                <option value="">Select City</option>
+                {% for area in abuja %}
+                <option value="{{area}}">{{area}}</option>
+                {% endfor %}
+                <option value="others">I don't know</option>
+            </select>
+            
+            {% endif %}
+            {% if rivers %}
+            <select name="area" id="river_area" class="form-control hidden">
+                <option value="">Select City</option>
+                {% for area in rivers %}
+                <option value="{{area}}">{{area}}</option>
+                {% endfor %}
+                <option value="others">I don't know</option>
+            </select>
+            {% endif %}
+            
+    </div>
+    <div class="row">
+        <div class="col-xs-7 col-sm-7 col-md-7">           
+            <div class="form-group {% if form.class_urgency.errors %}has-error{% endif %}">
+                <label class="margin-down-5 ">Lessons should start?</label>
+                {{ form.class_urgency|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please select start time" }}
+                {% if form.class_urgency.errors %}
+                <span class="help-block">{{ form.class_urgency.errors|join:"<br \>" }}</span>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5">
+            <div class="form-group {% if form.no_of_students.errors %}has-error{% endif %}">
+                <label for="id_no_of_students" class="control-label">Students</label>
+                {{ form.no_of_students|add_attributes:"class:form-control input-sm,required:true" }}
+                {% if form.no_of_students.errors %}
+                <span class="help-block">{{ form.no_of_students.errors|join:"<br \>" }}</span>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>    
+    {% if not parent_form %}
+
+    <div class="form-group hide {% if form.tutoring_location.errors %}has-error{% endif %}">
+        <label for="" class="margin-down-5" style="padding-top: 5px">Where should lessons hold?</label>
+        {{ form.tutoring_location|add_attributes:'required:true,class:form-control input-sm,required:true' }}
+        {% if form.tutoring_location.errors %}
+        <span class="help-block">{{ form.tutoring_location.errors|join:"<br \>" }}</span>
+        {% endif %}
+    </div>
+
+    {% endif %}
+    <hr class="checkbox-space">
+
+    <div class="form-group {% if form.number.errors %}has-error{% endif %}">
+        <!--<label for="" class="margin-down-5">Phone number</label>-->
+        <div class="input-group">
+            <div class="input-group-addon">+234</div>
+            {{ form.number|add_attributes:"class:form-control input-sm,required:true,data-parsley-error-message:Please enter a valid phone number" }}
+        </div>
+        {% if form.number.errors %}
+        <span class="help-block">{{ form.number.errors|join:"<br \>" }}</span>
+        {% endif %}
+    </div>
+    <div class="form-group hidden{% if form.time_to_call.errors %}has-error{% endif %}">
+        <!--<label class="margin-down-5 %}">Best time to call</label>-->
+        {{ form.time_to_call|add_attributes:"class:form-control input-sm, data-parsley-error-message:Please choose a time" }}
+        {% if form.time_to_call.errors %}
+        <span class="help-block">{{ form.time_to_call.errors|join:"<br \>" }}</span>
+        {% endif %}
+    </div>
+    {% if request.user.is_authenticated %}
+    <input type="hidden" id="pk" name="pk" value={{ instance_pk }}>
+    {% endif %}
+
+    <div class="form-group {% if form.email.errors %}has-error{% endif %}" style="margin-bottom: -10px">
+        <!--<label for="id_{{ form.email.name }}" class="control-label margin-bottom-5">Most active email address</label>-->
+        {{ form.email|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your email address name" }}
+        {% if form.email.errors %}
+        <span class="help-block">{{ form.email.errors|join:"<br \>" }}</span>
+        {% endif %}
+    </div>
+    
+    <input type="hidden" name="referral_code" value="{{request.referral_code}}">
+    <!--<small style="color:silver"><i class="glyphicon glyphicon-lock"></i> 100% secure. We respect your privacy.</small>-->
+    <div class="form-group padding-top-10">
+        <button id="submit_btn" data-loading-text="Loading..."
+        class="btn btn-lg btn-block btn-primary big-btn"
+        >{% trans "Next Step" %} &rarr;</button>
+    </div>
+</form>
+<script>
+</script>

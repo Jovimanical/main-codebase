@@ -1,0 +1,208 @@
+{% extends "bookings/booking_summary_tutor.html" %}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc %}
+{% block title %}Meeting Request Summary | Tuteria{% endblock title %}
+{% block css %}
+    {{ block.super }}
+    <style>
+        .rate-form {
+            padding-bottom: 15px;
+            padding-top: 25px;
+            border-top-width: 0;
+        }
+
+        #review-tutor-section {
+            background: #d2eaff;
+            margin: 0;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+    </style>
+{% endblock css %}
+{% block tabs %}{% endblock %}
+{% block sub_nav %}{% endblock %}
+{% block main_tab_heading %}
+    Request <span class="hidden-xs">Summary</span>
+{% endblock main_tab_heading %}
+{% block booking_summary_heading %}
+
+    <div class="gig-pict-102">
+        {% cloudinary object.user.profile_pic PAYMENT_THUMBNAIL alt=object.client.first_name %}
+        <!--<div class="tutor-name">{{ object.user.get_full_name|title }}</div>-->
+    </div>
+    <h4></h4>
+    <h3>
+        <span class="order-price pull-right hidden-xs hidden-sm">&#x20a6;{{ object.total_price|floatformat:0 }}</span>
+
+        Client: <a href="{{ object.client.get_absolute_url }}">{{ object.client.first_name|title }}</a>
+        {% if not object.met_with_client %}
+            <span class="phone_number">({{ object.client.primary_phone_no.number }})</span>
+        {% endif %}</h3>
+    <h4>Time to Call: <span class="blue-font">{{object.get_time_to_call_display}}</span> | Subject: <a href="{{ object.ts.get_absolute_url }}">{{ object.ts.skill.name|title }}</a></h4>
+{% endblock %}
+{% block booking_table_summary %}
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Description</td>
+            <td class="amount">Amount</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="truncated">
+               30% of Long-term Fee
+            </td>
+            <td class="amount">&#x20a6;{{ object.total_price|floatformat:0 }}</td>
+        </tr>
+        <tr class="boldify font-head">
+            <td class="truncated">
+                Deposit Made <span
+                    class="label label-success">Paid in full</span>
+            </td>
+            <td class="amount"> &#x20a6;{{ object.total_price|floatformat:0 }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
+{% block display_subject %}{% endblock %}
+{% block extra_info %}{% endblock extra_info %}
+
+{% block remaining_booking_content %}
+
+    <div class="panel row-space-top-4">
+        {% if object.met_with_client %}
+            <div id="booking-completion-badge" class="panel-body">
+                <div class="text-center col-sm-8 col-sm-offset-2 col-xs-12">
+                    <i class="fa fa-book fa-2x text-primary"></i>
+                    <h4 class="text-primary">MEETING CONFIRMED</h4>
+                </div>
+            </div>
+        {% else %}
+            <div id="parr" class="panel-body">
+                <div class="well bg-info col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12 text-center">
+                            <img src="{% static 'img/tutor/feedback.png' %}" class="img-responsive center-block"/>
+                        </div>
+                        <div class="col-sm-7 col-xs-12">
+                            <h4><span style="color:red">Important: </span>do this <span class="font-head"><u>AFTER</u></span> meeting has held</h4>
+
+                            <p>After you have met with the client, please return here to tell us some details about how the meeting went so we can follow-up on the client. You can return here from your Dashboard.</p>
+                            <a id="triggerSummary" href="javascript:void(0)" class="btn btn-primary btn-block btn-lg">I have met with client</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="review-tutor-section" class="panel-body hidden">
+                <div class="">
+                    <div class="rate-message text-center col-sm-10 col-sm-offset-1 col-xs-12">
+                        {% block pre_review_text %}
+                        {% endblock %}
+                    </div>
+                </div>
+                {% block review_form %}
+                    <form id="review_form" action="." method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="rate-form text-center col-xs-12">
+                            {% block rating_for %}
+                                <h3>Is {{ object.client.first_name }} likely to hire you?</h3>
+                            {% endblock %}
+
+                            <div class="rate-tutor"></div>
+                            <div id="hint"></div>
+                            {{ form.rating }}
+                        </div>
+                        <div class="row-space-top-4 comment-form text-center col-sm-8 col-sm-offset-2 col-xs-12 hide">
+                            <!--<h3 class="row-space-2">How do you feel about your
+                                class</h3>
+
+                            <div class="form-group">
+                                {{ form.meeting_outcome|add_attributes:'class:form-control,required:true,data-parsley-no_link:,data-parsley-no_email:,data-parsley-trigger:keyup' }}
+                            </div>-->
+                            <button class="btn btn-primary btn-block btn-lg">Close Meeting</button>
+
+                        </div>
+                    </form>
+                {% endblock %}
+            </div>
+        {% endif %}
+
+
+    </div>
+{% endblock remaining_booking_content %}
+
+{% block side_content %}
+    <div style="margin-top: 0px">
+        <div class="col-sm-12 col-xs-12 blue-bg">
+            <div class="padding-bottom-25 padding-top-25">
+                <h3 class="text-center font-head" style="color: red">How Requests Work</h3>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">1</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">
+                            Client has deposited <b>&#x20a6;</b><span class="font-head">{{ object.total_price|floatformat:0 }}</span> to meet with you in-person before deciding to book lessons.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">2</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">Call client within {{object.get_time_to_call_display}} today or tomorrow to schedule a meeting. Try to meet this week.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">3</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">After the meeting, please return here to let us know how it went so we can follow up with client and help you secure the lessons.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    {% if object.viewed_by_tutor %}
+        {{ block.super }}
+    {% else %}
+        <div class="container">
+            <div class="row row-space-top-4">
+                <div class="well col-sm-10 col-md-8 col-xs-12 col-sm-offset-1 col-md-offset-2 col-xs-offset-0">
+                    <form id="interview-form" action="." method="post" novalidate>
+                        {% csrf_token %}
+                        <h4><b>You have a meeting request for {{ object.ts.skill.name|title }}!</b></h4>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12 text-center">
+                                <img src="{% static 'img/tutor/requests.png' %}" class="img-responsive center-block"/>
+                            </div>
+                            <div class="col-sm-7 col-xs-12">
+                                <h4>Click button below to view details of client</h4>
+
+                                <p>Meeting requests are requests from interested clients who wish to speak with you in person before proceeding to book lessons.</p>
+                                <input type="hidden" name="can_view" value="True">
+                                <button class="btn btn-lg btn-block btn-primary">{% trans "View Client Details" %}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block request_section %}
+{% endblock request_section %}
+{% block javascript %}
+    <script>window.ConfirmRequestToMeet = true;</script>
+    {{ block.super }}
+{% endblock javascript %}

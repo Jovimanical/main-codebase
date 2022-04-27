@@ -1,0 +1,129 @@
+{% extends 'pages/request_tutor.html' %}
+{% load staticfiles i18n bootstrap3 add_attr activelink humanize distance_estimate %}
+{% block title %}Thanks for your Request! | Tuteria{% endblock title %}
+{% block carousel_content %}
+    <div class="col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center">
+        {% block custom_heading %}
+            <div class="jumbo-header">
+                <h2 class="myh2"><b class="white">Request Received!</b></h2>
+
+                <p>
+                    Thanks {{ user.first_name }}! Your request is now at our desk.
+                </p>
+
+            </div>
+
+        {% endblock custom_heading %}
+
+    </div>
+{% endblock %}
+{% block big_section %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl">
+        <div class="">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-xs-offset-0">
+                <div class="row">
+                    <div id="wizard-container" class="bordered spaced-bottom-lg">
+                        <div class="">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <h3 class="font-head blue-font text-center row-space-4">What happens next?</h3>
+
+                                    <div class="row">
+                                        <div class="col-sm-10 col-sm-offset-1 col-md-offset-2 col-md-8 col-xs-12">
+                                            <div>
+                                                <img class="center-block img-resized"
+                                                     src="{% static "img/gallery/search.png" %}">
+
+                                                <h3 class="text-center no-margin-top">First, we search</h3>
+
+                                                <p>We'll check our records of thousands of verified tutors to find those
+                                                    that suit your needs. If we do, we'll contact you in 30mins - 2hrs.
+                                                    If not, we'll instruct our quality team to look for tutors in your
+                                                    area and run them through our assessment and verification process to
+                                                    ensure they are top-notch. This may take up to 2 - 4 days, but we'll
+                                                    try to be as fast as possible without compromising on quality or
+                                                    safety.</p>
+                                            </div>
+                                            <hr class="hr-styled">
+                                            <div>
+                                                <img class="center-block img-resized"
+                                                     src="{% static "img/gallery/contact.png" %}">
+
+                                                <h3 class="text-center no-margin-top">Then contact you</h3>
+
+                                                <p>We'll send you an email and SMS containing links to two or three
+                                                    qualified tutors who meet your requirements so that you can review
+                                                    them too. If you don't actively check your emails or SMS, that's
+                                                    fine. One of our consultants, most likely Godwin, will give you a
+                                                    call.</p>
+
+                                            </div>
+                                            <hr class="hr-styled">
+                                            <div>
+                                                <img class="center-block img-resized"
+                                                     src="{% static "img/gallery/evaluate.png" %}">
+
+                                                <h3 class="text-center no-margin-top">You evaluate tutors</h3>
+
+                                                <p>Compare their experiences and styles of teaching to find out who is
+                                                    right for you. You can learn about their education, where they have
+                                                    worked and what other clients have said about them. This helps you
+                                                    get to know a bit about your tutor before deciding to book
+                                                    lessons.</p>
+                                            </div>
+                                            <hr class="hr-styled">
+                                            <div>
+                                                <img class="center-block img-resized"
+                                                     src="{% static "img/gallery/book-monthly.png" %}">
+
+                                                <h3 class="text-center no-margin-top">And book lessons!</h3>
+
+                                                <p>When you've chosen your preferred tutors, it's easy to hire them!
+                                                    Just use their real-time calendar to select the days and times you
+                                                    want lessons to hold, then complete your booking. Your tutors will
+                                                    contact you shortly afterwards to plan and prepare for lessons.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="padding-bottom-50"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block request_section %}
+    {% include 'includes/request_section2.html' %}
+{% endblock request_section %}
+
+{% block tracking_requests %}
+<!-- Facebook Conversion Code for Leads - People Who Placed Request for Tutors -->
+<script>(function() {
+var _fbq = window._fbq || (window._fbq = []);
+if (!_fbq.loaded) {
+var fbds = document.createElement('script');
+fbds.async = true;
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(fbds, s);
+_fbq.loaded = true;
+}
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6034109323955', {'value':'0.00','currency':'USD'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6034109323955&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+
+<!-- Twitter Conversion Code for Leads - People Who Placed Request for Tutors -->
+<!-- <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid('l6lgs', { tw_sale_amount: 0, tw_order_quantity: 0 });</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l6lgs&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l6lgs&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+</noscript> -->
+
+{% endblock tracking_requests%}

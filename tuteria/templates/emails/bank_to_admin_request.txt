@@ -1,0 +1,10 @@
+Full Name: {{booking.user.first_name}} {{booking.user.last_name}}
+Email: {{booking.user.email}}
+Link to Tutor Page: {{booking.get_tutor.get_absolute_url}}
+Booking_ID: {{booking.order}}
+Link to Booking Payment Page: http://{{site.domain}}/bookings/{{booking.order}}/
+Sessions In booking
+START           DURATION            NO_OF_STUDENT           PRICE
+{% for session in booking.bookingsession_set.all %}
+{{session.start}}       {{session.duration}}        {{session.student_no}}          {{session.price}}
+{% endfor %}

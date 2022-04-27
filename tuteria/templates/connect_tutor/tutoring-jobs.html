@@ -1,0 +1,315 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles bootstrap_pagination humanize add_attr cloudinary bootstrap3 %}
+{% block title %}Tutoring Jobs | Tuteria Nigeria{% endblock title %}
+{% block fixed %}{% endblock fixed %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with tutor_registration_view=True %}
+{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block css %}
+    {{ block.super }}
+    <style>
+    .carousel.fade .item .background {
+    height: 260px;
+    }
+    .content-carousel {
+    min-height: 155px;
+    }
+    @media(max-width: 768px){
+      .carousel.fade .item .background {
+      height: 330px;
+      }
+      nav{
+        display: block !important;
+      }
+    }
+    @media (max-height: 650px) and (max-width: 430px){
+    .content-carousel {
+        min-height: 170px !important;
+    }
+  }
+    @media (max-width: 720px){
+    .content-carousel {
+        min-height: 170px !important;
+        height: 170px !important;
+    }
+  }
+  @media(min-width: 768px){
+  .content-carousel .container {
+    padding-top: 0 !important;
+    }
+  }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/tutoring-jobs.css' %}"/>
+
+{% endblock %}
+{% block carousel_content %}
+
+    <div class="col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center">
+        {% block custom_heading %}
+          <div class="row">
+            <div class="text-left">
+                <h2 class="myh2"><b class="white">Tutoring Jobs</b></h2>
+
+                <p>
+                   Find new tutoring opportunities in your area
+                </p>
+
+            </div>
+          </div>           
+
+        {% endblock custom_heading %}
+
+    </div>
+{% endblock %}
+{% block main_content %}
+<div class="row">
+  <div class="body-content clearfix">
+
+        <div class="bg-color2">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-3 hidden-xs">
+                <div class="block-section-sm side-right">                
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <p><strong>Search by subject and location</strong></p>
+                    </div>                   
+                  </div>
+
+                <div class="affix-to box-list" id="affix-box">
+                  <div class="item" style="padding: 30px 20px">
+                    <form action="{{request.path}}">
+                      <div class="form-group">
+                        {{form.q|add_attributes:"class:form-control,placeholder:Type a subject or skill"}}
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-12">                       
+                          <div class="form-group">
+                            {{form.state|add_attributes:"class:form-control"}}
+                          </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-12">                       
+                          <div class="form-group">
+                            {{form.vicinity|add_attributes:"class:form-control, placeholder:Enter your location"}}
+                            {{form.latitude}}
+                            {{form.longitude}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        {{form.gender|add_attributes:"class:form-control"}}
+                      </div>
+                      <div class="form-group">
+                        <button class="btn btn-primary btn-block search-btn btn-tutor">Search</button>
+                      </div>
+
+                    </form>
+
+                  </div>
+                  <!-- <div class="padding-top-50">                    
+                    <a href="{% url 'request_meeting_redirect' %}" target="_blank">
+                      <img src="{% static "img/referral/advert.jpg" %}" width="100%">
+                    </a>
+                  </div> -->
+                </div>
+                </div>
+
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-9">              
+                <!-- box listing -->
+                <div class="block-section-sm box-list-area">
+                  <div class="visible-xs padding-bottom-25">
+                    <form class="mobile" action="{{request.path}}">
+                      <div class="form-group">
+                        {{form.q|add_attributes:"class:form-control,placeholder:Type a subject or skill"}}
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-12">                       
+                          <div class="form-group">
+                            {{form.state|add_attributes:"class:form-control"}}
+                          </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-12">                       
+                          <div class="form-group">                            
+                            {{form.vicinity|add_attributes:"class:form-control,placeholder:Enter a location"}}
+                            {{form.latitude}}
+                            {{form.longitude}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        {{form.gender|add_attributes:"class:form-control"}}
+                      </div>
+                      <div class="form-group">
+                        <button class="btn btn-primary btn-block search-btn btn-tutor">Search</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- desc top -->
+                  <div class="row">
+                    <div class="col-sm-6 ">
+                    {% if state_query or vicinity_query %}
+                    <p class="font-head color-black">{{paginator.count}} {{search_query}} tutoring jobs in {% if state_query %}
+                      {{state_query}} {% else %} {{vicinity_query}} {% endif %}</p>
+                      {% else %}
+                      <p class="font-head color-black">{{paginator.count}} tutoring jobs in {{o_state}}</p>
+                    {% endif %}
+                      
+                    </div>
+                    <div class="col-sm-6 hidden-xs">
+                      <p class="text-right">
+                        Jobs {{page_obj.start_index}} to {{page_obj.end_index}} of {{paginator.count}}
+                      </p>
+                    </div>
+                  </div><!-- end desc top -->
+
+                  <div class="box-list">
+                  {% if object_list.count > 0 %}                    
+                    {% for job in object_list %}
+                    <!-- item list -->                    
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 mobile-padding">
+                        <div class="row">
+                        <div class="col-sm-9 col-md-9 col-lg-9">
+                          <h3 class="no-margin-top">
+                          <a href="{% url 'job-details' job.slug %}" class="">
+{% if job.gender == "M" %}Male {% elif job.gender == "F" %}Female {% else %}{% endif %}
+                          {% if job.is_parent_request %}Home Tutor in {{job.get_vicinity}}, {{job.state}}
+                            {% else %}{{job.request_subjects.0 |title}} Tutor in {{job.get_vicinity|title}}, {{job.state}}
+                          {% endif %}</a></h3>
+                          <p class="">{{job.expectation |capfirst}}</p>
+                          {% if job.request_subjects|length > 1 or job.is_parent_request %}
+                             
+                          <div><span class="color-black brightgreen font-head">Subjects:</span> <span class="color-white-mute">{% for subject in job.request_subjects %}
+                            {{subject|title}} {% if not forloop.last %},
+                            {% endif %}
+                          {% endfor %}</span></div>
+                           {% endif %} 
+                          <div class="{% if job.request_subjects|length > 1 %} padding-top-10 {% endif %}">
+                            <ul class="list-inline list-unstyled">
+                              <li>
+                                <span class="brightblue font-head">Client: {{job.first_name}},</span> <span class="color-white-mute ">{{job.created|naturaltime}}</span>
+                              </li>
+                              <li class="space-for-mobile">
+                                 {% widthratio job.budget 100 70 as pricings %} 
+                                <span class="per-hour-1px">&#x20A6;{{ pricings|floatformat:0}}</span>
+                              </li>
+                            </ul>                            
+                          </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3 space-for-mobile">
+                          <a href="{% url 'job-details' job.slug %}" class="btn btn-primary col-xs-12 action-btn">
+                              View Job
+                          </a>
+                          <div class="text-center text-danger col-xs-12 padding-top-10">
+                            {{job.remaining_slot}} slot{{job.remaining_slot|pluralize}} left
+                          </div>
+                        </div>
+                          
+                        </div>                          
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end item list -->
+  
+                    {% endfor %}   
+                    {% else %}
+                      <div id="no-result" class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-9 col-md-9 col-xs-12">
+                                <h2>
+                                Sorry, there's no job at the moment. 
+                                </h2>
+
+                                <p>Don't worry if your search comes out empty. We drive hundreds of client requests daily so you can check back pretty soon.</p>
+
+                                <br/>
+
+                                <a href="{% url 'tutoring-jobs' %}" class="blue-font h5">&#8592; Return to all jobs</a>
+                                
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-8">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-md-3 col-xs-12 hidden-xs">
+                                <img class="pull-right " src="{% static "img/gallery/request.png" %}">
+                            </div>
+                        </div>
+
+                    </div>
+                 
+                  {% endif %}
+                  </div>
+                  {% if object_list.exists %}
+                  <div class="row">
+                    <div class="pagination-container col-xs-12 margin-top-15">
+                        <nav class="pagination-margin pull-left">
+                            {% bootstrap_paginate page_obj range=5 first_label="&#x2190;" last_label="&#x2192;" show_prev_next="false" show_first_last="true" %}
+                        </nav>
+                    </div>
+                 
+                  </div>
+                  <!-- pagination -->                    
+                  {% endif %}
+                    
+                  <!-- pagination -->
+                  
+                </div><!-- end box listing -->
+                <div class="padding-top-50 visible-xs">                    
+                    <a href="{% url 'request_meeting_redirect' %}" target="_blank">
+                      <img src="{% static "img/referral/advert.jpg" %}" width="100%">
+                    </a>
+                  </div>
+              </div>              
+            </div>
+          </div>
+        </div>
+
+
+        <div id="map-canvas" class="hidden"></div>
+  </div>
+</div>
+{% endblock %}
+{% block request_section %}{% endblock %}
+{% block footer %}{% endblock footer %}
+{% block bottom_footer %}
+{% endblock %}
+
+{% block javascript %}
+  {{block.super}}
+  <script>
+     function getQueryValues() {
+        if (typeof window !== "undefined") {
+          var query = window.location.search.substring(1);
+          var vars = query.split("&");
+          let result = {};
+          for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            let p = decodeURIComponent(pair[0]);
+            let q = decodeURIComponent(pair[1]);
+            result[p] = q;
+          }
+          return result;
+        }
+        return {};
+      }
+      $('#id_state').change(function (e) {
+        let params = getQueryValues()
+        params.state = $(this).val()
+        let newParams = new URLSearchParams(params).toString()
+        window.location.href = `${window.location.origin}${window.location.pathname}?${newParams}`
+      })
+  </script>
+  <script src="{% static "js/jobs.bundle.js" %}"></script>
+      <!-- <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script> -->
+{% endblock javascript %}

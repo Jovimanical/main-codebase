@@ -1,0 +1,48 @@
+FROM tuteria/django_app
+MAINTAINER Biola Oyeniyi "gbozee@gmail.com"
+
+ENV REFRESHED_AT 2015-01-01
+ENV C_INCLUDE_PATH /usr/include/gdal/
+ENV CPLUS_INCLUDE_PATH /usr/include/gdal/
+
+RUN apt-get -yqq update
+RUN apt-get install -y libgdal-dev swig postgresql-client protobuf-compiler libprotoc-dev locales \
+        osmosis \
+        libgeoip-dev && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN mkdir -p /root/.ssh/ /scripts && pip install -U setuptools
+
+RUN pip install --upgrade pip
+# Copy over private key, and set permissions
+COPY deploy/production/id_rsa /root/.ssh/
+
+# Create known_hosts
+RUN touch /root/.ssh/known_hosts && \
+  ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
+
+# Clone the conf files into the docker container
+COPY requirements/ /home/app/requirements
+# Install requirements
+# RUN pip install -r /home/app/requirements/production.txt
+RUN pip install -r /home/app/requirements/production.txt
+
+COPY tuteria/ /home/app/source
+COPY deploy/production/invoke.sh /scripts/
+COPY deploy/production/invoke1.sh /scripts/
+COPY deploy/production/config.py /scripts/
+COPY deploy/production/newrelic.ini /scripts/
+COPY deploy/production/uwsgi_config.ini /scripts/
+RUN chmod +x /scripts/invoke.sh
+RUN chmod +x /scripts/invoke1.sh
+
+WORKDIR /home/app/source
+
+RUN mkdir -p /var/tuteria && mkdir -p /var/tuteria_media && usermod -a -G www-data app && chgrp -R www-data /var/tuteria && chmod -R g+w /var/tuteria && chgrp -R www-data /var/tuteria_media && chmod -R g+w /var/tuteria_media
+RUN pip install -r /home/app/requirements/bare_local.txt
+VOLUME ["/tmp","/var/tuteria","/var/tuteria_media"]
+# run startup scripts which copies staticfiles, run migration and starts server
+CMD ["/scripts/invoke.sh"]
+
+EXPOSE 8000
+EXPOSE 9191

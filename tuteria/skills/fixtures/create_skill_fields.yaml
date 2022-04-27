@@ -1,0 +1,3838 @@
+# Math Category skills
+- model: skills.Skill
+  pk: 1
+  fields:
+    slug: general-mathematics
+    name: General Mathematics
+    categories: [1]
+    featured: true
+    duration: 8
+    quiz: 27
+    background_image: math.jpg
+    heading: Need Math help?
+    caption: Mathematics doesn't have to be hard. Let's make it easy and help you pass any Math exam without stress.
+    subheading: Get an experienced Math guru in your area to put you through
+    description: Helping students master the nitty-grity of Mathematics is our specialty. Whether you're preparing for an important exam, need help with Math homework, or simply want to strengthen specific areas like Algebra, Quadratic Equations, Trigonometry, Calculus, Elementary Math, Word Problems..and many more, our experienced and verified Mathematics tutors will help you achieve your goals.
+    short_name: Math
+
+
+#- model: skills.Skill
+#  pk: 2
+#  fields:
+#    slug: algebra
+#    background_image: ''
+#    heading:
+#    caption:
+#    subheading:
+#    description:
+#    short_name:
+#
+#- model: skills.Skill
+#  pk: 3
+#  fields:
+#    slug: geometry
+#    background_image: ''
+#    heading:
+#    caption:
+#    subheading:
+#    description:
+#    short_name:
+#
+#- model: skills.Skill
+#  pk: 4
+#  fields:
+#    slug: trigonometry
+#    background_image: ''
+#    heading:
+#    caption:
+#    subheading:
+#    description:
+#    short_name:
+#
+#- model: skills.Skill
+#  pk: 5
+#  fields:
+#    slug: further-mathematics
+#    background_image: ''
+#    heading:
+#    caption:
+#    subheading:
+#    description:
+#    short_name:
+#
+#- model: skills.Skill
+#  pk: 6
+#  fields:
+#    slug: arithmetic
+#    background_image: ''
+#    heading:
+#    caption:
+#    subheading:
+#    description:
+#    short_name:
+#
+#- model: skills.Skill
+#  pk: 7
+#  fields:
+#    slug: statistics
+#    background_image: ''
+#    heading:
+#    caption:
+#    subheading:
+#    description:
+#    short_name:
+#
+#- model: skills.Skill
+#  pk: 8
+#  fields:
+#    slug: probability
+#    name: Probability
+#    categories: [1]
+#    featured: true
+#    duration: 6
+#    quiz: 31
+#
+#- model: skills.Skill
+#  pk: 9
+#  fields:
+#    slug: data-analysis
+#    name: Data Analysis
+#    categories: [1]
+#    featured: true
+#    duration: 6
+#    quiz: 40
+#
+#- model: skills.Skill
+#  pk: 10
+#  fields:
+#    slug: sat-math
+#    name: SAT Math
+#    categories: [1,5]
+#    duration: 6
+#    quiz: 70
+#
+#- model: skills.Skill
+#  pk: 11
+#  fields:
+#    slug: differential-equations
+#    name: Differential Equations
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 12
+#  fields:
+#    slug: spss
+#    name: SPSS
+#    categories: [1]
+#    duration: 6
+#    quiz: 50
+#
+#- model: skills.Skill
+#  pk: 13
+#  fields:
+#    slug: finite-mathematics
+#    name: Finite Mathematics
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 14
+#  fields:
+#    slug: econometrics
+#    name: Econometrics
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 15
+#  fields:
+#    slug: discrete-mathematics
+#    name: Discrete Mathematics
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 16
+#  fields:
+#    slug: quantitative-reasoning
+#    name: Quantitative Reasoning
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 17
+#  fields:
+#    slug: basic-math
+#    background_image: math.jpg
+#    heading: Excel in English Language
+#    caption: English is key for all forms of learning. Ensure you have good mastery of the subject.
+#    subheading: Get an experienced English Language teacher in your area
+#    description: Helping students master English in-depth is our specialty. Whether you're preparing for an important exam, need help with homework, or want to strengthen specific areas like Writing Essays, Letters and Summaries, Oral & Aural Communication, Phonetics, Grammar and many more, our experienced and verified English Language tutors will help you achieve your goals in line with the relevant currriculum.
+#    short_name: Basic Math
+#
+#- model: skills.Skill
+#  pk: 18
+#  fields:
+#    slug: logic
+#    name: Logic
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 19
+#  fields:
+#    slug: acturial-science
+#    name: Acturial Science
+#    categories: [1,4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 20
+#  fields:
+#    slug: gmat
+#    name: GMAT
+#    categories: [1,5]
+#    duration: 6
+#    quiz: 25
+#
+#- model: skills.Skill
+#  pk: 21
+#  fields:
+#    slug: operations-research
+#    name: Operations Research
+#    categories: [1]
+#    duration: 6
+#    quiz: 52
+#
+#- model: skills.Skill
+#  pk: 22
+#  fields:
+#    slug: e-view
+#    name: E View
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 23
+#  fields:
+#    slug: regression-correlation
+#    name: Regression & Correlation
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 24
+#  fields:
+#    slug: numerical-methods
+#    name: Numerical Methods
+#    categories: [1]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 25
+#  fields:
+#    slug: calculus
+#    name: Calculus
+#    categories: [1]
+#    duration: 6
+#    quiz: 33
+#
+## English skills
+#- model: skills.Skill
+#  pk: 26
+#  fields:
+#    background_image:  english.jpg
+#    heading: Excel in English Language
+#    caption: English is key for all forms of learning. Ensure you have good mastery of the subject.
+#    subheading: Get an experienced English Language teacher in your area
+#    description: Helping students master English in-depth is our specialty. Whether you're preparing for an important exam, need help with homework, or want to strengthen specific areas like Writing Essays, Letters and Summaries, Oral & Aural Communication, Phonetics, Grammar and many more, our experienced and verified English Language tutors will help you achieve your goals in line with the relevant currriculum.
+#    short_name: English
+#
+#- model: skills.Skill
+#  pk: 27
+#  fields:
+#    slug: literature-in-english
+#    name: Literature in English
+#    categories: [2]
+#    duration: 6
+#    quiz: 44
+#
+#- model: skills.Skill
+#  pk: 28
+#  fields:
+#    slug: reading-comprehension
+#    name: Reading Comprehension
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 29
+#  fields:
+#    slug: english-grammar
+#    name: English Grammar
+#    categories: [2]
+#    duration: 6
+#    quiz: 36
+#
+#- model: skills.Skill
+#  pk: 30
+#  fields:
+#    slug: verbal-reasoning
+#    name: Verbal Reasoning
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 31
+#  fields:
+#    slug: spoken-english
+#    name: Spoken English
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 32
+#  fields:
+#    slug: letter-writing
+#    name: Letter Writing
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 33
+#  fields:
+#    slug: essay-writing
+#    name: Essay Writing
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 34
+#  fields:
+#    slug: spellings
+#    name: Spellings
+#    categories: [2]
+#    duration: 6
+#    quiz: 18
+#
+#- model: skills.Skill
+#  pk: 35
+#  fields:
+#    slug: creative-writing
+#    name: Creative Writing
+#    categories: [2]
+#    duration: 6
+#    quiz: 16
+#
+#- model: skills.Skill
+#  pk: 36
+#  fields:
+#    slug: proofreading-editing
+#    name: Proofreading & Editing
+#    categories: [2]
+#    duration: 6
+#    quiz: 17
+#
+#- model: skills.Skill
+#  pk: 37
+#  fields:
+#    slug: toefl
+#    name: TOEFL
+#    categories: [2,5]
+#    duration: 6
+#    quiz: 54
+#
+#- model: skills.Skill
+#  pk: 38
+#  fields:
+#    slug: ielts
+#    name: IELTS
+#    categories: [2,5]
+#    duration: 6
+#    quiz: 53
+#
+#- model: skills.Skill
+#  pk: 39
+#  fields:
+#    slug: sat-reading
+#    name: SAT Reading
+#    categories: [2,5]
+#    duration: 6
+#    quiz: 68
+#
+#- model: skills.Skill
+#  pk: 40
+#  fields:
+#    slug: sat-writing
+#    name: SAT Writing
+#    categories: [2,5]
+#    duration: 6
+#    quiz: 69
+#
+#- model: skills.Skill
+#  pk: 41
+#  fields:
+#    slug: book-publishing
+#    name: Book Publishing
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 42
+#  fields:
+#    slug: phonetics
+#    name: Phonetics
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 43
+#  fields:
+#    slug: public-speaking
+#    name: Public Speaking
+#    categories: [2,10]
+#    duration: 6
+#    quiz: 48
+#
+#- model: skills.Skill
+#  pk: 44
+#  fields:
+#    slug: vocabulary-building
+#    name: Vocabulary Building
+#    categories: [2]
+#    duration: 6
+#    quiz: 37
+#
+#- model: skills.Skill
+#  pk: 45
+#  fields:
+#    slug: linguistics
+#    name: Linguistics
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 46
+#  fields:
+#    slug: english-poetry
+#    name: English Poetry
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 47
+#  fields:
+#    slug: handwriting-improvement
+#    name: Handwriting Improvement
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 48
+#  fields:
+#    slug: study-skills
+#    name: Study Skills
+#    categories: [2]
+#    duration: 6
+#    quiz:
+#
+## Languages
+#- model: skills.Skill
+#  pk: 49
+#  fields:
+#    slug: french
+#    name: French Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 50
+#  fields:
+#    slug: spanish
+#    name: Spanish Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 7
+#
+#
+#- model: skills.Skill
+#  pk: 51
+#  fields:
+#    slug: dutch
+#    name: Dutch Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 12
+#
+#
+#- model: skills.Skill
+#  pk: 52
+#  fields:
+#    slug: arabic
+#    name: Arabic Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 53
+#  fields:
+#    slug: chinese
+#    name: Chinese Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 54
+#  fields:
+#    slug: german
+#    name: German Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 9
+#
+#
+#- model: skills.Skill
+#  pk: 55
+#  fields:
+#    slug: russian
+#    name: Russian Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 8
+#
+#
+#- model: skills.Skill
+#  pk: 56
+#  fields:
+#    slug: japanese
+#    name: Japanese Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 5
+#
+#
+#- model: skills.Skill
+#  pk: 57
+#  fields:
+#    slug: sign-language
+#    name: Sign Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 58
+#  fields:
+#    slug: greek
+#    name: Greek Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 59
+#  fields:
+#    slug: hebrew
+#    name: Hebrew Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 60
+#  fields:
+#    slug: latin
+#    name: Latin Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 10
+#
+#
+#- model: skills.Skill
+#  pk: 61
+#  fields:
+#    slug: italian
+#    name: Italian Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 14
+#
+#
+#- model: skills.Skill
+#  pk: 62
+#  fields:
+#    slug: turkish
+#    name: Turkish Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 63
+#  fields:
+#    slug: farsi
+#    name: Farsi Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 64
+#  fields:
+#    slug: yoruba
+#    name: Yoruba Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 65
+#  fields:
+#    slug: igbo
+#    name: Igbo Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 66
+#  fields:
+#    slug: hausa
+#    name: Hausa Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 67
+#  fields:
+#    slug: portugese
+#    name: Portugese Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 68
+#  fields:
+#    slug: ukranian
+#    name: Ukranian Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 69
+#  fields:
+#    slug: norwegian
+#    name: Norwegian Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 70
+#  fields:
+#    slug: swahili
+#    name: Swahili Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 71
+#  fields:
+#    slug: speech-training
+#    name: Speech Training
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 72
+#  fields:
+#    slug: ibibio
+#    name: Ibibio Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 73
+#  fields:
+#    slug: korean
+#    name: Korean Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 74
+#  fields:
+#    slug: indonesian
+#    name: Indonesian Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 75
+#  fields:
+#    slug: czech
+#    name: Czech Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 76
+#  fields:
+#    slug: danish
+#    name: Danish Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 77
+#  fields:
+#    slug: hindi
+#    name: Hindi Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 78
+#  fields:
+#    slug: croatian
+#    name: Croatian Language
+#    categories: [3]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 79
+#  fields:
+#    slug: swedish
+#    name: Swedish Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 13
+#
+#
+#- model: skills.Skill
+#  pk: 80
+#  fields:
+#    slug: irish
+#    name: Irish Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 15
+#
+#
+#- model: skills.Skill
+#  pk: 81
+#  fields:
+#    slug: polish
+#    name: Polish Language
+#    categories: [3]
+#    duration: 6
+#    quiz: 11
+#
+## Music
+#- model: skills.Skill
+#  pk: 82
+#  fields:
+#    slug: music-theory
+#    name: Music Theory
+#    categories: [15]
+#    duration: 6
+#    quiz: 51
+#
+#- model: skills.Skill
+#  pk: 83
+#  fields:
+#    slug: piano
+#    name: Piano
+#    categories: [15]
+#    duration: 6
+#    quiz: 47
+#
+#- model: skills.Skill
+#  pk: 84
+#  fields:
+#    slug: violin
+#    name: Violin
+#    categories: [15]
+#    duration: 6
+#    quiz: 49
+#
+#- model: skills.Skill
+#  pk: 85
+#  fields:
+#    slug: guitar
+#    name: Guitar
+#    categories: [15]
+#    duration: 6
+#    quiz: 28
+#
+#- model: skills.Skill
+#  pk: 86
+#  fields:
+#    slug: voice-training
+#    name: Voice Training
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 87
+#  fields:
+#    slug: drums
+#    name: Drums
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 88
+#  fields:
+#    slug: trumpet
+#    name: Trumpet
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 89
+#  fields:
+#    slug: singing
+#    name: Singing
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 90
+#  fields:
+#    slug: saxophone
+#    name: Saxophone
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 91
+#  fields:
+#    slug: accordion
+#    name: Accordion
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 92
+#  fields:
+#    slug: ear-training
+#    name: Ear Training
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 93
+#  fields:
+#    slug: xylophone
+#    name: Xylophone
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 94
+#  fields:
+#    slug: trombone
+#    name: Trombone
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 95
+#  fields:
+#    slug: flute
+#    name: Flute
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 96
+#  fields:
+#    slug: conducting
+#    name: Conducting
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 97
+#  fields:
+#    slug: harp
+#    name: harp
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 98
+#  fields:
+#    slug: music-production
+#    name: Music Production
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 99
+#  fields:
+#    slug: song-writing
+#    name: Song Writing
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 100
+#  fields:
+#    slug: composition
+#    name: Composition
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 101
+#  fields:
+#    slug: opera-voice
+#    name: Opera Voice
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 102
+#  fields:
+#    slug: rapping
+#    name: Rapping
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 103
+#  fields:
+#    slug: cello
+#    name: Cello
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 104
+#  fields:
+#    slug: audition-preparation
+#    name: Audition Preparation
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 105
+#  fields:
+#    slug: piccolo
+#    name: Picollo
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 106
+#  fields:
+#    slug: clarinet
+#    name: Clarinet
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 107
+#  fields:
+#    slug: french-horn
+#    name: French Horn
+#    categories: [15]
+#    duration: 6
+#    quiz: 6
+#
+#- model: skills.Skill
+#  pk: 108
+#  fields:
+#    slug: oboe
+#    name: Oboe
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 109
+#  fields:
+#    slug: music-history
+#    name: Music History
+#    categories: [15]
+#    duration: 6
+#    quiz:
+#
+## Sciences
+#- model: skills.Skill
+#  pk: 110
+#  fields:
+#    slug: physics
+#    name: Physics
+#    categories: [4]
+#    duration: 6
+#    quiz: 19
+#
+#- model: skills.Skill
+#  pk: 111
+#  fields:
+#    background_image: chemistry.jpg
+#    heading: Be excellent in Chemistry
+#    caption: Does Chemistry seem volatile? Learn how to understand Chemistry in-depth for school or exams.
+#    subheading: Get an experienced Chemistry taecher to help you succeed
+#    description: Helping students excel in Chemistry is our passion. Whether you need help to prepare for an important exam or need help with homework, or want to strengthen specific areas like Organic Chemistry, Practical Chemistry, Chemical Calculations and many more, our experienced and verified Chemistry tutors will help you achieve your goals in line with the school's or exam's curriculum.
+#    short_name: Chemistry
+#
+#- model: skills.Skill
+#  pk: 112
+#  fields:
+#    background_image: biology.jpg
+#    heading: Need help with Biology?
+#    caption: Understand Modern Biology - it's principles and process. Get help from an experienced teacher.
+#    subheading: Get an experienced Biology teacher in your area to help you
+#    description: Whether you need to prepare for an important exam, get help with tough assignments or better understand specific topics like Excretory or Digestive Systems, Cell theory and Organisms, Genetics, Practical Biology and many more, our experienced and verified Biology tutors will help you achieve your goals in line with the school's or exam's curriculum.
+#    short_name: Biology
+#
+#- model: skills.Skill
+#  pk: 113
+#  fields:
+#    slug: agric
+#    name: Agricultural Science
+#    categories: [4]
+#    duration: 6
+#    quiz: 3
+#
+#- model: skills.Skill
+#  pk: 114
+#  fields:
+#    background_image: science.jpg
+#    heading: Understand Basic Science
+#    caption: Give your child a strong introduction to Science from experienced teachers in your area.
+#    subheading: Book lessons with an experienced Science teacher in your area
+#    description: Helping students understand Basic Science is our passion. From elementary introduction to Science, to specific topics like Cell theory, Characteristics of organisms, Elements & their compounds, Weather and Climate or any area of interest, our experienced and verified tutors will help your kids excel in Sciences in-line with the school's curriculum whether you need help for exams or homework.
+#    short_name: Science
+#
+#- model: skills.Skill
+#  pk: 115
+#  fields:
+#    slug: electronics
+#    name: Electronic
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 116
+#  fields:
+#    slug: anatomy
+#    name: Anatomy
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 117
+#  fields:
+#    slug: technical-drawing
+#    name: Techical Drawing
+#    categories: [4]
+#    duration: 6
+#    quiz: 42
+#
+#- model: skills.Skill
+#  pk: 118
+#  fields:
+#    slug: botany
+#    name: Botany
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 119
+#  fields:
+#    slug: organic-chemistry
+#    name: Organic Chemistry
+#    categories: [4]
+#    duration: 6
+#    quiz: 23
+#
+#- model: skills.Skill
+#  pk: 120
+#  fields:
+#    slug: geography
+#    name: Geography
+#    categories: [4]
+#    duration: 6
+#    quiz: 65
+#
+#- model: skills.Skill
+#  pk: 121
+#  fields:
+#    slug: life-science
+#    name: Life Sciences
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 122
+#  fields:
+#    slug: technical-drawing
+#    name: Technical Drawing
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 123
+#  fields:
+#    slug: physiology
+#    name: Physiology
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 124
+#  fields:
+#    slug: thermodynamics
+#    name: Thermodynamics
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 125
+#  fields:
+#    slug: zoology
+#    name: Zoology
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 126
+#  fields:
+#    slug: mechatronics
+#    name: Mechatronics
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 127
+#  fields:
+#    slug: chemical-engineering
+#    name: Chemical Engineering
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 128
+#  fields:
+#    slug: civil-engineering
+#    name: Civil Engineering
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 129
+#  fields:
+#    slug: electrical-engineering
+#    name: Electrical Engineering
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 130
+#  fields:
+#    slug: fluid-dynamics
+#    name: Fluid Dynamics
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 131
+#  fields:
+#    slug: geology
+#    name: Geology
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 132
+#  fields:
+#    slug: mechanical-engineering
+#    name: Mechanical Engineering
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 133
+#  fields:
+#    slug: microbiology
+#    name: Microbiology
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 134
+#  fields:
+#    slug: nursing
+#    name: Nursing
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 135
+#  fields:
+#    slug: inorganic-chemistry
+#    name: Inorganic Chemistry
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 136
+#  fields:
+#    slug: artificial-intelligence
+#    name: Artificial Intelligence
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 137
+#  fields:
+#    slug: basic-technology
+#    name: Basic Technology
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 138
+#  fields:
+#    slug: philosophy
+#    name: Philosophy
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 139
+#  fields:
+#    slug: sociology
+#    name: Sociology
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 140
+#  fields:
+#    slug: environmental-management
+#    name: Environmental Management
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 141
+#  fields:
+#    slug: cybersecurity
+#    name: CyberSecurity
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 142
+#  fields:
+#    slug: obstetrics-gynaecology
+#    name: Obstetrics & Gynaecology
+#    categories: [4]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 143
+#  fields:
+#    slug: biochemistry
+#    name: Biochemistry
+#    categories: [4]
+#    duration: 6
+#    quiz: 24
+#
+#- model: skills.Skill
+#  pk: 144
+#  fields:
+#    slug: genetics
+#    name: Genetics
+#    categories: [4]
+#    duration: 6
+#    quiz: 22
+#
+## Exam Preparation
+#- model: skills.Skill
+#  pk: 145
+#  fields:
+#    slug: gre
+#    name: GRE
+#    categories: [5]
+#    duration: 6
+#    quiz: 26
+#
+#- model: skills.Skill
+#  pk: 146
+#  fields:
+#    slug: ican
+#    name: ICAN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 147
+#  fields:
+#    slug: acca
+#    name: ACCA
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 148
+#  fields:
+#    slug: pmp
+#    name: PMP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 149
+#  fields:
+#    slug: ccna
+#    name: CCNA
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 150
+#  fields:
+#    slug: lsat
+#    name: LSAT
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 151
+#  fields:
+#    slug: bar-exam
+#    name: Bar EXAM
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 152
+#  fields:
+#    slug: cisa
+#    name: CISA
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 153
+#  fields:
+#    slug: ceh
+#    name: CEH
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 154
+#  fields:
+#    slug: ccnp
+#    name: CCNP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 155
+#  fields:
+#    slug: ccie
+#    name: CCIE
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 156
+#  fields:
+#    slug: oracle
+#    name: ORACLE Certification
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 157
+#  fields:
+#    slug: sap
+#    name: SAP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 158
+#  fields:
+#    slug: cssp
+#    name: CSSP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 159
+#  fields:
+#    slug: prince2
+#    name: PRINCE2
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 160
+#  fields:
+#    slug: pmi
+#    name: PMI
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 161
+#  fields:
+#    slug: cima
+#    name: CIMA
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 162
+#  fields:
+#    slug: coren
+#    name: COREN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 163
+#  fields:
+#    slug: nim
+#    name: NIM
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 164
+#  fields:
+#    slug: mpe
+#    name: MPE
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 165
+#  fields:
+#    slug: cips
+#    name: CIPS
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 166
+#  fields:
+#    slug: cipsmn
+#    name: CIPSMN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 167
+#  fields:
+#    slug: plab
+#    name: PLAB
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 168
+#  fields:
+#    slug: citn
+#    name: CITN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 169
+#  fields:
+#    slug: icsan
+#    name: ICSAN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 170
+#  fields:
+#    slug: cpa
+#    name: CPA
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 171
+#  fields:
+#    slug: cism
+#    name: CISM
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 172
+#  fields:
+#    slug: scjp
+#    name: SCJP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 173
+#  fields:
+#    slug: scjd
+#    name: SCJD
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 174
+#  fields:
+#    slug: itil
+#    name: ITIL
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 175
+#  fields:
+#    slug: comptia-security
+#    name: CompTia Security +
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 176
+#  fields:
+#    slug: comptia-network
+#    name: CompTia Network +
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 177
+#  fields:
+#    slug: comptia-a
+#    name: CompTia A +
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 178
+#  fields:
+#    slug: cipmn
+#    name: CIPMN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 179
+#  fields:
+#    slug: six-sigma
+#    name: Six Sigma
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 180
+#  fields:
+#    slug: cfa
+#    name: CFA
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 181
+#  fields:
+#    slug: cibm
+#    name: CIBM
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 182
+#  fields:
+#    slug: mdcan
+#    name: MDCAN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 183
+#  fields:
+#    slug: nipr
+#    name: NIPR
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 184
+#  fields:
+#    slug: ismm
+#    name: ISMM
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 185
+#  fields:
+#    slug: ocp
+#    name: OCP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 186
+#  fields:
+#    slug: ocm
+#    name: OCM
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 187
+#  fields:
+#    slug: cwna
+#    name: CWNA
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 188
+#  fields:
+#    slug: cwnp
+#    name: CWNP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 189
+#  fields:
+#    slug: cibn
+#    name: CIBN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 190
+#  fields:
+#    slug: acib
+#    name: ACIB
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 191
+#  fields:
+#    slug: rhct
+#    name: RHCT
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 192
+#  fields:
+#    slug: gsec
+#    name: GSEC
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 193
+#  fields:
+#    slug: mcp
+#    name: MCP
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 194
+#  fields:
+#    slug: lpic1
+#    name: LPIC1
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 195
+#  fields:
+#    slug: ciin
+#    name: CIIN
+#    categories: [5]
+#    duration: 6
+#    quiz:
+#
+## Special needs
+#- model: skills.Skill
+#  pk: 196
+#  fields:
+#    slug: dyslexia
+#    name: Dyslexia
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 197
+#  fields:
+#    slug: hard-hearing
+#    name: Hard of Hearing
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 198
+#  fields:
+#    slug: braille-reading
+#    name: Braille Reading
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 199
+#  fields:
+#    slug: autism
+#    name: Autism
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 200
+#  fields:
+#    slug: special-needs
+#    name: Special Needs
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 201
+#  fields:
+#    slug: aspergers
+#    name: Aspergers
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 202
+#  fields:
+#    slug: add-adhd
+#    name: ADD/ADHD
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 203
+#  fields:
+#    slug: phonics
+#    name: Phonics
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+#
+#- model: skills.Skill
+#  pk: 204
+#  fields:
+#    slug: speech-disorders
+#    name: Speech Disorders
+#    categories: [6]
+#    duration: 6
+#    quiz:
+#
+## Computer & Software
+#
+#- model: skills.Skill
+#  pk: 205
+#  fields:
+#    slug: compute-science
+#    name: Computer Science
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 206
+#  fields:
+#    slug: graphic-design
+#    name: Graphic Design
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 207
+#  fields:
+#    slug: microsoft-excel
+#    name: Microsoft Excel
+#    categories: [7]
+#    duration: 6
+#    quiz: 67
+#
+#- model: skills.Skill
+#  pk: 208
+#  fields:
+#    slug: web-design
+#    name: Web Design
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 209
+#  fields:
+#    slug: php
+#    name: PHP Programming
+#    categories: [7]
+#    duration: 6
+#    quiz: 59
+#
+#- model: skills.Skill
+#  pk: 210
+#  fields:
+#    slug: autocad
+#    name: Autodesk AutoCAD
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 211
+#  fields:
+#    slug: video-animation
+#    name: Video Animation
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 212
+#  fields:
+#    slug: basic-computing
+#    name: Basic Computing
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 213
+#  fields:
+#    slug: computer-networking
+#    name: Computer Networking
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 214
+#  fields:
+#    slug: sql
+#    name: SQL
+#    categories: [7]
+#    duration: 6
+#    quiz: 56
+#
+#- model: skills.Skill
+#  pk: 215
+#  fields:
+#    slug: mathematica
+#    name: Mathematica
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 216
+#  fields:
+#    slug: matlab
+#    name: MATLAB
+#    categories: [7]
+#    duration: 6
+#    quiz: 55
+#
+#- model: skills.Skill
+#  pk: 217
+#  fields:
+#    slug: adobe-illustrator
+#    name: Adobe Illustrator
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 218
+#  fields:
+#    slug: adobe-photoshop
+#    name: Adobe Photoshop
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 219
+#  fields:
+#    slug: adobe-indesign
+#    name: Adobe InDesign
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 220
+#  fields:
+#    slug: adobe-lightroom
+#    name: Adobe Lightroom
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 221
+#  fields:
+#    slug: aspnet
+#    name: ASP.NET
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 222
+#  fields:
+#    slug: c
+#    name: C Programming
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 223
+#  fields:
+#    slug: csharp
+#    name: C# Programming
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 224
+#  fields:
+#    slug: c-plus-plus
+#    name: C++ Programming
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 225
+#  fields:
+#    slug: desktop-publishing
+#    name: Desktop Publishing
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 226
+#  fields:
+#    slug: java
+#    name: Java Programming
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 227
+#  fields:
+#    slug: javascript
+#    name: Javascript Programming
+#    categories: [7]
+#    duration: 6
+#    quiz: 57
+#
+#- model: skills.Skill
+#  pk: 228
+#  fields:
+#    slug: linux
+#    name: Linux OS
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 229
+#  fields:
+#    slug: mac
+#    name: Apple's Macintosh OS
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 230
+#  fields:
+#    slug: maya
+#    name: AutoDesk Maya
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 231
+#  fields:
+#    slug: microsoft-access
+#    name: Microsoft Access
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 232
+#  fields:
+#    slug: microsoft-outlook
+#    name: Microsoft Outlook
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 233
+#  fields:
+#    slug: microsoft-powerpoint
+#    name: Microsoft PowerPoint
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 234
+#  fields:
+#    slug: microsoft-word
+#    name: Microsoft Word
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 235
+#  fields:
+#    slug: coreldraw
+#    name: CORELDRAW
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 236
+#  fields:
+#    slug: perl
+#    name: Perl Programming
+#    categories: [7]
+#    duration: 6
+#    quiz: 58
+#
+#- model: skills.Skill
+#  pk: 237
+#  fields:
+#    slug: ruby
+#    name: Ruby Programming
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 238
+#  fields:
+#    slug: lisp
+#    name: LISP Programming
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 239
+#  fields:
+#    slug: web-development
+#    name: Web Development
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 240
+#  fields:
+#    slug: prolog
+#    name: Prolog
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 241
+#  fields:
+#    slug: python
+#    name: Python Programming
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 242
+#  fields:
+#    slug: sas
+#    name: SAS Business Analytics and Intelligence Software
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 243
+#  fields:
+#    slug: vb
+#    name: Visual Basic
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 244
+#  fields:
+#    slug: blog-management
+#    name: Blog Management
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 245
+#  fields:
+#    slug: seo
+#    name: Search Engine Optimization
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 246
+#  fields:
+#    slug: typing-skills
+#    name: Typing Skills
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 247
+#  fields:
+#    slug: computer-repairs
+#    name: Computer Repair
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 248
+#  fields:
+#    slug: phone-repair
+#    name: Phone Repairs
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 249
+#  fields:
+#    slug: mobile-app-development
+#    name: Mobile App Development
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 250
+#  fields:
+#    slug: video-editing
+#    name: Video Editing
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 251
+#  fields:
+#    slug: software-engineering
+#    name: Software Engineering
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 252
+#  fields:
+#    slug: data-structure
+#    name: Data Structures
+#    categories: [7]
+#    duration: 6
+#    quiz: 46
+#
+#- model: skills.Skill
+#  pk: 253
+#  fields:
+#    slug: photo-editing
+#    name: Photo Editing
+#    categories: [7]
+#    duration: 6
+#    quiz:
+#
+## Arts & Religion
+#- model: skills.Skill
+#  pk: 254
+#  fields:
+#    slug: fine-art
+#    name: Fine Art
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 255
+#  fields:
+#    slug: christian-religious-studies
+#    name: Christian Religious Studies
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 256
+#  fields:
+#    slug: islamic-religious-studies
+#    name: Islamic Religious Studies
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 257
+#  fields:
+#    slug: drawing
+#    name: Drawing
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 258
+#  fields:
+#    slug: food-nutrition
+#    name: Food & Nutrition
+#    categories: [8]
+#    duration: 6
+#    quiz: 60
+#
+#- model: skills.Skill
+#  pk: 259
+#  fields:
+#    slug: home-economics
+#    name: Home Economics
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 260
+#  fields:
+#    slug: sculpture
+#    name: Sculpture
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 261
+#  fields:
+#    slug: painting
+#    name: Painting
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 262
+#  fields:
+#    slug: creative-arts
+#    name: Creative Arts
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 263
+#  fields:
+#    slug: building-drawing
+#    name: Building Drawing
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 264
+#  fields:
+#    slug: film-production
+#    name: Film Production
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 265
+#  fields:
+#    slug: architecture
+#    name: Architecture
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 266
+#  fields:
+#    slug: film-acting
+#    name: Film Acting
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 267
+#  fields:
+#    slug: calligraphy
+#    name: Calligraphy
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 268
+#  fields:
+#    slug: cartooning
+#    name: Cartooning
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 269
+#  fields:
+#    slug: pottery
+#    name: Pottery
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 270
+#  fields:
+#    slug: nigerian-history
+#    name: Nigerian History
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 271
+#  fields:
+#    slug: african-history
+#    name: African History
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 272
+#  fields:
+#    slug: world-history
+#    name: World History
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 273
+#  fields:
+#    slug: history
+#    name: History
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 274
+#  fields:
+#    slug: law
+#    name: Law
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 275
+#  fields:
+#    slug: international law
+#    name: International Law
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 276
+#  fields:
+#    slug: company-law
+#    name: Company Law
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 277
+#  fields:
+#    slug: political-science
+#    name: Political Science
+#    categories: [8]
+#    duration: 6
+#    quiz:
+#
+## Beauty and lifestyle
+#- model: skills.Skill
+#  pk: 278
+#  fields:
+#    slug: cosmetology
+#    name: Cosmetology
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 279
+#  fields:
+#    slug: sewing-tailoring
+#    name: Sewing & Tailoring
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 280
+#  fields:
+#    slug: makeup
+#    name: Make up
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 281
+#  fields:
+#    slug: gele-tying
+#    name: Gele Tying
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 282
+#  fields:
+#    slug: hair-stying
+#    name: Hair Styling
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 283
+#  fields:
+#    slug: bead-making
+#    name: Bead Making
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 284
+#  fields:
+#    slug: fashion-designing
+#    name: Fashion Designing
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 285
+#  fields:
+#    slug: skin-care
+#    name: Skin Care
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 286
+#  fields:
+#    slug: nutritious-eating
+#    name: Nutritious Eating
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 287
+#  fields:
+#    slug: weight-loss
+#    name: Weight Loss
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 288
+#  fields:
+#    slug: health-coaching
+#    name: Health Coaching
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 289
+#  fields:
+#    slug: needle-work
+#    name: Needle Work
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 290
+#  fields:
+#    slug: facial-beauty
+#    name: Facial Beauty
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 291
+#  fields:
+#    slug: jewelry-design
+#    name: Jewelry Design
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 292
+#  fields:
+#    slug: hair-weaving
+#    name: Hair Weaving
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 293
+#  fields:
+#    slug: hair-growth-texture
+#    name: Hair Growth & Texture
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 294
+#  fields:
+#    slug: flat-stomach
+#    name: Flat Stomach
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 295
+#  fields:
+#    slug: decoration
+#    name: Decoration
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 296
+#  fields:
+#    slug: event-planning
+#    name: Event Planning
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 297
+#  fields:
+#    slug: wedding-planning
+#    name: Wedding Planning
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 298
+#  fields:
+#    slug: interior-design
+#    name: Interior Design
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 299
+#  fields:
+#    slug: ankara-craft
+#    name: Ankara Craft
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 300
+#  fields:
+#    slug: shirt-design
+#    name: Shirt Design
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 301
+#  fields:
+#    slug: fashion-drawing
+#    name: Fashion Drawing
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 302
+#  fields:
+#    slug: personal-hygiene
+#    name: Personal Hygiene
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 303
+#  fields:
+#    slug: etiquette
+#    name: Etiquette
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 304
+#  fields:
+#    slug: wire-works
+#    name: Wire Works
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 305
+#  fields:
+#    slug: hat-making
+#    name: Hat Making
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 306
+#  fields:
+#    slug: bag-making
+#    name: Bag Making
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 307
+#  fields:
+#    slug: face-treatment
+#    name: Face Treatment
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 308
+#  fields:
+#    slug: photography
+#    name: Photography
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 309
+#  fields:
+#    slug: embroidery
+#    name: Embroidery
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 310
+#  fields:
+#    slug: driving
+#    name: Driving
+#    categories: [9]
+#    duration: 6
+#    quiz:
+#
+## Business & Commercial
+#
+#- model: skills.Skill
+#  pk: 311
+#  fields:
+#    slug: accounting
+#    name: Principles of Accounting
+#    categories: [10]
+#    duration: 6
+#    quiz: 2
+#
+#- model: skills.Skill
+#  pk: 312
+#  fields:
+#    slug: commerce
+#    name: Commerce
+#    categories: [10]
+#    duration: 6
+#    quiz: 43
+#
+#- model: skills.Skill
+#  pk: 313
+#  fields:
+#    slug: economics
+#    name: Economics
+#    categories: [10]
+#    duration: 6
+#    quiz: 45
+#
+#- model: skills.Skill
+#  pk: 314
+#  fields:
+#    slug: government
+#    name: Government
+#    categories: [10]
+#    duration: 6
+#    quiz: 66
+#
+#- model: skills.Skill
+#  pk: 315
+#  fields:
+#    slug: business-studies
+#    name: Business Studies
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 316
+#  fields:
+#    slug: social-studies
+#    name: Social Studies
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 317
+#  fields:
+#    slug: civic-education
+#    name: Civic Education
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 318
+#  fields:
+#    slug: business-development
+#    name: Business Development
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 319
+#  fields:
+#    slug: writing-business-plan
+#    name: Writing Business Plan
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 320
+#  fields:
+#    slug: financial-analysis
+#    name: Financial Analysis
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 321
+#  fields:
+#    slug: digital-marketing
+#    name: Digital Marketing
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 322
+#  fields:
+#    slug: company-growth
+#    name: Company Growth
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 323
+#  fields:
+#    slug: customer-experience
+#    name: Customer Experience
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 324
+#  fields:
+#    slug: presentation-skills
+#    name: Presentation Skills
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 325
+#  fields:
+#    slug: networking-business
+#    name: Networking in Business
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 326
+#  fields:
+#    slug: business-etiquette
+#    name: Business Etiquette
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 327
+#  fields:
+#    slug: personal-finance
+#    name: Personal Finance
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 328
+#  fields:
+#    slug: career-counselling
+#    name: Career Counselling
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 329
+#  fields:
+#    slug: negotiation-skills
+#    name: Negotiation Skills
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 330
+#  fields:
+#    slug: strategic-patnership
+#    name: Strategic Patnership
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 331
+#  fields:
+#    slug: social-media-marketing
+#    name: Social Media Marketing
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 332
+#  fields:
+#    slug: procument-inventory
+#    name: Procument & Inventory
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 333
+#  fields:
+#    slug: contract-management
+#    name: Contract Management
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 334
+#  fields:
+#    slug: home-budgeting
+#    name: Home Budgeting
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 335
+#  fields:
+#    slug: business-administration
+#    name: Business Administration
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 336
+#  fields:
+#    slug: offshore-training
+#    name: Offshore Training
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 337
+#  fields:
+#    slug: management-accounting
+#    name: Management Accounting
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 338
+#  fields:
+#    slug: proposal-writing
+#    name: Proposal Writing
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 339
+#  fields:
+#    slug: business-management
+#    name: Business Management
+#    categories: [10]
+#    duration: 6
+#    quiz:
+#
+## Sport & Fitness
+#
+#- model: skills.Skill
+#  pk: 340
+#  fields:
+#    slug: swimming
+#    name: Swimming
+#    categories: [11]
+#    duration: 6
+#    quiz: 29
+#
+#- model: skills.Skill
+#  pk: 341
+#  fields:
+#    slug: cycling
+#    name: Cycling
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 342
+#  fields:
+#    slug: table-tennis
+#    name: Table Tennis
+#    categories: [11]
+#    duration: 6
+#    quiz: 61
+#
+#- model: skills.Skill
+#  pk: 343
+#  fields:
+#    slug: volleyball
+#    name: Volleyball
+#    categories: [11]
+#    duration: 6
+#    quiz: 64
+#- model: skills.Skill
+#  pk: 344
+#  fields:
+#    slug: squash
+#    name: Squash
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 345
+#  fields:
+#    slug: sports-nutrition
+#    name: Sports Nutrition
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 346
+#  fields:
+#    slug: football-coaching
+#    name: Football Coaching
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 347
+#  fields:
+#    slug: board-skating
+#    name: Board Skating
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 348
+#  fields:
+#    slug: shot-put
+#    name: Shot Put
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 349
+#  fields:
+#    slug: taekuondo
+#    name: Taekuondo
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 350
+#  fields:
+#    slug: track-field
+#    name: Track and Field
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 351
+#  fields:
+#    slug: horse-riding
+#    name: Horse Riding
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 352
+#  fields:
+#    slug: gymnastics
+#    name: Gymnastics
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 353
+#  fields:
+#    slug: kung-fu
+#    name: Kung Fu
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 354
+#  fields:
+#    slug: lawn-tennis
+#    name: Lawn Tennis
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 355
+#  fields:
+#    slug: basketball-coaching
+#    name: Basketball Coaching
+#    categories: [11]
+#    duration: 6
+#    quiz: 63
+#
+#- model: skills.Skill
+#  pk: 356
+#  fields:
+#    slug: cricket-coaching
+#    name: Cricket Coaching
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 357
+#  fields:
+#    slug: badminton
+#    name: Badminton
+#    categories: [11]
+#    duration: 6
+#    quiz: 62
+#
+#- model: skills.Skill
+#  pk: 358
+#  fields:
+#    slug: boxing
+#    name: Boxing
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 359
+#  fields:
+#    slug: kickboxing
+#    name: Kickboxing
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 360
+#  fields:
+#    slug: body-building
+#    name: Body Building
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 361
+#  fields:
+#    slug: fitness-exercise
+#    name: Fitness & Exercise
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 362
+#  fields:
+#    slug: golf-coaching
+#    name: Golf Coaching
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 363
+#  fields:
+#    slug: martial-arts
+#    name: Martial Arts
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 364
+#  fields:
+#    slug: self-defence
+#    name: Self Defence
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 365
+#  fields:
+#    slug: yoga
+#    name: Yoga
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 366
+#  fields:
+#    slug: lacrosse
+#    name: Lacrosse
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 367
+#  fields:
+#    slug: physical-education
+#    name: Physical Education
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 368
+#  fields:
+#    slug: javelin
+#    name: Javelin
+#    categories: [11]
+#    duration: 6
+#    quiz:
+#
+## Dance and Craft
+#
+#- model: skills.Skill
+#  pk: 369
+#  fields:
+#    slug: chess
+#    name: Chess
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 370
+#  fields:
+#    slug: ballet
+#    name: Ballet
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 371
+#  fields:
+#    slug: salsa-dance
+#    name: Salsa Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 372
+#  fields:
+#    slug: tango-dance
+#    name: Tango Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 373
+#  fields:
+#    slug: waltz-dance
+#    name: Waltz Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 374
+#  fields:
+#    slug: traditional-dance
+#    name: Traditional Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 375
+#  fields:
+#    slug: choreography
+#    name: Choreography
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 376
+#  fields:
+#    slug: ballroom-dance
+#    name: Ballroom Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 377
+#  fields:
+#    slug: irish-dance
+#    name: Irish Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 379
+#  fields:
+#    slug: indian-dance
+#    name: Indian Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 379
+#  fields:
+#    slug: tap-dance
+#    name: Tap Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 380
+#  fields:
+#    slug: screenwriting
+#    name: Screenwriting
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 381
+#  fields:
+#    slug: woodwork
+#    name: Woodwork
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 382
+#  fields:
+#    slug: carpentry
+#    name: Carpentry
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 383
+#  fields:
+#    slug: gardening
+#    name: Gardening
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 384
+#  fields:
+#    slug: welding
+#    name: Welding
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 385
+#  fields:
+#    slug: leather-work
+#    name: Leather Work
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 386
+#  fields:
+#    slug: upholsery
+#    name: Upholsery
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 387
+#  fields:
+#    slug: scrabble
+#    name: Scrabble
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 388
+#  fields:
+#    slug: chachacha-dance
+#    name: Chachacha Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 389
+#  fields:
+#    slug: break-dance
+#    name: Break Dance
+#    categories: [12]
+#    duration: 6
+#    quiz:
+#
+## Cooking
+#- model: skills.Skill
+#  pk: 390
+#  fields:
+#    slug: desserts
+#    name: Desserts
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 391
+#  fields:
+#    slug: continental-dishes
+#    name: Continental Dishes
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 392
+#  fields:
+#    slug: afang-soup
+#    name: Afang Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 393
+#  fields:
+#    slug: edikaikong-soup
+#    name: Edikaikong Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 394
+#  fields:
+#    slug: general-cooking
+#    name: General Cooking
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 395
+#  fields:
+#    slug: kitchen-hygiene
+#    name: Kitchen Hygiene
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 396
+#  fields:
+#    slug: french-cooking
+#    name: French Cooking
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 397
+#  fields:
+#    slug: confectionaries
+#    name: Confectionaries
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 398
+#  fields:
+#    slug: italian-cooking
+#    name: Italian Cooking
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 399
+#  fields:
+#    slug: chinese-cooking
+#    name: Chinese Cooking
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 400
+#  fields:
+#    slug: assorted-meals
+#    name: Assorted Meals
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 401
+#  fields:
+#    slug: calabar-soups
+#    name: Calabar Soups
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 402
+#  fields:
+#    slug: pizza
+#    name: Pizza
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 403
+#  fields:
+#    slug: small-chops
+#    name: Small Chops
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 404
+#  fields:
+#    slug: igbo-soups
+#    name: Igbo Soups
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 405
+#  fields:
+#    slug: event-management
+#    name: Event Management
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 406
+#  fields:
+#    slug: hotel-management
+#    name: Hotel Management
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 407
+#  fields:
+#    slug: ogbono-soup
+#    name: Ogbono Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#- model: skills.Skill
+#  pk: 408
+#  fields:
+#    slug: egusi-soup
+#    name: Egusi Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 409
+#  fields:
+#    slug: white-soup
+#    name: White Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 410
+#  fields:
+#    slug: ewedu-soup
+#    name: Ewedu Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 411
+#  fields:
+#    slug: bitter-leaf-soup
+#    name: Bitter Leaf Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 412
+#  fields:
+#    slug: food-dressing
+#    name: Food Dressing
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 413
+#  fields:
+#    slug: okro-soup
+#    name: Okro Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 414
+#  fields:
+#    slug: food-planning
+#    name: Food Planning
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 415
+#  fields:
+#    slug: ofada-soup
+#    name: Ofada Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 416
+#  fields:
+#    slug: cocktail
+#    name: Cocktail
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 417
+#  fields:
+#    slug: mexican-cooking
+#    name: Mexican Cooking
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 418
+#  fields:
+#    slug: shawama
+#    name: Shawama
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 419
+#  fields:
+#    slug: oha-soup
+#    name: Oha Soup
+#    categories: [13]
+#    duration: 6
+#    quiz:
+#
+#- model: skills.Skill
+#  pk: 420
+#  fields:
+#    slug: driving
+#    name: Driving
+#    categories: [13]
+#    duration: 6
+#    quiz:

@@ -1,0 +1,229 @@
+{% extends '_layouts/base-wizard.html' %}
+{% block ng_app %}ng-app="HelloQuiz"{% endblock ng_app %}
+{% load staticfiles i18n %}
+{% block infographics %}{% endblock infographics %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/tutor-registration.css' %}">
+<script type="text/javascript"
+				src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script src="{% static "angular/angular.js" %}"></script>
+<script src="{% static "angular/angular-sanitize.js" %}"></script>
+<script src="{% static "js/quizapp/quizapp-v0.2.js" %}"></script>
+<script src="{% static 'javascripts/vendor/angular/ui-bootstrap-tpls.min.js' %}"></script>
+<script src="{% static 'angular/angular-timer.js' %}"></script>
+<script>
+	var quiz_obj = JSON.parse(('{{ quiz|escapejs }}'));
+	console.log(quiz_obj);
+
+	angular.module("HelloQuiz", ["QuizApp", 'timer'])
+	.value('Questions', quiz_obj)
+	.config(['$httpProvider', function ($httpProvider) {
+		$httpProvider.defaults.xsrfCookieName = 'csrftoken';
+		$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+	}])
+	.controller('SampleCtrl', function ($scope, $rootScope, QuizService, $http, $window, $modal) {
+				MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+		$scope.callbackTimer = {};
+		// $scope.q_time = 20;
+		$scope.q_time = 600;
+		$scope.callbackTimer.finished = function () {
+			console.log("complete");
+			$scope.submitQuiz(false);
+			$scope.$apply();
+		};
+		$scope.questions = quiz_obj.questions;
+		$rootScope.$on('myCustomEvent', function (event, data) {
+			console.log(data);
+		});
+
+		$scope.submitQuiz = function (completed) {
+  			document.getElementsByTagName('timer')[0].stop();
+  			if(QuizService.questionsAttempted ===0){
+  				notifyServerOnQuizStart();
+  			}
+			var modalInstance = $modal.open({
+				templateUrl: 'myModalContent.html',
+				controller: 'ModalInstanceCtrl',
+				size: 'undefined',
+				windowClass: 'app-modal-window',
+				resolve: {
+					passmark: function () {
+						return quiz_obj.passmark;
+					},
+					completed:function(){
+						return completed;
+					}
+				}
+			});
+
+			function sendResultToServer(result){
+				var transformRequest = function (obj) {
+	                var str = [];
+	                for (var p in obj)
+	                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+	                return str.join("&");
+	            };
+	            $http({
+                    method: 'POST',
+                    url: Urls['users:exam_quiz'](quiz_obj.url),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: transformRequest,
+                    data: result
+                }).then(function(data){
+ 					console.log(data);
+ 					$window.location.href = Urls['users:describe_subject'](quiz_obj.url);
+				},function(error){
+					console.log(error);
+				})
+ 			}
+
+			modalInstance.result.then(function (selectedItem) {
+				$scope.$emit('myCustomEvent', 'Modal Closed');
+				sendResultToServer({result:QuizService.percentage(),passed:QuizService.passed(quiz_obj.passmark)});
+
+			}, function () {
+				$scope.$emit('myCustomEvent', 'Modal Cancelled');
+				sendResultToServer({result:QuizService.percentage(),passed:QuizService.passed(quiz_obj.passmark)});
+			});
+		};
+		function notifyServerOnQuizStart(){
+				$http.get(Urls['users:quiz_started'](quiz_obj.url))
+				.success(function (data) {
+					console.log(data);
+				}).error(function (error) {
+					$window.location.reload();
+				});
+				console.log();
+		}
+		$rootScope.$on('quizStarted', function (event, data) {
+			if (QuizService.questionsAttempted == 1) {
+				notifyServerOnQuizStart();
+			}
+		});
+	})
+.controller('ModalInstanceCtrl', function ($scope, $modalInstance, passmark, QuizService,completed) {
+	console.log(completed);
+	$scope.passed = QuizService.passed(passmark);
+	$scope.percentage = QuizService.percentage();
+	$scope.timeElapsed = completed;
+	$scope.ok = function () {
+		$modalInstance.close({});
+	};
+
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
+});
+// .directive('ttTimer', function () {
+// 	return {
+// 		restrict: 'EA',
+// 		templateUrl:'{% static 'js/quizapp/templates/quiz_timer.html' %}',
+// 		scope: {
+// 			quiz_time: '=quiz_time',
+// 			callback:'&'
+// 		}
+
+// 	}
+// });
+
+</script>
+<style>
+	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+		display: none !important;
+	}
+	.app-modal-window .modal-dialog {
+		width: 432px;
+	}
+	html {
+		height: 100%;
+	}
+
+	body {
+		min-height: 100%;
+	}
+
+	.modal-backdrop {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+	}
+</style>
+{% endblock css %}
+{% block main_content %}
+<div class="row">
+	{% block left_column %}
+	<div class="col-sm-12" ng-controller="SampleCtrl" ng-cloak>
+		<div>
+			<span>Timer Countdown: </span>
+			{% verbatim %}
+			<timer interval="1000" max-time-unit="'minute'"
+			countdown="q_time"
+			finish-callback="callbackTimer.finished()">{{ mminutes }} min{{ minutesS }}, {{ sseconds }}
+			sec{{ secondsS }}
+		</timer>
+		{% endverbatim %}
+	</div>
+	<table style="width:100%">
+		<tr>
+			<td style="width:70%;vertical-align:top">
+				<div ng-repeat="question in questions">
+					<iquestion
+					text="question"></iquestion>
+
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-8">
+			<button class="btn btn-lg btn-block btn-warning"
+			ng-click="submitQuiz(true)">{% trans "Finish" %}</button>
+		</div>
+	</div>
+
+
+</div>
+{% endblock left_column %}
+</div>
+{% endblock main_content %}
+{% block javascript %}
+{{ block.super }}
+{% endblock javascript %}
+{% block modal %}
+<script type="text/ng-template" id="myModalContent.html">
+	<div class="modal-header">
+		<button type="button" class="close" data-ng-click="cancel()"><span
+			aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<div ng-show="timeElapsed">
+				<h3 class="modal-title text-center" ng-show="passed">Congratulations You passed!</h3>
+
+				<h3 class="modal-title text-center" ng-hide="passed">Sorry You Failed!</h3>
+			</div>
+			<h3 class="modal-title text-center" ng-hide="timeElapsed">Time Elapsed</3>
+
+		</div>
+		<div class="modal-body">
+			<div class="media">
+				<a class="media-left" href="#">
+				<img src="{% static 'img/user/1.jpg' %}" width="122" height="122" class="img-circle" alt="...">
+				</a>
+				<div class="media-body">
+				{% verbatim %}
+					<h2 class="media-heading text-center">You got {{percentage}}%</h2>
+					<p class="text-center">lorem iwjewojw hewo wehw wheiw whewj wh</p>
+					<button class="btn btn-primary btn-lg center-block" ng-click="ok()">Proceed</button>
+				</div>
+				{% endverbatim %}
+			</div>
+		</div>
+		<div class="modal-footer">
+
+		</div>
+	</script>
+	{% endblock %}

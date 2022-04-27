@@ -1,0 +1,10 @@
+- model: quiz.Category
+  pk: 1
+  fields:
+    category: Tutor Registration
+
+- model: quiz.Category
+  pk: 2
+  fields:
+    category: Subject Quizes
+

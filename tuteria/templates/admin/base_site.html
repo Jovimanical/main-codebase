@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+{% load staticfiles %}
+{% block extrahead %}
+{{ block.super }}
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script defer type="text/javascript" src="https://www.tuteria.com/static/autocomplete_light/jquery.init.js"></script>
+<script defer type="text/javascript" src="https://www.tuteria.com/static/autocomplete_light/autocomplete.init.js"></script>
+<script defer type="text/javascript" src="https://www.tuteria.com/static/autocomplete_light/vendor/select2/dist/js/select2.full.js"></script>
+<script defer type="text/javascript" src="https://www.tuteria.com/static/autocomplete_light/select2.js"></script>
+{% comment %} <script src="{% static 'admin/lib/babel.min.js' %}"></script> {% endcomment %}  
+<!-- <script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/react-modal@3.1.7/dist/react-modal.min.js"></script> -->
+{% comment %} <script type="text/babel" src="{% static 'admin/external.js' %}"> </script> {% endcomment %}
+{% block react_styles %}
+<script src="{% static 'admin/lib/react.min.js' %}"></script>
+<script src="{% static 'admin/lib/react-dom.min.js' %}"></script>
+<script src="{% static 'admin/lib/react-modal.min.js' %}"></script> 
+{% if debug %}
+<link rel="stylesheet" href="http://localhost:3000/css/admin-modal.css">
+{% else %}
+<link rel="stylesheet" href="{{tutor_client_cdn}}/css/admin-modal.css"></script>
+{% endif %}
+{% include "users/includes/react-dev-css.html" with debug=debug s_host=tutor_client_cdn %}
+ {% endblock %}
+{% endblock %}
+{% block footer %}
+{{block.super}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+{% block react_scripts %}
+<script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/react-modal@3.1.7/dist/react-modal.min.js"></script>
+<script src="{% static 'admin/dist/external-real.js' %}"> </script>
+<script>
+        {% if user.is_authenticated %}
+        window.USER_ID = "{{user.id}}";
+        {% endif %}
+        window.ADMIN_MODAL_BASE_URL =  "/";
+    </script>
+{% include "admin/includes/external-scripts.html" with use_old=False debug=debug %}
+<!-- <script src="{% static 'admin/dist/sales-app-modal.js' %}"> </script>
+<script src="{% static 'admin/dist/customer-success-app.js' %}"> </script>
+<script src="{% static 'admin/dist/renderAdminModal.js' %}"> </script> -->
+{% endblock %}
+{% endblock footer %}

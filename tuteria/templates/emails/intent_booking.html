@@ -1,0 +1,558 @@
+{% load cloudinary %}
+<div><div> <div>
+    <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;border-spacing:0;background-color:#f7f7f7;width:100%">
+        <tbody>
+        <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+            <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                <div style="font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:15px;max-width:600px;display:block;margin:0 auto;padding-left:5px;padding-right:5px;padding-bottom:5px;padding-top:0px">
+                    <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;border-spacing:0;margin-bottom:10px;margin-top:10px;width:100%">
+                        <tbody>
+                        <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                            <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                                <div style="font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:15px;max-width:600px;display:block;margin:0 auto;padding-left:5px;padding-right:5px;padding-bottom:5px;padding-top:0px">
+                                    <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                                        <tbody>
+                                        <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;text-align:center">
+                                                <a rel="nofollow"
+                                                   href="//{{ site.domain }}"
+                                                   title="Tuteria"
+                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                   target="_blank">
+                                                    <img src="http://res.cloudinary.com/tuteria/image/upload/v1432685129/assets/site-logo.png"
+                                                         alt="Tuteria"
+                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0"
+                                                         border="0" class="CToWUd">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                        <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                            Hi {{ booking.user.first_name }},
+
+                        </div>
+                        <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;margin-top:1em">
+                            Take another look at <strong>{{ booking.ts.tutor.first_name }}: {{ booking.ts.skill.name }} tutor
+                                in {{ booking.ts.tutor.vicinity }}</strong>. You can review the tutor's
+                            experience, credentials and teaching methods to see if they meet your standards, and
+                            you can easily book hourly or monthly appointments with tutor for your upcoming
+                            lessons.
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;text-align:center">
+
+                        <a rel="nofollow" href="//{{ site.domain }}{{ booking.ts.get_absolute_url }}"
+{#                           style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border:1px solid;display:block;padding:10px 16px;text-decoration:none;text-align:center;vertical-align:middle;font-weight:bold;white-space:nowrap;background:#ffffff;border-color:#326372;background-color:#326372;color:#ffffff;border-top-width:1px"#}
+                           target="_blank">
+                            Learn more
+                        </a>
+
+                    </div>
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                        <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;margin-top:1em">
+                            If the tutor isn't quite right for you, maybe you would like these
+                            similar {{ booking.ts.skill.name|title }} tutors.
+                        </div>
+
+                    </div>
+                    <br/>
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                            <tbody>
+                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                                            <tbody>
+                                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                                <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                                                    <div style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;margin:0 9px">
+
+                                                        {% if first %}
+                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;float:left;width:291px">
+                                                                <table style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0;padding:7px"
+                                                                       align="left">
+                                                                    <tbody style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:0 0px">
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;background-color:#ffffff;padding-bottom:15px;padding-left:15px;padding-right:15px;padding-top:15px;border-bottom-width:1px;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;border-top-width:0;padding:0px;border-bottom:0px">
+
+                                                                                <a rel="nofollow"
+                                                                                   href="//{{ site.domain }}{{ first.get_absolute_url }}"
+                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                                                   target="_blank">
+
+                                                                                    <img src="{% cloudinary_url first.profile_pic format="jpg" crop="fit" height=300 width=300 %}"
+                                                                                         alt="{{ first.tutor.first_name }}"
+                                                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0;display:block"
+                                                                                         width="100%"
+                                                                                         height="182"
+                                                                                         class="CToWUd">
+                                                                                </a>
+
+                                                                            </div>
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding-right:15px;padding-bottom:15px;padding-left:15px;border-bottom-width:1px;border-top-width:0;background-color:#ffffff;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;padding-top:15px;padding:0">
+
+                                                                                <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0">
+                                                                                    <tbody>
+                                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:4px 15px">
+                                                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                <a rel="nofollow"
+                                                                                                   href="//{{ site.domain }}{{ first.get_absolute_url }}"
+                                                                                                   title="{{ first.heading }}"
+                                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#565a5c;text-decoration:none"
+                                                                                                   target="_blank">
+
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;overflow:hidden;white-space:nowrap;width:245px">
+                                                                                                        <strong style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            {{ first.tutor.get_full_name }}.</strong>
+                                                                                                        <strong style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            &#x20a6;{{ first.price|floatformat:0}}</strong>
+                                                                                                    </div>
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;white-space:nowrap;font-size:14px;color:#9ca299;overflow:hidden;width:245px">
+                                                                                                        <span style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ first.reviews.count }} Review{{ first.reviews.count|pluralize }} </span>|
+
+                                                                                                        <span>{{ first.tutor.vicinity }}</span>
+                                                                                                        <span style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ first.credentials }}</span>
+                                                                                                    </div>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        {% endif %}
+                                                        {% if second %}
+                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;float:left;width:291px">
+                                                                <table style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0;padding:7px"
+                                                                       align="left">
+                                                                    <tbody style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:0 0px">
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;background-color:#ffffff;padding-bottom:15px;padding-left:15px;padding-right:15px;padding-top:15px;border-bottom-width:1px;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;border-top-width:0;padding:0px;border-bottom:0px">
+
+                                                                                <a rel="nofollow"
+                                                                                   href="//{{ site.domain }}{{ second.get_absolute_url }}"
+                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                                                   target="_blank">
+
+                                                                                    <img src="{% cloudinary_url second.profile_pic format="jpg" crop="fit" height=300 width=300 %}"
+                                                                                         alt="Spacious, vibsy flat. Super central"
+                                                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0;display:block"
+                                                                                         width="100%"
+                                                                                         height="182"
+                                                                                         class="CToWUd">
+
+                                                                                </a>
+
+                                                                            </div>
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding-right:15px;padding-bottom:15px;padding-left:15px;border-bottom-width:1px;border-top-width:0;background-color:#ffffff;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;padding-top:15px;padding:0">
+
+                                                                                <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0">
+                                                                                    <tbody>
+                                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:4px 15px">
+                                                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                <a rel="nofollow"
+                                                                                                   href="//{{ site.domain }}{{ second.get_absolute_url }}"
+                                                                                                   title="{{ second.heading }}"
+                                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#565a5c;text-decoration:none"
+                                                                                                   target="_blank">
+
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;overflow:hidden;white-space:nowrap;width:245px">
+                                                                                                        <strong style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            {{ second.tutor.get_full_name }}.</strong>
+                                                                                                        <strong style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            &#x20a6;{{ second.price }}</strong>
+
+
+                                                                                                    </div>
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;white-space:nowrap;font-size:14px;color:#9ca299;overflow:hidden;width:245px">
+                                                                                                        <span style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ second.reviews.count }} Review{{ second.reviews.count|pluralize }} </span>|
+
+                                                                                                        <span>{{ second.tutor.vicinity }}</span>
+                                                                                                        <span style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ second.credentials }}</span>
+                                                                                                    </div>
+
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        {% endif %}
+
+
+                                                    </div>
+                                                </td>
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                                            <tbody>
+                                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                                <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                                                    </div>
+                                                </td>
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </td>
+                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <br style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                    <br style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                            <tbody>
+                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                                            <tbody>
+                                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                                <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                                                    <div style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;margin:0 9px">
+
+                                                        {% if third %}
+                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;float:left;width:291px">
+                                                                <table style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0;padding:7px"
+                                                                       align="left">
+                                                                    <tbody style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:0 0px">
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;background-color:#ffffff;padding-bottom:15px;padding-left:15px;padding-right:15px;padding-top:15px;border-bottom-width:1px;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;border-top-width:0;padding:0px;border-bottom:0px">
+
+                                                                                <a rel="nofollow"
+                                                                                   href="//{{ site.domain }}{{ third.get_absolute_url }}"
+                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                                                   target="_blank">
+
+                                                                                    <img src="{% cloudinary_url third.profile_pic format="jpg" crop="fit" height=300 width=300 %}"
+                                                                                         alt="{{ third.tutor.first_name }}!"
+                                                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0;display:block"
+                                                                                         width="100%"
+                                                                                         height="182"
+                                                                                         class="CToWUd">
+
+                                                                                </a>
+
+                                                                            </div>
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding-right:15px;padding-bottom:15px;padding-left:15px;border-bottom-width:1px;border-top-width:0;background-color:#ffffff;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;padding-top:15px;padding:0">
+
+                                                                                <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0">
+                                                                                    <tbody>
+                                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:4px 15px">
+                                                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                <a rel="nofollow"
+                                                                                                   href="//{{ site.domain }}{{ third.get_absolute_url }}"
+                                                                                                   title="{{ third.heading }}"
+                                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#565a5c;text-decoration:none"
+                                                                                                   target="_blank">
+
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;overflow:hidden;white-space:nowrap;width:245px">
+                                                                                                        <strong style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            {{ third.tutor.get_full_name }}.</strong>
+                                                                                                        <strong style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            &#x20a6;{{ third.price }}</strong>
+
+
+                                                                                                    </div>
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;white-space:nowrap;font-size:14px;color:#9ca299;overflow:hidden;width:245px">
+                                                                                                        <span style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ third.reviews.count }} Review{{ third.reviews.count|pluralize }} </span>|
+
+                                                                                                        <span>{{ third.tutor.vicinity }}</span>
+                                                                                                        <span style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ third.credentials }}</span>
+                                                                                                    </div>
+
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        {% endif %}
+                                                        {% if fourth %}
+                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;float:left;width:291px">
+                                                                <table style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0;padding:7px"
+                                                                       align="left">
+                                                                    <tbody style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:0 0px">
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;background-color:#ffffff;padding-bottom:15px;padding-left:15px;padding-right:15px;padding-top:15px;border-bottom-width:1px;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;border-top-width:0;padding:0px;border-bottom:0px">
+
+                                                                                <a rel="nofollow"
+                                                                                   href="//{{ site.domain }}{{ fourth.get_absoulute.url }}"
+                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                                                   target="_blank">
+
+                                                                                    <img src="{% cloudinary_url third.profile_pic format="jpg" crop="fit" height=300 width=300 %}"
+                                                                                         alt="{{ fourth.tutor.first_name }}"
+                                                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0;display:block"
+                                                                                         width="100%"
+                                                                                         height="182"
+                                                                                         class="CToWUd">
+
+                                                                                </a>
+
+                                                                            </div>
+                                                                            <div style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding-right:15px;padding-bottom:15px;padding-left:15px;border-bottom-width:1px;border-top-width:0;background-color:#ffffff;border-style:solid;border-color:#dbdbdb;border-left-width:1px;border-right-width:1px;padding-top:15px;padding:0">
+
+                                                                                <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;line-height:150%;width:100%;border-spacing:0">
+                                                                                    <tbody>
+                                                                                    <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                        <td style="margin:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:4px 15px">
+                                                                                            <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                <a rel="nofollow"
+                                                                                                   href="//{{ site.domain }}{{ fourth.get_absolute_url }}"
+                                                                                                   title="{{ fourth.heading }}"
+                                                                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#565a5c;text-decoration:none"
+                                                                                                   target="_blank">
+
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;overflow:hidden;white-space:nowrap;width:245px">
+                                                                                                        <strong style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            {{ fourth.tutor.get_full_name }}.</strong>
+                                                                                                        <strong style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                                                                            &#x20a6;{{ fourth.price|floatformat:0}}</strong>
+
+
+                                                                                                    </div>
+                                                                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;white-space:nowrap;font-size:14px;color:#9ca299;overflow:hidden;width:245px">
+                                                                                                        <span style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ fourth.reviews.count }} Review{{ fourth.reviews.count|pluralize }} </span>|
+
+                                                                                                        <span>{{ fourth.tutor.vicinity }}</span>
+                                                                                                        <span style="float:right;margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">{{ fourth.credentials }}</span>
+                                                                                                    </div>
+
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        {% endif %}
+
+
+                                                    </div>
+                                                </td>
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                                            <tbody>
+                                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                                <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+                                                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                                                    </div>
+                                                </td>
+                                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <br/>
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                        We are here to help! If you need any assistance with your booking, or for urgent or
+                        unexpected situations, please email <strong>{{ tuteria_details.email }}</strong> or call
+                        us on <strong>{{ tuteria_details.phone_number }}</strong>
+
+                    </div>
+                    <br style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                        Thanks,<br
+                            style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">The
+                        Tuteria Team
+
+                    </div>
+
+
+                    <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%;padding:10px"
+                               cellpadding="10">
+                            <tbody>
+                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"
+                                    align="center">
+                                    <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%;width:auto"
+                                           cellpadding="5">
+                                        <tbody>
+                                        <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:5px">
+                                                <a rel="nofollow"
+                                                   href="//facebook.com/tuteriacorp"
+                                                   title="Facebook"
+                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                   target="_blank">
+                                                    <img alt="Facebook"
+                                                         src="//{{ site.domain }}/static/img/ICONS/facebook.png"
+                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0"
+                                                         height="42" width="42" class="CToWUd">
+                                                </a></td>
+
+                                            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:5px">
+                                                <a rel="nofollow"
+                                                   href="//twitter.com/tuteriacorp"
+                                                   title="Twitter"
+                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                   target="_blank">
+                                                    <img alt="Twitter"
+                                                         src="//{{ site.domain }}/static/img/ICONS/twitter.png"
+                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0"
+                                                         height="42" width="42" class="CToWUd">
+                                                </a></td>
+
+                                            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:5px">
+                                                <a rel="nofollow"
+                                                   href="//plus.google.com/114015908906926908587/"
+                                                   title="Google+"
+                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                   target="_blank">
+                                                    <img alt="Google+"
+                                                         src="//{{ site.domain }}/static/img/ICONS/google.png"
+                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0"
+                                                         height="42" width="42" class="CToWUd">
+                                                </a></td>
+
+                                            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;padding:5px">
+                                                <a rel="nofollow"
+                                                   href="#"
+                                                   title="Linkedin"
+                                                   style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#ff5a5f;text-decoration:none"
+                                                   target="_blank">
+                                                    <img alt="Linkedin"
+                                                         src="//{{ site.domain }}/static/img/ICONS/linkedin.png"
+                                                         style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%;border:0"
+                                                         height="42" width="42" class="CToWUd">
+                                                </a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;border-spacing:0;line-height:150%;width:100%">
+                            <tbody>
+                            <tr style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                                <td style="padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;display:block;margin:0 auto;clear:both;max-width:610px">
+
+                                </td>
+                                <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;color:#eeeeee;font-size:1px;min-height:1px;line-height:1px">
+                            2014-12-25 03:55:49 +0000
+                        </div>
+                    </div>
+                    <br style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"><br
+                        style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif">
+
+                </div>
+            </td>
+            <td style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <span style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;font-size:1px;color:#eeeeee">### Airbnb ###</span>
+</div>
+<img src="https://ci5.googleusercontent.com/proxy/vyByuUvlKOo7eOoMMbipvieAaUnGTyiuoQ3JeSWE2ufo52xklprKDia_uNDNY9F_CnhKqx-OUvxMSttNfsC9fGluGsmu2C3vYVSyyA72P0D85sbcjOywblOl3bmG4L9M1mEIq5tihDX3f5sQTZJxmWTI6MBOeatFPBO-Y_csKbDpsc9s_w=s0-d-e1-ft#https://www.airbnb.com/tracking/pixel/email_opened/1419479749?rookery_uuid=71cb1a47-4ee7-b0ca-e128-7490c1a5bfc1"
+             style="margin:0;padding:0;font-family:&quot;Helvetica Neue&quot;,&quot;Helvetica&quot;,Helvetica,Arial,sans-serif;max-width:100%"
+             class="CToWUd">
+</div></div>

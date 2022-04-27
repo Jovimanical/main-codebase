@@ -1,0 +1,97 @@
+{% extends "andablog/base.html" %}
+{% load andablog_tags %}
+{% block title %}Tuteria Limited Blog{% endblock title %}
+{% block andablog_meta %}
+    <meta name="description" content="Latest blog entries">
+{% endblock %}
+{% block css %}
+    {{block.super}}
+    <style>
+    .base_img img{
+        background-size: cover;
+    }
+    .cust_height{
+        height:343px;
+    }
+    </style>
+{% endblock css %}
+{% block andablog_page_title %}
+    Latest Blog Entries
+{% endblock %}
+
+{% block andablog_content %}
+
+
+    <!--<section id="post-nav">
+        <div class="container">
+            <div class="col-md-12 col-lg-10 col-lg-offset-1 col-md-offset-0">
+                <ul id="post-tabs" class="nav nav-tabs">
+                    <li class="active"><a href="#most-recent" data-toggle="tab">Most Recent</a></li>
+                    
+                    {% for category in blog_categories %}                        
+                    <li><a href="#{{category.name|lower}}" data-toggle="tab">{{category.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>-->
+
+    <section id="post-content" class="container-fluid">  
+    <div class="blog-post">
+                <div id="post-list" class="tab-content">
+                        
+                    {% for entry in entries %}
+                        <div class="post">
+                            <a href="{{ entry.get_absolute_url }}" class="" style="text-decoration:none">
+                                <h1 class="post-title no-margin-bottom font-head">{{entry.title}}</h1>
+                                <p class="article-metadata">{{entry.published_timestamp|date:"DATE_FORMAT"}} · {{entry.link.category.name}} </p>
+
+                                <figure class="base_img" style="background: #F8B814">
+                                <div class="cust_height" style="background: url('{{MEDIA_URL}}{{entry.link.image}}') no-repeat center top;
+                                    background-size: cover;
+                                }">                                    
+                                </div>
+                                {# <img #}
+                                        {# src="{{MEDIA_URL}}{{ entry.link.image }}" #}
+                                        {# alt="{{entry.title}}"> #}
+                                        </figure>                                
+                            </a>
+                            <article class="padding-top-25">          
+                                  {{ entry.content|truncatechars:250 }}  
+                                </article> 
+
+                            <div>
+                                <a href="{{ entry.get_absolute_url }}" class="">
+                                    <p class="blue-font">Read More</p>                            
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}               
+                    {% regroup entries by link.category.name as new_enteries %}
+                    {% for x in new_enteries %}
+                         <div class="tab-pane fade " id="{{x.grouper|lower}}">
+                        {% for post in x.list %}
+                        <div class="col-xs-6 col-sm-4 post">
+                            <a href="{{ post.get_absolute_url }}" class="post-box">
+                                <figure style="background: {{post.background_color}}"><img
+                                        src="{{MEDIA_URL}}{{ post.link.image }}"
+                                        alt="{{post.title}}"></figure>
+                                <p><span class="category"><em>{{post.link.category.name}}</em></span><br>{{post.title}}</p>
+                            </a>
+                        </div>
+                        {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <!--/post-list-->
+                
+    {% include "andablog/pagination_snippet.html" with page_obj=page_obj %}
+                
+            
+
+        </div>
+
+    </section>
+
+{% endblock %}
+{% block request_section %}{% endblock request_section %}

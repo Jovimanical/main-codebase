@@ -1,0 +1,14 @@
+<form action="{% if request.user.is_staff %}{% url 'skill_search' %}{% else %}{% url 'skill_search' %} {% endif %}" id="{{ form_id }}" class="navbar-form navbar-left" method="get" name="search-form">
+    <div class="input-group top-search">
+        <input type="text" id="{% if passed_id %}{{passed_id}}{%else%}nav-skill-input{% endif %}" required="true" name="query" class="gui-input form-control"
+               placeholder="{{ search_placeholder }}">
+        <input type="hidden" name="region" value="{{ region|default_if_none:"" }}"/>
+        <span class="input-group-btn" style="width:0px;">
+
+        </span>
+        <span class="input-group-btn">
+        <button class="btn" style="" type="submit"><i
+                class="glyphicon glyphicon-search"></i></button>
+        </span>
+    </div>
+</form>

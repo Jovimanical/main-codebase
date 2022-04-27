@@ -1,0 +1,50 @@
+<div class="panel panel-default row-space-4">
+    <h4 class="panel-heading">
+        Quick Links
+    </h4>
+
+    <div class="panel-body">
+        <ul class="list-unstyled">
+            {# <li class="row-space-2"> #}
+                {# <a href="{% url 'users:user_bookings' %}">Upcoming lessons</a> #}
+            {# </li> #}
+            {% if object.profile.application_status > 0 %}
+            <li class="row-space-2">
+                <a href="{% url 'users:user_new_verifications' %}#guarantor_section">Update Guarantors</a>
+            </li>            
+
+            {% endif %}
+            
+            {% if object.profile.application_status == object.profile.VERIFIED %}
+
+
+            <li class="row-space-2">
+                <a href="{% url 'users:user_schedule' %}">Update Tutor Profile</a>
+            </li>            
+            <!--<li class="row-space-2">-->
+            <!--    <a href="{% url 'tutoring-jobs' %}">Tutoring Jobs</a> <span class="red-text font-head"></span>-->
+            <!--</li>            -->
+            <li class="row-space-2">
+                <a href="{% url 'users:user_education_history' %}">Edit Work & Education</a>
+            </li>
+            <!--<li class="row-space-2">-->
+            <!--    <a href="{% url 'tutor_levels' %}">Tuteria Levels</a>-->
+            <!--</li>            -->
+            {% endif %}
+
+            {% if not object.profile.application_status == object.profile.VERIFIED %}
+            <li class="row-space-2">
+                <a href="{% url 'trust_safety' %}">Trust & Safety</a>
+            </li>
+            {% endif %}
+
+            <li class="row-space-2">
+                <a href="{% url 'users:user_new_verifications' %}">Verifications</a>
+            </li>
+            {# <li class="row-space-2"> #}
+                {# <a href="#">Invite Friends</a> #}
+            {# </li> #}
+           
+        </ul>
+    </div>
+</div>

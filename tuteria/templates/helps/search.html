@@ -1,0 +1,27 @@
+{% extends "helps/home.html" %}
+{% load template_utils staticfiles activelink %}
+{% block sub_nav %}{% endblock %}
+{% block article_block %}
+<div class="col-8 col-offset-1 help-content text-copy navtree-content breadcrumbs-content">
+    {% with articles.count as counter %}
+    <h1 class="h2">{{counter}} result{{ counter|pluralize }} for "{{search_text}}"</h1>
+
+    {% if counter > 0 %}
+
+    <ul class="list-unstyled search-results-list">
+        {% for article in articles %}
+        <li class="text-copy search-result">
+          <img src="{% static 'img/gallery/result.png' %}" alt="" style="width:3%">
+          <a href="{{article.get_absolute_url}}">{{article.question}}</a>
+          <p class="row-space-top-1">{{ article.body|truncatechars_html:80|safe }}</p>
+          <hr>
+      </li>
+      {% endfor %}
+  </ul>
+  {%else%}
+  <p>No results for "{{search_text}}", <a href="{% url 'help:home' %}">browse Knowledge Base</a></p>
+  {% endif %}
+  {% endwith %}
+</div>
+<div class="hp-padding-btm-30"></div>
+{% endblock %}

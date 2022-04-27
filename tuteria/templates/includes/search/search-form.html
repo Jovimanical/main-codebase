@@ -1,0 +1,133 @@
+{% load staticfiles bootstrap_pagination humanize bootstrap3 add_attr cloudinary activelink %}
+{{ filter_form.query }}
+<div class="row">
+    {% if not display_searchable_location %}
+        <div class="col-sm-6 col-md-12 col-lg-12 col-xs-12">
+            <div class="form-group {% if not request.is_featured %}row-space-4{% endif %} ">
+                {% bootstrap_label filter_form.location.label label_class='control-label' %}
+                {{ filter_form.location|add_attributes:'class:form-control input-sm' }}
+                {{ filter_form.latitude }}
+                {{ filter_form.longitude }}
+                <input type="hidden" id="geocoded" name="geocoded" value="false"/>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-xs-6 col-md-12">
+            <div class="form-group {% if not request.is_featured %}row-space-4{% endif %} ">
+                {% bootstrap_label filter_form.region.label label_class='control-label' %}
+                {{ filter_form.region|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+    {% endif %}
+    <input type="hidden" name="region" id="id_region" value="{{ region|default_if_none:"" }}"/>
+    {#	<div class="col-xs-4  visible-xs">#}
+    {#		<div class="form-group {% if not request.is_featured %}row-space-4{% endif %} ">#}
+    {#	        {% bootstrap_label filter_form.region.label label_class='control-label' %}#}
+    {#	        {{filter_form.region|add_attributes:'class:form-control input-sm'}}#}
+    {#	    </div>#}
+    {#	</div>#}
+    <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 {% if location_query %}{% else %}hidden {% endif %}">
+        <div class="form-group {% if not request.is_featured %}row-space-4{% endif %} ">
+            {% bootstrap_label filter_form.distance.label label_class='control-label' %}
+            {{ filter_form.distance|add_attributes:'class:form-control input-sm' }}
+        </div>
+    </div>
+
+    {# <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 "> #}
+        {# <div class="form-group {% if not request.is_featured %} margin-bottom-40 {% endif %}"> #}
+            {# <label for="">Maximum Price</label> #}
+            {# {{ filter_form.end_rate|add_attributes:"class:form-control input-sm" }} #}
+        {# </div> #}
+    {# </div> #}
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-3 col-md-12 col-lg-12 hidden additional_filters ">
+        <div class="form-group {% if not request.is_featured %}row-space-4{% endif %}">
+            {# {% bootstrap_label filter_form.age.label label_class='control-label' %} #}
+            <label class="control-label">Age Range</label>
+            {{ filter_form.age|add_attributes:'class:form-control input-sm' }}
+        </div>
+    </div>
+    {#	<div class="col-sm-3 col-md-6 col-lg-6 col-xs-6 no-padding-right ">#}
+    {#		<div class="form-group {% if not request.is_featured %}row-space-4 margin-bottom-35 {% endif %}">#}
+    {#	        <label for="" class="control-label">Min Price</label>#}
+    {#	        {{ filter_form.start_rate|add_attributes:'class:form-control input-sm' }}#}
+    {#	    </div>		#}
+    {#	</div>#}
+    {% if not request.is_featured %}
+        <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 hidden additional_filters">
+            <div class="form-group row-space-4 margin-bottom-35">
+                {% bootstrap_label filter_form.gender.label label_class='control-label' %}
+                {{ filter_form.gender|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 ">
+            <div class="form-group row-space-4">
+                <label class="control-label">Availability</label>
+                {{ filter_form.days_per_week|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+        {% if request.user.is_staff %}
+                    <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 ">
+            <div class="form-group row-space-4">
+                <label class="control-label">Classes</label>
+                {{ filter_form.classes|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+                    <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 ">
+            <div class="form-group row-space-4">
+                <label class="control-label">Curriculum</label>
+                {{ filter_form.curriculum_used|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+                    <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 ">
+            <div class="form-group row-space-4">
+                <label class="control-label">Years of Teaching</label>
+                {{ filter_form.years_of_teaching|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+        {% endif %}
+
+    {% endif %}
+    {% if not request.is_featured %}
+        <div class="col-sm-3 col-md-12 col-lg-12 hidden additional_filters col-xs-6">
+            <div class="checkbox">
+                <label>
+                    {{ filter_form.is_teacher }} Teaches in a School
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-12 col-lg-12 extra-filters col-xs-6 font-head">
+            <a href="javascript:void(0)">Add more filters?</a>
+        </div>
+    {% endif %}
+</div>
+{% if request.is_featured %}
+    <div class="row">
+        <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 hidden additional_filters">
+            <div class="form-group row-space-4">
+                {% bootstrap_label filter_form.gender.label label_class='control-label' %}
+                {{ filter_form.gender|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-12 col-lg-12 col-xs-6 ">
+            <div class="form-group row-space-4">
+                <label class="control-label">Availability</label>
+                {{ filter_form.days_per_week|add_attributes:'class:form-control input-sm' }}
+            </div>
+        </div>
+
+        <div class="col-sm-3 col-md-12 col-lg-12 hidden additional_filters col-xs-6">
+            <div class="checkbox">
+                <label>
+                    {{ filter_form.is_teacher }} Teaches in a School
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-12 col-lg-12 extra-filters col-xs-6 font-head">
+            <a href="javascript:void(0)">Add more filters?</a>
+        </div>
+    </div>
+{% endif %}
+<input type="hidden" id="skill_page" value="{% if skill.name %}{{ skill.name }}{% endif %}">
+<input type="hidden" id="category_page" value="{% if skill.title and skill.slug %}{{ skill.slug }}{% endif %}">

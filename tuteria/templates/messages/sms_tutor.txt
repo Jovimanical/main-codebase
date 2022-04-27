@@ -1,0 +1,3 @@
+{{ message }}
+Tuteria
+Reply [YES] or [NO] to {{reply}} to indicate interest

@@ -1,0 +1,22 @@
+Welcome {{user.first_name}}!
+
+And thanks for joining our growing community. We're currently accepting tutor applicants so here's a quick guide to help you get started.
+
+Apply Online
+It's 100% free to become a tutor! You can earn extra money teaching people what you love, and it begins with an easy online application.
+
+Complete ID Verification
+Upload a valid ID, connect your social profile and verify personal details about your online and offline identity.
+
+Pass Assessments
+Once your ID is verified, we'll assess you against various parameters, including an interview, to determine if Tuteria will be a great place for you.
+
+Create Subjects
+If approved, you'll be able to create subjects you want to teach and start receiving lesson requests from clients in your community.
+
+That's it! Why not give it a try now?
+
+http://{{site.domain}}{% url 'become_tutor' %}
+
+The Tuteria Team.
+{{ tuteria_details.email }}

@@ -1,0 +1,197 @@
+{% load staticfiles humanize distance_estimate cloudinary %}
+
+<div class="row hidden-xs-2-special">
+    <div id="tutor_list">
+        {% for result in tutors %}
+            <div class="{% if column == 3 %}col-md-4 col-sm-4 {% else %} col-sm-4 col-md-3  col-xs-2-special
+                {% endif %}tutor center-block tt-tutor-details">
+                <a class="tt" href="{% url 'users:tutor_public_skill_profile' result.user_slug result.slug %}">
+                    <div class="ticontain">
+                        {# {% if result.image %} #}
+                        {% with user_img=result|get_img %}
+                            {% cloudinary user_img SEARCH_THUMBNAIL alt=result.first_name %}
+                        {% endwith %}
+                        {# {% cloudinary result.image SEARCH_THUMBNAIL alt=result.first_name %} #}
+                        {# {% else %} #}
+                        {# {% cloudinary result.user_image SEARCH_THUMBNAIL alt=result.first_name %} #}
+                        {# {% endif %} #}
+
+                        {#                        <ul class="badges">#}
+                        {#                                <li class="glyphicon glyphicon-ok-sign" data-toggle="popover" data-content="Verified ID"#}
+                        {#                                    data-placement="right"#}
+                        {#                                    data-trigger="hover"></li>#}
+                        {#                                {% with tutor_profile.level as level %}#}
+                        {#                                    <li class="tutor-badges tt_level_{{ level }} {% if level == 0 %}hide{% endif %}"#}
+                        {#                                        data-toggle="popover"#}
+                        {#                                        data-content="Level {{ level }}"#}
+                        {#                                        data-placement="right"#}
+                        {#                                        data-trigger="hover"></li>#}
+                        {#                                {% endwith %}#}
+                        {#                                <li class="tutor-badges background_check" data-toggle="popover"#}
+                        {#                                    data-content="Background Checked"#}
+                        {#                                    data-placement="right"#}
+                        {#                                    data-trigger="hover"></li>#}
+                        {#                            </ul>#}
+                    </div>
+
+                    <div class="tutor-profile-content">
+                        <div class="profile-heading">
+                            <h3 class="">{{ result.first_name }}</h3>
+                            {% if request.user.is_staff %}
+                            <div class="rating">
+                                    {% if result.starred %}
+                                        Starred
+                                    {% endif %}
+                                {% if result.score %}
+                                    {{ result.score|floatformat:0 }}
+                                {% endif %}
+                            </div>
+                            {% else %}
+                                {% if result.rc %}
+                                    <div class="rating">{{ result.rc }} Review{{ result.rc|pluralize }}</div>
+                                {% endif %}
+
+                            {% endif %}
+                        </div>
+                        <hr/>
+                        <p>{{ result.heading|capfirst }}</p>
+                    </div>
+
+                    <div class="sub-content">
+                        <span class="location">
+                            <i class="fa fa-map-marker"></i>
+                            {% if result.vicinity %}
+                                {{ result.vicinity }}
+                            {% else %}
+                                {{ result.state }}
+                            {% endif %}
+                            {% if coordinate %}
+                                <span class="distance">{% if not region %}(~ {{ result.distance|floatformat:"0" }}
+                                    km) {% endif %}
+                                </span> {% endif %}
+
+                        </span>
+                        <span class="degree pull-right"><i
+                                class="fa fa-graduation-cap"></i> {{ result.degree }}</span>
+                    </div>
+                    <div class="t-footer">
+                        <div class="misc">
+                                    <span class=" btn btn-primary hourly_p btn-sm" href="#">
+                                        {% if request.user.is_staff %}
+                                            {{ result.name }}
+                                        {% else %}
+                                            View More
+                                        {% endif %}
+
+                                    </span>
+                                    <span class="hidden monthly_p font-head blue-font">
+                                        {% if result.monthly_booking %}
+                                            {{ result.no_of_lessons }} lessons |
+                                            {{ result.hours_per_day }}hr{{ result.hours_per_day|pluralize }}
+                                        {% endif %}
+                                    </span>
+
+                        </div>
+                        <div class="price hourly_price font-head">
+                            {# <b>&#8358;</b>{{ result.price|floatformat|intcomma }}/hr #}
+                        </div>
+                        <div class="price hide  monthly_price font-head" id="monthly_price">
+                            {% if result.monthly_booking %}
+                                {# <b>&#8358;</b>{{ result.monthly_price|floatformat|intcomma }}/mth #}
+                            {% else %}
+                                {# hourly #}
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="visible-xs-2-special hidden-sm hidden-md hidden-lg">
+    <div id="tutor_list" class="list-group">
+        {% for result in tutors %}
+            <a id="tutor-details" href="{% url 'users:tutor_public_skill_profile' result.user_slug result.slug %}"
+               class="list-group-item tt-tutor-details">
+                <div class="media tutor-mobile">
+                    <div class="media-left">
+                        <div>
+                            {% with user_img=result|get_img %}
+                                {% cloudinary user_img SEARCH_THUMBNAIL_MOBILE alt=result.first_name %}
+                            {% endwith %}
+
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ result.first_name|title }}
+                            <ul class="hide badges">
+                                <li class="glyphicon glyphicon-ok-sign"></li>
+                                <li class="hide pe-7s-medal pe-lg pe-va">1
+                                </li>
+                                <li class="hide pe-7s-config pe-lg pe-va"></li>
+                            </ul>
+                            <div class="rating hide">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                <span class="text-center">(10k)</span>
+                            </div>
+                        </h4>
+
+                        <div class="price  hourly_price"><b
+                                class="amount">&#8358;{{ result.price|floatformat|intcomma }}</b>/hr
+                        </div>
+                        <div class="price hide monthly_price" id="monthly_price">{% if result.monthly_booking %}
+                            <b class="amount">&#8358;{{ result.monthly_price|floatformat|intcomma }}</b>/mth
+                        {% else %} hourly {% endif %}
+                        </div>
+                        <div class="review-loc">
+                            {% if result.rc > 0 %}{{ result.rc }} Review{{ result.rc|pluralize }}{% endif %}
+                            {#                    <div class="review-loc">{{ result.ts.rc }} Review{{ result.ts.rc|pluralize }}#}
+                            <span class="monthly_p hidden">
+                                {% if result.monthly_booking %}
+
+                                    {{ result.no_of_lessons }} lessons /
+                                    {{ result.hours_per_day }}hr{{ result.hours_per_day|pluralize }}
+                                {% endif %}
+                            </span>
+                        </div>
+
+
+                        <p class="tutor-caption">{{ result.heading|capfirst }} </p>
+
+                        <div class="misc">
+                                <span class="location">
+                                {% if request.is_featured %}
+                                    <img src="{% static "img/operamini/location-marker.svg" %}" width="20" height="15"
+                                         alt=""/>
+                                {% else %}
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                {% endif %}
+                                    {% if result.vicinity %}
+                                        {{ result.vicinity }}
+                                    {% else %}
+                                        {{ result.state }}
+                                    {% endif %}
+                                    {% if coordinate %}
+                                        <span class="distance">{% if not region %}
+                                            (~ {{ result.distance|floatformat:"0" }}km)
+                                        {% endif %}</span>
+                                    {% endif %}
+                                </span>
+
+                                <span class="degree pull-right">
+                                    {% if request.is_featured %}
+                                        <img src="{% static "img/operamini/gradcap.png" %}" alt="degree"/>
+                                    {% else %}
+                                        <i class="fa fa-graduation-cap"></i>
+                                    {% endif %}
+                                    {{ result.degree }}
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        {% endfor %}
+    </div>
+
+</div>

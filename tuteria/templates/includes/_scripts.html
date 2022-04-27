@@ -1,0 +1,22 @@
+{% load staticfiles cloudinary %}
+<script src="{% url 'js_reverse' %}" type="text/javascript"></script>
+
+<!-- Latest JQuery -->
+{% if django_conf == 'Production' or django_conf == 'StagingProd' %} 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> 
+ {% else %}
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->
+{% endif %}
+<script src=""></script>
+<!-- Latest compiled and minified JavaScript -->
+{# <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>#}
+{# <script src="{%static 'js/typeahead-0.4.bundle.js' %}"></script> #}
+<script src="{% static 'js/typeahead.bundle.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"></script>
+<!--Start of Tawk.to Script-->
+<!--End of Tawk.to Script-->
+

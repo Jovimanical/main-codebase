@@ -1,0 +1,228 @@
+{% extends 'pages/state_view.html' %}
+{% load staticfiles %}
+{% block title %}{{ skill }} Tutoring - Learn from a Pro! | Tuteria {% endblock title %}
+{% block carousel_image %}
+    {% if request.is_phone %}
+        <div class="item active">
+            <div class="caro excel"></div>
+            {# <img src="{% static "img/backgrounds/background_mobile.jpg" %}" alt="Private home lesson tutors" class="src"> #}
+        </div>
+    {% else %}
+        <div class="item active">
+            <div class="caro excel"></div>
+        </div>
+    {% endif %}
+{% endblock carousel_image %}
+{% block carousel_content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-8 padding-top-25">
+            <div class="jumbo-header row"><h2 id="header_title" style="color:#5e5e5e">Learn {{ skill }}</h2>
+
+                <p style="color:#5e5e5e" class="font-head">Get higher results and bring out the genius in your child</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 padding-top-25 mobile-top-25 row">                    
+
+                    {# <div class=""> #}
+                        {# {% if request.is_featured %} #}
+                            {# <a href="{% url 'request_tutor_parent' %}" class="btn btn-primary btn-lg col-xs-12">Find me a tutor</a> #}
+                        {# {% else %} #}
+                            <a href="#request-form" class="btn btn-primary btn-lg col-xs-12"><!--<i class="fa fa-search"></i>&nbsp;-->
+                                Find me a tutor now
+                            </a>
+                        {# {% endif %} #}
+                    {# </div> #}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock carousel_content %}
+{% block safety %}
+    <section id="firstss" class="padding-bottom-50 padding-top-25 row">
+    <div class="container padding-top-50 no-padding-total">
+    <div class="row">
+    	<div id="how-it-works" class="col-sm-8 col-sm-offset-2 wrapper-full clearfix text-center">
+            <h2 class="">
+          {% if request.is_featured %}<b>Become an Expert in {{ skill }}!</b>
+          {% else %}Become an Expert in {{ skill }}!
+          {% endif %}
+        </h2>
+        <p>Tuteria connects you with quality {{ skill }} tutors in your area for one-on-one lessons</p>
+        </div>
+
+        <div class="icon-box-6">            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">                    
+                     <i class="personal-img"></i>
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Learn from a Pro</b>
+                      {% else %}
+                      Learn from a Pro
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">In-depth learning with professionals and trainers who possess extensive knowledge of the subject.
+                    </span>
+                </div>
+            </div>            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">  
+                <i class="secure-img"></i>                  
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Learn at Your Pace</b>
+                      {% else %}
+                      Learn at Your Pace
+                      {% endif %}
+                      <br></h3>
+
+                    <span class="inline-block">Whether you want lessons only on weekends, or for few hours, for few days or months - you're covered.
+                    </span>
+                </div>
+            </div>
+            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">     
+                <i class="support-img"></i>               
+                     {# <img src="{% static 'img/gallery/support.png' %}" alt="Trusted and Tested Tutoring Services"> #}
+                    <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Affordable Rates</b>
+                      {% else %}
+                      Affordable Rates
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Never exceed your budget again. With Tuteria, you'll always find your perfect tutor at the right price.          
+                    </span>
+                </div>
+            </div>            
+        </div>
+        <div class="col-sm-4 col-sm-offset-4 text-center">
+                <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Ftuteriacorp&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=recommend&amp;colorscheme=light&amp;height=35" style="border:none; overflow:hidden; width:100%; height:35px; margin-top:15px; text-align: center" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+        
+        </div>
+    </section>
+    <section id="one-on-one-fourth" class="padding-top-50 padding-bottom-50 row white-bg">
+        <div class="container side_by_side">
+        <div class="row">
+        	
+            <div class="col-sm-6 icon-content row-space-4">
+                <h2 class="">
+                    {% if request.is_featured %}<b>How does this work?</b>
+                    {% else %}How {{ skill }} lessons work{% endif %}</h2>
+                        <p>
+                            Helping you master the nitty-gritty of {{ skill }} is our passion. Whether you're a beginner or an advanced student, or if you simply need to strengthen specific areas like Working with Functions & Formulas, Absolute, Relative and Mixed Referencing, Data Analysis, Using Macros, Linking & Formatting Worksheets, Creating Graphs & Charts, Logical and Lookup Functions etc., our tutors will help you develop mastery while being sensitive to your learning level.
+                        </p>
+                        <span>
+                            <ul class="list-mobile list-unstyled no-margin-bottom">
+                                <li class="">
+                                    <span class="font-head">1. Request {{ skill }} Tutor</span><br>We work together with you to get deeper insights into your kids, know what subjects need help and then create a personalized lesson plan just for your child to ensure you reach your goals.
+                                </li>
+                                <br>
+                                <li class="">
+                                    <span class="font-head">2. We recommend the Best</span><br>We match you with the perfect home tutor in {{ region }} who lives near you. This will be someone who has a proven track record of helping kids like yours and can give you exactly what you need. Our tutors travel to you and conduct the lessons in the comfort of your home or a venue of your choice. 
+                                </li>
+                                <br>
+                                <li class=""><span class="font-head">3. You decide whether to Proceed</span><br>We closely monitor and manage the tutoring, including co-ordinating lessons and giving you bi-monthly feedback on our progress towards your goal.
+                                </li>
+                            </ul>
+                        </span>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1 featured-tutor space-for-mobile">
+                <!--<div class="featured-tutor-image"></div>
+                <h5><b>Kehinde I.,</b> teaches Maths and Physics (MSc. Agric & Environ Engr.) </h5>-->
+                <h2 class="">
+                    {% if request.is_featured %}<b>Who are our tutors?</b>
+                    {% else %}Who are our tutors?{% endif %}</h2>
+                        <span>
+                            Our Music teachers have a wealth of experience in practising and performing. Having studied extensively, and excelling in technique and virtuosity, they aim to bring out the best of whomever they teach. Our music teachers are friendly and professional, understanding the importance of hard work, practice, and most of all the enjoyment that comes with learning an instrument.
+                            <br><br>
+                            <ul class="list-mobile list-unstyled no-margin-bottom">
+                                <li class="">
+                                    <span class="font-head">1. High Standards for Quality</span><br>For a start, tutors must have extensive knowledge of each subject they wish to teach. E.g. a Math tutor will be a Math guru who can simplify difficult topics, build confidence in your child and turn their C's to A's.
+                                </li><br>
+                                <li class="">
+                                    <span class="font-head">2. Teaching Ability</span><br>Not every smart person can teach. We go the extra mile to look for teaching ability, superb communication and a friendly personality.
+                                </li><br>
+                                <li class="">
+                                    <span class="font-head">3. A heart for Mentoring</span><br>
+                                     The biggest factor we consider is whether a candidate is serious about being a role model, a mentor and an encourager in the lives of our students. All tutors must pass this assessment.
+                                </li>
+                            </ul>
+                        </span>
+            </div>
+        </div>
+        </div>
+</section>
+
+{% endblock safety %}
+{% block quality %}{% endblock quality %}
+{% block howitworks %}{% endblock howitworks %}
+{% block testimonials %}{% endblock testimonials %}
+{% block more_info %}
+<section id="request-form" class="padding-top-50 padding-bottom-50 row">
+   <div class="container side_by_side">
+   <div class="row">
+   		<div class="col-sm-6">
+   			<form>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Email address</label>
+				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Password</label>
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputFile">File input</label>
+				    <input type="file" id="exampleInputFile">
+				    <p class="help-block">Example block-level help text here.</p>
+				  </div>
+			</form>
+   		</div>
+   		<div class="col-sm-6">
+   			<form>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Email address</label>
+				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Password</label>
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				  </div>
+				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+			</form>
+   		</div>
+   </div>
+</div>
+</section>
+{% endblock more_info %}
+{% block request_section %}
+                <div id="launch-section">
+                <!-- Request a Tutor Section -->
+                <div class="row padding-top-50 text-center padding-bottom-50 deepblue-bg space-bottom-mob-20 padding-top-mob-30">
+                    <h3 style="color:white">Learn {{ skill }}</h3>
+                    <br>
+                        <div class="request-box">
+                            <div class="request-icon" style="padding-right: 50px; padding-left: 50px">
+                                <div class="request-icon-img">
+                                    <img src="{% static 'img/tutor/call.png' %}" class="img-responsive center-block"
+                                         style="width:30px"/>
+                                </div>
+                                <div style="display: inline-block">
+                                        <span class="request-call-icon">
+                                            or call/text us
+                                        </span>
+                                        <span class="request-phone font-head">
+                                            {{ tuteria_details.phone_number }}
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <small style="color:aqua" class="pull-right">{{ tuteria_details.email }}</small>
+                            </div>
+                        </div>
+                </div>
+{% endblock request_section %}

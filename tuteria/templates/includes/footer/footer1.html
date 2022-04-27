@@ -1,0 +1,93 @@
+{% load cache %}
+<div class="clearfix2">
+    <div class="col-sm-6 col-xs-12">
+        <div class="row">
+            <div class="col-sm-6 col-xs-6">
+                <div class="foot-item-content">
+                    <h5 class="font-head">Get to know us</h5>
+                    <hr style="margin-top:10px; margin-bottom: 10px">
+                    <ul class="list-unstyled ">
+                        <!-- Link -->
+                        <li><a href="{% url 'why_use' %}" class="white hover-underline">About Tuteria</a></li>
+                        <li><a href="{% url 'trust_safety' %}" class="white hover-underline">Trust & Safety</a></li>
+                        <!--<li><a href="{% url 'help:home' %}" class="white hover-underline">Help Center</a></li>-->
+                        <!--<li><a href="/invite" class="white hover-underline">Invite Friends</a></li>-->
+                        <li><a href="{% url 'press' %}" class="white hover-underline">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-6">
+                <div class="foot-item-content">
+                    <h5 class="font-head">Learn with us</h5>
+                    <hr style="margin-top:10px; margin-bottom: 10px">
+                    <ul class="list-unstyled ">
+                        <!-- Link -->
+
+
+                        <!--<li><a href="/categories/mathematics/general-mathematics/" class="white hover-underline">Find a Tutor</a></li>-->
+                        <li><a href="{% url 'how_it_works' %}" class="white hover-underline">Home Tutoring</a></li>
+                        <li><a href="{% url 'skill_search' %}" class="white hover-underline">Find Subjects</a></li>
+
+                        <!--<li><a href="{% url 'resources' %}" class="white hover-underline">Tuteria Resources</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xs-12">
+        <div class="row">
+
+            <div class="col-sm-6 col-xs-6 space-for-mobile">
+                <div class="foot-item-content">
+                    <h5 class="font-head">Work with us</h5>
+                    <hr style="margin-top:10px; margin-bottom: 10px">
+                    <ul class="list-unstyled ">
+                        <!-- Link -->
+                        <li><a href="{% url 'become_tutor' %}" class="white hover-underline">Become a Tutor </a></li>
+                        <!--<li><a href="{% url 'help:how_to_tutor' %}" class="white hover-underline">How to Tutor</a></li>-->
+                        {% if request.user.is_tutor %}
+                        <li><a href="{% url 'tutoring-jobs' %}" class="white hover-underline">Tutoring Jobs</a></li>
+                        {% endif %}
+                        <li style="
+                            display: flex;
+                        "><a href="/careers" class="white hover-underline">Careers</a>
+                            <p style="
+                            margin-left: 8px;
+                            padding: 2px 4px;
+                            background: #3DB586
+                        ;
+                            color: white;
+                            border-radius: 4px;
+                            font-size: 12px;
+                        ">Hiring!</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-6 space-for-mobile">
+                <div class="foot-item-content">
+                    <h5 class="font-head">Connect with us</h5>
+                    <hr style="margin-top:10px; margin-bottom: 10px">
+                    <ul class="list-unstyled ">
+                        <!-- Link -->
+                        <!--<li class="font-head white hover-underline">{{ tuteria_details.phone_number }}</li>-->
+                        <!--<li class="white hover-underline">Head Office: 108 Herbert Macaulay Way, Ebute Metta, Yaba, Lagos</li>-->
+                        <!--<li class="white hover-underline">{{ tuteria_details.email }}</li>-->
+                        <li><a href="//facebook.com/tuteriacorp" target="_blank" class="white hover-underline"><i
+                                    class="fa fa-facebook circle-2 br-white"></i>&nbsp;Facebook</a></li>
+                        <li><a href="//twitter.com/tuteriacorp" target="_blank" class="white hover-underline"><i
+                                    class="fa fa-twitter circle-2 br-white"></i>&nbsp;Twitter</a></li>
+                        <li><a href="https://www.instagram.com/tuteriacorp/?hl=en" target="_blank" class="white hover-underline"><i
+                                    class="fa fa-instagram circle-2 br-white"></i>&nbsp;Instagram</a></li>
+                        <!--<li><a href="//plus.google.com/114015908906926908587/" target="_blank" class="white hover-underline"><i
+                                class="fa fa-google-plus circle-2 br-white"></i>&nbsp;Google + </a></li>-->
+                        <li><a href="https://www.linkedin.com/company/tuteria-nigeria/?viewAsMember=true" class="white hover-underline" target="_blank"> <i class="fa fa-linkedin circle-2 br-white"></i> 
+                            &nbsp;Linkedin</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

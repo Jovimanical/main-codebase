@@ -1,0 +1,709 @@
+{% extends '_layouts/base-external.html' %}
+{% load cloudinary humanize bootstrap_pagination add_attr i18n %}
+{% load staticfiles %}
+{% block meta_tags %}
+    {% if object.is_tutor %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Tuteria Limited">
+
+        <!-- for Google -->
+        <meta itemprop="name" content="Hire {{ object.user.first_name }} - {{ object.user.custom_header }}">
+        {% if object.profile.description %}
+            <meta itemprop="description" content="{{ object.profile.description|safe }}">
+        {% else %}
+            <meta itemprop="description" content="{{ og_description }}">
+
+        {% endif %}
+        <meta itemprop="image" content="{% cloudinary_url object.user.profile_pic TS_THUMBNAIL %}">
+        <meta name="description" content="{{ object.profile.description|slice:":155" }}"/>
+        <meta name="keywords" content=""/>
+        <meta name="author" content="{{ object.user.first_name }}"/>
+        <meta name="copyright" content=""/>
+        <meta name="application-name" content=""/>
+        <!-- for Facebook -->
+        <meta property="fb:app_id" content="781136408623359">
+        <meta property="og:site_name" content="Tuteria">
+        <meta property="og:title" content="Hire {{ object.user.first_name }} - {{ object.user.custom_header }}"/>
+        <meta property="og:type" content="tuteria:skills"/>
+        <meta property="og:image" content="{% cloudinary_url object.profile.profile_pic SQUARE_PROFILE_THUMBNAIL %}"/>
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
+        {% if object.profile.description %}
+            <meta property="og:description" content="{{ object.profile.description }}"/>
+        {% else %}
+            <meta property="og:description" content="{{ og_description }}"/>
+        {% endif %}
+        <meta property="tuteria:tt_hourly_price" content="&#8358;{{ object.price|floatformat }}"/>
+        <!-- for Twitter -->
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:url" content="{{ request.build_absolute_uri|urlencode }}"/>
+
+        <meta name="twitter:site" content="@tuteria"/>
+        <meta name="twitter:title" content="Hire {{ object.user.first_name }} - {{ object.user.custom_header }}"/>
+
+        {% if object.profile.description %}
+            <meta name="twitter:description" content="{{ object.profile.description }}"/>
+        {% else %}
+            <meta name="twitter:description" content="{{ og_description }}"/>
+        {% endif %}
+        <meta name="twitter:image" content="{{ object.profile.profile_pic }}"/>
+    {% endif %}
+
+{% endblock meta_tags %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/public_profile.css' %}">
+    <style>
+        .carousel.fade .item .background {
+            background-color: #3572b0;
+
+        }
+
+        .alert {
+            position: absolute;
+            z-index: 200000;
+            width: 100%;
+        }
+
+        .bigpanel {
+            padding: 25px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-row {
+                margin-left: -15px;
+                margin-right: -15px;
+            }
+
+            .bigpanel {
+                padding: 15px;
+            }
+        }
+
+        .content-carousel .rating {
+            font-size: 18px;
+        }
+    </style>
+{% endblock %}
+{% block sub_nav %}{% endblock sub_nav %}
+{% block title %}{% if object.is_tutor %}
+    {{ object.user.first_name | title }}, {{ object.user.custom_header }} | Tuteria Nigeria {% else %}
+    {{ object.user.first_name | title }}, Hire quality teachers | Tuteria Nigeria {% endif %}
+{% endblock title %}
+{% block carousel_image %}
+    <div class="item active">
+        <div class="background"></div>
+    </div>
+{% endblock carousel_image %}
+{% block carousel_content %}
+
+    <div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0 row-space-4">
+        <div class="visible-xs mobile-thumbnail text-center">
+        <span class="user-pict-130">
+            {% cloudinary object.profile.profile_pic USER_PROFILE_THUMBAIL alt=object.user.first_name %}
+        </span>
+        </div>
+        <div class="jumbo-header text-center">
+            <h2 class="myh2"><b class="white">Hi, I'm {{ object.user.first_name | title }}!</b></h2>
+            {% if object.profile.application_status == object.profile.VERIFIED %}
+                <p class="grey">{{ object.user.custom_header }}</p>
+            {% else %} <br><br>
+            {% endif %}
+
+            {% if reviews.exists %}
+                <a href="#total-reviews">
+                    {% if request.is_featured %}
+                        <div class="rating padding-bottom-10">
+                            {% for star in reviews.rating_integer %}
+                                <span class="opera-star">★</span>
+                            {% endfor %}
+                            {% if reviews.rating_decimal %}
+                                <i class="fa fa-star-half-full"></i>
+                            {% endif %}
+                            <span class="review-text">{{ reviews.reviews|length }} Review{{ reviews.reviews|length| pluralize }}</span>
+                        </div>
+                    {% else %}
+                        <div class="rating padding-bottom-10">
+                            {% for star in reviews.rating_integer %}
+                                <span class="fa fa-star"></span>
+                            {% endfor %}
+                            {% if reviews.rating_decimal %}
+                                <span class="fa fa-star-half-full"></span>
+                            {% endif %}
+                            <span class="review-text">{{ reviews.reviews|length }} Review{{ reviews.reviews|length| pluralize }}</span>
+                        </div>
+                    {% endif %}
+                </a>
+            {% else %}
+                <br/><br/>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row visible-xs">
+        <div class="col-xs-12">
+            {% if object.profile.application_status == object.profile.VERIFIED %}
+                <span class="user-data pull-left">{{ object.user.tutor_type }}</span>
+            {% else %}
+                <span class="user-data pull-left">from {{ object.user.vicinity }}</span>
+            {% endif %}
+            <span class="user-data pull-right">Member since {{ object.user.last_visit|date:"F o" }}</span>
+        </div>
+    </div>
+    <div class="hero-profile-image col-xs-12 hidden-xs">
+        <div class="">
+        <span class="user-pict-130">
+            {% cloudinary object.profile.profile_pic USER_PROFILE_THUMBNAIL_DESKTOP alt=object.user.first_name %}
+        </span>
+        <span class="user-data lf">
+            {% if object.profile.application_status == object.profile.VERIFIED %}
+                <a>{{ object.user.tutor_type }}</a>
+            {% else %} from {{ objectuser.vicinity }}
+            {% endif %}</span>
+            <span class="user-data pull-right">Member since {{ object.user.date_joined|date:"F o" }}</span>
+        </div>
+    </div>
+{% endblock %}
+{% block main_content %}
+    {% block mm_c %}
+        <div id="base" class="container">
+            <section class="panel row">
+                <div class="panel-body no-padding-total padding-top-50 row-space-bottom-5">
+                    <div id="know-your-tutor" class="wrapper-full clearfix">
+                        <div class="col-md-8 col-sm-12 col-xs-12 row-space-top-4 about">
+                            <div class="mobile-row">
+                                {% if object.profile.description %}
+                                    <h3> About {{ object.user.first_name|title }} </h3>
+                                    <div class="desc">
+                                        {{ object.profile.description|safe }}
+                                    </div>
+                                {% endif %}
+                                <ul class="list-unstyled row-space-4">
+
+                                    {% if object.user.email_verified %}
+                                        <li class="icn-verified">Email Verified</li>
+                                    {% endif %}
+                                    {% if object.id_verified %}
+                                        <li class="icn-verified">Offline ID Verified</li>
+                                    {% endif %}
+                                    {% if object.user.facebook_verified %}
+                                        <li class="icn-verified">Facebook Verified</li>
+                                    {% endif %}
+                                    {% if object.user.google_verified %}
+                                        <li class="icn-verified">Google + Verified</li>
+                                    {% endif %}                                    
+                                </ul>
+                            </div>                            
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-xs-12 space-for-mobile">
+                            {% if object.is_tutor %}
+                                {% if first_skill %}
+                                    <div class="row blue-bg">                                        
+                                        <div class="col-sm-12 col-xs-12">
+                                            {% block calendar %}
+                                                <div id="book_it_form" data-ng-cloak>
+                                                    {% if not request.user.id == object.user.id %}                                                        
+                                                        <div id="request_form" class="hidden" >
+                                                        {% if not request.user.id == object.user.id %}
+                                                            <img src="{% static "img/backgrounds/arrow.png" %}" class="hire-arrow"/>
+                                                        {% endif %}
+                                                        <h3 class="text-center blue-font">
+                                                            Contact {{ object.user.first_name | title }}</h3>
+                                                        <form action="{{ request.path }}" method="post"
+                                                              id="base_request_form"
+                                                              novalidate>
+                                                            {% csrf_token %}
+<div class="form-group {% if form.home_address.errors %}has-error{% endif %}">
+                                                            <label for="id_home_address" class="control-label">Please enter your address</label>
+                                                            {{ form.home_address|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please enter your home address" }}
+                                                            {% if form.home_address.errors %}
+                                                            <span class="help-block">{{ form.home_address.errors|join:"<br \>" }}</span>
+                                                            {% endif %}
+                                                            {{ form.latitude|add_attributes:"type:hidden" }}{{ form.longitude|add_attributes:"type:hidden" }}
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-7 col-sm-7 col-md-7">
+                                                                <div class="form-group {% if form.vicinity.errors %}has-error{% endif %}">
+                                                                    <!--<label for="id_{{ form.state.name }}"
+                                                                    class="control-label">{{ form.state.label }}</label>-->
+
+                                                                    {{ form.vicinity|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Input a town/city,placeholder:City or Nearest bustop" }}
+
+                                                                    {% if form.vicinity.errors %}
+                                                                    <span class="help-block">{{ form.vicinity.errors|join:"<br \>" }}</span>
+                                                                    {% endif %}
+                                                                </div>            
+                                                            </div>
+                                                            <div class="col-xs-5 col-sm-5 col-md-5">
+                                                                <div class="form-group {% if form.state.errors %}has-error{% endif %}">
+                                                                    {{ form.state|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please select a state" }}
+                                                                    {% if form.state.errors %}
+                                                                    <span class="help-block">{{ form.state.errors|join:"<br \>" }}</span>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                            <div class="form-group {% if form.request_subjects.errors %}has-error{% endif %}">
+                                                                <label class="control-label">Select a subject</label>
+                                                                {{ form.subject|add_attributes:"class:form-control input-sm,required:true" }}
+                                                                {% if form.request_subjects.errors %}
+                                                                    <span class="help-block">{{ form.request_subjects.errors|join:"<br \>" }}</span>
+                                                                {% endif %}
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div style="padding-top: 5px"></div>
+                                                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                                                    <div class="form-group {% if form.no_of_students.errors %}has-error{% endif %}">
+                                                                        <label for="id_no_of_students"
+                                                                               class="control-label">Students</label>
+                                                                        {{ form.no_of_students|add_attributes:"class:form-control input-sm,required:true" }}
+                                                                        {% if form.no_of_students.errors %}
+                                                                            <span class="help-block">{{ form.no_of_students.errors|join:"<br \>" }}</span>
+                                                                        {% endif %}
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-xs-8 col-sm-8 col-md-8">
+                                                                    <div class="form-group {% if form.class_urgency.errors %}has-error{% endif %}">
+                                                                        <label class="margin-down-5 ">Lessons should
+                                                                            start?</label>
+                                                                        {{ form.class_urgency|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please select start time" }}
+                                                                        {% if form.class_urgency.errors %}
+                                                                            <span class="help-block">{{ form.class_urgency.errors|join:"<br \>" }}</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {% if not parent_form %}
+
+                                                                <div class="form-group {% if form.tutoring_location.errors %}has-error{% endif %}">
+                                                                    <label for="" class="margin-down-5"
+                                                                           style="padding-top: 5px">Where should lessons
+                                                                        hold?</label>
+                                                                    {{ form.tutoring_location|add_attributes:'required:true,class:form-control input-sm,required:true' }}
+                                                                    {% if form.tutoring_location.errors %}
+                                                                        <span class="help-block">{{ form.tutoring_location.errors|join:"<br \>" }}</span>
+                                                                    {% endif %}
+                                                                </div>
+
+                                                            {% endif %}
+                                                            <hr class="hr-styled">
+                                                            <p>Tell us how best to reach you</p>
+
+                                                            <div class="form-group {% if form.number.errors %}has-error{% endif %}">
+                                                                <!--<label for="" class="margin-down-5">Phone number</label>-->
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon">+234</div>
+                                                                    {{ form.number|add_attributes:"class:form-control input-sm,required:true,data-parsley-error-message:Please enter a valid phone number" }}
+                                                                </div>
+                                                                {% if form.number.errors %}
+                                                                    <span class="help-block">{{ form.number.errors|join:"<br \>" }}</span>
+                                                                {% endif %}
+                                                            </div>
+
+                                                            <div class="form-group {% if form.time_to_call.errors %}has-error{% endif %}">
+                                                                {{ form.time_to_call|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please choose a time" }}
+                                                                {% if form.time_to_call.errors %}
+                                                                    <span class="help-block">{{ form.time_to_call.errors|join:"<br \>" }}</span>
+                                                                {% endif %}
+                                                            </div>
+
+                                                            <div class="form-group {% if form.email.errors %}has-error{% endif %}"
+                                                                 style="margin-bottom: 2px">
+                                                                {{ form.email|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your email address name,placeholder:Enter active email address" }}
+                                                                {% if form.email.errors %}
+                                                                    <span class="help-block">{{ form.email.errors|join:"<br \>" }}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                            <!--<small style="color:silver"><i class="glyphicon glyphicon-lock"></i> 100% secure. We respect your privacy.</small>-->
+
+                                                            {% if request.user.is_authenticated %}
+                                                                <input type="hidden" id="pk" name="pk"
+                                                                       value={{ instance_pk }}>
+                                                            {% endif %}
+                                                            <input type="hidden" name="referral_code" value="{{request.referral_code}}">
+                                                            <div class="form-group padding-top-10">
+                                                                <button id="submit_btn" data-loading-text="Loading..."
+                                                                        class="btn btn-lg btn-block btn-primary big-btn"
+                                                                        >{% trans "Finish up" %}</button>
+                                                            </div>
+                                                        </form>
+
+                                                        </div>
+                                                        <div id="initiator-section" class="padding-top-25">
+                                                            <a href="javascript:void(0)"
+                                                               class="btn btn-block btn-danger btn-lg"
+                                                               style="padding: 15px 16px; font-size:20px">Contact {{ object.user.first_name | title }}</a>
+
+                                                            <div class="row-space-top-4">
+                                                                <table class="table" border="1">
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                        {{ object.profile.gender|gender_display }} would like to know your schedule.
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Offline Lessons</td>
+                                                                        <td>1-on-1 Tutoring</td>
+                                                                    </tr>
+                                                                    <tr class="">
+                                                                        <td>Affordable Rates</td>
+                                                                        <td>
+                                                                            <!--<b>&#8358;</b>{{ object.price|floatformat|intcomma }}/hr-->
+                                                                            Refund Policy
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                            <div>
+                                                                    <small>
+                                                                        <img src="{% static "img/gallery/urgency.png" %}" width="8%">
+                                                                        Contact now!
+                                                                        Tutor may not be available after today.
+                                                                    </small>
+                                                            </div>
+                                                        </div>
+
+                                                    {% endif %}
+
+
+                                                </div>
+                                            {% endblock %}
+
+                                            <div class="padding-bottom-25">
+
+                                                <!-- Share Region to be visible only to users viewing this page themselves -->
+                                                {% if request.user.id == object.user.id %}
+                                                    <div class="text-center">
+                                                        <img src="{% static 'img/gallery/promote.png' %}"
+                                                             class="img-responsive center-block"/>
+                                                    </div>
+                                                    <h3 class="text-center blue-font">We see
+                                                        you {{ object.user.first_name | title }}!</h3>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-12">
+                                                            <div class="margin-top-5">Erm...actually, no we don't. It's
+                                                                just
+                                                                code that let's us know you're viewing this page right
+                                                                now.
+                                                                <br><br>
+                                                                It's your page. Clients can hire you directly from here
+                                                                without searching on Tuteria. Would you like to share
+                                                                your
+                                                                profile on social network and get more clients?
+                                                                <br><br>
+
+                                                                <div>
+
+                                                                    <hr style="border-top: 1px solid #00B0B9;"
+                                                                        class="no-margin-top">
+                                                                    <ul class="list-inline space-for-mobile text-center">
+                                                                        <li class="col-sm-3 col-md-3 col-xs-3">
+                                                                            <a id="facebook-share"
+                                                                               title="Share on Facebook"
+                                                                               class="btn btn-social-icon btn-facebook share-popup"
+                                                                               target="_blank"
+                                                                               href="https://www.facebook.com/sharer/sharer.php?u={{ object.user|get_full_url|urlencode }}"><i
+                                                                                    class="fa fa-facebook"></i></a></li>
+                                                                        <li class="col-sm-3 col-md-3 col-xs-3">
+                                                                            <a target="_blank" title="Share on Twitter"
+                                                                               class="btn btn-social-icon btn-twitter share-popup"
+                                                                               href="https://twitter.com/home?status={{ object.user|get_full_url|urlencode }}"><i
+                                                                                    class="fa fa-twitter"></i></a></li>
+                                                                        <li class="col-sm-3 col-md-3 col-xs-3">
+                                                                            <a id="google-share"
+                                                                               title="Share on Google+"
+                                                                               target="_blank"
+                                                                               href="https://plus.google.com/share?url={{ object.user|get_full_url|urlencode }}"
+                                                                               class="share-popup">
+                                                                                <img src="https://www.gstatic.com/images/icons/gplus-32.png"
+                                                                                     alt="Share on Google+"/></a>
+                                                                        </li>
+                                                                        <li class="col-sm-3 col-md-3 col-xs-3">
+                                                                            <a target="_blank" title="Share on LinkedIn"
+                                                                               class="btn btn-social-icon btn-linkedin share-popup"
+                                                                               href="https://www.linkedin.com/shareArticle?mini=true&url={{ object.user|get_full_url|urlencode }}&source="><i
+                                                                                    class="fa fa-linkedin"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+
+                        </div>
+
+
+            </section>
+
+        </div>
+    {% endblock %}
+
+
+
+    <section class="container">
+        {% with with_exhibition=object.ts_service.with_exhibition %}
+            {% if with_exhibition|length > 0 %}
+                <div class="row">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            {% for s in with_exhibition %}
+                                <div class="mobile-row">
+                                    <div class="col-md-5 col-sm-12">
+                                        <div class="h1 font-head">{{ s.skill.name }}</div>
+                                        <div class="h4 font-head">{{ s.heading }}</div>
+                                        <hr>
+                                        <div>{{ s.description|linebreaksbr }}</div>
+                                        <div class="padding-top-25">
+                                            <p class="font-head h4 blue-font">Price:
+                                                &#8358;{{ s.price|floatformat|intcomma }}/hr per student</p>
+                                        </div>
+                                        <div>{{ object.location_service.display }}</div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7 space-for-mobile">
+                                        {{ s.video.thumbnail }}
+                                        {# {% if True %} #}
+                                        {% if s.has_exhibition %}
+                                            <div id="tutor-video" class="">
+                                                <div class="row-space-4">
+                                                    <div class="flexslider">
+                                                        <ul class="slides">
+                                                            {% for exhibition in s.tutor_exhibitions %}
+                                                                {# {% for exhibition in "**" %} #}
+                                                                {# <li data-thumb="{% static 'img/backgrounds/background5_pc.jpg' %}"> #}
+                                                                <li data-thumb="{% cloudinary_url exhibition.image crop="fill" quality=85 height=121 width=161 %}">
+                                                                    <img class="img-responsive"
+                                                                         src="{% cloudinary_url exhibition.image crop="fill" quality=85 height=480 width=692 %}"/>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endif %}
+
+        {% endwith %}
+        {% regroup subjects|dictsort:"skill__categories__name" by skill__categories__name as skill_cat %}
+        <div class="row">
+            {% for cat in skill_cat %}
+                <div class="panel panel-default">
+                    <div class="panel-body bigpanel">
+                        <h2>{{ cat.grouper }}</h2>
+                        <hr class="hr-styled">
+                        {% for skill in cat.list|slice:":2" %}
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="font-head h4 no-margin-top">{{ skill.skill__name }}</span>
+                                    <br><span class="h5">{{ skill.heading }}</span>
+                                </div>
+                                <div class="col-md-9 space-for-mobile">
+                                    <p>{{ skill.description|truncatechars:200}}
+
+                                    </p>
+                                    <span class="pull-right font-head"><a
+                                            href="{% url 'users:tutor_public_skill_profile' object.user.slug skill.slug %}">Learn
+                                        More &#8594;</a></span>
+                                </div>
+                            </div>
+                            {% if not forloop.last %}
+                                <hr class="hr-styled">
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="row">
+            {% if object.is_tutor %}
+                <div class="col-xs-12 col-sm-4 col-md-3 row-space-2">
+                    {% if object.educations|length > 0 and object.work_experiences|length > 0 %}
+                        <div class="panel panel-default row">
+                            <div class="panel-heading">
+                                <h4>Credentials</h4>
+                            </div>
+                            <div class="panel-body">
+                                <dl>
+                                    <dt class="font-head">Education</dt>
+                                    {% for education in object.educations %}
+                                        <dd class="margin-bottom-5">
+                                            {% if education.degree != 'Others' %}{{ education.degree }},
+                                                {{ education.course|capfirst }}<br>{{ education.school|capfirst }}
+                                            {% endif %}</dd>
+                                    {% endfor %}
+                                    <hr class="hr-styled">
+                                    <dt class="font-head">Work History</dt>
+                                    {% for work in object.work_experiences %}
+                                        <dd class="margin-bottom-5">{{ work.role|capfirst }}<br>{{ work.name|capfirst }}
+                                        </dd>
+                                    {% endfor %}
+                                </dl>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="panel row-space-4 panel-default row">
+                        <div class="panel-heading">
+                            <h4>Tutoring Policies</h4>
+                        </div>
+
+                        <div class="panel-body">
+                            <div>
+                                <dt class="font-head">Travel</dt>
+                                <dd>{{ object.user.travel_policy }}</dd>
+                                {% if object.profile.tutoring_address == 'user' %}
+                                    <dd>{{ object.travel_policy_profile|safe }}</dd>
+                                {% endif %}
+                                {% if object.profile.tutoring_address == 'tutor' %}
+                                    <dd>Reason: {{ object.profile.address_reason|capfirst }}</dd>
+                                {% endif %}
+                                {% if object.profile.tutoring_address == 'neutral' %}
+                                    <dd>When you book lessons, they'll be delivered at your home or anywhere else you
+                                        both agree - whichever works best for you.
+                                    </dd>
+                                {% endif %}
+                                <hr class="hr-styled">
+                                <dt class="font-head">Cancellation</dt>
+                                <dd><a href="{% url 'cancellation' %}"><p>
+                                    <strong>{{ object.profile.cancellation_policy }}</strong></p></a>
+                                <dd>{{ object.profile.cancellation_policy_text|capfirst }} </dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                <div class="row-space-2">
+                    <div class="row">
+                        {% if reviews.reviews|length > 0 %}
+                            <div id="total-reviews" class="panel-body mobile-row">
+                                <h3>{{ reviews.reviews|length }} Review{{ reviews.reviews|length|pluralize }} </h3>
+                            </div>
+                            <div class="review-content mobile-row">
+                            <div class="panel-body">
+                                {% for rater in ratings %}
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2 col-xs-12 text-center">
+                                            <div class="review-image">
+                                                <a href="{{ rater.commenter.get_absolute_url }}"
+                                                   class="media-photo media-round row-space-1"
+                                                   name="review_23339042">
+                                                    {% cloudinary rater.reviewer_image RATING_THUMBNAIL alt="{{rater.commenter.first_name}}" %}
+                                                    <div class="padding-top-10">{{ rater.commenter.first_name }}</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10 col-sm-10 col-xs-12 space-for-mobile">
+                                            <div class="row-space-2">
+                                                <div data-review-id="23339042"
+                                                     data-original-text=""
+                                                     class="review-text expandable expandable-trigger-more row-space-2">
+                                                    <div class="expandable-content">
+                                                        <p>{{ rater.review|capfirst }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="text-muted review-subtext">
+                                                    <div class="col-sm-12">
+                                                        <div class="row">
+                                                            <div class="location pull-left">
+                                                                <i class="fa fa-map-marker"></i> {{ rater.commenter.vicinity }}
+                                                            </div>
+                                                            <div class="date pull-right">
+                                                                {{ rater.created|date:"F o" }}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row-space-2">
+                                        <div class="col-md-10 col-md-offset-2">
+                                            {% if not forloop.last %}
+                                                <hr class="hr-styled">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row">
+                                {% if reviews.reviews|length > 10 %}
+                                    <div class="col-xs-12">
+                                        <div class="pagination-container pull-left">
+                                            <nav>
+                                                {# {% bootstrap_paginate ratings range=5 show_prev_next="false" show_first_last="true" %} #}
+                                            </nav>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="review-content">
+                                <div class="panel-body">
+                                    <h4 class="row-space-4 text-center-sm"> No Reviews Yet </h4>
+                                </div>
+                            </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <div id="map-canvas"></div>
+
+
+{% endblock main_content %}
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        $(function () {
+            {% if form.errors %}
+                $('#initiator-section').addClass("hidden");
+                $('#request_form').removeClass("hidden");
+                $('#request_form').show();
+            {% else %}
+                $('#request_form').removeClass("hidden");
+                $('#request_form').hide();
+                $('#initiator-section > a').click(function (e) {
+                    console.log("holla");
+                    $('#request_form').fadeIn('slow');
+                    $('#initiator-section').addClass("hidden");
+                });
+            {% endif %}
+        })
+    </script>
+    
+    <script src="{% static 'js/public_profile.bundle.js' %}"></script>
+    
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script>
+        
+{% endblock %}

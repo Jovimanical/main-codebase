@@ -1,0 +1,100 @@
+{% extends "users/includes/profile_base.html" %}
+
+{% block modal %}
+
+{% endblock modal %}
+{% load staticfiles add_attr bootstrap3 i18n %}
+{% load cache activelink %}
+{% block title %}Profile - Tuteria{% endblock title %}
+{% block profile_url %}{% ifactive 'users:user_location' %}true{% else %}false{% endifactive %}{% endblock %}
+{% block main_content %}
+    {% if not object.tutor_req.completed_all_steps %}
+        <div class="potential-tutors well bg-info row">
+            <div class="col-sm-8 col-xs-12 row row-space-2">
+                {% if not object.tutor_req.has_completed_profile %}
+                    <span class="font-head">
+                        <strong>Please follow this guide to {% if object.user.tutor_intent %}apply as a tutor.{% else %} complete your profile.{% endif %} Use Chrome browser.</strong>
+                     </span>
+                     <br>
+                    <span style="color:red;" class="font-head"><b>Step 1 of 6:</b></span> Enter your profile information
+                    below
+                {% else %}
+                    <span class="font-head"><b>Go to the Next Step</b></span><br>
+                    You're almost done. Click <span style="color:red" class="font-head"><b>Continue</b></span> to complete
+                    your application
+                {% endif %}</div>
+            {% if object.tutor_req.has_completed_profile %}
+                <div class="col-sm-4 col-xs-12">
+                    <a class="btn btn-block btn-primary" href="{{ object.tutor_req.get_next_url }}">Continue &#8594;</a>
+                </div>
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+
+    <div class="row">
+        <div class="smart-forms">
+        <form accept-charset="UTF-8" action="{% url 'users:edit_profile' %}"
+              class="new_user {% if not request.is_featured %}invisible{% endif %}"
+              id="edit_profile_form" method="post" novalidate="novalidate">
+            {% csrf_token %}
+            <div class="panel panel-default row-space-4">
+                <div class="panel-heading">
+                    <h4>Required</h4>
+                </div>
+                <div class="panel-body">
+                    {% if request.is_featured %}
+                        {% include "users/includes/personal_info_featured.html" %}
+                    {% else %}
+                        {% include "users/includes/personal_info_smart.html" %}
+                    {% endif %}
+                </div>
+                <section id="tutor-specific-form" {% if not object.user.tutor_intent %}class="hidden" {% endif %} > 
+            {% include "users/includes/tutor_info.html" %}
+            </section>
+            
+                <div class="col-sm-3 col-sm-offset-9  ">
+                    <button type="submit" id="submitBtn" data-loading-text="Saving..."
+                            class="pull-right btn btn-primary btn-block btn-lg row-space-top-4">
+                        {% if object.user.tutor_intent %}Next Step{% else %}Save{% endif %}
+                    </button>
+                </div>
+                <div class="col-xs-12 padding-top-50">
+                    <hr class="hr-styled row">
+                        <small>
+                            <span class="font-head red-text">Please note:</span> <em>if you have troubles submitting this page, it's likely due to your browser. Please try using a Chrome, Firefox or up-to-date Opera mini.</em>
+                        </small>
+                </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% block request_section %}
+    {% if not object.user.tutor_intent %}
+        {{ block.super }}
+    {% endif %}
+{% endblock request_section %}
+{% block notification_tawk %}
+{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        const initialData = {
+            [window.CLIENT_PAGES.LOCATION_INFO]: JSON.parse('{{ initial_data|escapejs }}'),
+        };
+        window.loadApplication(window.CLIENT_PAGES.LOCATION_INFO, initialData, "{% url 'users:new_flow_post' %}");
+    </script>
+    <script src="{% static 'js/user_profile.bundle.js' %}"></script>
+    {% block edit_profile_js %}
+        <script>
+            window.phoneNumberIsVerified = "{{ object.primary_phone_no.verified }}";
+            window.ProfileStep = 1;</script>
+
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script>
+
+    {% endblock %}
+
+{% endblock %}

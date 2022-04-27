@@ -1,0 +1,177 @@
+{% load staticfiles cloudinary activelink cache %}
+<div class="header-2 hidden-xs">
+    <!-- Container -->
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-default padding-side-15" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo" href="{% url 'home' %}">
+                        <span class="nav-logo"></span>
+                        {# <img src="{% static "img/temp_logo.png" %}" height="47px"/> #}
+                        {# <img src="{% static " img/logo.png" %}" height="47px"/>#}
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    {% if not request.user.flagged %}
+                        {% if search_form %}
+                            {# {% cache 20000 header_search_form %} #}
+                            {% include 'includes/nav/header_search_form.html' with search_placeholder=placeholder %}
+                            {# {% endcache %} #}
+                        {% endif %}
+
+                        {% if invite %}
+                            <style>
+                            #hiring {
+                                    position: relative;
+                                    top: 49px;
+                                    padding: 7px 10px;
+                                    display: inline;
+                                    top: 15px;
+                                    border: 2px solid red;
+                                    text-transform: uppercase;
+                                    letter-spacing: 1.3px;
+                                    text-decoration: none;
+                                    font-size: 13px;
+                                    -webkit-border-radius: 3px;
+                                    -moz-border-radius: 3px;
+                                    -ms-border-radius: 3px;
+                                    -o-border-radius: 3px;
+                                    border-radius: 3px;
+                                    margin-top: 21px;
+                                    -webkit-transition: all 0.2s ease-in-out;
+                                    -moz-transition: all 0.2s ease-in-out;
+                                    -ms-transition: all 0.2s ease-in-out;
+                                    -o-transition: all 0.2s ease-in-out;
+                                    transition: all 0.2s ease-in-out;
+                                }
+
+                        </style>
+                        <!--<a id="hiring" class="blue-font {% if hide_invite %}hidden{% endif %}"  href="{% url 'request_meeting_redirect' %}">invite & earn!</a>-->
+                        {% endif %}
+                            <!--<span class="font-head" style="margin-left: 15%">
+                                <i class="fa fa-phone"></i> &nbsp; {{ tuteria_details.phone_number }}
+                            </span>-->
+                        {% if login_form %}
+                            {% if display_login %}
+                                <form class="navbar-form navbar-right" role="search">
+                                    <div class="form-group">
+                                        <input name="username" class="form-control" id="username" type="text"
+                                               placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="password" class="form-control" id="password" type="password"
+                                               placeholder="Password"><br>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if request.user.flagged %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="id_logout" href="{% url 'account_logout' %}">
+                                <i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if not display_phone_number %}
+                                <p class="navbar-text font-head">
+                                    <i class="glyphicon glyphicon-earphone"></i> &nbsp; {{ tuteria_details.phone_number }}
+                                </p>
+                                <p class="navbar-text font-head">
+                                    <i class="glyphicon glyphicon-earphone"></i> &nbsp; {{ tuteria_details.phone_number2 }}
+                                </p>
+                            {% endif %}
+
+
+                            {% if not user_profile %}
+                                {% if not ss_login %}
+                                <li><a id="login_nav" href="{% url 'account_login' %}" class="">Login</a></li>
+
+                                {% endif %}
+                            {% else %}
+                                <li class="dropdown navdropdown">
+                                    <a id="user_det" href="#" class="dropdown-toggle profile-image"
+                                       data-toggle="dropdown">
+                                        {% cloudinary user_profile.profile_pic AVATAR %}
+                                        &nbsp;{{ request.user.get_short_name }} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'users:tutor_subjects' %}">My Subjects</a></li>
+                                        <li><a href="{% url 'users:requests' %}">My Requests</a></li>
+                                        <li><a href="{% url 'users:user_bookings' %}">My Lessons</a></li>
+                                        <li><a href="{% url 'users:user_bookings' %}">My Jobs</a></li>
+                                        <li><a href="{% url 'users:edit_profile' %}">Edit Profile</a></li>
+                                        <li><a href="{% url 'users:account' %}">Account Settings</a></li>
+                                        <li class="divider"></li>
+                                        <li><a id="id_logout" href="{% url 'account_logout' %}">
+                                            <i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                            
+                       
+                            {% if not display_help %}
+                                <!--<li class="dropdown navdropdown">
+                                    <a href="{% url "help:home" %}" class="dropdown-toggle" data-toggle="dropdown">Help
+                                        <b
+                                                class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'help:home' %}" style="color: #337ab7; padding: 10px 20px">Visit
+                                            the Help Center &#10137;</a></li>
+                                        <li><a href="{% url 'help:article_detail' 69 %}" style="padding: 10px 20px">How
+                                            do I hire tutors on Tuteria?</a></li>
+                                        <li><a href="{% url 'help:article_detail' 21 %}" style="padding: 10px 20px">How
+                                            can I become a tutor on Tuteria?</a></li>
+                                        <li><a href="{% url 'help:article_detail' 14 %}" style="padding: 10px 20px">What
+                                            is Verified ID?</a></li>
+                                        <li><a href="{% url 'help:article_detail' 89 %}" style="padding: 10px 20px">How
+                                            does Tuteria payment system work?</a></li>
+                                        <li><a href="{% url 'help:article_detail' 86 %}" style="padding: 10px 20px">How
+                                            much do I pay for lessons?</a></li>
+                                    </ul>
+                                </li>-->
+                            {% endif %}
+
+                            {% if not tutor_registration_view %}
+
+                                {% if user_profile %}
+                                    {# <a href="{% url 'registration:tutor_landing' %}" class="btn btn-primary">Become a Tutor</a> #}
+                                    {% if user_profile.application_status < 2 %}
+                                        <li><a href="{% url 'become_tutor' %}" class="btn btn-tutor">Become
+                                            a tutor</a></li>
+                                    {% endif %}
+                                    {% if user_profile.application_status == user_profile.PENDING %}
+                                        <li><a href="{% url 'registration:tutor_landing' %}" class="btn btn-tutor">Pending
+                                            Review</a></li>
+                                    {% endif %}
+                                    {% if user_profile.application_status == user_profile.VERIFIED and user_profile.failed_skills_count %}
+                                        <!-- <li><a href="{% url 'users:subject_creation_landing' %}" class="btn btn-tutor">Create
+                                            Subject</a></li> -->
+                                    {% endif %}
+                                {% else %}
+
+                                    <li><a href="{% url 'become_tutor' %}" class="btn btn-tutor">Become
+                                        a tutor</a></li>
+                                {% endif %}
+                            {% endif %}
+
+                        </ul>
+                    {% endif %}
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+        </div>
+    </div>
+</div>

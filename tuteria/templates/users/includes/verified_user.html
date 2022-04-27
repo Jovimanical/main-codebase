@@ -1,0 +1,40 @@
+{% load staticfiles add_attr bootstrap3 i18n %}
+
+<div class="when-confirmed">
+<div class="row row-space-4">
+    <!-- Label -->
+    {% bootstrap_label form.first_name.label label_class="col-md-3 col-sm-3 col-xs-4" %}
+    <div class="col-md-9 col-sm-9 col-xs-8">
+<p class="form-control-static no-padding-top">{{object.user.first_name}}</p>
+    </div>
+</div>
+
+<div class="row  row-space-4">
+    {% bootstrap_label form.last_name.label label_class="col-md-3 col-sm-3 col-xs-4" %}
+
+    <div class="col-md-9 col-sm-9 col-xs-8">
+    <p class="form-control-static no-padding-top">{{ object.user.last_name }}</p>
+        <span class="input-hint">This is only shared when you have a confirmed
+            lesson with another Tuteria user.
+        </span>
+    </div>
+</div>
+
+<div class="row  row-space-4">
+    {% bootstrap_label profile_form.gender.label label_class="col-md-3 col-sm-3 col-xs-4" %}
+    <div class="col-md-4 col-xs-8">
+        <p class="form-control-static no-padding-top">{{ object.profile.get_gender_display }}</p>
+        <span id="helpBlock" class="input-hint">This is never shared, only used for data analysis
+        </span>
+    </div>
+</div>
+
+<div class="row  row-space-4">
+    {% bootstrap_label profile_form.dob.label label_class="col-md-3 col-sm-3 col-xs-4" %}
+    <div class="col-md-9 col-sm-9 col-xs-8">
+    <p class="form-control-static no-padding-top">{{object.profile.dob|date:"d-F-Y"}}</p>
+        <div class="input-hint">Only you can see this. We use this for analysis and never share with other users
+        </div>
+    </div>
+</div>    
+</div>

@@ -1,0 +1,155 @@
+{% extends '_layouts/base-wizard.html' %}
+{% load staticfiles i18n bootstrap3 %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/tutor-registration.css' %}">
+    <script> window.categories_json = JSON.parse('{{ categories|escapejs }}');</script>
+    {% if request.is_featured %}
+    <style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+    {% if django_conf == 'Production' or django_conf == 'StagingProd' %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% else %}
+        <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    {% endif %}
+    <script src=""></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.27/angular.min.js"></script>
+          <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
+          <script>window.Bloodhound  = {};
+          window.CreateStep = 0</script>
+        <script src="{% static "js/subject_create_mini.bundle.js" %}"></script>
+               
+    {% endif %}
+{% endblock css %}
+{% block title %}Create Subjects, Skills & Exams You Can Teach{% endblock title %}
+{% block process %}
+    <section class="row text-center">
+        <div class="col-sm-12 padding-bottom-50 padding-top-50">
+            <h2 style="font-weight: 700px">Create Your Subjects</h2>
+
+            <p style="font-size: 15px">Tuteria lets you make money teaching people what you love</p>
+        </div>
+        {% if request.is_featured %}
+            <div class="alert alert-danger row-space-4">
+                <p>Some subjects require you to pass a short test which this browser cannot support. If your subject is testable, you would need to use a better browser to take the test or quickly go to a nearby cyber cafe.</p>
+            </div>
+            <div class="padding-top-25"></div>                
+        {% endif %}
+    </section>
+{% endblock process %}
+{% block main_content %}
+    <div class="row">
+        {% block left_column %}
+            <div class="col-sm-12">
+                {% if request.is_featured %}
+                {% verbatim %}
+                    <div id="containing-container" ng-controller="SubjectSelectCtrl" ng-cloak>
+                        <div>
+                            <h4 class="br-bottom-md">Add a Subject</h4>
+                            <p>Select a category to find the subject, exam or skill you want to teach</p>
+
+                            <div class="row" id="form-field">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select
+                                                ng-model="selectedCategory"
+                                                ng-options="category.label for category in categories"
+                                        ng-Change="getCategories()"
+                                        class="form-control row-space-2"
+                                        ></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Skill</label>
+                                        <select
+                                                ng-model="selectedSkill"
+                                                ng-options="skill.label for skill in selectedCategory.skills"
+                                        {# ng-Change="fetchSkills()" #}
+                                        class="form-control row-space-2"
+                                        ></select>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div ng-class="{hidden: hideInfo()}">
+                                <div class="well bg-info">
+                                    <p><b>You have selected {{selectedSkill.label}}.</b></p>
+
+                                    <p ng-show="selectedSkill.testable">This subject has a multiple-choice test, but you are either using an Opera mini or low-end UCWeb browser which cannot support this test. In order to take this test, please use Chrome or Firefox browsers or use a good cyber cafe nearby. Once you pass the short test, you will be able to teach this subject. 
+                                    </p>
+
+
+                                    <div ng-show="!selectedSkill.testable">
+                                    <p>This subject is not currently tested. You'll need to write about your expertise in this subject or supply relevant credentials that further prove your mastery.</p>
+                                    
+                                    <p class="subject-extrax">After creating this subject, your submission will be reviewed by our quality team. You will be able to teach this subject only if the review is positive. </p>
+                                    </div>
+
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+                                            <button id="submit_btn" ng-click="nextStep()"
+                                                    class="btn btn-primary btn-lg btn-block" >
+                                                <span ng-show="selectedSkill.testable">Take Test</span>
+                                                <span ng-show="!selectedSkill.testable">Next Step</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endverbatim %}
+                    
+                {% else %}
+                    <div id="containing-container">
+                    </div>
+                {% endif %}
+
+            </div>
+        {% endblock left_column %}
+    </div>
+{% endblock main_content %}
+{% block javascript %}
+    {{ block.super }}
+    {% block custom_js %}
+        {% if not request.is_featured %}
+        {# {% if request.is_featured %} #}
+            <script>
+
+                // alert(window.categories_json)
+                window.CreateStep = 0;
+            </script>
+            <script type="text/javascript"
+                    src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+            <script src="{% static 'js/subject_create.bundle.js' %}"></script>
+            
+        {% endif %}
+        <script>
+                $('#body-container').removeClass('hidden');
+            </script>
+        <!-- Twitter Conversion Code for Tutors Who Have Been Approved -->
+        <!-- <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            twttr.conversion.trackPid('l69wn', {tw_sale_amount: 0, tw_order_quantity: 0});</script>
+        <noscript>
+            <img height="1" width="1" style="display:none;" alt=""
+                 src="https://analytics.twitter.com/i/adsct?txn_id=l69wn&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0"/>
+            <img height="1" width="1" style="display:none;" alt=""
+                 src="//t.co/i/adsct?txn_id=l69wn&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0"/></noscript> -->
+
+    {% endblock %}
+    {% block request_section %}{% endblock request_section %}
+
+{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}

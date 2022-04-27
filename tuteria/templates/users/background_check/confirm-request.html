@@ -1,0 +1,202 @@
+{% extends '_layouts/base-wizard.html' %}
+{% load staticfiles i18n cloudinary humanize %}
+
+{% block nav %}
+    <div class="header-2 hidden-xs">
+        <!-- Container -->
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default padding-side-15" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    <span class="logo" href="{% url 'home' %}">
+                        <img src="{% static "img/logo.png" %}" height="47px"/>
+                    </span>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.is_authenticated %}
+                                <li><a href="#" class="wallet_price">
+                                    &#x20a6;{{ request.user.wallet.amount_available|floatformat:"2" }}</a></li>
+                                <li class="dropdown navdropdown">
+                                    <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+                                        {% if request.user.profile.image %}
+                                            {% cloudinary request.user.profile.image AVATAR %}
+                                        {% else %}
+                                            <img src="http://placehold.it/30x30" class="img-circle">
+                                        {% endif %}
+                                        {{ request.user.get_short_name }} <b class="caret"></b></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block ng_app %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/booking_page.css' %}"/>
+    <style>
+        .heads {
+            margin-top: 0;
+        }
+
+        .wallet_price {
+            padding-bottom: 4px !important;
+            background-color: green;
+            color: white !important;
+            font-size: 17px;
+            margin-top: 8px;
+            padding-top: 4px !important;
+        }
+
+        .wallet_price:hover {
+            background-color: green !important;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl">
+        <div class="container">
+            <div class="col-sm-12">
+                <div class="row">
+                <h2>Make payment for background check</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, labore.</p>
+
+                </div>
+
+            </div>
+
+            <div class=" row">
+                <div class="col-sm-12 col-md-8 col-xs-12">
+
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+
+                                <h4>Payment Options</h4>
+                            </div>
+                            <div class="panel-body">
+
+
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="methods col-sm-3 col-xs-12">
+                                        <form class="form">
+                                            <label class="radio">
+                                                <input name="payment_method" type="radio"
+                                                       value="credit_card"
+                                                       id="payment_method1" checked="true">
+                                                Credit Card
+                                            </label>
+                                            {% if can_use_wallet %}
+                                                <label class="radio">
+                                                    <input type="radio" name="payment_method"
+                                                           value="use_wallet" id="payment_method3">Use Wallet
+                                                </label>
+
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-9 col-xs-12">
+                                        <div class="row well credit-card-option">
+                                            <div class="payment_method1">
+                                                <h4>Safe, Fast and Convenient</h4>
+                                                <style>
+                                                    #__p_ew_l td {
+                                                        border-top: 0 !important;
+                                                        border-bottom: 0 !important;
+                                                    }
+
+                                                    @media (min-width: 768px) {
+                                                        #__paga_btn.__proceed {
+                                                            position: absolute;
+                                                            right: 0;
+                                                            margin-top: -33px;
+                                                            margin-right: 25px;
+                                                        }
+                                                    }
+
+
+                                                </style>
+                                                <form>
+                                                    {{ paga_form }}
+                                                </form>
+                                                <script type="text/javascript"
+                                                        src="https://www.mypaga.com/paga-web/epay/ePay-button.paga?k=bffe463e-d4f8-4b16-a2eb-6a54a0d614c0&e=false&layout=V"></script>
+
+                                            </div>
+                                            {% if can_use_wallet %}
+                                                <div class="hide payment_method3">
+                                                    <div class="row credit-card-option">
+                                                        <p>You can also use your wallet in making payment.</p>
+
+
+                                                        <div class="col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-xs-12 need-help ">
+                                                            <!-- begin Paga ePay widget code -->
+                                                            <form action="{% url 'background_redirect' object.order %}"
+                                                                  method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="p_method" value="wallet"/>
+
+                                                                <button id="payment-form-submit" type="submit"
+                                                                        class="btn btn-primary btn-block">
+                                                                    Use Wallet
+                                                                </button>
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-sm-4 col-xs-12 panel">
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    </div>
+{% endblock %}
+
+{% block bottom_footer %}{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    {% block js_extra %}
+        <script>
+            window.StepCount = 1;
+        </script>
+    {% endblock js_extra %}
+    <script src="{% static "js/booking_page.bundle.js" %}"></script>
+
+{% endblock javascript %}
+
+

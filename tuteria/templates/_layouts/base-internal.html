@@ -1,0 +1,108 @@
+{% extends '_layouts/base.html' %}
+{% load staticfiles %}
+{% load activelink cache %}
+
+{% block containing_nav %}
+{% with user_profile=request.user.profile %}
+
+{% if request.is_featured %}
+    <div class="navbar navbar-default" role="navigation">
+        {% include 'includes/nav/mobile/mobile-header.html' %}                   
+    </div>
+{% else %}
+    <div class="{% block fixed %}{% endblock %} na hidden-xs ">
+            {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder %}
+            {% block black_nav %}
+                <div class="subnav hide-print">
+                    <div class="container">
+                        <ul class="subnav-list">
+                            <li>
+                                <a href="{% url 'users:dashboard' %}" aria-selected="{% ifactive 'users:dashboard' %}true{% else %}false{% endifactive %}"
+                                   class="subnav-item">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:tutor_subjects' %}" aria-selected="{% ifactive 'users:tutor_subjects' %}true{% else %}false{% endifactive %}"
+                                   class="subnav-item">My Subjects</a>
+                            </li>
+                            <!--<li>-->
+                            <!--    <a href="{% url 'users:requests' %}" aria-selected="{% ifactive 'users:requests' %}true{% else %}false{% endifactive %}"-->
+                            <!--       class="subnav-item">My Requests</a>-->
+                            <!--</li>-->
+                            <li>
+                                <a href="{% url 'users:user_bookings' %}" aria-selected="{% ifactive 'users:user_bookings' %}true{% else %}false{% endifactive %}" class="subnav-item">My
+                                    Lessons</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:edit_profile' %}" aria-selected="{% block profile_url %}{% ifactive 'users:edit_profile' %}true{% else %}false{% endifactive %}{% endblock %}" class="subnav-item">Profile</a>
+                            </li>
+                            <li>
+                                {# <a href="{% url 'account_change_password' %}" aria-selected="{% ifactive 'users:account' %}true{% else %}false{% endifactive %}" class="subnav-item">Account</a> #}
+                                <a href="{%url 'users:account' %}" aria-selected="{% block user_account %}{% ifactive 'users:account' %}true{% else %}false{% endifactive %}{% endblock %}" class="subnav-item">Account</a>
+                            </li>
+                            <li>
+                                {# <a href="{% url 'account_change_password' %}" aria-selected="{% ifactive 'users:account' %}true{% else %}false{% endifactive %}" class="subnav-item">Account</a> #}
+                                <a href="{%url 'users:user_jobs' %}" aria-selected="{% block user_jobs %}{% ifactive 'users:user_jobs' %}true{% else %}false{% endifactive %}{% endblock %}" class="subnav-item">My Jobs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        
+            {% endblock black_nav %}
+                
+        
+    </div>
+    {# {% cache 1000 smart_nav request.user.email %} #}
+        {% block mobile_subnav_2.2 %}
+        {% include "includes/nav/mobile/smart-nav.html" with btnn=True search=True %}
+        
+        <div class="subnav hide-print visible-xs">
+            <div class="container">
+                <ul class="subnav-list">
+                    <li>
+                        <a {% ifactive 'users:dashboard' %}href="javascript:void(0)" aria-selected="true"{% else %}href="{% url 'users:dashboard' %}" aria-selected="false"{% endifactive %} class="subnav-item">Dashboard</a>
+                    </li>
+                    <li>
+                        <a {% ifactive 'users:tutor_subjects' %}href="javascript:void(0)" aria-selected="true"{% else %}href="{% url 'users:tutor_subjects' %}" aria-selected="false"{% endifactive %} class="subnav-item">My Subjects</a>
+                    </li>
+                    <!--<li>-->
+                    <!--    <a {% ifactive 'users:requests' %}href="javascript:void(0)" aria-selected="true"{% else %}href="{% url 'users:tutor_subjects' %}" aria-selected="false"{% endifactive %} class="subnav-item">My-->
+                    <!--        Requests</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a {% ifactive 'users:user_bookings' %}href="javascript:void(0)" aria-selected="true"{% else %}href="{% url 'users:user_bookings' %}" aria-selected="false"{% endifactive %} class="subnav-item">My Lessons</a>
+                    </li>
+                    <li>
+                        <a {% ifactive 'users:edit_profile' %}href="javascript:void(0)" aria-selected="true"{% else %}href="{% url 'users:edit_profile' %}" aria-selected="false"{% endifactive %} class="subnav-item">Profile</a>
+                    </li>
+                    <li>
+                        <a {% ifactive 'users:user_jobs' %}href="javascript:void(0)" aria-selected="true"{% else %}href="{% url 'users:user_jobs' %}" aria-selected="false"{% endifactive %} class="subnav-item">My Jobs</a>
+                    </li>
+                {% block user_account2 %}
+
+                    <li>
+                        <a  {% ifactive 'users:account' %}href="javascript:void(0)" aria-selected="true"{% else %}href="{%url 'users:account' %}" aria-selected="false"{% endifactive %} class="subnav-item">Account</a>
+                    </li>
+                {% endblock %}
+                </ul>
+            </div>
+        </div>    
+        {% endblock mobile_subnav_2.2 %}
+        
+    {# {% endcache %} #}
+{% endif %}
+{% endwith %}    
+{% endblock containing_nav %}
+
+{% block css %}
+    {{ block.super }}
+    <link href="{% static 'css/internal.css' %}" rel="stylesheet">
+{% endblock %}
+{#{% block fixed %}profile-header{% endblock %}#}
+{% block mobile_urls %}
+    {#    <li><a href="{% url 'category' %}">Dashboard</a></li>#}
+    {#    <li><a href="{% url 'skill' %}">Your Subjects</a></li>#}
+    {#    <li><a href="{% url 'search' %}">Bookings</a></li>#}
+    {#    <li><a href="{% url 'profile' %}">Profile</a></li>#}
+    {#    <li><a href="{% url 'profile' %}">Account</a></li>#}
+{% endblock %}
+                                {% block footer2 %}{% endblock %}

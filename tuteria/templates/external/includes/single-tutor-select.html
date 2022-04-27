@@ -1,0 +1,405 @@
+{% load staticfiles i18n cloudinary humanize  bootstrap3 add_attr pricing_calc bootstrap_pagination  embed_video_tags activelink cache %}
+{#{% if the_tutor_list %}#}
+<div class="starter-template col-md-offset-0 col-md-12 col-lg-10 col-lg-offset-1 col-xs-12 ">
+    <div class="panel headpane">
+        <div class="panel-heading">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12">
+               <div class="col-sm-2">
+                <div class="">
+                    <div class="quality-img hidden-xs"></div>
+                      <!--{# <img src="{% static 'img/tutor/quality.png' %}" class=" center-block"/> #}-->
+                    
+                </div>
+              </div>
+              <div class="col-sm-8 col-sm-offset-1 row-space-4">
+                <div class="text-left">
+                      <h3 class="font-head blue-font">
+                          {% if object.is_parent_request %}
+                          Book Quality Home Lessons
+                          {% elif object.request_type == 3 %}
+                          Book Quality Online Tutors
+                          {% else %}
+                          Book {{object.request_subjects.0}} Lessons
+                          {% endif %}</h3>
+                      <p class="">
+                        <span class="font-head font-15">{{count}} tutors</span> match your search. Select your preferred tutor from the options below and proceed to book lessons. Up to 10% discount available!
+                    </p>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>          
+    </div>
+
+{#{% endif %}#}
+    {% for ts in ts_skills %}
+    <div class="panel">
+        <div class="panel-body containing">
+            {% with my_object=ts.get_ts %}
+            <div class="media">
+                {% if ts.recommended %}
+                <span class="top-choice font-head">
+                    Top Choice
+                    {% endif %}
+                </span>
+                <div class="media-left image-section">
+                    <div class="center-xs">
+                        {% cloudinary my_object.profile_pic SEARCH_THUMBNAIL alt=my_object.tutor.first_name %}
+                    </div>                    
+                    <div class="recommendations__result-actions hidden-xs">
+
+                        <a class="recommendations__hire-btn btn btn-primary btn-lg btn-block" href="{{ts.get_absolute_url}}">Select</a>
+
+                        <div class="recommendations__review-link profile_link" href="#">
+                            <h5 class="font-head brightgreen">
+                                {% with pro=my_object.tutor.profile %}
+                                {% if pro.years_of_teaching %}
+                                {{ pro.yoe_display }}
+                                {% endif %}
+                                
+                                {% endwith %}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-body subject-detail padding-top-10">
+                    <h4 class="media-heading recommendations__result-name center-xs">{{my_object.tutor.first_name}}
+                       <span class="font-head brightgreen h5"
+                       style="padding-bottom: 10px">(ID Verified)</span></h4>
+
+                       <div class="recommendations__result-price recommendations__pill recommendations__pill--tasker-price center-xs">
+                           <span class="font-head" style="padding: 15px 15px">{{currency|safe}}{{ts.ttp|floatformat:'0'|intcomma}}{% if the_tutor_list %}<span class="h4">/hr</span> {% endif %}</span>
+                        {% if object.request_type != 3 %}                            
+                        {% endif %}
+                        <!--<span class="">per hour</span>-->
+                    </div>
+                    <h4 itemprop="name" style="padding-top:0" class="font-head"
+                    title="{{ my_object.heading }}">{{ my_object.heading|capfirst }}</h4>
+                    <ul class="recommendations__result-info list-inline">
+                        {% with hours_taught=ts.no_of_hours_taught %}
+                        {% if hours_taught > 0 %}                            
+                        <li>
+                            <i class="fa fa-clock-o brightblue"></i> {{hours_taught|floatformat}} Hours Taught
+                        </li>
+                        {% endif %}
+                    {% endwith %}
+                        <li itemprop='aggregateRating' itemscope
+                        itemtype="http://schema.org/AggregateRating"
+                        data-location="{{ my_object.location }}"><i
+                        class="fa fa-map-marker brightblue"></i> {{ my_object.location|title }}
+                    </li>
+                    {% if my_object.review_count > 0 %}
+                    {% if request.is_featured %}
+                    <li><span class="rate">
+                      {% for star in my_object.rating_integer %}
+                      <span class="opera-star">★</span>
+                      {% endfor %}
+                      {% if my_object.rating_decimal %}
+                      <i class="fa fa-star-half-o"></i>
+                      {% endif %}
+                  </span> ({{ my_object.review_count }})
+              </li>
+              {% else %}
+              <li><span class="rate">
+
+                  {% for star in my_object.rating_integer %}
+                  <i class="fa fa-star"></i>
+                  {% endfor %}
+                  {% if my_object.rating_decimal %}
+                  <i class="fa fa-star-half-o"></i>
+                  {% endif %}
+              </span> ({{ my_object.review_count }})
+          </li>
+
+          {% endif %}
+          {% else %}
+          {% endif %}
+                                
+                            </ul>
+                            <hr>
+                            {# <h5 class="font-head margin-down-5">{{ my_object.skill.name }}</h5> #}
+                            <p class="font-head"><strong>How I can help:</strong></p>
+                            <p>{{ my_object.description|capfirst|linebreaksbr }}</p>
+                            <!-- Exhibit if Any -->
+                            <div class="">
+                                {{ my_object.video.thumbnail }}
+                                {# {% if True %} #}
+                                {% if my_object.has_exhibition %}
+                                <div id="tutor-video" class="">
+                                    <div class="row-space-4">
+                                        <div class="flexslider">
+                                            <ul class="slides">
+                                                {% comment %} {% if my_object.has_video %}
+                                                {% if not request.is_featured %}
+                                                {% video my_object.video as my_video %}
+                                                <li data-thumb="{{ my_video.thumbnail }}">
+                                                    <div class="embed-responsive embed-responsive-16by9">
+                                                        {% video my_video '100% x 50%' rel=0 modestbranding=1 showinfo=0 controls=0 %}
+                                                    </div>
+                                                </li>
+                                                {% endvideo %}
+                                                {% endif %}
+                                                {% endif %} {% endcomment %}
+                                                {% for exhibition in my_object.tutor_exhibitions %}
+                                                {# {% for exhibition in "**" %} #}
+                                                {# <li data-thumb="{% static 'img/backgrounds/background5_pc.jpg' %}"> #}
+                                                <li data-thumb="{% cloudinary_url exhibition.image crop="fill" height=121 width=161 %}">
+                                                    <img class="img-responsive"
+                                                    src="{% cloudinary_url exhibition.image crop="fill" height=520 width=692 %}"/>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 no-padding-top">
+                                    <div class="row">
+                                        <h6 class="pull-right color-white-mute"><em>Exhibit
+                                            of
+                                            tutor's work</em></h6>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                </div>
+
+                               
+                                {% if my_object.tutor.tutorskill_set.active.count > 0 %}
+                                <p><em>{{ my_object.tutor.first_name }} teaches
+                                    {% for sk in my_object.tutor.tutorskill_set.active %}
+                                    {{ sk.skill.name }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}</em></p>
+                                    {% endif %}
+
+                                    {% with pro=my_object.tutor.profile %}
+                                    
+                                    {% if pro.curriculum_used|length > 0 %}
+                                    <p class="font-head padding-top-10">Teaching Curriculum: <span class="blue-font">{{ pro.curriculum_display|join:", " }}</span></p>
+                                    {% if pro.curriculum_explanation %}
+                                    <p>{{ pro.curriculum_explanation }}</p>
+                                    {% endif %}
+                                    {% endif %}
+
+                                    {% if pro.classes|length > 0 %}
+
+                                    <p class=""><span class="font-head">Levels Taught: </span>{% for x in pro.classes %}
+                                        {{ x|title }}{% if forloop.revcounter0 == 1 %}{% else %},
+                                        {% endif %}{% endfor %}</p>
+
+                                        {% endif %}
+                                        {% endwith %}
+                                        
+                                        <div>
+                                            <h5 class="font-head">{{ my_object.travel_policy }}</h5>
+                                            {% if my_object.tutor.tutoring_address == 'user' %}
+                                            <p>{{ my_object.travel_policy_text }}</p>
+                                            {% endif %}
+                                            {% if my_object.tutor.tutoring_address == 'neutral' %}
+                                            When you book lessons, they'll be delivered at your home or
+                                            anywhere else
+                                            you both agree - whichever works best for you.
+                                            {% endif %}
+                                            {% if my_object.tutor.tutoring_address == 'tutor' %}
+                                            <p>
+                                                Reason: {{ my_object.tutor.profile.address_reason|title }}</p>
+                                                {% endif %}
+                                            </div>
+
+                                            {% with my_educations=my_object.tutor.education_set.all workexperiences=my_object.tutor.workexperience_set.all certificate_awards=my_object.skillcertificate_set.active %}
+                                            {% if my_educations|length > 0 %}
+                                            <hr>
+                                            <h4 class="font-head"><span>Education History</span></h4>
+                                            {% for school in my_educations %}
+                                            <h5>{{ school.degree }} in {{ school.course }}, {{ school.school }}</h5>
+                                            {% endfor %}
+                                            {% endif %}
+                                            
+                                             {% if workexperiences|length > 0 %} 
+                                             <hr> 
+                                             <h4 class="font-head"><span>Work Experience</span></h4> 
+
+                                             {% for we in workexperiences %} 
+                                             <h5>{{ we.role }}, {{ we.name }} {% if we.currently_work %} 
+                                                 <span class="brightgreen h6">(current)</span> {% endif %} 
+                                             </h5> 
+                                             {% endfor %} 
+                                             {% endif %} 
+                                            
+                                            {% if certificate_awards|length > 0 %}
+                                            <hr>
+                                            <h4 class="font-head"><span>Certificate & Awards</span>
+                                            </h4>
+                                            {% for certification in certificate_awards %}
+                                            <h5>{{ certification.award_name }}, {{ certification.award_institution }}</h5>
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+
+
+
+                                            {% with desc=my_object.tutor.profile.description %}
+
+                                            {% if desc %}
+                                            <hr>
+                                            <h4 class="font-head">
+                                                <span>A bit about {{ my_object.tutor.first_name }}</span></h4>
+
+
+                                                <p class="margin-top-bottom-10">
+                                                    {{ desc|capfirst|safe }}
+                                                </p>
+                                                {% endif %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+
+                                        <div class="recommendations__result-actions visible-xs">
+
+                                            <a class="recommendations__hire-btn btn btn-primary btn-lg btn-block" href="{{ts.get_absolute_url}}">Select
+                                                &amp;
+                                                Continue</a>
+
+                                                <div class="recommendations__review-link profile_link" href="#">
+                                                    <h5 class="font-head brightgreen">
+                                                        {% with pro=my_object.tutor.profile %}
+                                                        {% if pro.years_of_teaching %}
+                                                        {{ pro.yoe_display }}
+                                                        {% endif %}
+                                                        
+                                                        {% endwith %}
+                                                    </h5>
+                                                </div>
+                                            </div>
+
+                                                {% with reviews_count=my_object.review_count %}
+                        {% if reviews_count > 0 %}
+                            <div id="reviews" class="room-section webkit-render-fix ">
+                                <div class="special-row-element row">
+                                    <div class="">
+                                        <div class="row no-side-margin-mobile">
+                                            <div class="col-md-12 padding-top-25">
+                                                {% if reviews_count > 0 %}
+                                                    {# {% if object.reviews.count == 0 %} #}
+                                                    <div class="panel-body mob-row">
+                                                        <hr>
+                                                        <h4 class="row-space-4 font-head">
+
+                                                            {{ reviews_count }}
+                                                            Review{{ reviews.count| pluralize }}
+
+                                                            {# 5 Reviews #}
+                                                            {% if request.is_featured %}
+                                                                <div class="rating pull-right">
+                                                                    {% for star in my_object.rating_integer %}
+                                                                        {# {% for star in "****" %} #}
+                                                                        <span class="opera-star icon-resize">★</span>
+                                                                    {% endfor %}
+                                                                    {% if my_object.rating_decimal %}
+                                                                        <i class="fa fa-star-half-full icon-resize"></i>
+                                                                    {% endif %}
+                                                                    <span class="review-text">{{ reviews_count }} Review{{ reviews_count| pluralize }}</span>
+                                                                    {# <span class="review-text"> (4)</span> #}
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="star-rating pull-right">
+                                                            <span class="foreground">
+                                                                {% for star in my_object.rating_integer %}
+                                                                    {# {% for star in "****" %} #}
+                                                                    <i class="fa fa-star icon-resize"></i>
+                                                                {% endfor %}
+                                                                {% if my_object.rating_decimal %}
+                                                                    <i class="fa fa-star-half-full icon-resize"></i>
+                                                                {% endif %}
+                                                                {# </span> (4.52) #}
+                                                            </span>
+                                                                    ({{ my_object.rating|floatformat:"1" }}/5.0)
+                                                                </div>
+                                                            {% endif %}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="review-content mob-row">
+                                                        <div class="panel-body">
+                                                            {% with rater=my_object.valid_reviews.0 %}
+                                                                {# {% for rater in "**" %} #}
+                                                                <div class="row">
+                                                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                                        <div class="review-image text-center">
+                                                                            {% if rater.commenter.is_staff %}
+                                                                            {% else %}
+                                                                                <div href="{{ rater.commenter.get_absolute_url }}"
+                                                                                   class="media-photo media-round row-space-1"
+                                                                                   name="review_23339042">
+                                                                                    {% cloudinary rater.reviewer_image RATING_THUMBNAIL alt="{{rater.commenter.first_name}}" %}
+                                                                                    <div class="padding-top-10">{{ rater.commenter.first_name }}</div>
+                                                                                </div>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-10 col-sm-10 col-lg-10 col-xs-12">
+                                                                        <div class="row-space-2">
+
+                                                                            <div data-review-id="23339042"
+                                                                                 data-original-text="{{ rater.review }}"
+                                                                                 class="review-text expandable expandable-trigger-more row-space-2">
+
+                                                                                <div class="expandable-content space-for-mobile">
+                                                                                    <p class="min-space">{{ rater.review }}</p>
+
+                                                                                    <div class="text-muted review-subtext margin-top-15">
+                                                                                        <div class="col-sm-12">
+                                                                                            <div class="row">
+                                                                                                <div class="location pull-left">
+                                                                                                    <i class="fa fa-map-marker"></i> {{ rater.commenter.location|title }}
+                                                                                                </div>
+                                                                                                <div class="date pull-right">{{ rater.modified|date }}</div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+{#                                                                {% if not forloop.last %}#}
+{#                                                                    <div class="row row-space-2">#}
+{#                                                                        <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2">#}
+{#                                                                            <hr class="hr-styled">#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                {% endif %}#}
+                                                            {% endwith %}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    {% endwith %}
+
+                                            {% endwith %}
+
+                                        </div>
+
+                                    </div>
+
+                                    {% endfor %}
+{% if ts_skills.count > 3 %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="pagination-container pull-left">
+            <nav style="display:block">
+                {% bootstrap_paginate ts_skills range=5 show_prev_next="false" show_first_last="true" %}
+            </nav>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+                                </div>

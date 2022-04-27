@@ -1,0 +1,1763 @@
+- fields: {body: "<p> If you don\u2019t have a Tuteria account yet, head to: <a href=\"\
+      {% url 'account_signup' %}\">www.tuteria.com/signup</a> to create one. </p><p>Enter\
+      \ your first and last names, and your most active email address, then choose\
+      \ a secure password. Signing up and creating a Tuteria account is totally free,\
+      \ whether you\u2019re looking to hire or tutor!</p><p> After you signup, please\
+      \ be sure to complete your profile.</p><p><em>Note: You don\u2019t need to have\
+      \ an account to book lessons, but you\u2019ll need to create one before the\
+      \ booking can be completed.</em></p>", category: 2, question: How do I create
+      an account}
+  model: helps.Article
+  pk: 1
+- fields: {body: '<p>Tuteria may limit, suspend, or deactivate your account, as outlined
+      in our <a href="{% url ''terms'' %}">Terms of Service.</a></p><p>Your account
+      will be limited from applying to become a tutor if your previous attempt was
+      denied. This will be re-enabled after 90 days only for your first two attempts.</p><p><strong>Your
+      account may be deactivated during a review of Tuteria accounts.</strong> Reviews
+      are part of our effort to foster a trustworthy community and uphold the Terms
+      of Service.</p><p>If any form of fraudulent activity is detected on your account,
+      the following may occur with or without notifying you directly:</p><ul><li>Your
+      account can be deactivated or suspended</li><li>You may not be able to access
+      the platform, your account or content, or receive assistance from Tuteria Customer
+      Support</li></ul><p>Any upcoming booking you have as either a client or tutor
+      can be canceled; you may not be entitled to any compensation for the bookings
+      that were canceled as a result of your suspension. We also may:</p><ul><li>Communicate
+      to the appropriate persons that their booking was canceled.</li><li>Refund clients
+      in full, regardless of the cancellation policy.</li><li>Contact clients about
+      other tutors that may be available.</li></ul>', category: 2, question: 'Can
+      Tuteria deactivate my account?'}
+  model: helps.Article
+  pk: 2
+- fields: {body: "<p>Deleting your account can only be done by Customer Support. First,\
+      \ you\u2019ll need to email <a href=\"mailto:info@tuteria.com\">info@tuteria.com</a>\
+      \ using the email address you created your account with, stating the reason\
+      \ why you want to close your account.</p><p><em>Note: If you\u2019re a tutor,\
+      \ all your earnings should be cleared prior to closing. If you\u2019re a client,\
+      \ any balance should be refunded to your payment source first. If you have any\
+      \ active bookings, you will need to cancel them first.</em></p>", category: 2,
+    question: 'How do I delete my account?'}
+  model: helps.Article
+  pk: 3
+- fields: {body: '<p><strong>I forgot my password.</strong></p><p>If you''ve forgotten
+      your password or are having trouble logging into your Tuteria account, visit
+      <a href="{% url ''account_reset_password'' %}">www.tuteria.com/reset-password</a>.
+      Enter the email address you use for Tuteria and you''ll be emailed a link to
+      reset your password.</p><p><strong>I want to change my password.</strong></p><p>Visit
+      your <a href="{% url ''users:account'' %}">Security tab</a>. Click your name
+      in the top-right corner of tuteria.com, select <b>Account</b>, then click <b>Security</b>
+      in the menu on the left side of your screen.</p><p>Look for the <b>Change Your
+      Password</b> pane and follow the instructions. In order to change your password,
+      you need to know your current password.</p>', category: 3, question: 'How do
+      I reset my password?'}
+  model: helps.Article
+  pk: 4
+- fields: {body: '<p>Right now, you cannot change your email address.<p><p>The email
+      you used to create your account is the primary way Tuteria communicates with
+      you concerning activities related to your account.</p>', category: 3, question: 'Can
+      I change the email address I use for Tuteria?'}
+  model: helps.Article
+  pk: 5
+- fields: {body: '<p>Visit your <a href="{% url ''users:edit_profile'' %}">Edit Profile
+      tab</a>. Click your name in the top-right corner of tuteria.com, select <b>Edit
+      Profile</b>.</p><p>Look for the <b>Phone Number</b> entry, and change it there.
+      You would need to enter your new phone number twice to confirm it.</p>', category: 3,
+    question: 'How do I change my phone number?'}
+  model: helps.Article
+  pk: 6
+- fields: {body: "<p>Tuteria Wallet is a safe and secure electronic wallet system\
+      \ from which all transactions related to your account are managed.</p><p>When\
+      \ you hire tutors or book lessons on Tuteria, your payment is loaded to your\
+      \ wallet until lessons have been fully delivered and confirmed before being\
+      \ credited to the tutor\u2019s wallet. That way, clients and tutors are always\
+      \ confident that payments will be processed after lessons have been taught.</p><p>Your\
+      \ wallet is automatically created when you sign up to Tuteria. From the <b>Revenue\
+      \ Page</b> on your profile, you can see your wallet balance at any time.<p> ",
+    category: 4, question: 'What is Tuteria Wallet?'}
+  model: helps.Article
+  pk: 7
+- fields: {body: "<p>To withdraw your wallet balance, visit your <b>Revenues Page</b>.</p><p>Click\
+      \ your name in the top-right corner of tuteria.com, select <b>Account</b>, and\
+      \ then click <b>Revenues</b> in the menu on the left side of your screen.</p><p>There\
+      \ are two options to withdraw:</p><p>1. <b>Withdraw to your Paga Account:</b>\
+      \ if you have an account with Paga, you can withdraw your wallet balance to\
+      \ your Paga account. To use this option, you must have entered your Paga account\
+      \ details in the <b>Payout Method</b> section of your profile.</p><p>This normally\
+      \ takes 24 hours and is at no additional cost to you. If you don\u2019t have\
+      \ a Paga account, you can create one for free <a href=\"https://www.mypaga.com\"\
+      \ target=\"_blank\">here</a>.</p><p>2. <b>Withdraw to your Bank Account:</b>\
+      \ you can request to withdraw your wallet balance to your bank account. To use\
+      \ the option, you must have supplied your bank details in the Payout Method\
+      \ section of your profile.</p><p>This also takes 24 hours and will include a\
+      \ surcharge of N130 per withdrawal to bank.</p>", category: 4, question: 'How
+      can I withdraw from my wallet?'}
+  model: helps.Article
+  pk: 8
+- fields: {body: '<p>As a client, you fund your wallet when you book lessons with
+      tutors on Tuteria or when you request to meet with a tutor.</p><p>You can fund
+      your wallet by paying online using your debit card, credit card or Paga account,
+      or by bank payment.</p><p>As a tutor, all cleared earnings from lessons taught
+      are credited to your wallet which <a href="{% url ''help:article_detail'' 8
+      %}">you can withdraw</a> or use to hire other tutors.</p>', category: 4, question: 'How
+      can I fund my wallet?'}
+  model: helps.Article
+  pk: 9
+- fields: {body: "<p>To edit your Tuteria profile information, including your profile\
+      \ photo:</p><ol><li>Click your name in the top-right corner of tuteria.com</li><li>Select\
+      \ <b>Edit Profile</b></li><li>Use the menu on the left to select the different\
+      \ sections of your profile to edit.</li></ol><p>There are three sections to\
+      \ choose from:</p><p><b>Edit Profile:</b> update the basics about who you are\
+      \ and where you live, including the phone number you\u2019ll like to use for\
+      \ confirmed bookings. Click <b>Save</b> at the bottom of the page to save your\
+      \ changes.</p><p><b>Photo and Video:</b> upload a photo from your computer.\
+      \ Choose a photo that clearly shows your face, and have on a friendly smile.\
+      \ All tutors are required to have a profile photo and can also <a href=\"{%\
+      \ url 'help:article_detail' 25 %}\">upload a video</a> that shows up in their\
+      \ profiles.</p><p><b>Trust and Verification:</b> add verifications to complete\
+      \ your identity verification. Verified IDs are required for <a href=\"{% url\
+      \ 'help:article_detail' 16 %}\"> certain privileges</a> on Tuteria.</p><p>When\
+      \ you're done, click <b>View Profile</b> to see what your profile looks like\
+      \ to others.</p>", category: 6, question: 'How do I edit my profile or profile
+      photo?'}
+  model: helps.Article
+  pk: 10
+- fields: {body: '<p>Your profile is like a curriculum vitae for others in the Tuteria
+      community. Visiting someone''s profile is a great way to learn more about them
+      ahead of a lesson.</p><p>Tuteria is a community built on trust and safety, so
+      we require all tutors to have a verified profile photo, and we encourage clients
+      to upload a profile photo. Clients and tutors prefer to book lessons with people
+      who have legitimate profile photos, complete profiles, and multiple verifications.</p><p>When
+      your profile is robust, it helps others feel that you''re reliable, authentic,
+      and committed to the spirit of Tuteria. Whether you''re a tutor or a client,
+      the more complete your profile, the more lessons you''re likely to have.</p><p>For
+      a great profile, be sure to include:</p><ul><li>At least one profile photo</li><li>Multiple
+      <a href="{% url ''help:article_detail'' 12 %}">verifications</a> and a <a href="{%
+      url ''help:article_detail'' 14 %}">Verified ID</a></li><li>A description of
+      at least 50 words about yourself highlighting why you decided to join the Tuteria
+      community, your interests or hobbies, or anything else you think someone would
+      want to know</li></ul><p>To view someone''s profile, just click their name or
+      profile photo. Read more about how to <a href="{% url ''help:article_detail''
+      10 %}">edit your profile</a>.</p>', category: 6, question: 'Why do I need to
+      have a Tuteria profile or profile photo?'}
+  model: helps.Article
+  pk: 11
+- fields: {body: "<p>Verifications are a way to connect your Tuteria profile to other\
+      \ personal information about you, such as your Facebook profile, email address\
+      \ and offline ID.</p><p>We offer a variety of verifications. You can see which\
+      \ verifications someone has completed by looking for the verification badges\
+      \ on their profile.</p><p>Here are a few ways we promote trust and help you\
+      \ decide who to hire or tutor on Tuteria:</p><ul><li>Two-way reviews: clients\
+      \ and tutors on Tuteria actively review each other, and you can only review\
+      \ someone you\u2019ve hired or tutored.</li><li><a href=\"{% url 'help:article_detail'\
+      \ 10 %}\">Detailed profiles:</a> users on Tuteria write a description about\
+      \ themselves and add a profile photo which helps people get acquainted before\
+      \ a lesson.</li><li>Background checks: clients may run background checks on\
+      \ any tutor they hire which covers criminal records check and address verification.</li></ul>",
+    category: 7, question: 'What are verifications?'}
+  model: helps.Article
+  pk: 12
+- fields: {body: '<p>To verify your account, go to Edit Profile &gt; Trust and Verification.</p><p>Available
+      verifications include:</p><ul><li><b>Email address:</b> confirm that you can
+      receive email notifications and messages.</li><li><b>Profile Photos:</b> upload
+      a photo that clearly shows your face so others can get to know you.</li><li><b>Online
+      ID:</b> connect your Tuteria profile to Google, Facebook or LinkedIn.</li><li><b>Offline
+      ID:</b> upload a valid, <a href="{% url ''help:article_detail'' 26 %}">government
+      issued</a>, offline ID card. This is only used to verify your ID and is never
+      shared.</li><li><b>Reviews:</b> build your reputation within the Tuteria community
+      by giving and receiving reviews after completing lessons.</li><li><b>Background
+      check:</b> tutors can run background checks on themselves or clients can request
+      one on any tutor they hire.</li></ul><p>Getting a <a href="{% url ''help:article_detail''
+      14 %}">Verified ID badge</a> is a great way to help build trust in the Tuteria
+      community. To get a Verified ID badge, go to the Trust and Verification area
+      of your profile and complete the verification process.</p>', category: 7, question: 'How
+      do I get verifications?'}
+  model: helps.Article
+  pk: 13
+- fields: {body: "<p>We created Verified IDs to build trust within our community and\
+      \ give you more information when deciding who to hire or tutor on Tuteria. Having\
+      \ a Verified ID means that a user has successfully completed a series of verification\
+      \ steps.</p><p><b>How it Works</b></p><p>Verified ID works by connecting your\
+      \ Tuteria profile with other valid sources of information about you. In order\
+      \ to verify your ID, we ask you to:</p><ul><li>Upload an image of your government-issued\
+      \ ID, such as national ID, driver\u2019s license, voter\u2019s card or international\
+      \ passport. Depending on the circumstances, we may accept <a href=\"{% url 'help:article_detail'\
+      \ 26 %}\">other forms of IDs</a> if they sufficiently identify you.</li><li>Connect\
+      \ another online profile to your Tuteria account, such as an active Facebook,\
+      \ Google, or LinkedIn account.</li><li>Upload a clear profile photo and provide\
+      \ a phone number</li><li>Confirm your email address</li></ul><p>We take privacy\
+      \ seriously, so the information you provide during this process is <a href=\"\
+      {% url 'help:article_detail' 15 %}\">encrypted</a> and governed by our <a href=\"\
+      {% url 'policies' %}\">Privacy Policy</a>.</p><p><b>The Verified ID Badge</b></p><p>When\
+      \ you\u2019ve completed ID verification, you\u2019ll earn a badge on your profile.\
+      \ Many clients and tutors look for his badge when deciding whether to hire or\
+      \ tutor with someone.</p><p>Clients and tutors alike tell us they find Verified\
+      \ ID useful when deciding who to interact with on Tuteria, but it\u2019s not\
+      \ an endorsement or guarantee of someone\u2019s identity.</p><p><em>Whether\
+      \ you're a tutor or a client, once you've completed identity verification the\
+      \ first time, you won't need to do it again.</em></p>", category: 7, question: 'What
+      is Verified ID?'}
+  model: helps.Article
+  pk: 14
+- fields: {body: "<p>The information you provide Tuteria during the <a href=\"{% url\
+      \ 'help:article_detail' 14 %}\">Verified ID</a> process is governed by our <a\
+      \ href=\"{% url 'policies' %}\">Privacy Policy</a> and transmitted using SSL\u2014\
+      the same secure encryption that banks use to safely transmit credit card numbers.</p><p>When\
+      \ we receive image of your offline ID, we store it in a secure and encrypted\
+      \ form, and only used it to verify your ID once. Only two authorized Tuteria\
+      \ employees are allowed access to your original documentation for troubleshooting\
+      \ or internal purposes.</p>", category: 7, question: 'Is verifying my ID secure?'}
+  model: helps.Article
+  pk: 15
+- fields: {body: "<p>Currently, we ask all tutors to verify their IDs before they\
+      \ can begin the tutor application process.</p><p>If you\u2019ve not verified\
+      \ your ID and would like to <a href=\"{% url 'help:article_detail' 79 %}\">request\
+      \ meetings</a> with tutors, we may request that you complete ID verification\
+      \ before your request can be sent. We do this to protect both tutors and clients.</p><p>After\
+      \ completing Verified ID, you'll receive the Verified ID badge on your profile\
+      \ and the meeting request is sent. If you don\u2019t complete Verified ID within\
+      \ 24 hours, the request may be canceled and your payment refunded in full.</p><p><em>Whether\
+      \ you're a tutor or a client, once you've completed Verified ID the first time,\
+      \ you won't need to do it again.</em></p>", category: 7, question: 'When am
+      I required to complete verified ID?'}
+  model: helps.Article
+  pk: 16
+- fields: {body: "<p>Reputation is a trust and safety system we designed to help people\
+      \ easily identify trustworthy clients and tutors based on their activities and\
+      \ past behaviours on Tuteria. It openly rewards and penalizes users for good\
+      \ or bad behaviours.</p><p>In other words, your <a href=\"{% url 'help:article_detail'\
+      \ 18 %}\">reputation score</a> informs others how much they can trust you, how\
+      \ credible you are and whether they should transact with you or not, based on\
+      \ your activities and past behaviors since joining the site.</p><p>Tutoring\
+      \ is delicate and thrives on mutual trust. That\u2019s why we created the reputation\
+      \ system to protect all users, as well as promote service quality within our\
+      \ community.</p>", category: 8, question: 'What is Tuteria Reputation?'}
+  model: helps.Article
+  pk: 17
+- fields: {body: "<p>Your reputation score is published on your public profile. Clients\
+      \ and tutors alike use your score to decide whether or not they feel confident\
+      \ to transact with you. <em>A good reputation ensures you attract the best kinds\
+      \ of clients and tutors.</em></p><p>When you sign up to Tuteria, you\u2019re\
+      \ awarded <b>5 reputation points</b> for joining our trusted community which\
+      \ builds up as you perform certain simple trustworthy actions.</p><p><b>Actions\
+      \ that build trust and reputation as a Tuteria user</b></p><p>All users, old\
+      \ or new, whether tutors or clients, can build their reputations with these\
+      \ four one-time actions:</p><ul><li><b>Complete your profile (+5 points):</b>\
+      \ fill your information and tell the community a little about you; this helps\
+      \ others get acquainted with you before a lesson. An incomplete profile doesn\u2019\
+      t give others enough confidence about you.</li><li><b>Upload a facial photo\
+      \ (+10 points):</b> you know it can feel creepy transacting with someone when\
+      \ you don\u2019t know what they look like. This doesn\u2019t promote trust.\
+      \ Upload a facial photo; and don\u2019t forget to smile!</li><li><b>Verify your\
+      \ ID (+15 points):</b> Having a <a href=\"{% url 'help:article_detail' 14 %}\"\
+      >Verified ID</a> earns you a verified ID badge and signifies that you\u2019\
+      ve completed a specific set of verifications \u2013 offline ID, online ID, profile\
+      \ photo and email address. Clients and tutors can verify IDs.</li><li><b>Book\
+      \ your first lesson (+20 points):</b> booking your first lesson to learn whatever\
+      \ matters to you is the easiest way to belong in our learning community</li></ul><p>Apart\
+      \ from these general actions, there are also specific ways you can build and\
+      \ maintain your reputation<a href=\"{% url 'help:article_detail' 20 %}\">as\
+      \ a client</a> and <a href=\"{% url 'help:article_detail' 19 %}\">as a tutor</a>.</p>\n\
+      \n", category: 8, question: 'Why is my reputation important?'}
+  model: helps.Article
+  pk: 18
+- fields: {body: "<p>Tuteria is designed to help you succeed. To build your reputation,\
+      \ ensure you create a great profile, maintain quality tutoring service and keep\
+      \ to our policies.</p><p>A good reputation makes you more desirable to clients,\
+      \ while a bad reputation over time, may lead to your account being suspended\
+      \ or disabled.</p><p><b>Activities that add to your reputation:</b></p><ul><li><b>Uploading\
+      \ a Video (+15 points):</b> tutors with one video in their profile receive 3\
+      \ times more bookings than others because clients tend to trust them more. Please\
+      \ read our <a href=\"{% url 'help:article_detail' 25 %}\">guideline for creating\
+      \ videos</a></li><b>Creating first 5 subjects (+5 points):</b> you can create\
+      \ any number of subjects. Creating at least 5 subjects earns you more exposure\
+      \ and more clients.</li><li><b>Receiving great reviews (+10 points):</b> clients\
+      \ review your performance after each booking. Your reputation increases each\
+      \ time you get a great review.</li><li><b>Having background check (+30 points):</b>\
+      \ you or your clients can run a background check on you which covers criminal\
+      \ records check and/or address verification; and helps client feel safer to\
+      \ hire you.</li><li><b>Getting repeat bookings (+50 points):</b> every time\
+      \ previous clients hire you again through Tuteria, your reputation increases\
+      \ by 50! Repeat bookings are the strongest indication that you did a great job\
+      \ and that you are upholding our <a href=\"{% url 'policies' %}\">Tutoring Policies</a>.</li></ul><p><b>Activities\
+      \ that subtract from your reputation:</b></p><ul><li><b>Receiving bad reviews\
+      \ (-15 points):</b> every bad review from your client reduces your reputation.\
+      \ Always offer great service and you won\u2019t have any problems. Feel free\
+      \ to read our <a href=\"{% url 'help:article_detail' 24 %}\">top 10 successful\
+      \ tutoring tips</a>.</li><li><b>Cancelling a lesson (-10 points):</b> as much\
+      \ as possible, don\u2019t cancel lessons. If you won\u2019t be available for\
+      \ tutoring on a specific day, simply turn it off on your calendar and no one\
+      \ would be able to hire you.</li></ul><p>Your reputation score is calculated\
+      \ automatically when any of these actions occur. However, there are several\
+      \ instances where a tutor might be <a href=\"{% url 'help:article_detail' 27\
+      \ %}\">permanently removed from Tuteria</a>.</p>", category: 8, question: 'How
+      do I build my reputation as a tutor?'}
+  model: helps.Article
+  pk: 19
+- fields: {body: "<p><b>Activities that add to your reputation:</b></p><ul><li><b>Giving\
+      \ detailed reviews (+20 points):</b> providing genuine and helpful reviews about\
+      \ your experience with tutors promotes trust within our community, helps other\
+      \ clients learn more about the tutor and increases your reputation.</li><li><b>Receiving\
+      \ good reviews (+10 points):</b> tutors also review their experience with clients\
+      \ and provide feedback after each lesson. Your reputation increases each time\
+      \ you receive a good review.</li><li><b>Repeat bookings (+50 points):</b> clients\
+      \ re-hire tutors through Tuteria to ensure their <a href=\"{% url 'help:article_detail'\
+      \ 89 %}\">payments are always protected</a> and that tutors are monitored. Paying\
+      \ outside Tuteria makes it harder for us to protect your information and puts\
+      \ you at greater risk of fraud and other security issues. Every time you hire\
+      \ a previous tutor again through Tuteria, your reputation increases by 50!</li></ul><p><b>Activities\
+      \ that subtract from your reputation:</b><p><ul><li><b>Receiving bad reviews\
+      \ (-15 points):</b> bad reviews from tutors reduce your reputation. Being collaborative\
+      \ often ensures you always get a good review. Feel free to read our <a href=\"\
+      {% url 'help:article_detail' 98 %}\">top tips for hiring</a>.</li><li><b>Cancelling\
+      \ a lesson (-20 points):</b> clients are encouraged to consider their schedules\
+      \ before booking lessons in order to avoid cancelling. Cancelling lessons can\
+      \ destabilize your tutor and doesn\u2019t promote trust.</li></ul><p>Your reputation\
+      \ score is calculated automatically when any of these actions occur. A good\
+      \ reputation makes tutors more confident to offer their services to you, and\
+      \ a bad reputation implies fewer tutors may be willing to work with you.</p><p>However,\
+      \ there are several instances where a user might be <a href=\"{% url 'help:article_detail'\
+      \ 2 %}\">prevented from using Tuteria</a> in anyway.</p>", category: 8, question: 'How
+      do I build my reputation as a client?'}
+  model: helps.Article
+  pk: 20
+- fields: {body: "<p>Welcome home! It\u2019s easy and completely free to join Tuteria.\
+      \ Simply visit the <a href=\"{% url 'registration:tutor_landing' %}\">Tutor\
+      \ Registration</a> page and start your application. We\u2019ll ask you to complete\
+      \ identity verification, then you can fill out the short tutor application form.</p><p>All\
+      \ applications are manually reviewed and successful applicants will be able\
+      \ to start creating their subjects and receiving clients.</p><p>If your application\
+      \ is not successful, you\u2019ll have the opportunity of re-applying <a href=\"\
+      {% url 'help:article_detail' 23 %}\">only after 3 months</a> up to a maximum\
+      \ of 3 attempts.</p>", category: 10, question: 'How can I become a tutor on
+      Tuteria?'}
+  model: helps.Article
+  pk: 21
+- fields: {body: '<p>Almost anyone can apply to tutor and it''s free to sign up! Tutors
+      who make it unto Tuteria are friendly and exceptional people who naturally love
+      to teach, and take great pride in offering quality tutoring, guidance and mentorship.</p><p>Tutors
+      can be graduates, postgraduates, undergraduates, certified teachers, trainers,
+      coaches and instructors, and even working professionals from all over the country
+      who are very competent in their fields.</p><p>There are a few other basic requirements
+      though - you must be over 18 years, possess a valid means of identification,
+      have a positive attitude and be able to confirm personal information like education,
+      work experience, email address and social profiles.</p>', category: 10, question: 'Who
+      can tutor on Tuteria?'}
+  model: helps.Article
+  pk: 22
+- fields: {body: "<p>Our application process is thorough but flexible. If your application\
+      \ is denied the first time, you\u2019ll have up to 3 months before you can re-apply.\
+      \ However, if you\u2019ve made up to 3 attempts without being approved, you\
+      \ won\u2019t be able to apply anymore.</p><p><b>How to improve your chances\
+      \ of being approved</b></p><p>There are several reasons why an application may\
+      \ not be approved. We've made our process fair to give everyone an equal opportunity,\
+      \ while we maintain our high standards. Please use these guidelines to improve\
+      \ your chances on your next attempt.</p><ul><li><b>Complete ID Verification:</b>\
+      \ ensure you connect your Tuteria account to your active, personal social account\
+      \ (Facebook, LinkedIn or Google+), upload a clear facial photo and <a href=\"\
+      {% url 'help:article_detail' 26 %}\">a valid offline ID</a>. Note that fishy\
+      \ social accounts, invalid or unclear IDs, or any discrepancies noticed in any\
+      \ of these platforms may lead to your application being denied.</li><li><b>Upload\
+      \ Valid Supporting Documents:</b> when entering your education (and in some\
+      \ cases, your work history), also snap & upload an image of valid supporting\
+      \ documents. A clear picture of your certificate, work or school ID, result\
+      \ statement or letter of reference from school or work will suffice. This helps\
+      \ us process your application faster.</li><li><b>Tell us why you love teaching:</b>\
+      \ this is one of the most important sections. We want you to succeed on Tuteria,\
+      \ but that can only happen if you truly love to teach. So this is your chance\
+      \ to let your love for teaching shine through! A poorly written description\
+      \ may lead to your application not being approved.</li></ul><p>However, even\
+      \ if your application is denied, you will still be able to hire tutors from\
+      \ the site, but you won't be able to become a tutor.</p>", category: 10, question: 'What
+      if my application is denied?'}
+  model: helps.Article
+  pk: 23
+- fields: {body: "<p><b>1. Create detailed and accurate subject profiles.</b><br>To\
+      \ receive bookings from clients who are interested in your subject, make sure\
+      \ your <a href=\"{% url 'help:article_detail' 30 %}\">subject descriptions</a>\
+      \ accurately illustrate your own unique experience and style of teaching. Look\
+      \ at other tutors\u2019 subjects to get inspiration, but don't copy them!</p><p><b>2.\
+      \ Set competitive prices to attract clients and reach your earning goals.</b><br>You\
+      \ have complete control over <a href=\"{% url 'help:article_detail' 38 %}\"\
+      >how much you charge</a> for tutoring. Set prices which reflect the value of\
+      \ your work and that will attract clients to you. You can also offer discounts\
+      \ for group tutoring and you\u2019re free to change your price at any time.</p><p>Tuteria\u2019\
+      s <a href=\"{% url 'help:article_detail' 61 %}\">service fees</a> scale downwards\
+      \ from 35% to 15% of what you charge your clients, which we automatically subtract\
+      \ before you get your payout.</p><p><b>3. Upload a video to your profile to\
+      \ build clients\u2019 confidence in you.</b><br>Tutors with clear videos on\
+      \ their profile receive up to 3 times more clients than those without videos.\
+      \ As soon as you can, ensure you <a href=\"{% url 'help:article_detail' 25 %}\"\
+      >upload a video</a> because it helps clients hear you speak and boost their\
+      \ confidence to learn from you.</p><p><b>4. Respond to clients quickly.</b><br>You\u2019\
+      ll receive two main types of engagement notifications from clients:<ul><li><b>Booking\
+      \ Reservations</b> are lessons booked on specific days and times based on your\
+      \ available calendar for which a client has already hired you. It can be for\
+      \ a couple of hours or for a whole month or more depending on the client's demand.</li><li><b>Meeting\
+      \ Requests</b> are just what they sound like \u2013 requests from clients to\
+      \ meet with you in person before booking lessons in which case they would have\
+      \ paid 30% of your long-term fee upfront.</li></ul>It's important to respond\
+      \ to booking reservations and meeting requests by calling your clients immediately\
+      \ you receive the notification via SMS. Your responsiveness may affect how clients\
+      \ rate you.</p><p><b>5. Always go the extra mile to offer great service to your\
+      \ clients</b><br>You\u2019re the expert, and that\u2019s why they hired you.\
+      \ Don\u2019t just \u201Cdo your best and leave the rest\u201D. Prepare for each\
+      \ lesson and thrill your clients with the quality, approach and results of your\
+      \ tutoring. Happy clients will give you great reviews and hire you again through\
+      \ Tuteria which further increases your <a href=\"{% url 'help:article_detail'\
+      \ 19 %}\">reputation</a>.</p><p><b>6. Keep your commitments to your clients\
+      \ and avoid cancelling.</b><br>When clients hire you, remember that they\u2019\
+      re counting on you to follow through. Cancellations are really disruptive for\
+      \ clients, but we know that sometimes the unexpected happens. Keep in mind that\
+      \ you may face <a href=\"{% url 'help:article_detail' 54 %}\">cancellation penalties</a>\
+      \ whenever you cancel lessons.</p><p><b>7. Enter your payment information to\
+      \ get paid!</b><br>Earnings are paid to your wallet immediately after client\
+      \ confirms lessons or 3 days after you submit lessons, which can be withdrawn\
+      \ to your Paga or bank account at any time, once you have entered your <a href=\"\
+      {% url 'help:article_detail' 59 %}\">payment information</a>.</p><p><b>8. Submit\
+      \ lessons on time so that your earnings can be processed</b><br>After you\u2019\
+      ve taught a lesson, don\u2019t wait too long before you return to the site to\
+      \ indicate you have <a href=\"{% url 'help:article_detail' 49 %}\">delivered\
+      \ the lesson</a>. You'll need to submit all lessons before payments can be processed.\
+      \ Lessons submitted late may delay your payments.</p><p><b>9. Request a background\
+      \ check on yourself to gain clients\u2019 trust.</b><br>Having a <a href=\"\
+      {% url 'help:article_detail' 99 %}\">background check</a> earns you a badge\
+      \ which gives clients some assurance that you have no criminal record or that\
+      \ your address has been verified. Clients can request a background check on\
+      \ you, but you can also request one on yourself. Background checks help give\
+      \ clients peace of mind to hire you.</p><p><b>10. Keep to Tuteria tutoring policies,\
+      \ do not violate any of them.</b><br>Successful tutors can earn upwards of N360,\
+      \ 000 yearly, and cultivate their reputation within our trusted community. However,\
+      \ we have created standard <a href=\"{% url 'help:article_detail' 27 %}\">Tutoring\
+      \ Policies</a> that must guide your use of this site. Please note that we will\
+      \ disable any tutor who attempts to violate any of our policies \u2013 even\
+      \ for once.</p", category: 10, question: The Top 10 Tips for Successful Tutoring}
+  model: helps.Article
+  pk: 24
+- fields: {body: "<p>You may upload one video to introduce yourself to potential clients.\
+      \ Tutors with good videos get up to 3 times more clients than those without\
+      \ videos.</p><p><b>Create your video</b><br>Use a phone or camera with high\
+      \ pixel or resolution to create your video or get a professional video created\
+      \ for you. A poorly created video will not do much good. When creating your\
+      \ video, simply introduce yourself and your expertise to your clients.</p><ul><li>We\
+      \ suggest you sit at arm\u2019s length from the camera when making videos</li><li>Try\
+      \ to a make it less than 60 seconds. Be concise, focus on what\u2019s important</li><li>Also\
+      \ try to keep the light in front of you, not behind you so that your face is\
+      \ clearly seen</li><li>Make sure your voice is audible enough. It communicates\
+      \ confidence.</li><li>Look into the camera when speaking to create that personal\
+      \ connection \u2013 and yes! Ensure you have a smile on your face and be yourself!</li><li>Only\
+      \ mention your first name when introducing yourself. Don\u2019t reveal any other\
+      \ personal information to protect your privacy.</li></ul><p><b>Upload your video</b><br>When\
+      \ you\u2019re satisfied with the video you\u2019ve created, you need to upload\
+      \ it to your <a href=\"https://www.youtube.com\">YouTube account</a>. If you\
+      \ don\u2019t have one or don\u2019t know how to upload a video to Youtube, you\
+      \ may follow this detailed, <a href=\"http://www.wikihow.com/Upload-a-Video-to-YouTube\"\
+      >step-by-step guide</a>. After uploading the video, copy the URL from the address\
+      \ bar and insert it in the <b>Photo & Video</b> section of your profile. Then\
+      \ click <b>Upload.</b></p><p>Once your video is approved, it will begin to show\
+      \ in all your subjects.</p>", category: 10, question: 'How do I upload a video
+      to my profile?'}
+  model: helps.Article
+  pk: 25
+- fields: {body: "<p>The information we need on your ID include your name, your picture\
+      \ and your date of birth from a credible offline ID Card. We encrypt all information\
+      \ you send to us and delete it after verification is complete.</p><p><b>Government-issued,\
+      \ Photo IDs</b><br>These include national passport, international passport,\
+      \ driver\u2019s license or national voter\u2019s card. For any of these to be\
+      \ valid, it must</p><ul><li>Clearly show your name, picture and birthday</li><li>Be\
+      \ in colour, and not black-and-white</li><li>Not have expired as at the time\
+      \ of upload</li></ul><p>Snap or scan your ID and upload it as a picture to your\
+      \ profile. Feel free to cover up any information we don\u2019t need to verify\
+      \ your identity.</p><p><b>Other forms of ID we\u2019ll accept</b><br>In some\
+      \ circumstances where you don't have a government issued ID, we may accept <u>two\
+      \ different combinations</u> of IDs. For these to be valid, the names on the\
+      \ IDs must match, and either of the IDs must include a date of birth and photo\
+      \ that matches the information on your profile.</p><p>These may include Bank\
+      \ Statement, Employment or Work ID, Medical Record, Professional Membership\
+      \ ID, School ID, School Records (e.g. Certificates, Course forms, Statement\
+      \ of Results etc.) and Utility Bill.</p><p>Simply upload your ID to your profile.\
+      \ If we need to see another ID, we'll contact you via email.<p>", category: 10,
+    question: 'What are acceptable forms of ID on Tuteria?'}
+  model: helps.Article
+  pk: 26
+- fields: {body: "<p>Tuteria is a community built on trust. When deciding to tutor,\
+      \ it\u2019s important you understand and abide by our <a href=\"{% url 'terms'\
+      \ %}\">Terms of Service</a> to protect you, and ensure everyone is treated fairly.</p><p><b>Some\
+      \ policies to keep in mind</b><br><ul><li><b>Accepting direct payments from\
+      \ clients is not allowed:</b> all payments must be made through Tuteria, including\
+      \ clients who wish to re-hire you. Tutors are not permitted to collect money\
+      \ directly from or continue dealing directly with clients received through Tuteria.\
+      \ We advise that you factor in transport fare when stating your price. This\
+      \ ensures you\u2019re not cheated and that you don\u2019t struggle to collect\
+      \ payment after lessons.</li><li><b>Providing false or inaccurate information\
+      \ is prohibited:</b> be completely honest when describing your education, experience,\
+      \ age, address, work history etc. Tuteria gives equal opportunities to everyone\
+      \ without preference. Don\u2019t tell lies or mislead people. Any false information\
+      \ will be detected and penalized by our quality team.</li><li><b>Fraudulent,\
+      \ unprofessional or criminal behaviours are not condoned:</b> we have zero tolerance\
+      \ for such acts as stealing, sex offences, molestation, impersonation, fraud,\
+      \ kidnappings etc. When dealing with clients, do not engage in any crime or\
+      \ indecent behaviours.</li><li><b>Revealing any personal information is not\
+      \ permitted:</b> when filling your profile and subject descriptions, do not\
+      \ reveal any personal details like phone number, email, links, your last name,\
+      \ address etc. All your entries and edits are manually reviewed by our quality\
+      \ team. Tuteria will always supply you will client details when you have a booking.</li><li><b>High\
+      \ quality service is expected at all times:</b> quality learning is the heart\
+      \ of Tuteria, and we expect all tutors to deliver quality tutelage to their\
+      \ clients who will have the opportunity to rate and review the tutor after every\
+      \ lesson. Tutors whose ratings fall below 3.5 may not be allowed to continue\
+      \ on Tuteria.</li></ul></p><p>Tuteria is trusted by hundreds of thousands of\
+      \ people all over the country. In order to preserve our growing community and\
+      \ keep it fair for everyone, tutors who attempt to circumvent the platform or\
+      \ violate any of our policies \u2013 even for just one time \u2013 will be permanently\
+      \ removed from Tuteria.</p><p>In addition to that, we will cancel all tutor's\
+      \ pending lessons and refund client payments, as well as notify all previous\
+      \ clients about the tutor\u2019s removal on the basis of dishonesty and untrustworthy\
+      \ behaviour, and advise them not to encourage dealings with that tutor in anyway.</p><p>We\
+      \ support, protect and promote all our tutors because we want you to succeed\
+      \ on Tuteria. Please keep to our policies.</p>", category: 10, question: 'What
+      are some policies I need to be aware of when tutoring with Tuteria?'}
+  model: helps.Article
+  pk: 27
+- fields: {body: "<p>Once your <a href=\"{% url 'help:article_detail' 21 %}\">tutor\
+      \ application</a> is successful, you will be given tutor status on Tuteria and\
+      \ you can start creating any number of subjects you wish to teach so that clients\
+      \ can find you in search results. You must create at least one subject in order\
+      \ to receive clients.</p><p><b>To create a subject</b><br>From your <b>Dashboard</b>,\
+      \ click on <b>Your Subjects</b> tab, and under <b>Manage Subjects</b>, you can\
+      \ add a new subject. Select a subject from the list available and proceed to\
+      \ create it. Depending on the subject, you may have to pass a short, one-time\
+      \ <a href=\"{% url 'help:article_detail' 29 %}\">multiple-choice competency\
+      \ test</a>.</p><p>For subjects that aren't tested, you'll need to write about\
+      \ your experience and teaching methods which will be reviewed by our quality\
+      \ team.</p><p><b>To edit a subject</b><br>You can only edit a subject you have\
+      \ previously created. You\u2019ll find a list of your approved subjects under\
+      \ the Manage Subjects section of your Dashboard. Simply click on the subject\
+      \ you want to edit.</p><p>You\u2019ll be able to make changes to the following:<ul><li><b>Subject\
+      \ Headline:</b> this is the 70 character caption you give to your subjects.\
+      \ You can change this at any time.</li><li><b>Experience and Teaching Method:</b>\
+      \ this is where you describe your unique experience with that subject to potential\
+      \ clients. You should also walk potential clients through on how you will deliver\
+      \ the lessons or what techniques you might adopt<li><b>Topic Tags:</b> lists\
+      \ of some important topics in your subjects</li><li><b>Prices:</b> of course\
+      \ you can also change your hourly and monthly price!</li><li><b>Subject Media:</b>\
+      \ this refers to your subject profile image and any exhibitions you upload to\
+      \ showcase your expertise</li><li><b>Certification and Awards:</b> you can also\
+      \ add or remove up to two certifications and awards related to that subject</li></ul></p><p><em>Please\
+      \ note that all changes made are reviewed by our quality team and may take up\
+      \ to 12 hours before they become visible on your profile.</em></p>", category: 12,
+    question: 'How do I create or edit my subjects?'}
+  model: helps.Article
+  pk: 28
+- fields: {body: "<p>For most subjects, tutors need to pass a short, multiple-choice\
+      \ <u><b>online</b></u> test. This is a timed test, and can only be attempted\
+      \ once. The questions are standard and well-researched to assess minimum competency.</p><p>When\
+      \ adding a subject, you\u2019ll be told if it requires a test or not, and how\
+      \ much time you have. Most tests have 8-10 short questions to be answered with\
+      \ 6-8 mins.</p><p>Please ensure you have good internet connection before taking\
+      \ tests. <b>Only one attempt is permitted per subject.</b> If you do not pass\
+      \ the test the first time, you cannot teach that subject any more. But you can\
+      \ create other subjects.</p><p>For subjects that don\u2019t currently require\
+      \ tests, you\u2019d need to <a href=\"{% url 'help:article_detail' 30 %}\">describe\
+      \ your experience</a> with that subject which will be reviewed by our quality\
+      \ team. You will be able to teach that subject if your application is approved.</p><p>Tuteria\
+      \ supports more than 500 local subjects including academic subjects like Math,\
+      \ English, Chemistry, Account, Calculus, Data Analysis etc., exams like SAT,\
+      \ ICAN, PMP, IGCSE, TOEFL, CCNA etc. and skills like Dance, Makeup, Photography,\
+      \ Graphics Design, Cooking, Programming, Swimming etc.</p><p>In order to ensure\
+      \ relevant understanding of several certification subjects like ICAN, CCNA,\
+      \ GRE, ACCA etc., you will be required to provide a proof of certification before\
+      \ you can teach those subjects.</p><p>Tutors can teach any number of subjects\
+      \ as long as they pass each subject assessment.</p><p><em>Please note that tutors\
+      \ who don\u2019t pass a subject assessment the first time, can no longer teach\
+      \ that subject; and if a tutor fails up to 10 subject attempts cumulatively,\
+      \ they can no longer create new subjects on Tuteria. So it's very important\
+      \ that you only create subjects you have expertise in.</em></p>", category: 12,
+    question: 'Do I have to pass a test before I can create subjects?'}
+  model: helps.Article
+  pk: 29
+- fields: {body: "<p>Clients often search for tutors that meet specific needs, so\
+      \ by giving accurate and detailed subject descriptions, you can attract the\
+      \ best kinds of clients.</p><p><b>Write a thoughtful subject headline</b><br>This\
+      \ is your subject caption that shows in search results - the first thing clients\
+      \ read about you before they decide to view your profile. You only have 70 characters\
+      \ so it requires a lot of careful thinking, creativity and uniqueness. Here\
+      \ are some examples, but yours must be unique:</p><p><em>Experienced ICAN instructor\
+      \ with a personalized teaching approach</em><br><em>I love teaching Math and\
+      \ helping my students get better grades</em><br><em>I'll teach you professional\
+      \ photography from amateur to advanced level</em><br><em>Graduate of Muson Music\
+      \ Academy, I\u2019m an expert violin teacher</em></p><p><b>Describe your experience\
+      \ and teaching methods in detail</b><br>You have 1200 characters to convince\
+      \ clients that you\u2019re the perfect tutor! Try to answer important questions\
+      \ they may have about your experience, personality or qualifications such as\
+      \ who you\u2019ve taught in the past, what results you achieved, why you love\
+      \ teaching that subject etc.</p><p>For instance, if you had a first class degree,\
+      \ say it. If you\u2019ve taught 6 people who excelled in the subject or skill\
+      \ before, talk about it here! It\u2019s important you\u2019re honest and that\
+      \ you provide enough information to inspire clients to hire you. Endeavour to\
+      \ write in a friendly, professional tone!</p><p>Also let clients know what\u2019\
+      s unique about the way you teach. If you\u2019re a photography tutor who takes\
+      \ students to attend a real-life photoshoot, or has a photo studio, then make\
+      \ sure you don\u2019t forget to say it here!</p><p>For instance, will you bring\
+      \ a guitar or should they have theirs? Will you like to know what textbooks\
+      \ they use or speak with their school teacher first? Do you give short tests\
+      \ to assess understanding? What should they have in place before lessons commence?\
+      \ Give clients a feel of what to expect.</p><p><b>Enter some important topic\
+      \ tags</b><br>Topic tags give clients an idea of related topics you can teach.\
+      \ For example, if you can teach wedding photography, baby photography, portraits,\
+      \ model photography etc., those should be entered as topic tags under your Photography\
+      \ subject.</p><p>Topic tags also show up in search results. So for instance,\
+      \ even though \"Wedding Photography\" is not a subject on Tuteria, when clients\
+      \ search for it, you will show up in the search results if it\u2019s part of\
+      \ your topic tags.</p><p><b>Provide any relevant certifications and awards</b><br>Certifications\
+      \ help boost your profile. If you have any relevant certifications or awards\
+      \ that further prove your expertise in that subject, then enter them here.</p><p><b>Upload\
+      \ subject profile image and exhibitions</b><br>Pictures speak louder than words.\
+      \ If you have images to portray samples of your work or skill, ensure you upload\
+      \ them to your profile.</p><p><em>For your exhibition images to be approved,\
+      \ they must be your own pictures and you have to also appear in them. If the\
+      \ pictures aren't yours or are pull off the internet, they will be denied.</em></p>",
+    category: 12, question: 'What makes a good subject description?'}
+  model: helps.Article
+  pk: 30
+- fields: {body: "<p>To turn off any of your subjects at any time:</p><ol><li>Go to\
+      \ the <b>Your Subjects</b> tab from your <b>Dashboard</b> area.</li><li>Select\
+      \ <a href=\"www.tuteria.com/user/manage_subjects\">Manage Subjects</a></li><li>Click\
+      \ on the dropdown arrow at the right of the subject you wish to turn off and\
+      \ select Suspend.</li></ol><p>This deactivates the subject so that it no longer\
+      \ shows in search results. Whenever you\u2019re ready to continue tutoring that\
+      \ subject, you\u2019d need to <b>Activate</b> it the same way.</p>", category: 12,
+    question: 'How do I turn off or deactivate my subject for a while?'}
+  model: helps.Article
+  pk: 31
+- fields: {body: "<p>We do the job of getting you clients. However, sharing your most\
+      \ successful subjects on other platforms may help you reach more people beyond\
+      \ those searching on Tuteria, and can result in more bookings.</p><p>So we've\
+      \ also made it possible for you to share your subjects on different social media\
+      \ platforms including Facebook, Twitter, Google+, and LinkedIn. Here\u2019s\
+      \ how to do it:</p><ol><li>Go to <b>Your Subjects</b> tab from your <b>Dashboard</b>\
+      \ area</li><li>Select <a href=\"www.tuteria.com/user/manage_subjects\">Manage\
+      \ Subjects</a></li><li>Click on the dropdown arrow at the right of the subject\
+      \ you wish to share and click <b>Preview</b></li><li>In the subject preview\
+      \ page, you\u2019d see options to share on Facebook, Twitter, Google+ or LinkedIn.</li><li>Click\
+      \ on each of them to share to the respective networks.</li></ol><p>We recommend\
+      \ you share your subjects from time to time to gain more exposure and referrals\
+      \ from friends, but try to keep it at 1 or 2 times per day per subject.</p>",
+    category: 12, question: 'How can I promote my subjects to other websites?'}
+  model: helps.Article
+  pk: 32
+- fields: {body: "<p>As a tutor, your calendar indicates the days and times you\u2019\
+      re available to offer tutoring, as well as the sessions for which you have been\
+      \ booked for lessons. It gives you full control to plan your time, manage your\
+      \ bookings and keep track of lessons all from one place.</p><p>Clients will\
+      \ only be able to hire you on days and times you indicate availability on your\
+      \ calendar. For instance, if you are available from 2pm \u2013 7pm on Mondays,\
+      \ then clients can only hire you within that time window.</p><p>When clients\
+      \ book lessons with you, we automatically block that timeslot on your calendar\
+      \ from other incoming clients so that you never experience a clash.</p><p>You\
+      \ may receive a booking from 2pm \u2013 4pm, and another one from 5pm \u2013\
+      \ 7pm. We always give one hour gap, so you cannot be hired for 4pm \u2013 5pm\
+      \ in this case. You may also use your calendar to turn off days and times you\
+      \ won\u2019t be available so that clients can\u2019t hire you during those periods.</p><p>However,\
+      \ it is extremely important that you <a href=\"{% url 'help:article_detail'\
+      \ 33 %}\">keep your calendar up-to-date</a>.</p>", category: 13, question: 'How
+      does the Tuteria calendar work for tutors?'}
+  model: helps.Article
+  pk: 33
+- fields: {body: "<p><b>Setting up your calendar the first time</b><br>It\u2019s really\
+      \ easy to set up. During the tutor application process, you\u2019d be required\
+      \ to select your general tutoring days and time windows. So for instance, you\
+      \ can indicate Mondays, 8am \u2013 6pm; Wednesdays 12pm \u2013 7pm and Saturdays,\
+      \ 10am \u2013 4pm. And you can select any number of days in the week.</p><p>The\
+      \ availability you set at this point will be automatically activated for the\
+      \ next four months. That means if you set Monday 8am \u2013 6pm, we automatically\
+      \ activate your calendar to be available for booking every Monday from 8am \u2013\
+      \ 6pm for the next four months.</p><p>You\u2019ll also set how many days ahead\
+      \ you want clients to book. This should reflect how much time you\u2019d require\
+      \ to prepare for lessons. If you set 2 days, it means clients will always book\
+      \ at least 2 days ahead \u2013 so you\u2019ll have time to prepare.</p><p><b>Editing\
+      \ or updating your calendar</b><br>You can add, edit or remove any day or time\
+      \ slot from your calendar. However, you will not be able to make changes to\
+      \ days where you have been booked.</p><p>To edit or update your calendar:<ol><li>Go\
+      \ to the <b>Profile</b> tab in your <b>Dashboard</b> area</li><li>From the Profile\
+      \ tab, select Edit Tutor Profile then scroll down to <b>Calendar & Availability</b></li><li>Click\
+      \ on any day you wish to make changes to. Those in <b>Blue</b> are your current\
+      \ available days, <b>Gray</b> represent past days or days you have reserved\
+      \ bookings, while <b>White</b> are your current unavailable days.</li></ol><p>When\
+      \ you update an available day, it changes to orange. When you add a new day,\
+      \ it changes to green and you can also <b>Set Recurring</b> if you want that\
+      \ date to be active for the next 4 months. Lastly, when you delete a day, it\u2019\
+      s indicated in red.</p>", category: 13, question: 'How do I set up or update
+      my calendar?'}
+  model: helps.Article
+  pk: 34
+- fields: {body: "<p>Your calendar is the only way clients can find out when you\u2019\
+      re available for tutoring. It\u2019s extremely important you keep your calendar\
+      \ up-to-date so that it reflects your actual current availability without misleading\
+      \ clients.</p><p>If you won\u2019t be available for a particular week or for\
+      \ a single day, remember to turn it off on your calendar. Ideally, we advise\
+      \ you <a href=\"{% url 'help:article_detail' 34 %}\">update your calendar</a><b>\
+      \ at least once every month</b> to remove days and times you won\u2019t be available\
+      \ or add other days you\u2019d like to accept clients.</p><p>However, please\
+      \ note that if your calendar isn\u2019t updated in 3 months, your account will\
+      \ be temporarily suspended to prevent clients from booking lessons with you\
+      \ when you are not available, and will only be re-activated after you update\
+      \ your calendar.</p>", category: 13, question: 'Why is it important for my calendar
+      to be up-to-date?'}
+  model: helps.Article
+  pk: 35
+- fields: {body: "<p>All tutors on Tuteria by default can be hired on an hourly basis,\
+      \ and clients can hire tutors for any number of hours starting from one hour.\
+      \ Most clients hire between 2 \u2013 4 hours at a time, but there are no maximums.</p><p>However,\
+      \ if you wish to be hired on a <a href=\"{% url 'help:article_detail' 39 %}\"\
+      >monthly basis</a> as well, you\u2019d be able to set a minimum number of hours\
+      \ per day and days per week. We\u2019ll enforce your preferences whenever clients\
+      \ decide to hire you for a month.</p>", category: 13, question: 'What are the
+      minimum and maximum hours I can be hired for?'}
+  model: helps.Article
+  pk: 36
+- fields: {body: '<p>Pricing on Tuteria is basically calculated on an hourly basis.
+      You know the value of your time and tutelage much more than we do, so you are
+      always in control over how much you charge clients for tutoring in each of your
+      subjects.</p><p>Whatever hourly <a href="{% url ''help:article_detail'' 38 %}">price
+      you charge</a> is exactly what clients will see on your profile, and will be
+      the price at which they hire you. For example, if you charge N1000/hr, clients
+      will pay N2,000 for a two-hour lesson.</p><p>Tuteria takes a <a href="{% url
+      ''help:article_detail'' 61 %}">service fee</a> for every booking you receive
+      which reduces from 35% to 15% of what you charge your clients, and is automatically
+      subtracted before you get your payout after lessons have been taught.</p><p>So
+      new tutors start out earning 65% of whatever they charge clients, which increases
+      steadily to 85% as they attain <a href="{% url ''help:article_detail'' 66 %}">new
+      levels</a> on Tuteria. You can change your price at any time.</p>', category: 14,
+    question: 'How does pricing work on Tuteria?'}
+  model: helps.Article
+  pk: 37
+- fields: {body: "<p>Tuteria's pricing systems works on an hourly basis per student,\
+      \ and tutors are free to set their own prices for each subject.</p><p>We believe\
+      \ you know the value of your time and effort more than anyone else, hence should\
+      \ charge whatever reflects your work. However we do have some suggestions to\
+      \ help you arrive at a good hourly price:</p><p><b>Work back from your monthly\
+      \ earning goal</b><br>Think of how much you plan to earn in a month, then calculate\
+      \ what that roughly translates to per hour and see if it reflects the value\
+      \ of your work.</p><p>Here\u2019s a hypothetical example:</p><p>Let\u2019s assume\
+      \ you wish to earn &#8358;30,000 at the end of the month. We\u2019ll also assume\
+      \ you\u2019d prefer to teach at least twice a week, for say 2 hours per session.</p><p>That\
+      \ means in one week, you\u2019ll teach 2 sessions x 2 hours = 4 hours. In one\
+      \ month, you\u2019ll teach 4 hours x 4 weeks = 16 hours. So in this example,\
+      \ you can set your hourly charge at &#8358;30,000/16 = &#8358;1,875/hr.</p><p>Similarly,\
+      \ a &#8358;50,000 monthly goal translates to &#8358;3,125/hr, and &#8358;100,000\
+      \ translates to &#8358;6,250/hr.</p><p>This is only a guide. When you factor\
+      \ in the frequency of bookings, your location and Tuteria\u2019s <a href=\"\
+      {% url 'help:article_detail' 19 %}\">service fees</a>, you may earn more or\
+      \ less than your monthly goal; and you can always change your prices at any\
+      \ time.</p><p>We also advise you add a little extra to <a href=\"{% url 'help:article_detail'\
+      \ 40 %}\">cover for your transport fare</a> if you will have to travel to your\
+      \ client's location so that they can pay everything at once. Tutors are not\
+      \ allowed to request any form of direct payments from clients.</p><p><b>Consider\
+      \ charging slightly less at the beginning</b><br>Even though majority of clients\
+      \ consider competence and quality to be the most important factors, often times,\
+      \ price will be the ultimate determinant for who they decide to hire.</p><p>We\
+      \ suggest you consider reducing your price at the beginning so that you can\
+      \ attract more clients, offer amazing service and <a href=\"{% url 'help:article_detail'\
+      \ 29 %}\">build your reputation</a> on Tuteria. Then increase your prices steadily\
+      \ as you attain higher levels and people trust you more.</p><p>You can also\
+      \ look at the prices of other similar tutors in your area to make comparison.</p>",
+    category: 14, question: 'How much should I charge for my subjects?'}
+  model: helps.Article
+  pk: 38
+- fields: {body: '<p>Apart from standard hourly prices, tutors can also charge monthly
+      prices if they wish to be hired on a monthly basis. Monthly prices are calculated
+      based on the number of tutoring days per week and the number of hours per day.</p><p>If
+      you charge &#8358;500/hr for instance, and choose to teach 3 times in a week
+      and 2 hours per day, your monthly price will be calculated as:<br>Daily Price
+      = &#8358;500 x 2 hours = &#8358;1,000<br>Weekly Price = &#8358;1,000 x 3 times
+      a week = &#8358;3,000<br>Monthly Price = &#8358;3000 x 4 weeks = &#8358;12,000</p>',
+    category: 14, question: 'How are monthly prices calculated?'}
+  model: helps.Article
+  pk: 39
+- fields: {body: "<p>Transport fare is not charged separately from your standard hourly\
+      \ price. If you would like to charge a transport claim, simply include it in\
+      \ your hourly price so that clients pay for it at once.</p><p>Normally, this\
+      \ should only apply if you will be travelling to the client's location to deliver\
+      \ lessons.</p><p><b>What should I charge as transport fare?</b><br>Ideally,\
+      \ this is entirely up to you, but we advice that you charge moderately because\
+      \ whatever transport fare you include in your hourly price will be charged to\
+      \ the client on a per hour basis, so it will build up.</p><p>For example, if\
+      \ you <a href=\"{% url 'help:article_detail' 38 %}\">determine your hourly price</a>\
+      \ as &#8358;2,000/hr and add a transport claim of &#8358;250, it means clients\
+      \ will see &#8358;2,250/hr as your price. So if a client hires you for 2 hours,\
+      \ your transport claim amounts to &#8358;500.</p><p>On the other hand, charging\
+      \ a high transport claim will further increase your price and may lead to fewer\
+      \ clients and lesser incomes.</p><p>Additionally, tutors set a <a href=\"{%\
+      \ url 'help:article_detail' 42 %}\">Travel Policy</a> which indicates how far\
+      \ from their location they\u2019re willing to travel in order to deliver lessons,\
+      \ or if they\u2019d prefer clients come to them.</p><p>Please note that tutors\
+      \ are not allowed to request transport claims or any form of direct payments\
+      \ from clients. Doing so is against our policies and will lead to a <a href=\"\
+      {% url 'help:article_detail' 27 %}\">permanent removal</a> from Tuteria.</p>",
+    category: 14, question: 'What about my transport fare?'}
+  model: helps.Article
+  pk: 40
+- fields: {body: "<p>Yes you can offer discounts to clients for group bookings i.e.\
+      \ bookings involving more than one student per lesson. The standard price you\
+      \ set applies per student, but your discount begins to apply from the second\
+      \ student. Here\u2019s an example:</p><p>Let\u2019s assume you charge &#8358;1000/hr\
+      \ and would like to offer a 25% discount for group bookings. A client who books\
+      \ a 3 hour lesson for 3 students will pay the full price for the first student\
+      \ and the discounted price for the remaining 2.</p><p><b>Full price for first\
+      \ student:</b> &#8358;1,000/hr x 3 hrs x 1 student = &#8358;3, 000<br><b>Discounted\
+      \ price for remaining 2:</b> &#8358;1000/hr X 0.25 discount x 3 hrs x 2 students\
+      \ = &#8358;4,500<br>So total discounted price = &#8358;7,500 instead of &#8358;9,000.</p><p>If\
+      \ you offer discounts, it will show on your profile, and bookings with discounts\
+      \ applied are clearly marked as discounted. Offering discounts can encourage\
+      \ clients to hire you for group bookings, who otherwise may not have considered\
+      \ it.</p>", category: 14, question: 'Can I offer discounts to my clients?'}
+  model: helps.Article
+  pk: 41
+- fields: {body: "<p>The Travel Policy helps tutors specify what distance radius around\
+      \ their location they\u2019re willing to travel to deliver lessons, or if they\u2019\
+      d prefer clients come to them; and also gives clients good information about\
+      \ the distance tutors are willing to travel to deliver lessons. Three options\
+      \ are available for tutors:<p><p><b>Lessons hold at clients\u2019 location</b><br>This\
+      \ is default. Tutors are required to indicate how far they can travel e.g. 5km,\
+      \ 10km, 20km or the whole city etc. When an option is selected, we\u2019ll tell\
+      \ you several points in your city which are that distance apart.</p><p><b>Lessons\
+      \ hold at tutor\u2019s location</b><br>If you select this option, we\u2019ll\
+      \ ask you to further explain why you prefer lessons hold at your residence.\
+      \ We recognize that some skills are better taught at the tutors\u2019 residence\
+      \ because tutors have the equipment required e.g. video editing</p><p><b>Lessons\
+      \ hold at any location</b><br>Selecting this option means both tutors and clients\
+      \ would have to mutually agree where lessons should be delivered.</p><p>Please\
+      \ note that these information is only displayed on tutors' profile so that clients\
+      \ are aware before booking lessons. They do not, however, prevent clients from\
+      \ hiring tutors outside your travel distance, nor do they affect the tutors'\
+      \ prices. Both parties have full control to decide where to deliver lessons.</p>",
+    category: 15, question: 'What does the Travel Policy mean?'}
+  model: helps.Article
+  pk: 42
+- fields: {body: "<p>Tuteria\u2019s <a href=\"{% url 'cancellation' %}\">Cancellation\
+      \ Policies</a> are designed to protect both clients and tutors by specifying\
+      \ how much notice clients must give before cancelling a lesson, as well as the\
+      \ penalties that accrue if they cancel late.</p><p>Tutors select either the\
+      \ Flexible, Moderate or Strict cancellation policies which we enforce whenever\
+      \ clients cancel lessons. Only lessons yet to be taught can be cancelled.</p><p><b>Flexible:</b>\
+      \ for clients to get 100% refund, cancellation must be done 6 hours before start\
+      \ of lesson, else cost of the first hour is credited to tutor while the remaining\
+      \ hours are fully refunded. If booking contains more than one lesson, cancelling\
+      \ the whole booking before it commences refunds 90% to client.</p><p><b>Moderate:</b>\
+      \ for clients to get 100% refund, cancellation must be done 12 hours before\
+      \ start of lesson, else cost of the first hour plus 10% of remaining hours is\
+      \ credited to tutor. If booking contains more than one lesson, cancelling the\
+      \ whole booking before it starts refunds 85% to client.</p><p><b>Strict:</b>\
+      \ for clients to get 100% refund, cancellation must be done 24 hours before\
+      \ start of lesson, else cost of the first hour plus 20% of remaining hours is\
+      \ credited to tutor. If booking contains more than one lesson, cancelling the\
+      \ whole booking before it commences refunds 80% to client.</p><p><b>Long-term:</b>\
+      \ this automatically applies to all bookings of up to 24 hours, and will override\
+      \ tutor\u2019s cancellation policy. If long-term booking is cancelled before\
+      \ it starts, 70% is refunded to clients. If any of the individual lessons is\
+      \ cancelled, 70% of payment for the lesson is refunded to clients.</p><p>Tutors\
+      \ can also <a href=\"{% url 'help:article_detail' 54 %}\">cancel lessons</a>\
+      \ they don\u2019t wish to take and may face some penalties, in which case clients\
+      \ will receive a full refund irrespective of the tutor\u2019s cancellation policy.</p>",
+    category: 15, question: 'What is the Cancellation Policy?'}
+  model: helps.Article
+  pk: 43
+- fields: {body: "<p>We understand that hiring tutors off the internet can be a tough\
+      \ decision for clients. They may have questions or reservations which may not\
+      \ be answered on tutor's profile, until they have met tutors in person or until\
+      \ after lessons have begun.</p><p>The Good Fit Guarantee is a system agreed\
+      \ to by all tutors on Tuteria that if after the first hour with a new client,\
+      \ the client doesn\u2019t feel the tutor is a \u201Cgood fit\u201D \u2013 the\
+      \ client is free to terminate the appointment and hire another tutor.</p><p>If\
+      \ this happens, the cost of the first hour is paid to the tutor while the remaining\
+      \ hours are refunded to clients. In essence, all tutors on Tuteria have guaranteed\
+      \ their first hour with a new client. The client's payment is protected until\
+      \ they are sure the tutor is a perfect fit.</p><p>This protects both clients\
+      \ and tutors from having an unpleasant tutoring experience. Tutors who <a href=\"\
+      {% url 'help:article_detail' 48 %}\">prepare well for lessons</a> and offer\
+      \ great service, never need to refund any money.</p><p>However, this is different\
+      \ from our <a href=\"{% url 'help:article_detail' 65 %}\">Refund Policy</a>.</p>",
+    category: 15, question: 'What is the Good Fit Guarantee, and how does it apply
+      to me?'}
+  model: helps.Article
+  pk: 44
+- fields: {body: '<p>A booking refers to an instance of one or more lessons a client
+      has requested to have with a tutor.</p><p>For example, if a clients schedules
+      lessons with you for a month at once, that would lesson is called a booking.
+      A booking can contain only one lesson, e.g. a 2-hour lessons, or can contain
+      multiple lessons e.g. monthly bookings.</p><p>Whatever the case, clients review
+      tutors'' profiles on Tuteria and book lessons directly from the site at the
+      tutor''s stated price</p>', category: 17, question: 'What is a booking?'}
+  model: helps.Article
+  pk: 45
+- fields: {body: "<p>We\u2019ll send an instant SMS to the phone number you entered\
+      \ on your profile, as well as an email message containing details of the booking\
+      \ and client\u2019s phone number. Please ensure to <a href=\"{% url 'help:article_detail'\
+      \ 10 %}\">update your details</a> if either your phone number or email address\
+      \ changes.</p><p>The SMS will always be sent from +13349541263, so we highly\
+      \ recommend that you save this number as \u2018Tuteria\u2019 on your mobile\
+      \ device for easy recognition.</p>", category: 17, question: 'How do I know
+      when clients have hired me?'}
+  model: helps.Article
+  pk: 46
+- fields: {body: "<p>Yes. Clients always pay the full cost of the lessons upfront\
+      \ before you are contacted.</p><p>However, their payment is held in session\
+      \ until all the lessons have been taught. You are responsible for <a href=\"\
+      {% url 'help:article_detail' 47 %}\">submitting lessons</a> delivered and clients\
+      \ will have up to 3 days to confirm the lessons after which your earnings are\
+      \ credited to your wallet after Tuteria\u2019s <a href=\"{% url 'help:article_detail'\
+      \ 61 %}\">commission</a> has been removed.</p><p>So you can be confident whenever\
+      \ you receive a booking, knowing that full payment has already been made.</p>",
+    category: 17, question: 'Do clients pay upfront before lessons start?'}
+  model: helps.Article
+  pk: 47
+- fields: {body: '<p>This is really up to you, but we have a few suggestions.</p><p><b>First,
+      talk to the client in advance of the lesson</b>.<br>We recommend you call the
+      client within 1 hour of receiving the notification about the lesson. Be polite
+      and do your best to deeply understand their needs, and why they want to learn
+      that skill or subject.</p><p>If applicable, obtain a copy of the relevant textbooks,
+      course syllabus, etc., and work with the client to draw up a personalized lesson
+      plan before your first lesson.</p><p><b>Second, try to get repeat business!</b><br>The
+      hardest tutoring session to prepare for is usually the first one with a new
+      client. Tutors who offer superb service to clients are more likely to be hired
+      again.</p><p>For follow-up sessions, you will know exactly what''s expected
+      and preparation will be a lot easier. Learn more about <a href="{% url ''help:article_detail''
+      50 %}">getting repeat business</a>.</p>', category: 17, question: 'How do I
+      prepare myself for the lesson?'}
+  model: helps.Article
+  pk: 48
+- fields: {body: "<p>All your active lessons are displayed in the <b>Notifications</b>\
+      \ panel on your <b>Dashboard</b>.</p><p>Log into your account, go to your dashboard\
+      \ and identify the specific lesson(s) or booking you want to submit. Click to\
+      \ view the booking, and scroll down to the bottom of the page where all the\
+      \ lessons are listed.</p><p>Lessons that can be submitted will have an activated\
+      \ <b>\u201CSubmit\u201D</b> button in front of them. Use the button to submit\
+      \ the lesson and if you had any issues delivering the lesson, you can let us\
+      \ know from there.</p><p>Once you\u2019ve submitted all the lessons and given\
+      \ a review, the booking will be marked as delivered and the payment process\
+      \ will be activated.</p><p>For transparency, clients can also see all the lessons\
+      \ you submit, and will have up to 3 days to confirm or raise any issues to be\
+      \ resolved before the payments are made to you.</p><p>We advise you submit lessons\
+      \ as soon as possible so that your payments can be cleared faster.</p>", category: 17,
+    question: 'How do I indicate that I have delivered lessons?'}
+  model: helps.Article
+  pk: 49
+- fields: {body: "<p>Getting repeat bookings from previous clients through Tuteria\
+      \ is the \u201Cbig deal\u201D of your tutoring business, and will determine\
+      \ if you\u2019ll receive new clients or not. It\u2019s easier, and often more\
+      \ profitable, to keep getting repeat bookings from one happy client, than to\
+      \ get a new client.</p><p>However, on Tuteria, repeat bookings is the most important\
+      \ proof that you have offered great service, and is also the major way you <a\
+      \ href=\"{% url 'help:article_detail' 19 %}\">build your reputation</a> and\
+      \ attain <a href=\"{% url 'tutor_levels' %}\">higher levels</a>.</p><p><b>1.\
+      \ Offer exceptional tutoring service:</b> this is foundational. Go the extra\
+      \ mile to help your clients achieve their goals for hiring you. Don\u2019t just\
+      \ \u201Cdo your best and leave the rest\u201D. Aim to absolutely thrill clients\
+      \ with the quality, commitment and results of your tutelage. An unhappy client\
+      \ will not hire you again and will give you a bad review.</p><p><b>2. Encourage\
+      \ clients to hire you again:</b> if there are other things your clients need\
+      \ to learn in other to achieve their goals in that subject, or if they will\
+      \ clearly need more time to master the subject, ensure you let them know and\
+      \ encourage them to book more lessons with you from your profile on Tuteria,\
+      \ or if possible, lead them to do so.</p><p>For example, if a client hires you\
+      \ for 1 month to learn piano and after the first few lessons, you realise they\
+      \ would need at least 2 more months to master the skill, let them know and ask\
+      \ them to book more lessons with you through your profile on Tuteria.</p><p><b>3.\
+      \ Do not attempt to circumvent Tuteria:</b> receiving direct payments, or continuing\
+      \ to deal directly with clients is not allowed. All bookings must go through\
+      \ Tuteria. We are constantly in touch with all clients, and our algorithm will\
+      \ detect and disable the account of any tutor who violates our policy.</p><p>Tutors\
+      \ who have not received a repeat booking within 90 days of joining the site\
+      \ will also be temporarily suspended. <a href=\"{% url 'help:article_detail'\
+      \ 27 %}\">Learn more</a> about other occurrences that will lead to a tutor\u2019\
+      s removal from Tuteria.</p>", category: 17, question: 'How can I get repeat
+      bookings?'}
+  model: helps.Article
+  pk: 50
+- fields: {body: "<p>There are two ways clients can engage with tutors on Tuteria:\
+      \ by booking lessons directly from tutors\u2019 subject profiles or by requesting\
+      \ an in-person interview before booking lessons.</p><p>Meeting requests are\
+      \ requests from interested clients to physically interview tutors before booking\
+      \ lessons. Often times, clients have special tutoring needs, and may need to\
+      \ speak with tutors to determine if they are a good fit.</p><p>Meeting requests\
+      \ only apply for monthly or long-term bookings of at least 24 hours. Hence clients\
+      \ are asked to pay 30% of tutors\u2019 monthly or long-term price upfront to\
+      \ indicate their interest, before <a href=\"{% url 'help:article_detail' 52\
+      \ %}\">tutors are contacted</a> about the request.</p><p>However, this doesn\u2019\
+      t bind clients to tutors. If the meeting doesn\u2019t turn out positive, clients\
+      \ can find other tutors. If the meeting turns out positive, then clients can\
+      \ proceed to book lessons with the tutor.</p>", category: 18, question: 'What
+      are meeting requests?'}
+  model: helps.Article
+  pk: 51
+- fields: {body: "<p>When you receive <a href=\"{% url 'help:article_detail' 51 %}\"\
+      >meeting requests</a> from clients, it means they intend to speak with you in-person\
+      \ and have paid 30% of your monthly or long-term fee. You\u2019ll receive the\
+      \ client\u2019s phone number and should follow up from there.<p><p><b>1. Call\
+      \ the client to schedule the meeting:</b> we\u2019ll tell you the best time\
+      \ to call the client, and highly recommend you call that same day or the next\
+      \ unfailingly. You\u2019ll have a maximum of 1 week to meet with the client.</p><p><b>2.\
+      \ Attend the meeting:</b> when you\u2019ve set a day and time that works best\
+      \ for both of you, ensure you\u2019re there. Endeavour to understand their needs,\
+      \ develop a rapport and respond to questions asked.</p><p><b>3. Close the meeting:</b>\
+      \ after the meeting, return to your Dashboard area, and close the meeting by\
+      \ indicating whether it was positive or negative, and we will take it off from\
+      \ there.</p><p><em>Tutors who have a pending meeting request beyond 1 week will\
+      \ not receive any new booking, until the request has been closed.</em></p>",
+    category: 18, question: 'What should I do when I receive a meeting request?'}
+  model: helps.Article
+  pk: 52
+- fields: {body: '<p>No, you are not allowed to. Beginning lessons with clients who
+      only requested an interview exposes you to fraud and difficulties in collecting
+      payments.</p><p>If the meeting turns out positive, simply agree on days and
+      times lessons will hold and ask the client to schedule lessons with you on your
+      profile. They have already paid 30% upfront. You also need to indicate the <a
+      href="{% url ''help:article_detail'' 52 %}">outcome of the meeting</a>.</p><p>Please
+      note that dealing directly with or <a href="{% url ''help:article_detail'' 27
+      %}">collecting direct payments</a> from clients is not allowed and will prevent
+      you from being successful on Tuteria.</p>', category: 18, question: 'When I
+      receive meeting requests, am I allowed to begin lessons with the client immediately?'}
+  model: helps.Article
+  pk: 53
+- fields: {body: "<p>If you need to cancel a booking, it\u2019s important you do so\
+      \ before the booking starts. You cannot cancel a booking that has started. This\
+      \ is different from when <a href=\"{% url 'help:article_detail' 56 %}\">clients\
+      \ cancel lessons</a>.</p><p>To cancel a booking, go to your dashboard, find\
+      \ the booking you need to cancel, go to the Resolution Center and click <b>Cancel</b>.</p><p><em>Please\
+      \ note that it is highly important that you have contacted your client to apologize\
+      \ for the inconvenience before canceling.</em></p><p>When the booking is canceled,\
+      \ you\u2019ll be recorded as the party responsible for initiating the cancellation\
+      \ in our system. Because tutor cancellations require additional customer support,\
+      \ and generate additional costs for finding alternative tutors for clients,\
+      \ the following actions are applied:<p><p>1. An automatic review appears on\
+      \ your subject profile, indicating that a booking was canceled. We encourage\
+      \ you to publicly respond to this automated review to clarify to the community\
+      \ why you needed to cancel.</p><p>2. Your calendar will remain blocked for the\
+      \ dates of the booking. Our system does this automatically, to prevent another\
+      \ client from booking lessons on unavailable dates.</p><p>3. Your <a href=\"\
+      {% url 'help:article_detail' 18 %}\">reputation score</a> will be reduced by\
+      \ 15 points, and will be reflected on your profile.</p><p>If you cancel a booking,\
+      \ your client will receive full refund and you will not receive any payment.\
+      \ You also will not be able to attain higher levels on Tuteria if you cancel\
+      \ more than twice in any 3-month period.</p><p>If you believe you have tenable\
+      \ reasons for canceling a booking, please contact us at most 24 hours after\
+      \ cancelation to see if we can waive the penalties.</p>", category: 19, question: 'How
+      can I cancel a booking as a tutor?'}
+  model: helps.Article
+  pk: 54
+- fields: {body: "<p><b>Get to know the client</b><br>If you receive a booking or\
+      \ meeting request from clients, you can check their profile to learn more about\
+      \ them. Look out for verified IDs, profile photo and reviews they may have received.\
+      \ It also helps to call the client and observe their conversation.</p><p><b>Cancel\
+      \ the booking before it starts</b><br>If you\u2019re certain you don\u2019t\
+      \ want to deal with a particular client, you can cancel the booking before it\
+      \ starts. You may be subject to some <a href=\"{% url 'help:article_detail'\
+      \ 54 %}\">cancellation penalties</a>. If you need to cancel a reservation that\
+      \ has already began, please contact us on {{ tuteria_details.phone_number }}.</p><p><em>Remember:\
+      \ if you ever feel your personal safety is threatened, contact the local police\
+      \ or emergency services immediately.</em></p>", category: 19, question: 'What
+      if I feel uncomfortable with a client?'}
+  model: helps.Article
+  pk: 55
+- fields: {body: "<p>If your client cancels your reservation in his or her Tuteria\
+      \ account, you will be automatically notified by Tuteria\u2019s system and your\
+      \ calendar will be opened so you can receive other clients. Any payouts that\
+      \ accrue to you will be credited to you immediately, which you can verify in\
+      \ your <b>Transaction History</b>.</p><p>At the time of cancellation, your client\
+      \ is automatically refunded according to your <a href=\"{% url 'help:article_detail'\
+      \ 43 %}\">cancellation policy</a>. We will uphold your cancellation policy,\
+      \ unless the cancellation was processed in relation to a documented <a href=\"\
+      {% url 'help:article_detail' 65 %}\">Refund Policy</a> case.</p><p>If the booking\
+      \ hasn't changed to <b>Canceled</b> in your Tuteria account, then it has not\
+      \ been officially canceled in our system\u2014it's still considered active and\
+      \ will still appear on your calendar.</p>", category: 19, question: 'What happens
+      if my client cancels a booking reservation?'}
+  model: helps.Article
+  pk: 56
+- fields: {body: '<p>If you want to make changes to a booking that has already started,
+      you need to contact us directly by phone on {{ tuteria_details.phone_number
+      }} or by email on {{ tuteria_details.email }}.</p>', category: 19, question: 'Can
+      I make changes to a booking that has started?'}
+  model: helps.Article
+  pk: 57
+- fields: {body: '<p>To see details of your earnings, visit your <b>Transaction History</b>.</p><p>Your
+      earnings will your booking fee minus the 35 to 15% <a href="{% url ''help:article_detail''
+      61 %}">tutor service fees</a>. Your booking fee is calculated based on the total
+      number of hours your client has booked, and they pay an additional to 3 to 5%
+      client booking fee to cover for the cost of processing the booking, which explains
+      why they see a total that is higher than what you quoted.<p><p>Here are some
+      common things that can impact the amount you earn:</p><ol><li>If a booking is
+      cancelled by client, you may earn a fee depending on whether they meet your
+      <a href="{% url ''help:article_detail'' 43 %}">cancellation policy</a> or not</li><li>If
+      you cancel a booking, you will not receive any earnings and may be subject to
+      some <a href="{% url ''help:article_detail'' 54 %}">cancellation penalties</a>.</li><li>If
+      issues are raised concerning the lessons, Tuteria will act as the final mediator
+      and determine how payments are split.</li></ol>', category: 21, question: 'What
+      will my earnings be?'}
+  model: helps.Article
+  pk: 58
+- fields: {body: '<p>Tuteria credits your earnings to <a href="{% url ''help:article_detail''
+      7 %}">your wallet</a> immediately after clients confirm lessons, or 3 days after
+      you submit lessons into our system. For bookings with more than one lesson,
+      you need to submit all lessons for payments to be processed.</p><p>You can request
+      to withdraw your earnings at any time from your Transaction History. Currently,
+      we use Paga as our payout method so you may need to open a paga account to <a
+      href="{% url ''help:article_detail'' 8 %}">collect payments</a> to your bank.</p>',
+    category: 21, question: 'When do I get paid?'}
+  model: helps.Article
+  pk: 59
+- fields: {body: "<p>Tuteria\u2019s payment system is designed to make transferring\
+      \ money between clients and tutors as simple and reliable as possible. Here\u2019\
+      s how it works:</p><p>1. Clients pay through Tuteria when they book lessons,\
+      \ which is loaded in session within the client\u2019s wallet account in order\
+      \ to secure the lessons and notify the tutor,</p><p>2. Tuteria transfers the\
+      \ money to tutors only after clients confirm lessons have been taught or 3 days\
+      \ after tutors have submitted the lessons into our system.</p><p>3. If there\
+      \ is an issue during the cause of the lessons, you can be confident that Tuteria\
+      \ will withhold payments and carry out further investigation to decide the best\
+      \ cause of action for both parties.</p><p>Using Tuteria\u2019s payment system\
+      \ is required when booking lessons, and it helps ensure that both parties are\
+      \ protected under our Terms of Service, cancellation policies, Refund Policy,\
+      \ and other <a href=\"{% url 'trust_safety' %}\">safeguards</a>.</p><p>Paying\
+      \ outside the Tuteria system is not secure. We cannot protect your data and\
+      \ payments, or provide access to these benefits when lessons are not booked\
+      \ directly through Tuteria.</p><p>Clients prefer to re-hire tutors through Tuteria\
+      \ because it also helps monitor all lessons to ensure they are fully delivered\
+      \ before releasing payments; and gives clients the opportunity to review tutor\u2019\
+      s performance as well as get feedback.</p><p>However, to help cover the costs\
+      \ of running these services, Tuteria automatically includes <a href=\"{% url\
+      \ 'help:article_detail' 62 %}\">service fees</a> in each transaction.</p><p>Learn\
+      \ more about <a href=\"{% url 'help:article_detail' 85 %}\">how prices are determined</a>.</p>",
+    category: 21, question: 'How does Tuteria payment system work?'}
+  model: helps.Article
+  pk: 60
+- fields: {body: "<p>Tuteria charges a tutor service fee that scales from 35 to 15%\
+      \ based on the <a href=\"{% url 'help:article_detail' 66 %}\">level of the tutor</a>,\
+      \ every time a booking is completed on our online platform. This fee covers\
+      \ the cost of running the site, marketing and providing customer support.</p><p>We\
+      \ also charge clients a 3 to 5% <a href=\"{% url 'help:article_detail' 90 %}\"\
+      >client service fee</a> to cover the cost of processing each booking.</p><p>Both\
+      \ client and tutor service fees are calculated from the booking subtotal. The\
+      \ subtotal is the complete price of a booking before service fees have been\
+      \ added and is calculated from the tutor\u2019s price settings and the total\
+      \ number of hours booked.</p><p>Our system can only process whole numbers and\
+      \ will round the fee to the nearest Naira.</p><p>Example: a 4 hour lesson in\
+      \ a subject priced at &#8358;1000/hr per student</p><p>Subtotal = &#8358;1000\
+      \ x 4hrs = &#8358;4000</p><p>Tutor service fee for new tutor = 35% x &#8358;4000\
+      \ = &#8358;1400, tutor earns &#8358;2600</p><p>Tutor service fee for level 4\
+      \ tutor = 15% x &#8358;4000 = &#8358;600, tutor earns &#8358;3400</p>", category: 21,
+    question: 'What are tutor services fees?'}
+  model: helps.Article
+  pk: 61
+- fields: {body: "<p><b>Service fees:</b> Service fees are calculated from the booking\
+      \ subtotal. The subtotal is the complete price of the booking before service\
+      \ fees have been added, and is calculated based on the tutor\u2019s price and\
+      \ the total hours booked. If you alter your booking details, the service fees\
+      \ adjust according to the new subtotal.</p><p><b><u>Client service fee:</u></b>\
+      \ we add a 3-5% service fee to client payments every time a booking is made\
+      \ to cover the cost of processing the booking.</p><p>The exact percentage depends\
+      \ on the subtotal of the booking. The higher the subtotal, the lower the percentage\
+      \ so you can save money when booking long lessons.</p><p>Bookings below &#8358;20,000\
+      \ apply a 5% service fee, bookings between &#8358;20,000 and &#8358;50,000 apply\
+      \ a 4% service fee, and those above &#8358;50,000 apply a 3% service fee. You\
+      \ will see the exact amount in the price breakdown on the checkout page before\
+      \ you confirm and pay.</p><p>We only charge the service fee once your booking\
+      \ is made. If you cancel a booking as a client, the service fee is non-refundable.</p><p><b><u>Tutor\
+      \ service fee:</u></b> we deduct a 35-15% service fee from tutor earnings every\
+      \ time a lesson is completed for any of your subjects. This covers the cost\
+      \ of running the site, marketing and providing customer support.</p><p>You can\
+      \ see the exact amount by clicking on your <b>Transaction History</b>.</p><p><em>Our\
+      \ system only processes whole numbers, and all fees are rounded to the nearest\
+      \ whole amount.</em></p>", category: 21, question: 'What are the service fees?'}
+  model: helps.Article
+  pk: 62
+- fields: {body: '<p>Your payout method is the way your prefer to receive payments
+      which can either be to your bank account, or to you Paga account.</p><p>To add
+      a payout method</p><ul><li>Go to the <b>Account</b> section of your Dashboard</li><li>Click
+      on the <b>Payout Method</b> pane</li><li>Add your payout method in the page
+      that shows</li></ul>', category: 22, question: 'How do I add a payout method?'}
+  model: helps.Article
+  pk: 63
+- fields: {body: '<p>Go to the Paga site: <a href="www.mypaga.com">www.mypaga.com</a>
+      and create a page account there.</p>', category: 22, question: 'How can I open
+      a Paga account?'}
+  model: helps.Article
+  pk: 64
+- fields: {body: "<p>The Client Refund Policy supports clients in the event they experience\
+      \ a lesson issue.</p><p>A <b>lesson issue</b> generally falls into one of 3\
+      \ categories: (1) the tutor cancels the booking before it starts or the tutor\
+      \ doesn\u2019t show up for the lessons, (2) the tutor gave false, wrong or misleading\
+      \ information on their subject profile description, or (3) the tutor is involved\
+      \ in any form of crime or misdemeanor when dealing with clients.</p><p>To make\
+      \ a claim, please call us on {{ tuteria_details.phone_number }} or send an email\
+      \ to {{ tuteria_details.email }} not more thn 24 hours after the occurence,\
+      \ and we will require that clients provide some evidence to help us resolve\
+      \ the issue.</p><p>The following are scenarios addressed by the Client Refund\
+      \ Policy. The client notifies Tuteria within 24 hours of the occurrence that:</p><ul><li>The\
+      \ tutor has not shown up for lessons without due approval from client</li><li>The\
+      \ tutor doesn\u2019t possess the knowledge, skill or learning aids promised\
+      \ on the site, or is unable to communicate knowledge effectively</li><li>A different\
+      \ tutor from that which was booked came to deliver lessons</li><li>The tutor\
+      \ is involved in any form of criminal or fraudulent behaviours such as sex offences,\
+      \ theft, molestation, extortion etc.</li><li>The tutor exhibits behaviours or\
+      \ mannerisms which the client feels is unsafe, injurious or hazardous.</li></ul><p>The\
+      \ Client Refund Policy is available to all Tuteria clients who have booked on\
+      \ the site, no matter the tutor and subject they hired or their location of\
+      \ residence.</p><p>In the case of a lesson issue, Tuteria will reserve the right\
+      \ to withhold payments and resolve the dispute ", category: 23, question: 'What
+      is the Client Refund Policy?'}
+  model: helps.Article
+  pk: 65
+- fields: {body: "<p><a href=\"{% url 'tutor_levels' %}\">Tuteria levels</a> is a\
+      \ system designed to progressively reward all our tutors for offering exceptional\
+      \ service to clients. There are 5 levels on Tuteria, which determine tutor commission\
+      \ rates, as well as other benefits.</p><p><b>1. New Tutor:</b> every tutor begins\
+      \ at this level. To help you get started, you\u2019ll earn 65% of every completed\
+      \ booking and enjoy good exposure on Tuteria. In order to rise to level one,\
+      \ you\u2019ll need to:</p><ul><li>Be active on Tuteria for at least 30 days</li><li>Complete\
+      \ at least 20 hours of tutoring</li><li>Have at least one <a href=\"{% url 'help:article_detail'\
+      \ 50 %}\">repeat booking</a> from a previous client*</li><li>Maintain a 4 star\
+      \ rating and above</li><li>Have a low cancellation rate</li></ul><p><b>2. Level\
+      \ One (Influencer):</b> at this level, you\u2019re building your reputation\
+      \ on Tuteria and clients are beginning to trust you. You\u2019ll now earn 70%\
+      \ commission, enjoy better exposure and receive more clients. In order to rise\
+      \ to level two, you\u2019ll need to:</p><ul><li>Complete at least 100 hours\
+      \ of tutoring</li><li>Have at least 5 repeat bookings from previous clients</li><li>Maintain\
+      \ a 4.2 star rating and above</li><li>Upload a personal video to your profile\
+      \ (this gets you 3x more clients!)</li><li>Have a low cancellation rate</li></ul><p><b>3.",
+    category: 24, question: 'What are the Tuteria levels for tutors?'}
+  model: helps.Article
+  pk: 66
+- fields: {body: "<p><b>Your earnings:</b> your level determines your earnings rate\
+      \ for every booking you deliver. New tutors receive 65% commission which increases\
+      \ to 85% through <a href=\"{% url 'help:article_detail' 66 %}\">four levels</a>.\
+      \ So the more you teach, the more you earn.</p><p><b>Search results:</b> levels\
+      \ also affect your placement in search results. For instance, when clients search\
+      \ for a skill, tutors on Level 3 may gain higher placement than those on Level\
+      \ 2. Our algorithm also promotes new tutors so that they can get initial clients;\
+      \ but afterwards, placement is based on tutors\u2019 performance. We do this\
+      \ in order to help clients find the best tutors with proven track record.</p><p><b>Trust:</b>\
+      \ levels have a direct correlation to how much you\u2019re trusted since joining\
+      \ Tuteria. Tutors who have attained higher levels have taught more lessons,\
+      \ displayed great service quality and are committed to growing our community.</p><p><b>New\
+      \ features:</b> we are constantly building new features and opening new business\
+      \ opportunities to help tutors make even more impact and earn more money. Tutors\
+      \ at higher levels will be able to use these features and opportunities ahead\
+      \ of others.</p>", category: 24, question: 'How are Tuteria levels important
+      to me as a tutor?'}
+  model: helps.Article
+  pk: 67
+- fields: {body: "<p>Tutors are continuously evaluated to ensure they continue providing\
+      \ quality service to clients. If a tutor\u2019s performance reduces either by\
+      \ receiving bad reviews, canceling lessons, not updating calendar, not getting\
+      \ repeat bookings etc., our system will automatically drop the tutor to the\
+      \ previous level.</p><p>We do this in order to protect Tuteria clients. We\u2019\
+      ll also attempt to reach out to the affected tutor to find out what may have\
+      \ happened, and how we can offer some help.</p><p>However, if tutors\u2019 performance\
+      \ drops consistently, their account will be temporarily suspended and will no\
+      \ longer receive new clients. Only their previous clients will be able to find\
+      \ them on Tuteria.</p><p>Also, new tutors who have received up to 3 clients\
+      \ and have not recorded any <a href=\"{% url 'help:article_detail' 50 %}\">repeat\
+      \ booking</a> via Tuteria within 60 days, will no longer receive new clients\
+      \ until they get a repeat booking from a previous client.</p>", category: 24,
+    question: 'Can a tutor drop to a lower level?'}
+  model: helps.Article
+  pk: 68
+- fields: {body: "<p>When you hire on Tuteria, you\u2019re booking lessons to receive\
+      \ private tutoring. Each tutor has aunique experience and style of tutoring,\
+      \ so we provide you with enough information and good options so you can find\
+      \ your perfect tutor.</p><p><b>1. Find Your Perfect Tutor</b></p><p>With thousands\
+      \ of qualified tutors in every part of Nigeria for more than 500 subjects, skills\
+      \ and exams listed on Tuteria, you\u2019ll want to make sure the tutor you hire\
+      \ is the right one to help you achieve your goals:</p><ul><li>When you search,\
+      \ enter the subject you need a tutor for and your current location. Tuteria\
+      \ will show you tutors that teach that subject and live around that location.</li><li>Use\
+      \ filters to narrow your search. You may filter by age range, gender, price\
+      \ or distance. Look through to find the ones you may like to hire, then click\
+      \ <b>View More</b> to learn more about the tutor.</li><li>When you select a\
+      \ tutor, you can read a detailed description of the tutor\u2019s experience,\
+      \ teaching method, education, work experience etc. and reviews that other clients\
+      \ have left for this tutor. This helps you learn more about the tutor before\
+      \ booking lessons.</li><li>When you're ready to hire the tutor, simply book\
+      \ lessons online using the tutor\u2019s real-time calendar or request an interview\
+      \ with the tutor if you prefer to meet them first before booking lessons.</li></ul><p><b>2.\
+      \ Hire Your Tutor!</b></p><p>You\u2019ve found the perfect tutor, and now it\u2019\
+      s time to make it official. This is where you determine if you want to instantly\
+      \ book lessons online or physically meet the tutor first.</p><p><b>Book Lessons\
+      \ Online</b></p><p>Like the name suggests, you can easily schedule lessons with\
+      \ your tutor directly from the site using their real-time availability: </p><ol><li>On\
+      \ the tutor's profile, click <b>Book Lesson Online</b> to reveal their calendar.</li><li>Select\
+      \ the days, times and number of students on the tutor\u2019s calendar at the\
+      \ right side of your screen (for desktop)</li><li>Click <b>Continue</b> after\
+      \ selecting preferred days and times</li><li>Choose a preferred payment option\
+      \ and click <b>Proceed</b></li><li>When payment is successful, write an optional\
+      \ message to describe your needs to the tutor.</li></ol><p>You'll receive a\
+      \ confirmation email with your lesson and payment details. Tutor will be instantly\
+      \ notified and would contact you shortly afterwards.</p><p><b>Request an Interview</b></p><p>Some\
+      \ clients prefer to interview the tutor in-person before booking lessons. In\
+      \ this case, you\u2019ll need to click on the button that says <b>Request an\
+      \ Interview</b>. In order to submit a request, we ask you to deposit 30% of\
+      \ the tutor\u2019s monthly or long-term fee.</p><ol><li>From the tutor\u2019\
+      s subject page, click <b>Request an Interview</b></li><li>Enter the best time\
+      \ you\u2019ll like the tutor to call you</li><li>Choose a preferred payment\
+      \ option and click <b>Proceed</b></li></ol><p>The tutor would contact you to\
+      \ schedule a meeting. If the interview is successful, you can proceed to book\
+      \ lessons with the tutor.</p><p>Your <a href=\"{% url 'help:article_detail'\
+      \ 80 %}\">30% upfront payment</a> will be available to you, so you will only\
+      \ need to pay the balance. If the interview wasn\u2019t successful, you can\
+      \ hire another tutor.</p>", category: 26, question: 'How do I hire tutors on
+      Tuteria?'}
+  model: helps.Article
+  pk: 69
+- fields: {body: "<p>1. From the home page, enter the subject, skill or exam you need\
+      \ a tutor for and your location, then click <b>Get Started</b>.</p><p>2. You\u2019\
+      ll instantly find qualified tutors that match your search. Scroll through and\
+      \ find those that you may want to hire.</p><p>3. You can narrow your search\
+      \ results by using filters. Click on <b>Filters</b> to see the options. You\
+      \ can filter by age range, gender, distance and price. Also click on <b>View\
+      \ Monthly</b> to see tutors\u2019 monthly prices, then click <b>View More</b>.</p><p>4.\
+      \ When you select a tutor, you can read a detailed description of the tutor\u2019\
+      s experience, teaching method, education, work experience etc. and as well as\
+      \ reviews that other clients have left for this tutor. This helps you learn\
+      \ more about the tutor.</p><p>5. When you're ready to hire the tutor, simply\
+      \ <a href=\"{% url 'help:article_detail' 69 %}\">hire the tutor</a> by booking\
+      \ lessons online using the tutor\u2019s real-time calendar or request an interview\
+      \ with the tutor if you prefer to meet them first before booking lesson.</p>",
+    category: 26, question: 'How do I search for tutors?'}
+  model: helps.Article
+  pk: 70
+- fields: {body: '<p>Tuteria brings together the very best tutors, instructors and
+      coaches for a wide range of subjects including academic subjects like Math,
+      English, Physics, Calculus, Data Analytics etc., and exams like SAT, ICAN, GRE,
+      IGCSE, PMP etc., as well as skills like Photography, Dance, Music, Makeup, Web
+      Design, Swimming and even Cooking!</p><p>Clients can find and hire tutors for
+      any of these subject categories. Tuteria is built to the largest and <a href="{%
+      url ''trust_safety'' %}">most trusted platform</a> for offering and receiving
+      quality tutoring services for anything you want to learn.</p>', category: 26,
+    question: 'What range of subjects can I find tutors for?'}
+  model: helps.Article
+  pk: 71
+- fields: {body: '<p>You can know when a tutor is available by looking at their calendar
+      on their profile page. Tutors keep their calendar up-to-date to reflect their
+      most current availabile days and times.</p><p>Dates in <b>White</b> are days
+      that a tutor is available for tutoring. Clicking on any of those dates reveals
+      the specific available time durations for that day. These are the time durations
+      for which you can book lessons with the tutor. Simply select the time you want
+      lessons to start and end.</p><p>Dates in <b>Gray</b> are days that the tutor
+      is not available to offer tutoring. It could mean that the tutor has been fully
+      booked for that day, or he/she does not wish to teach on those days. These dates
+      cannot be selected.</p>', category: 26, question: 'How do I know when a tutor
+      is available for tutoring?'}
+  model: helps.Article
+  pk: 72
+- fields: {body: "<p>If your search comes up empty, don\u2019t worry! You can <a href=\"\
+      {% url 'how_it_works' %}\">Request a Tutor</a> or call us on {{ tuteria_details.phone_number\
+      \ }} and we would help you find qualified tutors in your area that meet your\
+      \ needs.", category: 26, question: "What if I can\u2019t find a tutor in my\
+      \ location?"}
+  model: helps.Article
+  pk: 73
+- fields: {body: "<p>Tuteria is a trusted platform where tutors and clients independently\
+      \ connect for private tutoring lessons. Everyone is looking for something different\
+      \ in a tutor and our job is to give you great options and useful tools to find\
+      \ the perfect tutor for you.</p><p><b>Manual Assessment</b><br>We manually assess\
+      \ and interview every single tutor applicant. For most subjects, we require\
+      \ that tutors pass standardized subject competency tests, and for other subjects\
+      \ we ask applicants to make written applications about their experience which\
+      \ are reviewed by our quality team. We have set high standards for all applicants,\
+      \ and only those who are successful can become tutors on Tuteria.</p><p><b>Continuous\
+      \ Evaluation</b><br>Tutors are also continuously evaluated to ensure top quality\
+      \ based on their behaviours and activities on the site, as well as their performance\
+      \ with previous clients \u2013 and only the high-performers are allowed to continue.\
+      \ Tutors whose ratings fall below 3.5 can no longer continue tutoring. We also\
+      \ openly publish reviews from previous clients for you to see before hiring.</p><p><b>Trust\
+      \ & Safety</b><br>All tutors have verified their offline and online IDs, as\
+      \ well as confirmed various personal information. We have also partnered with\
+      \ Background Checking Int\u2019l, the leading background checking company in\
+      \ Nigeria, to enable clients run thorough, up-to-date <a href=\"{% url 'help:article_detail'\
+      \ 99 %}\">background checks</a> on any tutor they hire which covers criminal\
+      \ check over the past 7 years and exact address verification check.</p>", category: 26,
+    question: 'What steps are taken to ensure quality of tutors?'}
+  model: helps.Article
+  pk: 74
+- fields: {body: "<p>Once you\u2019ve found a tutor you\u2019d like to hire, you can\
+      \ book lessons online using the following steps:</p><p>1. Click on the <b>Book\
+      \ Online</b> button from their profile to reveal the tutor\u2019s current calendar</p><p>2.\
+      \ Select the days you want lessons to hold by clicking on the dates in white\
+      \ and choosing your preferred times. Dates in gray indicate that tutor is not\
+      \ available.</p><p>3. After selecting lesson days and times, click <b>Continue</b></p><p>4.\
+      \ Select a payment method. You can pay online using your VISA, MasterCard, Verve\
+      \ or Paga account.</p><p>5. Write an optional message describing your needs\
+      \ to the tutor</p><p>You will receive a confirmation email and receipt of payment,\
+      \ and your tutor would contact you to further discuss the lesson.</p>", category: 28,
+    question: 'How do I book lessons online?'}
+  model: helps.Article
+  pk: 75
+- fields: {body: "<p>The tutor\u2019s calendar shows the days and times they are available\
+      \ to offer tutoring. Tutors update their calendars from time to time to reflect\
+      \ their current availability and help inform clients about the best days and\
+      \ times to schedule lessons.<p><p><b>The Calendar Colours</b></p><p>Days in\
+      \ white are tutor\u2019s available days where clients can book lessons. Clicking\
+      \ on any of these days reveal the available times which clients can select from.\
+      \ For instance, clicking on 9th of May could reveal that the tutor is free from\
+      \ 8am \u2013 4pm, so you can book a lesson anywhere within that time window.\
+      \ You can book lessons hourly or monthly</p><p>Days in gray are tutor\u2019\
+      s unavailable days, so they cannot be booked on those days. Unavailable dates\
+      \ could either mean the tutor has been fully booked for those days, or that\
+      \ they have turned them off on their calendar.</p>", category: 28, question: "What\
+      \ does the tutor\u2019s calendar mean?"}
+  model: helps.Article
+  pk: 76
+- fields: {body: "<p>When you book lessons online, we\u2019ll send you an instant\
+      \ email confirmation, receipt of payment and details of your booking.</p><p>The\
+      \ tutor is also instantly notified via SMS and will contact you shortly afterwards\
+      \ to further discuss the lesson and draw up a personalized plan for delivery.\
+      \ This is the only time we share users phone numbers so that they can communicate.</p><p>Your\
+      \ payment is stored in session and not paid to the tutor until all the lessons\
+      \ have been taught, so you can be confident that you\u2019ll only pay for actual\
+      \ lessons delivered. We\u2019ll also send a reminder one hour before lessons\
+      \ starts in case you need to make some last minute preparations.</p>", category: 28,
+    question: 'What happens when I book lessons online?'}
+  model: helps.Article
+  pk: 77
+- fields: {body: "<p>Yes. We are confident you\u2019ll find the best tutors here.\
+      \ Your first hour with any tutor is always protected by our <a href=\"{% url\
+      \ 'help:article_detail' 44 %}\">Good Fit Guarantee</a>: you don't pay unless\
+      \ you find a good fit.</p><p>If you\u2019re not completely satisfied, we\u2019\
+      ll gladly help you find another tutor or refund any unused payments.</p>", category: 28,
+    question: 'Does Tuteria offer any form of guarantee?'}
+  model: helps.Article
+  pk: 78
+- fields: {body: "<p>Of course! We understand the importance of hiring your best fit\
+      \ tutor, and often times, nothing does it better than a physical interview.</p><p>If\
+      \ after reviewing the tutor online, you still want an interview, then you can\
+      \ <a href=\"{% url 'help:article_detail' 80 %}\">Request an Interview</a> from\
+      \ their profile. The tutor will be instantly notified and would call at your\
+      \ preferred time to schedule a meeting.</p><p>However, this feature only applies\
+      \ if you\u2019re considering the tutor for a long-term or monthly booking of\
+      \ at least 24 hours, hence you\u2019d be required to make a 30% down payment\
+      \ of the tutor\u2019s long-term fee which is credited to your wallet to process\
+      \ your request.</p><p><em>Please note that this doesn\u2019t bind you to the\
+      \ tutor. It will only be deducted from your next booking.</em></p>", category: 29,
+    question: "I\u2019ve found a tutor I like. Can I meet the tutor before booking\
+      \ lessons?"}
+  model: helps.Article
+  pk: 79
+- fields: {body: "<p>Some clients prefer to interview the tutor in-person before booking\
+      \ lessons. However, this only applies for long-term or monthly bookings of at\
+      \ least 24 hours in total.</p><ol><li>From the tutor\u2019s subject page, click\
+      \ <b>Request an Interview</b></li><li>Enter the best time you\u2019ll like the\
+      \ tutor to call you</li><li>Choose a preferred payment option and click <b>Proceed</b></li></ol><p>The\
+      \ tutor would contact you at your preferred time to schedule an interview. If\
+      \ the interview is successful, you can proceed to book lessons with the tutor.\
+      \ If not, you can find another tutor.</p><p><b>30% upfront payment</b></p><p>In\
+      \ order to submit a request, we ask you to deposit 30% of the tutor\u2019s monthly\
+      \ or long-term fee. This payment is required as proof of commitment on the part\
+      \ of clients to hire the tutor if interview turns out positive. This also helps\
+      \ encourage the tutor to attend the interview. It however, does not bind the\
+      \ client to the tutor.</p><p>The payment is loaded into your account on Tuteria,\
+      \ and will be automatically applied from your next booking with any tutor on\
+      \ Tuteria. So you\u2019ll only need to pay the balance.</p><p>For example, if\
+      \ a tutor\u2019s monthly fee is &#8358;20,000, you\u2019ll pay &#8358;8,000\
+      \ to request an interview. When next you book lessons, the &#8358;8,000 will\
+      \ be automatically applied, so you only pay the remaining &#8358;12,000 if you\
+      \ decide to hire the same tutor.</p><p><b>Number of Interview Requests</b></p><ul><li>Clients\
+      \ may only request to interview one tutor at a time. When a request is made,\
+      \ you\u2019ll have up to 1 week to meet with the tutor. Requests are marked\
+      \ as completed when you hire the same tutor, or if the interview turns out negative.</li><li>Clients\
+      \ may only make a maximum of two meeting requests per subject. Once you\u2019\
+      ve requested to meet a second tutor for the same subject, you may no longer\
+      \ request tutors for that subject.</li><li>Clients will be required to pay the\
+      \ 30% upfront fee every time they request to meet tutors in a new subject. Payment\
+      \ is not required if request is for the same subject.</li><li>Clients may not\
+      \ request to see the same tutor more than once.</li></ul>", category: 29, question: 'How
+      do I request an interview with a tutor?'}
+  model: helps.Article
+  pk: 80
+- fields: {body: "<p>If you\u2019re satisfied with the tutor, you simply return to\
+      \ the site to book lessons using the tutor\u2019s current calendar.</p><p>From\
+      \ your the <b>Notifications</b> area of your Dashboard, you will see details\
+      \ of the tutor you requested to meet. Simply click to view their profile and\
+      \ schedule lessons from there.</p><p>You\u2019ll only pay the remaining 70%\
+      \ lesson fee which is also credited to your account on Tuteria until after all\
+      \ lessons have been taught.</p><p>On the other hand, if for some reason you\u2019\
+      re not satisfied after interviewing a tutor, you can <a href=\"{% url 'help:article_detail'\
+      \ 80 %}\">request to meet</a> another tutor of your choice.</p>", category: 29,
+    question: 'What should I do after interviewing the tutor?'}
+  model: helps.Article
+  pk: 81
+- fields: {body: '<p>No. Once you request an interview and make the 30% upfront payment,
+      the tutor is instantly notified about the request and cannot be cancelled</p>',
+    category: 29, question: 'Can I cancel a meeting request?'}
+  model: helps.Article
+  pk: 82
+- fields: {body: "<p>The <b>Request a Tutor</b> feature is used by clients when they\
+      \ cannot find a suitable tutor from the search results or if they prefer we\
+      \ recommend tutors for them.</p><p>When you request a tutor, we ask you to describe\
+      \ your tutoring needs which helps us find the best tutors in your locality that\
+      \ meet your criteria. Once we\u2019ve found up to 2 tutors, we\u2019ll send\
+      \ you an email containing a link to the tutors so you can compare them and hire\
+      \ your best-fit.</p><p>It\u2019s free to request tutors. However, clients may\
+      \ only make one request at a time for the same subject.</p><p><b>How do I request\
+      \ a tutor?</b></p><ul><li>Go to the <a href=\"{% url 'how_it_works' %}\">Request\
+      \ a Tutor</a> page</li><li>Fill and submit the form.</li></ul><p>We will be\
+      \ in touch with you shortly afterwards.</p>", category: 30, question: 'How does
+      requesting a tutor work?'}
+  model: helps.Article
+  pk: 83
+- fields: {body: '<p>After you request a tutor, we will use the information you supplied
+      to fine two qualified tutors in your area that best meet your requirements</p><p>This
+      is usually take less than 24 hours</p><p>Once we''ve found two tutors, we will
+      send an email to you contain links to the tutors'' profiles so you can compare
+      them and hire your best fit</p>', category: 30, question: 'What happens after
+      I request a tutor?'}
+  model: helps.Article
+  pk: 84
+- fields: {body: "<p>Your payment is collected at the point of <a href=\"{% url 'help:article_detail'\
+      \ 75 %}\">booking lessons</a> with your tutor which is clearly stated on the\
+      \ tutor\u2019s calendar as you schedule lessons.</p><p>Whether it\u2019s a 2-hour\
+      \ or monthly lesson, the payment is held in session until all lessons have been\
+      \ delivered before giving it to the tutor. So both parties can be confident\
+      \ that payments will be made when lessons have been taught.</p>", category: 32,
+    question: 'When do I pay for lessons?'}
+  model: helps.Article
+  pk: 85
+- fields: {body: "<p>The total amount you pay for a booking includes the cost of the\
+      \ lesson, applicable discounts and a service fee.</p><p><b>Lesson Cost or Booking\
+      \ subtotal</b></p><p>There\u2019s no standard hourly rate for hiring tutors\
+      \ on Tuteria. Each tutor chooses the amount they'd like to charge for tutoring\u2014\
+      per hour or per month. Your booking subtotal is calculated based on the total\
+      \ number of lesson hours booked.</p><p>For example, if a tutor charges &#8358;2000/hr.,\
+      \ your booking fee for a 3 hour lesson will be &#8358;2000/hr. x 3hrs = &#8358;6000.</p><p>Changing\
+      \ the number of hours booked will automatically change the booking subtotal.</p><p><b>Discounts</b><p><p>Some\
+      \ tutors offer discounts for bookings involving more than one student which\
+      \ will be clearly indicated on their profile. The discount offered applies from\
+      \ the second student.</p><p>Using the above example for instance, if the tutor\
+      \ offered a 20% discount and you book the 3 hour lesson for 3 students. Your\
+      \ booking subtotal is calculated as follows:</p><p>First student = &#8358;2000/hr\
+      \ x 3hrs = &#8358;6000</p><p>Remaining students = &#8358;2000/hr x 3hrs x 2stdts\
+      \ x 0.8 discount = &#8358;9600</p><p>Booking subtotal = &#8358;6,000 + &#8358;9,600\
+      \ = &#8358;15,600 instead of &#8358;18,000. So you save &#8358;2,400.</p><p><b>Service\
+      \ Fee</b></p><p>Tuteria charges clients a small <a href=\"{% url 'help:article_detail'\
+      \ 90 %}\">service fee</a> for each booking to help cover the costs of processing\
+      \ the booking. The amount of the service fee depends on the booking subtotal,\
+      \ and ranges from 3% to 5%. The larger your subtotal, the smaller the service\
+      \ fee percentage will be so you can save money on larger bookings.</p><p>Bookings\
+      \ below &#8358;20,000 apply a 5% service fee. Those between &#8358;20,000 and\
+      \ &#8358;50,000 apply a 4% service fee, while those above &#8358;50,000 apply\
+      \ a 3% service fee.</p><p>So in our above discounted example, your total booking\
+      \ price for a 2-hour lesson for 3 students will be calculated as follows:</p><p>Booking\
+      \ Subtotal = &#8358;15,600 at 5% service fee percentage</p><p>Service fee =\
+      \ 5% x &#8358;15,600 = &#8358;780</p><p>Total Booking Fee = &#8358;15,600 +\
+      \ &#8358;780 = &#8358;16,380.</p>", category: 32, question: 'How much do I pay
+      for a booking?'}
+  model: helps.Article
+  pk: 86
+- fields: {body: "<p>Tuteria holds all payments in session within the client's wallet\
+      \ and transfers same to tutors when lessons have been fully delivered. This\
+      \ way, both parties can be confident that Tuteria will process payments when\
+      \ lessons are taught.</p><p>When tutors have submitted all lessons into our\
+      \ systems, clients will have up to 3 days to confirm lessons and review tutors\u2019\
+      \ performance. Payment is made immediately client confirms lessons. However,\
+      \ if clients haven\u2019t confirmed lessons after 3 days, the booking is automatically\
+      \ marked as completed and earnings credited to the tutor.</p><p>If clients raise\
+      \ an issue concerning the lessons or the tutor, the booking will be put on pending\
+      \ and we will carry out further investigation to decide the best cause of action\
+      \ for both parties.</p>", category: 32, question: 'When will payments be transferred
+      to the tutor?'}
+  model: helps.Article
+  pk: 87
+- fields: {body: '<p>No, you don''t need to. All payments should be made through the
+      Tuteria platform in order to protect your payments, monitor tutors'' activities
+      and ensure all lessons are fully delivered before tutors receive payments.</p><p>Paying
+      outside of Tuteria may expose clients to greater risks of fraud, low-quality
+      service and other vices; and we are unable to provide support and protection
+      for any lessons that are not booked directly through the secure Tuteria platform.</p><p>We
+      have built the easiest, safety and most reliable system for hiring quality tutors,
+      monitoring lessons and managing payments that completely eliminates the need
+      for you to pay directly to any tutor - including transport fare.</p>', category: 32,
+    question: 'Am I allowed to pay tutors directly?'}
+  model: helps.Article
+  pk: 88
+- fields: {body: "<p>Tuteria\u2019s payment system is designed to make transferring\
+      \ money between clients and tutors as simple and reliable as possible. Here\u2019\
+      s how it works:</p><p>1. Clients pay through Tuteria when they book lessons,\
+      \ which is loaded in session within the client\u2019s wallet account in order\
+      \ to secure the lessons and notify the tutor,</p><p>2. Tuteria transfers the\
+      \ money to tutors only after clients confirm lessons have been taught or 3 days\
+      \ after tutors have submitted the lessons into our system.</p><p>3. If there\
+      \ is an issue during the cause of the lessons, you can be confident that Tuteria\
+      \ will withhold payments and carry out further investigation to decide the best\
+      \ cause of action for both parties.</p><p>Using Tuteria\u2019s payment system\
+      \ is required when booking lessons, and it helps ensure that both parties are\
+      \ protected under our Terms of Service, cancellation policies, Refund Policy,\
+      \ and other <a href=\"{% url 'trust_safety' %}\">safeguards</a>.</p><p>Paying\
+      \ outside the Tuteria system is not secure. We cannot protect your data and\
+      \ payments, or provide access to these benefits when lessons are not booked\
+      \ directly through Tuteria.</p><p>Clients prefer to re-hire tutors through Tuteria\
+      \ because it also helps monitor all lessons to ensure they are fully delivered\
+      \ before releasing payments; and gives clients the opportunity to review tutor\u2019\
+      s performance as well as get feedback.</p><p>However, to help cover the costs\
+      \ of running these services, Tuteria automatically includes <a href=\"{% url\
+      \ 'help:article_detail' 62 %}\">service fees</a> in each transaction.</p><p>Learn\
+      \ more about <a href=\"{% url 'help:article_detail' 85 %}\">how prices are determined</a>.</p>",
+    category: 32, question: 'How does Tuteria payment system work?'}
+  model: helps.Article
+  pk: 89
+- fields: {body: '<p>We charge a 3-5% client service fee every time lessons are booked.
+      This covers the cost of payments, processing the booking and monitoring lessons.
+      Service fees are calculated from the booking subtotal, which is the hourly price
+      set by tutors multiplied by the total number of hours booked.</p><p>The exact
+      percentage used for the client service fee depends on the subtotal of the booking.</p><p>Bookings
+      below &#8358;20,000 in total apply a 5% service fee, bookings between &#8358;20,000
+      and &#8358;50,000 apply a 4% service fee while bookings above &#8358;50,000
+      apply a 3% service fee so that clients can save more on longer bookings.</p><p>After
+      entering the exact lesson days and times, and the number of students, clients
+      will see the service fee included or quoted on the tutor''s subject page. The
+      exact fee is located on the checkout page before paying for lessons and on all
+      client billing receipt.</p><p>Please note that transportion fees have already
+      been included in the tutor''s stated price, so clients do not have to pay any
+      tutor directly</p><p>If clients pay from the available balance in their wallets,
+      we do not charge the service fee. If a client cancels a lesson, the service
+      fee is non-refundable. If a client chooses to be refunded after a tutor cancellation,
+      the service fee is refunded. If a booking is changed, the services fee adjusts
+      according to the new subtotal.</p><p>We also charge tutors a <a href="{% url
+      ''help:article_detail'' 61 %}">tutor service fee</a> to cover the cost running
+      the site, marketing and customer support.</p>', category: 32, question: 'What
+      are client service fees?'}
+  model: helps.Article
+  pk: 90
+- fields: {body: '<p>Apart from standard hourly prices, clients can also hire tutors
+      on a monthly basis. Monthly prices are calculated based on the number of tutoring
+      days per week and the number of hours per day.</p><p>If a tutor charges &#8358;500/hr
+      for instance, and chooses to teach 3 times in a week and 2 hours per day, the
+      monthly price will be calculated as:<br>Daily Price = &#8358;500 x 2 hours =
+      &#8358;1,000<br>Weekly Price = &#8358;1,000 x 3 times a week = &#8358;3,000<br>Monthly
+      Price = &#8358;3000 x 4 weeks = &#8358;12,000</p>', category: 32, question: 'How
+      are monthly prices calculated?'}
+  model: helps.Article
+  pk: 91
+- fields: {body: "<p><b>Service fees:</b> Service fees are calculated from the booking\
+      \ subtotal. The subtotal is the complete price of the booking before service\
+      \ fees have been added, and is calculated based on the tutor\u2019s price and\
+      \ the total hours booked. If you alter your booking details, the service fees\
+      \ adjust according to the new subtotal.</p><p><b><u>Client service fee:</u></b>\
+      \ we add a 3-5% service fee to client payments every time a booking is made\
+      \ to cover the cost of processing the booking.</p><p>The exact percentage depends\
+      \ on the subtotal of the booking. The higher the subtotal, the lower the percentage\
+      \ so you can save money when booking long lessons.</p><p>Bookings below &#8358;20,000\
+      \ apply a 5% service fee, bookings between &#8358;20,000 and &#8358;50,000 apply\
+      \ a 4% service fee, and those above &#8358;50,000 apply a 3% service fee. You\
+      \ will see the exact amount in the price breakdown on the checkout page before\
+      \ you confirm and pay.</p><p>We only charge the service fee once your booking\
+      \ is made. If you cancel a booking as a client, the service fee is non-refundable.</p><p><b><u>Tutor\
+      \ service fee:</u></b> we deduct a 35-15% service fee from tutor earnings every\
+      \ time a lesson is completed for any of your subjects. This covers the cost\
+      \ of running the site, marketing and providing customer support.</p><p>You can\
+      \ see the exact amount by clicking on your <b>Transaction History</b>.</p><p><em>Our\
+      \ system only processes whole numbers, and all fees are rounded to the nearest\
+      \ whole amount.</em></p>", category: 32, question: 'What are the service fees?'}
+  model: helps.Article
+  pk: 92
+- fields: {body: '', category: 32, question: 'What if a tutor asks me for more money
+      than I paid?'}
+  model: helps.Article
+  pk: 93
+- fields: {body: '', category: 33, question: 'What methods of payment does Tuteria
+      accept?'}
+  model: helps.Article
+  pk: 94
+- fields: {body: '', category: 33, question: 'How do I use my credit card to pay?'}
+  model: helps.Article
+  pk: 95
+- fields: {body: '', category: 33, question: 'What do I do if my credit card is not
+      working?'}
+  model: helps.Article
+  pk: 96
+- fields: {body: '', category: 33, question: 'How do I pay by bank deposit?'}
+  model: helps.Article
+  pk: 97
+- fields: {body: '', category: 26, question: The Top 10 Tips for Successful Hiring}
+  model: helps.Article
+  pk: 98
+- fields: {body: "<p>Background Checks on Tuteria is part of our efforts to promote\
+      \ trust and safety within our community.</p><p>Our application process manually\
+      \ verifies tutors' identity offline and online including their education, work\
+      \ and other personal details. Background checks therefore provide an additional\
+      \ metric to consider when choosing a qualified local tutor.</p><p>We have partnered\
+      \ with <a href=\"www.bcilimited.com\">Background Checking International</a>,\
+      \ one of the leading background check providers in Nigeria to legally conduct\
+      \ the checks.</p><p><b>How it Works</b></p><p>When requested by a tutor or a\
+      \ client, Background Checking International will conduct a National Criminal\
+      \ Database search on a tutor which will return results limited to the following:</p><ul><li>Residential\
+      \ Address Verification</li><li>Felony and misdemeanor convictions within the\
+      \ past seven (7) years</li><li>Sex crime convictions (misdemeanor or felony)\
+      \ within the past seven (7) years</li></ul><p>Generally, in accordance with\
+      \ applicable law, felony convictions within the past seven years; and misdemeanors\
+      \ within the past three years relating to children, theft, fraud or violence\
+      \ will subject a tutor to removal from the site.</p><p>Tuteria, however, will\
+      \ review every background report and will take into consideration the nature\
+      \ and gravity of the offense, as well as give tutors an opportunity to dispute\
+      \ any inaccurate or incomplete information with evidence before removing an\
+      \ individual from the site.</p><p><b>Ordering a background check</b><p><p>A\
+      \ background check may be ordered in one of two ways. In both cases, the party\
+      \ ordering the check will be responsible for the fee of &#8358;{{ tuteria_details.criminal_cost\
+      \ }}. First, a tutor may choose to run a background check on him or herself.\
+      \ This step is optional and may increase the chances of receiving future tutoring\
+      \ lessons. Second, a client may order a background check on a tutor.</p><p><b>What\
+      \ happens after a passed background check?</b></p><p>Upon notification of a\
+      \ successful background check, Tuteria will post an icon on the tutor\u2019\
+      s profile that indicates they have successfully passed the check. Clients will\
+      \ be able to see this icon when choosing a tutor.</p><p><b>What happens after\
+      \ a failed background check?</b></p><p>In compliance with the law, Tuteria will\
+      \ deactivate the profile of any tutor who does not pass a background check.\
+      \ Additionally, we will alert any client the tutor may have transacted with\
+      \ while being part of the Tuteria community that the tutor has not passed the\
+      \ background check requirements of the site.</p>", category: 25, question: 'What
+      is Background Check?'}
+  model: helps.Article
+  pk: 99
+- fields: {body: '<p>All the reviews on Tuteria are written by tutors and clients
+      from our community, so any review you see is based on a completed lesson a client
+      had with a tutor in a particular subject.<p><p><b>Writing a review</b></p><p>To
+      leave a review for a recent lesson, click on the reviews reminder in the Notifications
+      section of your dashboard. Reviews are limited to 500 words and must follow
+      Tuteria''s review guidelines. It''s important that you don''t leave personally
+      identifiable information in a review, like a person''s last name or address.</p><p><b>Previous
+      reviews</b></p><p>To see your review history, go to Edit Profile > Reviews.
+      You''ll see past Reviews About You and Reviews By You. Among the Reviews About
+      You, you''ll also see any Private Feedback that people have left you. This is
+      also where you can also leave a public response to a review you''ve received
+      within the past 2 weeks.</p><p><b>Star ratings</b></p><p>In addition to written
+      reviews, the clients who had lessons with a tutor can submit a primary star
+      rating of their experience with the tutor. The number of stars displayed on
+      the tutor''s subject page is an aggregate of the rating scores clients have
+      given that tutor in that particular subject.</p><p>Our community relies on honest,
+      transparent reviews. We will remove or alter a review if we find that it violates
+      our review guidelines.</p>', category: 25, question: 'How do Reviews work on
+      Tuteria?'}
+  model: helps.Article
+  pk: 100
+- fields: {body: '<p>After your subject has been reviewed, we may ask you to make
+      a few changes before it can be approved. When this happens, you will be notified
+      on your Dashboard and you can proceed to make the changes and save. It will
+      come to us.</p><p><b>What do I change?</b></p><p>There are several reasons why
+      your subject may require modification, but you can use this as a guide to cross-check
+      the following sections of your subject and make any necessary changes.</p><p>1.
+      Your Subject Headline or Description</p><ul><li>Double-check your spellings
+      and grammar to be sure that they are accurate. If possible, get a friend to
+      read it with you.</li><li>Ensure your description is not too short, is relevant
+      to the subject and contains enough information to help clients learn more about
+      your experience and style of teaching.</li><li>Ensure your description is written
+      with sincerity and not misleading in any way</li></ul><p>2. Price</p><p>Depending
+      on the judgment of our quality team, and on what similar tutors in your area
+      are charging, we may require that you to reduce your price if we think it is
+      too high. Setting inordinately high prices will affect you negatively and may
+      prevent you from receiving clients.</p><p>3. Subject Image & Exhibition</p><ul><li>Check
+      your subject profile picture to ensure it''s valid and of good quality.</li><li>Your
+      subject exhibitions most not contain any text, phone number or any personal
+      contact. If it does, you will be required to change it before it can be approved.</li></ul><p>If
+      none of these apply to you, then please send us a mail using info@tuteria.com
+      and we''ll resolve it.</p>', category: 12, question: 'What does it mean for
+      my subject to require modification?'}
+  model: helps.Article
+  pk: 101

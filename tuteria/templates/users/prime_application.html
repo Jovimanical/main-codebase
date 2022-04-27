@@ -1,0 +1,88 @@
+{% extends "users/update_details.html" %}
+{% load staticfiles i18n bootstrap3 add_attr %}
+{% block css %}
+{{block.super}}
+{% endblock css %}
+{% block title %}
+    Tuteria-Prime Access| Tuteria Nigeria
+{% endblock title %}
+{% block base77 %}
+    <div class="col-md-8 col-md-offset-2 col-lg-8 col-xs-12 col-lg-offset-2 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+        <div id="content" class="spaced-top-xl spaced-bottom-xl padding-top-50">
+        {% if form.errors %}
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="row">
+                    <div class="well bg-danger">
+                        <div class="has-error">
+                            Some parts of the form were not filled correctly, please check and submit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="">
+                    <div id="wizard-container" class="bordered spaced-bottom-lg">
+                        <div class="">
+                            <div class="panel row-space-4">
+
+                                <div class="panel-head col-sm-12">
+                                    <div class="row">
+                                        <div class="row-space-top-4 text-center">
+                                            <div class="col-sm-12 col-md-10 col-md-offset-1 ">
+                                                <h3 class="font-head blue-font">
+                                                    {% if not request.is_featured %}Tuteria Prime Tutor Access{% else %}
+                                                        <b>Tuteria Prime Tutor Access</b>{% endif %}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="text-center">Please input where you currently reside. </p>
+
+                                    <hr class="row hr-styled">
+                                </div>
+
+                                <div class="panel-body">
+                                    <form action="{% url "users:prime-application" %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row-space-4">
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus animi odio excepturi nisi laborum vero, veniam ea sed hic recusandae ipsum voluptates, delectus exercitationem dolorem. Aperiam necessitatibus id itaque explicabo?</div>
+                                        <div>Nesciunt quam, in quasi aspernatur ipsa, hic veritatis sunt quaerat labore minima, autem accusantium laborum, quia accusamus. Nobis fuga eos suscipit id, ad voluptates ratione. Fugiat natus, voluptas vero velit?</div>
+                                        <div>Voluptatem excepturi ex eum rerum animi quis ab fugiat quas, architecto voluptates, maxime? Expedita consequuntur distinctio possimus nulla, cum harum corporis recusandae fuga voluptatibus nam inventore labore, porro a eligendi.</div>
+                                        <div>Fugiat magni autem necessitatibus perferendis, optio quo dignissimos non ut deserunt iste sequi sint molestias saepe pariatur sed doloremque quas esse. Blanditiis tempora deserunt ipsam, consequuntur incidunt soluta fuga veniam.</div>
+                                        <div>Mollitia ea, explicabo natus maiores ipsum eius autem, ducimus quibusdam tempore. Reprehenderit quam consequatur veniam, neque consequuntur nulla, consectetur sapiente, eveniet aperiam earum eos, ipsam iusto amet animi unde. Obcaecati?</div>
+                                    </div>
+                                    <div class="checkbox">
+                                         <label>{{form.agree}} I have read and agree to the terms.</label>
+                                    </div>
+                                    <div class="">
+                                        <button type="submit" class="btn btn-block btn-lg btn-primary">
+                                            Apply to Tuteria Prime
+                                        </button>
+                                    </div>
+                                    
+                                    </form>
+                                    
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    </div>
+{% endblock base77 %}
+{% block big_section %}
+ {% endblock big_section %}
+{% block first_request_summary %}
+{% endblock first_request_summary %}

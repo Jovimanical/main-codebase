@@ -1,0 +1,17 @@
+{% if usdetails.user.tutor_intent %}
+<div class="potential-tutors well bg-info row">
+    <div class="col-sm-9 col-xs-12 row-space-2">
+        {% if not usdetails.user.tutor_req.has_completed_verification %}
+        <span class="font-head">Go to the Next Step</span>
+        <br> You're almost done. Click
+        <span style="color:red" class="font-head">Continue</span> to complete your application {% else %}
+        <span class="font-head">Apply to Teach</span>
+        <br> Well done! You've completed all required steps. Click
+        <span style="color:red" class="font-head">Begin Application</span> to proceed. {% endif %}
+    </div>
+    <div class="col-sm-3 col-xs-12">
+        <a class="btn btn-block btn-primary" href="{{ usdetails.user.tutor_req.get_next_url }}">{% if usdetails.user.tutor_req.has_completed_verification %}Begin Application &#8594;{% else %} Continue &#8594;
+            {% endif %}</a>
+    </div>
+</div>
+{% endif %}

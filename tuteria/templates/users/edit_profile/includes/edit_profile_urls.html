@@ -1,0 +1,30 @@
+{% load activelink %}
+
+<ul class="{{ url_class }}">
+    <li>
+        <a href="{% url 'users:edit_profile' %}"
+           aria-selected="{% ifactive 'users:edit_profile' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Edit Profile</a>
+    </li>
+    <li>
+        <a href="{% url 'users:edit_media' %}"
+           aria-selected="{% ifactive 'users:edit_media' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Photo and Video</a>
+    </li>
+    <li>
+        <a href="{% url 'users:edit_verification' %}"
+           aria-selected="{% ifactive 'users:edit_verification' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Trust and Verification</a>
+    </li>
+    {% if user_can_tutor %}
+    <li>
+        <a href="{% url 'users:edit_tutor_profile' %}"
+           aria-selected="{% ifactive 'users:edit_tutor_profile' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Edit Tutor Profile</a>
+    </li>
+    {% endif %}
+    <li>
+        <a href="{% url 'users:reviews' %}" {% ifactive 'users:reviews' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Reviews</a>
+    </li>
+</ul>

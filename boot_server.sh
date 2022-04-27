@@ -1,0 +1,2 @@
+# cd ~/tuteria/ && git pull && docker build -t=gbozee/tuteria . && cd /home/sama/tuteria && docker-compose build && docker-compose up -d
+cd /root/tuteria && docker build -f compose/django/Dockerfile -t=registry.gitlab.com/tuteria/tuteria . && cd /home/sama/tuteria && docker-compose build && docker-compose run app

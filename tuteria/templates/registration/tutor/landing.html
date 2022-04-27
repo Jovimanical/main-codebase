@@ -1,0 +1,325 @@
+{% extends '_layouts/base-wizard.html' %}
+{% load i18n cloudinary %}
+{% load static from staticfiles %}
+{% block ng_app %}{% endblock %}
+{% block title %}How Tutoring Works - Tuteria Nigeria{% endblock title %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/tutor-registration.css' %}"/>
+    <style>
+        .need-to-know img {
+            width: 64px;
+        }
+
+        @media (max-width: 768px) {
+            .need-to-know img {
+                width: 24px;
+            }
+        }
+
+        .padding-top-15 {
+            padding-top: 15px;
+            padding-bottom: 5px;
+        }
+
+        .landing-font {
+            font-size: 36px;
+            padding-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .landing-font {
+                padding-top: 0;
+                font-size: 28px !important;
+                padding-bottom: 10px;
+                text-align: center;
+            }
+        }
+
+
+    </style>
+
+{% endblock %}
+{% block wizard_title %}
+    <div class="col-sm-12 row">
+        <div class="col-sm-1" style="margin-top: 10px">
+            <div class="mobile-thumbnail text-center">
+        <span class="user-pict-130">
+            {% cloudinary request.user.profile_pic USER_PROFILE_THUMBAIL alt=request.user.first_name %}
+        </span>
+            </div>
+        </div>
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="landing-font"><b>Welcome {{ request.user.first_name }}!</b></div>
+            <p>To help you succeed, we'll walk you through 6 quick points about how Tuteria works, and ask you a few questions at the end to confirm understanding.</p>
+        </div>
+
+    </div>
+{% endblock wizard_title %}
+{% block col_size %}col-sm-12{% endblock col_size %}
+{% block wizard_progress %}
+
+{% endblock wizard_progress %}
+{% block main_content %}
+    <div class="row" id="containing-container">
+        {% block left_column %}
+            <div class="col-sm-12">
+                <div class="need-to-know">
+                    <div id="section-1" class="what-to-know">
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/independent.png' %}" class=" center-block"/>
+                            </div>
+
+                            <div class="media-body">
+                                <p><span class="font-head"><b>1. You are an independent tutor</b></span></p>
+
+                                <p>This means you have full responsibility to create your subjects,
+                                    set your price, accept appointments with clients, and submit lessons taught
+                                    into our system in order to get paid.</p>
+
+                                <p>We offer one-on-one tutoring. You cannot use
+                                    Tuteria to acquire students for your organisation, and you cannot transfer a student to any other tutor outside Tuteria.</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/thorough.png' %}" class=" center-block"/>
+                            </div>
+
+                            <div class="media-body">
+                                <p><span class="font-head"><b>2. Application is thorough but flexible</b></span></p>
+
+                                <p>If your application is approved, you'll be able to add subjects, take the tests and receive clients. If it's denied, you can only re-apply after 3 months and not more than 3 attempts. The information you've submitted is used to decide if Tuteria is the right place for you.</p>
+                            </div>
+                        </div>
+                        <div class="row row-space-top-4">
+                            <div class="col-sm-4 col-sm-offset-8 col-md-3 col-md-offset-9 col-xs-6 col-xs-offset-6">
+                                <button class="btn btn-block btn-primary next-btn">
+                                    Next &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="section-2" class="what-to-know hidden">
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/create_subjects.png' %}" class=" center-block"/>
+                            </div>
+
+                            <div class="media-body">
+                                <p><span class="font-head"><b>3. You create your own subjects and set your own prices</b></span></p>
+
+                                <p>For most Academic, Music, Exams & Languages, you MUST pass the relevant online tests, without which you CANNOT take any students. For hands-on skills like Photography, Fashion etc. you'll need to send us samples of your work and experience, and if it matches our requirements, we'll let you know. Clients in your area can review your subjects, see your experience and can request to hire you from the site. We'll send instant SMS and email containing details of your clients.</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/performance.png' %}" class=" center-block"/>
+                            </div>
+
+                            <div class="media-body">
+                                <p><span class="font-head"><b>4. Tuteria is performance-based: great service gets you more clients</b></span></p>
+
+                                <p>We make sure clients get the very best performing tutors, and that great tutors receive more clients. Quality teaching, excellent customer service, and good feedback is expected at all times. Clients rate you after every completed lesson as part of our continuous evaluation. High rating gets you much more clients. Tutors whose ratings fall below 4.0 are asked to leave.</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/payment.png' %}" class=" center-block"/>
+                            </div>
+
+                            <div class="media-body">
+                                <p><span class="font-head"><b>5. Your payment is always certain and prompt</b></span></p>
+
+                                <p>To ensure you always get paid, Tuteria handles all payments on your behalf and pays directly to your bank. As a tutor, you set your price and earn 70-75% of whatever you charge clients. Successful tutors earn more than &#x20A6;360, 000 every year.</p>
+
+                                <!--<table class="table" border="2">-->
+                                <!--    <tr class="font-head">-->
+                                <!--        <th>Hours Taught</th>             -->
+                                <!--        <th>Earning Commisson </th> -->
+                                <!--        <th>Minimum Rating </th>-->
+                                <!--    </tr>    -->
+                                <!--    <tr > -->
+                                <!--        <td>0 - 100</td> -->
+                                <!--        <td>70%</td> -->
+                                <!--        <td>4.20</td> -->
+                                <!--    </tr> -->
+
+                                <!--    <tr > -->
+                                <!--        <td>101 - 250</td> -->
+                                <!--        <td>75%</td> -->
+                                <!--        <td>4.50</td> -->
+                                <!--    </tr>-->
+
+                                <!--    <tr> -->
+                                <!--        <td>251 - 500</td> -->
+                                <!--        <td>80%</td> -->
+                                <!--        <td>4.70</td> -->
+                                <!--    </tr>-->
+
+                                <!--    <tr> -->
+                                <!--        <td>501+</td> -->
+                                <!--        <td>85%</td> -->
+                                <!--        <td>4.85</td> -->
+                                <!--    </tr>                            -->
+
+                                <!--</table>-->
+
+                                <p>E.g. if you charge clients &#x20A6;1000/hr, you'll be paid at the rate of &#x20A6;700-&#x20A6;750/hr.</p>
+
+                                <p>Clients pay in full through Tuteria when booking lessons with you, which becomes available to you immediately after client confirms that lesson has been taught or 1 day after you submit lesson into our system. You can withdraw your earnings at anytime.</p>
+                            </div>
+                        </div>
+                        <div class="row row-space-top-4">
+                            <div class="col-sm-4 col-md-3 col-xs-6 text-center">
+                                <a href="javascript:void(0)" class="previous-btn"><i
+                                        class="glyphicon glyphicon-menu-left"></i>Back</a>
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-6 col-xs-6 col-xs-offset-0">
+                                <button class="btn btn-block btn-primary next-btn">
+                                    Next &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="section-3" class="what-to-know hidden">
+                        <!--<div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/guarantee.png' %}" class=" center-block"/>
+                            </div>
+
+                            <div class="media-body">
+                                <p><span class="font-head"><b>6. Your first hour of lesson is guaranteed to new clients</b></span></p>
+
+                                <p>Hiring a new tutor can be a tough decision for most clients. Tutors on Tuteria agree
+                                    to guarantee their first hour with a new client.</p>
+
+                                <p>This means if the client isn't satisfied with the first lesson, they are free to terminate the appointment. If this happens, they'll be refunded for the first hour plus all untaught lessons, while the rest is paid to you. Tutors who offer great service never get their lessons terminated.</p>
+                            </div>
+                        </div>-->
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/rules.png' %}" class=" center-block"/>
+                            </div>
+
+                            <div class="media-body">
+                                <p><span class="font-head"><b>6. Important rules within Tuteria Community</b></span></p>
+
+                                <p>There are standard rules to ensure that tutors always get paid, protect users privacy, and make our service fair to everyone. Please keep the following in mind as you use Tuteria:</p>
+
+                                <ul style="margin-top:10px;">
+                                    <li style="margin-top:10px; margin-bottom: 10px;">
+                                        Accepting payments directly from clients or continuing to deal directly with
+                                        them outside Tuteria is not allowed, and will prevent you from succeeding
+                                        within our community.
+                                    </li>
+                                    <li style="margin-top:10px; margin-bottom: 10px;">
+                                        You’ll always be supplied with client details. Do not enter any personal
+                                        information such as your full name, home address, email, phone, adverts or links
+                                        on your profile.
+                                    </li>
+                                    <li style="margin-top:10px; margin-bottom: 10px;">
+                                        Do not make claim to any false or inaccurate information such as your
+                                        education, experience, work history, certifications, awards, photos etc. Be
+                                        completely honest. We will find out.
+                                    </li>
+                                    <li style="margin-top:10px; margin-bottom: 10px;">
+                                        Always be ethical when dealing with clients. We DO NOT condone any attempt to
+                                        use Tuteria to perpetuate any form of criminal misdemeanor such as stealing,
+                                        fraud, sex offences, molestations, kidnappings etc.
+                                    </li>
+                                    <li style="margin-top:10px; margin-bottom: 15px;">
+                                        If clients request to re-hire you privately, kindly direct them to book
+                                        appointments through your profile on Tuteria. This ensures you’re not cheated or
+                                        struggle to collect payment after lessons.
+                                    </li>
+                                </ul>
+                                <p>Tuteria is a trusted community. In order to protect all users,
+                                    tutors who violate ANY of the above policies – even for once – will be permanently & completely
+                                    disabled from using Tuteria in anyway. Welcome once again!</p>
+                            </div>
+                        </div>
+                        <div class="row row-space-top-4">
+                            <div class="col-sm-4 col-md-3 col-xs-6 text-center">
+                                <a href="javascript:void(0)" class="previous-btn"><i
+                                        class="glyphicon glyphicon-menu-left"></i>Back</a>
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-6 col-xs-6 col-xs-offset-0">
+                                <button class="btn btn-block btn-primary next-btn">
+                                    Take Quiz &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="section-4" class="what-to-know hidden">
+                        <a href="javascript:void(0)" class="previous-btn pull-left"><i
+                                class="glyphicon glyphicon-menu-left"></i>Back</a>
+
+                        <div class="col-xs-12">
+                            <h2 class="br-bottom-md text-center">Quiz</h2>
+                            <section id="tutor_registration_quiz"></section>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        {% endblock left_column %}
+    </div>
+{% endblock main_content %}
+{% block javascript %}
+    {{ block.super }}
+    {% block first_parent %}
+        {% if not request.is_featured %}
+
+        <script>
+            var opts = {
+                lines: 13 // The number of lines to draw
+                , length: 28 // The length of each line
+                , width: 14 // The line thickness
+                , radius: 42 // The radius of the inner circle
+                , scale: 1 // Scales overall size of the spinner
+                , corners: 1 // Corner roundness (0..1)
+                , color: '#000' // #rgb or #rrggbb or array of colors
+                , opacity: 0.25 // Opacity of the lines
+                , rotate: 0 // The rotation offset
+                , direction: 1 // 1: clockwise, -1: counterclockwise
+                , speed: 1 // Rounds per second
+                , trail: 60 // Afterglow percentage
+                , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+                , zIndex: 2e9 // The z-index (defaults to 2000000000)
+                , className: 'spinner' // The CSS class to assign to the spinner
+                , top: '30%' // Top position relative to parent
+                , left: '50%' // Left position relative to parent
+                , shadow: false // Whether to render a shadow
+                , hwaccel: false // Whether to use hardware acceleration
+                , position: 'absolute' // Element positioning
+            };
+            var target = document.getElementById('content');
+            var spinner = new Spinner(opts).spin();
+            target.appendChild(spinner.el)
+        </script>
+    {% endif %}
+    {% block custom_js %}
+        <script>window.QUESTIONS = JSON.parse("{{questions|escapejs}}");
+        window.CreateStep = 0;
+        </script>
+    {% endblock custom_js %}
+    <script src="{% static 'js/tutor_profile_create.bundle.js' %}"></script>
+    <script>
+        $('#body-container').removeClass('hidden');
+        spinner.stop()
+    </script>
+    {% block after_main %}{% endblock after_main %}
+    {% endblock first_parent %}
+
+{% endblock javascript %}
+{% block request_section %}{% endblock request_section %}

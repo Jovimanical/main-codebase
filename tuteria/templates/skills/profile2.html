@@ -1,0 +1,507 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc bootstrap_pagination embed_video_tags activelink cache %}
+
+{% block title %}{{ object.heading }}{% endblock %}
+{% block meta_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Tuteria Limited">
+
+    <!-- for Google -->
+    <meta itemprop="name" content="{{ object.heading }}">
+    <meta itemprop="description" content="{{ object.description }}">
+    <meta itemprop="image" content="{% cloudinary_url object.profile_pic TS_THUMBNAIL %}">
+    <meta name="description" content="{{ object.description|slice:":155" }}"/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="{{ object.tutor.first_name }}"/>
+    <meta name="copyright" content=""/>
+    <meta name="application-name" content=""/>
+    <!-- for Facebook -->
+    <meta property="fb:app_id" content="781136408623359">
+    <meta property="og:site_name" content="Tuteria">
+    <meta property="og:title" content="{{ object.heading }}"/>
+    <meta property="og:type" content="tuteria:skills"/>
+    <meta property="og:image" content="{% cloudinary_url object.profile_pic SQUARE_PROFILE_THUMBNAIL %}"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:description" content="{{ object.description }}"/>
+    <meta property="tuteria:tt_hourly_price" content="&#8358;{{ object.price|floatformat }}"
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:url" content="{{ request.build_absolute_uri|urlencode }}"/>
+
+    <meta name="twitter:site" content="@tuteria"/>
+    <meta name="twitter:title" content="{{ object.heading }}"/>
+    <meta name="twitter:description" content="{{ object.description }}"/>
+    <meta name="twitter:image" content="{{ object.profile_pic }}"/>
+{% endblock %}
+{% block ng_app %}{% if request.is_featured %}{% else %}ng-app="myApp"{% endif %}itemscope
+    itemtype="http://schema.org/Person"{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True making_booking=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block fixed %} {% endblock fixed %}
+{% block css %}
+    {{ block.super }}
+    <style>
+        @media (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+        .large-padding {
+            padding: 60px 40px;
+        }
+        section.protection {
+            color: #fff;
+            background: #36648B;
+            font-size: 18px
+        }
+
+        section.protection .media-photo {
+            background: transparent
+        }
+        .foreground{
+            color: #f5be4e;
+        }
+        @media(max-width: 768px){
+            .no-side-margin-mobile{
+                margin-right: 0;
+                margin-left: 0;
+            }
+            .mob-row{
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/tutor-select.css' %}"/>
+    {% include "includes/_scripts.html" %}
+    <script src="{% static "js/angular/angular.js" %}"></script>
+    <script>
+        var TutorResponse = JSON.parse('{{ ts_json|escapejs }}');
+        console.log(TutorResponse);
+        angular.module('json_response', []).value('TutorSkill', TutorResponse);
+        window.request_tutor = "{% url 'request_meeting_redirect' object.pk %}";
+    </script>
+    {% if request.is_featured %}
+        <script src="{% static "js/featured.bundle.js" %}"></script>
+    {% else %}
+        <script src="{% static "js/tutor_skill_profile.bundle.js" %}"></script>
+    {% endif %}
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            {% if form.errors %}
+                $('#initiator-section').addClass("hidden");
+                $('#request_form').show();
+            {% else %}
+                $('#request_form').hide();
+                $('#initiator-section > a').click(function (e) {
+                    console.log("holla");
+                    $('#request_form').fadeIn('slow');
+                    $('#initiator-section').addClass("hidden");
+                })
+            {% endif %}
+            
+        })
+    </script>
+{% endblock %}
+{% block jumbotron %}{% endblock %}
+{% block main_content %}
+    <div class="row">
+        <div class="body-content clearfix">
+            <div class="bg-color2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <!-- box item details -->
+                            <div class="block-section box-item-details">
+                                {% include "skills/includes/profile.html" with my_object=object %}
+                                {% if request.user != object.tutor %}
+
+                                    <div id="contact_wrapper">
+                                        {% if request.user.is_staff %}
+                                            Phone no: {{ object.tutor.primary_phone_no.number }}<br/>
+                                            Email: {{ object.tutor.email }}<br/>
+                                            {% if object.skill.testable %}
+                                                Score: {{ object.sitting.first.score }}<br/>
+                                            {% endif %}
+                                            <strong>Guarantors</strong> <br>
+                                            {% for guarantor in object.tutor.guarantor_set.all %}
+                                                Email: {{ guarantor.email }} <br>
+                                                Phone nO: ({{ guarantor.phone_no }}) <br>
+                                                first name: {{ guarantor.first_name }} <br>
+                                                last_name : {{ guarantor.last_name }} <br>
+                                                organization: {{ guarantor.organization }} <br>
+                                                No of years: {{ guarantor.no_of_years }} <br>
+                                            {% endfor %}
+                                            <form action="{{ request.path }}" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="request_pk"/>
+                                                <select name="request_action" id="rq">
+                                                    <option value="1">Add Tutor to RequestPool</option>
+                                                </select>
+                                                <button class="btn btn-primary">Submit</button>
+                                            </form>
+
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                                {% if reviews_count > 0 %}
+                                    <div id="reviews" class="room-secsion webkit-render-fix ">
+                                        <div class="special-row-element row">
+                                            <div class="">
+                                                <div class="row no-side-margin-mobile">
+                                                    <div class="col-md-12 padding-top-25">
+                                                        {% if reviews_count > 0 %}
+                                                            {# {% if object.reviews.count == 0 %} #}
+                                                            <div class="panel-body mob-row">
+                                                            <hr>
+                                                                <h4 class="row-space-4 font-head">
+
+                                                                    {{ reviews_count }}
+                                                                    Review{{ reviews_count| pluralize }}
+
+                                                                    {# 5 Reviews #}
+                                                                    {% if request.is_featured %}
+                                                                        <div class="rating pull-right">
+                                                                            {% for star in object.rating_integer %}
+                                                                                {# {% for star in "****" %} #}
+                                                                                <span class="opera-star icon-resize">★</span>
+                                                                            {% endfor %}
+                                                                            {% if object.rating_decimal %}
+                                                                                <i class="fa fa-star-half-full icon-resize"></i>
+                                                                            {% endif %}
+                                                                            <span class="review-text">{{ object.reviews.count }} Review{{ object.reviews.count| pluralize }}</span>
+                                                                            {# <span class="review-text"> (4)</span> #}
+                                                                        </div>
+                                                                    {% else %}
+                                                                        <div class="star-rating pull-right">
+                                                            <span class="foreground">
+                                                                {% for star in object.rating_integer %}
+                                                                    {# {% for star in "****" %} #}
+                                                                    <i class="fa fa-star icon-resize"></i>
+                                                                {% endfor %}
+                                                                {% if object.rating_decimal %}
+                                                                    <i class="fa fa-star-half-full icon-resize"></i>
+                                                                {% endif %}
+                                                                {# </span> (4.52) #}
+
+                                                            </span> ({{ object.rating|floatformat:'1' }}/5.0)
+
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </h4>
+                                                            </div>
+                                                            <div class="review-content mob-row">
+                                                                <div class="panel-body">
+                                                                    {% for rater in ratings %}
+                                                                        {# {% for rater in "**" %} #}
+                                                                        <div class="row">
+                                                                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                                                <div class="review-image text-center">
+                                                                                    {% if rater.commenter.is_staff %}
+                                                                                    {% else %}
+                                                                                        <a href="{{ rater.commenter.get_absolute_url }}"
+                                                                                           class="media-photo media-round row-space-1"
+                                                                                           name="review_23339042">
+                                                                                            {% cloudinary rater.reviewer_image RATING_THUMBNAIL alt="{{rater.commenter.first_name}}" %}
+                                                                                            <div class="padding-top-10">{{ rater.commenter.first_name }}</div>
+                                                                                        </a>
+                                                                                    {% endif %}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-10 col-sm-10 col-lg-10 col-xs-12">
+                                                                                <div class="row-space-2">
+
+                                                                                    <div data-review-id="23339042"
+                                                                                         data-original-text="{{ rater.review }}"
+                                                                                         class="review-text expandable expandable-trigger-more row-space-2">
+
+                                                                                        <div class="expandable-content space-for-mobile">
+                                                                                            <p class="min-space">{{ rater.review }}</p>
+
+                                                                                            <div class="text-muted review-subtext margin-top-15">
+                                                                                                <div class="col-sm-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="location pull-left">
+                                                                                                            <i class="fa fa-map-marker"></i> {{ rater.commenter.location }}
+                                                                                                        </div>
+                                                                                                        <div class="date pull-right">{{ rater.modified|date }}</div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {% if not forloop.last %}
+                                                                            <div class="row row-space-2">
+                                                                                <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2">
+                                                                                    <hr class="hr-styled">
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                            {% if reviews_count > 3 %}
+                                                            <div class="col-xs-12">
+                                                                <div class="pagination-container pull-left">
+                                                                    <nav>
+                                                                        {% bootstrap_paginate ratings range=5 show_prev_next="false" show_first_last="true" %}
+                                                                    </nav>
+                                                                </div>
+                                                            </div>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- end box item details -->
+                        <div class="col-md-4">
+                            <!-- box affix right -->
+                            <div class="affix-to box-list" id="affix-box">
+                                <div class="item" style="padding: 30px 20px">
+                                    {% block calendar %}
+                                        <div id="book_it_form" class="" data-ng-cloak>
+                                            {% if request.user.is_superuser %}
+                                                {% include 'skills/includes/calendar.html' with calendar_id="pricing" hire_summary="hire-summary" calendar_tab="calender-tab" %}
+                                            {% elif request.user == object.tutor %}
+                                                {% include "skills/includes/book_tutor_section.html" %}
+                                            {% else %}
+                                                <div id="request_form">
+                                                    <h3 class="text-center blue-font no-margin-top">
+                                                        Request Tutor</h3>
+                                                    <form action="{{ request.path }}" method="post" id="base_request_form" novalidate>
+                                                        {% csrf_token %}
+                                                        <div class="form-group hidden {% if form.request_subjects.errors %}has-error{% endif %}">
+                                                            <label class="control-label">Select a subject</label>
+                                                            {{ form.subject|add_attributes:"class:form-control input-sm,required:true" }}
+                                                            {% if form.request_subjects.errors %}
+                                                                <span class="help-block">{{ form.request_subjects.errors|join:"<br \>" }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                         <div class="form-group {% if form.home_address.errors %}has-error{% endif %}">
+                                                            <label for="id_home_address" class="control-label">Where do you stay?</label>
+                                                            {{ form.home_address|add_attributes:"class:form-control input-sm,rows:4,required:true, data-parsley-error-message:Please enter your home address" }}
+                                                            {% if form.home_address.errors %}
+                                                            <span class="help-block">{{ form.home_address.errors|join:"<br \>" }}</span>
+                                                            {% endif %}
+                                                            {{ form.latitude|add_attributes:"type:hidden" }}{{ form.longitude|add_attributes:"type:hidden" }}
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-7 col-sm-7 col-md-7">
+                                                                <div class="form-group {% if form.vicinity.errors %}has-error{% endif %}">
+                                                                    <!--<label for="id_{{ form.state.name }}"
+                                                                    class="control-label">{{ form.state.label }}</label>-->
+
+                                                                    {{ form.vicinity|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Input a town/city,placeholder:City or Nearest bustop" }}
+
+                                                                    {% if form.vicinity.errors %}
+                                                                    <span class="help-block">{{ form.vicinity.errors|join:"<br \>" }}</span>
+                                                                    {% endif %}
+                                                                </div>            
+                                                            </div>
+                                                            <div class="col-xs-5 col-sm-5 col-md-5">
+                                                                <div class="form-group {% if form.state.errors %}has-error{% endif %}">
+                                                                    {{ form.state|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please select a state" }}
+                                                                    {% if form.state.errors %}
+                                                                    <span class="help-block">{{ form.state.errors|join:"<br \>" }}</span>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                        <div class="row">
+                                                            <div style="padding-top: 5px"></div>
+                                                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                                                <div class="form-group {% if form.no_of_students.errors %}has-error{% endif %}">
+                                                                    <label for="id_no_of_students"
+                                                                           class="control-label">Students</label>
+                                                                    {{ form.no_of_students|add_attributes:"class:form-control input-sm,required:true" }}
+                                                                    {% if form.no_of_students.errors %}
+                                                                        <span class="help-block">{{ form.no_of_students.errors|join:"<br \>" }}</span>
+                                                                    {% endif %}
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                                                <div class="form-group {% if form.class_urgency.errors %}has-error{% endif %}">
+                                                                    <label class="margin-down-5 ">Lessons start?</label>
+                                                                    {{ form.class_urgency|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please select start time" }}
+                                                                    {% if form.class_urgency.errors %}
+                                                                        <span class="help-block">{{ form.class_urgency.errors|join:"<br \>" }}</span>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class=" hide form-group {% if form.tutoring_location.errors %}has-error{% endif %}">
+                                                            <label for="" class="margin-down-5"
+                                                                   style="padding-top: 5px">Where should lessons
+                                                                hold?</label>
+                                                            {{ form.tutoring_location|add_attributes:'required:true,class:form-control input-sm,required:true' }}
+                                                            {% if form.tutoring_location.errors %}
+                                                                <span class="help-block">{{ form.tutoring_location.errors|join:"<br \>" }}</span>
+                                                            {% endif %}
+                                                        </div>
+
+                                                        <hr class="hr-styled">
+                                                        <!--<p>Tell us how best to reach you</p>-->
+
+                                                        <div class="form-group {% if form.number.errors %}has-error{% endif %}">
+                                                            <!--<label for="" class="margin-down-5">Phone number</label>-->
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">+234</div>
+                                                                {{ form.number|add_attributes:"class:form-control input-sm,required:true,data-parsley-error-message:Please enter a valid phone number" }}
+                                                            </div>
+                                                            {% if form.number.errors %}
+                                                                <span class="help-block">{{ form.number.errors|join:"<br \>" }}</span>
+                                                            {% endif %}
+                                                        </div>
+
+                                                        <div class="form-group {% if form.time_to_call.errors %}has-error{% endif %}">
+                                                            {{ form.time_to_call|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please choose a time" }}
+                                                            {% if form.time_to_call.errors %}
+                                                                <span class="help-block">{{ form.time_to_call.errors|join:"<br \>" }}</span>
+                                                            {% endif %}
+                                                        </div>
+
+                                                        <div class="form-group {% if form.email.errors %}has-error{% endif %}"
+                                                             style="margin-bottom: 2px">
+                                                            {{ form.email|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your email address name,placeholder:Enter active email address" }}
+                                                            {% if form.email.errors %}
+                                                                <span class="help-block">{{ form.email.errors|join:"<br \>" }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <!--<small style="color:silver"><i class="glyphicon glyphicon-lock"></i> 100% secure. We respect your privacy.</small>-->
+
+                                                        {% if request.user.is_authenticated %}
+                                                            <input type="hidden" id="pk" name="pk"
+                                                                   value={{ instance_pk }}>
+                                                        {% endif %}
+                                                        <input type="hidden" name="referral_code" value="{{request.referral_code}}">
+                                                        <div class="form-group padding-top-10">
+                                                            <button id="submit_btn" data-loading-text="Loading..."
+                                                                    class="btn btn-lg btn-block btn-primary big-btn"
+                                                                    >{% trans "Next &#x2192;" %}</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            <div>
+    <div id="initiator-section">
+        <div class="font-head blue-font">
+            <span class="h3">&#x20A6;{{ object.price|floatformat|intcomma }}</span><span class="h5">/hr</span><span class="pull-right">per student</span></span><br>
+        </div>
+        <hr>
+        <p>Place a request explaining your needs and we'll connect you with {{ object.tutor.first_name }} in no time.</p>
+        <div class="padding-top-10">
+            <table class="table" border="1">
+                <tr>
+                    <td><i class="fa fa-shield" style="color:orange"></i>&nbsp; Identity Verified</td>
+                </tr>
+                <tr class="">
+                    <td><i class="fa fa-user-plus" style="color:orange"></i>&nbsp;Discount Applies for Extra Students</td>
+                </tr>
+            </table>
+        </div>
+        
+        <a href="javascript:void(0)" class="btn btn-block btn-primary btn-lg"
+           style="padding: 15px 16px; font-size:20px">Request Tutor &#x2192;</a>
+           
+       <!--<div>
+            <small>
+                <img src="{% static "img/gallery/urgency.png" %}" width="8%">
+                Book now!
+                Tutor may not be available after today.
+            </small>
+        </div>
+        <hr>
+        <h6 class="font-head padding-top-bottom-5">
+            <span class="pull-left">info@tuteria.com</span>
+            <span class="pull-right blue-font">Help? {{ tuteria_details.phone_number }}</span>
+        </h6>-->
+    </div>
+</div>
+
+                                        {% endif %}
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                                <!-- box affix right -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block request_section %}
+<div id="launch-section">
+                <!-- Request a Tutor Section -->
+                <div class="row padding-top-50 text-center padding-bottom-50 deepblue-bg space-bottom-mob-20 padding-top-mob-30">
+                    <h3 style="color:white">Got Questions?</h3>
+                    <br>
+
+                    <div>
+                        <!--<a href="{% url 'skill_only_view' object.skill.slug %}" class="btn-lg btn btn-primary">-->
+                        <!--    Request a tutor-->
+                        <!--    &nbsp;-->
+                        <!--    <i class="fa fa-chevron-circle-right"></i>-->
+                        <!--</a>-->
+
+                        <div class="request-box">
+                            <div class="request-icon">
+                                <div class="request-icon-img">
+                                    <img src="{% static 'img/tutor/call.png' %}" class="img-responsive center-block"
+                                         style="width:30px"/>
+                                </div>
+                                <div style="display: inline-block">
+                                        <span class="request-call-icon">
+                                            <small style="color:aqua">{{ tuteria_details.email }}</small>
+                                        </span>
+                                        <span class="request-phone font-head">
+                                            {{ tuteria_details.phone_number }}
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div id="map-canvas"></div>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+
+    {% block google_map_script %}   
+    <script src="{% static 'js/request_form1.bundle.js' %}"></script>
+
+        <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script>
+        <!-- Facebook Conversion Code for Visitors to the How it works Page -->
+
+    {% endblock google_map_script %}
+    
+
+
+{% endblock %}
+

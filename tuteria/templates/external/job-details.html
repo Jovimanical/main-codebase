@@ -1,0 +1,212 @@
+{% extends 'external/tutoring-jobs.html' %}
+{% load staticfiles bootstrap_pagination humanize add_attr cloudinary bootstrap3  %}
+{% block title %}{% if object.is_parent_request %}Home Tutor in {{object.get_vicinity}}
+                            {% else %}{{object.request_subjects.0}} Student in {{object.get_vicinity}}
+                          {% endif %}| Tuteria Nigeria{% endblock title %}
+{% block jumbotron %}{% endblock %}
+{% block fixed %}
+  
+{% endblock fixed %}
+{% block main_content %}
+<div class="row">
+  <div class="body-content clearfix">
+
+        <div class="bg-color2">
+          <div class="container">
+            <div class="row desktop-padding-50">
+              <div class="col-md-9">
+
+                <!-- box item details -->
+                <div class="block-section box-item-details mobile-padding-top">
+                  <h2 class="title font-head bright-blue">{% if object.is_parent_request %}Home Tutor in {{object.get_vicinity}}
+                            {% else %}{{object.request_subjects.0}} Student in {{object.get_vicinity}}
+                          {% endif %}
+                  <br>
+                  <span class="h5 font-head brightblue">Requested by {{object.first_name}}, {{object.created|naturaltime}}</span>
+                  </h2>
+                  <div class="job-meta">
+                    <ul class="list-inline">
+                      <li><i class="fa fa-calendar"></i> Starts {{object.get_class_urgency_display}}</li>
+                      <li><i class="fa fa-money"></i> &#x20A6;{{object.budget|floatformat:0}}</li>
+                      <li class="pull-right font-head text-info">Still open!</li>
+                      {# <li class="pull-right font-head text-danger">Now closed</li> #}
+                    </ul>
+                  </div>
+                  <h4 class="font-head">Client's Goal</h4>
+                  <p>{{object.expectation}}</p>
+                  <h4 class="font-head">Lesson Details</h4>
+                  <div class="row padding-bottom-25">
+                    <div class="col-sm-6 col-md-6">
+                    <h5 class="font-head brightgreen">Student Information</h5>
+                      <ul class="list-unstyled">
+                        <li><span class="color-white-mute">Number:</span> {{object.no_of_students}} student{{object.no_of_students|pluralize}}</li>
+                        {% if object.coc|length >= 1 %}
+                        <li><span class="color-white-mute">Level:</span> {{object.coc|join:","}}</li>                          
+                        {% endif %}
+                        {% if object.curriculum %}                          
+                        <li><span class="color-white-mute">Curriculum:</span> {{object.get_curriculum_display}}</li>
+                        {% endif %}
+                        <li><span class="color-white-mute">Preferred Experience: </span> At least 2 years</li>
+                        <li><span class="color-white-mute">Preferred Gender:</span> {{object.gen}}</li>
+                        <li><span class="color-white-mute">Subjects:</span>
+                          <ul>
+                          {% for subject in object.request_subjects %} 
+                          <li>{{subject}}</li>
+                          {% endfor %}
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                    <h5 class="font-head brightgreen">Lesson Information</h5>
+                      <ul class="list-unstyled">
+                        <li><span class="color-white-mute">No. of Hours:</span> {{object.hours_per_day}} hour{{object.hours_per_day|pluralize}} per day</li>
+                        <li><span class="color-white-mute">Lesson Days:</span> {% for x in object.available_days %}{% if forloop.last %} and {{x|title}} {% else %} {{x|title}} {% if forloop.revcounter0 == 1%}{% else %},{% endif %}{% endif %}                          
+                        {% endfor %}</li>
+                        <li><span class="color-white-mute">Lesson Time:</span> from {{object.time_of_lesson}}</li>
+                        <li><span class="color-white-mute">Preferred Venue:</span> {{object.get_tutoring_location_display}}</li>
+                        <li><span class="color-white-mute">Lesson Duration:</span>
+                           starts with {% if object.days_per_week <= 3 %}{{object.get_days_per_week_display}} {% else %}1 month
+                         {% endif %} </li>
+                      </ul>
+                    </div>
+                  </div>
+
+    <div class="well bg-info">                    
+      <h4 class="font-head no-padding-top">Answer these questions <u>before</u> you indicate interest</h4>
+      <ul>
+        <li>Have you created active subjects for any of the subjects requested?</li>
+        <li>Is your current location close enough to allow you teach this client effectively?</li>
+        <li>Are you sure you're fully available for the requested lesson days and time?</li>
+        <li>Do you fit the client's requirements and can work with their proposed budget?</li>
+      </ul>
+    </div>
+    <div class="get_alert">
+      <div class="row ">          
+              <div class="col-md-9 mobile-padding">
+               <h4 class="no-padding-top">If you answered yes to all 4 questions, then apply now!</h4>
+              </div>
+              {% if request.user.is_authenticated %}
+
+                {% if has_applied_before %}
+                  <div class="col-md-3 mobile-padding space-for-mobile">
+                      You have already indicated interest to teach this subject
+                  </div>  
+                {% else %}              
+                  {% if subjects_taught|length > 0 %}                
+                    {% if object.request_subjects|length == 1 %}          
+                      <form action="{{request.path}}" method="post">
+                        {% csrf_token %}
+                        <div class="col-md-3 mobile-padding space-for-mobile">
+                            <a <a href="#modal-apply" data-toggle="modal" class="btn btn-theme btn-success btn-block">I'm Interested!</a>
+                        </div>  
+                      </form>
+                    {% else %}
+                    <div class="col-md-12">
+                    <form action="{{request.path}}" method="post">
+                      {% csrf_token %}
+                      <p class="no-padding-top">Please select all subjects that need help</p>
+                       <div class="row row-space-4">
+                          {% for subject in form.subjects %}
+                          <div class="col-sm-4 checkbox-space">
+                              {{ subject }}
+                          </div>
+                          {% endfor %}
+                      </div>
+                      <button class="btn btn-primary">Submit</button>
+
+                    </form>
+                      
+                    </div>
+                      
+                    {% endif %}
+                    {% else %}
+                     <!-- <div class="col-md-3 mobile-padding space-for-mobile">
+                          {% if request.user.is_tutor %}
+                            <a href="{% url "users:subject_creation_landing" %}" class="btn btn-theme btn-success btn-block">Create Subject</a>
+                            {% else %}
+                            Your application to tutor is being reviewed.
+                          {% endif %}
+                        </div> -->
+                  {% endif %}
+                {% endif %}
+              {% else %}
+                  <div class="col-md-3 mobile-padding space-for-mobile">
+                      <a href="{% url "become_tutor" %}" class="btn btn-theme btn-success btn-block">Become a tutor</a>                            
+                  </div>
+              {% endif %}
+            
+      </div>
+      <br class="visible-xs">
+      <small class="font-head text-danger space-for-mobile">Only 8 slots left</small>
+    </div>
+                  
+
+                  
+
+                </div><!-- end box item details -->
+
+              </div>
+              <div class="col-md-3">
+
+                <!-- box affix right -->
+                <div class="block-section affix-top" id="affix-box" style="position: relative;">
+                  <div class="text-right">
+                    <p><a href="{% url 'tutoring-jobs' %}" class="btn btn-theme btn-line dark btn-block-xs"><< See all open jobs</a></p>
+
+                    <p>Share This Job <span class="space-inline-10"></span> :</p>
+                    <p class="share-btns">
+                      <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
+                      <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i></a>
+                      <a href="#" class="btn btn-danger"><i class="fa fa-google-plus"></i></a>
+                    </p>
+                  </div>
+                </div><!-- box affix right -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- modal apply -->
+        <div class="modal fade" id="modal-apply">
+          <div class="modal-dialog ">
+            <div class="modal-content">
+              <form>
+                <div class="modal-header ">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title">Hi {{object.user.first_name}}, Apply</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>Full name</label>
+                    <input type="email" class="form-control " placeholder="Enter Email">
+                  </div>
+                  <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" class="form-control " placeholder="Enter Email">
+                  </div>
+                  <div class="form-group">
+                    <label>Tell us why you better?</label>
+                    <textarea class="form-control" rows="6" placeholder="Something Comment"></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-theme" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success btn-theme">Send Application</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div><!-- end modal  apply -->        
+      </div>
+</div>
+{% endblock %}
+{% block request_section %}{% endblock %}
+<<<<<<< HEAD:tuteria/external/templates/external/job-details.html
+=======
+{% block footer %}
+{% endblock footer %}
+{% block bottom_footer %}
+{% endblock %}
+>>>>>>> a128f3eaf962a06f02e86fa0c16ba792441e04cf:tuteria/templates/pages/job-details.html

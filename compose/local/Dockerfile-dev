@@ -1,0 +1,16 @@
+#FROM python:3.6
+FROM revolutionsystems/python:3.6.3-wee-optimized-lto
+ENV PYTHONUNBUFFERED 1
+# Requirements have to be pulled and installed here, otherwise caching won't work
+RUN apt-get update && apt-get install -y git build-essential
+COPY ./requirements/ /requirements
+RUN pip install -U pip
+RUN pip install -r /requirements/local.txt
+COPY ./compose/django/entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r//' /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+RUN pip install django
+RUN echo "hello world holla"
+RUN pip install -e git+https://gitlab.com/gbozee/hubspot-crm.git@master#egg=hubspot
+WORKDIR /app
+CMD ["/entrypoint.sh"]

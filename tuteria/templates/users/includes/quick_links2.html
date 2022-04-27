@@ -1,0 +1,19 @@
+<div class="panel panel-default row-space-4">
+    <h4 class="panel-heading">
+        Quick Links
+    </h4>
+
+    <div class="panel-body">
+        <ul class="list-unstyled">
+            {# <li class="row-space-2"> #}
+                {# <a href="{% url 'users:user_bookings' %}">Upcoming lessons</a> #}
+            {# </li> #}
+            {% for link in usdetails.quick_links %}
+            <li class="row-space-2">
+                <a href="{{link.url}}">{{link.text}}</a>
+            </li>            
+            {% endfor %}
+           
+        </ul>
+    </div>
+</div>

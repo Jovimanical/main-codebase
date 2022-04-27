@@ -1,0 +1,192 @@
+{% extends '_layouts/base-internal.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary bootstrap_pagination %}
+{% load activelink %}
+{% block title %}Transaction History - Tuteria{% endblock title %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/orders.css' %}"/>
+{% endblock %}
+
+{% block user_account %}true{% endblock %}
+{% block user_account2 %}
+    <li>
+        <a href="javascript:void(0)" aria-selected="true" class="subnav-item">Account</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class="container row-space-top-4 row-space-4">
+        <div class="row">
+            <div class="col-sm-3">
+                {% block sidebar %}
+                    <div class="visible-xs row">
+                        <div class="header-2 visible-xs">
+                            <div class="navy">
+                                {% include 'users/account/includes/account-urls.html' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs row">
+                        <div class="sidenav ">
+                            {% include 'users/account/includes/account-urls.html' with url_class='sidenav-list' %}
+                        </div>
+                    </div>
+                {% endblock sidebar %}
+            </div>
+            <div class="col-sm-9 col-xs-12">
+                {% block main_content %}
+                    <div class="panel panel-default row">
+                        <div class="panel-heading"><h4>Payments</h4>
+                        <div class="pull-right money-expected visible-xs" style="margin-top: -15px;"><span class="hint--top" data-hint="From Active Orders">Current Balance: <b>&#8358;{{current_balance|floatformat:"0"}}</b></span>
+                            </div></div>
+                        
+                        {% if object_list|length > 0 %}
+                            <div class="panel-body mp-box">
+                                <div class="db-summary cf hidden-xs">
+                                    <div class="val">
+                                        <span><em>&#8358;{{ total_used_to_hire|floatformat:"0" }}</em><br>DEPOSITS & REVENUE</span>
+                                    </div>
+                                    <div class="val sym sym-minus"><span>-</span></div>
+                                    <div class="summary-calculation">
+                                        <div class="val sym sym-para sym-para-l"><span>(</span></div>
+                                        <div class="calc">
+                                            <div class="val">
+                                            <span>
+                                                <em>&#8358;{{ total_in_session|floatformat:"0" }}</em><br>ACTIVE LESSONS
+                                            </span>
+                                            </div>
+
+                                            <div class="val sym sym-plus"><span>+</span></div>
+                                            <div class="val">
+                                            <span>
+                                                <em>&#8358;{{ total_paid_to_tutor|floatformat:"0" }}</em><br>COMPLETED LESSONS
+                                            </span>
+                                            </div>
+                                            {#                                        <div class="val sym sym-minus"><span>-</span></div>#}
+                                            {#                                        <div class="val">#}
+                                            {#                                            <span>#}
+                                            {#                                                <em>&#8358;{{total_refund|floatformat:"0"}}</em><br>REFUNDS#}
+                                            {#                                            </span>#}
+                                            {#                                        </div>#}
+                                        </div>
+                                        <div class="val sym sym-para sym-para-r"><span>)</span></div>
+                                    </div>
+                                    <div class="val sym sym-equal"><span>=</span></div>
+                                    <div class="val total"><em>&#8358;{{ current_balance|floatformat:"0" }}</em><br>PAYMENT
+                                        <br> BALANCE
+                                    </div>
+                                </div>
+
+
+                                <div class="filter-select cf row-space-2">
+                                    <label for="fake-dropdown">SHOW</label>
+
+                                    <div class="dropdown transac_filter">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                                data-toggle="dropdown" aria-expanded="true"> {{ filter_val }}
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                            {% for url in filtering_options %}
+                                                <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                           href="{{ url.url }}">{{ url.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    Transactions
+                                </div>
+                                <div class="db-main-table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <td class="hidden-xs">DATE</td>
+                                            <td class="el2"><span class="hidden-xs">FOR</span>
+
+                                                <div class="visible-xs">Description</div>
+                                            </td>
+                                            <td>AMOUNT</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for tr in object_list %}
+                                            <tr class="hidden-action-link ">
+                                                <td class="date hidden-xs">{{ tr.modified|date:"b d, y"|title }}</td>
+
+                                                <td class="ellipsis-wrap">
+                                                    <div class="ellipsis"> {{ tr.to_string }}
+                                                        <a class="hidden-xs" href="{{ tr.booking.get_absolute_url }}">(view
+                                                            order)</a>
+                                                </td>
+                                                <td class="amount">
+                                                    {% if tr.transaction_type == "income" %}
+                                                        <span class="money-in">&#8358;{{ tr.total|floatformat:"0" }}</span>
+                                                    {% else %}
+                                                        <span class="money-out">-&#8358;{{ tr.total|floatformat:"0" }}</span>
+                                                    {% endif %}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="pagination-container col-xs-12 margin-top-15">
+                                    <nav class="pagination-margin pull-left">
+                                        {% bootstrap_paginate page_obj range=5 first_label="&#x2190;" last_label="&#x2192;" show_prev_next="false" show_first_last="true" %}
+                                    </nav>
+                                </div>
+                             
+                              </div>
+                  
+                        {% else %}
+                            <div class="panel-body">
+                                <p>
+                                    You have no transactions.
+                                </p>
+
+                            </div>
+                        {% endif %}
+
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block request_section %}
+        <section class="row protection large-padding">
+        <div class="page-container-full">
+            <div class="row">
+                <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+                    <div class="media-photo padding-bottom-25">
+                        <img width="85" height="85"
+                        src="{% static "img/gallery/gift1.png" %}">
+                    </div>
+                    <h2>
+                        <span class="font-head">
+                          Earn More Money
+                      </span>
+                  </h2>
+                  <p>Get 10% for 3 months for every client you refer to Tuteria.</p>
+
+                <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+                    <a href="{% url 'request_meeting_redirect' %}" class="btn btn-danger btn-lg big-btn col-sm-12 col-xs-12" style="padding: 10px 40px">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+    </script>
+    <script>window.currentPage = "Payout"</script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+{% endblock javascript %}
+{% block notification_tawk %}
+{% endblock %}

@@ -1,0 +1,35 @@
+<!-- Modal -->
+
+<div class="modal fade" id="search_only_form" tabindex="-1" role="dialog" aria-labelledby="search_only_form">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <form id="filterForm" action="{% url 'skill_search' %}"
+                  method="get" class="smart-forms">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title font-head text-center" id="myModalLabel">Search</h4>
+                </div>
+                <div class="modal-body pad-down-15">
+                    {# {% cache 20000 search_form_page %} #}
+                    {% include "includes/search/home-search.html" %}
+                    {# {% endcache %} #}
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <button id="filter-result"
+                                    class="btn btn-primary btn-lg margin-top-15 pull-right btn-block btn-block-tablet-portrait">
+                                <i class="fa fa-search"></i>&nbsp; Find your tutor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="map-canvas" class="hidden"></div>

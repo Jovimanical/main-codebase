@@ -1,0 +1,217 @@
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc bootstrap_pagination embed_video_tags activelink cache %}
+{% if request.user == my_object.tutor %}
+<div class="pad-down-5">
+    <div class="well bg-info">
+    <h4 class="no-padding-top no-margin-top font-head">Preview your subject</h4>
+    <p class="no-margin-bottom">This is how your {{ my_object.skill.name }} profile appears to clients. Do you think your description will convince them to hire you over other tutors? If not, you may edit the subject or add a new one.</p>
+</div>
+</div>
+{% endif %}
+<div class="resume-block">
+    <div class="img-profile">
+        {% cloudinary my_object.profile_pic TS_THUMBNAIL alt=my_object.tutor.slug %}
+        <br><span class="visible-xs font-head blue-font space-for-mobile text-center"><span
+                class="h4">&#x20A6;{{ my_object.price|floatformat|intcomma }}</span><span class="h5">/hr</span></span>
+        <!--{% if request.user.is_staff or request.user == object.tutor %}-->
+        <!--<br>-->
+        <!--<span class="visible-xs font-head blue-font space-for-mobile text-center"><span-->
+        <!--        class="h4">&#x20A6;{{ my_object.price|floatformat|intcomma }}</span><span class="h5">/hr</span></span>-->
+        <!--{% endif %}-->
+    </div>
+    <div class="desc">
+        <div class="section-padding">
+            <h2>{{ my_object.tutor.first_name }} <span class="font-head brightgreen h5" style="padding-bottom: 10px">(ID Verified)</span>
+                    <span class="pull-right blue-font font-head">
+                        {% if request.user.is_staff %}                        
+                        <span class="h3">&#x20A6;{{ my_object.price|floatformat|intcomma }}/hr</span>
+                        {% endif %}
+                    </span>
+                    </h2>
+            <h4 itemprop="name" style="padding-top:0" class="font-head"
+                title="{{ my_object.heading }}">{{ my_object.heading|capfirst }}</h4>
+            <ul class="list-inline">
+            {% with hours_taught=my_object.no_of_hours_taught %}
+                {% if hours_taught > 0 %}                    
+                    <li>
+                        <i class="fa fa-clock-o brightblue"></i> {{hours_taught|floatformat}} Hours Taught
+                    </li>
+                {% endif %}
+            {% endwith %}
+            
+            {% if request.user.is_staff %}
+            <li>
+                <i class="fa fa-bookmark brightblue"></i> {{active_bookings}} Active Booking{{active_bookings|pluralize}}
+            </li>
+            {% endif %}
+
+                <li itemprop='aggregateRating' itemscope
+                    itemtype="http://schema.org/AggregateRating"
+                    data-location="{{ my_object.location }}"><i class="fa fa-map-marker brightblue"></i> {{ my_object.location }}
+                </li>                
+
+                {% if my_object.review_count > 0 %}
+                    {% if request.is_featured %}
+                        <li><span class="rate">
+          {% for star in my_object.rating_integer %}
+              <span class="opera-star">★</span>
+          {% endfor %}
+                            {% if my_object.rating_decimal %}
+                                <i class="fa fa-star-half-o"></i>
+                            {% endif %}
+        </span> ({{ my_object.review_count }})
+                        </li>
+                    {% else %}
+                        <li><span class="rate">
+
+          {% for star in my_object.rating_integer %}
+              <i class="fa fa-star"></i>
+          {% endfor %}
+                            {% if my_object.rating_decimal %}
+                                <i class="fa fa-star-half-o"></i>
+                            {% endif %}
+        </span> ({{ my_object.review_count }})
+                        </li>
+
+                    {% endif %}
+                {% else %}
+                {% endif %}
+
+            </ul>
+        </div>
+
+        <h3 class="resume-sub-title"><span>How I can help</span></h3>
+
+        <div>
+            <h4 class="font-head margin-down-5">{{ my_object.skill.name }}</h4>
+            <h5 class="font-head brightgreen">
+                {% with pro=my_object.tutor.profile %}
+                    {% if my_object.tutor.years_of_experience %}
+                        {{ my_object.tutor.years_of_experience }}
+                    {% endif %}
+                {% endwith %}
+            </h5>
+            <!--<h5 class="font-head">Between 3-5 years</h5>-->
+
+            <!-- Exhibit if Any -->
+            <div class="">
+                {{ my_object.video.thumbnail }}
+                {# {% if True %} #}
+                {% if my_object.has_exhibition %}
+                    <div id="tutor-video" class="">
+                        <div class="row-space-4">
+                            <div class="flexslider">
+                                <ul class="slides">
+                                    {% comment %} {% if my_object.has_video %}
+                                        {% if not request.is_featured %}
+                                            {% video my_object.video as my_video %}
+                                            <li data-thumb="{{ my_video.thumbnail }}">
+                                                <div class="embed-responsive embed-responsive-16by9">
+                                                    {% video my_video '100% x 50%' rel=0 modestbranding=1 showinfo=0 controls=0 %}
+                                                        </div>
+                                                        </li>
+                                                    {% endvideo %}
+                                        {% endif %}
+                                    {% endif %} {% endcomment %}
+                                    {% for exhibition in my_object.tutor_exhibitions %}
+                                        {# {% for exhibition in "**" %} #}
+                                        {# <li data-thumb="{% static 'img/backgrounds/background5_pc.jpg' %}"> #}
+                                        <li data-thumb="{% cloudinary_url exhibition.image crop="fill" height=121 width=161 %}">
+                                            <img class="img-responsive"
+                                                 src="{% cloudinary_url exhibition.image crop="fill" height=520 width=692 %}"/>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 no-padding-top">
+                        <div class="row">
+                            <h6 class="pull-right color-white-mute"><em>Exhibit of tutor's work</em></h6>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <p>{{ my_object.description|capfirst|linebreaksbr }}</p>
+            {% if other_subjects|length > 0 %}
+                <h5 class="font-head">{{ my_object.tutor.first_name }} also teaches:</h5>
+                    {% for sk in other_subjects %}
+                        <a href="{{ sk.get_absolute_url }}" style="text-decoration:none; color:#5e5e5e">{{ sk.skill.name }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}</p>
+            {% endif %}
+            {% with pro=my_object.tutor.profile %}
+                {% if my_object.levels_taught|length > 0 %}
+                    <p><span class="font-head"><b>Levels taught:</b></span> {% for x in my_object.levels_taught %}
+                        {% if forloop.last and forloop.counter > 1 %} and {{ x|title }} {% else %} {{ x|title }}{% if forloop.revcounter0 == 1 %}{% else %},{% endif %}{% endif %}
+                    {% endfor %}</p>
+
+                {% endif %}
+
+                {% if my_object.curriculum_used|length > 0 %}
+                    <h5 class="font-head">Teaching Curriculum: <span class="blue-font">{{ my_object.curriculum_used|join:", " }}</span></h5>
+                    {% if pro.curriculum_explanation %}
+                        <p>{{ pro.curriculum_explanation }}</p>
+                    {% endif %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <h3 class="resume-sub-title"><span>Travel Policy</span></h3>
+
+        <div>
+            <h4>{{ my_object.travel_policy }}</h4>
+            {% if my_object.tutor.tutoring_address == 'user' %}
+                <p>{{ my_object.travel_policy_text }}</p>
+            {% endif %}
+            {% if my_object.tutor.tutoring_address == 'neutral' %}
+                When you book lessons, they'll be delivered at your home or
+                anywhere else
+                you both agree - whichever works best for you.
+            {% endif %}
+            {% if my_object.tutor.tutoring_address == 'tutor' %}
+                <p>Reason: {{ my_object.tutor.profile.address_reason|title }}</p>
+            {% endif %}
+        </div>
+
+
+        {% with my_educations=my_object.tutor.education_set.all workexperiences=my_object.tutor.workexperience_set.all certificate_awards=my_object.skillcertificate_set.active %}
+            {% if my_educations|length > 0 %}
+                <h3 class="resume-sub-title"><span>Education History</span></h3>
+                {% for school in my_educations %}
+                    <h4>{{ school.degree }} in {{ school.course }}</h4>
+                    <h5>{{ school.school }}</h5>
+                {% endfor %}
+            {% endif %}
+            {% if request.user.is_staff %}
+                
+            {% if workexperiences|length > 0 %}
+                <h3 class="resume-sub-title"><span>Work Experience</span></h3>
+
+                {% for we in workexperiences %}
+                    <h4>{{ we.role }} {% if we.currently_work %}
+                        <span class="brightgreen h5">(current)</span> {% endif %}</h4>
+                    <h5>{{ we.name }}</h5>
+                {% endfor %}
+            {% endif %}
+            {% endif %}
+            {% if certificate_awards|length > 0 %}
+                <h3 class="resume-sub-title"><span>Certificate & Awards</span></h3>
+                {% for certification in certificate_awards %}
+                    <h4>{{ certification.award_name }}</h4>
+                    <h5>{{ certification.award_institution }}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h3 class="resume-sub-title"><span>About {{ my_object.tutor.first_name }}</span></h3>
+
+        <h4>Private {{ my_object.skill.name }} Tutor in {{ my_object.location }}</h4>
+
+        <p class="margin-top-bottom-10">
+            {% if my_object.tutor.profile.description %}
+                {{ my_object.tutor.profile.description|capfirst }}
+            {% endif %}</p>
+
+    </div>
+</div><!-- end box item details -->

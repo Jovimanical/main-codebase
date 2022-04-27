@@ -1,0 +1,447 @@
+{% extends '_layouts/base-external.html' %}
+{% load static from staticfiles %}
+{% load account %}
+{% block fixed %}{% endblock %}
+{% block nav_class %}transparent-nav{% endblock %}
+{% block title %}Find a Private Tutor Near You & Learn What Matters to You - Tuteria{% endblock title %}
+
+{% block css %}
+    {{ block.super }}
+    {#    <link rel="stylesheet" href="{% static "css/main.css" %}">#}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/carousel-css.css' %}"/>
+    <style>
+        .well.around {
+            border: 2px solid #d9edf7;
+        }
+
+        .well.styling {
+            background-color: rgba(250, 217, 32, 0.31);
+            border: none;
+        }
+
+        .pac-container {
+            background-color: #FFF;
+            z-index: 10000000;
+            position: fixed;
+            display: inline-block;
+            float: left;
+        }
+
+        {#            .modal {#}
+        {#                z-index: 20;#}
+        {#            }#}
+        {##}
+        {#            .modal-backdrop {#}
+        {#                z-index: 10;#}
+        {#            }#}
+
+        @media (max-width: 768px) {
+            .well.styling {
+                text-align: center;
+            }
+
+            .input-addon {
+                display: table;
+                width: 100%;
+            }
+
+            .fake-search-field {
+                background-color: #fff;
+            }
+
+            .input-large {
+                font-size: 15px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .input-stem {
+                display: table-cell;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .btn.fa.icon-full {
+                font-size: 19px;
+            }
+
+            .input-suffix.btn {
+                padding-top: 11px;
+                padding-bottom: 11px;
+                margin-left: -45px;
+            }
+
+            .pac-container {
+                background-color: #FFF;
+            {#                z-index: 20;#} position: fixed;
+                display: inline-block;
+                float: left;
+            }
+
+            .modal {
+                z-index: 20;
+            }
+
+            .modal-backdrop {
+                z-index: 10;
+            }
+
+            ​
+        }
+
+        .icon-pos {
+            width: 150px;
+            position: absolute;
+            top: 20px;
+            left: -125px;
+        }
+
+    </style>
+{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block data-ride %}data-ride="carousel"{% endblock data-ride %}
+{% block carousel_image %}
+    {% if request.is_phone %}
+        <div class="item active">
+            <div class="caro bg1"></div>
+        </div>
+    {% else %}
+        {% for carousel_content in carousels %}
+            <div class="item {% if forloop.first %}active{% endif %}">
+                <div class="caro {{ carousel_content.icon_class }}"></div>
+
+                <div id="how-it-works" class="carousel-caption pull-left trans-label">
+                <span class="reset-this caption-text">{{ carousel_content.caption }}
+                </span>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock carousel_image %}
+{% block carousel_content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-12 text-center padding-top-25">
+            <div class="row">
+                <div class="jumbo-header"><h2 id="header_title">FIND YOUR PERFECT TUTOR</h2>
+
+                    <p class="grey">Book private lessons with screened teachers and instructors in your community</p>
+                    <br>
+                </div>
+            </div>
+
+            <div class="visible-xs row">
+                {% if request.is_featured or request.is_bb_featured %}
+                    <a href="{% url 'search' %}" class="btn btn-primary col-xs-12">Find a tutor </a>
+                {% else %}
+                    <div class="input-addon js-p1-search-cta" data-toggle="modal" data-target="#search_only_form"
+                         id="sm-search-field">
+                <span class="input-stem text-center input-large fake-search-field pad-right-40">
+                  What do you want to learn?
+                </span>
+                        <i class="input-suffix btn btn-primary fa icon-full fa-search no-border-radius"></i>
+                    </div>
+                {% endif %}
+            </div>
+            {% if not request.is_featured %}
+                <div class="col-sm-12 col-sm-offset-0 col-md-10 col-md-offset-1">
+                    <form action="{% url 'search' %}" method="get" id="home_search_form" novalidate class="hidden-xs">
+
+                        <div class="smart-forms clearfix">
+                            <div>
+                                <div class="row searcbox">
+                                    <div class="inpp">
+                                        <label class="field">
+                                            <!-- Input box -->
+                                            <input type="text" name="query" id="skill_search"
+                                                   class="gui-input typeahead" required="true"
+                                                   placeholder="What subject do you need help with?"
+                                                   min-length="2"
+                                                   data-parsley-errors-container="#err"
+                                                   data-parsley-error-message="Must be at least two characters long.">
+                                        </label>
+                                    </div>
+                                    <div class="inpp ssm">
+                                        <label class="field ">
+                                            <!-- Input box -->
+                                            <input type="text" name="location" id="location_search" list="location_list"
+                                                   class="gui-input" placeholder="Where do you live?">
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="latitude" id="l_latitude"/>
+                                    <input type="hidden" name="longitude" id="l_longitude"/>
+
+                                    <div class="pull-right but">
+                                        <button class="btn btn-primary btn-lg btn-block"
+                                                >Get Started
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="carousel-error-container" class="text-left search-hint hidden-xs">
+                                <small id="err"></small>
+                            </div>
+                            <input type="hidden" id="geocoded" name="geocoded" value="false"/>
+                        </div>
+                    </form>
+
+                    <img src="{% static "img/backgrounds/starthere.png" %}" class="icon-pos hidden-xs"/>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock carousel_content %}
+{% block main_content %}
+
+    <section id="firstss" class="row">
+        <div class="container no-padding-total row-space-bottom-5">
+            <div id="how-it-works"
+                 class="row col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wrapper-full padding-top-50 padding-bottom-50 padding-bottom-mob-0 clearfix text-center">
+                <br><br>
+                {% if request.is_featured %}
+                    <h2 class=""><b>{% if request.user.is_authenticated %}Hi {{ request.user.first_name }}! Let's walk
+                        you through {% else %}Welcome, let's walk you through {% endif %}</b></h2>
+                {% else %}
+                    <h2 class="">{% if request.user.is_authenticated %}Hi {{ request.user.first_name }}! Let's walk you
+                        through {% else %}Welcome, let's walk you through {% endif %}</h2> {% endif %}
+                <p>Tuteria is the reliable way to connect with quality private teachers in your community and is as
+                    simple to use as 1 - 2 - 3</p>
+            </div>
+            <div class="icon-box-6">
+                {% for info in infographics_content %}
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="{{ info.icon_class }}"></i>
+
+                            <h3 class="text-center"> {% if request.is_featured %}
+                                <b>{{ info.heading }}</b>    {% else %}{{ info.heading }}
+                            {% endif %}</h3>
+                    <span class="inline-block">{{ info.content }}
+                    </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section id="top-business-section" class="hidden-xs">
+        <div class="mypanel row" style="z-index: 2">
+            <!-- Panel heading -->
+            <section id="top-business" class="container padding-top-50 padding-bottom-mob-0">
+                <div class=" text-center ">
+                    <br>
+                    {% if request.is_featured %}
+                        <h2 class="">
+                            <b>Together, we'll help reach your goals faster</b>
+                        </h2>
+                    {% else %}
+                        <h2 class="">
+                            Together, we'll help reach your goals faster
+                        </h2>
+                    {% endif %}
+                    <p>Leave struggling behind, and hire qualified tutors from our most popular categories</p>
+                </div>
+                <!-- Panel body -->
+                <div class="panel-body padding-bottom-50 padding-bottom-mob-0 ">
+                    {% for business in top_businesses %}
+                        <div class="col-sm-6  col-md-4 padding-0">
+                            <a href="{{ business.url }}" class="blue">
+                                <div class="featured_category boox center-block thumbnail">
+                                    <img src="{{ business.img }}">
+
+                                    <div class="box-content bg-white padd-5 blue-hover">
+                                        <h4>{{ business.heading }}</h4>
+
+                                        <div class="help-block row">
+                                            {% for tag in business.tags %}
+                                                <span class="col-xs-4">{{ tag }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </section>
+    <section id="one-on-one-first" class="row padding-bottom-50 padding-top-50 padding-bottom-mob-0 pad-20-mob blue-bg">
+        <div class="sidebar_by_side row-space-top-1 row-space-4" style="">
+            <div class="col-sm-7 col-md-8 row-space-4 hidden-xs">
+                <i class="book_sample"></i>
+            </div>
+            <div class="col-sm-5 col-md-4 icon-content holla padding-top-mob-0 pad-right-10">
+                {% if request.is_featured %}
+                    <h2 class="">
+                        <b>Get quality private tutoring <span style="color:red">whenever</span> you need it</b>
+                    </h2>
+                {% else %}
+                    <h2 class="">
+                        Get quality private tutoring <span style="color:red">whenever</span> you need it
+                    </h2>
+                {% endif %}
+
+                <p>For example, you can find a male SAT Math teacher who lives within 5km from you, aged between 25 and
+                    30 years, has at least a B.Sc, teaches in a school and charges not more than ₦1,500 per hour (or per
+                    month), and then hire him for just a few hours to help brush up for the exam, or hire him for a
+                    month or two - whichever works best for you.</p>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        {% if request.is_featured %}
+                            <a href="{% url 'search' %}" class="btn btn-danger col-xs-12">Find your tutor</a>
+                        {% else %}
+                            <button type="button" class="btn btn-danger btn-lg col-xs-12"
+                                    data-toggle="modal" data-target="#search_only_form"><i class="fa fa-search"></i>&nbsp;Find
+                                tutor
+                            </button>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-sm-offset-1 col-md-offset-1 hidden-xs">
+                        <a href="{% url 'how_it_works' %}" class="btn btn-cancel btn-lg">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonialz" class="testimonials-one padding-top-50 padding-top-mob-0 row-space-bottom-5 row">
+        <div class="row-space-bottom-5">
+            <br>
+            {% if request.is_featured %}
+                <h2 class="black text-center"><b>Trusted by parents and students</b></h2>
+            {% else %}
+                <h2 class="black text-center">Trusted by parents and students</h2>
+            {% endif %}
+            <div class="col-sm-12 col-md-12 col-xs-12 text-center row-space-bottom-5">
+                <div class="fb-like" data-href="https://www.facebook.com/tuteriacorp" data-layout="button_count"
+                     data-width="280px" data-action="like" data-show-faces="false" data-share="false"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for testimonial in testimonials %}
+                    <div class="col-sm-6 col-xs-12 row-space-4">
+                        <div class="media ">
+                            <div class="media-photo media-round pull-left text-center">
+                                <img alt="{{ testimonial.alt }}" height="69" class="img-circle"
+                                     src="{{ testimonial.img }}" width="69">
+                            </div>
+                            <div class="media-body">
+                                <div class="panel panel-quote panel-light">
+                                    <div class="panel-body">
+                                        <p>{{ testimonial.content }}
+                                        </p>
+
+                                        <p class="text-muted">
+                                            <span class="person pull-left">{{ testimonial.alt }}</span>
+                                            <span class="location pull-right">{{ testimonial.location }}</span></p>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="well styling col-sm-10 col-xs-12 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="row">
+                    <div class="col-sm-8 col-xs-12">
+                        <h3>
+                            {% if request.is_featured %}
+                                <b>Need help finding great tutors?</b>
+                            {% else %}
+                                Need help finding great tutors?
+                            {% endif %}
+                        </h3>
+
+                        <p>We've hand-picked the best tutors nationwide</p>
+                    </div>
+                    <div class="col-sm-4 col-xs-12 ">
+                        {% if request.is_featured %}
+                            <a href="{% url 'search' %}" class="btn btn-primary col-xs-12">Search Now!</a>
+                        {% else %}
+                            <button type="button" class="btn btn-primary col-xs-12 btn-lg center-block"
+                                    data-toggle="modal" data-target="#search_only_form">Search Now!
+                            </button>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="one-on-one-fourth" class="padding-top-50 row white-bg">
+        <div class="container side_by_side">
+            <div class="col-sm-6 icon-content row-space-4">
+                <h2 class="">
+                    {% if request.is_featured %}<b>A community built on quality & safety</b>
+                    {% else %}A community built on quality & safety{% endif %}</h2>
+                        <span>
+                            Your peace of mind is everything. We're very serious about safety and have gone the extra mile to create a most trusted and reliable tutoring experience.
+                            <br><br>
+                            <ul class="list-mobile list-unstyled list-with-icons no-margin-bottom">
+                                {% for check_item in trust_checks %}
+                                    <li class="">
+                                        <i class="fa fa-check check-size"></i>
+                                        &nbsp;
+                                        {{ check_item }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </span>
+                <br>
+                <a href="{% url 'trust_safety' %}" class="action-link">
+                    Learn more about safety on Tuteria &#8594;
+                </a>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1 featured-tutor hidden-xs">
+
+                <div class="featured-tutor-image"></div>
+                <h5><b>Kehinde I.,</b> teaches Maths and Physics (MSc. Agric & Environ Engr.) </h5>
+            </div>
+        </div>
+    </section>
+    <section id="one-on-one-fourth" class="padding-top-50 row white-bg pad-20-top-mob">
+        <div class="container side_by_side">
+            <h4 class="hidden-xs"><em>Support, media, awards</em></h4>
+            <h5 class="visible-xs"><em>Support, media, awards</em></h5>
+        </div>
+    </section>
+    <hr style="margin: 0;">
+    {% include "includes/achievments.html" %}
+    <hr style="margin: 0;">
+
+    <section id="tutor-action" class="row white-bg">
+        {% with button_text="Become a tutor today" carousel_title="Passionate about teaching?" %}
+            {% include "includes/tutor_carousel.html" %}
+        {% endwith %}
+    </section>
+
+    {% if not request.is_featured %}
+        {% include "includes/search/search-modal.html" %}
+    {% endif %}
+
+
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+
+    <script src="{% static 'js/home.bundle.js' %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&sensor=false&callback=initializeCallback"></script>
+{% endblock %}
+

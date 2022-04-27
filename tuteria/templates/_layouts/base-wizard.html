@@ -1,0 +1,116 @@
+{% extends '_layouts/base.html' %}
+{% load staticfiles %}
+{% load activelink %}
+
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with regular_layout=True placeholder=search_placeholder tutor_registration_view=True %}
+{% endblock nav %}
+{% block footer %} {% endblock %}
+{% block bottom_footer %}{% endblock %}
+{% block css %}
+    {{ block.super }}
+    {# <link href="{% static 'css/wizard.css' %}" rel="stylesheet"> #}
+
+{% endblock %}
+{% block opera_header %}
+    {% if request.is_featured %}        
+       {% include "includes/operamini-flash.html" %}
+    {% endif %}    
+{% endblock opera_header %}
+{% block fixed %}profile-header{% endblock %}
+{% block sub_nav %} {% endblock %}
+{% block content %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl">
+
+{#        <div id="body-container" class="container hidden">#}
+        <div id="body-container" class="container {% if not request.is_featured %}hidden{% endif %}">
+            <div class="{% block col_size %}col-sm-10 col-sm-offset-1{% endblock col_size %} col-xs-12">
+                <div class="row">
+                    <!--<div class="col-sm-12 br-bottom-md">-->
+                        {% block wizard_title %}
+
+                        {% endblock wizard_title %}
+
+                    <!--</div>-->
+                </div>
+                {% block react_rendering %}
+                    {% block process %}
+                        <div class="row br-bottom-md row-space-4">
+                            <div class="col-sm-12">
+                                {% block processbar %}
+                                    <div class="processbar row">
+                                        <div class="processbar-steps">
+                                            {% block wizard_progress %}
+                                            {% endblock wizard_progress %}
+                                        </div>
+                                    </div>
+                                {% endblock processbar %}
+
+                            </div>
+                        </div>
+                    {% endblock process %}
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {% block wizard_container %}
+                                <div id="wizard-container" class="row well bordered spaced-bottom-lg">
+                                    {% block main_content %}
+                                    {% endblock main_content %}
+
+                                </div>
+
+                            {% endblock wizard_container %}
+                        </div>
+                    </div>
+                {% endblock react_rendering %}
+
+            </div>
+            {% block infographics %}
+                {% if not request.is_featured %}
+                    <div id="how-it-works" class="hidden-xs wrapper-full clearfix text-center">
+                        <div class="icon-box-6 text-center">
+                            <div class=" col-sm-4">
+                                <div class="icon-box-6-item">
+                                    <img src="{% static 'img/tuteria/teach.png' %}" alt="" style="width:80px">
+
+                                    <h5 class="black" style="font-size:15px"><b>Teach More People</b><br>
+                                    </h5>
+                                        <span style="font-size:14px">Receive constant lesson requests from clients in your area
+                                        </span>
+                                </div>
+                            </div>
+                            <div class=" col-sm-4">
+                                <div class="icon-box-6-item">
+                                    <img src="{% static 'img/tuteria/payment.png' %}" alt="" style="width:80px">
+
+                                    <h5 class="black" style="font-size:15px"><b>Make Extra Money</b><br>
+
+                                    </h5>
+                                        <span style="font-size:14px">Enjoy secure, instant payments for all completed lessons
+                                        </span>
+                                </div>
+                            </div>
+                            <div class=" col-sm-4">
+                                <div class="icon-box-6-item myicon">
+                                    <img src="{% static 'img/tutor/quality.png' %}" alt="" style="width:80px">
+
+                                    <h5 class="black" style="font-size:15px"><b>Build Your Reputation</b><br>
+
+                                    </h5>
+                                        <span style="font-size:14px">Grow your income & influence within our trusted community
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {% endif %}
+            {% endblock infographics %}
+
+        </div>
+
+    </div>
+{% endblock %}

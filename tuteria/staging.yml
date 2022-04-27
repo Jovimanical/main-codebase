@@ -1,0 +1,92 @@
+redis:
+  extends:
+    file: common.yml 
+    service: redis 
+
+rabbitmq:
+  extends:
+    file: common.yml 
+    service: rabbitmq 
+
+dbdata:
+  extends:
+    file: common.yml 
+    service: dbdata
+  volumes:
+    - /var/lib/postgresql/data
+    - /tmp/
+    - /var/tuteria
+
+db:
+  extends:
+    file: common.yml 
+    service: db
+  volumes_from:
+    - dbdata
+
+celery:
+  extends:
+    file: common.yml 
+    service: celery 
+  links:
+    - db:db_server
+    - redis:redis_server
+    - rabbitmq:rabbitmq_server  
+
+flower:
+  extends:
+    file: common.yml 
+    service: flower  
+  links:
+    - db:db_server
+    - redis:redis_server
+    - rabbitmq:rabbitmq_server
+
+dev1:
+  extends:
+    file: common.yml 
+    service: dev 
+  env_file:
+    - ./env/prod.env
+  command: /scripts/run_server.sh 1>&2
+  links:
+    - db:db_server
+    - redis:redis_server
+    - rabbitmq:rabbitmq_server
+  volumes_from:
+    - dbdata
+
+dev2:
+  extends:
+    file: common.yml 
+    service: dev 
+  command: /scripts/run_server.sh 1>&2
+  env_file:
+    - ./env/prod.env
+  links:
+    - db:db_server
+    - redis:redis_server
+    - rabbitmq:rabbitmq_server
+  volumes_from:
+    - dbdata
+
+haproxy:
+  image: tutum/haproxy
+  links:
+      - dev1
+      - dev2
+  environment:
+      - BACKEND_PORT=8000
+
+webserver:
+  extends:
+    file: common.yml 
+    service: webserver
+  volumes_from:
+    - dbdata
+  # volumes:
+  #   - /tuteria/sandbox/webserver/conf/conf.d:/etc/nginx/conf:ro
+  #   - /tuteria/sandbox/webserver/conf/html:/etc/nginx/html
+  links:
+    # - haproxy:haproxy_server
+    - haproxy

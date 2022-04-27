@@ -1,0 +1,96 @@
+{% extends '_layouts/base-wizard.html' %}
+{% load staticfiles i18n bootstrap3 %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/tutor-registration.css' %}">
+    <script> window.categories_json = JSON.parse('{{ categories|escapejs }}');</script>
+    {% if request.is_featured %}
+    {% if django_conf == 'Production' or django_conf == 'StagingProd' %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% else %}
+        <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    {% endif %}
+    <script src=""></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.27/angular.min.js"></script>
+          <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
+          <script type="text/javascript"
+                    src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+          <script>window.Bloodhound  = {};
+          window.CreateStep = 1
+            MathJax.Hub.Config({
+                skipStartupTypeset: true,
+                messageStyle: "none",
+                "HTML-CSS": {
+                    showMathMenu: false
+                }
+            });
+            MathJax.Hub.Configured();
+            window.quiz_details = {
+                url:"{{quiz.url}}",
+                passmark:"{{skill.passmark}}",
+                skill_slug:"{{skill.slug}}"
+            };
+          </script>
+        <script src="{% static "js/subject_create_mini.bundle.js" %}"></script>
+               
+    {% endif %}
+{% endblock css %}
+{% block title %}Create Subjects, Skills & Exams You Can Teach{% endblock title %}
+{% block process %}
+    <section class="row text-center">
+        <div class="col-sm-12 padding-bottom-50 padding-top-50">
+            <h2 style="font-weight: 700px">{{skill.name}} Quiz</h2>
+
+            <p style="font-size: 15px">This quiz has a duration of {{skill.duration}} minutes. Do not refresh this page or you would be marked as failed.</p>
+        </div>
+    </section>
+{% endblock process %}
+{% block main_content %}
+    <div class="row">
+        {% block left_column %}
+            <div class="col-sm-12">
+                {% verbatim %}
+                    <div id="containing-container">
+                        <div class="row">
+                            <div class="col-xs-12" ng-controller="QuizCtrl">
+                                <div class="quiz-item row-space-4" ng-repeat="question in quiz.questions">
+                                    {{$index+1}}. <span class="question" dynamic="question.question"> </span>
+                                    <div class="radio-options">
+                                      <div class="radio quiz-option" ng-repeat="answer in question.options">
+                                        <label>
+                                          <input type="radio" name="{{question.id}}" id="question{{question.id}}-{{$index}}" ng-model="$parent.answer"
+                                            value="{{answer}}" ng-change="question.answerQuestion(answer)"/>
+                                            <span dynamic="answer.text"></span>                             
+                                        </label>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-4 col-sm-offset-8">
+                                    <button class="btn btn-lg btn-block btn-warning" ng-click="viewResult()">Submit</button>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endverbatim %}
+            </div>
+        {% endblock left_column %}
+    </div>
+{% endblock main_content %}
+{% block javascript %}
+    {{ block.super }}
+    {% block custom_js %}
+        
+        <script>
+                $('#body-container').removeClass('hidden');
+            </script>        
+    {% endblock %}
+    {% block request_section %}{% endblock request_section %}
+
+{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}

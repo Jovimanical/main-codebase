@@ -1,0 +1,42 @@
+{% load cloudinary %}
+
+<div id="myCarousel" class="carousel slide hidden-xs">
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        {% for gr in groups %}
+        <div class="item {% if forloop.forloop.counter == 1 %}active {% endif %}">
+            <div class="row">
+                {% for skill in gr %}
+                <div class="col-sm-4 visible-sm tutor center-block tt-tutor-details">
+                    <a class="tt" href="{{ skill.get_absolute_url }}">
+                        <div class="ticontain">
+                            {% cloudinary skill.profile_pic SEARCH_THUMBNAIL alt=skill.skill.name %}
+                        </div>
+                        <div class="tutor-profile-content">
+                            <div class="profile-heading">
+                                <h3 class="">{{ skill.skill.name }}</h3>
+                                {# {% if skill.reviews.exists %} #}
+                                {# <div class="rating"> #}
+                                    {# {{ skill.reviews|length }} Review{{ skill.reviews|length|pluralize }} #}
+                                {# </div> #}
+                                {# {% endif %} #}
+                            </div>
+                            <hr/>
+                            <p>{{ skill.heading }}</p>
+                        </div>
+                        <div class="t-footer">
+                            <div class="price hourly_price">
+                                <b>&#8358;{{ skill.price|floatformat:"0"}}</b>/hr
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>    
+        {% endfor %}
+    </div>
+
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>

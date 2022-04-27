@@ -1,0 +1,57 @@
+{% load static %}
+<html>
+<head>
+    <title>Django + React + Webpack demo</title>
+    <link rel="stylesheet" href="{% static 'css/external.css' %}">
+    <style>
+        h1 {
+            border-bottom: 1px solid #ddd;
+        }
+
+        h2 {
+            border-bottom: 1px solid #eee;
+        }
+
+        form label {
+            display: block;
+        }
+
+        form button {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Django + React + Webpack demo</h1>
+
+    <p>
+        The combination of server-side rendering & form-handling with client-side interactivity
+        enables this page to perform similarly with or without JavaScript enabled.
+    </p>
+
+    <p>
+        {% if no_js %}
+            <a href="{% url 'index' %}">View this page with JavaScript</a>
+        {% else %}
+            <a href="{% url 'index-no-js' %}">View this page without JavaScript</a>
+        {% endif %}
+    </p>
+    <!-- Insert the CommentBox's rendered markup -->
+    <div id="content">{{ comment_box }}</div>
+</div>
+{% if not no_js %}
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        (function () {
+            // In the webpack.config.js file, we specify a `library` property
+            // which allows us to define a global function that is the entry point
+            // of the bundle.
+            // Call it and pass in the same properties as on the server side.
+            main({{ comment_box.render_props }});
+            console.log({{comment_box.render_props}})
+        })();
+    </script>
+{% endif %}
+</body>
+</html>

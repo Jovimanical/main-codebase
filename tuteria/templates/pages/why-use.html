@@ -1,0 +1,298 @@
+{% extends 'pages/trust.html' %}
+{% load staticfiles %}
+{% block sub_nav %}
+{% endblock %}
+{% block title %}Why We Built Tuteria{% endblock title %}
+{% block css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% static 'css/why-use.css' %}"/>
+
+{% endblock %}
+{% block carousel_image %}
+    <div class="item active">
+        <div class="background"></div>
+    </div>
+{% endblock carousel_image %}
+{% block carousel_content %}
+
+    <div class="col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center">
+        {% block custom_heading %}
+            <div class="jumbo-header">
+                <h2 class="myh2"><b class="white">You inspired us to build Tuteria</b></h2>
+
+                <p>
+                    ...and we think you'll love what we've done
+                </p>
+
+            </div>
+
+        {% endblock custom_heading %}
+
+    </div>
+{% endblock %}
+{% block main_content %}
+    {% block mm_c %}
+        <div id="base" class="container">
+        {% block base77 %}
+            <div class="row">
+                <div class="col-sm-8 col-xs-12 no-padding-for-xs">
+                    {% block big_section %}
+                        <section class="panel">
+                            <div class="panel-body no-padding-total row-space-bottom-5 mp-levels">
+                                <div class="levels-wrap img-resize">
+                                    {% block first_section %}
+                                        <div id="heads" class="levels-intro row-space-3">
+
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="{% static 'img/gallery/care.png' %}" class=" center-block"
+                                                         style="margin-top: 19px;"/>
+                                                </div>
+
+                                                <div class="media-body">
+                                                    <h3>
+                                                        {% if request.is_featured %}
+                                                            <b>We have solved a problem you care about</b>
+                                                        {% else %} We have solved a problem you care about
+                                                        {% endif %}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <p>We started working on the idea for Tuteria in late 2013 when we realized
+                                                how difficult it was to connect with people who can teach various
+                                                subjects, skills and topics you want to learn.</p>
+
+                                            <p>Like a father of 3 kids who told us that despite his busy schedule as a
+                                                manager in a top firm, he has had to resort to tutoring his kids himself
+                                                because he hadn't been able to find a tutor for them in over 3 months,
+                                                even though they live close to the University of Ibadan where there are
+                                                literally thousands of people who have the competence and passion to
+                                                tutor his kids. We felt compelled to bridge that gap.</p>
+
+                                            <p>Or like Dami, a working professional who paid &#x20A6;70,000 for 6 weeks
+                                                of ICAN tutoring for which the tutor, painfully, began skipping lessons
+                                                after the 2nd week. Plus Dami also wants to learn how to swim, dance
+                                                salsa and cook Afang, but has no clue where to find someone to teach
+                                                her. We wanted to make it very easy, reliable and safe to connect with
+                                                quality private instructors to learn what matters to you.</p>
+
+                                            <p>On the other hand, people who can teach these subjects and skills had no
+                                                platform where they could be found - but not anymore. Tuteria has
+                                                evolved from more than 16 months of delicate planning, interviewing
+                                                hundreds of people across Nigeria, writing complex code and tweaking the
+                                                plan to ensure we create a trustworthy platform that reliably connects
+                                                both parties in a way that you can be proud of.</p>
+                                        </div>
+
+                                    {% endblock first_section %}
+                                    {% block second_section %}
+                                        <div>
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="{% static 'img/gallery/learn.png' %}"
+                                                         class=" center-block"/>
+                                                </div>
+
+                                                <div class="media-body">
+                                                    <h3>
+                                                        {% if request.is_featured %}
+                                                            <b>Now you can learn the things that matter to you</b>
+                                                        {% else %} Now you can learn the things that matter to you
+                                                        {% endif %}
+                                                    </h3>
+                                                </div>
+                                            </div>
+
+                                            <p>From improving academic performance for kids and adults, to excelling at
+                                                various local, international and professional exams and even mastering
+                                                skills like Public Speaking, Photography, Music etc., Tuteria helps you
+                                                connect with qualified private tutors, instructors, coaches and mentors
+                                                in your community.</p>
+
+                                            <div class="col-sm-12 row">
+                                                <div class="col-sm-9 row">
+                                                    <p>We assess every tutor against the <a
+                                                            href="{% url 'help:article_detail' 74 %}">highest standards
+                                                        for quality</a> in each subject, verify their IDs, facilitate
+                                                        background checks and continuously evaluate tutor performance so
+                                                        that you can always be confident of learning from the very best.
+                                                        Beyond that, Tuteria gives you the power to examine and hire
+                                                        your perfect tutors, as well as determine how you want lessons
+                                                        to be delivered - either hourly or monthly.</p>
+                                                </div>
+                                                <div class="col-sm-3 info-resize">
+                                                    <img src="{% static 'img/infographics/1.png' %}"
+                                                         class="img-responsive center-block"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div>
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="{% static 'img/gallery/teaching.png' %}"
+                                                         class=" center-block" style="margin-top: 19px;"/>
+                                                </div>
+
+                                                <div class="media-body">
+                                                    <h3>
+                                                        {% if request.is_featured %}
+                                                            <b>Or make a difference, teaching what you love</b>
+                                                        {% else %} Or make a difference, teaching what you love
+                                                        {% endif %}
+                                                    </h3>
+                                                </div>
+                                            </div>
+
+                                            <p>We love exceptional teachers! Teaching is both who we are and what we do,
+                                                and there's no better time to <a
+                                                        href="{% url "registration:tutor_landing" %}">become a
+                                                    prestigious tutor</a> on Tuteria than right now! We have built the
+                                                most reliable platform to help you teach more people and make greater
+                                                impact in your own community.</p>
+
+                                            <div class="col-sm-12 row">
+                                                <div class="col-sm-9 row">
+                                                    <p>From creating your tutoring subjects, to gaining exposure for
+                                                        your expertise, managing lesson schedules, planning your time,
+                                                        collecting payments and growing your business, Tuteria takes
+                                                        care of every detail so that you can focus 100% on providing
+                                                        great service to your clients, teaching what you love. With
+                                                        Tuteria, you're part of a community that's constantly opening
+                                                        new frontiers for you to make more impact.</p>
+                                                </div>
+                                                <div class="col-sm-3 info-resize">
+                                                    <img src="{% static 'img/infographics/2.png' %}"
+                                                         class="img-responsive center-block"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="{% static 'img/gallery/secure.png' %}"
+                                                         class=" center-block" style="margin-top: 19px;"/>
+                                                </div>
+
+                                                <div class="media-body">
+                                                    <h3>
+                                                        {% if request.is_featured %}
+                                                            <b>Whatever your interests, you can trust Tuteria</b>
+                                                        {% else %} Whatever your interests, you can trust Tuteria
+                                                        {% endif %}
+                                                    </h3>
+                                                </div>
+                                            </div>
+
+                                            <p>Tuteria is built on trust. We have gone the extra mile to <a
+                                                    href="{% url "trust_safety" %}">ensure your absolute peace of
+                                                mind</a> when hiring or tutoring, as well as maintain a secure platform
+                                                for collecting and transferring payments after lessons have been
+                                                delivered, which helps to protect your data, monitor lessons and resolve
+                                                any complaints.</p>
+
+                                            <div class="col-sm-12 row">
+                                                <div class="col-sm-9 row">
+                                                    <p>Clients and tutors leave reviews after having lessons which are
+                                                        displayed on their profiles and also used to evaluate
+                                                        performance. All activities are monitored and reviewed by our
+                                                        quality team, and only tutors who continue to offer great
+                                                        service can remain on Tuteria. So you can learn and teach with
+                                                        confidence knowing that Tuteria will never compromise on quality
+                                                        and safety. Welcome Home{% if request.user.is_authenticated %}
+                                                            {{ request.user.first_name }}.{% else %}.
+                                                            </h2> {% endif %} </p>
+                                                </div>
+                                                <div class="col-sm-3 info-resize">
+                                                    <img src="{% static 'img/infographics/3.png' %}"
+                                                         class="img-responsive center-block"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    {% endblock second_section %}
+
+                                <div class="row-space-bottom-5 row"></div>
+                                <!--{% if not request.user.is_authenticated %}
+                                    <a id="signup_nav" href="{% url 'account_signup' %}"
+                                       class="btn btn-lg btn-primary action-btn signup_nav">
+                                        Join our community
+                                        {% if request.is_featured %} &#8594;
+                                        {% else %}&nbsp;
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                        {% endif %}
+                                    </a>
+                                {% endif %}-->
+                            </div>
+                        </section>
+                    {% endblock %}
+
+                </div>
+                <div class="row">
+                 {% block first_request_summary %}
+                <div class="col-sm-4 col-xs-12 row-space-top-4">
+                    {% block small_section %}
+
+                    {% endblock %}
+                    <div class="panel">
+                        <div class="panel-body no-padding-total img-resize">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4>The Tuteria Experience</h4>
+                                </div>
+                                <hr class="margin-top-0">
+                            </div>
+
+                            <h5 class="tuteria-items">Quality Tutors</h5>
+
+                            <p class="m">Only the very best applicants are approved and continuously reviewed to ensure
+                                top quality.</p>
+
+                            <h5 class="tuteria-items">Safety First</h5>
+
+                            <p>Tuteria sets high safety standards and will never compromise on your peace of mind.</p>
+
+                            <h5 class="tuteria-items">Secure Payments</h5>
+
+                            <p>Payments and earnings are always protected till lessons are fully delivered.</p>
+                        </div>
+                    </div>
+                    <div id="help" class="panel">
+                        <div class="panel-body no-padding-total">
+                            <h4>Contact Us</h4>
+                            <hr class="margin-top-0">
+                            <p>We are always here to help you before, during and after your lessons. </p>
+                            <ul class="list-unstyled list-inline">
+                                <li><i class="glyphicon glyphicon-phone"></i>{{ tuteria_details.phone_number }}</li>
+                                <li><i class="glyphicon glyphicon-envelope"></i> {{ tuteria_details.email }}</li>
+                            </ul>
+                            <!--<ul class="list-unstyled list-inline">
+                                <li><i class="glyphicon glyphicon-map-marker"></i>{{ tuteria_details.address }}</li>
+                            </ul>-->
+                        </div>
+                    </div>
+                </div>
+                        
+                    {% endblock first_request_summary %}   
+                </div>
+
+            </div>
+
+        {% endblock base77 %}
+            
+        </div>
+    {% endblock %}
+
+{% endblock %}
+{% block referral %}{% endblock referral %}
+{% block javascript %}
+    {{ block.super }}
+{#    <script src="{% static 'js/static_pages.bundle.js' %}"></script>#}
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+{% endblock %}

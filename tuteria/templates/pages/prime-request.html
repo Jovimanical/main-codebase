@@ -1,0 +1,623 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles i18n bootstrap3 add_attr humanize activelink %}
+{% load render_bundle from webpack_loader %} 
+{% block css %}
+{{ block.super }}
+{# <link href="{% static 'css/request_tutor.css' %}" rel="stylesheet"> #}
+<style>
+    .content-carousel {
+        margin-top: 0 !important;
+    }
+
+    .margin-down-5 {
+        margin-bottom: 7px !important;
+    }
+
+    .pad-down-20 {
+        padding-bottom: 20px;
+    }
+
+    .img-resized {
+        width: 40px;
+    }
+
+    .hr-styled {
+        margin-top: 20px;
+    }
+    .padding-top-bottom-1{
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+    .no-margin-padding-10{
+        margin:0 auto !important;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    @media (min-width: 768px) {
+        .padding-left-50 {
+            padding-left: 50px;
+
+        }
+    }
+    .img-resize img {
+        width: 40px;
+        margin-top: 0;
+    }
+    @media(max-width: 768px){
+        .package{
+            background: #00d1c1 left no-repeat;
+            color: #FFF;
+            text-align: center;
+            padding: 40px 20px 40px 0px;
+        }
+    }
+    @media(min-width: 768px){
+        .package{
+            background: #00d1c1 left no-repeat;
+            color: #FFF;
+            text-align: center;
+            padding: 40px 20px 40px 0px;
+        }
+    }
+
+    .package .headtext{
+        font-size: 40px;
+        line-height: 45px;
+    }
+    .package .subtext{
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    ._3-8y {
+        margin-top: 12px;
+    }
+    ._585n {
+        background-color: red;
+        border: 1px solid red;
+        border-radius: 3px;
+        overflow: hidden;
+        padding: 0 0 0 40px;
+    }
+    ._4mim {
+        text-align: left;
+    }
+
+    .sp__TVnXU4gELp {
+        background-size: auto;
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+    }
+    ._585p {
+        float: left;
+        margin: 9px 0 0 -29px;
+        color: white;
+    }
+    ._585r {
+        background: #fff;
+        margin: 0;
+        padding: 9px 10px;
+    }
+    ._50f3 {
+        font-size: 12px;
+        line-height: 16px;
+    }
+    .a.list-group-item .h4 {
+        font-size: 14px important;
+    }
+    
+    .list-group-item-heading {
+        color: inherit !important;
+        font-size: 15px !important;
+    }
+    
+    .list-group-item-text {
+        color: inherit !important;
+        font-size: 12px;
+    }
+    
+    .form-control {
+        height: 40px;
+        border-radius: 1px;
+    }
+
+</style>
+{% endblock %}
+{% block jumbotron %}{% endblock jumbotron %}
+{% block title %}Complete your request | Tuteria{% endblock title %}
+{% block fixed %}profile-header{% endblock %}
+{% block carousel_content %}{% endblock %}
+{% block mobile_navigation %}
+{# {% cache 1000 smart_nav request.user.email %} #}
+{% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True making_booking=True %}
+{# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block nav %}
+{% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block base77 %}
+<div class="col-md-12 col-lg-10 col-xs-12 col-lg-offset-1 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+    {{block.super}}
+</div>
+{% endblock base77 %}
+{% block big_section %}
+<div id="content" class="spaced-top-xl spaced-bottom-xl padding-top-50">
+    {% if form.errors %}
+    <div class="col-sm-12 no-padding-for-xs">
+        <div class="row">
+            <div class="well bg-danger">
+                <div class="has-error">
+                    Some parts of the form were not filled correctly, please check and re-submit.
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-sm-12 no-padding-for-xs">
+            <div class="">
+                <div id="wizard-container" class="bordered spaced-bottom-lg">
+                    <div class="padding-bottom-50">
+                        <form id="request_parent_form" action="{% url 'prime-request' %}"
+                        method="post" novalidate>
+                        {% csrf_token %}
+
+                        <div class="panel row-space-4">
+
+                            <div class="panel-head col-sm-12">
+                                <div class="row">
+                                    <div class="text-center">
+                                        <div class="col-sm-12">
+                                            <div class="package white-bg row">
+                                                <div class="col-sm-12">
+                                                    <div class="headtext font-head">
+                                                    Get a Tutor Now
+                                                </div>
+                                                <div class="subtext">
+                                                    Fill this form to get quality lessons for your kids at affordable rates.
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="padding-top-25"></div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <div class="form-group {% if form.no_of_students.errors %}has-error{% endif %}">
+                                            <label for="id_{{ form.no_of_students.name }}"
+                                            class="control-label margin-bottom-5">How many students?</label><br>
+                                            {{ form.no_of_students|add_attributes:"class:form-control,required:true" }}<br>
+                                            <!--<small class="text-info"><em>More than 2 students attract extra fee.</em></small><br>-->
+                                            
+                                            {% if form.no_of_students.errors %}
+                                            <span class="help-block">{{ form.no_of_students.errors|join:"<br \>" }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <div class="form-group {% if form.hours_per_day.errors %}has-error{% endif %}">
+                                            <label for="id_{{ form.hours_per_day.name }}"
+                                            class="margin-bottom-5 control-label">{{ form.hours_per_day.label }}?</label><br>
+                                            {{ form.hours_per_day|add_attributes:"class:form-control,required:true" }}<br>
+                                            <!--<small class="text-info"><em>More than 2 hours attract extra fee.</em></small><br>-->
+                                            
+                                            {% if form.hours_per_day.errors %}
+                                            <span class="help-block">{{ form.hours_per_day.errors|join:"<br \>" }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 checkbox-space multiple-teachers hidden">
+                                       <label> {{ form.multiple_teachers }} Check this box if you want 2 teachers (PS: This doubles the price)</label>
+                                    </div>
+                                    
+                                </div>
+                                <section id="questions" class="smart-forms">
+                                 <h4 class="font-head row-space-4 brightgreen" style="line-height:0">
+                                     {% if not request.is_featured %}Subjects{% else %}<b>Subjects</b>{% endif %}
+                                 </h4>
+                                 <p class="no-padding-top">Select the subjects to be taught. Please note that if more than one teacher is required, the fee will be reviewed upwards. You can add other subjets in the comments below.</p>
+                                 <div class="row row-space-4 no-margin-bottom-mob">
+                                    {% for weekday in form.subjects %}
+                                    <div class="col-sm-12 checkbox-space">
+                                        {{ weekday }}
+                                    </div>
+                                    {% endfor %}
+                                    <br>
+                                    {% if form.subjects.errors %}
+                                    <div class="col-sm-12">
+                                        <div class="has-error">
+                                            <span class="help-block">{{ form.subjects.errors|join:"<br \>" }}</span>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <hr class="row hr-styled padding-bottom-25">
+                             
+                                <h4 class="font-head row-space-4 brightgreen" style="line-height:0">
+                                    {% if not request.is_featured %}Lesson Information{% else %}<b>Lesson Information</b>{% endif %}
+                                </h4>
+                                <!--<div class="form-group {% if form.days_per_week.errors %}has-error{% endif %}">-->
+                                <!--    <label class="control-label">Choose the days you want lessons to hold</label><br>-->
+                                <!--    <small class="text-info"><em>For example, if you want lessons 3 times a week, then check 3 days</em></small>-->
+
+                                <!--</div>-->
+                                <!--<div class="row row-space-4 no-margin-bottom-mob">-->
+                                <!--    {% for weekday in form.available_days %}-->
+                                <!--    <div class="col-sm-4 checkbox-space">-->
+                                <!--        {{ weekday }}-->
+                                <!--    </div>-->
+                                <!--    {% endfor %}-->
+                                <!--    <br>-->
+                                <!--    {% if form.available_days.errors %}-->
+                                <!--    <div class="col-sm-12">-->
+                                <!--        <div class="has-error">-->
+                                <!--            <span class="help-block">{{ form.available_days.errors|join:"<br \>" }}</span>-->
+                                <!--        </div>-->
+                                <!--    </div>-->
+                                <!--    {% endif %}-->
+                                <!--</div>-->
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <div class="form-group {% if form.lesson_occurence.errors %}has-error{% endif %}">
+                                            <label for="id_{{ form.lesson_occurence.name }}"
+                                            class="margin-bottom-5 control-label">How often should lessons hold?</label><br>
+                                            {{ form.lesson_occurence|add_attributes:"class:form-control,required:true" }}
+                                            {% if form.lesson_occurence.errors %}
+                                            <span class="help-block">{{ form.lesson_occurence.errors|join:"<br \>" }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <div class="form-group {% if form.days_per_week.errors %}has-error{% endif %}">
+                                            <label for="id_{{ form.days_per_week.name }}"
+                                            class="control-label margin-bottom-5">For how long?</label><br>
+                                            {{ form.days_per_week|add_attributes:"class:form-control,required:true" }}
+                                            {% if form.days_per_week.errors %}
+                                            <span class="help-block">{{ form.days_per_week.errors|join:"<br \>" }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                         <div class="form-group {% if form.time_of_lesson.errors %}has-error{% endif %}">
+                                            <label for="id_{{ form.time_of_lesson.name }}"
+                                            class="control-label margin-bottom-5">From what time?</label><br>
+                                            {{ form.time_of_lesson|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please set a valid start time, e.g. 5:00pm not 5pm,placeholder:11 30 AM" }}
+                                            {% if form.time_of_lesson.errors %}
+                                            <span class="help-block">{{ form.time_of_lesson.errors|join:"<br \>" }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class=" col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group {% if form.gender.errors %}has-error{% endif %}">
+                                            <label for="id_{{ form.gender.name }}" class="control-label margin-bottom-5">Male or Female Teacher?</label>
+                                            {{ form.gender|add_attributes:"class:form-control" }} {% if form.gender.errors %}
+                                            <span class="help-block">{{ form.gender.errors|join:"<br \>" }}</span> {% endif %}
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-12">
+                                         <div class="form-group ">
+                                            <label for="id_expectation" class="control-label">Tell us your goals and expectations for this lessons. Also, how soon do you want to start?</label>
+                                            <br><br>
+                                            <!--<small class="text-info"><em>E.g. "I need help to prepare for P1 in next ACCA exam" or "I want to play the piano as a beginner" or "I need help with assignments for my kids especially in Math"</em></small>-->
+                                                {{form.expectation|add_attributes:"class:form-control,rows:5,required:true,placeholder:E.g. My son in Year 5 needs to master his Mathematics and Sciences especially. I need him to start immediately."}}
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+        						<hr class="row hr-styled" />
+        							
+                                <div class="">
+                                    <h4 class="font-head row-space-4 padding-top-25 brightgreen" style="line-height:0">
+                                        Personal Information
+                                    </h4>
+                                </div>
+        							<div class="row-space-bottom-5">
+        								<div class="row row-space-3">
+        									<div class="col-sm-6">
+                                                <div class="form-group {% if form.first_name.errors %}has-error{% endif %}">
+                  					            	<label for="id_{{ form.first.name }}" class="control-label margin-bottom-5">First name</label>
+                                                    {{ form.first_name|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your first name,placeholder:First name" }}
+                                                    {% if form.first_name.errors %}
+                  						            <span class="help-block">{{ form.first_name.errors|join:"<br \>" }}</span>
+                                                     {% endif %}
+                  					            </div>
+        									</div>
+        									<div class="col-sm-6">
+                                                <div class="form-group {% if form.last_name.errors %}has-error{% endif %}">
+                  						            <label for="id_{{ form.last.name }}" class="control-label margin-bottom-5">Last name</label>
+                                                    {{ form.last_name|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your last name,placeholder:Last name" }}
+                                                    {% if form.last_name.errors %}
+                                                    <span class="help-block">{{ form.last_name.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group {% if form.email.errors %}has-error{% endif %}"
+                                                        style="margin-bottom: 2px">
+                                                        <label class="control-label">Email Address</label>
+                                                    {{ form.email|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your email address name,placeholder:Enter active email address" }}
+                                                    {% if form.email.errors %}
+                                                        <span class="help-block">{{ form.email.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+        									<div class="col-sm-6">
+                                                <div class="form-group {% if form.primary_phone_no1.errors %}has-error{% endif %}">
+                                                    <label class="control-label margin-bottom-5">Phone number</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">+234</div>
+                                                        {{ form.number|add_attributes:"class:form-control,required:true, data-parsley-equalto-message:Please enter a valid phone number,data-parsley-maxlength-error-message:Number is too long. Please check again or remove +234,placeholder:E.g. 0801234457)" }}
+                                                    </div>
+                                                    {% if form.number.errors %}
+                                                    <span class="help-block">{{ form.number.errors|join:"<br \>" }}</span> {% endif %}
+                                                </div>
+        									</div>
+        									<div class="col-sm-12">
+                                                <div class="form-group {% if form.home_address.errors %}has-error{% endif %}">
+                                                    <label for="id_home_address" class="control-label margin-bottom-5">Home Address so we can get a nearby tutor</label>
+                                                    {{ form.home_address|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please enter your home address" }}
+                                                    {% if form.home_address.errors %}
+                                                        <span class="help-block">{{ form.home_address.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                    {{ form.latitude|add_attributes:"type:hidden" }}{{ form.longitude|add_attributes:"type:hidden" }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group {% if form.state.errors %}has-error{% endif %}">
+                                                    <label for="id_{{ form.state.name }}"
+                                                           class="control-label margin-bottom-5">{{ form.state.label }}</label>
+                                                    {{ form.state|add_attributes:"class:form-control ,required:true, data-parsley-error-message:Please select a state" }}
+                                                    {% if form.state.errors %}
+                                                        <span class="help-block">{{ form.state.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group {% if form.where_you_heard.errors %}has-error{% endif %}">
+                                                    <label for="id_{{ form.where_you_heard.name }}"
+                                                           class="control-label margin-bottom-5">Where you heard about us</label>
+                                                    {{ form.where_you_heard|add_attributes:"class:form-control ,required:true, data-parsley-error-message:Please select a state" }}
+                                                    {% if form.where_you_heard.errors %}
+                                                        <span class="help-block">{{ form.where_you_heard.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                     </div>
+                                    
+                            </section>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+{% endblock %}
+{% block first_request_summary %}
+ <div class="col-sm-4 col-xs-12 padding-top-50 mobile-top-25">
+        {% block small_section %}
+
+        {% endblock %}
+        <div class="row panel">
+            <div class="panel-body no-padding-total img-resize">
+                
+                <div class="media">
+                    <div class="">
+                        <div class="pull-left">
+                                <div class="margin-top-15 row-space-3 font-head blue-font h3">
+                                    Start Learning
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="">
+                        
+                        <div class="book-it__subtotal">
+                            <div class="">
+                                <table class="table">
+                                    <thead class="font-head"><tr><th scope="col" class="hide-border-top hide-padding"><span class="screen-reader-only"><span>Price Breakdown</span></span></th>
+                                    <th scope="col" class="hide-border-top hide-padding"><span class="screen-reader-only pull-right">
+                                        <span id="mdisplay">1 month</span>
+                                        </span></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="price-item one_hour padding-top-25">
+                                     
+                                        <th class="price-item__header hide-border-top" scope="row"> <span id="the_no_of_hours">1</span>hrs x <span id="no_of_lessons">1</span> lessons<span aria-hidden="true">&nbsp;</span></th>
+                                            <td class="text-right price-item__price hide-border-top"><div class=""><span> ₦<span id="the-total-price">{{price|floatformat:"0"}}</span></span></div></td></tr>
+                                                <tr class="price-item"></tr>
+                                                <tr class="price-item"><th class="price-item__header" scope="row">Service fee (one-time)<span aria-hidden="true">&nbsp;</span></th>
+                                                <td class="text-right price-item__price"><div class=""><span>₦{{processing_fee}}</span></div></td></tr>
+                                                
+                                                <tr class="font-head h4"><th class="price-item__header" scope="row"><span><b>Total</b></span></th><td class="text-right"><span>{{currency}}<span id="final-total">{{processing_fee}}</span></span></td></tr></tbody></table></div></div>
+                                                
+                    </div>
+                </div>
+                 <div class="row row-space-4 pad-up-18">
+                        <div class="col-sm-12">
+                            <button id="submit_btn" data-loading-text="Loading..."
+                                    class="btn btn-lg book_btn btn-block btn-primary big-btn pad-up-18"
+                            >{% trans "Book Now" %}</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row panel">
+            <div class="panel-body no-padding-total">
+                <div class="media">
+                        <div class="pull-left p">
+                                    PS: If you have very strict requirements for a teacher, the tuition cost will <u>increase</u> to enable us get your best-fit tutor.
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map-canvas" class="hidden"></div>
+    {% endblock first_request_summary %}
+{% block footer %}{% endblock footer %}
+{% block bottom_footer %}{% endblock bottom_footer %}
+{% block request_section %}{% endblock request_section %}
+{% block javascript %}
+{{ block.super }}
+{% block cutsom_script %}
+<script>
+            window.NOOFSTUDENTS = $('#no_of_students').val();
+            
+            function displayStudentNo(){
+                var no = $('no_of_students').val() || 1
+                var no = parseInt(no)
+                var result = no + " student"+ no > 1 ? 's': '';
+                $('#student_no').text(result)
+            }
+            displayStudentNo();
+            
+            function getClasses(){
+                var subjects = $('input[name="subjects"]').toArray().filter(function(x){return x.checked})
+                var classes = subjects.map(function(val){
+                    var right = val.value.indexOf('(')
+                    var left = val.value.indexOf(')')
+                    return val.value.substring(right+1,left)
+                })
+                var without_group = classes.filter(function(s){return s !== 'JSS - SSS'})
+                if(classes.length !== without_group.length){
+                    without_group = without_group.concat(['JSS','SSS'])
+                    
+                }
+                return [...new Set(without_group)]
+            }
+            function determineTotalPrice(){
+                var multiple_teachers = $('#id_multiple_teachers').is(':checked')
+                var multiplier =  multiple_teachers ? 2 : 1
+        
+                var state = $('#id_state').val() || 'Lagos'
+                var hours = $('#id_hours_per_day').val() || 2
+                var processing_fee = {{processing_fee}};
+                var frequency = $('#id_lesson_occurence').val() || 3
+                var student_no = $('#id_no_of_students').val() || 1;
+                var how_long= $('#id_days_per_week').val() || 4
+                var months = how_long > 3 ? 4: how_long
+                var classes = getClasses()
+                if(['Lagos','Abuja','Rivers'].indexOf(state) > -1){
+                    var per_hour = parseFloat("{{set_a.nursery_price|floatformat:2}}")
+                    if(classes.indexOf('JSS')>-1 || classes.indexOf('SSS')>-1){
+                        per_hour = parseFloat("{{set_a.jss_price|floatformat:2}}")
+                       
+                    }
+                    if(student_no >= 3){
+                        per_hour = parseFloat("{{set_a.nursery_student_price|floatformat:2}}")
+                        
+                            if(classes.indexOf('JSS')>-1 || classes.indexOf('SSS')>-1){
+                                per_hour = parseFloat("{{set_a.jss_student_price|floatformat:2}}")
+                            }
+                    }
+                }else{
+                    var per_hour = parseFloat("{{set_b.nursery_price|floatformat:2}}")
+                    if(classes.indexOf('JSS')>-1 || classes.indexOf('SSS')>-1){
+                        per_hour = parseFloat("{{set_b.jss_price|floatformat:2}}")
+                       
+                    }
+                    if(student_no >= 3){
+                        per_hour = parseFloat("{{set_b.nursery_student_price|floatformat:2}}")
+                    
+                    if(classes.indexOf('JSS')>-1 || classes.indexOf('SSS')>-1){
+                        per_hour = parseFloat("{{set_b.jss_student_price|floatformat:2}}")
+                    }
+                    }
+                }
+                if(hours < 2){
+                    hours = 2
+                }
+                var kid_price = per_hour * months * hours * frequency
+                var total = Math.ceil(kid_price*student_no*multiplier/10)*10
+                if(student_no < 3){
+                    total= (Math.ceil(kid_price/10)*10 * multiplier) 
+                }
+                $('#the-total-price').text(total);
+                $('#final-total').text(total + processing_fee)
+                var hours = $('#id_hours_per_day').val() || 1
+                $('#no_of_lessons').text(months*frequency)
+                $('#the_no_of_hours').text(hours)
+                $('#span_hours').text(hours)
+                $('#for-1-hour').text(per_hour);
+                $('#i_hr_price').text(per_hour)
+                
+
+            }
+            function determineDisplay(x){
+                if(x){
+                    if(parseInt(x)<4){
+                        $('#mdisplay').text(x + " weeks")
+                    }else{
+                        $('#mdisplay').text("1 month")
+                    }
+                }else{
+                    $('#mdisplay').text("1 week")
+                }
+            }
+            determineTotalPrice()
+            determineDisplay($('#id_days_per_week').val())
+            $('#id_hours_per_day').change(function(x){
+                determineTotalPrice()
+            })
+            $('#id_days_per_week').change(function(e){
+                determineTotalPrice()
+                var x = e.target.value
+                determineDisplay(x)
+            })
+            $('#id_no_of_students').change(function(e){
+                var ss = $('#id_no_of_students').val() || 1
+                if(parseInt(ss) >2){
+                    $('.multiple-teachers').removeClass('hidden');
+                }else{
+                    $('.multiple-teachers').removeClass('hidden').addClass('hidden');
+                }
+                determineTotalPrice();
+            })
+            $('#id_multiple_teachers').change(function(o){
+                console.log("multiple teachers");
+                determineTotalPrice()
+            })
+            $('#id_state').change(function(o){
+                determineTotalPrice()
+            })
+            $('#id_lesson_occurence').change(function(o){
+                console.log("triggered")
+                determineTotalPrice()
+                }
+    )       
+            $('input[name="subjects"]').change(function(){
+                determineTotalPrice()
+            })
+
+            $('.book_btn').click(function(){
+                $('#request_parent_form').submit()
+            })
+        </script>
+{% endblock cutsom_script %}
+
+{% if not request.is_featured %}
+
+<script src="{% static "js/request_parent.bundle.js" %}"></script>
+<script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script>
+
+{% endif %}
+{% endblock %}

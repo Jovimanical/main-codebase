@@ -1,0 +1,32 @@
+{% extends '_layouts/base.html' %}
+{% load static from staticfiles %}
+{% block css %}
+    {{ block.super }}
+    {# <link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}"/> #}
+    <link href="{% static 'css/external.css' %}" rel="stylesheet">
+{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+{% endblock %}
+{% block content %}
+	{% block jumbotron %}
+	<div id="carousel" class="carousel fade" {% block data_ride %}{% endblock data_ride %}>
+		<div class="carousel-inner">
+
+			{% block carousel_image %}
+			{% endblock carousel_image %}
+		</div>
+	</div>
+	<div class="content-carousel">
+		<div class="container">
+			{% block carousel_content %}
+			{% endblock carousel_content %}
+		</div>
+	</div>
+	{% endblock jumbotron %}
+	{% block main_content %}
+
+	{% endblock main_content %}
+{% endblock content %}
+{% block footer2 %}
+{% endblock footer2 %}

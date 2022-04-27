@@ -1,0 +1,22 @@
+
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button"
+            id="dropdownMenu1" data-toggle="dropdown"
+            aria-expanded="true">
+        <span class="caret"></span>Actions
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right subject_options"
+        role="menu"
+        aria-labelledby="dropdownMenu1">
+        <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="{% url 'users:tutor_public_skill_profile' request.user.slug subject.slug %}">Preview 
+        </a>
+        </li>
+        {% if subject.status != subject.ACTIVE %}
+            <li role="presentation"><a role="menuitem" tabindex="-1"
+                                        onclick="DeleteTS('{{ subject.skill.slug }}','{{ subject.skill.name }}')"
+                                        href="javascript:void(0)">Delete</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

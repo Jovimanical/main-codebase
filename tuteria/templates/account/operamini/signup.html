@@ -1,0 +1,24 @@
+{% load bootstrap3 %}
+
+<form action="{% url 'account_signup' %}" method="post">
+	{% csrf_token %}
+   {% bootstrap_field form.first_name %}
+   {% bootstrap_field form.last_name %}
+   {% bootstrap_field form.email %}
+   {% bootstrap_field form.confirm_email %}
+   {% bootstrap_field form.country %}
+   {% bootstrap_field form.phone_number %}
+   {% bootstrap_field form.password1 %}
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+
+  
+	
+	{% buttons %}
+        <button type="submit" class="btn btn-primary btn-lg">
+            Submit
+        </button>
+    {% endbuttons %}
+</form>
+

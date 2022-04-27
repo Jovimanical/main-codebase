@@ -1,0 +1,242 @@
+{% extends 'skills/includes/base_booking_list.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary bootstrap_pagination %}
+{% block title %}Manage Subjects - Tuteria{% endblock title %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        td span.label{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        @media (min-height: 800px) {
+            .space_eater {
+                height: 200px;
+            }
+        }
+    </style>
+    {% include "users/includes/react-dev-css.html" with debug=debug s_host=tutor_client_cdn %}
+{% endblock css %}
+{% block extra_headings %}
+    {% if request.is_featured %}
+        {% if quiz_result.failed %}
+            <div class="alert alert-info" alert-dismissible role='alert'>
+                <button type="button" class="close" data-dismiss="alert"><span
+                        aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                Sorry You failed the quiz. You got {{ quiz_result.score }}%
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock extra_headings %}
+{% block sidebar %}
+    <div class="visible-xs row">
+        <div class="header-2 visible-xs">
+            <div class="navy">
+                {% include 'users/subject/includes/subject-urls.html' with subject_page=True %}
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs row">
+        <div class="sidenav ">
+            {% include 'users/subject/includes/subject-urls.html' with url_class='sidenav-list' subject_page=True %}
+        </div>
+    </div>
+{% endblock sidebar %}
+{#{% load activelink %}#}
+{% block page_title %}<h4>Manage Subjects</h4>{% endblock %}
+
+{% block filter_right_section %}
+{% if request.user.tutor_req.has_connected_social_media %}
+    {% if failed_skills %}
+        <a href="{% url 'users:subject_creation_landing' %}" class="btn btn-primary pull-right">Add new subject</a>
+    {% endif %}
+    {% else %}
+    <a href="{% url 'users:edit_verification' %}" class="btn btn-primary pull-right">Verify Identity</a>
+
+{% endif %}
+{% endblock filter_right_section %}
+
+{% block object_table %}
+    {% if use_new_tutor_flow %}
+        {% else %}
+       {% if subjects|length > 0 %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> Subject</td>
+                    <td> Description</td>
+                    <td> Status </td>
+                    <td></td>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for subject in subjects %}
+                    <tr>
+                       
+                        <td class="db-title">
+                            <span>{{ subject.skill.name }}</span>
+                            {# {% if subject.status == subject.DENIED %} #}
+                                
+                            {# {% else %} #}
+                                {# <a href="{% url 'users:edit_subject' subject.skill.slug %}">{{ subject.skill.name }}</a> #}
+                            {# {% endif %}  #}
+                        </td>
+
+                        <td>
+                        {% if subject.status != subject.DENIED %}
+                            {% if subject.status == subject.MODIFICATION %}                                
+                                    {% if subject.skill.testable %}
+                                        {% if not subject.taken_test %}
+                                            <a href="{% url 'users:subject_creation_landing' %}?url_params=True&testable=True">Take Test Now</a>
+                                        {% else %}                                        
+                                            <a href="{% url 'users:edit_subject' subject.skill.slug %}">Submit your qualification</a>
+                                        {% endif %}
+                                    {% else %}
+                                    <a href="{% url 'users:edit_subject' subject.skill.slug %}">Submit your qualification and experience</a>
+                                    {% endif %}
+                            {% else %}         
+                                    <a href="{% url 'users:edit_subject' subject.skill.slug %}">Edit your submission</a>
+                            {% endif %}
+                        {% endif %}
+                        </td>
+                        <td style="vertical-align: middle">
+                            {% if subject.status == subject.ACTIVE %}
+                                <span class="label label-success">Active</span>
+                            {% elif subject.status == subject.PENDING %}
+                                <span class="label label-info">Pending</span>
+                            {% elif subject.status == subject.MODIFICATION %}
+                                <span class="label label-warning">Needs Edit</span>
+                            {% elif subject.status == subject.DENIED %}
+                                <span class="label label-danger">Denied</span>
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        
+
+                        <td class="status" style="vertical-align: middle;">
+                            {% if subject.status != subject.DENIED %} 
+                                {% include "users/includes/dropdown.html" %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="pagination-container col-xs-12 margin-top-15">
+                    <nav class="pagination-margin pull-left">
+                        {% bootstrap_paginate page_obj range=5 first_label="&#x2190;" last_label="&#x2192;" show_prev_next="false" show_first_last="true" %}
+                    </nav>
+                </div>
+             
+              </div>
+        </div>
+    {% else %}
+        {% if failed_skills %}
+            <h5 class="text-center">You currently have no active subjects. Add at least 1 subject!</h5>
+
+        {% endif %}
+    {% endif %}
+    {% if not failed_skills %}
+        <h5 class="text-center">You can no longer create new subjects because you have already made 10 unsuccessful
+            attempts</h5>
+    {% endif %}
+    {% endif %}
+ 
+{% endblock object_table %}
+{% block footer2 %}{% endblock %}
+{% block request_section %}{% endblock request_section %}
+{% block main_content %}
+    <div class="row" {% if use_new_tutor_flow %} id="root"{% endif %}></div>
+    {% if use_new_tutor_flow %}
+    {% else %}
+     {% with profile as user_profile %}
+        {% if user_profile.application_status != user_profile.VERIFIED %}
+            <div class="panel panel-default row row-space-4">
+                <div class="panel-heading">
+                    <h4>
+                        {% if user_profile.application_status == user_profile.PENDING %}
+                            Pending Review
+                        {% else %}
+                            Apply to Tutor
+                        {% endif %}
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    {% if user_profile.application_status == user_profile.PENDING %}
+                        <p>Your application is currently being reviewed. If approved you can return here to start
+                            creating subjects.</p>
+                    {% else %}
+                        <p>You need to apply as a tutor in order to create subjects. It's 100% free and you can
+                            earn money teaching whatever you love!</p>
+                        <a href="{% url 'registration:tutor_landing' %}" class="btn btn-primary btn-tutor pull-left">Apply
+                            to Tutor</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="invisible space_eater">Holla</div>
+        {% else %}           
+            {{ block.super }}
+        {% endif %}
+    {% endwith %} 
+    {% endif %}
+    </div>
+    {% if object.is_tutor %}
+        <div class="row padding-top-35">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Tutoring Jobs <span class="red-text font">NEW!</span></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                            <div id="how-it-works" class="col-sm-7 col-md-7 wrapper-full clearfix ">
+                        
+                            <p>See all available opportunities in your area and indicate those you are interested in.</p>
+                            </div>
+                            <div id="how-it-works" class="col-sm-5 col-md-5 rapper-full clearfix padding-top-mob-0">
+                                <div class="col-md-8 col-md-offset-4 col-lg-8 col-lg-offset-4 col-sm-11 col-sm-offset-1 col-xs-12 padding-top-10 row">
+                                    <div class="">
+                                        <a href="{% url 'tutoring-jobs' %}" class="btn btn-success col-xs-12">
+                                            See available jobs &rarr;
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    </div>
+{% endblock main_content %}
+
+{% block javascript %}
+    {{ block.super }}
+    {% if use_new_tutor_flow %}
+    {% include "users/includes/react-dev-server.html" with debug=debug s_host=tutor_client_cdn %}
+    <script>
+        const initialData = {
+            [window.CLIENT_PAGES.SUBJECTS]: {
+                ...JSON.parse('{{ initial_data|escapejs }}'),
+            },
+        };
+        window.loadApplication(window.CLIENT_PAGES.SUBJECTS, initialData, "{% url 'users:new_flow_post' %}");
+    </script>
+    {% endif %}
+    <script>window.currentPage = "SubjectList";
+    function DeleteTS(skill_id, skill_name) {
+        var message = "Are you sure you want to delete " + skill_name;
+        var result = window.confirm(message);
+        if (result) {
+            window.location.href = Urls['users:delete_subject'](skill_id)
+        }
+    }
+    </script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+{% endblock javascript %}

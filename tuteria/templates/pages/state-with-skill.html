@@ -1,0 +1,55 @@
+{% extends "pages/skill.html" %}
+{% block title %}{{ skill.name }} Home Tutors in {{ region }} | Tuteria{% endblock title %}
+{% block skill_name_content %}
+    <h2><b>{{ skill.name }} Tutors</b></h2>
+        {% if tutors|length > 1  %}
+        <div class="row">
+            <div class="col-md-12 col-lg-10">                    
+                <hr class="hr-header"/>
+                <p class="h4" style="line-height: 1.2; color: #0769ad">Each tutor has been manually screened for {{ skill.name }}. Hire your preferred tutor directly or request an in-person interview.</p> 
+            </div>
+        </div>
+        {% elif tutors|length == 1 %}
+        <div class="row">
+            <div class="col-md-12 col-lg-10">                    
+                <hr class="hr-header"/>
+                <p class="h4" style="line-height: 1.2; color: #0769ad">This tutor has been manually screened for {{ skill.name }}. Hire tutor directly or request an in-person interview.</p> 
+            </div>
+        </div>
+        {% endif %}
+    <!--<form action="" method="get" class="row-space-4">
+        <div class="col-md-12 col-lg-10">
+            <div class="row">
+
+                {#                                                            {% if request.is_phone %}#}
+                <div class=" smart-forms">
+                    <div class="section">-->
+
+
+                        <!-- Label -->
+                        <!--<label class="field select">
+                            <select name="dropdown"
+                                    onchange="openUrl(this.value)">
+                                <option value="">Related Topics
+                                </option>
+                                {% for sk in skill.link_tutor_skill_tags %}
+                                    <option value="?tags={{ sk }}">{{ sk }}</option>
+                                {% endfor %}
+                            </select>
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                </div>
+                {#                                                            {% else %}#}
+                <p class="trans_label">
+                    {% for cat in skill.link_tutor_skill_tags %}
+                        <a href="javascript:void(0)" onclick="evaluateQuery('{{ cat }}')"
+                           class="label label-lg">{{ cat|title }}</a>
+                    {% endfor %}
+                </p>
+                {#                                                            {% endif %}#}
+            </div>
+
+        </div>
+    </form>-->
+{% endblock %}

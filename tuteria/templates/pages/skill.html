@@ -1,0 +1,72 @@
+{% extends "includes/search/category.html" %}
+{% load staticfiles humanize bootstrap3 add_attr cloudinary %}
+{% block title %}Private {{ skill.name }} Lesson Teachers | Tuteria {% endblock title %}
+{% block page_heading %}
+    {% block jumbotron %}
+        <div class="page-heading-one category-header-page panel">
+            <div class="jumbo-container-detail panel-body panel-height">
+                <div class="col-sm-3 hidden-xs container-thumbnail">
+                    <a href="#" class="thumbnail category-thumb">
+                        <img src="/static/img/ui/{{ skill.categories.first.image }}" alt=""/>
+                        {#                                                    <img src="{% static 'img/ui/mathematics.jpg' %}" alt="...">#}
+                    </a>
+                </div>
+                <div class="col-sm-9">
+                    {% block skill_name_content %}
+                        <h2><b>{{ skill.name }} Tutors</b></h2>
+                        {% if tutors|length > 1  %}
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10">                    
+                                <hr class="hr-header"/>
+                                <p class="h4" style="line-height: 1.2; color: #0769ad">Each tutor has been manually screened for {{ skill.name }}. Hire your preferred tutor directly or request an in-person interview.</p> 
+                            </div>
+                        </div>
+                        {% elif tutors|length == 1 %}
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10">                    
+                                <hr class="hr-header"/>
+                                <p class="h4" style="line-height: 1.2; color: #0769ad">This tutor has been manually screened for {{ skill.name }}. Hire tutor directly or request an in-person interview.</p> 
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!--<form action="" method="get" class="row-space-4 hide">
+                            <div class="col-md-12 col-lg-10">
+                                <div class="row">
+                                    {#                                                            {% if request.is_phone %}#}
+                                    <div class="visible-xs smart-forms">
+                                        <div class="section">
+
+
+                                               Label 
+                                            <label class="field select">
+                                                <select name="dropdown"
+                                                        onchange="openUrl(this.value)">
+                                                    <option value="">Related Topics
+                                                    </option>
+                                                    {% for sk in skill.link_tutor_skill_tags %}
+                                                        <option value="?tags={{ sk }}">{{ sk }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <i class="arrow"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {#                                                            {% else %}#}
+                                    <p class="trans_label hidden-xs">
+                                        {% for cat in skill.link_tutor_skill_tags %}
+                                            <a href="javascript:void(0)" onclick="evaluateQuery('{{ cat }}')"
+                                               class="label label-lg">{{ cat|title }}</a>
+                                        {% endfor %}
+                                    </p>
+                                    {#                                                            {% endif %}#}
+                                </div>
+
+                            </div>
+                        </form>-->
+                    {% endblock skill_name_content %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+       

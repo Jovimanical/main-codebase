@@ -1,0 +1,159 @@
+{% extends '_layouts/base-internal.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary %}
+{% load activelink %}
+{% block title %}Accounts - Tuteria{% endblock title %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/external.css' %}"/>
+    <style>
+    .payment-image {
+      height: 150px;
+    }
+    #modal-trigger-add {
+      cursor: pointer;
+    }
+    .row-space-top-3 {
+      margin-top: 18.75px;
+    }
+    .row-space-3 {
+      margin-bottom: 18.75px;
+    }
+    .fa-24x{
+        font-size: 2.4em;
+    }
+
+    .lead{
+        font-size: 17px;
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container row-space-top-4 row-space-4">
+        <div class="row">
+            <div class="col-sm-3">
+                {% block sidebar %}
+                    <div class="visible-xs row">
+                        <div class="header-2 visible-xs">
+                            <div class="navy">
+                                {% include 'users/account/includes/account-urls.html' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs row">
+                        <div class="sidenav ">
+                            {% include 'users/account/includes/account-urls.html' with url_class='sidenav-list' %}
+                        </div>
+                    </div>
+                {% endblock sidebar %}
+            </div>
+            <div class="col-sm-9 col-xs-12">
+                {% block main_content %}
+                    <div class="panel panel-default row">
+                        <div class="panel-heading"><h4>Payout Details</h4></div>
+                        <div class="panel-body mp-box">
+                            {% if payout_options|length != 1 %}
+                                <div class="col-sm-4">
+                                    <div id="modal-trigger-add" data-toggle="modal" data-target="#payment_form" class="panel payment-image">
+                                      <div class="row row-table row-full-height">
+                                        <div class="col-sm-12 text-center lead">
+                                          <div class="row-space-3 row-space-top-3">
+                                            <i class="fa fa-plus fa-24x"> </i>
+                                          </div>
+                                          <div class="row-space-1" id="add_payment_method">
+                                            Add Bank Details
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>    
+                                </div>
+                            {% endif %}
+                            <div class="col-sm-12">
+                                <div class="row">
+                                {% for po in payout_options %}
+                                <div class="col-sm-6">
+                                    {% if po.payout_type == 1 %}
+                                    <h4>{{po.bank}}</h4>
+                                    <p>{{po.account_name}} ({{po.account_id}})</p>
+{#                                    {% else %}#}
+{#                                    <h4>Paga</h4>#}
+{#                                    <p>{{po.account_id}}</p>#}
+                                    {% endif %}
+                                </div>                                    
+                                {% endfor %}                                    
+                                </div>    
+                            </div>                           
+
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+           <div class="modal fade" id="payment_form" tabindex="-1" role="dialog" aria-labelledby="payment_form">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Add Payment Method</h4>
+                        </div>
+                        <form id="payForm" action="{% url 'users:account' %}"
+                          method="post" class="smart-forms" novalidate>
+                        
+                        <div class="modal-body">
+                        <div id="errorMessage"></div>
+                        {% csrf_token %}
+                        <div class="row row-space-4">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label  class="control-label">Payment Type</label>
+                                    {{payment_form.payout_type|add_attributes:"class:form-control"}}
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div id="account_sec" class="form-group">
+                                    <label class="control-label">Account No. (NUBAN)</label>
+                                    {{payment_form.account_id|add_attributes:"class:form-control, placeholder:10-digit number,pattern:\d{10},required:true"}}
+                                </div>
+                            </div>
+                            <div id="other-bank-details">
+                                <div class="col-xs-6">
+                                    <label class="control-label">Account Name</label>
+                                    {{payment_form.account_name|add_attributes:"class:form-control, placeholder:Account name,required:true"}}
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for="" class="control-label">Select Bank</label>
+                                    {{payment_form.bank|add_attributes:"class:form-control,required:true"}}
+                                </div>
+                            </div>                           
+                        </div>
+                        <div class="well bg-info">
+                            This is where we pay you when you earn money from teaching or if you request a refund as a client. You can withdraw your funds from your Tuteria wallet into your bank account at any time.
+                            <br><br>
+                            <span style="color:red">PS</span>: Please write correctly, you won't be able to edit this information except by calling us.
+                        </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button id="payoutButton" type="submit" data-loading-text="Submitting..." class="btn btn-primary">Add Payment Option</button>
+                        </div>
+                    </form>
+                        
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block request_section %}
+{% endblock %}
+{% block notification_tawk %}
+{% endblock %}
+{% block javascript %}
+    {{block.super}}
+    <script>
+    </script>
+    <script>window.currentPage = "Payout"</script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+{% endblock javascript %}

@@ -1,0 +1,63 @@
+{% extends 'includes/search/category.html' %}
+{% load staticfiles bootstrap_pagination humanize bootstrap3 add_attr cache cloudinary %}
+{% block title %}{{ search_text }}{% endblock title %}
+{% block page_heading %}
+    <div class="page-header search-header">
+        {% if skill %}
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="row col-sm-6 col-md-4">
+                    <div class="media pull-left">
+                        <div class="media-left right-padding-5">
+                            <img src="{% static 'img/gallery/search.png' %}" class="center-block image-sizer"/>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="search-default">Search results for</h3>
+                        </div>
+                    </div> 
+                </div>
+                <div class="row hidden-xs">
+                    <div class="col-sm-6 col-md-8">
+                        <div class="media pull-right">
+                            <!--<div class="media-left right-padding-5">
+                                <img src="{% static 'img/gallery/search.png' %}" class="center-block image-sizer"/>
+                            </div>-->
+                            <!--<div class="media-body">
+                                <h5 class="">Need Help? <span class="font-head">{{ tuteria_details.phone_number }}</span></h5>
+                            </div>-->
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+                    
+        {% endif %}
+        {% if skill %}
+            <h1 class="search-text">{{ search_text }}</h1>
+            {% if tutors|length > 1  %}
+            <p style="font-size: 14px"><em>Each tutor has been manually screened and identity verified</em></p>
+            {% elif tutors|length == 1 %}
+            <p style="font-size: 14px"><em>This tutor has been manually screened and identity verified</em></p>
+            {% endif %}
+        {% else %}
+            <h1>Please enter a subject and a location.</h1>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block result_display %}
+    {% if skill %}
+        {{ block.super }}
+    {% else %}
+        <div id="search_only_form" class="panel">
+            <div class="panel-body">
+                <form id="filterForm" action="{% url 'search' %}" method="get">
+                    {% include "includes/search/home-search.html" %}
+                    <div class="form-group">
+                        <button class="btn btn-primary col-sm-6 col-sm-offset-6 col-xs-12 pull-right">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock result_display %}

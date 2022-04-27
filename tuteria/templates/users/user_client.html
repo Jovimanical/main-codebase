@@ -1,0 +1,48 @@
+{% extends "_layouts/base-internal.html" %}
+{% load staticfiles %}
+{% block ng_app %}ng-app="userApp"{% endblock ng_app %}
+{% block title %}{% verbatim %} {{title}} {% endverbatim %}{% endblock title %}
+{% block mixpanel %}{% endblock mixpanel %}
+{# {% block meta_tags %} {% endblock meta_tags %} #}
+{% block tag_manager %}{% endblock tag_manager %}
+{% block modal %}{% endblock modal %}
+{% block footer %} {% endblock footer %}
+{% block bottom_footer %} {% endblock bottom_footer %}
+{% block javascript %}
+{{block.super}}
+<script type="text/javascript" src="{% static "js/user_application.js" %}"></script>
+
+{% endblock javascript %}
+{% block notification_tawk %} {% endblock notification_tawk %}
+{% block body_content %}
+<div class="outer">
+	{% with user_profile=request.user.profile %}
+
+	{% if request.is_featured %}
+	<div class="navbar navbar-default" role="navigation">
+		{% include 'includes/nav/mobile/mobile-header.html' %}
+	</div>
+	{% else %}
+	<div class="{% block fixed %}{% endblock %} na hidden-xs ">
+		{% block nav %}
+		{% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder %}
+		{% endblock %}
+		{% block sub_nav %}
+		<user-navigation></user-navigation>
+		{# {% cache 20000 sub_nav_1 %} #}
+		{# {% include 'includes/nav/sub-nav-1.html' %} #}
+		{# {% endcache %} #}
+		{% endblock %}
+	</div>
+	{% block mobile_navigation %}
+	{# {% cache 1000 smart_nav request.user.email %} #}
+	{% include "includes/nav/mobile/smart-nav.html" with btnn=True search=True %}
+	{# {% endcache %}     #}
+	{% endblock mobile_navigation %}
+
+	{% endif %}
+	{% endwith %}
+</div>
+<div ui-view> </div>
+
+{% endblock body_content %}

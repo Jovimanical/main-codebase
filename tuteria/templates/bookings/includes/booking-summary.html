@@ -1,0 +1,50 @@
+{% load cloudinary %}
+<header class="order-header with-thumb cf row-space-4">
+
+    {% block booking_summary_heading %}
+{% if object.ts %}
+    <div class="gig-pict-102">
+            {% cloudinary object.ts.profile_pic PAYMENT_THUMBNAIL alt=object.ts.heading %}
+            {#                                                            <div class="tutor-name">{{ object.ts.tutor.get_full_name|title }}</div>#}
+        </div>
+        <h4 class="no-margin-top">
+            <span class="order-price pull-right hiddenp-xs hidden-sm font-head">&#x20a6;{{ object.real_price|floatformat:0 }}<br>
+            <span style="font-size: 13px; text-align: center; color: #5cb85c; padding-right: 17px">@&#x20a6;{{object.ts.price|floatformat:0}} per hour</span></span>
+            <span class="blue-font font-summary">{{ object.ts.tutor.first_name }}, {{ object.ts.skill.name|title }} Tutor</span>
+        </h4>
+        <h1>
+            {{ object.ts.heading|capfirst }}
+
+        </h1>
+        {% else %}
+        <div class="gig-pict-102">
+            {% cloudinary object.tutor.profile_pic PAYMENT_THUMBNAIL alt="object.tutor.slug" %}
+            {#                                                            <div class="tutor-name">{{ object.ts.tutor.get_full_name|title }}</div>#}
+        </div>
+        <h4 class="no-margin-top">
+            <span class="order-price pull-right hidden-xs hidden-sm font-head">&#x20a6;{{ object.real_price|floatformat:0 }}<br>
+            <span style="font-size: 13px; text-align: center; color: #5cb85c; padding-right: 17px">@&#x20a6;{{object.get_price|floatformat:0}} per hour</span></span>
+            <span class="blue-font font-summary">{{ object.tutor.first_name }}, {{ object.ts.skill.name|title }} Private Tutor</span>
+        </h4>
+        <h1>            {{object.rq_heading}}
+        </h1>
+{% endif %}
+        
+
+    {% endblock %}
+    <ul class="order-header-info cf">
+        {% block display_subject %}
+            <!--<li><em>Subject: <a
+                    href="{{ object.ts.get_absolute_url }}">{{ object.ts.skill.name|title }}</a>
+            </em></li>-->
+            <li><em>Students: {{ object.student_no }}</em></li>
+        {% endblock %}
+        <li>
+            <em><span class="hidden-xs">Date: </span><time datetime="{{ object.created|date:'M. d, o' }}">
+                {{ object.created|date:'M. d, o' }}</em></time>
+        </li>
+        {#                                                        <li><em>Students: {{ object.student_no }} </em></li>#}
+        <li><em>Booking ID: #{{ object.order }}</em></li>
+    </ul>
+</header>
+   

@@ -1,0 +1,25 @@
+{% extends "admin/external/base.html" %}
+{% load i18n %}
+{% load admin_urls %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs_last %}
+{% trans "Client Account for Refund of Processing Fee" %}
+{% endblock %}
+
+{% block content %}
+<style>
+    body{
+        margin-top: 30px;
+        display:flex;
+        justify-content: center;
+    }
+</style>
+<form action="" method="POST">
+    {{form|crispy}}
+  
+    <div class="submit-row">
+      <input type="submit" class="btn btn-primary" value="{% trans "Refund Fee" %}">
+    </div>
+</form>
+{% endblock %}

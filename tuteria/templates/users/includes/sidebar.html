@@ -1,0 +1,19 @@
+            {% with object.is_tutor as user_can_tutor  %} 
+                <div class="visible-xs">
+                    <div class="header-2 visible-xs">
+                        <div class="navy">
+                            {% include 'users/edit_profile/includes/edit_profile_urls.html' %}
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-xs">
+                    <div class="sidenav ">
+                        {% include 'users/edit_profile/includes/edit_profile_urls.html' with url_class='sidenav-list' %} 
+                    </div>
+
+
+                    <a href="#" class="btn bg-orange btn-block row-space-top-4">View
+                        Profile</a>
+                </div>
+            {% endwith %}

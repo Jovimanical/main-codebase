@@ -1,0 +1,125 @@
+{% extends 'pages/state_view.html' %}
+{# {% block ng_app %}ng-app=referralBtn{% endblock %} #}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc %}
+{% block title %}Partnership Received | Tuteria Nigeria{% endblock title %}
+{% block nav %}
+{% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block fixed %} {% endblock fixed %}
+
+{% block carousel_image %}
+{% if request.is_phone %}
+<div class="item active">
+    <div class="caro partnership"></div>
+    {# <img src="{% static "img/backgrounds/background_mobile.jpg" %}" alt="Private home lesson tutors" class="src"> #}
+</div>
+{% else %}
+<div class="item active">
+    <div class="caro partnership"></div>
+</div>
+{% endif %}
+{% endblock carousel_image %}
+{% block css %}
+{{block.super}}
+<style>
+
+    .login-prompt {
+        position: relative;
+        padding-left: 165px;
+    }
+
+    .resolution-slab {
+        position: relative;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        padding-left: 2.5em;
+        padding-right: 2.5em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media(max-width: 768px){
+        .resolution-slab {
+            padding-left: 1.5em;
+            padding-right: 1.5em;
+        }
+    }
+    .resolution-slab-header {
+        margin-top: 0.3125em;
+        margin-bottom: 1.5625em;
+    }
+    .content-carousel p {
+        padding-top: 10px;
+        font-size: inherit;
+        color: inherit;
+    }
+</style>
+{% endblock css%}
+{% block carousel_content %}
+<div class="row text-center padding-bottom-50">
+	<div class="jumbo-header padding-bottom-50" style="margin-top: -20px">
+
+        <img class="media-object img-circle" style="border: 2px white solid" src="{% static "img/gallery/godwin.jpg" %}" width="120">
+		
+		<h2 class="myh2 referrals-heading text-special row-space-3 padding-top-10 space-for-mobile-20">
+			<b class="white font-head">
+				Thank you.
+			</b>        
+		</h2>
+
+    </div>
+    {% endblock %}
+    {% block main_content %}
+    <section class="padding-bottom-50 row white-bg">
+        <div class="col-sm-12 col-xs-12 padding-bottom-50" style="margin-top: -50px">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-lg-6 col-xs-12 col-lg-offset-3 col-xs-offset-0 col-sm-8 col-sm-offset-2">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="small-12 resolution-slab">
+                                <div class="padding-top-15 padding-bottom-25">
+                                    <h3 class="h4 text-center font-head blue-font"><b>Hi, I'm Godwin Benson!</b></h3>
+                                    <p style="line-height:inherit">I'm excited that you're considering a partnership with Tuteria. You can be sure that I will read through your proposal as soon as I can, and send you a reply via email so we can discuss further.</p>
+
+                                    <p style="line-height:inherit">
+                                        At the heart of Tuteria, is a burning desire to help people master the things that matter to them by learning from other experts in their communities. By this, we hope to make quality tutoring accessible to everyone in Africa, and beyond.
+                                    </p>
+
+                                    <p style="line-height:inherit">
+                                        There's so much to be done, and many people to be reached but we cannot do it alone. So if your proposition points to a strategic way we can mutually extend our reach to help more people and make more impact, then we'll be happy to work together.
+                                    </p>
+
+                                    <p class=""><em>Thanks once again!</em></p>
+                                    <p class="font-head"><b>CEO, Tuteria Limited</b></p>
+                                </div>
+                                     
+                                     <a href="/invite" class="btn btn-danger no-border-radius ">&#8592; Back to Invite</a>                   
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section> 
+
+    {% endblock %}
+    {% block request_section %}{% endblock request_section %}
+    {% block notification_tawk %}{% endblock notification_tawk %}
+    {% block footer %}{% endblock footer%}
+    {% block javascript %}
+    {% include "includes/_scripts.html" %}
+
+    <script>
+        window.INVITEES = JSON.parse("{{invitees|escapejs}}");
+    </script>
+    <script src="{% static "js/angular/angular.js" %}"></script>    
+    <script>
+        window.currentPage = "Referrals";
+    </script>
+    <script src="//apis.google.com/js/client.js"></script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+
+    {% endblock javascript %}

@@ -1,0 +1,98 @@
+{% extends 'skills/includes/base_booking_list.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary activelink humanize %}
+{% block title %}My Jobs - Tuteria{% endblock title %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        @media (min-height: 800px) {
+            .space_eater {
+                height: 200px;
+            }
+        }
+    </style>
+    
+    {% include "users/includes/react-dev-css.html" with debug=debug s_host=tutor_client_cdn %}
+{% endblock css %}
+{% block db_summary %}
+    
+{% endblock db_summary %}
+{% block sidebar %}
+    <div class="visible-xs row">
+        <div class="header-2 visible-xs">
+            <div class="navy">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{% url 'users:user_schedule' %}"
+                           aria-selected="{% ifactive 'users:user_schedule' %}true{% else %}false{% endifactive %}"
+                           class="sidenav-item">Schedule</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users:user_jobs' %}"
+                           aria-selected="{% ifactive 'users:user_jobs' %}true{% else %}false{% endifactive %}"
+                           class="sidenav-item">Jobs</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users:tutor_subjects' %}"
+                           aria-selected="{% ifactive 'users:tutor_subjects' %}true{% else %}false{% endifactive %}"
+                           class="sidenav-item">Subjects</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users:user_bookings' %}"
+                           aria-selected="{% ifactive 'user_bookings' %}true{% else %}false{% endifactive %}"
+                           class="sidenav-item">Bookings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs row">
+        <div class="sidenav ">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="{% url 'users:user_bookings' %}"
+                       aria-selected="{% ifactive 'users:requests' %}true{% else %}false{% endifactive %}"
+                       class="sidenav-item">Schedule</a>
+                </li>
+                <li>
+                    <a href="{% url 'users:user_jobs' %}"
+                       aria-selected="{% ifactive 'users:user_jobs' %}true{% else %}false{% endifactive %}"
+                       class="sidenav-item">Jobs</a>
+                </li>
+                <li>
+                    <a href="{% url 'users:tutor_subjects' %}"
+                       aria-selected="{% ifactive 'users:tutor_subjects' %}true{% else %}false{% endifactive %}"
+                       class="sidenav-item">Subjects</a>
+                </li>
+                <li>
+                    <a href="{% url 'users:user_bookings' %}"
+                       aria-selected="{% ifactive 'user_bookings' %}true{% else %}false{% endifactive %}"
+                       class="sidenav-item">Bookings</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock sidebar %}
+{#{% load activelink %}#}
+{% block main_content %}<div id="root" class="row"></div>{% endblock %}
+
+{% block object_table %}
+  
+{% endblock object_table %}
+{% block footer2 %}{% endblock %}
+{% block request_section %}{% endblock request_section %}
+
+{% block javascript %}
+    {{ block.super }}    
+    {% include "users/includes/react-dev-server.html" with debug=debug s_host=tutor_client_cdn %}
+    <script>
+        const initialData = {
+            [window.CLIENT_PAGES.JOBS]: {
+                ...JSON.parse('{{ initial_data|escapejs }}')
+            },
+        };
+        console.log(initialData)
+        window.initialData = initialData
+        window.loadApplication(window.CLIENT_PAGES.JOBS, initialData, "{% url 'users:new_flow_post' %}",{booking_key:'{{ booking_key }}'});
+    </script>
+{% endblock javascript %}

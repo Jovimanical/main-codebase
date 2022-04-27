@@ -1,0 +1,86 @@
+{% load staticfiles bootstrap_pagination humanize bootstrap3 add_attr cloudinary %}
+{% if region == 'Lagos' and tutors|length > 0 %}
+    <div style="padding-bottom: 10px; color: #00B0B9">Not in Lagos? Filter by location</div>
+{% endif %}
+<div class="panel panel-tutor">
+    <div class="panel-heading clearfix" style="position:relative;">
+        <h4 class="panel-title pull-left ">
+            {{ paginator.count }} tutor{{ paginator.count|pluralize }} <span class="hidden-xs">found</span>
+        </h4>
+
+        <div class="btn-group pull-right">
+            <a href="javascript:void(0)" id="toggle-price-type"
+               class="btn btn-default btn-sm padding-top-bottom-14">Monthly Price</a>
+            {% if not category %}
+                <a id="displayFilterBtn" href="javascript:void(0)"
+                   class="padding-top-bottom-14 btn btn-default btn-sm visible-sm"
+                   style="margin-left:6px;"><i class="fa fa-sliders fa-rotate-90"></i>Filter</a>
+                {% if request.is_featured %}
+
+                    <button id="operaFilterBtn" type="button" class="padding-top-bottom-14 btn btn-default btn-sm "
+                            style="margin-left:6px;">Filter
+                    </button>
+                {% else %}
+                    <button type="button" class="padding-top-bottom-14 btn btn-default btn-sm visible-xs"
+                            style="margin-left:6px;" data-toggle="modal" data-target="#myModal"><i
+                            class="fa fa-sliders fa-rotate-90"></i>Filter
+                    </button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="result-display2" class="result-display row">
+            <div>
+                {% if paginator.count > 0 %}
+                    {% block search_result %}
+                        {% include 'includes/search/search-result.html' with skill=False column=3 %}
+                    {% endblock %}
+                    <div class="">
+                        <div class="pagination-container pull-left margin-top-15">
+                            <div class="results_count">
+                                <p>
+                                    {{ tutors.start_index }} – {{ tutors.end_index }}
+                                    of {{ paginator.count }} Tutors
+                                </p>
+                            </div>
+                            <nav class="pagination-margin">
+                                {% bootstrap_paginate tutors range=5 show_prev_next="false" show_first_last="true" %}
+                            </nav>
+                        </div>
+                    </div>
+                {% else %}
+                    <div id="no-result" class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-9 col-md-9 col-xs-12">
+                                <h2>No Results, Place Request</h2>
+
+                                <p>Don't worry if your search comes out empty. Please click the button below to request a tutor and tell us about your needs. We'll help you find qualified tutors in your area in no time.</p>
+                                <br/>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-8">
+
+                                        <div class="center-block">
+                                            <a class="btn btn-primary btn-lg btn-block"
+                                               href="{% url 'how_it_works' %}">
+                                                Request a Tutor &rarr;
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-md-3 col-xs-12 hidden-xs">
+                                <img class="pull-right " src="{% static "img/gallery/request.png" %}">
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+

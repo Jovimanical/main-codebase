@@ -1,0 +1,436 @@
+{% extends "users/includes/profile_base.html" %}
+{% load staticfiles cloudinary %}
+{% load socialaccount %}
+{% block profile_url %}true{% endblock %}
+{% block title %}Trust & Verification - Tuteria{% endblock title %}
+{% block main_content %}
+    {% if object.user.tutor_intent %}
+        <div class="potential-tutors well bg-info row">
+            <div class="col-sm-9 col-xs-12 row-space-2">
+                {% if not object.tutor_req.has_uploaded_a_verified_ID %}             
+                    <span class="font-head"><b>Verify Your Offline Identity</b></span><br>
+                    Please upload a valid ID card to verify your identity
+                {% elif not object.tutor_req.has_connected_social_media %}
+                    <span class="font-head blue-font"><b>Confirm Your ONLINE Identity</b></span><br>
+                    <span style="color:red" class="font-head"><b>Step 4 of 6:</b></span> Scroll down to connect your account to one of your social networks<br><br><em><b>PS:</b> This is compulsory, but if you're unable to connect a social account, skip and do it later</em>
+                {% elif not object.tutor_req.has_verified_email_address %}
+                    <span class="font-head"><b>Lastly, confirm that you got our email</b></span><br>
+                    <span style="color:red;" class="font-head"><b>Step 5 of 6:</b></span> Please check your inbox (or spam) to verify that our email arrived<br><br><em><b>PS:</b> You can skip this step and confirm your email after your application</em>     
+                {% else %}
+                    <span class="font-head"><b>Apply to Teach</b></span><br>
+                    Well done! You've completed all required steps. Click <span style="color:red" class="font-head"><b>Begin Application</b></span> to proceed.
+                {% endif %}
+
+            </div>
+                <div class="col-sm-3 col-xs-12">
+                {% if not object.tutor_req.has_uploaded_a_verified_ID %}
+                    <a class="btn btn-block btn-primary btn-tutor" href="{{ object.tutor_req.get_next_url }}">I'll do this later</a>
+                {% elif not object.tutor_req.has_connected_social_media %}
+                    <a class="btn btn-block btn-primary btn-tutor" href="{{ object.tutor_req.get_next_url }}">I'll do this later</a>
+                {% elif not object.tutor_req.has_verified_email_address %}
+                    <a class="btn btn-block btn-primary btn-tutor" href="{{ object.tutor_req.get_next_url }}">I'll do this later</a>
+                {% else %}
+                    {# <a class="btn btn-block btn-primary btn-tutor" href="{% url 'registration:tutor_landing' %}">Begin Application &#8594;</a> #}
+                    <a class="btn btn-block btn-primary btn-tutor" href="{{ object.tutor_req.get_next_url }}">Begin Application &#8594;</a>
+                    {% endif %}
+                </div>                
+        </div>
+    {% endif %}
+    {% if object.is_tutor and not object.tutorskills.exists %}
+        <div class="potential-tutors well bg-info row">
+            <div class="col-sm-9 col-xs-12 row-space-2">
+                {% if object.identity == None %}
+                <span class="font-head"><b>Verify Your Offline ID</b></span><br>
+                <span style="color:red;" class="font-head"><b>Compulsory:</b></span> Please upload a valid ID card below before creating subjects
+                {% elif not object.tutor_req.has_connected_social_media %}
+                <span class="font-head blue-font"><b>Lastly, Confirm Your ONLINE ID</b></span><br>
+                <span style="color:red" class="font-head"><b>Compulsory:</b></span> Scroll down to connect to one of your social networks
+                {% else %}
+                <span class="font-head"><b>You can add subjects now!</b></span><br>
+                Select the subjects you want to teach and add them to your profile so clients can find you in search results. Click <span style="color: red" class="font-head"><b>Add Subjects</b></span> to proceed 
+                {% endif %}
+            </div>
+            {% if object.identity != None and object.tutor_req.has_connected_social_media and not object.tutorskills.exists %}
+                <div class="col-sm-3 col-xs-12">
+                    <a class="btn btn-block btn-primary btn-tutor" href="/subjects/new/">Add Subjects Now!</a>
+                </div> 
+            {% endif %}                               
+        </div>   
+    {% endif %}
+
+    <div class="">
+        {% if not object.id_verified %}
+            <div class="panel panel-default row">
+                <div class="panel-body">
+                    <div class="row row-table">
+                        <div class="col-sm-7 col-middle">
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>Verify Your Offline ID</b>
+                                {% else %}
+                                Verify Your Offline ID
+                                {% endif %} 
+                            </h4>
+                            {% if not object.profile.image %}
+                                <p>It appears you haven't uploaded a profile picture yet. <a
+                                        href="{% url 'users:edit_media' %}">Please click here</a> to upload one.</p>
+                            {% endif %}
+                            <p>Snap and upload a valid ID card to complete identity verification. <span class="font-head">Your ID will be <u>completely deleted</u> immediately after confirmation.</span></p>
+
+                            <p>
+                                <span style="color: green;" class="font-head"><b>EXAMPLE:</b></span> this can be your National ID, Int'l Passport, Voter's Card, Driver's License, Work ID, School ID Card or any other valid means of identification. Verifying your ID helps build trust within the Tuteria community. We'll match information from your online account to those on your ID card.
+                                <!--<a href="{% url 'help:article_detail' 14 %}"> Learn more </a>-->
+                            </p>
+
+                            <p>
+                                <span class="font-head"><b>This step is compulsory for all tutors.</b></span> Your ID is 100% secure and you'll only do this once. You may also send your ID to <a href="mailto:help@tuteria.com">{{ tuteria_details.help_email }}</a>.
+                            </p>
+                        </div>
+                        <div class="col-sm-5 verify-block">
+                            <div class="centered">
+                                <img src="/static/img/tutor/id-verification.png" alt="">
+                                {% if object.identity.verified == False %}
+                                    <button class="btn btn-lg btn-primary disabled">
+                                        ID Uploaded
+                                    </button>
+                                {% else %}
+                                    <form action="{% url 'users:edit_verification' %}" id="identification_form"
+                                          method="post"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {% if request.is_featured %}
+                                            <div class="form-group row-space-2">
+                                                {{ form.identity }}
+                                            </div>
+                                            <div class="col-sm-4 col-xs-6">
+                                                <button class="btn btn-primary btn-block">Upload ID</button>
+                                            </div>
+                                        {% else %}
+                                            {{ form.identity }}
+                                            <span id="desktop-verify" class="btn btn-lg btn-primary btn-file"> Upload ID
+                                                </span>
+                                        {% endif %}
+
+                                    </form>
+                                    <div class="status_value"></div>
+                                {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% get_social_accounts object.user as accounts %}
+
+        {% if object.user.any_verification %}
+            <div class="panel panel-default row">
+                <div class="panel-heading">Your Current Verifications</div>
+                <div class="panel-body">                    
+                        <ul class="list-unstyled">
+                        {% if object.user.email_verified %}
+                            <li class="email unverified row-space-4 clearfix">
+                                <h4>
+                                {% if request.is_featured %}
+                                <b>Email Address</b>
+                                {% else %}
+                                Email Address
+                                {% endif %}
+                                </h4>
+                                <p class="description">You have confirmed your email: <b>{{ object.user.email }}</b>. A confirmed email is important to allow us to securely communicate with you.</p>
+                            </li>
+
+                        {% endif %}
+                        {% if accounts.facebook %}
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>Facebook</b>
+                                {% else %}
+                                Facebook
+                                {% endif %}
+                                </h4>
+
+                                <p class="description">You have connected your Tuteria account to your Facebook account. Connecting to a social network helps establish your online identity.</p>
+                            </li>
+                        {% endif %}
+                        {% if accounts.google %}
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>Google</b>
+                                {% else %}
+                                Google
+                                {% endif %}
+                                </h4>
+                                <p class="description">You have connected your Tuteria account to your Google account. Connecting to a social network helps establish your online identity.</p>
+                            </li>
+                        {% endif %}
+                        {% if accounts.linkedin_oauth2 %}
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>LinkedIn</b>
+                                {% else %}
+                                LinkedIn
+                                {% endif %}
+                                </h4>
+
+                                <p class="description">You have connected your Tuteria account to your LinkedIn account. Connecting to a social network helps establish your online identity.</p>
+                            </li>
+                        {% endif %}
+                        {% if object.user.id_verified %}
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>Offline ID</b>
+                                {% else %}
+                                Offline ID
+                                {% endif %}
+                                </h4>
+                                <p class="description">Your offline ID has been verified. Uploading an offline ID helps confirm personal details about you and maintain trust within our community.</p>
+                            </li>
+                        {% endif %}
+                        {% if background_checked %}
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>Background Check</b>
+                                {% else %}
+                                Background Check
+                                {% endif %}
+                                </h4>
+
+                                <p class="description">You have successfully passed the background check requirement.</p>
+                            </li>
+                        {% endif %}
+                    
+                </div>
+            </div>
+        {% endif %}
+
+        {% if not object.user.email_verified or not object.user.all_social_verified %}
+            <div class="panel panel-default row">
+                <div class="panel-heading"><h4>
+                {% if request.is_featured %}
+                <b>Verify Your Online ID</b>
+                {% else %}
+                Verify Your Online ID
+                {% endif %} 
+                </h4></div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        {% if not object.user.email_verified %}
+                            <li class="email unverified row-space-4 clearfix">
+                                <h4>
+                                {% if request.is_featured %}
+                                <b>Email Address</b>
+                                {% else %}
+                                Email Address
+                                {% endif %}
+                                </h4>
+
+                                <p class="description">Please verify your email address by clicking the link in the
+                                    message we just sent to: <b>{{ object.user.email }}</b></p>
+
+                                <p class="description">Can’t find our message? Check your spam folder or <a
+                                        href="{% url 'users:resend_mail' %}"
+                                        class="js-request-email">resend the confirmation email.</a></p>
+                            </li>
+
+                        {% endif %}
+                        {% if not object.user.facebook_verified %}
+                            <li class="facebook unverified row-space-4 clearfix">
+                                <h4>
+                                {% if request.is_featured %}
+                                <b>Facebook</b>
+                                {% else %}
+                                Facebook
+                                {% endif %}
+                                </h4>
+
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <p class="description verification-text-description">
+                                            Connect your Tuteria account to Facebook. This verifies your online identity and never posts on your profile.
+                                        </p>
+                                    </div>
+
+                                    <div class="col-sm-5">
+
+                                        <div class="connect-button">
+                                            {#                                            {% if accounts.facebook %}#}
+                                            {#                                                <a class="btn btn-block btn-primary btn-lg">Facebook Verified</a>#}
+                                            {#                                            {% else %}#}
+
+                                            <a href="{% provider_login_url "facebook" process="connect" next="/users/edit-verification/" %}"
+                                               ng-click="facebookConnect()"
+                                               class="btn btn-block btn-lg btn-primary"
+                                                    >Connect</a>
+                                            {#                                            {% endif %}#}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                        {% endif %}
+                        {% if not object.user.google_verified %}
+                        <li class="unverified row-space-4 clearfix">
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>Google</b>
+                                {% else %}
+                                Google
+                                {% endif %}
+                            </h4>
+
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <p class="description verification-text-description">
+                                        Connect your Tuteria profile to your Google+ account to verify your online identity. This does not post on your network.
+                                    </p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="connect-button">
+                                        {% if accounts.google %}
+                                            <a class="btn btn-block btn-danger btn-lg">Google Verified</a>
+                                        {% else %}
+                                            <a href="{% provider_login_url "google" process="connect" next="/users/edit-verification/" %}"
+                                               class="btn btn-block btn-danger btn-lg"
+                                                    >Connect</a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>    
+                        {% endif %}
+                        {% if not object.user.linkedin_verified %}
+                        <li class="unverified row-space-4 clearfix">
+                            <h4>
+                                {% if request.is_featured %}
+                                <b>LinkedIn</b>
+                                {% else %}
+                                LinkedIn
+                                {% endif %}
+                            </h4>
+
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <p class="description verification-text-description">
+                                        Connect your Tuteria profile to your LinkedIn account to verify your online identity. This does not post on your network.
+                                    </p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="connect-button">
+                                        {% if accounts.linkedin_oauth2 %}
+                                            <a class="btn btn-block btn-lg" style="background:#1686B0;color:white;">Linkedin
+                                                Verified</a>
+                                        {% else %}
+                                            <a href="{% provider_login_url "linkedin_oauth2" process="connect" next="/users/edit-verification/" %}"
+                                               class="btn btn-block btn-lg"
+                                               style="background:#1686B0;color:white;">Connect</a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        {% endif %}
+                        
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        {% if object.profile.application_status == object.profile.VERIFIED and can_display_content %}
+            {% if not background_checked %}
+                {% if not object.user.pending_bg_check %}
+                {% with  background_check_consent=user.background_check_consent  %}
+                    
+                {% endwith %}
+                    <div class="panel panel-default row">
+                        <div class="panel-heading">{% if background_check_consent %}Run a BackgroundCheck{% else %}
+                            Background Check Consent{% endif %}</div>
+                        <div class="panel-body">
+                            {% if background_check_consent %}
+                                <p class="row-space-2">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Atque doloremque nesciunt repellat vero. Adipisci aliquam
+                                    aliquid amet aspernatur blanditiis delectus earum error et
+                                    hic ipsam iste nam natus obcaecati provident quam quas
+                                    quibusdam quidem quis quisquam,
+                                    quod, similique ullam voluptate!
+                                </p>
+                                <form id="request_bg_form" action="{% url 'users:confirm_request_and_pay' 'new' %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-sm-8 col-xs-12 row-space-2">
+                                            <div class="form-group">
+                                                <span class="pull-right">&#x20a6;{{ tuteria_details.criminal_cost|floatformat:0 }}</span>
+
+                                                <div class="checkbox">
+                                                    <label>{{ bg_form.criminal_option }} Criminal Background
+                                                        Check</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <span class="pull-right">&#x20a6;{{ tuteria_details.address_cost|floatformat:0 }}</span>
+
+                                                <div class="checkbox"><label>{{ bg_form.address_option }} Address
+                                                    Verification Check</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-xs-8">
+                                            <button class="btn btn-block btn-primary" disabled>Proceed to Payment Page
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            {% else %}
+                                <p class="row-space-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Architecto odio qui quos recusandae.
+                                    Ad dolor enim excepturi fuga quos tenetur!
+                                </p>
+                                <div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
+                                    <a href="{% url 'users:request_consent' %}"
+                                       class="btn btn-block btn-primary">Okay</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="panel panel-default row">
+                        <div class="panel-heading">Pending Background Request</div>
+                        <div class="panel-body">
+                            <div class="well">You have a pending background request which is being processed.
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+{% endblock %}
+{% block request_section %}
+ {% if not object.user.tutor_intent %}
+ {{block.super}}
+ {% endif %}
+{% endblock request_section %}
+{% block javascript %}    
+    {{block.super}}
+    {% providers_media_js %}
+    {% cloudinary_includes %}
+    {% cloudinary_js_config %}   
+    
+    <script>
+        $('.btn-file').click(function(){
+           $('.cloudinary-fileupload ').get(0).click();
+        });
+        window.ProfileStep = 3;
+    </script>
+
+   <script src="{% static 'js/user_profile.bundle.js' %}"></script>
+{% endblock %}

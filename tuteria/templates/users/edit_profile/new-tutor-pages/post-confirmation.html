@@ -1,0 +1,35 @@
+{% extends "users/includes/profile_base.html" %}
+{% block sidebar_container %}{% endblock %}
+{% block modal %}
+
+{% endblock modal %}
+{% load staticfiles add_attr bootstrap3 i18n %}
+{% load cache activelink %}
+{% block title %}Profile - Tuteria{% endblock title %}
+{% block profile_url %}{% ifactive 'users:user_location' %}true{% else %}false{% endifactive %}{% endblock %}
+{% block main_container %}
+<div id="root" class="col-xs-12"></div>
+{% endblock %}
+{% block request_section %}
+{% endblock request_section %}
+{% block notification_tawk %}
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script>
+    const initialData = {
+        [window.CLIENT_PAGES.POST_APPLICATION]: JSON.parse('{{ initial_data|escapejs }}'),
+    };
+    window.initialData = initialData
+    window.loadApplication(window.CLIENT_PAGES.POST_APPLICATION, initialData, "{% url 'users:new_flow_post' %}", {
+        onNextStep: () => {
+            window.location.href = "/dashboard/";
+        }
+    });
+</script>
+<script src="{% static 'js/user_profile.bundle.js' %}"></script>
+{% block edit_profile_js %}
+
+{% endblock %}
+
+{% endblock %}

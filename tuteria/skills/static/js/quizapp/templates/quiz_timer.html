@@ -1,0 +1,9 @@
+<div>
+    <span>Timer Countdown: </span>
+
+    <timer interval="1000" max-time-unit="'minute'"
+           countdown="{{quiz_time}}"
+           finish-callback="callback()">{{ mminutes }} min{{ minutesS }}, {{ sseconds }}
+        sec{{ secondsS }}
+    </timer>
+</div>

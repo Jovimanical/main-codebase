@@ -1,0 +1,31 @@
+  {% extends "_layouts/base-external.html" %}
+  {% load staticfiles %}
+  {% block title %}Page Not found{% endblock %}
+  	{% block content %}
+  	<div class="page-container-responsive">
+    <div class="row row-space-top-8 row-space-8">
+      <div class="col-md-5 col-middle col-md-offset-1 col-xs-offset-0 ">
+        <h1 class="text-jumbo text-ginormous hide-sm">Oops!</h1>
+        <h2>An Error Has Occured</h2>
+        <h6>Error code: 400</h6>
+        <ul class="list-unstyled">
+          <li>Here are some helpful links instead:</li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/search">Search</a></li>
+          <li><a href="/help">Help</a></li>
+          <li><a href="/help/getting-started/how-to-hire">How to Hire on Tuteria</a></li>
+          <li><a href="/trust">Trust &amp; Safety</a></li>
+          <li><a href="/trust">Trust &amp; Safety</a></li>
+        </ul>
+      </div>
+      <div class="col-md-5 col-middle text-center">
+        <img src="{% static "img/404.png" %}" height="428" class="hidden-xs" alt="Search glass.">
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+  {% block request_section %}{% endblock %}
+  {% block javascript%}
+  {{ block.super }}
+      <script src="{% static 'js/static_pages.bundle.js'%}"></script>
+  {% endblock javascript %}

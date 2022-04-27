@@ -1,0 +1,82 @@
+{% extends "registration/tutor/landing.html" %}
+{% load cloudinary staticfiles %}
+{% block title %}How Meeting Request Works - Tuteria{% endblock title %}
+
+{% block wizard_title %}
+    <div class="col-sm-12 row">
+        <div class="col-sm-1" style="margin-top: 10px">
+            <div class="mobile-thumbnail text-center">
+                <span class="user-pict-130">
+                    {% cloudinary request.user.profile_pic USER_PROFILE_THUMBAIL alt=request.user.first_name %}
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="landing-font">About Meeting Requests</div>
+            <p>Hi {{ request.user.first_name }}! Clients can request to meet with you in person before deciding to hire you. We want you to know how this works, and how to make the most of it.</p>
+        </div>
+
+    </div>
+{% endblock wizard_title %}
+
+{% block left_column %}
+    <div class="col-sm-12">
+        <div class="need-to-know">
+            <div id="section-1" class="what-to-know">
+                <div class="media">
+                    <div class="media-left">
+                        <img src="{% static 'img/tutor/independent.png' %}" class=" center-block"/>
+                    </div>
+
+                    <div class="media-body">
+                        <p class="font-head">1. Meeting Requests are NOT confirmed lessons</p>
+
+                        <p>When you receive a meeting request, it means an interested client wants to speak with you in person before booking lessons. To process requests, we ask client to pay 30% of your long-term fee upfront so you can be sure they'll hire you if the meeting is positive. Long-term fee is the cost of 24 hours of lessons.</p>
+                        <p>However, this doesn’t bind clients to you. If the meeting turns out negative, clients can find another tutor. If the meeting is positive, then clients can proceed to book lessons with you.</p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <img src="{% static 'img/tutor/thorough.png' %}" class=" center-block"/>
+                    </div>
+
+                    <div class="media-body">
+                        <p class="font-head">2. What to do when you receive meeting requests?</p>
+
+                        <p>A. <u>Call to fix Meeting:</u> we'll give you the client's phone number and best time of call. You must call <em>the same day or the next day unfailingly</em> to fix the meeting.</p>
+
+                        <p>B. <u>Attend the Meeting:</u> when you’ve fixed the meeting, ensure you’re there! Try to understand their needs, develop a rapport and respond to questions asked.</p>
+
+                        <p>C. <u>Close the Meeting:</u> after the meeting, return to your Dashboard area, and close the meeting by indicating that it has held. We will take it off from there.</p>                        
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <img src="{% static 'img/tutor/thorough.png' %}" class=" center-block"/>
+                    </div>
+
+                    <div class="media-body">
+                        <p class="font-head">3. Important rules about Meeting Requests</p>
+                        <p>Please take note of the following rules to protect you, ensure you are not cheated or struggle to collect payments and keep our service fair to everyone.</p>
+
+                        <p>1. Do not begin lessons or accept direct payments from clients. They've not hired you yet. If you feel the meeting is positive, encourage them to hire you through Tuteria.</p>
+
+                        <p>2. Do your best to secure the lesson. Tutors who have up to 3 meeting requests without any leading to a confirmed booking will be suspending from using Tuteria.</p>                        
+                    </div>
+                </div>
+
+            </div>
+            <div id="section-4" class="what-to-know">
+                <div class="col-xs-12">
+                    <h2 class="br-bottom-md text-center">Show us you understand</h2>
+                    <section id="tutor_registration_quiz"></section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock left_column %}
+{% block first_parent %}
+    <script>window.RequestToMeetQuiz = true;</script>
+    {{ block.super }}
+{% endblock first_parent %}

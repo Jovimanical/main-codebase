@@ -1,0 +1,118 @@
+{% extends 'users/edit_profile/personal_info.html' %}
+
+{% load staticfiles %}
+{% block main_content %}
+<ul class="nav nav-tabs" role="tablist">
+    <li>
+        <a class="tab-item" href="https://www.airbnb.com/users/reviews?id=23883876#" role="tab"
+        aria-controls="received" aria-selected="true">
+        Reviews About You
+    </a>
+</li>
+<li>
+    <a href="https://www.airbnb.com/users/reviews?id=23883876#" class="tab-item" role="tab"
+    aria-controls="sent">
+    Reviews By You
+</a>
+</li>
+</ul>
+
+<div id="dashboard-content">
+
+    <div id="reviews" class="row-space-top-4">
+        <div class="tab-panel" role="tabpanel" id="received">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Past Reviews
+                </div>
+                <div class="panel-body">
+                    <p class="text-lead">
+                        Reviews are written at the end of a reservation through Airbnb. Reviews you've received will
+                        be visible both here and on your public profile.
+                    </p>
+
+                    <ul class="list-unstyled reviews-list row-space-top-4">
+                        <li class="reviews-list-item">
+                            No one has reviewed you yet.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" aria-hidden="true" id="sent">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Reviews to Write
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled reviews-list">
+                      {# {% for booking in bookings %} #}
+                      <li class="row">
+                        <div class="col-md-3">
+                            <div class="pull-left review-image">
+                                <a href="{{ rater.commenter.get_absolute_url }}"
+                                class="media-photo media-round row-space-1 pull-right"
+                                name="review_23339042" target="blank">
+                                <img src="{% static "img/users/1.jpg" %}" alt="">
+                                <div class="text-center">Ambert</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row-space-2">
+                            <div data-review-id="23339042"
+                            data-original-text="{{ rater.review }}"
+                            class="review-text expandable expandable-trigger-more row-space-2">
+
+                            <div class="expandable-content">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dolor culpa, ullam obcaecati quae atque pariatur! Culpa eum dignissimos reprehenderit.</p>
+                            </div>
+                        </div>
+                        <div class="text-muted review-subtext">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="location pull-left">
+                                        <i class="fa fa-map-marker"></i>{{ rater.commenter.location }}
+                                    </div>
+                                    <div class="date pull-right">{{ rater.get_date }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+            <div class="row row-space-2">
+                <div class="col-md-9 col-md-offset-3">
+                    <hr>
+                </div>
+            </div>
+            {# {% endfor %} #}
+            {% if bookings.count == 0 %}
+            <li class="reviews-list-item">
+                Nobody to review right now. Looks like it's time to hire a new tutor!
+            </li>
+            {% endif %}
+
+
+        </ul>
+    </div>
+</div>
+
+<div class="panel panel-default row-space-top-4">
+    <div class="panel-heading">
+        Past Reviews You've Written
+    </div>
+    <div class="panel-body">
+
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+
+{% endblock main_content %}
+{% block edit_profile_js %}
+{% endblock edit_profile_js %}

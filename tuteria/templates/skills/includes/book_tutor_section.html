@@ -1,0 +1,16 @@
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc bootstrap_pagination embed_video_tags activelink cache %}
+
+<div id="initiator-section22">
+    <a href="{% url 'users:edit_subject' object.skill.slug %}" class="btn btn-block btn-danger btn-lg"
+    style="padding: 15px 16px; font-size:20px">Edit subject</a>
+<div class="row">
+    <div class="col-xs-5 pad-up-18"><hr class="hr-styled"></div>
+    <div class="col-xs-2 pad-up-18">OR</div>
+    <div class="col-xs-5 pad-up-18"><hr class="hr-styled"></div>
+</div>
+    
+    <div class="padding-top-25">
+    <a href="{% url 'users:subject_creation_landing' %}" class="btn btn-block btn-success btn-lg"
+    style="padding: 15px 16px; font-size:20px">Add another</a>
+    </div>
+</div>

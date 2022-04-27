@@ -1,0 +1,33 @@
+{% extends "pages/why-use.html" %}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc %}
+{% block title %}Request Successful!{% endblock title %}
+{% block custom_heading %}
+<div class="jumbo-header">
+<h2 class="myh2"><b class="white">Meeting Request Sent!</b></h2>
+
+<p>
+  Thanks {{ user.first_name }}, your request to interview {{ object.tutor.first_name }} was successful.
+</p>
+
+</div>
+
+{% endblock custom_heading %}
+{% block first_section %}
+    <div id="heads" class="levels-intro row-space-3">
+
+    <h3 class="blue-font">What happens next?</h3>
+    <hr class="hr-styled"/>
+
+        <p>{{ object.tutor.first_name }} would call within your designated timeslot to schedule a meeting at your preferred time and location, and would also let us know after the meeting has been held.</p>
+
+        <p>We'll follow up with you to find out if you're interested in beginning lessons with {{ object.tutor.first_name }} in which case you can proceed to hire tutor and only pay any lesson balance. However, if you'd prefer to interview another tutor, you can do so using the same deposit you just made or we could recommend one for you.</p>
+
+        <p>Thanks for using Tuteria!</p>
+        <small class="pull-right">-- The Tuteria Team</small>
+    </div>
+
+{% endblock first_section %}
+{% block second_section %}{% endblock second_section %}
+{% block request_section %}
+    {% include 'includes/request_section2.html' %}
+{% endblock request_section %}

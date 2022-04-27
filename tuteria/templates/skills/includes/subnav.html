@@ -1,0 +1,34 @@
+{% load activelink %}
+<div class="subnav hide-print">
+    <div class="container">
+        <ul class="subnav-list">
+            <li>
+                <a href="{% url 'users:dashboard' %}"
+                   aria-selected="{% ifactive 'users:dashboard' %}true{% else %}false{% endifactive %}"
+                   class="subnav-item">Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url 'users:tutor_subjects' %}"
+                   aria-selected="{% ifactive 'users:tutor_subjects' %}true{% else %}false{% endifactive %}"
+                   class="subnav-item">Your
+                    Subjects</a>
+            </li>
+            <li>
+                <a href="{% url 'users:user_bookings' %}"
+                   aria-selected="{% ifactive 'users:user_bookings' %}true{% else %}false{% endifactive %}"
+                   class="subnav-item">Your
+                    Bookings</a>
+            </li>
+            <li>
+                <a href="{% url 'users:edit_profile' %}" aria-selected="
+                        {% block profile_url %}{% ifactive 'users:edit_profile' %}true{% else %}false{% endifactive %}{% endblock %}"
+                   class="subnav-item">Profile</a>
+            </li>
+            <li>
+                <a href="{% url 'users:account' %}"
+                   aria-selected="{% ifactive 'users:account' %}true{% else %}false{% endifactive %}"
+                   class="subnav-item">Account</a>
+            </li>
+        </ul>
+    </div>
+</div>

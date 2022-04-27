@@ -1,0 +1,94 @@
+version: "2"
+# networks:
+#   app: null
+
+services:
+  test:
+    build:
+      context: .
+      dockerfile: ./compose/local/Dockerfile-dev    
+    command: /start-dev.sh
+    volumes:
+      - ./tuteria:/app
+    environment:
+      - DATABASE_URL=postgres://biola:biola@postgres/tuteria
+      - REDIS_URL=redis://redis:6379
+      - BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - EMAIL_SERVICE_URL=http://notification-service:5000/
+      - LOCATION_SERVICE_URL=http://location-service:8000/
+      - REQUEST_SERVICE_URL=http://request-service:8000/
+      - CLOUDINARY_URL=cloudinary://728568457692931:GUot9JhC1Rol3xfhen7dOLNif_k@tuteria
+      - DJANGO_CONFIGURATION=StagingDev4
+      - TUTOR_SERVICE_URL=http://tutor-service:8000/
+
+    depends_on:
+      - postgres
+      - redis
+      - notification-service
+      - location-service
+      - tutor-service
+      - request-service
+
+    
+  redis:
+    expose:
+    - '6379'
+    image: redis
+  
+
+  location-service:
+    image: tuteria/location
+    environment:
+      - DATABASE_URL=postgres://biola:biola@postgres/location_service
+      - REDIS_URL=redis://redis:6379
+      - DJANGO_SETTINGS_MODULE=config.settings.local
+    depends_on:
+      - postgres
+    
+  notification-service:
+    image: tuteria/notification-service
+    env_file:
+      - ./env/email.env
+    
+  
+  postgres:
+    image: sameersbn/postgresql:9.6-2
+    environment:
+      - DB_USER=biola
+      - DB_PASS=biola
+      - DB_NAME=tutor_service,location_service,tuteria,request_service
+
+  tutor-service:
+    image: tuteria/tutor
+    environment:
+      - DATABASE_URL=postgres://biola:biola@postgres/tutor_service
+      - DJANGO_SETTINGS_MODULE=config.settings.local
+      - REDIS_URL=redis://redis:6379
+      - BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - EMAIL_SERVICE_URL=http://notification-service:5000/
+      - LOCATION_SERVICE_URL=http://location-service:8000/
+    depends_on:
+      - postgres
+      - notification-service
+      - location-service
+
+  request-service:
+    image: tuteria/request
+    command: /start-dev.sh
+    environment:
+      - DATABASE_URL=postgres://biola:biola@postgres/request_service
+      - DJANGO_SETTINGS_MODULE=config.settings.local
+      - REDIS_URL=redis://redis:6379
+      - BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - MONOLITH_URL=http://monolith:5001
+      - EMAIL_SERVICE_URL=http://notification-service:5000
+    
+    depends_on:
+      - postgres
+      - notification-service
+      - monolith
+  
+  
+  monolith:
+    image: tuteria/monolith
+  

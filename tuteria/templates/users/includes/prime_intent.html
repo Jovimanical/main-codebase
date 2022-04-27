@@ -1,0 +1,11 @@
+{% if not request.user.profile.applied_for_prime and request.user.tutor_verified %}
+<div class="potential-tutors well bg-info row">
+    <div class="col-sm-9 col-xs-12 row-space-2">
+        <span class="font-head">Apply to Teach</span><br>
+        <p>Want to get more clients? Apply to Prime Now.</p>
+    </div>
+    <div class="col-sm-3 col-xs-12">
+        <a class="btn btn-block btn-primary" href="{% url "users:prime-application" %}">Apply for Tuteria Prime</a>        
+    </div>
+</div>
+{% endif %}

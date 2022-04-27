@@ -1,0 +1,279 @@
+{% extends '_layouts/base-internal.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary bootstrap_pagination %}
+{% load activelink %}
+{% block title %}Your Earnings - Tuteria{% endblock title %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/revenue.css' %}"/>
+{% endblock %}
+{% block user_account %}true{% endblock %}
+{% block user_account2 %}
+    <li>
+        <a href="javascript:void(0)" aria-selected="true" class="subnav-item">Account</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class="container row-space-top-4 row-space-4">
+        <div class="row">
+            <div class="col-sm-3">
+                {% block sidebar %}
+                    <div class="visible-xs row">
+                        <div class="header-2 visible-xs">
+                            <div class="navy">
+                                {% include 'users/account/includes/account-urls.html' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs row">
+                        <div class="sidenav ">
+                            {% include 'users/account/includes/account-urls.html' with url_class='sidenav-list' %}
+                        </div>
+                    </div>
+                {% endblock sidebar %}
+            </div>
+            <div class="col-sm-9 col-xs-12">
+                {% block main_content %}
+                    <div class="panel panel-default row">
+                        <div class="panel-heading">
+                            <h4>Revenues
+                                {% if my_transactions %}
+                                    <div class="pull-right money-expected"><span class="hint--top hidden-xs"
+                                                                                 data-hint="From Active Orders">UPCOMING EARNINGS: <b>
+                                        &#8358;{{ upcoming_earnings|floatformat:"0" }}</b></span>
+                                    <span class="hint--top visible-xs" style="margin-top: 5px">BALANCE: <b>
+                                        &#8358;</b><span
+                                            class="font-head">{{ withdrawable_balance|floatformat:"0" }}</span></span>
+                                    </div>
+                                {% endif %}
+                            </h4>
+
+                        </div>
+                        {% if my_transactions %}
+                            <div class="panel-body mp-box">
+                                <div class="db-summary cf hidden-xs">
+
+                                    <div class="val">
+                                        <span><em>&#8358;{{ total_earned|floatformat:"0" }}</em><br>EARNED</span>
+                                    </div>
+                                    <div class="val sym sym-plus"><span>+</span></div>
+                                    <div class="val">
+                                        <a href="?filter_by=used_to_hire">
+                                            <em>&#8358;{{ wallet_balance|floatformat:"0" }}</em><br>LESSON <br>
+                                            BALANCE
+                                        </a>
+                                    </div>
+
+                                    <div class="val sym sym-minus"><span>-</span></div>
+                                    <div class="summary-calculation">
+                                        <div class="val sym sym-para sym-para-l"><span>(</span></div>
+                                        <div class="calc">
+                                            <div class="val">
+                                                <a href="?filter_by=withdrawn">
+                                                    <em>&#8358;{{ total_withdrawn|floatformat:"0" }}</em><br>WITHDRAWALS
+                                                </a>
+                                            </div>
+
+                                            <div class="val sym sym-plus"><span>+</span></div>
+                                            <div class="val">
+                                                <a href="?filter_by=used_to_hire">
+                                                    <em>&#8358;{{ total_used_to_hire|floatformat:"0" }}</em><br>WALLET
+                                                    <br>
+                                                    PAYMENTS
+                                                </a>
+                                            </div>
+                                            {#                                            <div class="val sym sym-plus"><span>+</span></div>#}
+                                            {#                                            <div class="val">#}
+                                            {#                                                <a href="?filter_by=pending">#}
+                                            {#                                                    <em>&#8358;{{ wallet_balance|floatformat:"0" }}</em><br>WALLET <br>#}
+                                            {#                                                    BALANCE#}
+                                            {##}
+                                            {#                                                </a>#}
+                                            {#                                            </div>#}
+                                        </div>
+                                        <div class="val sym sym-para sym-para-r"><span>)</span></div>
+                                    </div>
+                                    <div class="val sym sym-equal"><span>=</span></div>
+                                    <div class="val total"><em>
+                                        &#8358;{{ withdrawable_balance|floatformat:"0" }}</em><br>WITHDRAWABLE <br>
+                                        FUNDS
+                                    </div>
+                                </div>
+
+                                {% if withdrawable_balance > 500 and request.user.has_bank %}
+                                    <div class="modal fade" id="payment_form" tabindex="-1" role="dialog"
+                                         aria-labelledby="payment_form">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span
+                                                            aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirm Payment</h4>
+                                                </div>
+                                                <form id="payForm22" action="{% url 'users:revenue_transactions' %}"
+                                                      method="post" class="smart-forms">
+
+                                                    <div class="modal-body">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="payment_type"/>
+
+                                                        <div id="paga_form" class="">
+                                                        </div>
+                                                        <div class="well bg-info">
+                                                            <p>You are about to initiate a withdrawal to your associated bank account. <strong>Please allow at least 3 days</strong> for it to reflect in your bank.</p>
+
+                                                            <p>Kindly note that transfer charges have increased to &#8358;200/deposit which will be split equally between you & Tuteria. Therefore, &#8358;100 will be deducted from your earning. We apologize for any inconvenience. Thanks.</p>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                        <label for="auto_withdraw"> 
+                                                            <input id="auto_withdraw" type="checkbox" name="auto_withdraw">
+                                                            Automatically trigger payments once classes are closed. (You won't have to come here to withdraw payments anymore.)
+                                                        </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Confirm
+                                                        </button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filter-actions row-space-2">
+                                        <label>Withdraw to: </label>
+
+                                        {% if request.user.has_bank %}
+                                            <button data-toggle="modal" data-whatever="Bank"
+                                                    data-target="#payment_form" class="btn btn-standard pp btn-primary">Your Bank
+                                                <span class="hidden-xs">Account</span>
+                                            </button>
+                                        {% endif %}
+                                        {#                                        {% if request.user.primary_phone_no %}#}
+                                        {#                                            <input data-toggle="modal" data-whatever="Phone" data-target="#payment_form"#}
+                                        {#                                                   class="btn btn-danger card" name="commit" type="submit"#}
+                                        {#                                                   value="Mobile Phone">#}
+                                        {#                                        {% endif %}#}
+                                    </div>
+
+                                {% endif %}
+
+                                <div class="filter-select cf row-space-2">
+                                    <label for="fake-dropdown">SHOW</label>
+
+                                    <div class="dropdown transac_filter">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                                data-toggle="dropdown" aria-expanded="true"> {{ filter_val }}
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                            {% for url in filtering_options %}
+                                                <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                           href="{{ url.url }}">{{ url.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="db-main-table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <td class="hidden-xs">DATE</td>
+                                            <td class="el2"><span class="hidden-xs">FOR</span>
+
+                                                <div class="visible-xs">Description</div>
+                                            </td>
+                                            <td>AMOUNT</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for tr in object_list %}
+                                            <tr class="hidden-action-link">
+                                                <td class="date hidden-xs">{{ tr.modified|date:"b d, y"|title }}</td>
+
+                                                <td class="ellipsis-wrap">
+                                                    <div class="ellipsis"> {{ tr.to_string }}
+                                                        {% if tr.type == tr.EARNING %}
+                                                            <a class="hidden-xs"
+                                                               href="{{ tr.booking.get_tutor_absolute_url }}">(view
+                                                                order)</a>
+                                                        {% endif %}</div>
+                                                </td>
+                                                <td class="amount">
+                                                    {% if tr.transaction_type == "income" %}
+                                                        <span class="money-in">&#8358;{{ tr.total|floatformat:"0" }}</span>
+                                                    {% else %}
+                                                        <span class="money-out">-&#8358;{{ tr.total|floatformat:"0" }}</span>
+                                                    {% endif %}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="pagination-container col-xs-12 margin-top-15">
+                                    <nav class="pagination-margin pull-left">
+                                        {% bootstrap_paginate page_obj range=5 first_label="&#x2190;" last_label="&#x2192;" show_prev_next="false" show_first_last="true" %}
+                                    </nav>
+                                </div>
+                             
+                              </div>
+                        {% else %}
+                            <div class="panel-body">
+                                <p>
+                                    You have not earned any money yet.
+                                </p>
+                                {# <div class="row"> #}
+                                {# <div class="col-sm-8"> #}
+                                {# <form accept-charset="UTF-8" action="/s" class="row" method="get"> #}
+                                {# <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div> #}
+                                {# <div class="col-sm-8"> #}
+                                {# <input type="text" class="location" autocomplete="off" id="location"name="location" placeholder="What do you want to learn?"> #}
+                                {# </div> #}
+                                {# <div class="col-sm-4"> #}
+                                {# <button type="submit" class="btn btn-primary" id="submit_location"> #}
+                                {# Search Tutors #}
+                                {# </button> #}
+                                {# </div> #}
+                                {# </form> #}
+                                {# </div> #}
+                                {# </div> #}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block request_section %}
+    {% include 'includes/request_section2.html' %}
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+    </script>
+    <script>window.currentPage = "Payout"</script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+    <script>
+        $('#payment_form').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var recipient = button.data('whatever'); // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+            modal.find('.modal-title').text('Confirm Payment to ' + recipient);
+            modal.find("input[name='payment_type']").val(recipient);
+
+        })
+    </script>
+{% endblock javascript %}
+{% block notification_tawk %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% with current_user=request.user  %}
+{% if current_user.is_authenticated %}
+{% with c_profile=current_user.profile  %}
+{% if c_profile.application_status == c_profile.VERIFIED %}
+<a href="{% url 'users:subject_creation_landing' %}" class="btn-lg btn btn-primary"> Create your subjects &#8594;
+</a>
+
+<br><br>
+                <b>More subjects get you more clients!</b>
+{% elif c_profile.application_status == c_profile.PENDING%}
+
+<button class="btn-lg btn btn-primary row-space-2 invite_friends_btn" aria-expanded="false">
+    Invite friends to Tuteria!
+    {% if request.is_featured %}{% else %}&nbsp;
+     <i class="fa fa-chevron-circle-right"></i>
+     {% endif %}
+</button>
+
+
+<!--<a href="#" class="btn-lg btn btn-primary"> Invite friends to Tuteria
+ &nbsp;
+ <i class="fa fa-chevron-circle-right"></i>
+</a>-->
+
+<br><br>
+                <b>Be the one to spread the good news!</b>
+{% else %}
+<a href="{% url 'users:subject_creation_landing' %}" class="btn-lg btn btn-primary">
+  Become a tutor today! &#8594;         
+</a>
+
+<br><br>
+                <b>Applications are open for now. Hurry!</b>
+{% endif %}
+{% endwith %}
+{% else %}
+<a id="signup_nav" href="{% url 'account_signup' %}" class="btn-lg btn btn-primary signup_nav">
+  Become a tutor today! &#8594;            
+</a>
+<br><br>
+                <b>Applications are open for now. Hurry!</b>
+{% endif %}
+{% endwith %}

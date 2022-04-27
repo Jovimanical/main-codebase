@@ -1,0 +1,42 @@
+Hi {{ booking.user.first_name }},
+
+Unfortunately, Your booking reservation reservation with {{ booking.get_tutor.first_name }}: {{ booking.skill_display }} tutor in {{ booking.get_tutor.vicinity }} has been cancelled as bank payment wasn't received. Would you consider using our online payment option? It is instant, convinient and secure.
+Give it a try now and hire your tutor.
+
+{% if booking.ts %}
+http://{{ site.domain }}{{ booking.ts.get_absolute_url }}
+{% else %}
+http://{{ site.domain }}{{ booking.get_tutor.get_absolute_url }}
+{% endif %}
+
+If the tutor isn't quite right for you, maybe you would like these similar {{ booking.skill_display }} tutors.
+
+ {% if first %}
+{{first.tutor.get_full_name}}. ₦{{first.price|floatformat:0}}
+{{first.reviews.count}} Review{{first.reviews.count|pluralize}} | {{first.tutor.vicinity}} {{first.credentials}}
+http:////{{ site.domain }}{{ first.get_absolute_url }}
+{% endif %}
+
+{% if second %}
+{{second.tutor.get_full_name}}. ₦{{second.price|floatformat:0}}
+{{second.reviews.count}} Review{{second.reviews.count|pluralize}} | {{second.tutor.vicinity}} {{second.credentials}}
+http:////{{ site.domain }}{{ second.get_absolute_url }}
+{% endif %}
+
+{% if third %}
+{{third.tutor.get_full_name}}. ₦{{third.price|floatformat:0}}
+{{third.reviews.count}} Review{{third.reviews.count|pluralize}} | {{third.tutor.vicinity}} {{third.credentials}}
+http:////{{ site.domain }}{{ third.get_absolute_url }}
+{% endif %}
+
+{% if fourth %}
+{{fourth.tutor.get_full_name}}. ₦{{fourth.price|floatformat:0}}
+{{fourth.reviews.count}} Review{{fourth.reviews.count|pluralize}} | {{fourth.tutor.vicinity}} {{fourth.credentials}}
+http:////{{ site.domain }}{{ fourth.get_absolute_url }}
+{% endif %}
+
+
+We are here to help! If you need any assistance with your booking, or for urgent or unexpected situations, please email {{ tuteria_details.email }} or call us on {{ tuteria_details.phone_number }}
+
+Thanks,
+The Tuteria Team

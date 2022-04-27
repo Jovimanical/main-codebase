@@ -1,0 +1,375 @@
+{% extends 'pages/trust.html' %}
+{% load staticfiles i18n bootstrap3 add_attr activelink humanize distance_estimate %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/level.css' %}"/>
+{% endblock %}
+{% block title %}Grow Your Income With Tuteria Levels{% endblock title %}
+{% block carousel_image %}
+    <div class="item active">
+        <div class="caro bg9"></div>
+        {# <img src="{% static 'img/backgrounds/levels.jpg' %}" alt=""> #}
+    </div>
+{% endblock carousel_image %}
+{% block carousel_content %}
+
+    <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0  text-center">
+        <div class="jumbo-header xs-padding-top-50">
+            <h2 class="myh2"><b class="white">WELCOME HOME</b></h2>
+
+            <small>
+                Earn more with Tuteria. Great customer satisfaction, high quality service, great ratings and repeat
+                clients will earn you a new level status with benefits.
+            </small>
+
+        </div>
+
+    </div>
+{% endblock %}
+{% block main_content %}
+    {% block mm_c %}
+        <div id="base" class="container">
+        <section class="panel row">
+            <div class="panel-body no-padding-total padding-top-50 row-space-bottom-5 mp-levels">
+                <div class="levels-wrap">
+                    <header id="heads" class="levels-intro row-space-3">
+
+                        <div class="default-level">
+
+                            <div class="levels-tag p-t-0 cf">
+                                <span class="tag" style="padding: 5px 10px;">New Tutors</span>
+                            </div>
+                            <h2 class="level-font">As a new tutor, you've just gotten started on Tuteria and are
+                                dedicated to increasing sales on the site. We'll help you get started with:</h2>
+                            <ul class="intro-extras">
+                                <li><i class="tutor-levels-icons increased_earinings"></i>65% Earning Commission</li>
+                                <li><i class="tutor-levels-icons unlimited_subjects"></i>Unlimited Subjects</li>
+                                <li><i class="tutor-levels-icons good_exposure"></i>Good Exposure</li>
+                            </ul>
+                            {# <ul class="intro-extras m-t-10"> #}
+                            {# <li><i class="tutor-levels-icons good_exposure"></i>Send <a #}
+                            {# href="http://blog.fiverr.com/take-fiverr-business-anywhere/?utm_source=bl_ct&amp;utm_term=n540" #}
+                            {# target="_blank">Custom Offers</a> (up to $325) #}
+                            {# </li> #}
+                            {# </ul> #}
+                        </div>
+                        <br>
+
+                        <h2 class="rise-text level-font">To rise to level 1:</h2>
+
+                        <ul class="levels-timeline row-space-3">
+                            <li class="with-arrow glyphicon glyphicon-arrow-down"></li>
+                            <!--with-check-->
+                            <li class="with-circle">Be 30 days active on Tuteria</li>
+                            <li class="with-circle">Complete at least 20 hours of tutoring</li>
+                            <li class="with-circle">Receive at least 1 repeat booking</li>
+                            <li class="with-circle">Maintain a 4 star rating or above</li>
+                            <li class="with-circle">Have a low cancellation rate</li>
+                        </ul>
+                        <div class="levels-tag with-tip row-space-3" id="press">
+
+                            <div class="tag-wrapper" data-toggle="tooltip" data-container="body" data-placement="right"
+                                 data-viewport="#press" data-html="true"
+                                 title="On average a Level 1 tutor will receive 1.5 - 2.5 times more traffic than a new tutor. This happens because your subjects start to show up higher in search results and are included in promotion emails which makes it easier for you to offer more superb services to clients visiting your subjects.">
+                                <span class="tag" style="padding: 5px 10px;">Level 1</span>
+                            </div>
+                        </div>
+                        <figure class="levels-img row-space-6">
+                            <div class="level1bg"></div>
+                            <figcaption>
+                                <b><span class="badges">
+              <!--<span class="user-badge-round-lrg tutor-levels-icons level-1"></span>-->
+              <em>You've
+                  graduated<br>to
+                  Level 1</em></span></b>
+                                <h5 class="level-color">You will now enjoy:</h5>
+                                <ul>
+                                    <li><i class="tutor-levels-icons increased_earinings_white mob"></i>70% Earning
+                                        Commission
+                                    </li>
+                                    <li><i class="tutor-levels-icons more_clients_white mob"></i>More Clients</li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons unlimited_subjects_white mob"></i>Unlimited
+                                        Subjects
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons more_exposure_white mob"></i>More Exposure</li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                        <h2 class="rise-text level-font">At level 1, you've become an influencer and are beginning to
+                            build a strong and trustworthy reputation on Tuteria. To rise to level 2:</h2>
+                        <ul class="levels-timeline row-space-3">
+                            <li class="with-arrow glyphicon glyphicon-arrow-down"></li>
+                            <li class="with-circle">Complete at least 100 hours of tutoring</li>
+                            <li class="with-circle">Receive at least 5 repeat bookings</li>
+                            <li class="with-circle">Upload a personal video to your profile</li>
+                            <li class="with-circle">Maintain a 4.2 star rating or above</li>
+                            <li class="with-circle">Have a low cancellation rate</li>
+                        </ul>
+                        <div class="levels-tag with-tip cf sel row-space-3" id="sel">
+                            {# <span class="user-pict-32 hint--top hint--always" data-hint="You" data-toggle="tooltip" data-container="body" #}
+                            {# data-placement="top" title="You"> #}
+
+                            {# <img src="//cdnil0.fiverrcdn.com/photos/2307131/thumb/ProfilePic.jpg?1396384571" alt="godwinbenson" #}
+                            {# width="32" height="32" data-reload="inprogress"></span> #}
+                            <div class="tag-wrapper" data-toggle="tooltip" data-container="body" data-placement="right"
+                                 data-viewport="#sel" data-html="true"
+                                 title="<b>On average, a Level 2 tutor will receive:</b><br><br>• 1.5 - 2 times more traffic to their subjects than a Level 1 tutor<br>• 4-5 times more traffic to your subjects than a new tutor<br>We give even more exposure to your subjects via our search results and promotional landing pages for the exceptional service you continue to deliver.">
+                                <span class="tag" style="padding: 5px 10px;">Level 2</span>
+                            </div>
+                        </div>
+                        <figure class="levels-img row-space-6">
+                            <div class="level2bg"></div>
+                            {# <img class="hidden-xs" #}
+                            {# src="{% static 'img/tutor/level2.jpg' %}" alt="Tuteria: Level two tutor" #}
+                            {# width="996" height="380"> #}
+                            <figcaption>
+                                <b><span class="badges">
+                <!--<span class="user-badge-round-lrg tutor-levels-icons level-2"></span>-->
+                <em>You’ve moved
+                    up to<br>the Leader's level!</em></span></b>
+
+                                <h5 class="level-color">You will now enjoy:</h5>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob increased_earinings_white"></i>75% Earning
+                                        Commission
+                                    </li>
+                                    <li><i class="tutor-levels-icons mob more_clients_white"></i>Even More Clients</li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob unlimited_subjects_white"></i>Unlimited
+                                        Subjects
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob more_exposure_white"></i>Extended Exposure</li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+
+                        <h2 class="rise-text level-font">You're now on level two! You're making great progress, offering
+                            superb service, and clients trust you a lot more. To rise to level 3:</h2>
+                        <ul class="levels-timeline row-space-3">
+                            <li class="with-arrow glyphicon glyphicon-arrow-down"></li>
+                            <li class="with-circle">Complete at least 250 hours of tutoring</li>
+                            <li class="with-circle">Receive at least 15 repeat bookings</li>
+                            <li class="with-circle">Teach at least 10 different clients</li>
+                            <li class="with-circle">Pass the Tuteria Tutor Certification<sup>&reg;</sup></li>
+                            <li class="with-circle">Maintain a 4.5 star rating or above</li>
+                            <li class="with-circle">Have a low cancellation rate</li>
+                        </ul>
+                        <div class="levels-tag with-tip cf row-space-3" id="sam">
+
+                            <div class="tag-wrapper" data-toggle="tooltip" data-container="body" data-placement="right"
+                                 data-viewport="#sam" data-html="true"
+                                 title="<b>A Level 3 tutor will receive on average:</b><br><br>• 3-4 times more traffic to their subjects than a Level 2 tutor<br>• 6-7 times more traffic to their subjects than a Level 1 tutor<br>• 15-18 times more traffic to their subjects than a non-level tutor<br><br>Traffic is delivered a number of ways, including but not limited to the Tuteria.com homepage, promotional emails, search results and social media content.">
+                                <span class="tag" style="padding: 5px 10px;">LEVEL 3</span>
+                            </div>
+                        </div>
+                        <figure class="levels-img row-space-6">
+                            <div class="level3bg"></div>
+                            {# <img class="hidden-xs" #}
+                            {# src="{% static 'img/tutor/level3.jpg' %}" alt="Tuteria: Level three tutor" #}
+                            {# width="996" height="380"> #}
+                            <figcaption>
+                                <b><span class="badges">
+                <!--<span class="user-badge-round-lrg tutor-levels-icons level-3"></span>-->
+                <em>You’ve become <br>a Role Model</em></span></b>
+
+                                <h5 class="level-color">You will now enjoy:</h5>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob increased_earinings_white"></i>80% Earning
+                                        Commission
+                                    </li>
+                                    <li><i class="tutor-levels-icons mob certified_white"></i>Certified Tutor Badge</li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob exclusive_white"></i>Exclusive Features</li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob more_exposure_white"></i>Priority Exposure</li>
+                                    <li><i class="tutor-levels-icons mob priority_support_white"></i>Priority Support
+                                    </li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+
+                        <h2 class="rise-text level-font">Now on level three! You've earned a Certified Tutor Badge which
+                            attracts the best clients to you. To become a top level tutor:</h2>
+                        <ul class="levels-timeline row-space-3">
+                            <li class="with-arrow glyphicon glyphicon-arrow-down"></li>
+                            <li class="with-circle">Complete at least 500 hours of tutoring</li>
+                            <li class="with-circle">Receive at least 40 repeat bookings</li>
+                            <li class="with-circle">Teach at least 25 different clients</li>
+                            <li class="with-circle">Maintain 4.7 star rating or above</li>
+                            <li class="with-circle">Have a low cancellation rate</li>
+                        </ul>
+                        <div class="levels-tag with-tip cf row-space-3" id="sam4">
+
+                            <div class="tag-wrapper" data-toggle="tooltip" data-container="body" data-placement="right"
+                                 data-viewport="#sam4" data-html="true"
+                                 title="<b>A Top Level Tutor (TLT) will receive on average:</b><br><br>• 4-5 times more traffic to their subjects than a Level 3 tutor<br>• 5-7 times more traffic to their subjects than a Level 2 tutor<br>• 8-10 times more traffic to their subjects than a Level 1 tutor<br>• 17-20 times more traffic to their subjects than a non-level tutor<br><br>Traffic is delivered a number of ways, including but not limited to the Tuteria.com homepage, promotional emails, search results and social media content.">
+                                <span class="tag" style="padding: 5px 10px;">Top Level Tutor</span>
+                            </div>
+                        </div>
+                        <figure class="levels-img">
+                            <div class="level4bg"></div>
+                            {# <img class="hidden-xs" #}
+                            {# src="{% static 'img/tutor/level4.jpg' %}" alt="Tuteria: Level three tutor" #}
+                            {# width="996" height="380"> #}
+                            <figcaption>
+                                <b><span class="badges">
+                <!--<span class="user-badge-round-lrg tutor-levels-icons level-4"></span>-->
+                  
+                <em>You're officially A<br>Tuteria Superstar!</em></span></b>
+                                <h5 class="level-color">You will always enjoy:</h5>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob increased_earinings_white"></i>85% Earning
+                                        Commission
+                                    </li>
+                                    <li><i class="tutor-levels-icons mob certified_white"></i>Certified Tutor Badge</li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob exclusive_white"></i>Exclusive Features</li>
+                                </ul>
+                                <ul>
+                                    <li><i class="tutor-levels-icons mob more_exposure_white"></i>VIP Exposure</li>
+                                    <li><i class="tutor-levels-icons mob priority_support_white"></i>VIP Support</li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </header>
+                </div>
+                <div class="padding-top-50 desktop-padding-15">
+                    <h5><b><u>SOME DEFINITIONS:</u></b></h5>
+
+                    <p><b>Earning Commission:</b> the percentage you earn for each booking, increases from 65% to 85%.
+                    </p>
+
+                    <p><b>Repeat Booking:</b> when a previous client books another lesson with you through Tuteria.</p>
+
+                    <p><b>Cancellation Rate:</b> the total number of times you cancel a booked lesson.</p>
+
+                    <p><b>Tutor Certification<sup>&reg;</sup>:</b> a test to certify your skills and earn you a
+                        Certified Tutor status on Tuteria.</p>
+
+                    <p><b>Exclusive Features:</b> exciting new features to make tutoring easier and more rewarding.</p>
+                </div>
+            </div>
+
+            <div id="worry-free" class="panel-body">
+                <div class="no-padding-total row-space-bottom-5 padding-top-50">
+                    <div id="how-it-works"
+                         class="wrapper-full clearfix text-center col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+                        {% if request.is_featured %}
+                            <h2 class=""><b>Grow your income with Tuteria</b></h2>
+                        {% else %}
+                            <h2 class="">Grow your income with Tuteria</h2>
+                        {% endif %}
+
+                        <p>On Tuteria, you earn more than money. You become part of a trusted community that is
+                            constantly opening new frontiers for you to make more impact.</p>
+                    </div>
+
+
+                    <div class="icon-box-6">
+                        <div class=" col-sm-4 col-md-4 row-space-4">
+                            <div class="icon-box-6-item text-center">
+                                <div class="hours-img"></div>
+                                {# <img src="{% static 'img/gallery/500hours.png' %}" alt="Trusted and Tested Tutoring Services"> #}
+
+                                <h4 class="text-center">
+                                    {% if request.is_featured %}
+                                        <b>#500Hours</b>
+                                    {% else %}
+                                        #500Hours
+                                    {% endif %}
+                                    <br></h4>
+
+                                <p class="inline-block">Our goal is to help each tutor deliver 500 tutoring hours at
+                                    least. Everything we do here at Tuteria is driven by this primary purpose.
+                                </p>
+                            </div>
+                        </div>
+                        <div class=" col-sm-4 col-md-4 row-space-4">
+                            <div class="icon-box-6-item text-center">
+                                <div class="performance-img"></div>
+                                {# <img src="{% static 'img/gallery/performance.png' %}" alt="Trusted and Tested Tutoring Services"> #}
+
+                                <h4 class="text-center">
+                                    {% if request.is_featured %}
+                                        <b>Reward Performance</b>
+                                    {% else %}
+                                        Reward Performance
+                                    {% endif %}
+                                    <br></h4>
+
+                                <p class="inline-block">Tuteria is designed to reward tutors who continue to offer great
+                                    service to their clients. We will go the extra mile for such tutors.
+                                </p>
+                            </div>
+                        </div>
+                        <div class=" col-sm-4 col-md-4 row-space-4">
+                            <div class="icon-box-6-item text-center">
+                                <div class="treatment-img"></div>
+                                {# <img src="{% static 'img/gallery/treatment.png' %}" alt="Trusted and Tested Tutoring Services"> #}
+
+                                <h4 class="text-center">
+                                    {% if request.is_featured %}
+                                        <b>Fair Treatment</b>
+                                    {% else %}
+                                        Fair Treatment
+                                    {% endif %}
+                                    <br></h4>
+
+                                <p class="inline-block">We are working very hard and therefore expect all tutors to
+                                    abide by our <a href="{% url 'help:article_detail' 27 %}">tutoring policies</a>.
+                                    That's the only way to succeed on Tuteria.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if request.user.is_authenticated and not request.user.email_verified %}
+                        <div class="col-sm-12">
+                            <div class="col-sm-10 col-sm-offset-1 well bg-info">
+
+                                <p class="text-center">If you don't confirm your email within 48 hours, your application will be denied. Ensure you confirm your email immediately by checking your inbox or spam, or send "This is my email" to <a href="mailto:help@tuteria.com">help@tuteria.com</a> for manual confirmation.</p>
+
+                            </div>
+                        </div>
+
+                    {% endif %}
+
+
+                </div>
+                <div class="col-sm-4 col-sm-offset-4 col-xs-12 col-xs-offset-0">
+                    <div class="text-block">
+                        <p class="text-center padding-top-50 padding-bottom-50">
+                            {% include "includes/special_button.html" %}
+                        </p>
+                    </div>
+                </div>
+        </section>
+    {% endblock %}
+
+{% endblock %}
+{% block request_section %}
+    {% include 'includes/request_section2.html' %}
+{% endblock request_section %}
+{% block javascript %}
+    {{ block.super }}
+
+    <script>
+        window.currentPage = "Levels";
+    </script>
+    <script src="{% static 'js/static_pages.bundle.js' %}">
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+{% endblock %}

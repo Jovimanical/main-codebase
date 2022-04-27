@@ -1,0 +1,9 @@
+{
+  "project_name": "Tuteria",
+  "project_secret": "993e26d7-dce7-49d9-6f9e-335b739036a0",
+  "project_watch": true,
+  "project_presence": true,
+  "project_join_leave": true,
+  "project_history_size": 10,
+  "project_history_lifetime": 30
+}

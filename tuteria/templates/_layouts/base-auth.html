@@ -1,0 +1,75 @@
+{% extends '_layouts/base-external.html' %}
+{% load staticfiles activelink %}
+{% load i18n %}
+{% block modal %}
+    
+{% endblock modal %}
+{% block nav %}
+{# {% include 'includes/nav/_navigation.html' with login_form=True display_login=True %} #}
+{% endblock %}
+
+{% block mobile_navigation %}
+{% include "includes/nav/mobile/smart-nav.html" with display_sidebar=True%}
+{% endblock mobile_navigation %}
+
+{% block fixed %}{% endblock %}
+{% block sub_nav %}{% endblock %}
+{% block opera_header %}
+{% if request.is_featured %}        
+{% include "includes/operamini-flash.html" %}
+{% endif %}    
+{% endblock opera_header %}
+
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static "css/auth.css" %}"/>
+<style>
+    @media (min-width: 1200px) {
+        .container {
+            width: 1024px;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+{# {% if not request.is_featured %} #}
+{# {% block opera_mini_section %} #}
+{# {% endblock opera_mini_section %} #}
+{# {% else %} #}
+<div class="container-fluid">
+    <section class="row">
+        <div class="container">
+            <div class="row">                        
+                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12">
+                    <!--<div class="hidden-xs site-logo text-center row-space-top-4">
+                        <span class="nav-logo22"></span>
+                    </div>-->
+                    {% block form_heading %}
+                    {% if request.is_featured %}
+                    If your are experiencing issues. Refresh the page
+                    {% endif %}
+
+                    {% endblock %}
+                    <div class="signup-form smart-forms row-space-4">
+                        {% block form_content %}
+                        {% endblock %}
+                        <hr><small><a target="_blank" href="{% url 'help:article_detail' 102 %}">Need help?</a></small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+{% block bottom_footer %}{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script src="{% static "js/static_pages.bundle.js" %}"></script>
+{% endblock %}

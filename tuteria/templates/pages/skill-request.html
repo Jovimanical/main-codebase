@@ -1,0 +1,608 @@
+{% extends 'pages/state_view.html' %}
+{% load staticfiles i18n bootstrap3 add_attr activelink cloudinary %}
+{% block title %}Private {{ skill }} Tutors® - Learn from Experts | Tuteria NG{% endblock title %}
+{% block meta_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description"
+          content="Get the best {{ skill }} tutors near you at affordable rates"/>
+    <meta name="author" content="Tuteria Ltd."/>
+    <!-- for Facebook -->
+    <meta property="fb:app_id" content="781136408623359"/>
+    <meta property="og:site_name" content="Tuteria"/>
+    <meta property="og:title" content="Private {{ skill }} Tutors® - Learn from Experts | Tuteria NG"/>
+    <meta property="og:description" content="Get the best {{ skill }} tutors near you at affordable rates"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://
+            {{ site.domain }}{{ STATIC_URL }}img/subject_images/{{ skill.get_background_image }}?t=12345?"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@tuteriacorp"/>
+    <meta name="twitter:title" content="Private {{ skill }} Tutors® - Learn from Experts | Tuteria NG"/>
+    <meta name="twitter:description" content="Get the best {{ skill }} tutors near you at affordable rates"/>
+    <meta name="twitter:image" content="https://
+            {{ site.domain }}{{ STATIC_URL }}img/subject_images/{{ skill.get_background_image }}?t=12345?"/>
+    <meta name="twitter:creator" content="@tuteriacorp">
+{% endblock meta_tags %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block carousel_image %}
+    {% if request.is_phone %}
+        <div class="item active">
+            <div class="caro bg-image"></div>
+            {# <img src="{% static "img/backgrounds/background_mobile.jpg" %}" alt="Private home lesson tutors" class="src"> #}
+        </div>
+    {% else %}
+        <div class="item active">
+            <div class="caro bg-image"></div>
+        <!--    {% if active_tutors > 2 %}-->
+        <!--        <div class="carousel-caption pull-right trans-label">-->
+        <!--<span class="reset-this caption-text">{{ active_tutors }} verified tutor{{ active_tutors|pluralize }}-->
+        <!--</span>-->
+        <!--        </div>-->
+        <!--    {% endif %}-->
+        </div>
+    {% endif %}
+{% endblock carousel_image %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/category.css' %}"/>
+    <style>
+        .tutor .sub-content {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            padding: 0 5px;
+            font-size: 12px;
+        }
+
+        .tutor .tt {
+            height: 280px;
+            width: 235px;
+        }
+
+        .tutor .tt:hover p {
+            color: rgb(94, 94, 94);
+        }
+
+        .tutor .tt:hover {
+            box-shadow: none;
+            cursor: default;
+        }
+
+        @media (max-width: 545px) {
+
+            .tutor .tt {
+                width: 220px;
+            }
+        }
+
+        .bg-image {
+            background-image: url('/static/img/subject_images/{{skill.get_background_image}}');
+        }
+
+        @media (max-width: 767px) {
+            .bg-image {
+                background-image: url('/static/img/subject_images/{{skill.get_background_image}}');
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .carousel-caption {
+                left: 7% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1290px) and (min-width: 1280px) {
+            .carousel-caption {
+                left: 4% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1460px) and (min-width: 1420px) {
+            .carousel-caption {
+                left: 9% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1036px) and (min-width: 1016px) {
+            .carousel-caption {
+                left: 3% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1000px) and (min-width: 940px) {
+            .carousel-caption {
+                left: 10% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        .caption-text {
+            border: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            font-size: 15px;
+            padding: 10px;
+            padding-left: 25px !important;
+            padding-right: 25px !important;
+        }
+
+        .tutor-promo {
+            color: white;
+            padding: 5px 5px 0px;
+            margin-top: 70px;
+        }
+
+        @media (max-width: 768px) {
+            .tutor-promo {
+                width: 116px !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .content-carousel {
+                min-height: 520px !important;
+            }
+        }
+        .request-style {
+            border-radius: 1px;
+        }
+        .margin-top-80{
+            margin-top: -100px;
+        }
+        @media(max-width:760px){
+            .margin-top-80 {
+                margin-top: -35px;
+            }
+            .content-carousel {
+                height: 605px!important;
+                min-height: 605px!important;
+            }
+            .carousel-inner {
+                height: 665px;
+            }
+        }
+        .content-carousel h2 {
+    font-size: 50px;
+    line-height: 55px;
+}
+
+.content-carousel h2 {
+    line-height: 35px;
+    font-weight: 300;
+    font-size: 30px !important;
+    font-family: 'Circular Bold',sans-serif;
+}
+.panel-padding {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+    </style>
+{% endblock css %}
+{% block carousel_content %}
+    <div class="row margin-top-80">
+        <div class="col-sm-6 col-md-6 col-lg-5">
+            
+             <div id="book" class="panel col-sm-12 request-style">
+        <div class="row">
+            <!--<img src="{% static "img/backgrounds/arrow.png" %}" class="arrow-pos" style="width:40px"/>-->
+
+            <div class="panel-heading col-sm-12 panel-padding">
+                <h2 class="text-center font-head blue-font">
+                    {{ skill.get_heading }}</h2>
+                <h4>{{ skill.get_subheading }}</h4>
+                
+            <hr class="no-margin-top-bottom">
+            </div>
+            <div class="panel-body">
+                {% include "includes/request_form1.html" %}
+            </div>
+        </div>
+
+    </div>
+
+            <!--<div class="jumbo-header row"><h2 id="header_title" style="color:white">{{ skill.get_heading }}</h2>-->
+
+            <!--    <p style="color:white" class="font-head">{{ skill.get_subheading }}</p>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 padding-top-25 mobile-top-25 row">-->
+                    <!--<div class="">-->
+                        <!--{% if not request.is_featured %}-->
+                        <!--    <a href="javascript:void(0)"-->
+                        <!--       class="scrollable-link btn btn-primary btn-lg col-xs-12 big-btn">-->
+                        <!--        Book Lessons-->
+                        <!--    </a>-->
+                        <!--{% else %}-->
+                        <!--    <a href="#book" class="scrollable-link btn btn-primary btn-lg col-xs-12 big-btn">-->
+                        <!--        Book Lessons-->
+                        <!--    </a>-->
+                        <!--{% endif %}-->
+
+                        {% if active_tutors > 2 %}
+                            <div class="padding-top-50 visible-xs pull-right">
+                                <div class="tutor-promo">
+                                    <small>{{ active_tutors }} verified
+                                        tutor{{ active_tutors|pluralize }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+{% endblock carousel_content %}
+{% block safety %}
+  <section class="row white-bg">
+        <div class="container side_by_side">
+            {# <hr style="margin:0"> #}
+            {% include "includes/achievments.html" with clickable=True %}
+            <hr class="hr-styled " style="margin:0">
+        </div>
+    </section>
+    <section id="firstss" class="padding-bottom-50 padding-top-25 padding-top-mob-0 row white-bg">
+        <div class="container mobile-top-25 no-padding-total">
+            <div class="row">
+                <div class="icon-box-6">
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="pro-img"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>Trusted Professionals</b>
+                                {% else %}
+                                    Trusted Professionals
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">Tuteria tutors are experienced, friendly, manually screened, and thoroughly vetted.
+                      </span>
+                        </div>
+                    </div>
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="pace-img"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>Learn at Your Pace</b>
+                                {% else %}
+                                    Learn at Your Pace
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">Book online in about 60 seconds and plan your private lessons according to your own schedule.
+                      </span>
+                        </div>
+                    </div>
+
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="budget-img"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>Safe and Secure</b>
+                                {% else %}
+                                    Safe and Secure
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">Trusted by 100s of happy parents, professionals and students with more than 90% success rate.        
+                      </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="one-on-one-fourth" class="padding-top-50 padding-bottom-50 row blue-bg">
+        <div class="container side_by_side">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 icon-content row-space-4">
+                    <img src="{% static "img/tutor/service.png" %}" class="center-block subject-icon-size"/>
+
+                    <h1 class="text-center" style="padding-top: 20px">
+                        {% if request.is_featured %}<b>{{ skill.get_short_name }} Lessons</b>
+                            {% else %}{{ skill.get_short_name }} Lessons{% endif %}</h1>
+
+                    <p class="tweak padding-bottom-25">
+                        {{ skill.get_description }}
+                    </p>
+                    <!--{% if skill.has_testimonial %}-->
+                    <!--    <hr class="hr-styled">-->
+                    <!--    <div class="media">-->
+                    <!--        <div class="media-photo media-round pull-left text-center">-->
+                    <!--            <img height="100" class="img-circle testimonial-face-size"-->
+                    <!--                 src="{% cloudinary_url skill.testifier.profile_pic width=100 height=100 %}" width="100"-->
+                    <!--                 style="position:relative"/>-->
+
+                    <!--            <p class="visible-xs text-center"-->
+                    <!--               style="padding-top: 5px">{{ skill.testifier.first_name }}</p>-->
+                    <!--        </div>-->
+                    <!--        <div class="media-body">-->
+                    <!--            <div class="">-->
+                    <!--                <div class="panel-body">-->
+                    <!--                    <p><em>{{ skill.testimonial }}</em>-->
+                    <!--                    </p>-->
+
+                    <!--                    <p class="hidden-xs"-->
+                    <!--                       style="padding-top: 2px">{{ skill.testifier.first_name }}</p>-->
+                    <!--                </div>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--{% endif %}-->
+
+                <!--    <hr class="hr-styled" style="margin-top:0">-->
+
+                <!--    <p class="tweak blue-font padding-top-25" style="text-align: left">What is included in the-->
+                <!--        lessons?</p>-->
+
+                <!--    <div class="row col-sm-12 makefont-15">-->
+                <!--        <div class="row">-->
+                <!--            <div class="col-sm-5">-->
+                <!--                <ul class="list-mobile list-unstyled list-with-icons no-margin-bottom">-->
+                <!--                    <li class="">-->
+                <!--                        {% if not request.is_featured %}-->
+                <!--                            <i class="fa fa-check check-size blue-font"></i>{% else %}1.{% endif %}-->
+                <!--                        &nbsp;-->
+                <!--                        High quality tutors only-->
+                <!--                    </li>-->
+                <!--                    <li class="">-->
+                <!--                        {% if not request.is_featured %}-->
+                <!--                            <i class="fa fa-check check-size blue-font"></i>{% else %}2.{% endif %}-->
+                <!--                        &nbsp;-->
+                <!--                        Detailed lesson plans-->
+                <!--                    </li>-->
+                <!--                    <li class="">-->
+                <!--                        {% if not request.is_featured %}-->
+                <!--                            <i class="fa fa-check check-size blue-font"></i>{% else %}3.{% endif %}-->
+                <!--                        &nbsp;-->
+                <!--                        Safety & security-->
+                <!--                    </li>-->
+                <!--                </ul>-->
+                <!--            </div>-->
+                <!--            <div class="col-sm-5 col-sm-offset-2">-->
+                <!--                <ul class="list-mobile list-unstyled list-with-icons no-margin-bottom">-->
+                <!--                    <li class="">-->
+                <!--                        {% if not request.is_featured %}-->
+                <!--                            <i class="fa fa-check check-size blue-font"></i>{% else %}4.{% endif %}-->
+                <!--                        &nbsp;-->
+                <!--                        Affordable pricing-->
+                <!--                    </li>-->
+                <!--                    <li class="">-->
+                <!--                        {% if not request.is_featured %}-->
+                <!--                            <i class="fa fa-check check-size blue-font"></i>{% else %}5.{% endif %}-->
+                <!--                        &nbsp;-->
+                <!--                        100% satisfaction-->
+                <!--                    </li>-->
+                <!--                    <li class="">-->
+                <!--                        {% if not request.is_featured %}-->
+                <!--                            <i class="fa fa-check check-size blue-font"></i>{% else %}6.{% endif %}-->
+                <!--                        &nbsp;-->
+                <!--                        Refund policy-->
+                <!--                    </li>-->
+                <!--                </ul>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<div id="book" class="col-sm-5 col-sm-offset-0 col-md-4 col-md-offset-0 space-for-mobile">-->
+                   
+                <!--    <div class="padding-top-25">-->
+                <!--        <div class="fb-like" data-href="https://www.facebook.com/tuteriacorp" data-layout="standard"-->
+                <!--             data-width="300px" data-action="recommend" data-show-faces="false" data-share="false"-->
+                <!--             allowtransparency="true" frameborder="0" scrolling="no"></div>-->
+                <!--    </div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </section>
+{% endblock safety %}
+{% block howitworks %}
+{% endblock howitworks %}
+{% block more_info %}
+{% endblock more_info %}
+{% block quality %}
+    <section id="one-on-one-fourth" class="padding-top-25 padding-bottom-50 row white-bg">
+        <div class="container side_by_side">
+            <div class="row">
+                <div class="col-sm-12 icon-content space-for-mobile-20">
+                    <h2 class="padding-bottom-20">
+                        {% if request.is_featured %}<b>Questions our clients asked</b>
+                        {% else %}Questions our clients asked{% endif %}
+                    </h2>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                        {% if not request.is_featured %}Where will the lessons hold?{% else %}
+                                            <b>Where will the lessons hold?</b>{% endif %}</div>
+                                    <div class="answer-value">You chose where works best for you. Lessons may hold in
+                                        the comfort of your home, at the tutor's location or anywhere you both agree.
+                                        All lessons are delivered offline, in-person and you can choose your preferred
+                                        tutor.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How much does it
+                                        cost?{% else %}<b>How much does it cost?</b>{% endif %}</div>
+                                    <div class="answer-value">Lesson cost will depend on your area, length of lessons
+                                        and the number of students. You get discounts for multiple students and up to 10% additional discount when you pay ahead!
+                                        <br><br>
+                                        <em>Please note that we require a one-time fee of &#x20A6;{{tuteria_details.processing_fee}} in order to
+                                            process your request. If we can't find a tutor, we'll fully refund your
+                                            payment.</em></div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How do I pay for my
+                                        lessons?{% else %}<b>How do I pay for my lessons?</b>{% endif %}</div>
+                                    <div class="answer-value">You can pay securely online or via bank transfer. Our
+                                        online payments are processed by PayStack and AccessBank which which accepts Visa, Master and
+                                        Verve cards. Apart from the above service fee, you don't have to pay for
+                                        lessons until we have found your perfect {{ skill }} tutor and you're ready to
+                                        begin lesson. We closely monitor lesson delivery and support you in any
+                                        emergencies.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How do you ensure
+                                        quality and safety?{% else %}
+                                        <b>How do you ensure quality and safety?</b>{% endif %}</div>
+                                    <div class="answer-value">Our {{ skill }} tutors have undergone various screening
+                                        phases
+                                        including offline and online identity verification, and {{ skill }} competency
+                                        assessments. Only the top candidates were interviewed and the very bests were
+                                        hand-picked. We also facilitate criminal background checks on behalf of clients,
+                                        and request two reputable guarantors especially for students under 18.
+                                    </div>
+                                    <br>
+
+                                    <div class="answer-value">Beyond that, clients also rate tutors' performance and
+                                        those whose ratings fall below 70% are not allowed to continue. So your tutor
+                                        will either be newly approved or have been rated above 70% by previous clients.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}Is there a Refund Policy
+                                        or Guarantee?{% else %}<b>Is there a Refund Policy or Guarantee?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">Yes there is. If you're not satisfied after the first
+                                        lesson, we will replace the tutor at no cost to you or refund your balance. We
+                                        keep our words.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How quickly can I get a
+                                        tutor in my area?{% else %}
+                                        <b>How quickly can I get a tutor in my area?</b>{% endif %}</div>
+                                    <div class="answer-value">We have several verified {{ skill }} tutors and their
+                                        current availability. If we already have a tutor in your area, then you can get
+                                        one by tomorrow. If not, it may take up to 2 weeks for us to find one that meets
+                                        our standards. Just place a request above and we'll take it up from there.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock quality %}
+
+{% block testimonials %}
+{% endblock testimonials %}
+{% block request_section %}
+    <div id="launch-section">
+    <!-- Request a Tutor Section -->
+    <div class="row padding-top-50 text-center padding-bottom-50 deepblue-bg space-bottom-mob-20 padding-top-mob-30">
+        {% if not request.is_featured %}
+            <a href="javascript:void(0)" class="scrollable-link"><h3 style="color:white">
+                Achieve your goals!</h3></a>
+        {% else %}
+            <a href="#book" class="scrollable-link"><h3 style="color:white">
+                Achieve your goals!</h3></a>
+        {% endif %}
+        <br>
+
+        <div class="request-box">
+            <div class="request-icon" style="padding-right: 50px; padding-left: 50px">
+                <div class="request-icon-img">
+                    <img src="{% static 'img/tutor/call.png' %}" class="img-responsive center-block"
+                         style="width:30px"/>
+                </div>
+                <div style="display: inline-block">
+                    <span class="request-call-icon">
+                        <small style="color:aqua">{{ tuteria_details.email }}</small>
+                    </span>
+                    <span class="request-phone font-head">
+                        {{ tuteria_details.phone_number }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="map-canvas" class="hidden"></div>
+{% endblock request_section %}
+
+{% block javascript %}
+    <script>
+        window.SubjectToBeTaught = "{{skill.name}}";
+    </script>
+    {{ block.super }}
+    <script>    
+        function displayState(state){
+            if (o.indexOf(state) > -1){
+                $('#region-section').removeClass("hidden")
+                if(state == "Lagos"){
+                    $('#lagos_area').removeClass("hidden")
+                    $('#abuja_area').removeClass('hidden').addClass('hidden')
+                    $('#river_area').removeClass('hidden').addClass('hidden')
+
+                }
+                if(state == "Abuja"){
+                    $('#abuja_area').removeClass("hidden")
+                    $('#lagos_area').removeClass('hidden').addClass('hidden')
+                    $('#river_area').removeClass('hidden').addClass('hidden')
+                }
+                if(state == "Rivers"){
+                    $('#river_area').removeClass("hidden")
+                    $('#lagos_area').removeClass('hidden').addClass('hidden')
+                    $('#abuja_area').removeClass('hidden').addClass('hidden')
+                }
+                $('select[name="area"]').attr("required", true)
+            }
+            else{
+                $('#region-section').removeClass("hidden").addClass('hidden')
+                $('select[name="area"]').removeAttr("required")
+            }
+        }
+        console.log("Sama was here")
+        var o = []
+        {% for p in valid_states %}
+        o.push("{{p}}")
+        {% endfor %}
+        console.log($('#id_state').val())
+        displayState($('#id_state').val());
+        $('#id_state').on('change',function(e){
+            var state = e.target.value;
+            displayState(state);
+        })
+    </script>
+{% endblock javascript %}

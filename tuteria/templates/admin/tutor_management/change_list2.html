@@ -1,0 +1,77 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+{% load admin_list_tutor_management %}
+
+{# Original template renders object-tools only when has_add_permission is True. #}
+{# This hack allows sub templates to add to object-tools #}
+{% block object-tools %}
+<ul class="object-tools">
+  {% block object-tools-items %}
+  {% if has_add_permission %}
+  {{ block.super }}
+  {% endif %}
+  {% endblock %}
+</ul>
+{% endblock %}
+
+{% block result_list %}
+{% if action_form and actions_on_top and cl.show_admin_actions %}{% admin_actions %}{% endif %}
+{% result_list cl %}
+{% if action_form and actions_on_bottom and cl.show_admin_actions %}{% admin_actions %}{% endif %}
+{% endblock %}
+
+{% block react_scripts %}
+{% include "users/includes/react-dev-server.html" with debug=debug s_host=tutor_client_cdn %}
+<script>
+  $(".clientRequestJs").on("click", function () {
+    let result = JSON.parse(JSON.parse('"' + $(this).data("info") + '"'))
+    const btnType = $(this).data("buttonType");
+    const email = $(this).data('email')
+    function callback(action) {
+      let node = document.querySelector(`.clientRequestJs.id_${result.user_id}[data-button-type=${btnType}]`)
+      let parent = node.parentNode;
+      if (action === 'approve') {
+        parent.textContent = `${btnType === 'video' ? "Video" : "Identity"} approved`
+        node.remove()
+      } else {
+        parent.parentNode.style.display = "none";
+      }
+    }
+    let rootNode = document.querySelector("#rootTutorApplicant")
+    window.unMountReviewComponent(rootNode);
+    window.renderReviewComponent({ data: result, type: btnType, email }, rootNode, "/tutor-applicants/admin/verify-identity-video/", callback);
+  });
+</script>
+<script>
+  $(".referencesBtn").on("click", function () {
+    const data = JSON.parse(JSON.parse('"' + $(this).data("info") + '"'))
+    function callback(action, payload) {
+      let node = document.querySelector(`.referencesBtn.id_${data.user_id}`)
+      let parent = node.parentNode;
+      if (action === 'approve') {
+        parent.textContent = "Guarantors approved"
+        node.remove()
+      } else {
+        parent.parentNode.style.display = "none";
+      }
+    }
+    window.unMountReviewGuarantors("tutorReferences");
+    window.renderReviewGuarantors(
+      data,
+      "tutorReferences",
+      { update: '/tutor-applicants/admin/update-guarantors/', verify: '/tutor-applicants/admin/approve-guarantors/' },
+      callback
+    );
+  });
+</script>
+<!-- <script >
+    window.initializeAdmin(
+        [{label: "Add Remark",value:"generic"}],
+        "/tutor-applicants/admin/update-remark",
+        "td.field-tutor_remarks")
+</script> -->
+{% endblock %}
+
+{% block react_styles %}
+{% include "users/includes/react-dev-css.html" with debug=debug s_host=tutor_client_cdn %}
+{% endblock %}

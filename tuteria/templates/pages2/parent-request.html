@@ -1,0 +1,325 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles i18n bootstrap3 add_attr activelink %}
+{% block css %}
+    {{ block.super }}
+    {#    <link href="{% static 'css/request_tutor.css' %}" rel="stylesheet">#}
+    <style>
+        .content-carousel {
+            margin-top: 0 !important;
+        }
+
+        .margin-down-5 {
+            margin-bottom: 7px !important;
+        }
+
+        .pad-down-20 {
+            padding-bottom: 20px;
+        }
+
+        .img-resized {
+            width: 40px;
+        }
+
+        .hr-styled {
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .padding-left-50 {
+                padding-left: 50px;
+
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}Request a Private Tutor | Tuteria{% endblock title %}
+{% block fixed %}profile-header{% endblock %}
+{% block carousel_content %}
+    <div class="col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center">
+        {% block custom_heading %}
+            <div class="jumbo-header row">
+                <h2 class="myh2"><b class="white">Get a Home Tutor in your area</b></h2>
+
+                <p>
+                    Tell us what you need so we can find the right home tutor for you
+                </p>
+
+            </div>
+
+        {% endblock custom_heading %}
+
+    </div>
+{% endblock %}
+{% block big_section %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl">
+        <div class="">
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="">
+                    <div id="wizard-container" class="bordered spaced-bottom-lg">
+                        <div class="">
+                            <form id="request_parent_form" action="{% url 'request_tutor_parent' %}"
+                                  method="post">
+                                {% csrf_token %}
+
+                                <div class="panel row-space-4">
+                                    <div class="panel-body ">
+
+                                        <section id="questions" class="smart-forms">
+                                            <div class="row row-space-4">                                            
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.class_of_child.errors %}has-error{% endif %}">
+                                                        <label for="id_class_of_child" class="control-label blue-font font-head">Please what class is your child in?</label>
+                                                               <br><small>This helps us get tutors experienced for this level</small>
+                                                        {{ form.class_of_child|add_attributes:"class:form-control" }}
+                                                        {% if form.class_of_child.errors %}
+                                                            <span class="help-block">{{ field.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.age.errors %}has-error{% endif %}">
+                                                        <label for="id_age" class="control-label blue-font font-head">Also, what's the child's age range?</label>
+                                                        <br><small>Child's age range is crucial when choosing a fitting tutor</small>
+                                                        {{ form.age|add_attributes:"class:form-control" }}
+                                                        {% if form.class_of_child.errors %}
+                                                            <span class="help-block">{{ field.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="checkbox row-space-4">
+                                                <label for="id_another_child">
+                                                    {{ form.another_child }} I have another child who needs help?
+                                                </label>
+                                            </div>
+                                            <hr>                                            
+                                                <p class="blue-font font-head" style="line-height:0">Next, what subject(s) need help?</p>
+                                                <small style="color: red" class="no-padding-top">Please select all that apply or type yours below</small><br><br>
+
+                                            <div class="row row-space-4">
+                                                {% for subject in form.possible_subjects %}
+                                                    <div class="col-sm-4 row-space-2">
+                                                        {{ subject }}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="row row-space-4">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group row-space-4 {% if form.subjects.errors %}has-error{% endif %}"> 
+                                                        <label for="id_subjects" class="control-label ">Other subjects? Seperate each with a comma</label>
+                                                        {{ form.subjects|add_attributes:"class:form-control" }}
+                                                        {% if form.subjects.errors %}
+                                                            <span class="help-block">{{ form.subjects.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.curriculum.errors %}has-error{% endif %}">
+                                                        <label for="id_curriculum" class="control-label">What curriculum is used in child's school?</label>
+                                                        {{ form.curriculum|add_attributes:"class:form-control" }}
+                                                        {% if form.curriculum.errors %}
+                                                            <span class="help-block">{{ form.curriculum.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr style="margin-top:0">
+                                            <p class="blue-font font-head" style="line-height:0">Preference, expectation and schedule</p>
+                                            <br>
+                                            <div class="form-group {% if form.expectation.errors %}has-error{% endif %}">
+                                                <label for="id_expectation" class="control-label">Please write your specific goal for this lesson</label><br>
+                                                <small style="color:red">E.g. "I want to prepare my son to pass SAT" or "I need someone to help with assignments for my niece"</small>
+                                                {{ form.expectation|add_attributes:"class:form-control,rows:4" }}
+                                                {% if form.expectation.errors %}
+                                                    <span class="help-block">{{ form.expectation.errors|join:"<br \>" }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="form-group {% if form.home_address.errors %}has-error{% endif %}">
+                                                        <label for="id_home_address" class="control-label">Please type your full home address</label>
+                                                        {{ form.home_address|add_attributes:"class:form-control" }}
+                                                        {% if form.home_address.errors %}
+                                                            <span class="help-block">{{ form.home_address.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                        {{ form.latitude }}{{ form.longitude }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group {% if form.state.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ form.state.name }}"
+                                                               class="control-label">{{ form.state.label }}</label>
+                                                        {{ form.state|add_attributes:"class:form-control" }}
+                                                        {% if form.state.errors %}
+                                                            <span class="help-block">{{ form.state.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.days_per_week.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ form.days_per_week.name }}"
+                                                               class="control-label font-head">{{ form.days_per_week.label }}</label><br>
+                                                               <small>If you're not sure, our consultant will guide you</small>
+                                                        {{ form.days_per_week|add_attributes:"class:form-control" }}
+                                                        {% if form.days_per_week.errors %}
+                                                            <span class="help-block">{{ form.days_per_week.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.hours_per_day.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ form.hours_per_day.name }}"
+                                                               class="control-label font-head">{{ form.hours_per_day.label }}</label><br>
+                                                               <small>If you're not sure, our consultant will guide you</small>
+                                                        {{ form.hours_per_day|add_attributes:"class:form-control" }}
+                                                        {% if form.hours_per_day.errors %}
+                                                            <span class="help-block">{{ form.hours_per_day.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row row-space-4">                                                
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.gender.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ form.gender.name }}"
+                                                               class="control-label">{{ form.gender.label }}</label>
+                                                        {{ form.gender|add_attributes:"class:form-control" }}
+                                                        {% if form.gender.errors %}
+                                                            <span class="help-block">{{ form.gender.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                        <div class="form-group {% if form.budget.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ form.budget.name }}"
+                                                               class="control-label">{{ form.budget.label }}</label>
+                                                        {{ form.budget|add_attributes:"class:form-control" }}
+                                                        {% if form.budget.errors %}
+                                                            <span class="help-block">{{ form.budget.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <a href="javascript:void(0)" id="price-trigger">See recommended prices for your area</a>
+                                                        </div>
+                                                </div>
+                                                <div id="price-display" class="col-sm-12 col-xs-12 hidden">
+                                                    <div class="">
+                                                        <div>
+                                                        For one tutor in your area, the cost of lessons for <span id="dpw" class="font-head" style="color:green">lesson</span> and <span id="hpd" class="font-head" style="color:green">hours</span> per class is:
+                                                        <br><br>
+                                                                <table class="table" border="1">
+                                                                <tr class="font-head">
+                                                                    <th>Lessons</th>
+                                                                    <th>Minimum <span class="hidden-xs">Price</span></th> 
+                                                                    <th>Maximum <span class="hidden-xs">Price</span></th>
+                                                                  </tr>
+                                                                  <tr id="monthly-pricing">
+                                                                    <td>Monthly <span class="hidden-xs">Lessons</span></td>
+                                                                    <td>&#8358;<span id="min-price"></span> <span class="hidden-xs">/month</span></td> 
+                                                                    <td>&#8358;<span id="max-price"></span> <span class="hidden-xs">/month</span></td>
+                                                                  </tr>
+                                                                  <tr id="weekly-pricing">
+                                                                    <td>Weekly <span class="hidden-xs">Lessons</span></td>
+                                                                    <td>&#8358;<span id="min-price"></span> <span class="hidden-xs">/week</span></td> 
+                                                                    <td>&#8358;<span id="max-price"></span> <span class="hidden-xs">/week</span></td>
+                                                                  </tr>
+                                                                </table>
+                                                            <small><em>*Based on what tutors charge in your area and already covers transport fare. Please set a good budget to get the best tutor.</em></small>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>                                           
+                                            
+                                            <hr>
+                                            <p class="blue-font font-head" style="line-height:0">Lastly, let's get to know you</p>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.first_name.errors %}has-error{% endif %}">
+                                                        {{ form.first_name|add_attributes:"class:form-control" }}
+                                                        {% if form.first_name.errors %}
+                                                            <span class="help-block">{{ form.first_name.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.last_name.errors %}has-error{% endif %}">
+                                                        {{ form.last_name|add_attributes:"class:form-control" }}
+                                                        {% if form.last_name.errors %}
+                                                            <span class="help-block">{{ form.last_name.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.number.errors %}has-error{% endif %}">
+                                                        {{ form.number|add_attributes:"class:form-control" }}
+                                                        {% if form.number.errors %}
+                                                            <span class="help-block">{{ form.number.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.primary_phone_no1.errors %}has-error{% endif %}">
+                                                        {{ form.primary_phone_no1|add_attributes:"class:form-control" }}
+                                                        {% if form.primary_phone_no1.errors %}
+                                                            <span class="help-block">{{ form.primary_phone_no1.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6" style="margin-bottom: 15px">
+                                                    <div class="form-group {% if form.email.errors %}has-error{% endif %}" style="margin-bottom: 2px">
+                                                        {{ form.email|add_attributes:"class:form-control" }}
+                                                        {% if form.email.errors %}
+                                                            <span class="help-block">{{ form.email.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <small style="color:silver"><i class="glyphicon glyphicon-lock"></i> We never spam! We respect your privacy</small>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.time_to_call.errors %}has-error{% endif %}">
+                                                        {{ form.time_to_call|add_attributes:"class:form-control" }}
+                                                        {% if form.time_to_call.errors %}
+                                                            <span class="help-block">{{ form.time_to_call.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row row-space-4 pad-down-20 padding-top-25">
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <button id="submit_btn" data-loading-text="Loading..."
+                                                class="btn btn-lg btn-block btn-primary"
+                                                >{% trans "Submit Request" %}</button>
+                                    </div>
+                                </div>
+                                        </section>
+                                    </div>
+                                </div>
+                                
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="map-canvas" class="hidden"></div>
+{% endblock %}
+{% block footer %}{% endblock footer %}
+{% block bottom_footer %}{% endblock bottom_footer %}
+{% block request_section %}{% endblock request_section %}
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static "js/request_parent.bundle.js" %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&region=NG&sensor=false&callback=initializeCallback"></script>
+
+{% endblock %}

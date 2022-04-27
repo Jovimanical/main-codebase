@@ -1,0 +1,504 @@
+{% extends "pages/how-it-works.html" %}
+{% load staticfiles %}
+{% block title %}Private Home Tutors in {{ region }} - Hire Screened Tutors | Tuteria {% endblock title %}
+{% block css %}
+    {{ block.super }}
+    {#    <link rel="stylesheet" href="{% static "css/main.css" %}">#}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/carousel-css.css' %}"/>
+    <style>
+        .well.around {
+            border: 2px solid #d9edf7;
+        }
+
+        .well.styling {
+            background-color: rgba(250, 217, 32, 0.31);
+            border: none;
+        }
+
+        .pac-container {
+            background-color: #FFF;
+            z-index: 10000000;
+            position: fixed;
+            display: inline-block;
+            float: left;
+        }
+
+        .input-addon.js-p1-search-cta {
+            cursor: pointer;
+        }
+
+        {##}
+        {#        .modal {#}
+        {#            z-index: 20;#}
+        {#        }#}
+        {##}
+        {#        .modal-backdrop {#}
+        {#            z-index: 10;#}
+        {#        }#}
+        {##}
+        @media (max-width: 768px) {
+            .well.styling {
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 1020px) {
+            .content-carousel h2 {
+                font-size: 58px;
+            }
+        }
+
+        .media {
+            margin-top: 15px !important;
+        }
+
+        @media (max-width: 768px) {
+            .media-object {
+                position: relative !important;
+            }
+        }
+
+        .input-addon {
+            display: table;
+            width: 100%;
+        }
+
+        .fake-search-field {
+            background-color: #fff;
+        }
+
+        .input-large {
+            font-size: 15px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .input-stem {
+            display: table-cell;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .btn.fa.icon-full {
+            font-size: 19px;
+        }
+
+        .input-suffix.btn {
+            padding-top: 11px;
+            padding-bottom: 11px;
+            margin-left: -45px;
+        }
+
+        .icon-pos {
+            width: 150px;
+            position: absolute;
+            top: 390px;
+            left: 390px;
+        }
+
+        @media (max-width: 1050px) and (min-width: 1020px) {
+            .icon-pos {
+                top: 410px;
+                left: 300px;
+            }
+        }
+
+        @media (max-width: 1450px) and (min-width: 1400px) {
+            .icon-pos {
+                top: 390px;
+                left: 465px;
+            }
+        }
+
+        @media (min-width: 2400px) {
+            .icon-pos {
+                top: 390px;
+                left: 1015px;
+            }
+        }
+        @media (max-width: 768px){
+            .mobile-top-spacing{
+                margin-top: 60px;
+            }
+        }
+
+        /*#testimonialz a {
+            text-decoration: none !important;
+            color: #337ab7 !important;
+        }
+
+        #testimonialz a:hover {
+            text-decoration: underline !important;
+            color: #337ab7 !important;
+        }*/
+    </style>
+{% endblock %}
+{% block sub_nav %}{% endblock sub_nav %}
+{% block nav %}
+        {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block carousel_content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-8 padding-top-25">
+            <div class="jumbo-header"><h2 id="header_title" style="color:#5e5e5e">Meet your <span class="blue-font">perfect</span> home tutor in {{ region }}</h2>
+
+                <p style="color:#5e5e5e" class="font-head">Get higher results and bring out the genius in your child</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 padding-top-25 mobile-top-25">                    
+
+                    <div class="">
+                        {# {% if request.is_featured %} #}
+                            {# <a href="{% url 'request_tutor_parent' %}" class="btn btn-primary btn-lg col-xs-12">Find me a tutor</a> #}
+                        {# {% else %} #}
+                            <a href="{% url 'request_tutor_parent' %}" class="btn btn-primary btn-lg col-xs-12"><!--<i class="fa fa-search"></i>&nbsp;-->
+                                Find me a tutor now
+                            </a>
+                        {# {% endif %} #}
+                    </div>
+                    <div class="padding-top-50">                        
+                    <div class="media tutor-promo">
+                        <div class="media-left mobile-top" style="margin-top: -4px">
+                            <img class="media-object img-circle" src="{% static "img/backgrounds/sample.jpg" %}"
+                                 alt="..." height="50" width="50">
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{ detail.name }} {% if request.is_featured %}
+                                <span class="opera-star text-warning">★</span>
+                                <span class="opera-star text-warning">★</span>
+                                <span class="opera-star text-warning">★</span>
+                                <span class="opera-star text-warning">★</span>
+                                <i class="fa fa-star-half-o text-warning"></i>{% else %}
+                                <i class="fa fa-star text-warning"></i><i
+                                        class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
+                                        class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star-half-o text-warning"></i>{% endif %}
+                                <small class="hidden-xs"> (100+ hours)</small>
+                            </h4>
+                            Maths Tutor in {{ detail.vicinity }}, {{ region }}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<img src="{% static "img/backgrounds/inspire.png" %}" class="icon-pos hidden-xs"/>-->
+    </div>
+{% endblock carousel_content %}
+{% block press %}
+    {% include "includes/achievments.html" with clickable=True %}
+{% endblock press %}
+{% block safety %}
+<section id="one-on-one-fourth" class="padding-top-50 padding-bottom-50 row">
+        <div class="container side_by_side">
+            <div class="col-sm-6 icon-content row-space-4">
+                <h2 class="">
+                    {% if request.is_featured %}<b>How does Tuteria work?</b>
+                    {% else %}How does Tuteria work?{% endif %}</h2>
+                        <p>
+                            We know you desire the best for your kids in school and life, so choosing Tuteria is about giving them that edge above their peers. By working with only the most accomplished home tutors in {{ region }}, we provide high-quality tutoring with exceptional results for families like yours. See how we operate:
+                        </p>
+                        <span>
+                            <ul class="list-mobile list-unstyled no-margin-bottom">
+                                <li class="">
+                                    <span class="font-head">1. Detailed Assessment</span><br>We work together with you to get deeper insights into your kids, know what subjects need help and then create a personalized lesson plan just for your child to ensure you reach your goals.
+                                </li>
+                                <br>
+                                <li class="">
+                                    <span class="font-head">2. Tutor Matching</span><br>We match you with the perfect home tutor in {{ region }} who lives near you. This will be someone who has a proven track record of helping kids like yours and can give you exactly what you need. Our tutors travel to you and conduct the lessons in the comfort of your home or a venue of your choice. 
+                                </li>
+                                <br>
+                                <li class=""><span class="font-head">3. Monitoring & Feedback</span><br>We closely monitor and manage the tutoring, including co-ordinating lessons and giving you bi-monthly feedback on our progress towards your goal.
+                                </li>
+                            </ul>
+                        </span>
+                <br>
+                <a href="{% url 'request_tutor_parent' %}" class="action-link font-head" style="color: crimson">
+                    Great! I have a kid who needs help &rarr;
+                </a>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1 featured-tutor space-for-mobile">
+                <!--<div class="featured-tutor-image"></div>
+                <h5><b>Kehinde I.,</b> teaches Maths and Physics (MSc. Agric & Environ Engr.) </h5>-->
+                <h2 class="">
+                    {% if request.is_featured %}<b>How we select our home tutors</b>
+                    {% else %}How we select our home tutors{% endif %}</h2>
+                        <span>
+                            A great tutor makes all the difference in the life of a child. While we are eager to recruit tutors in all subjects, we maintain very strict selection criteria in order to protect our high standards. In time past, we've helped more than 2,105 students prepare for exams.
+                            <br><br>
+                            <ul class="list-mobile list-unstyled no-margin-bottom">
+                                <li class="">
+                                    <span class="font-head">1. High Standards for Quality</span><br>For a start, tutors must have extensive knowledge of each subject they wish to teach. E.g. a Math tutor will be a Math guru who can simplify difficult topics, build confidence in your child and turn their C's to A's.
+                                </li><br>
+                                <li class="">
+                                    <span class="font-head">2. Teaching Ability</span><br>Not every smart person can teach. We go the extra mile to look for teaching ability, superb communication and a friendly personality.
+                                </li><br>
+                                <li class="">
+                                    <span class="font-head">3. A heart for Mentoring</span><br>
+                                     The biggest factor we consider is whether a candidate is serious about being a role model, a mentor and an encourager in the lives of our students. All tutors must pass this assessment.
+                                </li>
+                            </ul>
+                        </span>
+                        <br>
+                <a href="{% url 'request_tutor_parent' %}" class="action-link font-head" style="color:crimson">
+                    Okay, I want to boost my kid's results!
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock safety %}
+   {% block quality %}   
+    {% endblock quality %}
+{% block howitworks %}
+ <section id="one-on-one-fourth" class="padding-top-50 padding-bottom-50 row white-bg">
+        <div class="container side_by_side">
+            <div class="col-sm-6 icon-content row-space-4">
+                <h2 class="">
+                    {% if request.is_featured %}<b>Quality & safety are our top priorities</b>
+                    {% else %}Quality & safety are our top priorities{% endif %}</h2>
+                        <span>
+                            Your peace of mind is everything. We are very serious about safety and have gone the extra mile to create the most trusted and reliable home tutoring experience.
+                            <br><br>
+                            <ul class="list-mobile list-unstyled list-with-icons no-margin-bottom">
+                                <li class="">
+                                    <i class="fa fa-check check-size"></i>
+                                    &nbsp;
+                                    All tutors have been manually screened for highest quality
+                                </li>
+                                <li class="">
+                                    <i class="fa fa-check check-size"></i>
+                                    &nbsp;
+                                    We manually verify tutors' offline and online identities
+                                </li>
+                                <li class="">
+                                    <i class="fa fa-check check-size"></i>
+                                    &nbsp;
+                                    Facilitate up-to-date criminal background checks
+                                </li>
+                                <li class="">
+                                    <i class="fa fa-check check-size"></i>
+                                    &nbsp;
+                                    Tutors are rated by their clients after each lesson
+                                </li>
+                                <li class="">
+                                    <i class="fa fa-check check-size"></i>
+                                    &nbsp;
+                                    Only high-performing tutors are allowed to continue
+                                </li>
+                            </ul>
+                        </span>
+                <br>
+                <a href="{% url 'request_tutor_parent' %}" class="action-link btn btn-primary btn-lg col-xs-12 col-sm-8">
+                    Get quality tutoring for your kids &rarr;
+                </a>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1 featured-tutor space-for-mobile mobile-top-spacing">
+                <div class="featured-tutor-image"></div>
+                <h5><span class="font-head"><em>Kehinde I.,</em></span> Math and Physics Tutor (MSc. Agric & Environ Engr.) </h5>
+            </div>
+        </div>
+    </section>
+{% endblock howitworks %}
+{% block testimonials %}
+    <section id="testimonialz"
+             class="testimonials-one padding-top-50 padding-top-mob-0 row-space-bottom-5 row padding-bottom-50 padding-bottom-mob-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 row-space-bottom-5">
+                    <br>
+                    {% if request.is_featured %}
+                        <h2 class="black text-center"><b>Trusted by parents and students</b></h2>
+                    {% else %}
+                        <h2 class="black text-center">Trusted by parents and students</h2>
+                    {% endif %}
+                    <p class="text-center">Set your goals high, our home tutors in {{ region }} will help you meet them one lesson at a time</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for testimonial in testimonials %}
+                    <div class="col-sm-6 row-space-4">
+                        <div class="media ">
+                            <div class="media-photo media-round pull-left text-center">
+                                <img alt="{{ testimonial.alt }}" height="69" class="img-circle"
+                                     src="{{ testimonial.img }}" width="69">
+                            </div>
+                            <div class="media-body">
+                                <div class="panel panel-quote panel-light">
+                                    <div class="panel-body">
+                                        <p>{{ testimonial.content }}
+                                        </p>
+
+                                        <p class="text-muted">
+                                            <span class="person pull-left">{{ testimonial.alt }}</span>
+                                            <span class="location pull-right">{{ testimonial.location }}</span></p>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="well styling col-sm-10 col-xs-12 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="row">
+                    <div class="col-sm-8 col-xs-12">
+                        <h3>
+                            {% if request.is_featured %}
+                                <b>Need help finding great tutors?</b>
+                            {% else %}
+                                Need help finding great tutors?
+                            {% endif %}
+                        </h3>
+
+                        <p>Get the best home tutors in {{ region }}</p>
+                    </div>
+                    <div class="col-sm-4 col-xs-12 ">
+                        <!--{% if request.is_featured %}
+                            <a href="{% url 'search' %}" class="btn btn-primary col-xs-12">Search Now!</a>
+                        {% else %}
+                            <button type="button" class="btn btn-primary col-xs-12 btn-lg center-block"
+                                    data-toggle="modal" data-target="#search_only_form">Search Now!
+                            </button>
+                        {% endif %}-->
+                        <a href="{% url 'request_tutor_parent' %}" class="btn btn-primary btn-lg col-xs-12" style="color:white">
+                                Get a tutor now!
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="firstss" class="row padding-bottom-50 white-bg">
+        <div class="container no-padding-total">
+            <div id="how-it-works"
+                 class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wrapper-full padding-top-25 padding-bottom-50 padding-bottom-mob-0 clearfix text-center">
+                <br><br>
+                {% if request.is_featured %}
+                    <h2 class=""><b>Boost Results, Reduce Stress</b></h2>
+                {% else %}
+                    <h2 class="">Boost Results, Reduce Stress</h2> {% endif %}
+                <p>95% of kids perform better with a home tutor. So don't delay on your child's success</p>
+            </div>
+
+            <div class="icon-box-6">
+                {% for info in how_it_works %}
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="{{ info.icon_class }}"></i>
+                            {# {% endif %} #}
+                            <h3 class="text-center"> {% if request.is_featured %}
+                                <b>{{ info.heading }}</b>    {% else %}{{ info.heading }}
+                            {% endif %}</h3>
+                    <span class="inline-block">{{ info.content }}
+                    </span>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!--<div class="row text-center">
+                    <div class="padding-top-25 mobile-top-25 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-xs-12">
+                        {% if request.is_featured %}
+                            <a href="{% url 'search' %}" class="btn btn-primary btn-lg col-xs-12">Find your tutor</a>
+                        {% else %}
+                            <button type="button" class="btn btn-primary btn-lg col-xs-12"
+                                    data-toggle="modal" data-target="#search_only_form"><i class="fa fa-search"></i>&nbsp;
+                                Find your tutor
+                            </button>                            
+                        {% endif %}
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock testimonials %}
+{% block learn %}{% endblock learn %}
+{% block more_info %}
+    <!--<section id="testimonialz" class="row testimonials-one padding-top-25 padding-top-mob-0 row-space-bottom-5 row">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 row-space-top-5">
+                    {% if request.is_featured %}
+                        <h2 class="black text-center"><b>Popular subjects hired in {{ region }}</b></h2>
+                    {% else %}
+                        <h2 class="black text-center">Popular subjects hired in {{ region }}</h2>
+                    {% endif %}
+                    <p class="text-center">Don't struggle with results, get a qualified tutor today to help you
+                        succeed</p>
+                </div>
+            </div>
+        </div>
+        {% for sub_category in cached_categories %}
+            <div class="container sidebar_by_side row-space-4 padding-top-25">
+                {% for mini_category in sub_category %}
+                    <div class="col-sm-4 col-md-3 col-md-offset-1 icon-content holla padding-top-mob-0">
+                        {% if request.is_featured %}
+                            <h4 class="space-for-mobile">
+                                <b>{{ mini_category.name }}</b>
+                            </h4>
+                        {% else %}
+                            <h4 class="space-for-mobile">
+                                {{ mini_category.name }}
+                            </h4>
+                        {% endif %}
+                        <hr class="hr-styled">
+                        <ul class="list-unstyled list-mobile list-with-icons no-margin-bottom">
+                            {% for cat_skill in mini_category.skills %}
+                                <li class=""><a
+                                        href="{% url 'state_skill_view' cat_skill.name|slugify region|slugify %}">{{ cat_skill.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>-->
+{% endblock more_info %}
+{% block footer %}
+{% endblock %}
+{% block bottom_footer %}
+{% endblock %}
+{% block request_section %}
+                <div id="launch-section">
+                <!-- Request a Tutor Section -->
+                <div class="row padding-top-50 text-center padding-bottom-50 deepblue-bg space-bottom-mob-20 padding-top-mob-30">
+                    <h3 style="color:white" class="hidden-xs">Put your kids ahead of others now!</h3>
+
+                    <h3 style="color:white" class="visible-xs">Put your kids ahead!</h3>
+                    <br>
+
+                    <div>
+                        <a href="{% url 'request_tutor_parent' %}" class="btn-lg btn btn-primary">
+                            Request a tutor
+                            &nbsp;&rarr;
+                            <!--<i class="fa fa-chevron-circle-right"></i>-->
+                        </a>
+
+                        <div class="request-box">
+                            <div class="request-icon">
+                                <div class="request-icon-img">
+                                    <img src="{% static 'img/tutor/call.png' %}" class="img-responsive center-block"
+                                         style="width:30px"/>
+                                </div>
+                                <div style="display: inline-block">
+                                        <span class="request-call-icon">
+                                            or call/text us
+                                        </span>
+                                        <span class="request-phone font-head">
+                                            {{ tuteria_details.phone_number }}
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <small style="color:aqua" class="pull-right">{{ tuteria_details.email }}</small>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+{% endblock request_section %}

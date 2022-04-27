@@ -1,0 +1,64 @@
+{% load staticfiles %}
+
+<div class="category_div box-shadow-2 ">
+    <div class="container">
+        <div class="row">
+            <!-- Navigation starts -->
+            <div class="navigation hidden-xs">
+                <!-- Menu outer container -->
+                <div id="mgmenu1" class="mgmenu_container">
+
+                    <ul class="mgmenu">
+                        {% for category in tuteria_categories.featured %}
+                            <li class="dropdown "><a>{{ category.name }}
+                                <i class=""></i></a>
+                                {% with category.get_first_10_skills as cat_list %}
+                                    {% if category.count > 5 %}
+                                        <div class="dropdown_container dropdown_4columns" {% if forloop.counter > 7 %}style="right:-1px;"{% endif %}>
+                                            <div class="row">
+                                                <div class="col-sm-6 border-right">
+                                                    <ul class="mega-links no_bullets ">
+                                                        {% for skill in cat_list.first %}
+                                                            <li>
+                                                                {# <a href="{% url 'skill_detail' category.slug skill.slug|slugify %}?region={{ region|default_if_none:"" }}">{{ skill.name }}</a> #}
+                                                                <a href="{% url 'skill_only_view' skill.slug|slugify %}?region={{ region|default_if_none:"" }}">{{ skill.name }}</a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <ul class="mega-links no_bullets">
+                                                        {% for skill in cat_list.second %}
+                                                           <li>
+                                                                <a href="{% url 'skill_only_view' skill.slug|slugify %}?region={{ region|default_if_none:"" }}">{{ skill.name }}</a>
+                                                            </li>
+                                                        {% endfor %}
+{#                                                        <li>#}
+{#                                                            <a href="{% url 'skill_detail' category.slug "others" %}">Others</a>#}
+{#                                                        </li>#}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endwith %}
+                            </li>
+                        {% endfor %}
+                        {# <li class="dropdown right_item"><a href="{% url 'home' %}">Others</a> #}
+
+                            {# <div class="dropdown_container dropdown_2columns"> #}
+                                <!-- Multi level dropdown menu -->
+                                {# <ul class="dropdown_flyout"> #}
+                                    {# {% for cat in tuteria_categories.secondary %} #}
+                                        {# <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li> #}
+                                    {# {% endfor %} #}
+                                {# </ul> #}
+                            {# </div> #}
+                        {# </li> #}
+                    </ul>
+                </div>
+            </div>
+            <!-- Navigation ends -->
+        </div>
+    </div>
+</div>

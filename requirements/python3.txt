@@ -1,0 +1,17 @@
+-r base.txt
+
+django-celery-beat==1.1.0
+hiredis==0.2.0
+django-secure==1.0.1
+flower==0.9.3
+gunicorn==19.7.1
+newrelic==2.98.0.81
+# uwsgi==2.0.15
+whitenoise==3.3.1
+# raven
+#-e git+https://github.com/gofaniyi/apm-agent-python@master#egg=elastic-apm
+elastic-apm
+# opbeat
+meinheld
+kombu==4.1.0
+raven

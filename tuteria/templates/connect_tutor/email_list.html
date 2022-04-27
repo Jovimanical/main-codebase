@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Your Google+ Activity</title>
+    <style type=text/css>
+      td  { vertical-align: top; padding: 0.5em }
+      img { border:0 }
+    </style>
+  </head>
+  <body>
+    <table border=1>
+      {% for item in activitylist.items %}
+      <tr><td>{{ item.object.content|safe }}</td></tr>
+      {% endfor %}
+    </table>
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script src="https://apis.google.com/js/client.js"></script>
+    <script>
+      function auth() {
+        var config = {
+          'client_id': '527492296794-5vgq21fj2cjp9qi92dfdbkdde4eu8efh.apps.googleusercontent.com',
+          'scope': 'https://www.google.com/m8/feeds'
+        };
+        gapi.auth.authorize(config, function() {
+          fetch(gapi.auth.getToken());
+        });
+      }
+      function fetch(token) {
+        $.ajax({
+          url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json',
+          dataType: 'jsonp',
+          data: token
+        }).done(function(data) {
+            console.log(JSON.stringify(data));
+          });
+      }
+    </script>
+
+  </body>
+</html>

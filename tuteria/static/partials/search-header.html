@@ -1,0 +1,12 @@
+<div class="page-header search-header">
+    <div class="media">
+        <div class="media-left right-padding-5">
+            <img ng-src="/static/img/gallery/search.png" class="center-block image-sizer" style="height: 40px;"/>
+        </div>
+        <div class="media-body">
+            <h3 class="search-default pull-left">Search results for</h3>
+        </div>
+    </div>
+	<h1 ng-if="location_name" class="search-text"><span class="capitalize-text">{{skill_search_name}}</span> tutors in <span class="capitalize-text">{{location_name}}</span></h1>
+	<h1 ng-if="!location_name" class="search-text"><span class="capitalize-text">{{skill_search_name}}</span> tutors </h1>
+</div>

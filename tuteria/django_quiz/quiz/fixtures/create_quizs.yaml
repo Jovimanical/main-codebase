@@ -1,0 +1,632 @@
+- model: quiz.Quiz
+  pk: 1
+  fields:
+    title: Tutor Registration Quiz
+    description: Quiz to demonstrate understanding of the tutor's registration process
+    url: tutor-registration-quiz
+    category: 1
+    pass_mark: 100
+
+- model: quiz.Quiz
+  pk: 2
+  fields:
+    title: Accounting Quiz
+    description: Quiz for Accounting Skill
+    url: accounting-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 3
+  fields:
+    title: Agricultural Science Quiz
+    description: Quiz for Agricultural Science Skill
+    url: agric-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 4
+  fields:
+    title: English Language Quiz
+    description: Quiz for English Languagte
+    url: english-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 5
+  fields:
+    title: Japanese Quiz
+    description: Quiz for Japanese Language Skill
+    url: japanese-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 6
+  fields:
+    title: French Quiz
+    description: Quiz for French Skill
+    url: french-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 7
+  fields:
+    title: Spanish Quiz
+    description: Quiz for Spanish Language Skill
+    url: spanish-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 8
+  fields:
+    title: Russian Quiz
+    description: Quiz for Russian Language Skill
+    url: russian-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 9
+  fields:
+    title: German Quiz
+    description: Quiz for German Language Skill
+    url: german-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 10
+  fields:
+    title: Latin Quiz
+    description: Quiz for Latin Language
+    url: latin-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 11
+  fields:
+    title: Polish Quiz
+    description: Quiz or Polish Language
+    url: polish-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 12
+  fields:
+    title: Dutch Quiz
+    description: Quiz for the Dutch Language
+    url: dutch-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 13
+  fields:
+    title: Swedish Quiz
+    description: Quiz for the Swedish Language
+    url: swedish-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 14
+  fields:
+    title: Italian Quiz
+    description: Quiz for the Italian Language
+    url: italian-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 15
+  fields:
+    title: Irish Quiz
+    description: Quiz for the Irish Language
+    url: irish-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 16
+  fields:
+    title: Creative Writing Quiz
+    description: Quiz for Creative Writing
+    url: creative-writing-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 17
+  fields:
+    title: Proofreading Quiz
+    description: Quiz for Proof Reading
+    url: proofreading-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 18
+  fields:
+    title: Spelling Quiz
+    description: Quiz for Spelling
+    url: spelling-quiz
+    category: 2
+    pass_mark: 80
+
+- model: quiz.Quiz
+  pk: 19
+  fields:
+    title: Physics Quiz
+    description: Quiz for Physics
+    url: physics-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 20
+  fields:
+    title: Chemistry Quiz
+    description: Quiz for Chemistry
+    url: chemistry-quiz
+    category: 2
+    pass_mark: 60
+
+- model: quiz.Quiz
+  pk: 21
+  fields:
+    title: Biology Quiz
+    description: Quiz for Biology
+    url: biology-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 22
+  fields:
+    title: Genetics
+    description: Quiz for Genetics
+    url: genetics-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 23
+  fields:
+    title: Organic Chemistry
+    description: Quiz to test Organic Chemistry
+    url: organic-chemistry-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 24
+  fields:
+    title: BioChemistry Quiz
+    description: Quiz to test BioChemistry
+    url: biochemistry-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 25
+  fields:
+    title: GMAT Quiz
+    description: Quiz to test GMAT
+    url: gmat-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 26
+  fields:
+    title: GRE Quiz
+    description: Quiz to test GRE
+    url: gre-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 27
+  fields:
+    title: General Mathematics Quiz
+    description: Quiz to test General Mathematics
+    url: general-mathematics-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 28
+  fields:
+    title: Guitar Quiz
+    description: Quiz to test Guitar
+    url: guitar-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 29
+  fields:
+    title: Swimming Quiz
+    description: Quiz to test Swimming Proficiency
+    url: swimming-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 30
+  fields:
+    title: Geometry Quiz
+    description: Geometry Proficiency Test
+    url: geometry-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 31
+  fields:
+    title: Probability Quiz
+    description: Probability Proficiency Test
+    url: probability-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 32
+  fields:
+    title: Statistics Quiz
+    description: Statistics Proficiency Test
+    url: statistics-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 33
+  fields:
+    title: Calculus Quiz
+    description: Calculus Proficiency Test
+    url: calculus-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 34
+  fields:
+    title: Further Math Quiz
+    description: Further Mathematics Proficiency Test
+    url: further-math-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 35
+  fields:
+    title: Trigonometry Quiz
+    description: Trigonometry Proficiency Quiz
+    url: trigonometry-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 36
+  fields:
+    title: English Grammar Quiz
+    description: English Grammar Proficiency Test
+    url: english-grammar-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 37
+  fields:
+    title: Vocabulary Building Quiz
+    description: Vocabulary Building Proficiency Test
+    url: vocabulary-building-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 38
+  fields:
+    title: Algebra Quiz
+    description: Algebra Proficiency Test
+    url: algebra-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 39
+  fields:
+    title: Arithmetic Quiz
+    description: Arithmetic Proficiency Test
+    url: arithmetic-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 40
+  fields:
+    title: Data Analytics Quiz
+    description: Data Analytics Proficiency Test
+    url: data-analytics-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 41
+  fields:
+    title: Basic Math Quiz
+    description: Basic Math proficiency Test
+    url: basic-math-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 42
+  fields:
+    title: Technical Drawing Quiz
+    description: Technical Drawing Proficiency Test
+    url: technical-drawing-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 43
+  fields:
+    title: Commerce Quiz
+    description: Commerce Proficiency Test
+    url: commerce-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 44
+  fields:
+    title: Literature in English Quiz
+    description: Literature in English Proficiency Test
+    url: literature-english-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 45
+  fields:
+    title: Economics Quiz
+    description: Economics Proficiency Test
+    url: economics-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 46
+  fields:
+    title: Data Structures Quiz
+    description: Data Structures Proficiency Test
+    url: data-structures-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 47
+  fields:
+    title: Piano Quiz
+    description: Quiz to test proficiency in Piano
+    url: piano-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 48
+  fields:
+    title: Public Speaking Quiz
+    description: Public Speaking Proficiency Test
+    url: public-speaking-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 49
+  fields:
+    title: Violin Quiz
+    description: Violin Proficiency Test
+    url: violin-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 50
+  fields:
+    title: SPSS Quiz
+    description: SPSS Proficiency Test
+    url: spss-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 51
+  fields:
+    title: Music Theory Quiz
+    description: Quiz to test knowledge of Music Theory
+    url: music-theory-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 52
+  fields:
+    title: Operational Research Quiz
+    description: Operational Research Proficency Test
+    url: operational-research-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 53
+  fields:
+    title: IELTS Quiz
+    description: IELTS Proficency Test
+    url: ielts-quiz
+    category: 2
+    pass_mark: 60
+
+- model: quiz.Quiz
+  pk: 54
+  fields:
+    title: TOEFL
+    description: TOEFL Proficency Test
+    url: toefl-quiz
+    category: 2
+    pass_mark: 60
+
+- model: quiz.Quiz
+  pk: 55
+  fields:
+    title: MATLAB Quiz
+    description: MATLAB Proficiency Test
+    url: matlab-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 56
+  fields:
+    title: SQL Quiz
+    description: SQL Proficency Test
+    url: sql-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 57
+  fields:
+    title: JavaScript Quiz
+    description: Javascript Programming Language Quiz
+    url: javascript-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 58
+  fields:
+    title: Perl Quiz
+    description: Perl Programming Language Quiz
+    url: perl-quiz
+    category: 2
+    pass_mark: 30
+
+- model: quiz.Quiz
+  pk: 59
+  fields:
+    title: PHP Quiz
+    description: PHP Competency Test
+    url: php-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 60
+  fields:
+    title: Food and Nutrition Quiz
+    description: Food and Nutrition Competency Quiz
+    url: food-nutrition-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 61
+  fields:
+    title: Table Tennis Quiz
+    description: Table Tennis Quiz
+    url: table-tennis-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 62
+  fields:
+    title: Badminton Quiz
+    description: Badminton Quiz
+    url: badminton-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 63
+  fields:
+    title: BasketBall Quiz
+    description: BasketBall Quiz
+    url: basketball-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 64
+  fields:
+    title: VolleyBall Quiz
+    description: VolleyBall Quiz
+    url: volleyball-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 65
+  fields:
+    title: Geography Quiz
+    description: Geography Proficency Test
+    url: geography-quiz
+    category: 2
+    pass_mark: 50
+
+- model: quiz.Quiz
+  pk: 66
+  fields:
+    title: Government Quiz
+    description: Government Quiz
+    url: government-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 67
+  fields:
+    title: Microsoft Excel Quiz
+    description: Proficiency Test for Workbook Apps
+    url: excel-quiz
+    category: 2
+    pass_mark: 40
+
+- model: quiz.Quiz
+  pk: 68
+  fields:
+    title: SAT Reading Quiz
+    description: Proficiency Test for Workbook Apps
+    url: sat-reading-quiz
+    category: 2
+    pass_mark: 40
+
+
+- model: quiz.Quiz
+  pk: 69
+  fields:
+    title: SAT Writing Quiz
+    description: Proficiency Test for Workbook Apps
+    url: sat-writing-quiz
+    category: 2
+    pass_mark: 40
+
+
+- model: quiz.Quiz
+  pk: 70
+  fields:
+    title: SAT Math Quiz
+    description: Proficiency Test for Workbook Apps
+    url: sat-math-quiz
+    category: 2
+    pass_mark: 40
+

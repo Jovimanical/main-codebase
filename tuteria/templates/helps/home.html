@@ -1,0 +1,232 @@
+{% extends "pages/trust.html" %}
+{% load template_utils staticfiles activelink %}
+{% block sub_nav %}{% endblock %}
+{% block fixed %}{% endblock %}
+{% block nav %}
+{% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder display_help=True %}
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/help.css' %}"/>
+{% endblock %}
+{% block jumbo1 %}
+    <div class="caro bg10"></div>
+{% endblock jumbo1 %}
+{% block title %}Help Center - Tuteria{% endblock title %}
+{% block carousel_content %}
+
+<div class="col-sm-10 col-sm-offset-1 text-center mb-remove-margin-25">
+    <div class="jumbo-header"><h2 class="myh2"><b class="white">We're always here to help</b></h2>
+        <br>
+    </div>
+    <div class="col-md-8 col-sm-10 col-md-offset-2 col-sm-offset-1">
+        <form action="{% url 'help:search' %}" method="get" id="home_search_form" novalidate>
+            {% if request.is_featured %}
+            <div class="form-group">
+                <label for="" class="control-label pull-left" style="color:white; font-size:18px;">How can we
+                    help? </label>
+                    <input type="text" class="form-control" name='query' required="true">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Search">
+                </div>
+                {% else %}
+                <div class="smart-forms clearfix">
+                    <div>
+                        <div class="row searcbox">
+                            <div class="inpp">
+                                <label class="field">
+                                    <!-- Input box -->
+                                    <input type="text" name="query" id="skill_search"
+                                    class="gui-input typeahead" required="true"
+                                    placeholder="How can we help?"
+                                    min-length="2"
+                                    data-parsley-errors-container="#err"
+                                    data-parsley-error-message="Must be at least two characters long.">
+                                </label>
+                            </div>
+                            <div class="pull-right but">
+                                <button class="btn btn-primary btn-lg btn-block no-border-radius"
+                                ><i class="input-suffix fa icon-full fa-search no-border-radius"></i></button>
+                            </div>
+                        </div>
+                        <div id="carousel-error-container" class="text-left search-hint hidden-xs">
+                            <small id="err"></small>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </form>
+
+        </div>
+    </div>
+    {% endblock %}
+    {% block main_content %}
+
+    <div class="container row-space-top-4 padding-top-50">
+        <div id="help-cont" class="">
+            <div class="">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-12 bs-docs-sidebar hidden-xs">
+                        <ul id="sidebar" class="nav nav-stacked">
+                            <li class="sub-item">
+                                <a href="{% url 'help:home' %}">Help Home</a>
+                            </li>
+                          <li class="sub-item {% block sidbar_nav_class %}{% endblock sidbar_nav_class %}">
+                                <a href="javascript:void(0)">Getting Started</a>
+                                <ul class="nav nav-stacked">
+                                    <li class="{% ifactive 'help:how_it_works' %}active{% endifactive %}"><a href="{% url 'help:how_it_works' %}" class="parentArticle {% ifactive 'help:how_it_works' %}active{% endifactive %}">How it Works</a></li>
+                                    <li class="{% ifactive 'help:how_to_hire' %}active{% endifactive %}"><a href="{% url 'help:how_to_hire' %}" class="parentArticle {% ifactive 'help:how_to_hire' %}active{% endifactive %}">How to Hire</a></li>
+                                    <li class="{% ifactive 'help:how_to_tutor' %}active{% endifactive %}"><a href="{% url 'help:how_to_tutor' %}" class="parentArticle {% ifactive 'help:how_to_tutor' %}active{% endifactive %}">How to Tutor</a></li>
+                                </ul>
+                            </li>
+                            {% block sidebar_topics %}
+                          
+                            {% for category in parents %}
+                            <li class="sub-item">
+                                <a href="javascript:void(0)">{{ category.name }}</a>
+                                <ul class="nav nav-stacked">
+                                    {% for sub_category in category.sub_categories.all %}
+                                    <li>
+                                        <a class="parentArticle" href="{{ sub_category.get_absolute_url }}">
+                                            {{ sub_category.name }}
+                                        </a>
+                                        {# <ul class="spec nav-stacked hide"> #}
+                                            {# {% for article in sub_category.article_set.all %} #}
+                                            {# <li><a class="active" href="{{ article.get_absolute_url }}"> #}
+                                                {# {{ article.question }}</a></li> #}
+                                                {# {% endfor %} #}
+                                            {# </ul> #}
+                                        {# </li> #}
+
+                                        {% endfor %}
+
+                                    </ul>
+                                </li>
+                                {% endfor %}
+                                {% endblock sidebar_topics %}
+
+                            </ul>
+                        </div>
+                        <div class="col-sm-9 col-xs-12">
+                            {% block breadcrumb %}
+                            {% endblock %}
+                            {% block article_block %}
+                            <div class="col-sm-12 col-xs-12 help-content text-copy navtree-content breadcrumbs-content">
+
+  <div class="popular-topics">
+    <div class="row row-space-6">
+      <div class="col-sm-12 row-space-1">
+        <h2>Common Questions</h2>
+      </div>
+      <div class="col-sm-12">
+        <div class="row row-space-3">
+          <div class="col-sm-12 text-copy">
+            <a href="{% url 'help:article_detail' 21 %}" data-hook="track_homepage_article_click">
+              How can I become a tutor on Tuteria?
+            </a>
+          </div>
+        </div>
+        <div class="row row-space-3">
+          <div class="col-sm-12 text-copy">
+            <a href="{% url 'help:article_detail' 14 %}" data-hook="track_homepage_article_click">
+              What is Verified ID?
+            </a>
+          </div>
+        </div>
+        <div class="row row-space-3">
+          <div class="col-sm-12 text-copy">
+            <a href="{% url 'help:article_detail' 28 %}" data-hook="track_homepage_article_click">
+              How do I create or edit my subjects?
+            </a>
+          </div>
+        </div>
+        <div class="row row-space-3">
+          <div class="col-sm-12 text-copy">
+            <a href="{% url 'help:article_detail' 60 %}" data-hook="track_homepage_article_click">
+              How does Tuteria payment system work?
+            </a>
+          </div>
+        </div>
+        <div class="row row-space-3">
+          <div class="col-sm-12 text-copy">
+            <a href="{% url 'help:article_detail' 69 %}" data-hook="track_homepage_article_click">
+              How do I hire tutors on Tuteria?
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row row-space-8">
+    <h2 class="col-sm-12 row-space-3">
+      Getting Started
+      <hr>
+    </h2>
+     <div id="how-it-works" class="wrapper-full clearfix text-center">
+                        <div class="icon-box-6 text-center">
+                            <div class=" col-sm-4">
+                                <div class="icon-box-6-item">
+                                    <img src="{% static 'img/gallery/learning.png' %}" alt="" style="width:80px">
+
+                                    <h5 class="black" style="font-size:15px"><b>How Tuteria Works</b><br>
+                                    </h5>
+                                        <span style="font-size:14px">
+            Learn what Tuteria is all about, and discover how we make tutoring easy, reliable, and safe. <a class="text-copy" href="{% url 'help:how_it_works' %}">
+            Read more
+          </a>
+                                        </span>
+                                </div>
+                            </div>
+                            <div class=" col-sm-4">
+                                <div class="icon-box-6-item">
+                                    <img src="{% static 'img/tutor/competency.png' %}" alt="" style="width:80px">
+
+                                    <h5 class="black" style="font-size:15px"><b> Tutoring Basics</b><br>
+
+                                    </h5>
+                                        <span style="font-size:14px">Learn how to create subjects, respond to requests, deliver great service and receive payments.<a class="text-copy" href="{% url 'help:how_to_tutor' %}">
+                                        Read more
+                                      </a>
+                                        </span>
+                                </div>
+                            </div>
+                            <div class=" col-sm-4">
+                                <div class="icon-box-6-item myicon">
+                                    <img src="{% static 'img/tutor/monthly.png' %}" alt="" style="width:80px">
+
+                                    <h5 class="black" style="font-size:15px"><b>Hiring Basics</b><br>
+
+                                    </h5>
+                                        <span style="font-size:14px">Learn how to search for your perfect tutor, schedule lessons, and prepare to learn.<a class="text-copy" href="{% url 'help:how_to_hire' %}">
+                                    Read more
+                                  </a>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+  </div>
+
+
+
+
+</div>
+                                        {% endblock %}
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endblock %}
+                    {% block javascript %}
+                    {{ block.super }}
+                    <script src="{% static "js/help.bundle.js" %}"></script>
+                    {% endblock %}

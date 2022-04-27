@@ -1,0 +1,10 @@
+<div class="subnav hide-print">
+    <div class="container">
+        <ul class="subnav-list">
+            <li ng-repeat="section in vm.url_sections">
+                <a href="{{::section.url}}" aria-selected="{% ifactive 'users:dashboard' %}true{% else %}false{% endifactive %}"
+                class="subnav-item">{{::section.name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

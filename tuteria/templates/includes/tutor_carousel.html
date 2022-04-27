@@ -1,0 +1,81 @@
+ {% load activelink cache %}
+ <div id="carousel-example-generic" class="carousel fade" data-ride="carousel">
+    <ol class="carousel-indicators with-images">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+    </ol>
+    {% ifactive 'home' %}
+    {% if  request.user.profile.application_status >= 2 %}
+        {% else %}        
+    <a href="{% url 'registration:tutor_landing' %}" class="caraousel-btn btn-lg btn btn-primary row-space-2"> {{button_text}} &#8594;
+    </a>
+    {% endif %}
+    {% else %}    
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'registration:tutor_landing' %}" class="caraousel-btn btn-lg btn btn-primary btn-tutor big-btn row-space-2"> {{button_text}} &#8594;
+        </a>
+        {% else %}
+      <a id="signup_nav" href="{% url 'account_signup' %}" class="caraousel-btn btn-lg btn btn-primary big-btn signup_nav">
+            {{button_text}}                    
+            &#8594;
+        </a>
+        {% endif %}    
+    {% endifactive %}
+    
+    <div class="carousel-inner" role="listbox">
+        <div class="inner-content container padding-top-50" >
+            <h3 class="caro-heading col-md-6 col-lg-5 col-sm-6" style="color:#3572b0">
+                {% if request.is_featured %}
+                <b>{{carousel_title}}</b>
+                {% else %}
+                {{carousel_title}}
+                {% endif %}
+            </h3>
+
+        </div>
+        <div class="item">
+            <div class="kehinde" data-holder-rendered="true" ></div>
+            <section class="rel_cont col-sm-6 col-lg-7 col-xs-12 mb-text-center">              
+                <blockquote class="justin">
+                    <p>I have a Master’s degree in Engineering, and a passion for teaching Math and Physics. I once had the privilege of teaching a young lady who'd been failing Math in WAEC. She's now in the university and also doing very well, which gives me great joy. I love Tuteria because of it's simplicity that attracts the best kinds of teachers at heart."</p>
+                    <footer>
+                        <span class="cite">Kehinde Ishie</span>
+                    </footer>
+                </blockquote>
+            </section>
+        </div>
+        <div class="item active">
+            <div class="godwin" data-holder-rendered="true"></div>
+            <section class="rel_cont col-sm-6 col-lg-7 col-xs-12 mb-text-center">
+                <blockquote class="meisin">
+                    <p>"I’m a first-class engineering graduate with more than 9 years tutoring experience. I’ve helped students excel in Math, Physics and Further Math, as well as GRE, TOEFL, SAT, IELTS and GMAT. With Tuteria, I can plan my time and focus on teaching more people while everything else is handled for me - from scheduling, to payments and disputes."</p>
+                    <footer>
+                        <span class="cite">Godwin Benson</span>
+                    </footer>
+                </blockquote>
+            </section>
+        </div>
+        <div class="item">
+            <div class="haleemah" data-holder-rendered="true"></div>
+            <section class="rel_cont col-sm-6 col-lg-7 col-xs-12 mb-text-center">
+                <blockquote class="justin">
+                    <p>"Working with beads and creating superb jewellery designs have been something I really enjoyed and tried to perfect over time. At first it started out as a hobby but now with Tuteria, I get to make extra cash teaching people what I love to do best! Nothing beats this, it's just awesome!!!"</p>
+                    <footer>
+                        <span class="cite">Haleemah Abdulrazaq</span>
+                    </footer>
+                </blockquote>   
+            </section>
+        </div>
+    </div>    
+    <div>
+        {# <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> #}
+        {# <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> #}
+        {# <span class="sr-only">Previous</span> #}
+        {# </a> #}
+        {# <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> #}
+        {# <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> #}
+        {# <span class="sr-only">Next</span> #}
+        {# </a> #}
+    </div>
+</div>

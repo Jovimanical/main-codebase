@@ -1,0 +1,291 @@
+{% extends "pages/why-use.html" %}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/request_to_meet.css" %}">
+    <style>
+        .img-resize img {
+            width: 60px;
+            margin-top: 19px;
+        }
+        .wallet_price {
+            padding-bottom: 4px !important;
+            background-color: #5cb85c;
+            color: white !important;
+            font-size: 15px;
+            margin-top: 8px;
+            padding-top: 4px !important;
+            border-radius: 25px;
+        }
+
+        .wallet_price:hover {
+            background-color: green !important;
+        }
+    </style>
+{% endblock css %}
+{% block title %}Request to Meet {{ object.tutor.first_name }}{% endblock title %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True making_booking=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block nav %}
+    <div class="header-2 hidden-xs">
+        <!-- Container -->
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default padding-side-15" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    <span class="logo" href="{% url 'home' %}">
+                        {# <img src="{% static "img/logo.png" %}" height="47px"/> #}
+                        <span class="nav-logo"></span>
+                    </span>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#" class="wallet_price">Balance:
+                                    &#x20a6;{{ request.user.wallet.amount_available|floatformat:"2" }}</a></li>
+                                <li class="dropdown navdropdown">
+                                    <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+                                        {% if request.user.profile.image %}
+                                            {% cloudinary request.user.profile.image AVATAR %}
+                                        {% else %}
+                                            <img src="http://placehold.it/30x30" class="img-circle">
+                                        {% endif %}
+                                        {{ request.user.get_short_name }} <b class="caret"></b></a>
+                                </li>
+                        </ul>
+                    </div>              
+                </nav>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+{% block bottom_footer %} {% endblock bottom_footer %}
+{% block request_section %} {% endblock request_section %}
+{% block custom_heading %}
+    <div class="jumbo-header">
+        <h2 class="myh2"><b class="white">Meet with {{ object.tutor.first_name }} in-person</b></h2>
+
+        <p>
+            Request to interview your tutor <em>before</em> booking lessons with them
+        </p>
+
+    </div>
+
+{% endblock custom_heading %}
+{% block first_section %}
+    <div id="heads" class="levels-intro row-space-3">
+        <h3>{% if request.is_featured %}<b>How it Works</b>{% else %}How it Works{% endif %}</h3>
+        <hr class="hr-styled"/>
+        
+        <p>By placing request, {{ object.tutor.first_name }} will call you within the week to schedule a meeting at your preferred time and venue. If you're happy with the tutor, you can then proceed with booking lessons.</p>
+
+        <h4 class="blue-font">30% Down Payment</h4>
+        <p>To summit request, we ask you to deposit 30% of the tutor's long-term fee. This is only required to reserve your booking if the interview turns out positive. Long term booking = 24hours of lessons.</p>
+
+        <p>Deposit is stored in your Tuteria wallet, so that if:</p>
+
+        <ul>
+            <li>meeting is positive, you'll only pay any balance left and nothing more.</li>
+            <li>meeting is negative, you can interview another {{ object.ts.skill.name|title }} tutor at no extra cost.</li>
+            <li>both meetings are negative, we'll refund your deposit in full.</li>
+        </ul>
+
+        <p>Review details below and indicate the best time for {{ object.tutor.first_name }} to call you.</p>
+    </div>
+{% endblock first_section %}
+{% block second_section %}
+    <div class="">
+        <section class="db-content db-content-order-detail">
+            {# <div class="db-tabs-wrapper "> #}
+                {# <article class=" db-order-activity js-page-tab-content js-page-tab-activity"> #}
+                    {# {% include 'bookings/includes/booking-summary.html' %} #}
+                    <div class="order-gig-details no-padding-xs">
+                        <div class="order-gig-detail">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <td><span class="hidden-xs"></span>Description</td>
+                                        <td class="amount">Amount</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="truncated">
+                                            Long-term <small>(24hrs x &#x20a6;{{object.ts.price|floatformat:0}})</small>
+                                        </td>
+                                        <td class="amount">
+                                            &#x20a6;{{ object.ts.new_long_term_booking|floatformat:"0"|intcomma }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="truncated">
+                                            Deposit <small>(30% of Long-term)</small>
+                                        </td>
+                                        <td class="amount">
+                                            &#x20a6;{{ object.total_price|floatformat:"0"|intcomma }}</td>
+                                    </tr>
+                                    {% if object.wallet_amount > 0 and sample %}
+                                        <tr>
+                                            <td class="visible-xs date" colspan="2">
+                                                Wallet amount Used  <span class="fa fa-question-circle"
+                                                                          data-container="body"
+                                                                          data-toggle="popover"
+                                                                          data-placement="bottom"
+                                                                          data-trigger="hover"
+                                                                          data-content="This is the amount remaining in your wallet."
+                                                    ></span>
+                                            </td>
+                                            <td colspan="3" class="date hidden-xs" style="color:green">
+                                                Wallet amount Used
+                                            <span class="fa fa-question-circle"
+                                                  data-container="body"
+                                                  data-toggle="popover"
+                                                  data-placement="bottom"
+                                                  data-trigger="hover"
+                                                  data-content="This is the amount remaining in your wallet."
+                                                    ></span>
+                                            </td>
+                                            <td class="amount" style="color:green;">
+                                                (&#x20a6;{{ object.wallet_amount|floatformat:"2" }})
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    <tr class="">
+                                        <td colspan="" class="date">
+                                            Gateway Fee (1.5%)
+                                        <span class="fa fa-question-circle"
+                                              data-container="body"
+                                              data-toggle="popover"
+                                              data-placement="bottom"
+                                              data-trigger="hover"
+                                              data-content="This is used by payment gateway to process request."
+                                                ></span>
+                                        </td>
+                                        <td class="amount">
+                                            &#x20a6;{{ object.service_fee|floatformat:"2" }}</td>
+                                    </tr>
+
+                                    <tr class="">
+                                        <td class="font-head" colspan=""> Total Amount
+                                        </td>
+                                        <td class="amount font-head">
+                                            <b>&#x20a6;</b>{{ object.bank_price|floatformat:"0"|intcomma }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                {# </article> #}
+            {# </div> #}
+        </section>
+        {% if object.time_to_call %}
+            <div class="row">
+                {% if hiring_for_the_same_subject %}
+                    <div class="payment_method3">
+                        <div class="credit-card-option">
+                            <h4>Proceed to the next step</h4>
+
+                            <p>You have already requested to meet with a tutor teaching this skill. There is no need for
+                                another payment. Please submit the form below to process your payment</p>
+
+                            <div class="col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-xs-12 need-help ">
+                                <!-- begin Paga ePay widget code -->
+                                <form action="{% url 'condition_to_not_make_payment' object.order %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="p_method"
+                                           value="{{ object.order }}"/>
+
+                                    <button id="payment-form-submit" type="submit"
+                                            class="btn btn-primary btn-block">
+                                        Proceed
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                <div class="col-sm-12 col-xs-12">
+                    <div class="payment_method1">
+                        <h4>Make Deposit - Safe, Fast and Convenient</h4>
+                        <style>
+                            #__p_ew_l td {
+                                border-top: 0 !important;
+                                border-bottom: 0 !important;
+                            }
+
+                            @media (min-width: 768px) {
+                                #__paga_btn.__proceed {
+                                    position: absolute;
+                                    right: 0;
+                                    margin-top: -33px;
+                                    margin-right: 25px;
+                                }
+                            }
+                        </style>
+                        <form>
+
+                            {{ paga_form }}
+                        </form>
+                        <script type="text/javascript"
+                                src="https://www.mypaga.com/paga-web/epay/ePay-button.paga?k=bffe463e-d4f8-4b16-a2eb-6a54a0d614c0&e=false&layout=V"></script>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        {% else %}
+            <form id="interview-form" action="{% url 'request_meeting' object.order %}" method="post" novalidate>
+                {% csrf_token %}
+                <div class="row padding-top-25">
+                    <div class="col-sm-4 col-xs-12 text-center">
+                        {# <img src="{% static 'img/tutor/interview.png' %}" class="img-responsive center-block"/> #}
+                        {% cloudinary object.ts.profile_pic USER_PROFILE_THUMBAIL alt=object.tutor.first_name %}
+                    </div>
+                    <div class="col-sm-7 col-xs-12">
+                        <h4 class="blue-font">When's the best time for {{ object.tutor.first_name }} to call?</h4>
+
+                        <p>We recognise you're busy. Please select a timeslot when you're free to receive a call from {{ object.tutor.first_name }}.</p>
+
+                        <div class="form-group row-space-4">
+                            {{ form.time_to_call|add_attributes:'class:form-control,required:true' }}
+                        </div>
+{#                        <p>Please enter your home address. This is not shown to tutor.</p>#}
+{#                        <div class="form-group row-space-4">#}
+{#                            {{ form.address|add_attributes:"class:form-control,required:true,placeholder:Home Address" }}#}
+{#                        </div>#}
+{#                        <div class="form-group row-space-4">#}
+{#                            {{ form.state|add_attributes:"class:form-control,required:true" }}#}
+{#                        </div>#}
+                        <button class="btn btn-lg btn-block btn-primary">{% trans "Submit Request" %}</button>
+                    </div>
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock second_section %}
+{% block javascript %}
+    {{ block.super }}
+
+    <script>$('[data-toggle="popover"]').popover();</script>
+
+{% endblock javascript %}

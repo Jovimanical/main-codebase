@@ -1,0 +1,4 @@
+{{object.user_id}}
+{{object.state}}
+{{object.vicinity}}
+{{object.lga}}

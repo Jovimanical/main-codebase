@@ -1,0 +1,235 @@
+{% extends '_layouts/base-external.html' %}
+{% block ng_app %}ng-app=TuteriaSearch{% endblock %}
+{% load staticfiles bootstrap_pagination humanize bootstrap3 add_attr cloudinary %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/category.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div id="category_base" class="row">
+        {% block content_section %}
+            <div class="container temp">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="main" class="margin-bottom-5">
+                            {% block page_heading %}
+                            {% endblock %}
+                        </div>
+                        {% block search_content %}
+                            <div id="filter_column" class="row">
+                                <div id="desktop_filter" class="col-md-3 visible-md visible-lg">
+                                    <div class="panel filter-form-container ">
+                                        <div class="panel-heading clearfix" style="position:relative;">
+                                            <h4 class="panel-title pull-left padding-top-bottom-14"><i
+                                                    class="fa fa-sliders fa-rotate-90"></i> Filter tutors</h4>
+                                        </div>
+                                        <hr>
+                                        <div class="panel-body">
+                                            <form id="filterForm" method="get" action="{% url 'search' %}">
+                                                {# {% cache 20000 search_form_page %} #}
+                                                {% include "includes/search/search-form.html" %}
+                                                {# {% endcache %} #}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if request.is_featured %}
+                                    {# <div id="operamini_filter" class=""> #}
+                                    <div id="operamini_filter" class="hidden">
+
+                                        <div class="modal2 panel">
+                                            <div class="panel-body">
+                                                <form id="filterForm" action="{% url 'search' %}"
+                                                      method="get" class="smart-forms">
+                                                    {# {% cache 20000 search_form_page %} #}
+                                                    {% include "includes/search/search-form.html" %}
+                                                    <input type="hidden" id="mobile" class="visible-xs" name="mobile"
+                                                           value="true"/>
+                                                    {# {% endcache %} #}
+                                                    <div class="row">
+                                                        <div class="col-xs-6">
+                                                            <button type="button"
+                                                                    class="cancel_button btn btn-cancel pull-left btn-block btn-block-tablet-portrait">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <button id="filter-result"
+                                                                    class="btn btn-primary pull-right btn-block btn-block-tablet-portrait">
+                                                                Filter
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+                                <div id="tablet_filter" class="col-sm-12 visible-sm">
+                                    <div class="panel filter-form-container hidden">
+                                        <div class="panel-body">
+                                            <form id="filterForm" method="get" action="{% url 'search' %}">
+                                                {# {% cache 20000 search_form_page %} #}
+                                                {% include "includes/search/search-form.html" %}
+                                                {# {% endcache %} #}
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="base_search_layout" class="col-md-9 col-sm-12">
+                                    <div class="row-space-4">
+                                        <div id="demo-holder" style="height:868px;" class="hidden"></div>
+                                        {% block result_display %}
+                                            <div id="result-display">
+                                                {% include "pages/ajax-search-result.html" with initial_load=True %}
+                                            </div>
+                                        {% endblock result_display %}
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if not request.is_featured %}
+                                <!-- Modal -->
+                                <div class="modal modal2 fade" id="myModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form id="filterForm" action="{% url 'search' %}"
+                                                  method="get" class="smart-forms">
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span
+                                                            aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Filter tutors</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {# {% cache 20000 search_form_page %} #}
+                                                    {% include "includes/search/search-form.html" %}
+                                                    <input type="hidden" id="mobile" class="visible-xs" name="mobile"
+                                                           value="true"/>
+                                                    {# {% endcache %} #}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-xs-6">
+                                                        <div class="{% if request.is_featured %} col-xs-6 {% endif %}">
+                                                            <button data-dismiss="modal" type="button"
+                                                                    class="btn btn-cancel margin-top-15 pull-right btn-block btn-block-tablet-portrait">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="{% if request.is_featured %}col-xs-6{% endif %}">
+                                                            <button id="filter-result"
+                                                                    class="btn btn-primary margin-top-15 pull-right btn-block btn-block-tablet-portrait">
+                                                                Filter
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+
+                        {% endblock search_content %}
+
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endblock content_section %}
+        <div id="map-canvas" class="hidden"></div>
+        <section id="find_tutors" class="">
+            <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3 col-xs-12 row-space-4">
+                <h2 class="text-center font-head">How to Hire Tutors
+                </h2>
+
+                <p class="text-center help-font">We hand-picked only the very bests from over 3,450 applicants</p>
+            </div>
+            <div class="container no-padding-total row-space-bottom-5">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12 text-center row-space-4">
+                        <i class="icons search row-space-4"></i>
+
+                        <div class="help-margin">
+                            <h4 class="category-help">1. Search</h4>
+
+                            <p class="inline-block font-15">
+                                Find qualified tutors near you, and filter by price, age, gender or distance.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12 text-center row-space-4">
+                        <i class="icons evaluate row-space-4"></i>
+
+                        <div class="help-margin">
+                            <h4 class="category-help">2. Evaluate</h4>
+
+                            <p class="inline-block font-15">
+                                Evaluate tutors' experience, credentials and reviews to ensure they're right for you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12 text-center row-space-4">
+                        <i class="icons book row-space-4"></i>
+
+                        <div class="help-margin">
+                            <h4 class="category-help">3. Book Lessons</h4>
+
+                            <p class="inline-block font-15">
+                                Then easily book lessons with your preferred tutors or request an in-person interview.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        var map, geocoder;
+        window.DemoCallback = function () {
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(-34.397, 150.644);
+            var mapOptions = {
+                zoom: 8,
+                center: latlng
+            }
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        }
+    </script>
+    {#    {% if django_conf == 'Production' or django_conf == 'StagingProd' %}#}
+    {#        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>#}
+    {#    {% else %}#}
+    {#        <script src="{% static "js/angular/angular.js" %}"></script>#}
+    {#    {% endif %}#}
+    <script src="{% static "js/category_featured.bundle.js" %}"></script>
+    <script>
+    </script>
+    {#    <script src="{% static "js/category_smart.bundle.js" %}"></script>#}
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&sensor=false&callback=initializeCallback"></script>
+
+{% include 'includes/tracker/tracker.html' with facebook_tracker="6034106795955" twitter_tracker="l6lg4" %}
+{% endblock %}
+{% block referral %}{% endblock referral %}
+{% block footer %}
+{% endblock %}
+{% block bottom_footer %}
+{% endblock %}

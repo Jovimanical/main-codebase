@@ -1,0 +1,37 @@
+<div>
+    <div>
+        <strong>Full Name:</strong> {{ booking.user.first_name }} {{ booking.user.last_name }}
+    </div>
+    <div>
+        Email: {{ booking.user.email }}
+    </div>
+    <div>
+        Link to Tutor Page: http://{{ site.domain }}{{ booking.get_tutor.get_absolute_url }}
+    </div>
+    <div>
+        Booking_ID: {{ booking.order }}
+    </div>
+    <div>
+        Link to Booking Payment Page: http://{{ site.domain }}/bookings/{{ booking.order }}/
+    </div>
+    <div>
+        Sessions In booking
+    </div>
+    <table>
+        <tr>
+            <td>START</td>
+            <td>DURATION</td>
+            <td>NO_OF_STUDENT</td>
+            <td>PRICE</td>
+        </tr>
+        {% for session in booking.bookingsession_set.all %}
+            <tr>
+                <td>{{ session.start }}</td>
+                <td>{{ session.duration }}</td>
+                <td>{{ session.student_no }}</td>
+                <td>&#8358;{{ session.price }}</td>
+            </tr>
+
+        {% endfor %}
+    </table>
+</div>

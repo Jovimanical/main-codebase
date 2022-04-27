@@ -1,0 +1,190 @@
+{% extends '_layouts/base-external.html' %}
+{% load activelink %}
+{% load cloudinary %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/about.css" %}">
+{% endblock css %}
+{% block footer2 %}{% endblock %}
+{% block black_nav %}    
+{% include 'includes/nav/sub-nav-1.html' %}
+{% endblock %}
+{% block content %}
+<div class="container row-space-top-4">
+    <div class="row">
+        <div class="col-sm-3 hidden-xs">
+            <div class="row">
+                <div class="sidenav ">                  
+                    {% block sidenav22 %}
+                    <ul class="sidenav-list">
+                        <li>
+                            <a href="{% url 'about_us' %}"
+                            aria-selected="{% ifactive 'about_us' %}true{% else %}false{% endifactive %}"
+                            class="sidenav-item">About Us</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'founders' %}"
+                            aria-selected="{% ifactive 'founders' %}true{% else %}false{% endifactive %}"
+                            class="sidenav-item">Founders</a>
+                        </li>
+                    </ul>    
+                    {% endblock sidenav22 %}
+
+                </div>
+            </div>
+        </div>
+        {% block mobile_crum %}
+        <ol class="breadcrumb visible-xs">
+            {% ifactive 'about_us' %}
+            <li class="active"> About Us </li>
+            {% else %}
+            <li>
+                <a href="{% url 'about_us' %}">About Us</a>
+            </li>
+            {% endifactive %}
+            {% ifactive 'founders' %}
+                <li class="active"> Founders </li>
+                {% else %}
+                <li class="active">
+                    <a href="{% url 'founders' %}">Founders</a>
+                </li>
+            {% endifactive %}
+            
+        </ol>    
+        {% endblock mobile_crum %}
+        
+        <div class="col-sm-9">
+            <div>
+                {% block main_content2 %}
+                <div class="text-copy">
+                    <h1 class="h2 row-space-4">About Us</h1>
+
+                    <p>
+                        Founded in August of 2008 and based in San Francisco, California, Airbnb is a trusted
+                        community marketplace
+                        for people to list, discover, and book unique accommodations around the world — online
+                        or from a mobile
+                        phone.
+                    </p>
+
+                    <p class="row-space-4">
+                        Whether an apartment for a night, a castle for a week, or a villa for a month, Airbnb
+                        connects people to
+                        unique travel experiences, at any price point, in more than 34,000 cities and 190+
+                        countries. And with
+                        world-class customer service and a growing community of users, Airbnb is the easiest way
+                        for people to
+                        monetize their extra space and showcase it to an audience of millions.
+                    </p>
+
+                    <div class="row row-space-4">
+                        <div class="col-md-6">
+                            <div class="info-panel panel">
+                                <div class="panel-body">
+                                    <div class="row row-condensed">
+                                        <div class="col-xs-3 text-center">
+                                            <i class="fa fa-group fa-rausch fa-3x"></i>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <div class="h6 row-space-2">Total Users</div>
+                                            <div class="h2">25,000,000+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-panel panel">
+                                <div class="panel-body">
+                                    <div class="row row-condensed">
+                                        <div class="col-xs-3 text-center">
+                                            <i class="fa fa-group fa-rausch fa-3x"></i>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <div class="h6 row-space-2">Total Tutors</div>
+                                            <div class="h2">34,000+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space-4">
+                        <div class="col-md-6">
+                            <div class="info-panel panel">
+                                <div class="panel-body">
+                                    <div class="row row-condensed">
+                                        <div class="col-xs-3 text-center">
+                                            <i class="fa fa-group fa-blue fa-rausch fa-3x"></i>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <div class="h6 row-space-2">Hours Taught</div>
+                                            <div class="h2">250,000,000+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-panel panel">
+                                <div class="panel-body">
+                                    <div class="row row-condensed">
+                                        <div class="col-xs-3 text-center">
+                                            <i class="fa fa-city fa-pink fa-rausch fa-3x"></i>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <div class="h6 row-space-2">Subjects</div>
+                                            <div class="h2">34,000+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space-4">
+                        <div class="col-md-6">
+                            <div class="info-panel panel">
+                                <div class="panel-body">
+                                    <div class="row row-condensed">
+                                        <div class="col-xs-3 text-center">
+                                            <i class="fa fa-castle fa-yellow fa-rausch fa-3x"></i>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <div class="h6 row-space-2">Cities</div>
+                                            <div class="h2">600+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-panel panel">
+                                <div class="panel-body">
+                                    <div class="row row-condensed">
+                                        <div class="col-xs-3 text-center">
+                                            <i class="fa fa-globe-alt fa-blue fa-rausch fa-3x"></i>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <div class="h6 row-space-2">States in Nigeria</div>
+                                            <div class="h2">190+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script src="{% static 'js/static_pages.bundle.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "admin/change_list.html" %}
+
+  {% load jchart %}
+{% load humanize add_attr %}
+{% block content_title %}
+    <h1> Booking Summary </h1>
+{% endblock %}
+{% block result_list %}
+<div class="results">
+    <table>
+        
+    <thead>
+      <tr>
+        <th>
+          <div class="text">
+            <a href="#">Client</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">Total bookings</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">Total paid bookings</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">
+              <strong>% Of Total bookings paid</strong>
+            </a>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in summary %}
+      <tr class="{% cycle 'row1' 'row2' %}">
+        <td> 
+            <a  href="/we-are-allowed/wallet/paymenthistory/?q={{ row.owner__email }}">
+        {{ row.owner__email }}</a>  </td>
+        <td> 
+            <a target="_blank" href="/we-are-allowed/wallet/wallettransaction/?type__exact=2&q={{ row.owner__email }}">
+            {{ row.booking_total | intcomma }} 
+            </a></td>
+        <td><a href="/we-are-allowed/wallet/bookingnotpaid/?q={{row.owner__email}}" target="_blank">
+        {{ row.booking_paid| default:0 | intcomma }}</a>  </td>
+        <td>
+          <strong>
+          {{ row.booking_paid | default:0 | percentof:row.booking_total | floatformat}} 
+          </strong>
+        </td>
+      </tr>
+      
+      {% endfor %}
+      
+    </tbody>
+    
+  </table>
+  {% if line_chart %}
+  
+  <h2> Sales over time </h2>
+
+    {{ line_chart.as_html }}
+  {% endif %}
+
+</div>
+{% endblock %}
+{% block pagination %}{% endblock %}

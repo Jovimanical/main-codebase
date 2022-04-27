@@ -1,0 +1,762 @@
+{% extends "pages/parent-request.html" %}
+{% load staticfiles cloudinary humanize %}
+{% block title %}Lesson Payment | Tuteria Nigeria{% endblock %}
+{% block css %}
+{{block.super}}
+<link rel="stylesheet" href="{% static "css/request_received.css" %}">
+<style>
+    .wallet_price {
+        padding-bottom: 4px !important;
+        background-color: #5cb85c;
+        color: white !important;
+        font-size: 15px;
+        margin-top: 8px;
+        padding-top: 4px !important;
+        border-radius: 25px;
+    }
+
+    .wallet_price:hover {
+        background-color: green !important;
+    }
+    .large-padding {
+        padding: 60px 40px;
+    }
+
+    section.protection {
+        color: #fff;
+        background: #36648B;
+        font-size: 18px
+    }
+
+    section.protection .media-photo {
+        background: transparent
+    }
+    .list-group-item:last-child {
+        margin-bottom: 0;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .list-group-item:first-child {
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+    .padding-40 {
+        padding: 40px 40px;
+    }
+    @media(max-width: 768px){
+        .no-padding-top-mobile{
+            padding-top: 0 !important;
+        }
+    }
+</style>
+{% endblock css %}
+{% block mobile_navigation %}
+{# {% cache 1000 smart_nav request.user.email %} #}
+{% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True making_booking=True %}
+{# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block nav %}
+<div class="header-2 hidden-xs">
+    <!-- Container -->
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-default padding-side-15" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="logo" href="{% url 'home' %}">
+                    <span class="nav-logo"></span>
+                </span>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                    {# <li><a class="wallet_price">Balance: #}
+                    {# &#x20a6;{{ request.user.wallet.displayable_amount|floatformat:"2" }}</a></li> #}
+                    <li class="dropdown navdropdown">
+                        <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+                            {% if request.user.profile.image %}
+                            {% cloudinary request.user.profile.image AVATAR alt="exclude" %}
+                            {% else %}
+                            <img src="http://placehold.it/30x30" class="img-circle">
+                            {% endif %}
+                            {{ request.user.get_short_name }} <b class="caret"></b></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block jumbotron %} {% endblock jumbotron %}
+{% block mm_c %}
+<div id="content">
+    <div id="base" class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 col-md-12 col-xs-12 col-md-offset-0 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+                <div class="row padding-top-50 no-padding-top-mobile">
+                    <div class="select-page-css ">
+                        <style>
+                            .list-group {
+                                margin-bottom: 20px;
+                                padding-left: 0;
+                            }
+                            .list-group-heading {
+                                font-size: 11px;
+                                font-weight: 700;
+                            }
+                            .list-group-item {
+                                padding-left: 35px;
+                            }
+                            .list-group-item:first-child {
+                                border-top-right-radius: 4px;
+                                border-top-left-radius: 4px;
+                            }
+                            .list-group-heading {
+                                background-color: #eee;
+                            }
+                            a.list-group-item {
+                                color: #555;
+                            }
+
+                            .list-group-item {
+                                position: relative;
+                                display: block;
+                                padding: 10px 15px;
+                                margin-bottom: -1px;
+                                background-color: #fff;
+                                border: 1px solid #ddd;
+                            }
+                            .list-group-heading {
+                                background-color: #eee;
+                                font-size: 16px;
+                            }
+
+                            .list-spacing {
+                                padding: 40px 40px;
+                            }
+                            @media(max-width:768px) {
+                                .list-spacing {
+                                    padding: 40px 20px;
+                                }
+                            }
+                            .list-group-item-heading {
+                                font-size: 16px !important;
+                                color: #0070C0!important;
+                            }                       
+                            .list-group-item-text {
+                                font-size: 12.5px !important;
+                            }
+                            .red-text {
+                                font-size: 13px !important;
+                                color: red !important;
+                            }
+                            .badge {
+                                display: inline-block;
+                                min-width: 10px;
+                                padding: 3px 7px;
+                                font-size: 24px;
+                                font-weight: 700;
+                                border-radius: 10px;
+                                background: none !important;
+                                margin-top: -10px;
+                            }
+                            @media(max-width: 768px){
+                                .badge {
+                                    font-size: 20px;
+                                }
+                            }
+                            .badge-pay {
+                                display: inline-block;
+                                min-width: 10px;
+                                padding: 3px 7px;
+                                font-size: 24px;
+                                font-weight: 700;
+                                border-radius: 10px;
+                                background: none !important;
+                                margin-top: 5px;
+                            }
+                            @media(max-width: 768px){
+                                .badge-pay {
+                                    font-size: 20px;
+                                }
+                            }
+                            .pad07 {
+                                padding: 0 15px;
+                            }
+                            .strikethrough {
+                              position: relative;
+                          }
+                          .strikethrough:before {
+                              position: absolute;
+                              content: "";
+                              left: 0;
+                              top: 50%;
+                              right: 0;
+                              border-top: 1px solid;
+                              border-color: inherit;
+
+                              -webkit-transform:rotate(-5deg);
+                              -moz-transform:rotate(-5deg);
+                              -ms-transform:rotate(-5deg);
+                              -o-transform:rotate(-5deg);
+                              transform:rotate(-5deg);
+                          }
+                          .img-resize img {
+                            width: 56px;
+                            margin-top: -10px;
+                        }
+
+                    </style>
+
+
+
+                    <div class="row padding-bottom-50">
+                        <div class="col-sm-12 space-for-mobile">
+                            <div class="list-group">
+                                <span class="list-group-item list-group-heading font-head">Choose a Payment Plan</span>
+                                {% for a_price in prices %}
+                                <a href="" class="price_option list-group-item list-spacing">
+                                    <span class="text-center" style="float:right">
+                                        <span class="badge brightgreen font-head">{{currency}}<span >{{a_price.discount|floatformat:"0"}}</span></span>
+                                        <span class="hidden price_to_pay">{{a_price.real_price|floatformat:"0"}}</span><br>
+                                        <span class="hidden weeksval">{{a_price.sub_text}}</span>
+                                        <span class="hidden paypal_price_to_pay">{{a_price.paypal|floatformat:"0"|intcomma}}</span>
+                                        {% if a_price.diff %}
+                                            <span class="pad07 red-text strikethrough">{{currency}}
+                                            <span class="original_price_to_pay">{{a_price.amount|floatformat:"0"}}</span> </span>
+                                            {% else %}
+
+                                        <span class="list-group-item-text pad07"></span>
+                                        {% endif %}
+                                    </span>
+                                    <span class="">
+                                        <h4 class="list-group-item-heading font-head blue-font">{{a_price.text}}
+                                        {% if a_price.color %} &nbsp; <span class="label label-{{a_price.color}}">{{a_price.tag}}</span>
+                                        {% endif %}</h4>
+                                        <p class="list-group-item-text">{{a_price.description}}</p>
+                                    </span>
+                                </a>
+                                {% endfor %}
+                            </div>
+                            {% if not req_instance.paid_fee %}
+                                <a href="{% url "client_request_completed" req_instance.slug %}" class="list-group-item list-spacing">
+                                    <span class="text-center" style="float:right">
+                                        <span class="badge brightgreen font-head">{{currency}}{{tuteria_details.processing_fee}}</span><br>
+                                        <!--<span class="list-group-item-text pad07">One-time Fee</span>-->
+                                    </span>
+                                    <span class="">
+                                        <h4 class="list-group-item-heading font-head blue-font">Speak with Tutor First</h4>
+                                        <p class="list-group-item-text">Pay service fee and speak with tutor before booking lessons</p>
+                                    </span>
+                                </a>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+
+
+
+                    
+                    <div id="the-payment-section" class="panel">
+                        <div class="panel-body">
+                            <h4 class="font-head blue-font">Make Payment</h4>
+                            <p class="row-space-4 list-group-item-text">Select a payment option. Tutor is not paid, till all lessons are fully delivered. We'll email your receipt.</p>
+                            <div class="">
+                                <div class="methods col-sm-3 col-xs-12">
+                                    <form class="form">
+                                        <label class="radio">
+                                            <input name="payment_method" type="radio" value="credit_card" id="payment_method1"
+                                            checked="true">
+                                            Pay Online
+                                        </label>
+                                        <!-- <label class="radio">
+                                            <input name="payment_method" type="radio" value="credit_card" id="payment_method5" >
+                                            Pay with Paga
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="payment_method"
+                                            value="paypal"
+                                            id="payment_method4">
+                                            Use Paypal
+                                        </label> -->
+                                        <label class="radio">
+                                            <input type="radio" name="payment_method"
+                                            value="bank_transfer"
+                                            id="payment_method2">
+                                            Pay to Bank
+                                        </label>
+
+                                        {% if can_use_credit %}
+
+                                        <label class="radio">
+                                            <input type="radio" name="payment_method"
+                                            value="use_wallet" id="payment_method3">Use Wallet
+                                        </label>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                                <div class="col-sm-9 col-xs-12">
+                                    <div class="row well credit-card-option">
+                                        <div class="payment_method1">
+                                            {% if not request.is_featured %}
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h4 class="font-head row-space-4" style="line-height:0">
+                                                        Secure payment
+                                                    </h4>
+                                                </div>
+                                                <div class="media-right">
+                                                    <img src="{% static 'img/gallery/padlock.png' %}" style="padding-top: -10px" class="safety-icon" width="35%">
+                                                </div>
+                                            </div>
+                                            <p class="">Payment is processed by PayStack and secured by Access Bank for your safety, convenience and peace of mind. Supports MasterCard & Visa Cards only</p>
+
+                                            <!--{% with percent_discount=req_instance.percent_discount %}-->
+                                            <!--    {% if percent_discount > 0 %}-->
+                                            <!--        <p><strong>{{percent_discount}}% discount applies if you choose to pay using Paystack</strong></p>-->
+                                            <!--    {% endif %}-->
+                                            <!--{% endwith %}-->
+
+                                            <form class="padding-top-50">
+                                                <script src="https://js.paystack.co/v1/inline.js"></script>
+                                                <button id="paystack_btn" class="btn btn-success pull-right big-btn" type="button" > Pay with Paystack</button>
+                                            </form>
+
+
+                                            {% else %}
+                                            <div>
+                                                <a href="{% url 'authorize_paystack' object.order %}" class="btn btn-success btn-large pull-right">Pay with Paystack</a>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="hide payment_method5">
+                                          {% if not request.is_featured %}
+                                          <div class="media">
+                                            <div class="media-body">
+                                                <h4 class="font-head row-space-4" style="line-height:0">
+                                                    Secure payment
+                                                </h4>
+                                            </div>
+                                            <div class="media-right">
+                                                <img src="{% static 'img/gallery/padlock.png' %}" style="padding-top: -10px" class="safety-icon" width="35%"
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <style>
+                                        #__p_ew_l td {
+                                            border-top: 0 !important;
+                                            border-bottom: 0 !important;
+                                        }
+
+                                        @media (min-width: 768px) {
+                                            #__paga_btn.__proceed {
+                                                position: absolute;
+                                                right: 0;
+                                                margin-top: -33px;
+                                                margin-right: 25px;
+                                            }
+                                        }
+
+
+                                    </style>
+                                    <p class="">Payment is processed by Interswitch (Verve card works here)</p>
+
+                                    <form>
+                                        {{ paga_form }}
+                                    </form>
+                                    <script type="text/javascript" src="https://www.mypaga.com/paga-web/epay/ePay-button.paga?k=bffe463e-d4f8-4b16-a2eb-6a54a0d614c0&e=false&layout=V"></script>
+
+                                    {% endif %}
+                                </div>
+                                <div class="hide payment_method2">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h4 class="font-head row-space-4" style="line-height:0">
+                                                {% if not request.is_featured %}Bank payment{% else %}<b>Bank payment</b>{% endif %}
+                                            </h4>
+                                        </div>
+                                        <div class="media-right">
+                                            <img src="{% static 'img/gallery/padlock.png' %}" style="padding-top: -10px" class="safety-icon" width="35%"
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p>Pay into one of the banks below and call <b class="font-head">{{ tuteria_details.phone_number }}</b> or email <b class="font-head">{{ tuteria_details.sales_email }}</b> to confirm receipt of payment.</p>
+
+                                <div class="font-head pad-up-18 blue-font">Supported banks</div>
+                                <hr class="hr-styled">
+                                <div class="bank_payment_method1">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object"
+                                            width="50" height="50"
+                                            src="/static/img/cards/UBA-PAY.png"/>
+                                        </div>
+                                        <div class="media-body">
+                                            <ul class="list-unstyled">
+                                                <li>Name: <span
+                                                    class="font-head"><b>{{ tuteria_details.uba.name }}</b></span>
+                                                </li>
+                                                <li>Acct. No: <span
+                                                    class="font-head"><b>{{ tuteria_details.uba.account }}</b></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="hr-styled">
+                                <div class="bank_payment_method2">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object"
+                                            width="50" height="50"
+                                            src="/static/img/cards/GTB-PAY.jpg"
+                                            alt="..."/>
+                                        </div>
+                                        <div class="media-body">
+                                            <ul class="list-unstyled">
+
+                                                <li>Name: <span
+                                                    class="font-head"><b>{{ tuteria_details.gt.name }}</b></span>
+                                                </li>
+                                                <li>Acct. No: <span
+                                                    class="font-head"><b>{{ tuteria_details.gt.account }}</b></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <hr class="hr-styled"> -->
+                                <!-- <div class="bank_payment_method1">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object"
+                                                    width="50" height="50"
+                                                    src="/static/img/cards/zenith.png"/>
+                                        </div>
+                                        <div class="media-body">
+                                            <ul class="list-unstyled">
+                                                <li>Name: <span
+                                                        class="font-head"><b>{{ tuteria_details.zenith.name }}</b></span>
+                                                </li>
+                                                <li>Acct. No: <span
+                                                        class="font-head"><b>{{ tuteria_details.zenith.account }}</b></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div class="hide payment_method4">
+                                <div class="credit-card-option">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h4 class="font-head row-space-4" style="line-height:0">
+                                                {% if not request.is_featured %}Pay with Paypal{% else %}<b>Pay with PayPal</b>{% endif %}
+                                            </h4>
+                                        </div>
+                                        <div class="media-right">
+                                            <img src="{% static 'img/gallery/padlock.png' %}" style="padding-top: -10px" class="safety-icon" width="35%">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="">By clicking the button below, you'll be directed to PayPal website where you can pay securely with your local debit card or your PayPal email. You'll return here afterwards.</p>
+
+                                <small>Payment is charged in dollars, so exchange rate may apply.</small>
+
+                                <div class="row padding-top-25">
+
+                                    <div class="col-sm-offset-5 col-sm-7 col-md-offset-7 col-md-5 col-xs-12 need-help ">
+                                     <!--begin Paga ePay widget code -->
+                                     {{paypal_form.render}}
+                                 </div>
+                             </div>
+                         </div>
+                         {% if can_use_credit %}
+                         <div class="hide payment_method3">
+                            <div class="credit-card-option">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4 class="font-head row-space-4" style="line-height:0">
+                                            {% if not request.is_featured %}Pay with Wallet{% else %}<b>Pay with Wallet</b>{% endif %}
+                                        </h4>
+                                    </div>
+                                    <div class="media-right">
+                                        <img src="{% static 'img/gallery/padlock.png' %}" style="padding-top: -10px" class="safety-icon" width="35%">
+                                    </div>
+                                </div>
+
+                                <p>Use your available wallet balance to complete this
+                                    booking. Click the "Pay with Wallet" button below to
+                                    proceed.</p>
+
+
+                                    <div class="col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-xs-12 need-help ">
+                                     begin Paga ePay widget code 
+                                     <form action="{{request.path}}"method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="p_method"
+                                        value="wallet"/>
+                                        <button id="payment-form-submit" type="submit"
+                                        class="btn btn-primary btn-block">
+                                        Pay with Wallet
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-xs-12">
+
+            <div class="padding-top-25 row">
+                <hr class="hr-styled row">
+                <h4 class="font-head padding-top-25">How Payments Work</h4>
+                <p>
+                    Payment is loaded safely to <u>your account on Tuteria</u> in order to book your lessons and pay the tutor at the end, after you confirm that all lessons have been fully delivered.
+                </p>
+
+                <p>
+                    This ensures we can secure your payments, monitor lesson delivery, ensure
+                    quality service and respond promptly to any emergencies.
+                </p>
+
+                <p>
+                    We'll send a payment receipt via email and also contact you so we can schedule the lessons and create a detailed lesson plan. Your tutor will call you shortly afterwards to discuss the lessons and prepare ahead of the commencement date.
+                </p>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="col-sm-4 col-xs-12">
+    <div class="panel row">
+        <div class="panel-body no-padding-total img-resize">
+            <div class="">
+
+                <div class="media">
+                  <div class="media-left">
+                    <div>
+                      <img class="media-object img-circle" src="http://www.kiyosh.in/wp-content/uploads/2015/09/satisfactionicon.png" width="60px">
+                  </div>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading font-head" style="margin-top:10px">REFUND POLICY</h4>
+                
+            </div>
+            <p class="list-group-item-text margin-top-5">All lessons are 100% guaranteed. If you are not fully satisfied, we'll promptly replace the tutor or refund your balance. Payments are credited to your wallet and tutors are not paid till all lessons are done.</p>
+        </div>
+        <hr>
+
+
+        <div class="bb322 font-head margin-down-5">
+
+            {% if req_instance.is_parent_request %}
+            <span class="fa-stack"><i class="glyphicon glyphicon-bookmark lightblue"></i></span> Home Lessons with {{req_instance.tutor.first_name}}
+            {% else %}
+            {% if object.request_subjects|length > 1 %}
+            <span class="fa-stack"><i class="glyphicon glyphicon-bookmark lightblue"></i></span> {{req_instance.request_subjects|length}} Subjects with {{req_instance.tutor.first_name}}
+            {% else %}
+            <span class="fa-stack"><i class="glyphicon glyphicon-bookmark lightblue"></i></span>  {{req_instance.request_subjects.0}} with {{req_instance.tutor.first_name}}
+            {% endif %} {% endif %}
+        </div>
+
+        <!--<div class="bb322 margin-down-5">-->
+        <!--     <span class="fa-stack"><i class="glyphicon glyphicon-user lightblue"></i></span>{{req_instance.no_of_students}} student{{req_instance.no_of_students|pluralize}}-->
+
+        <!--</div>-->
+        <div class="bb322 margin-down-5">
+            <span class="fa-stack"><i class="glyphicon glyphicon-time lightblue"></i></span><span id="value_of_week">{% if req_instance.days_per_week < 4 %}
+            {{ req_instance.get_days_per_week_display }}
+            {% else %}
+            1 month
+            {% endif %}</span>
+        </div>
+    </div>
+    <hr class="row hr-styled"/>
+    {% if object.wallet_amount > 0 or not req_instance.paid_fee %}
+
+    <div class="row font-head to_be_hidden">
+        <div class="col-xs-6 col-sm-7"><p>Subtotal</p></div>
+        <div class="col-xs-4 col-sm-3 col-sm-offset-1 col-xs-offset-2 brightblue"><p class="margin-top-0">&#x20A6;{{object.amount|floatformat:"0"}}</p></div>
+    </div>
+    {% endif %}
+    {% if not req_instance.paid_fee %}
+    <div class="row font-head to_be_hidden">
+        <div class="col-xs-6 col-sm-7"><p>Service Fee</p></div>
+        <div class="col-xs-4 col-sm-3 col-sm-offset-1 col-xs-offset-2 brightblue"><p class="margin-top-0">&#x20A6;{{processing_fee}}</p></div>
+    </div>
+    {% endif %}
+    {% if object.wallet_amount > 0 %}
+    <div class="row font-head">
+        <div class="col-xs-6 col-sm-7"><p class="brightgreen">Deducted Bal.</p></div>
+        <div class="col-xs-4 col-sm-4 col-sm-offset-1 col-xs-offset-2 brightgreen"><p class="margin-top-0">-&#x20A6;{{object.wallet_amount|floatformat:"0"}}<p></div>
+    </div>
+    {% endif %}
+
+    <hr class="row hr-styled"/>
+    <div class="row font-head">
+        <div class="col-xs-6"><h4 class="font-head">TOTAL</h4></div>
+        <div class="col-xs-4 col-xs-offset-2 brightblue"><h4 class="margin-top-0 font-head">&#x20A6;<span id="final-total-price">{{amount_to_be_paid|floatformat:"0"}}</span></h4></div>
+    </div>
+</div>
+</div>
+
+<div id="help" class="panel row">
+    <div class="panel-body no-padding-total">
+
+        <div class="media">
+          <div class="media-left">
+            <div>
+              <img class="media-object img-circle" src="{% static "img/gallery/support.png" %}" width="45">
+          </div>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading font-head">Have Questions?</h4>
+        <p>Call Us: 09094526878</p>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+</div>
+{% endblock %}
+{% block footer %}
+<div class="padding-bottom-50"></div>
+
+{% endblock footer %}
+{% block javascript %}
+{{block.super}}
+
+<script>
+    var base_paypal_price = $('#id_amount').val()
+    var paystack_amount = {{paystack.amount}}
+    var variable_paystack = paystack_amount
+    function getAmount(){
+        return variable_paystack
+    }
+    $('.price_option').click(function(e){
+        e.preventDefault()
+        // debugger;
+        var real_price = $(this).find('.price_to_pay').text();
+        var dollar_price = $(this).find('.paypal_price_to_pay').text() || base_paypal_price;
+        var wk_val = $(this).find('.weeksval').text()
+        updatePrice(real_price, dollar_price, wk_val)
+        $('html, body').animate({
+            scrollTop: $('#the-payment-section').offset().top
+        }, 2000);
+    })
+    $('input[name="payment_method"]').on('change', function () {
+        if ($(this).attr('id') === 'payment_method1') {
+            $('.payment_method1').removeClass('hide');
+            $('.payment_method2').addClass('hide');
+            $('.payment_method3').addClass('hide');
+            $('.payment_method4').addClass('hide');
+            $('.payment_method5').addClass('hide');
+        }
+        if($(this).attr('id') === 'payment_method2') {
+            $('.payment_method1').addClass('hide');
+            $('.payment_method2').removeClass('hide');
+            $('.payment_method3').addClass('hide')
+            $('.payment_method4').addClass('hide');
+            $('.payment_method5').addClass('hide');
+        }
+        if($(this).attr('id') === 'payment_method3'){
+         $('.payment_method1').addClass('hide');
+         $('.payment_method2').addClass('hide');
+         $('.payment_method3').removeClass('hide')
+         $('.payment_method4').addClass('hide');
+         $('.payment_method5').addClass('hide');
+     }
+     if($(this).attr('id') === 'payment_method4'){
+         $('.payment_method1').addClass('hide');
+         $('.payment_method2').addClass('hide');
+         $('.payment_method3').addClass('hide')
+         $('.payment_method5').addClass('hide')
+         $('.payment_method4').removeClass('hide');
+     }
+     if($(this).attr('id') === 'payment_method5'){
+         $('.payment_method1').addClass('hide');
+         $('.payment_method2').addClass('hide');
+         $('.payment_method3').addClass('hide')
+         $('.payment_method4').addClass('hide')
+         $('.payment_method5').removeClass('hide');
+     }
+ });
+    function updatePrice(real_price, dollar_price, wk_val){
+        variable_paystack = real_price
+        $('#id_subtotal').val(real_price)
+        $('#id_amount').val(dollar_price)
+        $('#final-total-price').text(real_price)
+        $('.to_be_hidden').hide()
+        $('#value_of_week').text(wk_val)
+    }
+</script>
+<script>
+    function paystackhanlder(amount){
+        var handler = PaystackPop.setup({
+          key: '{{paystack.key}}',
+          email: '{{paystack.email}}',
+          amount: amount*100,
+          ref: '{{paystack.ref}}',
+          plan: '',
+          callback: function(response){
+            $.get('/request/paystack/validate/'+'{{object.order}}/'+response.trxref).then(function(data){
+                console.log(data);
+                if(data.status == true){
+                    window.location.href=Urls['users:revenue_transactions']()
+                }else{
+                    alert("We couldn't verify this transaction. If it was successful please notify info@tuteria.com")
+                }
+                                                                            // window.location.reload()
+                                                                        })
+        },
+        onClose: function(){
+                                                                      // alert('window closed');
+                                                                  }
+                                                              });
+        handler.openIframe();
+    }
+    $('#paystack_btn').click(function(){
+        paystackhanlder(getAmount())
+    })
+</script>
+
+{% endblock javascript %}
+{% block cutsom_script %}
+{% endblock cutsom_script %}

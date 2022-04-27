@@ -1,0 +1,14 @@
+Hi {{instance.first_name}} {{instance.last_name}},
+
+Thanks for using Tuteria. We’ve looked through your request and reviewed the top {{subject}} tutor(s) around {{request_instance.get_vicinity}} who most closely match your requirements and can produce the results you seek.
+
+Please click the link below to see the list of tutors selected.
+https://www.{{site.domain}}{{instance.get_absolute_url}}
+--
+Link to access all selected tutors: "https://www.{{site.domain}}{{instance.link_to_tutors}}
+Admin link to the Request in “we-are-allowed”: "https://www.{{site.domain}}{{instance.link_to_admin_for_request}}
+
+Links Tutors Sent [FOR INTERNAL PURPOSE ONLY]
+{% for tutor in instance.approved_tutors %}
+{{tutor.full_name}}  |  Location:{{tutor.location}})  |   Price: {{tutor.cost}}/hr
+{% endfor %}

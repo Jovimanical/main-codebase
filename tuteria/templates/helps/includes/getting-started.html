@@ -1,0 +1,99 @@
+{% extends "helps/home.html" %}
+{% load template_utils staticfiles %}
+{% block sidbar_nav_class %}active{% endblock sidbar_nav_class %}
+{% block article_block %}
+<div class="row row-space-6 row-space-top-6">
+  <div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0 help-content text-copy navtree-content breadcrumbs-content">
+      <h1> {{page_detail.page_title}}</h1>
+      <ol class="list-unstyled getting-started-list getting-started-how-it-works">
+          {% for content in page_detail.page_content %}
+          <li class="panel row-space-6 {{content.icon_class}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-7 col-xs-12">
+                  <h3>{{content.title}}</h3>
+                  <p>{{content.body|safe}}</p>
+                  {% if content.extras|length > 0 %}                    
+                  <strong><a class="see-more" href="#" data-prevent-default="">
+                      Learn More
+                  </a></strong>
+                  {% endif %}
+                </div>
+                <div class="col-sm-4 col-sm-offset-1 col-xs-12 pull-right">
+                  <i class="illustration"> </i>
+                </div>
+              </div>
+              {% if content.extras|length > 0 %}
+              <div class="row row-space-top-4">
+                  <div class="col-sm-12 more hide">
+                    <ul class="list-unstyled bullets-list">
+                    {% for sub_content in content.extras %}
+                      <li class="row-space-top-6">
+                        <h3>{{sub_content.title}}</h3>
+                        <p>{{sub_content.body|safe}}
+                        </p>
+                    </li>
+                    {% endfor %} 
+                  </ul> 
+                </div>
+              </div>
+              {% endif %} 
+            </div>
+          </li>       
+          {% endfor %}
+      </ol>
+<div class="hp-padding-btm-30 row"></div>
+<h1> Need more info? </h1>
+
+<ul class="list-unstyled looking-for-more-info-list">
+
+    <li class="panel panel-dark row-space-top-3">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2 col-xs-12 text-center">
+            <img src="{% static 'img/gallery/purpose.png' %}" alt="" style="width:80px">
+          </div>
+          <div class="col-sm-9 col-xs-12">
+            <h3>Why We Built Tuteria</h3>
+            <p>
+              Learning from inspiring local instructors is at the heart of Tuteria. <a href="{% url 'why_use' %}">Why we built Tuteria »</a>
+            </p>
+          </div>
+        </div>
+      </div></li>
+  <li class="panel panel-dark row-space-top-3">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-2 col-xs-12 text-center">
+          <img src="{% static 'img/gallery/refund.png' %}" alt="" style="width:80px">
+        </div>
+        <div class="col-sm-9 col-xs-12 ">
+          <h3>Client Refund Policy</h3>
+          <p>
+            Our customer service team will support you in the event you experience a Lesson Issue.
+            
+            <a href="{% url 'help:article_detail' 65 %}">Learn more about Refunds »</a>
+          </p>
+        </div>
+      </div>
+    </div></li>
+      <li class="panel panel-dark row-space-top-3">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-2 col-xs-12 text-center">
+              <img src="{% static 'img/gallery/safety.png' %}" alt="" style="width:80px">
+            </div>
+            <div class="col-sm-9 col-xs-12">
+              <h3>Visit the Safety Center</h3>
+              <p>
+                Your safety and absolute peace of mind is our number one concern.
+                <br>
+                <a href="{% url 'trust_safety' %}">Learn more at our Trust and Safety Center »</a>
+              </p>
+            </div>
+          </div>
+        </div></li>
+      </ul>
+</div>
+<div class="padding-bottom-50"></div>
+{% endblock %}

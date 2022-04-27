@@ -1,0 +1,25 @@
+{% load activelink %}
+
+<ul class="{{ url_class }}">
+
+	<li>
+		<a href="{% url 'users:account' %}"
+		aria-selected="{% ifactive 'users:account' %}true{% else %}false{% endifactive %}"
+		class="sidenav-item">Payout Method</a>
+	</li>
+	<li>
+		<a href="{% url 'users:transactions' %}"
+		aria-selected="{% ifactive 'users:transactions' %}true{% else %}false{% endifactive %}"
+		class="sidenav-item">Transaction History</a>
+	</li>
+	<li>
+		<a href="{% url 'users:revenue_transactions' %}"
+		aria-selected="{% ifactive 'users:revenue_transactions' %}true{% else %}false{% endifactive %}"
+		class="sidenav-item">Your Earnings</a>
+	</li>
+	<li class="">
+		<a href="{% url 'account_change_password' %}"
+		aria-selected="{% ifactive 'account_change_password' %}true{% else %}false{% endifactive %}"
+		class="sidenav-item">Security</a>
+	</li>
+</ul>

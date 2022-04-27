@@ -1,0 +1,393 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles i18n bootstrap3 add_attr activelink cloudinary %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/small-calendar.css" %}">
+
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        .content-carousel {
+            margin-top: 0 !important;
+        }
+
+        .margin-down-5 {
+            margin-bottom: 7px !important;
+        }
+
+        .pad-down-20 {
+            padding-bottom: 20px;
+        }
+
+        .img-resized {
+            width: 40px;
+        }
+
+        .hr-styled {
+            margin-top: 20px;
+        }
+
+        .resume-block .img-profile {
+            position: absolute;
+            left: 0;
+            z-index: 2;
+            top: 0
+        }
+
+        @media (max-width: 768px) {
+            .resume-block .img-profile {
+                position: relative;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            #map-canvas {
+                width: 100%;
+                height: 300px;
+            }
+
+            @media (max-width: 996px) and (min-width: 769px) {
+
+                #map-canvas {
+                    height: 400px;
+                }
+            }
+            @media (min-width: 997px) {
+                #map-canvas {
+                    height: 400px;
+                }
+            }
+
+    </style>
+{% endblock %}
+{% block jumbotron %}{% endblock jumbotron %}
+{% block title %}Update Address and Availability | Tuteria Nigeria{% endblock title %}
+{% block fixed %}profile-header{% endblock %}
+{% block carousel_content %}{% endblock %}
+{% block mobile_navigation %}{% endblock mobile_navigation %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block base77 %}
+    <div class="col-md-12 col-lg-10 col-xs-12 col-lg-offset-1 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+        {{ block.super }}
+    </div>
+{% endblock base77 %}
+{% block big_section %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl padding-top-50">
+        {% if form.errors %}
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="row">
+                    <div class="well bg-danger">
+                        <div class="has-error">
+                            Some parts of the form were not filled correctly, please check and submit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="">
+                    <div id="wizard-container" class="bordered spaced-bottom-lg">
+                        <div class="">
+                            <div class="panel row-space-4">
+
+                                <div class="panel-head col-sm-12">
+                                    <div class="row">
+                                        <div class="row-space-top-4 text-center">
+                                            <div class="col-sm-12 col-md-10 col-md-offset-1 ">
+                                                <h3 class="font-head blue-font">
+                                                    {% if not request.is_featured %}Tutoring Address Update{% else %}
+                                                        <b>Tutoring Address Update</b>{% endif %}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="text-center">Please input where you currently reside. </p>
+
+                                    <hr class="row hr-styled">
+                                </div>
+
+                                <div class="panel-body">
+                                    {% if address_form %}
+                                        <form action="{% url 'users:update_addr' %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="pull-left">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <h4 class="font-head row-space-4 padding-top-25"
+                                                            style="line-height:0">
+                                                            {% if not request.is_featured %}Tutoring address{% else %}
+                                                                <b>Tutoring address</b>{% endif %}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <img src="{% static 'img/gallery/padlock.png' %}"
+                                                             style="padding-top: 20px" class="safety-icon" width="50%">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group {% if address_form.address.errors %}has-error{% endif %}">
+                                                        <label for="id_home_address"
+                                                               class="control-label margin-bottom-5">Please
+                                                            what is your home address?</label>
+                                                        {{ address_form.address|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please enter your home address" }}
+                                                        {% if form.home_address.errors %}
+                                                            <span class="help-block">{{ address_form.address.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                        {{ address_form.latitude|add_attributes:"type:hidden" }}{{ address_form.longitude|add_attributes:"type:hidden" }}
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-6 col-md-6">
+                                                    <div class="form-group {% if address_form.vicinity.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ address_form.vicinity.name }}"
+                                                               class="control-label">Nearest bus stop or town</label>
+                                                        {{ address_form.vicinity|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Input a town/city,placeholder:Town/City" }}
+                                                        {% if address_form.vicinity.errors %}
+                                                            <span class="help-block">{{ address_form.vicinity.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                        {% if not request.is_featured %}
+                                                            <span class="help-block"><a id="toggleMap" href="#">use map
+                                                                to get vicinity</a></span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if address_form.state.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ address_form.state.name }}"
+                                                               class="control-label margin-bottom-5">{{ address_form.state.label }}</label>
+                                                        {{ address_form.state|add_attributes:"class:form-control ,required:true, data-parsley-error-message:Please select a state" }}
+                                                        {% if address_form.state.errors %}
+                                                            <span class="help-block">{{ address_form.state.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div id="load-region"></div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="row-space-top-4 text-center">
+                                                        {% if not request.is_featured %}
+                                                            <p id="message">
+                                                                <span id="info"></span>
+                                                                <span id="address"></span>
+                                                            </p>
+                                                            <a href="#" id="validateVicinity" class="btn btn-primary">Validate
+                                                                Vicinity</a>
+                                                            <button id="submitAddrBtn" class="btn btn-primary">
+                                                                Submit
+                                                            </button>
+                                                        {% else %}
+                                                            <div>
+                                                                <div id="map_msg" class="hidden">Drag the marker to
+                                                                    where your address is.
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <button class="btn btn-primary">Submit</button>
+                                                        {% endif %}
+                                                        <div id="map-canvas" class="hidden"></div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+
+                                        <hr class="row hr-styled">
+                                    {% endif %}
+                                    {% if calendar_form %}
+
+
+                                        <div class="pull-left">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h4 class="font-head row-space-4 padding-top-25"
+                                                        style="line-height:0">
+                                                        Update Your calendar
+                                                    </h4>
+                                                </div>
+                                                <div class="media-right">
+                                                    <img src="{% static 'img/gallery/padlock.png' %}"
+                                                         style="padding-top: 20px" class="safety-icon" width="50%">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <form action="{% url 'users:update_tutor_details' %}" method="post">
+                                                    {% csrf_token %}
+                                                    {{ calendar_form.management_form }}
+                                                    <div class="match-page match-page-availabilityquestion text-center">
+                                                        <div class="match-step-wrapper">
+                                                            <div class="match-step">
+                                                                <div class="match-page-input-wrapper">
+                                                                    <div class="availability-selector-wrapper">
+                                                                        <div class="availability-selector text-noselect medium-spc-s">
+                                                                            <div class="row">
+                                                                                <div class="column-days column col-xs-3">
+                                                                                    <div class="row spc-sm-s spc-med-n">
+                                                                                        <div class="column col-xs-12">
+                                                                                            &nbsp;</div>
+                                                                                    </div>
+                                                                                    {% for form in calendar_form %}
+                                                                                        <div class="row">
+                                                                                            {{ form.weekday }}
+                                                                                            <div class="column col-xs-12">{{ form.weekday.value|upper|slice:":3" }}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    {% endfor %}
+                                                                                </div>
+
+                                                                                <div class="column-times column col-xs-9">
+                                                                                    <div class="row spc-sm-s spc-med-n">
+                                                                                        <div class="column col-xs-4 ">
+                                                                                            MORNING
+                                                                                        </div>
+                                                                                        <div class="column col-xs-4 ">
+                                                                                            AFTERNOON
+                                                                                        </div>
+                                                                                        <div class="column col-xs-4 ">
+                                                                                            EVENING
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    {% for form in calendar_form %}
+                                                                                        <div class="row">
+                                                                                            {% for time_slot in form.time_slot %}
+                                                                                                <div class="column col-xs-4">
+                                                                                                    <label for="{{ time_slot.id_for_label }}"
+                                                                                                           class="tap-selector">
+                                                                                                        <input id="{{ time_slot.id_for_label }}"
+                                                                                                               type="checkbox"
+                                                                                                               name="{{ time_slot.name }}"
+                                                                                                               value="{{ time_slot.choice_value }}"
+                                                                                                               {% if time_slot.choice_value in form.time_slot.value %}checked="checked" {% endif %}
+                                                                                                               data-checkbox-exclusive=".im-flexible">
+                                                        <span>
+                                                            {{ form.weekday.value|upper }} {{ time_slot.choice_value|title }}
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            {% endfor %}
+                                                                                        </div>
+                                                                                    {% endfor %}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-space-4 padding-top-25">
+                                                        <div class="col-sm-12">
+                                                            <button id="submit_btn" data-loading-text="Loading..."
+                                                                    class="btn btn-lg btn-block btn-primary big-btn pad-up-18"
+                                                            >{% trans "Done" %}</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+
+
+                                    </section>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block first_request_summary %}
+    <div class="col-sm-4 col-xs-12 padding-top-50 mobile-top-25">
+        <div class="row panel">
+            <img src="{% static "img/user/tuteria.png" %}" width="100%">
+
+            <div class="panel-body no-padding-total img-resize">
+                <div class="media">
+                    <div class="">
+                        <h4 class="font-head no-margin-top">Earn money inviting friends</h4>
+                        <hr class="row" style="margin-top:10px; margin-bottom:10px">
+                        <small>Hey {{ user.first_name|title }}, with over 80 million Nigerian parents, professionals,
+                            youths and students seeking to learn one thing or another, this is such a huge opportunity
+                            for you to make real impact and earn good money.
+                        </small>
+                        <br><br>
+                        <small class="margin-top-15">
+                            <span class="pull-left"><a href="tel:{{ tuteria_details.mobile_number }}"><i
+                                    class="fa fa-phone-square"></i>{{ tuteria_details.mobile_number }}</a></span>
+                            <span class="pull-right"><a href="mailto:{{ tuteria_details.email }}"><i
+                                    class="fa fa-envelope"></i> {{ tuteria_details.email }}</a></span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if no_of_referrals > 9 %}
+        <div class="col-sm-4 col-xs-12 padding-top-10">
+            <div class="row panel">
+                <div class="panel-body no-padding-total">
+                    <div class="media">
+                        <div class="">
+                            <p class="font-head"><b><img src="{% static "img/gallery/urgency.png" %}" width="8%">
+
+                                {{ no_of_referrals }} smart people have joined.</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock first_request_summary %}
+</div>
+{% block footer %}{% endblock footer %}
+{% block bottom_footer %}{% endblock bottom_footer %}
+{% block request_section %}{% endblock request_section %}
+{% block notification_tawk %}{% endblock notification_tawk %}
+{% block javascript %}
+    {{ block.super }}
+    {% block cutsom_script %}
+    {% endblock cutsom_script %}
+    <script>
+        $('#load-region').load("{% url 'users:the_region_view' state="Lagos" %}")
+        window.map_latitude ={{coordinate.0}};
+        window.map_longitude ={{coordinate.1}};
+    </script>
+    <script src="{% static "js/update_address.bundle.js" %}"></script>
+    {% if address_form %}
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&callback=initializeCallback&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk"></script>
+    {% endif %}
+
+
+{% endblock %}

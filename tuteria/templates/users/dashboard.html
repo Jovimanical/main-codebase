@@ -1,0 +1,247 @@
+{% extends '_layouts/base-internal.html' %}
+{% load staticfiles tuteria_thumbnail cache %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
+{% endblock %}
+{% block title %}Dashboard - Tuteria{% endblock title %}
+
+{% block content %}
+    <div class="container row-space-top-4 row-space-4">
+        <div class="row">
+        {# {% cache LONG_TTL 'dashboard_sidebar' object.email %} #}
+            <div class="visible-xs">
+               {% if object.profile.registration_level < 1 %}
+                    {% include "users/includes/tutor_intent.html" %}                                             
+                {% endif %}
+                    
+                <div class="row">
+                    <div class="col-xs-12">
+                    <div class="media row-space-4">
+                        <a class="pull-left" href="#">
+                            {% cloudinary object.profile.profile_pic class="img-responsive" alt=object.user.first_name format="jpg" crop="fill" height=80 width=80 %}
+                        </a>
+                        <div class="media-body">
+                            <h2 class="text-center">
+                                {{ object.user.first_name }}
+                            </h2>
+                            <ul class="list-unstyled text-center">
+                                <li>
+                                    <a href="{{ object.get_absolute_url }}">View profile</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'users:edit_profile' %}"
+                                        id="edit-profile">Edit profile</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-3">
+                <div class="panel panel-default row-space-4">
+                    <div class="media media-photo-block">
+                        <a href="#" title="View Profile">
+                            {% cloudinary object.profile.profile_pic height=250 width=250 format="jpg" crop="fill" class="img-responsive center-block" alt=object.user.first_name %}
+                        </a>
+                    </div>
+                    {% block hide_detail %}
+                        <div class="panel-body">
+                            <h2 class="text-center">
+                                {{ object.user.first_name }}
+                            </h2>
+                            <ul class="list-unstyled text-center">
+                                <li>
+                                    <a href="{{ object.get_absolute_url }}">View Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'users:edit_profile' %}"
+                                       id="edit-profile">Edit Profile</a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endblock %}
+                </div>
+                
+                {% block side_panel %}
+                    {# {% cache LONG_TTL 'quick_links' %} #}
+                    {% include "users/includes/progress-bar.html" %}
+                    {% include "users/includes/quick_links.html" %}
+                    {# {% endcache %} #}
+                {% endblock %}
+            </div>
+        {# {% endcache %} #}
+            <div class="col-sm-9 col-xs-12">	
+                <div class="hidden-xs">
+                    {% if object.profile.registration_level < 1 %}
+                        {% include "users/includes/tutor_intent.html" %}
+                    {% endif %}
+                </div>
+                     
+                <div class="row">
+                    {% block main_content %}
+                        <div class="visible-xs">                            
+                            {% include "users/includes/progress-bar.html" %}
+                        </div>
+                        <div class="panel panel-default row-space-4">
+                            <h4 class="panel-heading">Notifications </h4>
+
+                            <div class="panel-body">
+                                <ul class="list-unstyled  hdb-light-bg">
+                                    {% if object.notifications|length > 0 %}
+                                        {% for notification in object.notifications %}
+                                            <li class="default airplane removeable alert0 ">
+                                                        <div class="row row-space-2 row-table ">
+                                                            <div class="col-sm-12 col-xs-12">
+                                                                <a href="{{notification.action}}">{{notification.msg}}
+                                                                &nbsp;<i class="fa fa-caret-right"></i>
+                                                                </a>
+                                                            </div>
+                                                            <!--<div class="col-sm-4 col-xs-8">
+                                                                <a href="{{notification.action}}"
+                                                                   class="btn btn-block btn-primary">{{notification.action_text}}</a>
+                                                            </div>-->
+                                                        </div>
+                                                        {% if not forloop.last %}
+                                                            <hr class="section-divider"> 
+                                                        {% endif %}
+                                                    </li>
+                                        {% endfor %}
+                                        {% else %}
+                                        <li class="default airplane removeable  alert0 ">
+                                                <div class="row row-space-2 row-table ">
+                                                    <div class="col-xs-12 col-md-middle">
+                                                        You have no notifications yet. When activities happen on your account, they will show up here.
+                                                    </div>
+                                                </div>
+                                            </li>
+                                    {% endif %}
+                                    {% if object.is_tutor %}
+                                    <hr class="section-divider">
+                                    
+                                    <li class="default airplane removeable  alert0 ">
+                                        <div class="row row-space-2 row-table ">
+                                            <a href="{% url "registration:how_tutoring_works2" %}">
+<div class="col-sm-10  col-xs-8">
+                                                <strong>Tuteria terms and conditions</strong>
+                                            </div>
+                                            <div class="col-sm-2 col-xs-4">
+                                                <a href="{% url "registration:how_tutoring_works2" %}"
+                                                    class="btn btn-block btn-primary">
+                                                    Click Here </a>
+                                            </div>
+                                            </a>
+                                            
+                                        </div>
+                                    </li>
+                                    <hr class="section-divider">
+                                    
+                                    <li class="default airplane removeable  alert0 ">
+                                        <div class="row row-space-2 row-table ">
+                                            <a href="http://bit.ly/ChatTutors" target="_blank"> <div class="col-sm-10  col-xs-8">
+                                                <strong>Tuteria  Slack channel.</strong>
+                                            </div>
+                                            <div class="col-sm-2 col-xs-4">
+                                                <a href="http://bit.ly/ChatTutors" target="_blank"
+                                                    class="btn btn-block btn-primary">
+                                                    Join</a>
+                                            </div>
+                                            </a>
+                                            
+                                        </div>
+                                    </li>
+
+                                    {% endif %}
+                                    
+                                </ul>
+                                
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel panel-default row-space-4 hide">
+                            <div class="panel-body">
+
+                                <a href="#" class="hidden-xs btn btn-primary pull-right">Invite
+                                    Friends</a>
+
+                                <p class="h4">
+                                    Invite friends, earn travel credit! </p>
+
+                                <p> Earn up to $100 for everyone you invite.
+
+                                </p>
+
+                                <a href="#"
+                                   class="visible-xs hidden-sm hidden-md hidden-lg  btn btn-primary pull-right">Invite
+                                    Friends</a>
+
+                            </div>
+                        </div>
+
+                        {% if object.reputations|length > 0 %}
+                        <div class="panel panel-default row-space-4">
+                            <h4 class="panel-heading clearfix">
+                                Reputation
+                                <small class="pull-right"><span class="badge reputation_badge">{{ object.user.reputation }}</span> Points</small>
+                            </h4>
+                            <div class="panel-body">
+                                <div class="well">
+                                    <p>
+                                        Tuteria is a community built on trust. Your reputation point helps give the best clients and tutors confidence to transact with you. The most important actions needed to build your reputation are listed below. <a href="{% url 'help:article_detail' 17 %}" target="_blank">Learn more</a>
+                                    </p>
+                                </div>
+
+                                <ul class="list-unstyled  hdb-light-bg">
+                                    {% for reputation in object.reputations %}
+                                        <li class="default airplane removeable  alert0 ">
+                                            <div class="row row-space-2 row-table ">
+                                                <div class="col-sm-10  col-xs-8">
+                                                    {{ reputation.condition }}
+                                                </div>
+                                                <div class="col-sm-2 col-xs-4">
+                                                    <a href="{{ reputation.get_absolute_url }}"
+                                                       class="btn btn-block btn-primary">{% if reputation.score > 0 %}
+                                                        +{% endif %}{{ reputation.score }} <span class="hidden-xs">points</span></a>
+                                                </div>
+                                            </div>
+                                            {% if not forloop.last %} 
+                                            <hr class="section-divider">
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                        
+                        <div class="visible-xs">
+                            {# {% cache LONG_TTL 'quick_links' %} #}
+                            {% include "users/includes/quick_links.html" %}
+                            {# {% endcache %} #}
+                        </div>
+                    {% endblock %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block notification_tawk %}
+{% endblock %}
+{% block request_section %}
+ {% if not object.user.tutor_intent %}
+ {{block.super}}
+ {% endif %}
+{% endblock request_section %}
+{% block footer2 %}{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'js/dashboard.bundle.js' %}"></script>    
+   
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'pages/trust.html' %} 
+{% load staticfiles %} 
+{% block sub_nav %} {% endblock %} 
+{% block title %}Software Engineer, Full Stack{% endblock title %}
+ {% block css %} 
+ {{ block.super }}
+
+<link rel="stylesheet" href="{% static 'css/why-use.css' %}" /> {% endblock %} {% block carousel_image %}
+<div class="item active">
+	<div class="background"></div>
+</div>
+{% endblock carousel_image %} {% block carousel_content %}
+
+<div class="col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center">
+	{% block custom_heading %}
+	<div class="jumbo-header">
+		<h2 class="myh2"><b class="white">Software Engineer, Full Stack</b></h2>
+
+		<p>
+			Lagos, Nigeria
+		</p>
+
+	</div>
+
+	{% endblock custom_heading %}
+
+</div>
+{% endblock %} 
+{% block main_content %} 
+{% block mm_c %}
+<div id="base" class="container">
+	{% block base77 %}
+	<div class="row">
+		<div class="col-md-12 col-xs-12 no-padding-for-xs">
+            <div class="panel panel-body no-padding-total row-space-bottom-5 mp-levels">
+<h3>Software Engineering at Airbnb:</h3>
+			<p>There is much more that we want to build and so much that we could improve. We value strong engineers who are agile enough
+				to jump into most projects.</p>
+			<h3><strong>What are examples of work that Software Engineers have done at Airbnb?</strong></h3>
+			<ul>
+				<li>Our payments platform transmits billions of dollars in dozens of different currencies among over 100 countries. By integrating
+					new partners, we can both optimize our costs and grow our business by better supporting different countries.</li>
+				<li>We re-built the&nbsp;<a href="https://www.airbnb.com/rooms/new">List Your Space flow</a>. We A/B tested every change
+					carefully and within three months doubled the conversion rate.</li>
+				<li>We created&nbsp;<a href="https://www.airbnb.com/locations">Neighborhoods</a>, a product that answers the question of
+					which parts of a city have desirable Airbnb listings for you. We built systems that allowed writers, translators, and
+					photographers all over the world to collaborate on bringing cities to life.&nbsp;<a href="http://nerds.airbnb.com/behind-the-scenes-airbnb-neighborhoods">Read more</a>.</li>
+				<li>When Hurricane Sandy struck, we&nbsp;<a href="http://www.nyc.gov/portal/site/nycgov/menuitem.c0935b9a57bb4ef3daf2f1c701c789a0/index.jsp?pageID=mayor_press_release&amp;catID=1194&amp;doc_name=http%3A%2F%2Fwww.nyc.gov%2Fhtml%2Fom%2Fhtml%2F2012b%2Fpr401-12.html&amp;cc=unused1978&amp;rc=1194&amp;ndi=1">partnered</a>&nbsp;with
+					the City of New York to quickly create&nbsp;<a href="https://www.airbnb.com/sandy">a platform</a>&nbsp;for New Yorkers
+					to provide free housing to those who were displaced by the storm.<em><br></em></li>
+			</ul>
+			<h3><strong>The following are some examples of profiles that are relevant to us:</strong></h3>
+			<ul>
+				<li>Full-stack engineering experience in any of the following languages: C/C++, Java, JavaScript, Python/Django, Ruby/Ruby
+					on Rails.</li>
+				<li>Minimum of 1 year of industry experience in engineering.</li>
+				<li>Evidence of exposure to architectural patterns of a large, high-scale web application (e.g., well-designed APIs, high
+					volume data pipelines, efficient algorithms).</li>
+				<li>Engineers who have experience with web best practices such as A/B testing, test coverage.</li>
+				<li>We are currently not interviewing anyone with less than 2 years of industry experience for this role. Our new graduate
+					requisition will be re-opened in the fall.</li>
+			</ul>
+			<h3><strong>Benefits</strong></h3>
+			<ul>
+				<li>Stock</li>
+				<li>Competitive salaries</li>
+				<li>Quarterly employee travel coupon</li>
+				<li>Paid time off</li>
+				<li>Medical, dental, &amp; vision insurance</li>
+				<li>Life insurance and disability benefits</li>
+				<li>Fitness Discounts</li>
+				<li>401K</li>
+				<li>Flexible Spending Accounts</li>
+				<li>Apple equipment</li>
+				<li>Commuter Subsidies</li>
+				<li>Community Involvement (4 hours per month to give back to the community)</li>
+				<li>Company sponsored tech talks and happy hours</li>
+				<li>Much more...</li>
+			</ul><br>
+			<a href="/careers/apply2/2192?gh_src=" id="applyButton" class="btn btn-large btn-primary" style="position: relative; margin-top: -21px;">
+            Apply Now
+          </a>
+		</div>
+
+            </div>
+			
+
+	</div>
+
+	{% endblock base77 %}
+
+</div>
+{% endblock %} 
+{% endblock %}
+ {% block referral %}{% endblock referral %} 
+ {% block javascript %} {{ block.super }} {#
+<script
+	src="{% static 'js/static_pages.bundle.js' %}"></script>#}
+	<script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script> 
+    {% endblock %}

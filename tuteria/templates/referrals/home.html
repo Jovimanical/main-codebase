@@ -1,0 +1,404 @@
+{% extends 'pages/state_view.html' %}
+{% load tuteria_thumbnail staticfiles i18n humanize bootstrap3 add_attr pricing_calc bootstrap_pagination %}
+{# {% block ng_app %}ng-app=referralBtn{% endblock %} #}
+
+{% block title %}Invite Friends to Tuteria!{% endblock title %}
+{% block nav %}
+{% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block fixed %} {% endblock fixed %}
+{% block meta_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description"
+          content="Get up to ?6,500 for everyone you invite to learn or teach on Tuteria!"/>
+    <meta name="author" content="Trusted by 100s of Happy Clients"/>
+    <!-- for Facebook -->
+    <meta property="fb:app_id" content="781136408623359"/>
+    <meta property="og:site_name" content="Tuteria"/>
+    <meta property="og:title" content="Earn extra money inviting friends"/>
+    <meta property="og:description" content="Get up to ?6,500 for everyone you invite to learn or teach on Tuteria!"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://{{ site.domain }}{% static "img/backgounds/referral.jpg" %}?t=12345?"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@tuteriacorp"/>
+    <meta name="twitter:title" content="Earn extra money inviting friends"/>
+    <meta name="twitter:description" content="Get up to ?6,500 for everyone you invite to learn or teach on Tuteria!"/>
+    <meta name="twitter:image" content="https://{{ site.domain }}{% static "img/backgounds/referral.jpg" %}?t=12345?"/>
+    <meta name="twitter:creator" content="@tuteriacorp">
+{% endblock meta_tags %}
+
+{% block css %}
+{{block.super}}
+
+<link rel="stylesheet" href="{% static "css/referrals.css" %}">
+<style>
+    .tweak{
+        text-align: left !important;
+    }
+</style>
+{% endblock css %}
+{% block carousel_image %}
+{% if request.is_phone %}
+<div class="item active">
+    <div class="caro rf"></div>
+    {# <img src="{% static "img/backgrounds/background_mobile.jpg" %}" alt="Private home lesson tutors" class="src"> #}
+</div>
+{% else %}
+<div class="item active">
+    <div class="caro rf"></div>
+</div>
+{% endif %}
+{% endblock carousel_image %}
+{% block carousel_content %}
+<div class="row text-center">
+	<div class="jumbo-header" style="margin-top: -20px">
+		{% if request.user.is_referrer %}
+		<div class="text-center space-for-mobile-20">
+			<h2 class="padding-bottom-25"><b class="white">Get 10% for 3 months by referring clients.</b></h2>
+
+			<p class="font-head">Invite your email contacts</p>
+
+			<div class="contact-importers" id="base_ctrl" ng-controller="BaseController as vm">
+             {% include "referrals/script.html" %}
+             <div class="email_link_container">
+                <div class="contact-importer">
+                  <div class="loading-trigger google_btn email_link" data-source="gmail" >
+                    <div class="loading-indicator email_icon gmail_email_icon"></div>
+                    <div class="email_link_text font-head">Gmail</div>
+                </div>
+                <div id="angular_google_btn" ng-click="vm.openModal()" class="invisible loading-trigger google_btn email_link" data-source="gmail" >
+                    <div class="loading-indicator email_icon gmail_email_icon"></div>
+                    <div class="email_link_text font-head">Gmail</div>
+                </div>
+            </div>
+        </div>
+        <div class="email_link_container">
+            <div class="contact-importer">
+              <div class="loading-trigger yahoo_btn  email_link" data-source="yahoo">
+                <div class="loading-indicator email_icon yahoo_email_icon"></div>
+                <div class="email_link_text font-head">Yahoo! Mail</div>
+            </div>
+            <div id="angular_yahoo_btn" ng-click = "vm.getYahoo()" class="loading-trigger invisible yahoo_btn  email_link" data-source="yahoo">
+                <div class="loading-indicator email_icon yahoo_email_icon"></div>
+                <div class="email_link_text font-head">Yahoo! Mail</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+{% else %}
+<div class="row">
+    <h2 class="myh2 referrals-heading text-special row-space-3 space-for-mobile-20">
+ <b class="white font-head">
+    Earn money inviting people!
+</b>
+</h2>
+<h3 style="color:white">
+ Get 10% commission for 3 months for <u>every</u> client you refer to Tuteria.
+</h3>
+
+<div class="text-center padding-top-25 mobile-top-25 row">
+
+        {% if request.user.is_authenticated %}
+                        <a href="{% url 'referral_confirm' %}" class="btn btn-danger btn-lg col-xs-10 col-xs-offset-1  col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 big-btn text-center">
+                                Start inviting friends
+                            </a>
+
+            {% else %}
+                            <a id="login_nav" href="{% url 'account_login' %}?next=/invite" class="login_nav2 btn btn-danger btn-lg col-xs-10 col-xs-offset-1  col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 big-btn text-center">
+                                Login to invite friends
+                            </a>
+
+        {% endif %}
+
+</div>
+{% if not request.user.is_authenticated %}
+
+    <br>
+    <h4 class="text-white">New to Tuteria? <a id="signup_nav" href="{% url 'account_signup' %}?next=/invite" class="signup_nav brightblue">Create account!</a></h4>
+
+{% endif %}
+</div>
+
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
+{% block main_content %}
+{% if request.user.is_referrer %}
+{% verbatim %}
+<div ng-controller="ErrorController as ec">
+    <div id="notify-wrapper" class="hidden">
+       <span ng-show="ec.display_error" id="notify" ng-class="{'server-error':ec.danger == true,'server-success':ec.danger==false}">
+        <span id="notify-msg">{{ec.error_message}}</span>
+    </span>
+</div>
+</div>
+
+{% endverbatim %}
+
+<section class="row padding-top-50 padding-bottom-50 white-bg">
+    <div class="">
+        <div class="col-sm-4 col-sm-offset-1">
+             <h2 class="font-head">Invite people <span class="red-text">online</span></h2>
+
+            <p class="text-lead tweak" style="align-left">
+                You'll get 10% commission when your friends hire a tutor, and &#8358;2000 when they teach a lesson. Share your link on Facebook, LinkedIn & Twitter - remember to tag important people!
+            </p>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+             <div class="padding-top-10">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="input-group">
+                              <input type="text" <input type="text" readonly value="www.tuteria.com{% url 'users:referral_signup' request.user.slug %}" class="input-lg text-center blue-font no-border-radius font-15 full-width" disabled="">
+                              <span class="input-group-addon" id="facebook-share">
+                                <a id="" href="https://www.facebook.com/sharer/sharer.php?u=https://{{site.domain}}{% url 'users:referral_signup' request.user.slug %}"
+                                class="share-popup no-border-radius full-width font-head text-white" style="border:none; color:white; text-decoration:none"><span class="hidden-xs">Share on </span>Facebook
+                                </a>
+                              </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-6 space-for-mobile padding-top-25">
+                            <a id="twitter-share"
+                                href="https://twitter.com/home?status={{twitter_msg|urlencode}}"
+                                class="btn-lg btn btn-primary share-popup no-border-radius checkbox-space full-width" style="border:none">
+                                Twitter
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-xs-6 space-for-mobile padding-top-25">
+                            <a id="linkedin-share" href="https://www.linkedin.com/shareArticle?mini=true&url=https://{{site.domain}}{% url 'users:referral_signup' request.user.slug %}&title={{meta_title}}&description={{meta_description}}&submitted-url=https://{{site.domain}}{% url 'users:referral_signup' request.user.slug %}"
+                            class="btn-lg btn btn-primary share-popup no-border-radius checkbox-space full-width" style="border:none">
+                            LinkedIn
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+
+</div>
+</section>
+
+
+<section class="row padding-top-50 padding-bottom-50" style="margin-top: -5px">
+
+        <div class="col-sm-4 col-sm-offset-1">
+             <h2 class="font-head">Invite people <span class="blue-font">offline</span></h2>
+
+            <p class="text-center text-lead tweak">
+                Most clients are offline. Refer people to learn anything and tell them to use your code <strong><u>{{referral_instance.offline_code|upper}}</u></strong> when placing a request online or by phone, and they will get &#8358;1,500 discount!</em>
+            </p>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+             <div class="padding-top-10">
+                    <div class="row">
+                        <div class="">
+                        <div class="font-head col-sm-12">
+                            <input type="text" readonly value="CODE: {{referral_instance.offline_code|upper}}" class="input-lg text-center blue-font no-border-radius font-15 full-width" disabled="">
+                        </div>
+                        <!--
+                        <div class="col-sm-6 space-for-mobile">
+                            <a href="{% url 'offline-materials' %}"
+                            class="btn-lg btn btn-danger no-border-radius checkbox-space full-width" style="border:none">
+                            Get offline materials
+                            </a>
+                        </div>-->
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+
+</section>
+
+{% if my_referrals|length > 0 %}
+<hr class="hr-styled row">
+<section class="container row-space-8 padding-top-50">
+	<div class="row row-space-6">
+		<div class="">
+			<h2 class="text-center text-special font-head">
+				You have earned <span class="icon-lima brightgreen">&#8358;{{request.user.wallet.total_referral_earning|floatformat:0}}</span> from referral.
+			</h2>
+			<p class="text-center copy-heading font-head">
+				Track your referrals below and invite more friends to earn more money!
+			</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-lg-10 col-md-10 col-md-offset-1 col-sm-offset-0 col-lg-offset-1 col-xs-offset-0 col-xs-12">
+			<div class="loading-pane disabled loading"></div>
+			<div id="sent-referrals">
+				{% for x in my_referrals %}
+				<div class="media sent-referral">
+					<div class="media-left ">
+                        {% cloudinary x.owner.profile_pic width=50 height=50 %}
+                    </div>
+					<div class="media-body">
+						<div class="referred-row row">
+							<div class="col-sm-9 col-md-10">
+								<div class="h4 text-wrap">{{x.owner.email}}</div>
+								<div>{{x.status}} </div>
+							</div>
+							<div class="col-sm-3 col-md-2">
+								{% if x.first_class %}<span class="brightgreen"> Earned &#8358;{{x.total_earned}}</span>
+								{% else %}
+                {% if x.can_display_link %}
+                <a href="{% url 'referral_remind' %}?email={{x.owner.email}}" class="btn btn-cancel remind"> Remind </a>
+                {% endif %}
+									{% endif %}
+							</div>
+						</div>
+					</div>
+                    {% if not forloop.last %}
+                        <hr class="hr-styled">
+                    {% endif %}
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+    <div class="col-sm-12 col-lg-10 col-md-10 col-md-offset-1 col-sm-offset-0 col-lg-offset-1 col-xs-offset-0 col-xs-12">
+    <div class="pagination-container col-xs-12 margin-top-15">
+                    <nav class="pagination-margin pull-left">
+                        {% bootstrap_paginate my_referrals range=5 first_label="&#x2190;" last_label="&#x2192;" show_prev_next="false" show_first_last="true" %}
+                    </nav>
+                </div>
+    </div>
+
+	</div>
+
+</section>
+	{% endif %}
+	{% else %}
+
+	{% include "referrals/includes/approval.html" %}
+	{% endif %}
+ <section id="one-on-one-fourth" class="padding-top-25 padding-bottom-50 row white-bg">
+    <div class="container side_by_side">
+        <div class="row">
+            <div class="col-sm-12 icon-content space-for-mobile-20">
+                <h2 class="padding-bottom-20">
+                    {% if request.is_featured %}<b>Frequently asked questions</b>
+                    {% else %}Frequently asked questions{% endif %}
+                </h2>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="faq-item">
+                            <div class="question-bullet">Q:</div>
+                            <div class="faq-question">
+                                <div class="question-value">
+                                    {% if not request.is_featured %}How and when will I get paid?{% else %}<b>How and when will I get paid?</b>{% endif %}
+                                </div>
+                                <div class="answer-value">When you refer a client who hires a tutor, your 10% earning is automatically credited to your wallet on Tuteria for up to 3 months if the client continues. You can withdraw your money to your local bank in one click, and we'll always send you instant email alerts everytime you earn money.
+                                    <br><br>
+                                    If you refer a tutor who completes their first lesson, you'll get &#8358;2,000. The more people you refer, the more money you make - there's no limit!</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                        {% if not request.is_featured %}What can people learn on Tuteria?{% else %}<b>What can people learn on Tuteria?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">You can refer people to learn anything! From academic subjects like Math, English, Physics etc., to exams like SAT, GMAT, ICAN, ACCA, IGCSE etc., and even skills like Cake Making, Music, Make up, Languages etc., we help people learn anything from top-notch and experienced tutors anywhere in Nigeria - so this is a huge opportunity for you and also for us.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                        {% if not request.is_featured %}So how can I start inviting people?{% else %}<b>So how can I start inviting people?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">You can invite people online from your email contacts, Facebook, Twitter and LinkedIn - your link will be sent to them. You can also invite offline using your unique code. Each invite will receive &#8358;1,500 discount courtesy of you! So they are happy and you are actually making real impact.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                        {% if not request.is_featured %}How do you ensure quality and safety?{% else %}<b>How do you ensure quality and safety?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">Each tutor has undergone various screening phases including offline and online identity verification, and subject competency assessments. Only the top performers were interviewed and the very bests were hand-picked. We also facilitate criminal background checks on behalf of clients, and request up to two reputable guarantors especially for students below 18.</div>
+                                    <br>
+                                    <div class="answer-value">Beyond that, clients also rate tutors' performance and tutors whose overall rating falls below 70% are not allowed to continue. So we always have the very best tutors who are safe to work with.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                               <div class="question-bullet">Q:</div>
+                               <div class="faq-question">
+                                   <div class="question-value">
+                                       {% if not request.is_featured %}Will I be credited for referring a Tuteria user?{% else %}<b>Will I be credited for referring a Tuteria user?</b>{% endif %}
+                                   </div>
+                                   <div class="answer-value">No you won't. You are only credited for referring a new user who signs up or places a request using your referral code or link. Earnings are credited to you once they complete their lessons, and you can earn up to 3 months for each referral if they continue their lessons.</div>
+                               </div>
+                           </div>
+                           <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                        {% if not request.is_featured %}Can I track how many people I've referred?{% else %}<b>Can I track how many people I've referred?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">Sure you can. When someone signs up with your code or link, or completes their lessons, we'll let you know so you can see how much you've earned. You'll be able to review all referrals and track their progress in one place.</div>
+                                </div>
+                            </div>
+
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   {% endblock %}
+   {% block request_section %}
+   <section class="row protection large-padding">
+    <div class="page-container-full">
+        <div class="row">
+            <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+                <div class="media-photo padding-bottom-25">
+                    <img width="100" height="100"
+                    src="{% static "img/backgrounds/partner.png" %}">
+                </div>
+                <h2>
+                    <span class="font-head">
+                      Have ideas for partnership?
+                  </span>
+              </h2>
+
+              <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+               <a href="{% url 'partnerships' %}" class="btn btn-danger btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+                  Let's talk
+              </a>
+          </div>
+      </div>
+  </div>
+</div>
+</section>
+{% endblock request_section %}
+{% block notification_tawk %}{% endblock notification_tawk %}
+{% block javascript %}
+{% include "includes/_scripts.html" %}
+
+<script>
+    window.INVITEES = JSON.parse("{{invitees|escapejs}}");
+</script>
+<script src="{% static "js/angular/angular.js" %}"></script>
+<script>
+    window.currentPage = "Referrals";
+    window.GOOGLE_CLIENT_ID ='{{tuteria_details.google_id}}';
+    window.YAHOO_CLIENT_ID='{{tuteria_details.yahoo_id}}';
+
+</script>
+<script src="//apis.google.com/js/client.js"></script>
+<script src="{% static "js/static_pages.bundle.js" %}"></script>
+
+{% endblock javascript %}

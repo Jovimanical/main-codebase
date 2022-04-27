@@ -1,0 +1,120 @@
+- fields: {name: Account, parent: null, slug: account}
+  model: helps.Category
+  pk: 1
+- fields: {name: Signing Up, parent: 1, slug: signing-up}
+  model: helps.Category
+  pk: 2
+- fields: {name: Security & Password, parent: 1, slug: security-and-password}
+  model: helps.Category
+  pk: 3
+- fields: {name: Tuteria Wallet, parent: 1, slug: tuteria-wallet}
+  model: helps.Category
+  pk: 4
+- fields: {name: Profile, parent: null, slug: profile}
+  model: helps.Category
+  pk: 5
+- fields: {name: About you, parent: 5, slug: about-you}
+  model: helps.Category
+  pk: 6
+- fields: {name: Verifications, parent: 5, slug: verifications}
+  model: helps.Category
+  pk: 7
+- fields: {name: Reputation, parent: 5, slug: reputation}
+  model: helps.Category
+  pk: 8
+- fields: {name: Tutoring, parent: null, slug: tutoring}
+  model: helps.Category
+  pk: 9
+- fields: {name: Deciding to Tutor, parent: 9, slug: deciding-to-tutor}
+  model: helps.Category
+  pk: 10
+- fields: {name: Your Subjects, parent: 9, slug: your-subjects}
+  model: helps.Category
+  pk: 11
+- fields: {name: Creating Subjects, parent: 11, slug: creating-subjects}
+  model: helps.Category
+  pk: 12
+- fields: {name: Calendar & Availability, parent: 11, slug: calendar-availability}
+  model: helps.Category
+  pk: 13
+- fields: {name: Pricing, parent: 11, slug: pricing}
+  model: helps.Category
+  pk: 14
+- fields: {name: Policies, parent: 11, slug: policies}
+  model: helps.Category
+  pk: 15
+- fields: {name: Your Bookings, parent: 9, slug: your-bookings}
+  model: helps.Category
+  pk: 16
+- fields: {name: Receiving Bookings, parent: 16, slug: receiving-bookings}
+  model: helps.Category
+  pk: 17
+- fields: {name: Honoring Meeting Requests, parent: 16, slug: honoring-meeting-requests}
+  model: helps.Category
+  pk: 18
+- fields: {name: Alterations and Cancellations, parent: 16, slug: alterations-and-cancellations}
+  model: helps.Category
+  pk: 19
+- fields: {name: Getting paid, parent: 9, slug: getting-paid}
+  model: helps.Category
+  pk: 20
+- fields: {name: How Payments work, parent: 20, slug: how-payments-work}
+  model: helps.Category
+  pk: 21
+- fields: {name: Payout Services, parent: 20, slug: payout-services}
+  model: helps.Category
+  pk: 22
+- fields: {name: Refunds, parent: 20, slug: Refunds}
+  model: helps.Category
+  pk: 23
+- fields: {name: Tutor Levels, parent: 9, slug: tutor-levels}
+  model: helps.Category
+  pk: 24
+- fields: {name: Hiring, parent: null, slug: hiring}
+  model: helps.Category
+  pk: 25
+- fields: {name: Finding a Tutor, parent: 25, slug: finding-a-tutor}
+  model: helps.Category
+  pk: 26
+- fields: {name: Booking Lessons, parent: 25, slug: booking-lessons}
+  model: helps.Category
+  pk: 27
+- fields: {name: Booking Lessons Online, parent: 27, slug: booking-lessons-online}
+  model: helps.Category
+  pk: 28
+- fields: {name: Requesting an Interview, parent: 28, slug: requesting-an-interview}
+  model: helps.Category
+  pk: 29
+- fields: {name: Requesting a Tutor, parent: 28, slug: requesting-a-tutor}
+  model: helps.Category
+  pk: 30
+- fields: {name: Paying, parent: 25, slug: paying}
+  model: helps.Category
+  pk: 31
+- fields: {name: Pricing & Fees, parent: 31, slug: pricing-and-fees}
+  model: helps.Category
+  pk: 32
+- fields: {name: Payment Methods, parent: 31, slug: payment-methods}
+  model: helps.Category
+  pk: 33
+- fields: {name: Refunds, parent: 31, slug: refunds}
+  model: helps.Category
+  pk: 34
+- fields: {name: Your Lessons, parent: 25, slug: your-lessons}
+  model: helps.Category
+  pk: 35
+- fields: {name: Preparing for Your Lessons, parent: 35, slug: preparing-for-your-lessons}
+  model: helps.Category
+  pk: 36
+- fields: {name: During Your Lessons, parent: 35, slug: during-your-lessons}
+  model: helps.Category
+  pk: 37
+- fields: {name: After Your Lessons, parent: 35, slug: after-your-lessons}
+  model: helps.Category
+  pk: 38
+- fields: {name: Change of Plans, parent: 35, slug: change-of-plans}
+  model: helps.Category
+  pk: 39
+- fields: {name: Resolve a Problem, parent: 35, slug: resolve-a-problem}
+  model: helps.Category
+  pk: 40

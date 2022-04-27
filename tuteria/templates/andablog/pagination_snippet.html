@@ -1,0 +1,13 @@
+{% load bootstrap_pagination  %}
+<div class="col-sm-12">
+	<div class="row">
+		<div class="pagination-container col-xs-12 margin-top-15">
+                    <nav class="pagination-margin pull-left">
+                        {% bootstrap_paginate page_obj range=5 first_label="&#x2190;" last_label="&#x2192;" show_prev_next="false" show_first_last="true" %}
+                    </nav>
+                </div>
+		
+	</div>
+</div>
+                <!--/pagination-->
+                

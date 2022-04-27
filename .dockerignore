@@ -1,0 +1,29 @@
+.git
+.idea
+# npm
+node_modules*
+# Campass
+.sass-cache
+
+# bower
+bower_components/
+tuteria/static/javascripts/vendor/mathjax
+*.dmp
+*.map
+compressed
+Tuteria Emails
+staticfiles
+Tuteria.egg-info
+backend.sublime-project
+backend.sublime-workspace
+*.pid
+.vagrant
+Tuteria.egg-info
+vms
+tuteria/.idea
+tuteria/templates/.idea
+frontend
+docs
+frontend_app/node_modules
+tuteria/node_modules
+venv*

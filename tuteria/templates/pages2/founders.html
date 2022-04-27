@@ -1,0 +1,62 @@
+{% extends 'pages/about.html' %}
+{% load cloudinary %}
+
+{% block css %}
+    {{block.super}}
+<style type="text/css">
+  h3,.h3,h2,.h2 {
+    margin-top:0;
+  }
+
+</style>
+{% endblock %}
+{% block main_content2 %}
+
+<div class="text-copy">
+  <h1 class="h2">Our Co-Founders</h1>
+
+  <div class="panel">
+    <div class="panel-body">
+      <div class="media row-space-4">
+        <figure class="media-photo media-round pull-left">
+          <img src="./Founders - Airbnb_files/nathan-blecharczyk-airbnb-cto-188-636240a02bb8a0ea91075763241d2ba3.jpg"
+               width="188" height="188" alt="Nathan Blecharczyk">
+        </figure>
+        <div class="media-body">
+          <h2 class="h3">
+            Nathan Blecharczyk<br>
+            <small>CTO &amp; Co-Founder</small>
+          </h2>
+          <p>Nathan is the co-founder and CTO at Airbnb. He oversees the technical strategy of the
+            company, and is dedicated to building a team of world-class engineers to keep Airbnb at the
+            forefront of the industry. Nathan became an entrepreneur early on running a business while
+            he was in high school, selling to clients in more than 20 countries. He received a degree in
+            Computer Science from Harvard University and held several engineering positions with
+            Microsoft, OPNET Technologies and Batiq before becoming a co-founder at Airbnb.</p>
+        </div>
+      </div>
+      <div class="media row-space-4">
+        <figure class="media-photo media-round pull-left">
+          <img src="./Founders - Airbnb_files/brian-chesky-airbnb-ceo-188-03cec366f89aae14e7de25acbce02a44.jpg"
+               width="188" height="188" alt="Brian Chesky">
+        </figure>
+        <div class="media-body">
+          <h2 class="h3">
+            Brian Chesky<br>
+            <small>CEO &amp; Co-Founder</small>
+          </h2>
+          <p>Brian is the co-founder and CEO at Airbnb. He drives the company's vision, strategy and
+            growth as it provides interesting and unique ways for people to travel and changes the lives
+            of its community. Under Brian's leadership, Airbnb stands at the forefront of the sharing
+            economy, and has expanded to over 800,000 listings in 190+ countries. Brian met co-founder
+            Joe Gebbia at the Rhode Island School of Design where he received a Bachelor of Fine Arts in
+            industrial design.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

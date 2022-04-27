@@ -1,0 +1,71 @@
+{% extends "users/includes/profile_base.html" %}
+{% load staticfiles cloudinary %}
+{% load socialaccount activelink %}
+{% block profile_url %}true{% endblock %}
+{% block title %}Trust & Verification - Tuteria{% endblock title %}
+{% block view_profile %} {% endblock %}
+{% block new_steps %}
+     <li>
+        <a href="{% url 'users:user_new_verifications' %}"
+        aria-selected="{% ifactive 'users:user_new_verifications' %}true{% else %}false{% endifactive %}"
+        class="sidenav-item">Identity</a>
+    </li>
+    <li>
+        <a href="{% url 'users:user_guarantors' %}"
+        aria-selected="{% ifactive 'users:user_guarantors' %}true{% else %}false{% endifactive %}"
+        class="sidenav-item">Guarantors</a>
+    </li>
+    <li>
+        <a href="{% url 'users:user_edu_work_proof' %}"
+        aria-selected="{% ifactive 'users:user_edu_work_proof' %}true{% else %}false{% endifactive %}"
+        class="sidenav-item">Education & Work History Proof</a>
+    </li>
+{% endblock %}
+{% block mobile_nav_section %}
+ <li>
+    <a {% ifactive 'users:user_new_verifications' %}href="javascript:void(0)"
+    aria-selected="true"{% else %}aria-selected="false" href="{% url 'users:user_new_verifications' %}"{% endifactive %}
+    class="subnav-item">Identity</a>
+</li>
+<li>
+    <a {% ifactive 'users:user_guarantors' %}href="javascript:void(0)"
+    aria-selected="true"{% else %}aria-selected="false" href="{% url 'users:user_guarantors' %}"{% endifactive %}
+    class="subnav-item">Guarantors</a>
+</li>
+<li>
+    <a {% ifactive 'users:user_edu_work_proof' %}href="javascript:void(0)"
+    aria-selected="true"{% else %}aria-selected="false" href="{% url 'users:user_edu_work_proof' %}"{% endifactive %}
+    class="subnav-item">Education & Work History Proof</a>
+</li>
+{% endblock %}
+{% block main_content %}
+ 
+{% endblock %}
+{% block request_section %}
+ {% if not object.user.tutor_intent %}
+ {{block.super}}
+ {% endif %}
+{% endblock request_section %}
+{% block javascript %}    
+    {{block.super}}
+    <script>
+        const initialData = {
+            [window.CLIENT_PAGES.GUARANTOR_INFO]: {
+                tutorInfo: JSON.parse('{{ initial_data|escapejs }}')
+            },
+        };
+        window.loadApplication(window.CLIENT_PAGES.GUARANTOR_INFO, initialData, "{% url 'users:new_flow_post' %}");
+    </script>
+    {% providers_media_js %}
+    {% cloudinary_includes %}
+    {% cloudinary_js_config %}   
+    
+    <script>
+        $('.btn-file').click(function(){
+           $('.cloudinary-fileupload ').get(0).click();
+        });
+        window.ProfileStep = 3;
+    </script>
+
+   <script src="{% static 'js/user_profile.bundle.js' %}"></script>
+{% endblock %}

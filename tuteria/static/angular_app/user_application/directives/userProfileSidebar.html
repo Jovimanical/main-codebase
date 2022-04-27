@@ -1,0 +1,29 @@
+<div>
+<div class="visible-xs">
+    <div class="header-2 visible-xs">
+    <div class="navy " ng-class="{'hidden':vm.user.tutor_intent}">
+            <ul>
+                <li ng-repeat="link in vm.user_links">
+                    <a href="#{{::link.url}}"
+                    aria-selected="{{vm.isCurrentLink(link.url)}}"
+                    class="sidenav-item">{{::link.name}}</a>
+                </li>
+            </ul>                            
+        </div>
+    </div>
+</div>
+<div class="hidden-xs">
+    <div class="sidenav ">
+        <ul class="sidenav-list">
+            <li ng-repeat="link in vm.user_links">
+                <a href="#{{::link.url}}"
+                aria-selected="{{vm.isCurrentLink(link.url)}}"
+                class="sidenav-item">{{::link.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row col-sm-10">                        
+        <a href="{% url 'users:profile' request.user.slug %}" class="btn btn-default hidden-sm btn-block row-space-top-4">View Profile</a>
+    </div>    
+</div>                
+</div>

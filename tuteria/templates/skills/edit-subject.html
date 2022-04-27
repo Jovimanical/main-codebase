@@ -1,0 +1,484 @@
+{% extends 'users/subjects.html' %}
+{% load staticfiles i18n bootstrap3 add_attr cloudinary %}
+{% block css %}
+    {{ block.super }}
+    <style>
+        body {
+            position: relative;
+        }
+    </style>
+{% endblock css %}
+{% block title %}{{ object.skill.name }} Edit {% endblock title %}
+{% block body_attr %}data-spy="scroll" data-target=".sidenav"{% endblock body_attr %}
+
+{% block sidebar %}
+    <div class="hidden-xs">
+        <div class="sidenav">
+            <ul class="sidenav-list nav">
+                <li>
+                    <a href="#describe"
+                       aria-selected="false"
+                       class="sidenav-item active">Describe Skill</a>
+                </li>
+                <li>
+                    <a href="#price"
+                       aria-selected="false"
+                       class="sidenav-item">Set Pricing</a>
+                </li>
+                <li>
+                    <a href="#media" aria-selected="false"
+                       class="sidenav-item">Skill Media</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock sidebar %}
+
+{% block main_content %}
+    <!--{% if object.status == object.MODIFICATION %}
+
+    {% endif %}-->
+    {% if object.skill.testable %}
+        {% if not object.taken_test %}
+        <div class="potential-tutors well bg-info row">
+            <div class="col-xs-12 row-space-2 row">
+                <span style="color:red; font-weight: bolder">Important Notice:</span> You need to take the test for this subject
+                before this subject can be approved. <a target="_blank" class="btn btn-primary" href="{% url 'users:subject_creation_landing' %}?url_params=True&testable=True">Take Test</a>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+
+    {% if form.errors %}
+        {% for field in form %}            
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{field.name|title}}: {{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row smart-forms">
+        <form accept-charset="UTF-8" action="{% url 'users:edit_subject' object.skill.slug %}" class="new_user"
+              id="edit_subject_form" method="post" novalidate="novalidate">
+            {% csrf_token %}
+            <div id="describe" class="panel panel-default row-space-4">
+                <div class="panel-heading">
+                    <h3 class="blue-font">{{ object.skill.name }}</h3>
+
+                    <p style="font-size: 14px; padding-top: 10px">Talk about your experience in {{ object.skill.name }} below
+                        so that it stands out to clients who want to hire you</p>
+                </div>
+                <div class="panel-body">
+                    <div class="row row-space-4">
+                        <!-- Label -->
+                        {# {% bootstrap_label form.heading.label label_class="col-md-3 text-right" %} #}
+                        <label class="col-md-3 text-right">Subject Headline</label>
+
+                        <div class="col-md-9">
+                            {{ form.heading|add_attributes:"class:form-control, placeholder:Be very clear and descriptive" }}
+                            <div id="textCounter" style="font:12px; color:red;" class="pull-right"></div>
+                            <span class="input-hint"> Your headline is the first thing clients see when they find your subject in search results</span>
+
+                            <div class="margin-top-15"><a id="heading-example" href="javascript:void(0)">See some
+                                examples</a></div>
+                            <div class="row-space-4"></div>
+                            <div class="well bg-info heading-section hidden">
+                                <p><b>In 70 characters or less, summarize your <u>expertise</u> in {{ object.skill.name }}.</b></p>
+
+                                <p>Headlines <span class="font-head">must</span> convey real value to prospective clients. Here are some examples to gain inspiration, but yours must be unique.<br/><em>- Experienced ICAN instructor with a personalized
+                                        teaching approach</em><br/><em>- I love teaching Math and helping my students get
+                                        better grades</em><br/><em>- Learn the art of making beautiful jeweleries and
+                                        beads by yourself</em><br/><em>- Graduate of Muson Music Academy and an expert
+                                        violin teacher</em></p>
+
+                                <p>Please don't make any errors, only use alphabets and numbers, avoid unnecessary punctuations and write in full, NO ABBREVIATIONS.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row  row-space-4">
+                        {# {% bootstrap_label form.description.label label_class="col-md-3 text-right" %} #}
+                        <label class="col-md-3 text-right">Describe Your Experience and Teaching Style</label>
+
+                        <div class="col-md-9">
+                            <div class="well bg-danger">
+                                <p class="font-head black-text"><b>PAY CLOSE ATTENTION</b></p>
+                                <p>Clients will read what you write here, and is a MAJOR determinant whether they hire you or another tutor. Make sure your description contains these three components:</p>
+                                <p>1. Demonstrate your knowledge, experience or qualification in {{ object.skill.name }}. A good way to do this is to talk about <u>very specific things</u> pertaining to the subject that show you are an expert. Don't write generally, else we will not approve your subject.</p>
+                                <p>2. Describe the <u>results you achieved</u> for people you may have taught in the past. This is very crucial. Be very specific, honest and detailed too. We will read what you write.</p>
+                                <p>3. Explain your style of teaching. What the client should expect, how they should prepare, what you will need for the lesson etc.</p>
+                                <p>Lastly, don't make any errors. High standards are expected of teachers. Clients will always have a choice, so a single error can make them hire someone else. See more help below.</p>
+                            </div>
+                            {{ form.description|add_attributes:"class:form-control,data-parsley-no_link:,data-parsley-no_email:,data-parsley-trigger:keyup,placeholder:Why should clients hire you in particular? What makes you the best tutor for them?" }}
+                            <div id="description_counter" style="font:12px; color:red;" class="pull-right"></div>
+                            <span class="input-hint"> Talk about your experience and teaching style in details so clients can learn more about you</span>
+
+                            <div class="margin-top-15">
+                                <a id="description_link" href="javascript:void(0)">Need Help?</a>
+                            </div>
+                            <div class="row-space-4"></div>
+                            <div class="well bg-info description-note hidden">
+                                For example, if you have taught 13 people who excelled in the subject, talk about it! Will you bring a guitar or should they have theirs? Will you like
+                                to know what textbooks they use or speak with their school teacher first? Do you give
+                                short tests to assess understanding? Give clients a feel of what to expect.
+                                <br/><br/>
+
+                                <span class="font-head">Common errors that can discourage clients from hiring you</span>
+                                <br/>
+                                1. Don't spell <em>taught</em> as <em>thought</em> e.g. I have  <strike> thought </strike>  taught 6 people ...
+                                <br/>
+                                2. Always capitalize your I. Don't write "i like to", instead of "I like to"
+                                </br>
+                                3. Write in full. "Have taught people" should be written as "I have taught people"
+                                </br>
+                                4. Re-read your writing to ensure it's free of errors and well spaced. DON'T WRITE IN ALL CAPITALS. Make sure you use paragraphs so that clients can easily read through.
+                                <div class="margin-top-15"><a id="wellers" href="javascript:void(0)">See an example</a>
+                                </div>
+                                <div class="well-hidden hidden row-space-top-1">
+                                    <p class="font-head"><span style="color: green;"><b>A Simple Example:</b></span> let this inspire you, <u>but don't copy it</u>. Write in your own style.<em></p>
+
+                                    <p>"Most universities require a minimum score of 60% in the Math section of SAT before an applicant can be considered for admission. I got 700 out of 800 (87.5%) in SAT Math in 2013, and have prepared 17 students for the exam most of whom are now in their desired schools abroad, including several who had less than a month to prepare.</p>
+
+                                    <p>So I'm confident that I can help you or your wards master SAT Math. I’m up-to-date with the curriculum, and text books, and have in-depth understanding of how to bring students up to speed with nifty tactics to help them solve SAT Math questions quickly and correctly. I'll be happy to help you pass the exam and achieve your goals. Hire me so we can get started."</p></em>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <!--<div class="row  row-space-4">
+                        {% if request.is_featured %}
+                            <div class="col-xs-12">
+                                {% bootstrap_field form.tags %}
+                             <span id="helpBlock" class="input-hint">Tags are some important topics you can teach in {{ object.skill.name }}. Enter up to 3 topics seperating each with a comma. This helps clients find you when they search for those topics.
+                            <br><br>
+                            <span style="color:red; font-weight:bold">PLEASE NOTE:</span> Only enter topics for {{ object.skill.name }}. Do not enter a <u>different</u> subject. If you do, this subject will be automatically denied.
+                            </span>
+
+                            </div>
+                        {% else %}
+                            {# {% bootstrap_label form.tags.label label_class="col-md-3 text-right" %} #}
+                            <label class="col-md-3 text-right">Topic Tags</label>
+                            <div class="col-md-9">
+                                {{ form.tags|add_attributes:"class:form-control" }}
+                            <span id="helpBlock" class="input-hint">Tags are some important topics you can teach in {{ object.skill.name }}. Enter up to 3 topics seperating each with a comma. This helps clients find you when they search for those topics.
+                            <br><br>
+                            <span style="color:red; font-weight:bold">PLEASE NOTE:</span> Only enter topics for {{ object.skill.name }}. Do not enter a <u>different</u> subject. If you do, this subject will be automatically denied.
+                            </span>
+                            </div>
+                        {% endif %}
+
+                    </div>-->
+
+                    <div class="row  row-space-4 {% if request.is_featured %} hidden {% endif %}" id="certificate-form"
+                            >
+                        <label class="text-right col-md-3" for="user_profile_info_current_city">
+                            Relevant Certifications or Awards
+                        </label>
+
+                        <div class="col-md-9">
+                            {{ certificate_form.management_form }}
+                            <div id="certificate_formset_area">
+                                {% for c_form in certificate_form %}
+                                    <div id="{{ c_form.prefix }}-row" class="form-base">
+                                        {{ c_form.id|add_attributes:"class:id_form" }}
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    {% bootstrap_label c_form.award_name.label label_class='sr-only' %}
+                                                    {{ c_form.award_name|add_attributes:"class:form-control award,placeholder:Enter award or certification" }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    {% bootstrap_label c_form.award_institution.label label_class='sr-only' %}
+                                                    {{ c_form.award_institution|add_attributes:"class:form-control institution,placeholder:From which organization?" }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        {{ c_form.DELETE|add_attributes:"class:delete_form" }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="input-hint">If you have any relevant certification {{ object.skill.name }}, enter it
+                                here, including the name of the organisation that gave the certification. E.g. "CCNA"
+                                certification by "Cisco".
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="price" class="panel panel-default row-space-4">
+                <div class="panel-heading">
+                    <h4>Set Your Price</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row  row-space-4">
+                        {% bootstrap_label form.price.label label_class='text-right col-md-3' %}
+                        <div class="col-md-9">
+                        <div class="well bg-danger">
+                            <p class="font-head black-text"><b>SET COMPETITIVE PRICES</b></p>
+                            <p>Tutors who charge high, are generally less likely to get clients. See help below</p>
+                        </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">&#8358;</span>
+                                {{ form.price|add_attributes:"class:form-control" }}
+                                <span class="hidden-xs input-group-addon">per hour per student</span>
+                            </div>
+                            <div class="visible-xs">per hour per student</div>
+                            <div class="input-hint row-space-top-1">Set the price clients should pay per hour when
+                                hiring you. You can edit your price at any time.
+                            </div>
+                            <div class="margin-top-15"><a href="javascript:void(0)" id="advice-link">Need help with pricing?</a></div>
+                            <div class="row-space-4"></div>
+                            <div class="well bg-info hidden price-advice">
+                                <p><b>Few suggestions about setting attractive prices</p>
+                                1. Work back from your monthly earning goal:</b> Think of what you would charge per
+                                month, then divide it by the number of hours you will teach. For example: let's say you
+                                would charge &#8358;20,000 per month and teach 2 times a week and 2hrs per lesson;
+                                that means in one month, you will teach 2 hours x 2 sessions x 4 weeks = 16
+                                hours.<br/><br/>So in this case, your hourly charge can be &#8358;20,000/16 = &#8358;1,250/hr.
+                                Similarly, a &#8358;30,000 monthly goal translates to &#8358;1,875/hr, and &#8358;50,000
+                                translates to &#8358;3,125/hr. However, lower prices will get you more clients. We also
+                                advise you add a little extra to cover your transport fare if you'll travel to your
+                                client's location.<br/><br/><b>2. Consider charging slightly less at first:</b> We
+                                suggest you consider reducing your price initially so that you can attract more clients
+                                and build your reputation. Then increase your price steadily as your level increases and
+                                clients trust you more.<br/><br/><b>3. Think of what prospective clients <u>in your
+                                area</u> can afford:</b> There's no point charging a high price and receiving no
+                                clients. If people around you won't be able to afford your price, please reduce it so
+                                that they can hire you and help you build your reputation on Tuteria.
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row  row-space-4">
+                        <label class="text-right col-md-3">
+                            Maximum Student & Discount
+                        </label>
+
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        {% bootstrap_label form.max_student.label label_class="sr-only" %}
+                                        {{ form.max_student|add_attributes:"class:form-control" }}
+
+                                        <div class="input-hint">
+                                            Maximium number of students per lesson
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {% bootstrap_label form.discount.label label_class="sr-only" %}
+                                        {{ form.discount|add_attributes:"class:form-control" }}
+                                        <div class="input-hint">
+                                            Clients pay &#8358;<span id="discount_price">500</span> for each extra
+                                            student
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=""><a href="javascript:void(0)" id="discount-link">How discounts work</a></div>
+                            <div class="row-space-4"></div>
+                            <div class="well bg-info hidden discount-help">
+                                <b>Tutors can offer discounts for lessons involving more than one student.</b><br/>If
+                                you offer a discount for group lessons, it will only apply from the second student. For
+                                instance, if you charge &#8358;1,000/hr and offer a 20% discount, a client who books a 3
+                                hour lesson for 3 students will pay the full price for 1 student and the discounted
+                                price for the remaining 2 as shown below:<br/><br/><b>Full price for 1 student:</b>
+                                &#8358;1,000/hr x 3 hrs x 1 student = &#8358;3, 000<br/><b>Discounted price for
+                                remaining 2:</b> &#8358;1000/hr X 0.20 discount x 3 hrs x 2 students = &#8358;4,800<br/>So
+                                the client will pay &#8358;3,000 + &#8358;4,800 = &#8358;7,800 instead of &#8358;9,000.
+                            </div>
+                        </div>
+                    </div>
+{#                    <hr>#}
+{#                    <div class="row row-space-4">#}
+{#                        <label class="col-md-3 text-right">Booking type Settings</label>#}
+{##}
+{#                        <div class="col-md-9">#}
+{#                            <div class="checkbox">#}
+{#                                <label>#}
+{#                                    {{ form.monthly_booking }} <strong>Allow Monthly Booking?</strong>#}
+{#                                </label>#}
+{#                            </div>#}
+{#                            <div class="input-hint row-space-4">#}
+{#                                By default, all tutors can be hired monthly and hourly. If you do not wish to accept#}
+{#                                monthly lessons for this subject, please uncheck this option.#}
+{#                            </div>#}
+{#                            <div id='monthly_support' class="row">#}
+{#                                <div id='calc-container' class='col-sm-12 row'>#}
+{#                                    <div class="col-sm-6">#}
+{#                                        <div class="form-group">#}
+{#                                            {% bootstrap_label form.hours_per_day.label label_class='control-label sr-only' %}#}
+{#                                            {{ form.hours_per_day|add_attributes:"class:form-control" }}#}
+{#                                        </div>#}
+{#                                        <div class="form-group">#}
+{#                                            <label class="control-label">#}
+{#                                                Weekly price#}
+{#                                            </label>#}
+{##}
+{#                                            <h3 style="margin-top:0">#}
+{#                                                <span class="label label-grey">&#8358;<span id="weekly_price">0</span> /student</span>#}
+{#                                            </h3>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-sm-6">#}
+{#                                        <div class="form-group ">#}
+{#                                            {% bootstrap_label form.days_per_week.label label_class='control-label sr-only' %}#}
+{#                                            {{ form.days_per_week|add_attributes:"class:form-control" }}#}
+{#                                        </div>#}
+{#                                        <div class="form-group">#}
+{#                                            <label class="control-label">#}
+{#                                                Monthly price#}
+{#                                            </label>#}
+{##}
+{#                                            <h3 style="margin-top:0">#}
+{#                                                <span class="label label-grey">&#8358;<span id="monthly_price">0</span> /student</span>#}
+{#                                            </h3>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+            </div>
+            <div class=" hide panel panel-default row-space-4 {% if request.is_featured %} hidden {% endif %}">
+                <div class="panel-heading">
+                    <h4>Subject Image</h4>
+                </div>
+                <div class="panel-body photos-section">
+                    <div class="media row-space-4">
+                        <div id="image_container" class="media-left center-block pull-left">
+                            {% cloudinary object.profile_pic SEARCH_THUMBNAIL %}
+                        </div>
+
+                        <div class="media-body col-sm-7 col-sm-offset-1 col-xs-12">
+                        <div class="row well bg-info margin-up-mob-10">
+                                <p>
+                                    <span style="color:red" class="font-head">THIS IS HOW CLIENTS SEE YOU FOR THIS SUBJECT</span>
+                                    <br>
+                                    Profile photo is used by default but you can change it for this subject or just move on if it looks great.
+                                </p>
+                                <p style="font-weight: bold">If you wish to change this subject photo, then you MUST follow our guidelines:</p>
+
+                                <ul style="list-style-position: inside; padding-left:0;">
+                                    <li>Only upload a photo that clearly shows your face and is relevant to this subject. e.g. if you teach guitar, upload a picture that <u>shows you playing or holding your guitar</u>.</li>
+                                    <li>Don't upload any image from the internet. You'll be denied.</li>
+                                    <li>If this picture looks great, don't change it. Move on!</li>
+                                </ul>
+                        </div>
+
+                            <div class="row row-condensed">
+
+                                <!--<div class="col-sm-6 take_photo  hide">
+
+                                    <button class="btn btn-block btn-lg">
+                                        Take a photo with <br>your webcam
+                                    </button>
+                                </div>-->
+                                <div class="row col-sm-6 col-sm-offset-3">
+                                   <span id="image-upload-btn" data-loading-text="Uploading..."
+                                         class="btn btn-block btn-lg btn-default btn-file">
+                                      Upload Image
+                                      {{ form.image }}
+                                  </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-xs-offset-3">
+                                    <span class="status_value hide" style='{padding-top:10px}'>Idle</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="media" class="panel panel-default row-space-4 {% if request.is_featured %} hidden {% endif %}">
+                <div class="panel-heading">
+                    <h4>Subject Exhibitions</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row-space-5 well bg-danger">
+                        <p class="font-head">SHOULD YOU UPLOAD EXHIBITS?</p>
+                        <p>If your subject is hands-on such as bead-making, cooking, photography, swimming etc., you <u>MUST UPLOAD UP TO 2 PICTURES OF YOUR WORK</u> to showcase your expertise. Even if your subject isn't hands on, any high quality picture you have that shows your expertise, will get you more clients.</p>
+
+                        <p>It MUST NOT contain any phone number or text, and must be of high quality. Do not lift pictures from the internet. They will be reviewed and deleted, if not up to standard. You can also send images to help@tuteria.com to upload for you.</p>
+                    </div>
+                    <div class="padding-bottom-50"></div>
+
+                    <div class="row row-space-4">
+                        {% bootstrap_label form.attachments.label label_class='col-md-3 text-right' %}
+                        <div class="col-xs-12">
+                            <div id="exhibition-pics">
+                                {% for exhibition in object.exhibitions.all %}
+                                    {% cloudinary exhibition.image SQUARE_PROFILE_THUMBNAIL %}
+                                {% endfor %}
+                            </div>
+
+                            <div class='upload_multiple_images_holder' style='margin-bottom: 20px'>
+                                <a href="#" class="cloudinary-button" id="upload_widget_multiple">Upload Exhibits</a>
+                            </div>
+                            <hr>
+                            <small><em>If you encounter any difficulty saving this page, please use Chrome or Firefox
+                                browser.</em></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-sm-3 col-sm-offset-9">
+                <button type="submit" class="pull-right btn btn-primary btn-lg btn-block">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock main_content %}
+{% block subject_js %}
+    {% cloudinary_includes %}
+    {% cloudinary_js_config %}
+    <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        {% if django_conf == 'Production' or django_conf == 'StagingProd' %}
+            window.CloudName = "tuteria";
+        {% else %}
+            window.CloudName = "iolab";
+        {% endif %}
+
+        $('#heading-example').click(function () {
+            $('.heading-section').toggleClass('hidden');
+        });
+        $('#description_link').click(function () {
+            $('.description-note').toggleClass('hidden');
+        });
+        $('#wellers').click(function () {
+            $('.well-hidden').toggleClass('hidden');
+        })
+        $('#advice-link').click(function () {
+            $('.price-advice').toggleClass('hidden');
+        })
+        $('#discount-link').click(function () {
+            $('.discount-help').toggleClass('hidden');
+        })
+    </script>
+    <script src="{% static "js/subject_update.bundle.js" %}"></script>
+{% endblock subject_js %}
+{% block notification_tawk %}
+{% endblock %}

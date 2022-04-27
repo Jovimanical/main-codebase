@@ -1,0 +1,3268 @@
+- fields:
+    content: What is the relationship between tutors and Tuteria?
+    quiz: [1]
+  model: multichoice.MCQuestion
+  pk: 1
+- fields:
+    content: How do you create subjects?
+    quiz: [1]
+  model: multichoice.MCQuestion
+  pk: 2
+- fields:
+    content: How can you ensure that Tuteria helps you get more client and earn more
+      incomes?
+    quiz: [1]
+  model: multichoice.MCQuestion
+  pk: 3
+- fields:
+    content: How do tutors receive payments for lessons?
+    quiz: [1]
+  model: multichoice.MCQuestion
+  pk: 4
+- fields:
+    content: Which of these will NOT lead to permanent removal from the Tuteria Community?
+    quiz: [1]
+  model: multichoice.MCQuestion
+  pk: 5
+- fields:
+    content: Which of the following is true about the double entry system?
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 6
+- fields:
+    content: The unfavorable balance of Profit and Loss account should be?
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 7
+- fields:
+    content: A company had a beginning balance in Retained Earnings of $43,000. It
+      had net income of $6,000 and paid cash dividends of $5,625 in the current period.
+      The ending balance in Retained Earnings equals?
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 8
+- fields:
+    content: Which of the following equations properly represents a derivation of
+      the fundamental accounting equation?
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 9
+- fields:
+    content: Gerald had beginning total stockholders' equity of N160,000. During the
+      year, total assets increased by N240,000 and total liabilities increased by
+      N120,000. Gerald's net income was N180,000. No additional investments were made;
+      however, dividends did occur during the year. How much were the dividends?"
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 10
+- fields:
+    content: Which financial statement displays the revenues and expenses of a company
+      for a period of time?
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 11
+- fields:
+    content: Which account increases equity?
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 12
+- fields:
+    content: The account format that displays debits, credits, balances and headings
+      is called?
+    quiz: [2]
+  model: multichoice.MCQuestion
+  pk: 13
+- fields:
+    content: The most effective method of controlling or preventing viral diseases
+      in plants is by
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 14
+- fields:
+    content: A.D.P to A.T.P change is called
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 15
+- fields:
+    content: Anemometer measures
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 16
+- fields:
+    content: Drip irrigation is useful in which region?
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 17
+- fields:
+    content: The causative organism of maize rust is
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 18
+- fields:
+    content: Which of the following is not a method of knowing seed life
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 19
+- fields:
+    content: Reduction of ten seedlings of pawpaw to two per stand is referred to
+      as
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 20
+- fields:
+    content: Which of the following describes the steps in making hay?
+    quiz: [3]
+  model: multichoice.MCQuestion
+  pk: 21
+- fields:
+    content: Select the best answer for questions 1 - 3 <br>Mr. Hawkins requests that
+      someone _________ the data by fax immediately.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 22
+- fields:
+    content: Each of the Olympic athletes ____________ for months, even years.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 23
+- fields:
+    content: The company will upgrade _________ computer information systems next
+      month.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 24
+- fields:
+    content: Select the one underlined word or phrase that is incorrect for questions
+      4-7 <br>Takeshi <u>swimmed</u> one <u>hundred</u> laps <u>in</u> the pool <u>yesterday</u>.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 25
+- fields:
+    content: <u>When</u> our vacation, we <u>plan</u> to spend three <u>days</u> scuba
+      <u>diving</u>.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 26
+- fields:
+    content: I had <u>a</u> enjoyable <u>time</u> <u>at</u> the party <u>last</u>
+      night.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 27
+- fields:
+    content: <u>The</u> doctor <u>him</u> <u>visited</u> the <u>patient's</u> parents.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 28
+- fields:
+    content: Select the best answer for questions 8 and 9 <br>The rate of ___________
+      has been fluctuating wildly this week.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 29
+- fields:
+    content: Many cultures have special ceremonies to celebrate a person's _________
+      of passage into adulthood.
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 30
+- fields:
+    content: 'Answer questions 10 and 11 using the short paragraph below: <strong>Directions
+      to Erik''s house</strong> <br>Leave Interstate 25 at exit 7S. Follow that road
+      (Elm Street) for two miles. After one mile, you will pass a small shopping center
+      on your left. At the next set of traffic lights, turn right onto Maple Drive.
+      Erik''s house is the third house on your left. It''s number 33, and it''s white
+      with green trim. <br>What is Erik''s address?'
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 31
+- fields:
+    content: Which is closest to Erik's house?
+    quiz: [4]
+  model: multichoice.MCQuestion
+  pk: 32
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>Sērusuman ni iranai mono
+      o _____________.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 33
+- fields:
+    content: Nihon ni _________ denwa shite kudasai.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 34
+- fields:
+    content: In each Japanese sentence for questions 3-5, select the one underlined
+      word or phrase that is incorrect. <br>Kono tegami <u>ni</u> nan <u>to</u> kaitearu
+      <u>no</u> <u>o</u> oshiete kudasai.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 35
+- fields:
+    content: Shujin no okā-san, <u>kanari</u>, giri no <u>haha</u>, wa <u>osekkai</u>
+      <u>sugite</u> komarimasu.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 36
+- fields:
+    content: Shinkansen <u>wa</u> hayai <u>shi</u> kaiteki <u>shi</u> jikan <u>mo</u>
+      seikaku desu.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 37
+- fields:
+    content: Choose the correct Japanese word order for the following Japanese sentences
+      in questions 6-8. <br>Apāto no doa ga _________.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 38
+- fields:
+    content: ____________ to mōshimasu. Dōzo yoroshiku.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 39
+- fields:
+    content: ____________ hayaku kite kudasai.
+    quiz: [5]
+  model: multichoice.MCQuestion
+  pk: 40
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>Quand j’irai chez les
+      parents de ma fiancée à Pâques, je _____ parlerai de mon intention d’épouser
+      Martine.
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 41
+- fields:
+    content: Nos amies québécoises sont ______ hier directement de Montréal.
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 42
+- fields:
+    content: In each French sentence for questions 3 & 4, select the one underlined
+      word or phrase that is incorrect. <br>Jeanine <u>sera</u> vraiment <u>déçue</u>
+      si elle n’est pas <u>inviter</u> chez les <u>Dupont</u> dimanche avec nous.
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 43
+- fields:
+    content: Nous <u>donnons</u> toujours <u>un</u> pourboire <u>à le</u> serveur
+      dans un café pas <u>vous</u>?
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 44
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Véronique, ce ______ désire
+      voir quelque chose dans les imperméables pour femmes, de haute qualité.
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 45
+- fields:
+    content: Paris est divisé en vingt ______, numérotés de I à XX.
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 46
+- fields:
+    content: 'Read the French text and select the best answers for questions 7 & 8.<br>Bonjour
+      Mesdames, bonjour Messieurs. La Compagnie Air France, le Commandant Michelet
+      et son équipage vous souhaitent la bienvenue à bord du vol 113 à destination
+      de Boston. Nous allons décoller dans quelques instants; veuillez attacher vos
+      ceintures et éteindre vos cigarettes. Nous vous rappelons qu''il est strictement
+      interdit de fumer dans les toilettes. Notre appareil Boeing 767 volera à une
+      altitude de 7 000 mètres, et l’atterrissage est prévu pour 18 heures sur l’aérodrome
+      Logan. Nous vous prions maintenant de redresser le dossier de votre siège, de
+      remettre en position droite la tablette devant vous, et de vous préparer au
+      départ.<br>Une hôtesse de l''air ne dit pas aux passagers:'
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 47
+- fields:
+    content: 'Le vol va arriver à Boston:'
+    quiz: [6]
+  model: multichoice.MCQuestion
+  pk: 48
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>Rosa me __________ ayer.
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 49
+- fields:
+    content: ¡ __________ Uds!
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 50
+- fields:
+    content: In each spench sentence for questions 3 & 4, select the one underlined
+      word or phrase that is incorrect. <br>Si <u>tenía</u> mucho dinero, <u>me</u>
+      <u>compraría</u> <u>un</u> coche nuevo.
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 51
+- fields:
+    content: Andrés no <u>quiso</u> <u>discutir</u> y <u>le</u> fue <u>a</u> Madrid.
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 52
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Los___________ ayudan a
+      los médicos.
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 53
+- fields:
+    content: 'Hace mal tiempo hoy: está lloviendo a __________'
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 54
+- fields:
+    content: Read the spanish text and select the best answers for questions 7 & 8.<br>Para
+      Rodolfo Otto la presencia de lo Otro - y podríamos añadir, la sensación de "otredad"-
+      se manifiesta "como un misterio tremendum, un misterio que hace temblar." Al
+      analizar el contenido de lo tremendo, el pensador alemán encuentra tres elementos.  En
+      primer término el terror sagrado, esto es, "un terror especial," que sería vano
+      comparar con el miedo que nos produce un peligro conocido.  El terror sagrado
+      es pavor indecible, precisamente por ser experiencia de lo indecible.<br>¿A
+      qué se refiere "otredad" en este fragmento?
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 55
+- fields:
+    content: ¿Qué quiere decir Paz cuando escribe 'pavor indecible'?
+    quiz: [7]
+  model: multichoice.MCQuestion
+  pk: 56
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>_____ ты идёшь?
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 57
+- fields:
+    content: Дава́й встре́тимся ______ теа́тра.
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 58
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br>В <u>магази́не</u> <u>Ма́ша</u> <u>купи́ла</u> два <u>сту́лья</u>.
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 59
+- fields:
+    content: <u>Ме́жду</u> <u>про́чего</u>, <u>мы</u> изуча́ем <u>ру́сский</u> язы́к.
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 60
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Соба́ка ла́ет, а ко́шка
+      _____.
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 61
+- fields:
+    content: Ры́цари прие́хали к короле́вскому _____.
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 62
+- fields:
+    content: Read the ruanish text and select the best answers for questions 7 & 8.<br>Совреме́нная
+      медици́на всё ещё и́щет ключи́ к зага́дке, кото́рая вот уже́ бо́лее полу́тора
+      веко́в ста́вит в тупи́ к исто́риков, — зага́дке сме́рти Наполео́на. Бонапа́рт
+      позабо́тился обзавести́сь двойника́ми, — всего́ их бы́ло че́тверо. Оди́н двойни́к
+      был отра́влен накану́не би́твы при Ватерло́о, друго́й упа́л с ло́шади и стал
+      кале́кой, тре́тий погиб́ от шально́й пу́ли. Остава́лся то́лько оди́н Франсуа́
+      Робо́, когда́ закати́лась звезда́ Наполео́на.<br>Что ста́вит в тупи́к исто́риков?
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 63
+- fields:
+    content: Что случи́лось со вторы́м двойнико́м Бонапа́рта?
+    quiz: [8]
+  model: multichoice.MCQuestion
+  pk: 64
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>Jörn, ________ bitte das
+      Fenster auf! Mir ist ziemlich warm.
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 65
+- fields:
+    content: Die Band ist wirklich klasse, auf die Musik __________ .
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 66
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br>Jorge <u>hat</u> Maria <u>gestern</u> schon wieder <u>einen</u>
+      langen Brief <u>geschreibt</u>.
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 67
+- fields:
+    content: Guido <u>mag</u> <u>entweder</u> Muscheln noch mag <u>er</u> Fisch <u>als</u>
+      Vorspeise.
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 68
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Beatrix, ___________ du
+      wie der Schauspieler in Casablanca heißt?
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 69
+- fields:
+    content: Der Bus hat ___________ Verspätung, wenn es schneit.
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 70
+- fields:
+    content: Read the German text and select the best answers for questions 7 & 8.<br>Von
+      der Autobahn A8 müßt ihr die Ausfahrt 'Wannweil' nehmen, und gleich rechts in
+      die Hauptstraße einbiegen. Nach ungefähr einem Kilometer, kommt ihr an einem
+      Supermarkt vorbei. An der Ampel nach dem Ortsschild, müßt ihr links in die Marienstraße
+      einbiegen. Tobias' und Simones Haus ist das zweite auf der linken Seite. Es
+      ist Nummer 110, und hat ein grünes Garagentor.<br>Wie lautet Tobias' und Simones
+      Adresse?
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 71
+- fields:
+    content: Was ist am nächsten bei Tobias' und Simones Haus?
+    quiz: [9]
+  model: multichoice.MCQuestion
+  pk: 72
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>_____ bene dictum est
+      ab ûllô meum est.
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 73
+- fields:
+    content: Lupus est homô _____.
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 74
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br>Dum inter <u>hominî</u> <u>sumus</u>, <u>colâmus</u> <u>hûmânitâtem</u>.
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 75
+- fields:
+    content: <u>Philosophia</u> <u>est</u> <u>ars</u> <u>vîta</u>.
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 76
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Graecia _____ ferum victôrem
+      cêpit.
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 77
+- fields:
+    content: Perîcula _____ vêra.
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 78
+- fields:
+    content: 'Read the Latin text and select the best answers for questions 7 & 8.<br>Aut
+      prôdesse volunt aut dêlectâre poetae aut simul et iûcunda et idônea dîcere vîtae.
+      Quidquid praecipiês, estô brevis, ut cito dicta percipiant animî docilês teneantque
+      fidêlês: omne supervacuum plênô dê pectore mânat.<br>What is the poet Horace
+      cautioning us against in these verses?'
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 79
+- fields:
+    content: What is the verb tense of 'praecipiês'
+    quiz: [10]
+  model: multichoice.MCQuestion
+  pk: 80
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>Jak ci _____ moje nowe
+      okulary?
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 81
+- fields:
+    content: Moi rodzice wracają jutro _______.
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 82
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br><u>Kto</u> jeszcze będziemy <u>zapraszać</u> <u>na</u> <u>nasze</u>
+      przyjęcie?
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 83
+- fields:
+    content: Mąż chce, <u>żebym</u> <u>przestała</u> pracować i zajęła <u>się</u>
+      więcej <u>z</u> domem.
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 84
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Artykuł ten nie był zbyt
+      __________.
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 85
+- fields:
+    content: Nie ma czego się _________, powiedział profesor.
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 86
+- fields:
+    content: Read the text and select the best answers for questions 7 & 8.<br>Polacy,
+      podobnie jak inni Europejczycy, najchętniej piją herbatę czarną, czyli sfermentowaną.
+      Niestety, w naszym kraju trudno jest kupić naprawdę dobre gatunki. Herbatę sprowadzamy
+      głównie z Indii, Chin, Cejlonu, a także z Argentyny. W Polsce różne gatunki
+      są mieszane i paczkowane. Dopiero potem mieszankom tym nadaje się nazwy handlowe,
+      na przykład Madras.<br>Artykuł ten napisany jest z punktu widzenia sytuacji
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 87
+- fields:
+    content: Madras to jest
+    quiz: [11]
+  model: multichoice.MCQuestion
+  pk: 88
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>Die man die tegen me aangebotst
+      is, ___________________.
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 89
+- fields:
+    content: De Heer Van Loon vraagt of u onmiddellijk naar zijn kantoor _______________.
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 90
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br>Gisteren <u>koopte</u> mijn <u>zoontje</u>, Willem, <u>voor</u>
+      het <u>eerst</u> alleen kleren.
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 91
+- fields:
+    content: <u>Weet</u> je wie die <u>boeken</u> <u>meegenomen</u> <u>hebben</u>?
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 92
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Vanavond organiseert de
+      studentenvereniging een grootse _____________.
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 93
+- fields:
+    content: Mijn broer Tom heeft een grote belangstelling ____________ muziek uit
+      de middeleeuwen.
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 94
+- fields:
+    content: Read the text and select the best answers for questions 7 & 8.<br>Romantisch
+      en gastronomisch weekeinde in Kasteel "Het Lindenhof". Klein luxueus hotel,
+      gemakkelijk bereikbaar vanuit de belangrijkste Nederlandse steden, verwelkomt
+      weekeindgasten van april tot oktober. De twaalf kamers hebben elk een privé-badkamer
+      en een zithoek en zijn uitgerust met telefoon en kabeltelevisie. Het ontbijt
+      is bij de prijs inbegrepen. Het sfeervolle restaurant staat in heel Nederland
+      bekend bij gastronomen. Het menu bestaat voornamelijk uit streekgerechten.<br>Moet
+      je het ontbijt apart betalen?
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 95
+- fields:
+    content: Wanneer is het hotel open?
+    quiz: [12]
+  model: multichoice.MCQuestion
+  pk: 96
+- fields:
+    content: Select the best answer for questions 1 & 2 <br>Eva _________ på kontoret
+      idag.
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 97
+- fields:
+    content: Mina föräldrar _____________, men jag vill hellre börja arbeta.
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 98
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br>De <u>mesta</u> <u>turister</u> <u>som</u> kommer till Sverige
+      säger att allting är så <u>dyrt</u>.
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 99
+- fields:
+    content: Emma <u>få</u> <u>många</u> <u>presenter</u> på<u>sin</u> födelsedag.
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 100
+- fields:
+    content: Select the best answer in questions 5 & 6 <br>Jag har ont i ___________,
+      så jag kan inte skriva.
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 101
+- fields:
+    content: Jag ____________ i timmar, innan jag hittade adressen.
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 102
+- fields:
+    content: Read the text and select the best answers for questions 7 & 8.<br>Nina
+      bor på Söder i Stockholm. Det är svårt att parkera i stan, så det är lättast
+      att åka buss eller tunnelbana när man ska hälsa på henne. Nina brukar alltid
+      rekommendera att man tar tunnelbanan eftersom tågen går oftare än bussarna.
+      Ta vilket södergående tåg som helst från T-Centralen och stig av vid Slussen.
+      Gå ut genom uppgången till Götgatan och ta sedan till vänster. Gå Götgatan söderut
+      i ungefär fem minuter, tills du kommer till Högbergsgatan. Ta av till vänster.
+      Hennes port är nummer 35, den tredje på höger sida av gatan. Du behöver inte
+      veta kodnumret till hennes ingång, eftersom hon också har porttelefon.<br>På
+      vilken gata bor Nina?
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 103
+- fields:
+    content: Varför rekommenderar Nina alltid tunnelbanan?
+    quiz: [13]
+  model: multichoice.MCQuestion
+  pk: 104
+- fields:
+    content: Select the best Answer for questions 1 & 2 <br>Se tu _____________________,
+      saresti potuto venire in macchina con me alla festa ieri sera.
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 105
+- fields:
+    content: Alla fine di questa settimana, io ________________ di studiare per l’esame.
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 106
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br>Laura <u>no</u> ha <u>mai</u> <u>visto</u> <u>il</u> film 'I
+      Vitelloni.'
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 107
+- fields:
+    content: La torta <u>di</u> mirtilli che fa <u>tua</u> mamma è la <u>meglio</u>
+      di <u>tutte</u>.
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 108
+- fields:
+    content: Select the best Answer in questions 5 & 6 <br>___________ vai per Natale?
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 109
+- fields:
+    content: Pietro dice che non può _____________ il nostro invito.
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 110
+- fields:
+    content: 'Read the text and select the best Answers for questions 7 & 8.<br>Pasta
+      alla Norma - Ingredienti: melanzane, pomodori, prezzemolo, ricotta salata. Sbucciare
+      e friggere le melanzane. Tagliare a pezzettini i pomodori. Cuocere i pomodori
+      a parte per 15-20 minuti o finché non diventano asciutti. Poi aggiungere le
+      melanzane, il prezzemolo, e il formaggio, e servire caldo con la pasta.<br>Le
+      melanzane devono essere:'
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 111
+- fields:
+    content: Che cosa NON serve per fare questa ricetta?
+    quiz: [14]
+  model: multichoice.MCQuestion
+  pk: 112
+- fields:
+    content: Select the best Answer for questions 1 & 2 <br>Chaith mé seachtain sa
+      choill ____________.
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 113
+- fields:
+    content: Thug sé ______ aige dom.
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 114
+- fields:
+    content: In questions 3 & 4, select the one underlined word or phrase that is
+      incorrect. <br><u>Tá</u> airgead <u>ag</u> Seán, ach <u>níl</u> aon airgead
+      <u>ag mé</u>.
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 115
+- fields:
+    content: An <u>bhfaca</u> tú an <u>chéad</u> <u>bean</u> a shiúil isteach anseo
+      ar <u>maidin</u>?
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 116
+- fields:
+    content: Select the best Answer in questions 5 & 6 <br>Táim ag ól caifé ____________.
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 117
+- fields:
+    content: An bhfuil sí in ann _____________?
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 118
+- fields:
+    content: 'Read the text and select the best Answers for questions 7 & 8.<br>Leabhar
+      nua sa tsraith: Rugadh Pilib Ó Laoghaire i Worchester, Massachusetts. Bhain
+      sé céim dhochtúireachta sa Léann Ceilteach amach in Ollscoil Harvard, agus tá
+      sé ina léachtóir le litríocht Éireannach i mBoston College faoi láthair. D''fhoilsigh
+      sé cuid mhaith aistí agus léirmheasanna ar ghnéithe éagsúla de thraidisiún liteartha
+      na hÉireann ó na meánaoiseanna I leith. Foilsíodh leabhar tábhachtach scoláireachta
+      leis, <em>The Prose Literature of the Gaelic Revival, 1881-1921: Ideology and
+      Innovation</em> in 1994. Is é Gearóid Denvir eagarthóir na sraithe <em>Aistí
+      Léirmheasa.</em><br>Cár bhain sé céim dhochtúireachta amach?'
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 119
+- fields:
+    content: Cén tslí bheatha atá ag Pilib Ó Laoghaire faoi láthair?
+    quiz: [15]
+  model: multichoice.MCQuestion
+  pk: 120
+- fields:
+    content: Which of these examples demonstrates the correct use of the apostrophe
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 121
+- fields:
+    content: <em>'If I had more time, I would have written a shorter letter'</em>
+      is a famous quote meaning what?
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 122
+- fields:
+    content: When would you write an epilogue?
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 123
+- fields:
+    content: <em>Show don't tell</em> is an often quoted creative writing mantra meaning
+      what?
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 124
+- fields:
+    content: Which of the following statements is correct?
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 125
+- fields:
+    content: What form of writing does the genre <em>misery lit</em> cover?
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 126
+- fields:
+    content: A comma splice is...
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 127
+- fields:
+    content: It is commonly accepted creative writing practice to use <em>adverbs</em>...
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 128
+- fields:
+    content: Which of these statements is false?
+    quiz: [16]
+  model: multichoice.MCQuestion
+  pk: 129
+- fields:
+    content: Identify the number of errors present in each sentence<br>John desparately
+      wanted to develop a authoratative jazz website, and the task did not phase him.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 130
+- fields:
+    content: He partnerd with Jennifer, a musician he first met in the mid-90’s.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 131
+- fields:
+    content: Jennifer was a classically-trained singer who had had a succesful career,
+      before damaging her vocal chords.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 132
+- fields:
+    content: Her musical interests complimented Johns, so the partnership seamed a
+      natural fit.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 133
+- fields:
+    content: Jennifer prooved too be a real trooper, compleating tasks in a lightening-fast
+      manner without him asking her, and John soon gave her free reign.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 134
+- fields:
+    content: An acomplished proofreader, Jennifer corrected even miniscule mistakes,
+      and before long the cite had far less grammatical errors.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 135
+- fields:
+    content: Today, John’s and Jennifer’s website is one of the few jazz sites which
+      offers comprehensive reviews.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 136
+- fields:
+    content: Although the site is smaller then others, it is known for it’s compeling
+      content.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 137
+- fields:
+    content: As much as they would like to, alot of similar sites just can not compete.
+    quiz: [17]
+  model: multichoice.MCQuestion
+  pk: 138
+- fields:
+    content: 'Friend or social contact:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 139
+- fields:
+    content: 'Burning:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 140
+- fields:
+    content: 'Advantage:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 141
+- fields:
+    content: 'Written acknowledgement:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 142
+- fields:
+    content: 'Work out:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 143
+- fields:
+    content: 'By the way:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 144
+- fields:
+    content: 'Opinion, ruling:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 145
+- fields:
+    content: 'Naughty:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 146
+- fields:
+    content: 'Queasy:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 147
+- fields:
+    content: 'Reasonable:'
+    quiz: [18]
+  model: multichoice.MCQuestion
+  pk: 148
+- fields:
+    content: Two bodies have masses in the ratio 3:1. They experience forces which
+      impart to them acceleration in the ratio 2:9 respectively. Find the ratio of
+      forces the masses experienced.
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 149
+- fields:
+    content: A bullet of mass 0.1kg is thrown vertically upwards with a speed of $10\frac{m}{s}$
+      from the top of a tower 10m high. Neglecting air resistance, its total energy
+      just before hitting the ground is (take $g = 10ms^{-2}$)
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 150
+- fields:
+    content: When temperature of a liquid increases, its surface tension
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 151
+- fields:
+    content: A gas at a volume of $V_{0}$ in a container at pressure $P_{0}$ is compressed
+      to one-fifth of its volume. What will be its pressure if the magnitude of its
+      original temperature T is constant?
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 152
+- fields:
+    content: The power dissipated in an A.C. circuit is given by
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 153
+- fields:
+    content: In a simple electric motor, the commutator
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 154
+- fields:
+    content: In a simple electric motor, the commutator
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 155
+- fields:
+    content: When 4g of ice changes to water
+    quiz: [19]
+  model: multichoice.MCQuestion
+  pk: 156
+- fields:
+    content: Atoms are composed of
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 157
+- fields:
+    content: A substance that is composed of only one type of atom is called a(n)
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 158
+- fields:
+    content: Sharing of electrons between atoms of two or more elements
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 159
+- fields:
+    content: Enzymes
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 160
+- fields:
+    content: The concentration of a solution is
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 161
+- fields:
+    content: Acidic solutions have a pH that is
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 162
+- fields:
+    content: Water is a polar molecule because
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 163
+- fields:
+    content: A solid that absorbs water from the atmosphere and forms an aqueous solution
+      is
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 164
+- fields:
+    content: At $25^{o}C$ and 1 atm, a gas occupies a volume of $1.50dm^{3}$. What
+      volume will it occupy at $100^{o}C$ and 1 atm
+    quiz: [20]
+  model: multichoice.MCQuestion
+  pk: 165
+- fields:
+    content: When the chromosomes line up in mitosis this is known as which phase?
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 166
+- fields:
+    content: Which cellular organelle contains enzymes that are considered digestive?
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 167
+- fields:
+    content: Organs repair themselves through a process of?
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 168
+- fields:
+    content: Which of the following statements about enzymes is not true?
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 169
+- fields:
+    content: 'Hardening of the arteries is known as:'
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 170
+- fields:
+    content: Which of the following is not considered a function of the kidneys?
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 171
+- fields:
+    content: The functional unit of the kidney is known as?
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 172
+- fields:
+    content: What anatomical structure connects the stomach and the mouth?
+    quiz: [21]
+  model: multichoice.MCQuestion
+  pk: 173
+- fields:
+    content: A human being has _____ autosomes and ______ sex chromosomes
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 174
+- fields:
+    content: A section of chromosomes that codes for a trait can be called a(n)
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 175
+- fields:
+    content: Somatic cells of a human have ____ chromosomes and are called ____
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 176
+- fields:
+    content: 'A person who receives an extra chromosome, could have:'
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 177
+- fields:
+    content: 'Each chromosome consists of two identical:'
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 178
+- fields:
+    content: 'If a person receives an X and a Y chromosome, that person is:'
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 179
+- fields:
+    content: 'Two alleles for pea plant height are designated T (tall) and t (dwarf).
+      These alleles are found on:'
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 180
+- fields:
+    content: An animal has 40 chromosomes in its gametes, how many chromosomes would
+      you expect to find in this animal's brain cells?
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 181
+- fields:
+    content: 'A picture of a person''s chromosomes is called a(n):'
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 182
+- fields:
+    content: During which phase of mitosis is DNA replicated?
+    quiz: [22]
+  model: multichoice.MCQuestion
+  pk: 183
+- fields:
+    content: 'All of the following are carbohydrates EXCEPT:'
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 184
+- fields:
+    content: 'Fatty acids that are unsaturated have:'
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 185
+- fields:
+    content: Which of the following can have a quaternary structure?
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 186
+- fields:
+    content: 'An organic compound is one that:'
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 187
+- fields:
+    content: Which of the following elements is the LEAST abundant in living organisms?
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 188
+- fields:
+    content: Which of the following is used in PET scans?
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 189
+- fields:
+    content: Carbon can form ___ separate bonds with other elements?
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 190
+- fields:
+    content: 'The cohesion of water is caused by:'
+    quiz: [23]
+  model: multichoice.MCQuestion
+  pk: 191
+- fields:
+    content: Plants store glucose in the form of
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 192
+- fields:
+    content: Which of the following is a carbohydrate?
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 193
+- fields:
+    content: Lipids are
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 194
+- fields:
+    content: Long chains of amino acids are found in
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 195
+- fields:
+    content: ATP (adenosine triphosphate) stores energy in the bonds between its
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 196
+- fields:
+    content: The two strands of a DNA molecule are held together by
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 197
+- fields:
+    content: The molecule on which an enzyme acts is called a(n)
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 198
+- fields:
+    content: What gives each amino acid its unique properties?
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 199
+- fields:
+    content: The two types of nucleic acids are
+    quiz: [24]
+  model: multichoice.MCQuestion
+  pk: 200
+- fields:
+    content: One of these is not a section in the GMAT Examination
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 201
+- fields:
+    content: What’s the maximum score on the GMAT?
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 202
+- fields:
+    content: David has $d$ books, which is 3 times as many as Jeff and $\frac{1}{2}$
+      as many as Paula. How many books do the three of them have altogether, in terms
+      of $d$?
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 203
+- fields:
+    content: If an object travels at five feet per second, how many feet does it travel
+      in one hour?
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 204
+- fields:
+    content: '<em>Sue: Commercial flights currently contribute more carbon dioxide
+      to the atmosphere in one year than does the whole of Africa. If we want to reduce
+      global warming we need to restrict the number of flights we take.</em><br><em>Dave:
+      Did you know that by taking one inter-continental flight you cause more pollution
+      than you would in twelve months of car travel?</em><br>Dave’s response to Sue’s
+      comment serves to'
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 205
+- fields:
+    content: Josh has twenty years of typing experience behind him; therefore, if
+      you are looking for an efficient typist to enter your data into the new system,
+      you need look no further.<br>The speaker assumes that
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 206
+- fields:
+    content: A cubical block of metal weighs 6 pounds. How much will another cube
+      of the same metal weigh if its sides are twice as long?
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 207
+- fields:
+    content: A bucket was placed under a dripping tap which was dripping at a uniform
+      rate. At what time was the bucket full?<br>1. The bucket was put in place at
+      2pm.<br>2. The bucket was half full at 6pm and three-quarters full at 8pm on
+      the same day.
+    quiz: [25]
+  model: multichoice.MCQuestion
+  pk: 208
+- fields:
+    content: Which of these is not a section in GRE
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 209
+- fields:
+    content: If a sweater sells for $48 after a 25 percent markdown, what was its
+      original price?
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 210
+- fields:
+    content: If x+y=8 and y-x=-2, then y=
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 211
+- fields:
+    content: If there are 14 women and 10 men employed in a certain office, what is
+      the probability that one employee picked at random will be a woman?
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 212
+- fields:
+    content: Taking antibiotics for a viral infection may, it is true, be ____; however,
+      in certain cases a course of these drugs can actually ward off opportunistic
+      bacterial infections.
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 213
+- fields:
+    content: Each occupation has its own ____; bankers, lawyers and computer professionals,
+      for example, all use among themselves language which outsiders have difficulty
+      following.
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 214
+- fields:
+    content: ______ by nature, Jones spoke very little even to his own family members
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 215
+- fields:
+    content: What is the greatest of 3 consecutive integers whose sum is 24?
+    quiz: [26]
+  model: multichoice.MCQuestion
+  pk: 216
+- fields:
+    content: When 25 is converted from denary to binary which of the following will
+      it be?
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 217
+- fields:
+    content: How many cubes of ice-cream that are 3 inches on an edge can be packed
+      into a Christmas tin that is 9 inches deep by 12 inches wide by 8 inches high
+      with the lid still being able to be closed?
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 218
+- fields:
+    content: A school committee consists of 2 teachers and 4 students. The number
+      of different committees that can be formed from 5 teachers and 10 students is
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 219
+- fields:
+    content: The graphs of the two linear equations ax + by = c and bx - ay = c, where
+      a, b and c are all not equal to zero,
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 220
+- fields:
+    content: If $\log_{4}x=12, then \log_{2}(\frac{x}{4})=12$ is equal to
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 221
+- fields:
+    content: In his pocket, a boy has 3 red marbles, 4 blue marbles, and 4 green marbles.
+      How many will he have to take out of his pocket to ensure that he has taken
+      out at least one of each color?
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 222
+- fields:
+    content: You are lying 12m away from a tree that is 5m tall. You look up at the
+      top of the tree. Approximately how far is your hear from the top of the tree
+      in a straight line?
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 223
+- fields:
+    content: If $\log_{x}\frac{1}{8}=-\frac{3}{2},$ then x is equal to
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 224
+- fields:
+    content: In a writing competition, the first place winner receives ½ of the prize
+      money. The second runner up receives ¼ of what the winner won. What was the
+      total amount of prize money distributed if the winner receives $6,000?
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 225
+- fields:
+    content: Which of the following numbers is farthest from the number 1 on the number
+      line?
+    quiz: [27]
+  model: multichoice.MCQuestion
+  pk: 226
+- fields:
+    content: What do you call the thickest string or the loudest sounding?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 227
+- fields:
+    content: What do you call the 5th string?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 228
+- fields:
+    content: What do you call the 4th string?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 229
+- fields:
+    content: How many strings are there in a guitar?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 230
+- fields:
+    content: In a chord chart, what does 'X' mean?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 231
+- fields:
+    content: What do you call the part to tune your guitar?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 232
+- fields:
+    content: What do we call the part that holds the string?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 233
+- fields:
+    content: Which of these is not a guitar scale?
+    quiz: [28]
+  model: multichoice.MCQuestion
+  pk: 234
+- fields:
+    content: Which of the following is not a regulation stroke?
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 235
+- fields:
+    content: Which method is the fastest (for most experienced swimmers) when turning
+      around on the wall?
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 236
+- fields:
+    content: Which stroke is the first in an individual medley?
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 237
+- fields:
+    content: You can be disqualified for not touching the wall with both hands when
+      finishing the breaststroke.
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 238
+- fields:
+    content: A false start is…
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 239
+- fields:
+    content: The winner of a swim meet is decided by...
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 240
+- fields:
+    content: The 'anchor' is...
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 241
+- fields:
+    content: How many swimmers are on a relay team?
+    quiz: [29]
+  model: multichoice.MCQuestion
+  pk: 242
+- fields:
+    content: Line <em>k</em> is drawn so that it is perpendicular to two distinct
+      planes, P and R. What must be true about planes P and R?
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 243
+- fields:
+    content: Isoceles trapezoid ABCD has diagonals AC and BD. If AC=5x+13 and BD=11x–5,
+      what is the value of x?
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 244
+- fields:
+    content: What are the center and radius of a circle whose equation is $(x-A)^{2}+(y-B)^{2}=C?$
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 245
+- fields:
+    content: The vertex angle of an isosceles triangle measures eight times the measure
+      of a base angle.  Find the measure of a base angle.
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 246
+- fields:
+    content: The sides of a triangle are 5, 6 and 10.  Find the length of the longest
+      side of a similar triangle whose shortest side is 15.
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 247
+- fields:
+    content: In triangle ABC, <A = 60 and <B = 40.  Which side of triangle ABC is
+      the longest?
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 248
+- fields:
+    content: The number of common tangents that can be drawn for two externally tangent
+      circles is
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 249
+- fields:
+    content: Find the distance between the points (3,-2) and (6,4)?
+    quiz: [30]
+  model: multichoice.MCQuestion
+  pk: 250
+- fields:
+    content: A pair of dice are rolled.  What is the probability of rolling 10 or
+      less?
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 251
+- fields:
+    content: A basketball squad has ten players.  Which expression represents the
+      number of five-player teams that can be made if Tunde, the team captain, must
+      be on every team?
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 252
+- fields:
+    content: If $^{n}C_{r}$ represents the number of combinations of <em>n</em> items
+      taken <em>r</em> at a time, what is the value of $\sum_{r=1}^{3}^{4}C_{r}?$
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 253
+- fields:
+    content: In a box, there are 8 red, 7 blue and 6 green balls. One ball is picked
+      up randomly. What is the probability that it is neither red nor green?
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 254
+- fields:
+    content: Tickets numbered 1 to 20 are mixed up and then a ticket is drawn at random.
+      What is the probability that the ticket drawn has a number which is a multiple
+      of 3 or 5?
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 255
+- fields:
+    content: Four dice are thrown simultaneously. Find the probability that all of
+      them show the same face.
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 256
+- fields:
+    content: There are four hotels in a town. If 3 men check into the hotels in a
+      day then what is the probability that each checks into a different hotel?
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 257
+- fields:
+    content: If <em>x</em> is chosen at random from the set {1,2,3,4} and <em>y</em>
+      is to be chosen at random from the set {5,6,7}, what is the probability that
+      <em>xy</em> will be even?
+    quiz: [31]
+  model: multichoice.MCQuestion
+  pk: 258
+- fields:
+    content: The average amount earned by 20 juniors for a week was $35, while during
+      the same week 10 seniors averaged $20.  What were the average earnings for that
+      week for the combined group?
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 259
+- fields:
+    content: On a standardized test, Alisha received a score of 85, which was exactly
+      2 standard deviations above the mean. If the standard deviation for the test
+      is 4, what is the mean for this test?
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 260
+- fields:
+    content: Thomas and Lanre discovered that the means of their grades for the first
+      semester were identical. They also noticed that the standard deviation of Thomas’
+      grades is 20.7, while the standard deviation of Lanre's grades is 2.7. Which
+      statement must be true?
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 261
+- fields:
+    content: 'The standard deviation is:'
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 262
+- fields:
+    content: Which of the following is interpreted as the percentage of scores in
+      a reference group that falls below a particular raw score?
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 263
+- fields:
+    content: 'What is the median of the following set of scores: 20, 6, 12, 10, 14,
+      18?'
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 264
+- fields:
+    content: The coefficient of variation for a data set is defined as what?
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 265
+- fields:
+    content: Which of the following is NOT a measure of variability?
+    quiz: [32]
+  model: multichoice.MCQuestion
+  pk: 266
+- fields:
+    content: Find the derivative ${f}'(x), of this function f(x)=(3x-4)^{2}$
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 267
+- fields:
+    content: What is the integration, F(x), of the function $f(x)=x^{2}(x^{2}-1)$?
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 268
+- fields:
+    content: If a car’s velocity is described by the function $v(t)=16+3t+\frac{t^{2}}{4}$,
+      what is the car’s acceleration at $t=4$?
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 269
+- fields:
+    content: If $y=\cos^{3}3x, then \frac{\mathrm{d} y}{\mathrm{d} x}$=?
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 270
+- fields:
+    content: The slope of the line tangent to the graph of $y=\ln (x^{2}) at x=e^{2}$
+      is
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 271
+- fields:
+    content: A particle moves in a straight line with velocity $v(t)=t^{2}$. How far,
+      in meters, does the particle move between times t=1 and t=2?
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 272
+- fields:
+    content: If $y=e^{nx}, then \frac{\mathrm{d} ^{n}y}{\mathrm{d} x^{n}}$=
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 273
+- fields:
+    content: If $f(x)=\sin x^{3}$, then $f’(x)$ is
+    quiz: [33]
+  model: multichoice.MCQuestion
+  pk: 274
+- fields:
+    content: $\log _{a}(2^{a})=\frac{a}{4}, then a=?$
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 275
+- fields:
+    content: Find the reminder when the function $P(x)=2x^{3}–4x+3$ is divided by
+      (x+1)
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 276
+- fields:
+    content: What is the equation of a line passing through the points (1, 2) and
+      (-2, 5)?
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 277
+- fields:
+    content: The expression $\cos 80^{o}\cos 70^{o}+\sin 80^{o}\sin 70^{o}$ is equivalent
+      to
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 278
+- fields:
+    content: The system of vectors i, j, k is?
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 279
+- fields:
+    content: In how many ways can a team of 3 boys and 4 girls be selected from a
+      group of 5 boys and 6 girls if one boy must be on the team?
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 280
+- fields:
+    content: Find the slope of a line perpendicular to the line whose equation is
+      3y+2x=6.
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 281
+- fields:
+    content: Consider the graph of the function $y=2^{x}$. At what point will this
+      graph intersect the x-axis?
+    quiz: [34]
+  model: multichoice.MCQuestion
+  pk: 282
+- fields:
+    content: Two sides of a triangle measure 10 inches and 6 inches. Which of the
+      following choices for the length of the third side will make the triangle a
+      right triangle?
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 283
+- fields:
+    content: If $\sin a=\frac{4}{5}, what is \cos a?$
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 284
+- fields:
+    content: The expression $\cos 80^{o}\cos 70^{o}+\sin 80^{o}\sin 70^{o}$ is equivalent
+      to
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 285
+- fields:
+    content: The expression $\frac{\tan x}{\sec x}$ is equivalent to
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 286
+- fields:
+    content: If the tangent of an angle is negative and its secant is positive, in
+      which quadrant does the angle terminate?
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 287
+- fields:
+    content: In triangle ABC, <A=45, <B=30, and a=10. What is the length of side b?
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 288
+- fields:
+    content: The expression $\ sin 2A-2\ sin A$ is equivalent to
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 289
+- fields:
+    content: If $\sin (x+20^{o})=\cos x,$ the value of x is
+    quiz: [35]
+  model: multichoice.MCQuestion
+  pk: 290
+- fields:
+    content: ______ shall I say is calling?
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 291
+- fields:
+    content: Homophones are
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 292
+- fields:
+    content: Microsoft announced ________ releasing a new product next week.
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 293
+- fields:
+    content: We need three _______ and two _______ for the soup.
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 294
+- fields:
+    content: 'Adverbs can modify:'
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 295
+- fields:
+    content: Those are all prepositions, except
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 296
+- fields:
+    content: The other boys or Henry ____ to blame.
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 297
+- fields:
+    content: This will be just between you and ___
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 298
+- fields:
+    content: These are all coordinating conjunctions, except
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 299
+- fields:
+    content: Love, courage, and childhood are examples of
+    quiz: [36]
+  model: multichoice.MCQuestion
+  pk: 300
+- fields:
+    content: 'They had mixed feelings about it; hence their comments were:'
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 301
+- fields:
+    content: If something is implied by actions or statements, it is
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 302
+- fields:
+    content: Fred was in a hurry so he entered the room
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 303
+- fields:
+    content: The ________ steps confirmed he was hiding from someone.
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 304
+- fields:
+    content: A Pyrrhic victory is
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 305
+- fields:
+    content: Mary was always able to recover quickly from misfortunes. She was very
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 306
+- fields:
+    content: 'If something is in oblivion:'
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 307
+- fields:
+    content: Beleaguer means
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 308
+- fields:
+    content: Someone with excessive concern for precision and formal rules is
+    quiz: [37]
+  model: multichoice.MCQuestion
+  pk: 309
+- fields:
+    content: (x + y) + z = x + (y + z) is an example of the _____ property of addition
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 310
+- fields:
+    content: 'Given: a#b=|a-b|. What is the value of 6#8?'
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 311
+- fields:
+    content: The larger root of the equation (x+4)(x–3)=0 is
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 312
+- fields:
+    content: Which point is a solution to this linear quadratic system? $y=x^{2}+4x+3$
+      and $y=2x+6$
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 313
+- fields:
+    content: If you multiply an inequality by a negative number, when should you reverse
+      the inequality symbol?
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 314
+- fields:
+    content: $If f(x)=-x^{2}+1, then f(x+1)=?$
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 315
+- fields:
+    content: 'Solve for $y: y^{2}-81=0$'
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 316
+- fields:
+    content: The graph of $y=2^{x}$ contains which of these points?
+    quiz: [38]
+  model: multichoice.MCQuestion
+  pk: 317
+- fields:
+    content: Find the 41st term in the sequence whose general term is $T_{n}=-3+4(n-1)$
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 318
+- fields:
+    content: The total of the ages of Ahmed, Aminu and Anthony is 80 years. What was
+      the total of their ages three years ago?
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 319
+- fields:
+    content: After a 10% discount, an article is sold for $360. The price before the
+      discount was
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 320
+- fields:
+    content: The simple interest on N1600 for 6 months at 5% per annum is
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 321
+- fields:
+    content: If the fractions $\frac{8}{5}, \frac{7}{2}, \frac{9}{5}, \frac{5}{4},
+      \frac{4}{5}$ are arranged in descending order of their values, which one will
+      be fourth?
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 322
+- fields:
+    content: Alfred can type 10 pages in 5 minutes. Bode can type 5 pages in 10 minutes.
+      Working together, how many pages can they type in 30 minutes?
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 323
+- fields:
+    content: 'A fruit seller had some apples. He sells 40% apples and still has 420
+      apples. Originally, he had:'
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 324
+- fields:
+    content: If A = x% of y and B = y% of x, then which of the following is true?
+    quiz: [39]
+  model: multichoice.MCQuestion
+  pk: 325
+- fields:
+    content: The most basic concept in hypothesis testing is to
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 326
+- fields:
+    content: Which of the following is most likely to reduce sampling error?
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 327
+- fields:
+    content: Which of the following is not a necessary step in scientific research?
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 328
+- fields:
+    content: When drawing a graph it is important that the axes begin at zero to avoid
+      having
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 329
+- fields:
+    content: The main difference between inferential statistics and descriptive statistics
+      is
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 330
+- fields:
+    content: A Type I error is the result of
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 331
+- fields:
+    content: Type II errors should be of concern to us because
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 332
+- fields:
+    content: Theoretically, the reason one would conduct an ANOVA rather than a series
+      of t-tests to analyze the data from a study with four groups is
+    quiz: [40]
+  model: multichoice.MCQuestion
+  pk: 333
+- fields:
+    content: One and a third minus five sixths is equal to
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 334
+- fields:
+    content: Increase 5 by 40%
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 335
+- fields:
+    content: $(1\times 2)\times 3\div 5=$
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 336
+- fields:
+    content: If a certain health condition affects men and women in the ratio of 4
+      men to every 5 women, what percentage of people, to 1 decimal place, affected
+      with this health condition are women?
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 337
+- fields:
+    content: 'An error 2% in excess is made while measuring the side of a square.
+      The percentage of error in the calculated area of the square is:'
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 338
+- fields:
+    content: 'What is the solution to this pair of simultaneous equations: 6x+y=18
+      and 4x+2y=12?'
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 339
+- fields:
+    content: 'If 20% of a=b, then b% of 20 is the same as:'
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 340
+- fields:
+    content: Find the greatest number that will divide 43, 91 and 183 so as to leave
+      the same remainder in each case.
+    quiz: [41]
+  model: multichoice.MCQuestion
+  pk: 341
+- fields:
+    content: 'The distance a screw thread advances axially in one turn is the:'
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 342
+- fields:
+    content: In oblique sketches, the most commonly used angles for receding lines
+      are
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 343
+- fields:
+    content: The recommended method of dimensioning a sphere with diameter 80 mm is
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 344
+- fields:
+    content: The dimension figure for radius of a circle should be preceded by
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 345
+- fields:
+    content: The curve generated by a point on the circumference of a circle, which
+      rolls without slipping along outside of another circle is known as
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 346
+- fields:
+    content: An axonometric projection in which three perpendicular edges of the object
+      make different angles with the plane of projection is called
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 347
+- fields:
+    content: The top and right side views have common dimensions of
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 348
+- fields:
+    content: Hidden lines are drawn as
+    quiz: [42]
+  model: multichoice.MCQuestion
+  pk: 349
+- fields:
+    content: A distinguishing characteristics of a limited liability company is that
+      it
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 350
+- fields:
+    content: A pro forma invoice is NOT required when
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 351
+- fields:
+    content: A demonstration of social responsibility by a business is the payment
+      of
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 352
+- fields:
+    content: Which of the following groups is paid first when a firm liquidates?
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 353
+- fields:
+    content: The rate at which a country’s exports exchange for its imports is called
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 354
+- fields:
+    content: The difference between the total payments for imports and the receipts
+      from exports within a given period is referred to as
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 355
+- fields:
+    content: Drawing two parallel lines across a cheques means that it has to be paid
+      into the account of the
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 356
+- fields:
+    content: The element of the marketing mix are
+    quiz: [43]
+  model: multichoice.MCQuestion
+  pk: 357
+- fields:
+    content: Unintentional use of an inappropriate word similar in sound to the appropriate
+      word, often with humorous effect.
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 358
+- fields:
+    content: A play on words wherein a word is used to convey two meanings at the
+      same time.
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 359
+- fields:
+    content: A figure of speech wherein a part of something represents the whole thing
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 360
+- fields:
+    content: The emotional content of a word.
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 361
+- fields:
+    content: The structure of a story; the sequence in which the author arranges events
+      in a story; the structure of a five-act play often includes the rising action,
+      the climax, the falling action, and the resolution.
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 362
+- fields:
+    content: 'In ''The Flight to Australia'' the following line occurs: ‘Tier upon
+      tier it towered, the terrible Apennines'' The figure of speech used in this
+      line is known as'
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 363
+- fields:
+    content: In on of the three jugs<br>The three jugs where on certain evenings return
+      the tranquil souls,<br>the breaths of the ancestors,<br>the ancestors who were
+      men,<br>the ancestors who were sages,<br>Mother has dipped three fingers<br>three
+      fingers of her left hand:<br>thumb, forefinger and middle finger<br>I have dipped
+      three fingers<br>three fingers of my right hand:<br>thumb, forefinger and middle
+      finger.<br>(From 'Viaticum'by B.Diop)<br><br>In this poem, the repetitive pattern
+      suggests
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 364
+- fields:
+    content: You cannot know<br>And should not bother;<br>Tide and market come and
+      go<br>And so shall your mother.<br><br>In this verse the poet uses
+    quiz: [44]
+  model: multichoice.MCQuestion
+  pk: 365
+- fields:
+    content: Suppose there is excess supply in a market and the price decreases. Which
+      of the following combinations of events will occur?
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 366
+- fields:
+    content: Suppose a market is in equilibrium, and then the demand increases. Which
+      of the following would be shown on a graph that illustrated the effects?
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 367
+- fields:
+    content: In the short-run, which of the following always gets smaller as output
+      increases?
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 368
+- fields:
+    content: What is meant by intermediate goods and services?
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 369
+- fields:
+    content: Which of the following statements is false?
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 370
+- fields:
+    content: Which of the following would not shift the money demand curve to the
+      right?
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 371
+- fields:
+    content: Microeconomics is concerned with
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 372
+- fields:
+    content: If your income during one year is £10,000 and the following year it is
+      £12,000, then it has grown by
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 373
+- fields:
+    content: 'Two factors that do not directly affect the demand curve are:'
+    quiz: [45]
+  model: multichoice.MCQuestion
+  pk: 374
+- fields:
+    content: The memory address of the first element of an array is called
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 375
+- fields:
+    content: The term 'push' and 'pop' is related to the
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 376
+- fields:
+    content: A variable P is called pointer if
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 377
+- fields:
+    content: Which of the following algorithm design technique is used in the quick
+      sort algorithm?
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 378
+- fields:
+    content: The complexity of Binary search algorithm is
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 379
+- fields:
+    content: Two main measures for the efficiency of an algorithm are
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 380
+- fields:
+    content: Which of the following data structure is not linear data structure?
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 381
+- fields:
+    content: The operation of processing each element in the list is known as
+    quiz: [46]
+  model: multichoice.MCQuestion
+  pk: 382
+- fields:
+    content: How many keys are found on an average piano
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 383
+- fields:
+    content: What are the black keys on a piano called?
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 384
+- fields:
+    content: What is the right pedal on a piano used for?
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 385
+- fields:
+    content: What is the left pedal on a piano used for?
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 386
+- fields:
+    content: How many strings are in an average piano
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 387
+- fields:
+    content: Which is not a piano part?
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 388
+- fields:
+    content: How many letters are there in the music alphabet?
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 389
+- fields:
+    content: A Half Note is an example of a
+    quiz: [47]
+  model: multichoice.MCQuestion
+  pk: 390
+- fields:
+    content: Which one of the following is the recommended sequence for preparing
+      and delivering a speech?
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 391
+- fields:
+    content: Concerning the title of a speech, which statement below is false?
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 392
+- fields:
+    content: Which of the following is not one of the seven components to the Public
+      Speaking Process?
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 393
+- fields:
+    content: Facial expressions, words, visual aids, and messages conveyed make up
+      the communication process
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 394
+- fields:
+    content: The four components essential to public speaking are
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 395
+- fields:
+    content: Feedback comes in variety of forms. The two types of feedback are best
+      described as
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 396
+- fields:
+    content: What is the difference between hearing and listening?
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 397
+- fields:
+    content: Which of the following organizations is a reputable public speaking company?
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 398
+- fields:
+    content: When choosing a topic, you should
+    quiz: [48]
+  model: multichoice.MCQuestion
+  pk: 399
+- fields:
+    content: One of these is not a part of the bow…
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 400
+- fields:
+    content: The nut is...
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 401
+- fields:
+    content: A violin is made mostly out of what kinds of wood?
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 402
+- fields:
+    content: What are the strings in order from lowest to highest?
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 403
+- fields:
+    content: What is the violin bow made of?
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 404
+- fields:
+    content: Violins are tuned by turning their what?
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 405
+- fields:
+    content: A person that makes or repairs violins is called a what?
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 406
+- fields:
+    content: How many strings does a violin have?
+    quiz: [49]
+  model: multichoice.MCQuestion
+  pk: 407
+- fields:
+    content: Which of the following is used for creating and defining various characteristics
+      of variables?
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 408
+- fields:
+    content: Which menu would you select to run statistical procedures?
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 409
+- fields:
+    content: What are the two main windows in SPSS?
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 410
+- fields:
+    content: Which of the following is used for entering and viewing data?
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 411
+- fields:
+    content: Which menu contains the split file and select cases command?
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 412
+- fields:
+    content: Select the window where the results of your analysis appear?
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 413
+- fields:
+    content: Which menu item contains procedures to manipulate variables
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 414
+- fields:
+    content: In this tab, rows represent variables and columns represent characteristics
+      of variables
+    quiz: [50]
+  model: multichoice.MCQuestion
+  pk: 415
+- fields:
+    content: A _______ is drawn as an open oval
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 416
+- fields:
+    content: What are the three notes that make up a C Major Chord?
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 417
+- fields:
+    content: What does the lower number in the time signature indicate?
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 418
+- fields:
+    content: In the key of D, what chords would represent 2-5-1 progression?
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 419
+- fields:
+    content: What is the relative minor scale to G major?
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 420
+- fields:
+    content: Which of the following markings would affect the length of a note?
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 421
+- fields:
+    content: 'How would the chord (with notes from lowest to highest): C E G B be
+      classified?'
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 422
+- fields:
+    content: How many sharps are in the scale F sharp major?
+    quiz: [51]
+  model: multichoice.MCQuestion
+  pk: 423
+- fields:
+    content: What is the objective function in linear programming problems?
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 424
+- fields:
+    content: PERT is used for projects involving activities of what nature?
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 425
+- fields:
+    content: Which of these have several objective functions, each having a target
+      value?
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 426
+- fields:
+    content: To obtain inequality constraints introduce _____ variables for <= type
+      of constraint
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 427
+- fields:
+    content: In Vogel’s Approximation method; the opportunity cost associated with
+      a row is determined by
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 428
+- fields:
+    content: 'Consider the constraint: 5x+3y=4z<=7. Find the value of the slack variable,
+      s, associated with this constraint for the point A(1,2,3)'
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 429
+- fields:
+    content: The variables assigned the value zero are called
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 430
+- fields:
+    content: A ___________ is the sequence of cells in the transportation table such
+      that no cell appears more than once in the sequence
+    quiz: [52]
+  model: multichoice.MCQuestion
+  pk: 431
+- fields:
+    content: Which of these is not one of the sections in IELTS?
+    quiz: [53]
+  model: multichoice.MCQuestion
+  pk: 432
+- fields:
+    content: IELTS scores are called?
+    quiz: [53]
+  model: multichoice.MCQuestion
+  pk: 433
+- fields:
+    content: One of the sections usually involves a physical or online examination
+      with an IELTS staff
+    quiz: [53]
+  model: multichoice.MCQuestion
+  pk: 434
+- fields:
+    content: 'The types of IELTS exams are:'
+    quiz: [53]
+  model: multichoice.MCQuestion
+  pk: 435
+- fields:
+    content: What is the maximum score on IELTS?
+    quiz: [53]
+  model: multichoice.MCQuestion
+  pk: 436
+- fields:
+    content: Walking along the side of the road, ______.
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 437
+- fields:
+    content: After her death in 1986 many documentaries ______ Georgia O'Keeffe were
+      produced.
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 438
+- fields:
+    content: Popular belief in the United States is that <u>an early</u> life of hardship
+      and poverty <u>made</u> Abraham Lincoln <u>to be</u> the great leader <u>he
+      was</u>.
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 439
+- fields:
+    content: According to the scientific method, a scientist must consider ______
+      outcome.
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 440
+- fields:
+    content: Similar <u>in</u> climate and geography <u>many</u> northeastern cities
+      <u>is</u> Portland, the <u>largest</u> city in Oregon
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 441
+- fields:
+    content: Uranium, ______ , is an exceedingly rare and potentially dangerous element.
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 442
+- fields:
+    content: The architecture exhibited in the Empire State Building and <u>conveyed</u>
+      us an idea of the <u>prevailing</u> attitudes of the day <u>is</u> important
+      for the historical and cultural value <u>it represents</u>.
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 443
+- fields:
+    content: The Flower Market in San Francisco is ______, and was established in
+      the 1930's.
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 444
+- fields:
+    content: What is the maximum score in TOEFL?
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 445
+- fields:
+    content: Which of these is NOT one of the sections in the exam?
+    quiz: [54]
+  model: multichoice.MCQuestion
+  pk: 446
+- fields:
+    content: Which one of the following is a legitimate variable name in MATLAB?
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 447
+- fields:
+    content: Which of the following MATLAB expression gives -1
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 448
+- fields:
+    content: Which of the following determines the number of elements N in a matrix
+      A?
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 449
+- fields:
+    content: The difference between a function and a script is
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 450
+- fields:
+    content: Which of the following expressions generates an evenly spaced vector
+      x containing 15 values between 4 and 20?
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 451
+- fields:
+    content: A student does an experiment to measure the change in a pendulum’s oscillation
+      period with the length of the pendulum. What is the most appropriate excel chart
+      type to display this data?
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 452
+- fields:
+    content: 'Executing in the Command Window the code: A = eye(1,10); size(A(2,2))
+      returns'
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 453
+- fields:
+    content: Executing in the Command Window the code a = [1:2]’ ; size(a) returns
+    quiz: [55]
+  model: multichoice.MCQuestion
+  pk: 454
+- fields:
+    content: What does SQL stand for?
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 455
+- fields:
+    content: In SQL, which command is used to remove a stored function from the database?
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 456
+- fields:
+    content: In SQL, which command is used to select only one copy of each set of
+      duplicate rows
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 457
+- fields:
+    content: Count function in SQL returns the number of
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 458
+- fields:
+    content: What operator performs pattern matching?
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 459
+- fields:
+    content: What is a DATABLOCK?
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 460
+- fields:
+    content: Composite key is made up of
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 461
+- fields:
+    content: Which command displays the SQL command in the SQL buffer, and then executes
+      it?
+    quiz: [56]
+  model: multichoice.MCQuestion
+  pk: 462
+- fields:
+    content: Inside which HTML element do we put the JavaScript?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 463
+- fields:
+    content: What is the correct JavaScript syntax to write “Hello World”?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 464
+- fields:
+    content: How do you call a function named “myFunction”?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 465
+- fields:
+    content: How do you write a conditional statement for executing some statements
+      only if “i” is NOT equal to 5?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 466
+- fields:
+    content: How many different kind of loops are there in JavaScript?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 467
+- fields:
+    content: How does a “for” loop start?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 468
+- fields:
+    content: What is the correct way to write a JavaScript array?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 469
+- fields:
+    content: How do you round the number 8.25, to the nearest whole number?
+    quiz: [57]
+  model: multichoice.MCQuestion
+  pk: 470
+- fields:
+    content: In Perl, __________ is a special character or a sequence that will define
+      the number of times the previous character or sequence appears
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 471
+- fields:
+    content: In Perl, the expression will result in which of the following, if the
+      prize is currently “5 dollars print ‘You won $prize’;
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 472
+- fields:
+    content: In Perl, the words function and subroutines are used interchangeably
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 473
+- fields:
+    content: Which of the following are file handles?
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 474
+- fields:
+    content: Which switch is used for printing out warnings about typographical errors
+      in your script?
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 475
+- fields:
+    content: CGI is a programming language
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 476
+- fields:
+    content: In Perl, “stat” returns a thirteen element array with which of the following
+      values?
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 477
+- fields:
+    content: Scalar variables always begin with a _______ sign
+    quiz: [58]
+  model: multichoice.MCQuestion
+  pk: 478
+- fields:
+    content: In PHP, arrays may be sorted with which of the following functions?
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 479
+- fields:
+    content: PHP comments for a single line have the following syntax
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 480
+- fields:
+    content: In PHP, the error control operator is ______
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 481
+- fields:
+    content: In PHP, instructions are terminated with a ______
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 482
+- fields:
+    content: How do you write “Hello World” in PHP
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 483
+- fields:
+    content: All variables in PHP start with which symbol?
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 484
+- fields:
+    content: What is the correct way to include the file “time.inc”?
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 485
+- fields:
+    content: What is the correct way to create a function in PHP?
+    quiz: [59]
+  model: multichoice.MCQuestion
+  pk: 486
+- fields:
+    content: A substance needed by the body for growth, energy, repair and maintenance
+      is
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 487
+- fields:
+    content: All the following are nutrients found in food except
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 488
+- fields:
+    content: A diet high in saturated fats can be linked to which of the following?
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 489
+- fields:
+    content: Amylases in saliva begin the breakdown of carbohydrates into
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 490
+- fields:
+    content: Your body needs vitamins and minerals because
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 491
+- fields:
+    content: Food passes through the stomach directly by
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 492
+- fields:
+    content: About half of your diet should be made up of
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 493
+- fields:
+    content: 'A mineral that the body needs to work properly is '
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 494
+- fields:
+    content: What is a unit of energy that indicates the amount of energy contained
+      in food
+    quiz: [60]
+  model: multichoice.MCQuestion
+  pk: 495
+- fields:
+    content: When you serve, the ball must not bounce more than once on the opponent’s
+      side of the table. If it does, then you lose the point (even though your opponent
+      did not return the serve). This is to ensure that the serve is not so short
+      as to be impossible to retrieve
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 496
+- fields:
+    content: A game is played to 11, with the serve changing every 2 points. A game
+      must be won by 2 points, so the score sometimes exceed 11 points.
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 497
+- fields:
+    content: If you touch the table with your free hand while playing, you lose the
+      point
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 498
+- fields:
+    content: The ball cannot travel around the side of the net to reach the other
+      side of the table. That is, the ball must travel over the net
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 499
+- fields:
+    content: If player A hits the ball over the net, and the ball hits player B’s
+      side of the table, and then, before player B has hit the ball, the ball travels
+      back over to player A’s side of the table, then player A wind the point
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 500
+- fields:
+    content: When a player is within one point of losing the game, it is his serve
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 501
+- fields:
+    content: What is it called when the ball hits the net and successfully makes it
+      over when serving?
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 502
+- fields:
+    content: Who gets the point when a let occurs on a serve?
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 503
+- fields:
+    content: If the ball touches any part of the hand holding the paddle, you lose
+      the point
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 504
+- fields:
+    content: How many lets can you have in a row on a serve?
+    quiz: [61]
+  model: multichoice.MCQuestion
+  pk: 505
+- fields:
+    content: In doubles play, the first serve for the serving side begins in what
+      court?
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 506
+- fields:
+    content: In singles play, if you are serving and the score is an even number,
+      you serve from which service courts?
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 507
+- fields:
+    content: When serving the shuttle, the racket head must be where?
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 508
+- fields:
+    content: A shot to which the shuttle is hit sharply downward into the opponent’s
+      court is called?
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 509
+- fields:
+    content: The net in badminton is how high?
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 510
+- fields:
+    content: During the game, you may hit the shuttle two times in a row
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 511
+- fields:
+    content: Points may only be scored by the serving side
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 512
+- fields:
+    content: If the shuttle lands on the line, it is considered out of bounds
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 513
+- fields:
+    content: It is a fault if the server missed the shuttle completely while attempting
+      to serve
+    quiz: [62]
+  model: multichoice.MCQuestion
+  pk: 514
+- fields:
+    content: What is it called when a player scores a point?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 515
+- fields:
+    content: How many points is a shot worth when inside the opposition’s semi-circle?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 516
+- fields:
+    content: A basketball game has how many parts?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 517
+- fields:
+    content: How long is each part?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 518
+- fields:
+    content: How many players are allowed on the court for each team?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 519
+- fields:
+    content: How many substitutes is each team allowed to make?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 520
+- fields:
+    content: For how long is each team allowed to stay in possession of the ball before
+      they must shoot?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 521
+- fields:
+    content: Once past the half-way line, is a team in possession allowed to play
+      the ball back into their own half?
+    quiz: [63]
+  model: multichoice.MCQuestion
+  pk: 522
+- fields:
+    content: What is it called when you step on or over the line while serving?
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 523
+- fields:
+    content: What is the name of a hit when the ball is contacted with the fingertips
+      above the head.
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 524
+- fields:
+    content: What is a type of pass where the hands are clenched together and contact
+      is made between the wrists and elbows?
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 525
+- fields:
+    content: What is the maximum number of hits a team can use to get the ball over
+      the net during play?
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 526
+- fields:
+    content: If a player hits the ball twice consecutively, it is called what?
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 527
+- fields:
+    content: If a player hits the ball with two open palms, it is called a
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 528
+- fields:
+    content: Which of these is NOT a type of hit?
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 529
+- fields:
+    content: A ball that is served to the other team where no one touches it is called
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 530
+- fields:
+    content: If a serve hits the top of the net, but continues over the net, it is
+    quiz: [64]
+  model: multichoice.MCQuestion
+  pk: 531
+- fields:
+    content: Which pair of activities would you NOT find in an equatorial climate?
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 532
+- fields:
+    content: Which of the following factors least explains the fast growing population
+      in Africa
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 533
+- fields:
+    content: If a scale of 1:50,000 is reduced by half, what is the new scale of the
+      map?
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 534
+- fields:
+    content: Which of the following provides the best location for a bakery?
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 535
+- fields:
+    content: Which of the following towns is NOT a pre-colonial town in Nigeria?
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 536
+- fields:
+    content: A World Title Boxing contest took place in New York (75oW time zone)
+      on a Tuesday between 21:30 and 22:30 Hours and was televised live. When did
+      viewers in Lagos (15oE time zone) watch the contest live on television?
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 537
+- fields:
+    content: Which of the following currents has a warming influence upon the coast
+      along which it flows?
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 538
+- fields:
+    content: Temperature is to isotherms as air pressure is to
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 539
+- fields:
+    content: In which of the following countries is commercial grain farming an important
+      occupation?
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 540
+- fields:
+    content: The length of a year is 365 (1/4) days because that is the times it takes
+    quiz: [65]
+  model: multichoice.MCQuestion
+  pk: 541
+- fields:
+    content: The central point of capitalism, as expounded by Karl Marx, is that
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 542
+- fields:
+    content: One of the advantages of a bicameral over a unicameral legislature is
+      that it
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 543
+- fields:
+    content: Delegated legislature becomes unavoidable when
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 544
+- fields:
+    content: One major disadvantage of public opinion is that
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 545
+- fields:
+    content: Citizenship in a modern state expresses the status of a person who possesses
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 546
+- fields:
+    content: Communism is a system which recognizes
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 547
+- fields:
+    content: A major issue that distinguishes pressure groups from political parties
+      is
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 548
+- fields:
+    content: Which of these constitutions recognized local government as a third tier
+      of government in Nigeria?
+    quiz: [66]
+  model: multichoice.MCQuestion
+  pk: 549
+- fields:
+    content: Microsoft Excel is a _______ application
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 550
+- fields:
+    content: 'A spreadsheet must have all the following EXCEPT:'
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 551
+- fields:
+    content: The cell reference for a range of cells that starts in cell B1 and goes
+      over to column G and down to row 10 is ____
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 552
+- fields:
+    content: Which of the following formulas will give you the total value of a series
+      of numbers displayed in column C from C1 to C14
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 553
+- fields:
+    content: What value will =5+6*5 produce?
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 554
+- fields:
+    content: The formula that will add the value of cell D4 to the value of C2 and
+      then multiply by the value in B2 is _____
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 555
+- fields:
+    content: Cell A4 = 2 and A5 = 4. You select both cells and drag the fill handle
+      down to A8. The contents of the cells A6, A7, and A8 are ___
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 556
+- fields:
+    content: To edit existing data in a cell without having to retype it all, you
+      should _____.
+    quiz: [67]
+  model: multichoice.MCQuestion
+  pk: 557
+- fields:
+    content: Trying to keep her balance on the icy surface, <u>the last competitor's
+      ski-tip caught the pole and somersaulted into the soft snow.</u>
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 558
+- fields:
+    content: The temperature dropped suddenly last night, <u>which will mean that
+      the shoots emerging from the soil will be killed by the frost.</u>
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 559
+- fields:
+    content: The impostor eluded detection for so long because she conducted herself
+      <u>as though she were a licensed practitioner.</u>
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 560
+- fields:
+    content: <u>Being abandoned by our friends is the cause of great sorrow for us.</u><u>
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 561
+- fields:
+    content: The government requires <u>that these forms should be submitted</u> before
+      the end of the financial year.
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 562
+- fields:
+    content: After arduous months of fighting, the sight of the white flag being raised
+      generated <u>as much relief on the victor's side than it did on the vanquished.</u>
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 563
+- fields:
+    content: The best way to encourage innovative thinking is not to promise financial
+      rewards for ideas, <u>but to ensure that the person making the suggestion receives
+      recognition for his contribution.</u>
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 564
+- fields:
+    content: It ought to be <u>her with whom you share your secrets, not me.</u>
+    quiz: [68]
+  model: multichoice.MCQuestion
+  pk: 565
+- fields:
+    content: Today Wegener's theory is ____ ; however, he died an outsider treated
+      with ____ by the scientific establishment.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 566
+- fields:
+    content: The revolution in art has not lost its steam; it ____ on as fiercely
+      as ever.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 567
+- fields:
+    content: Each occupation has its own ____ ; bankers, lawyers and computer professionals,
+      for example, all use among themselves language which outsiders have difficulty
+      following.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 568
+- fields:
+    content: ____ by nature, Jones spoke very little even to his own family members.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 569
+- fields:
+    content: Biological clocks are of such ____ adaptive value to living organisms,
+      that we would expect most organisms to ____ them.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 570
+- fields:
+    content: The peasants were the least ____ of all people, bound by tradition and
+      ____ by superstitions.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 571
+- fields:
+    content: Many people at that time believed that spices help preserve food; however,
+      Hall found that many marketed spices were ____ bacteria, moulds and yeasts.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 572
+- fields:
+    content: If there is nothing to absorb the energy of sound waves, they travel
+      on ____ , but their intensity ____ as they travel further from their source.
+    quiz: [69]
+  model: multichoice.MCQuestion
+  pk: 573
+- fields:
+    content: If an object travels at five feet per second, how many feet does it travel
+      in one hour?
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 574
+- fields:
+    content: What is the average (arithmetic mean) of all the multiples of ten from
+      10 to 190 inclusive?
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 575
+- fields:
+    content: A cubical block of metal weighs 6 pounds. How much will another cube
+      of the same metal weigh if its sides are twice as long?
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 576
+- fields:
+    content: ' In a class of 78 students 41 are taking French, 22 are taking German.
+      Of the students taking French or German, 9 are taking both courses. How many
+      students are not enrolled in either course?'
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 577
+- fields:
+    content: A 3 by 4 rectangle is inscribed in circle. What is the circumference
+      of the circle?
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 578
+- fields:
+    content: Six years ago Anita was P times as old as Ben was. If Anita is now 17
+      years old, how old is Ben now in terms of P?
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 579
+- fields:
+    content: If the product of 6 integers is negative, at most how many of the integers
+      can be negative?
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 580
+- fields:
+    content: The price of a cycle is reduced by 25 per cent. The new price is reduced
+      by a further 20 per cent. The two reductions together are equal to a single
+      reduction of
+    quiz: [70]
+  model: multichoice.MCQuestion
+  pk: 581

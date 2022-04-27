@@ -1,0 +1,233 @@
+{% extends 'pages/trust.html' %}
+{% load staticfiles %}
+{% block sub_nav %}{% endblock %}
+{% block carousel_image %}
+<div class="item active">
+{% block jumbo1 %}
+    <div class="caro bg8"></div>
+{% endblock jumbo1 %}
+  {# <img src="{% static 'img/backgrounds/trust.jpg' %}" alt="tested and trusted privated tutoring"> #}
+</div>
+{% endblock carousel_image %}
+{% block css %}
+    {{block.super}}
+    <style>
+    #carousel .carousel-inner > .item > .caro, .carousel-inner > .item > a > img {
+    height: 525px;
+    }
+    .content-carousel {
+        min-height: 525px;
+    }
+    .feature-hero {
+    margin-bottom: 0;
+    padding: 40px 0;
+    }
+    .feature-hero p {
+    font-size: 17px;
+    line-height: 1.45;
+    margin-bottom: 18px;
+    color: #67696a;
+    }
+    .large-padding {
+    padding: 60px
+    }
+
+    section.protection {
+        color: #fff;
+        background: #36648B;
+        font-size: 18px
+    }
+    section.protection .media-photo {
+        background: transparent
+    }
+    .bg8{
+      background-image: url('/static/img/backgrounds/discounts.jpg');
+      background-size: 100% !important;
+    }
+      @media(max-width: $screen-xs-max){
+        .bg8{
+        background-size: cover !important;
+          background-position: 50% 40%;
+          height: 300px !important;
+         }
+      } 
+      @media (min-width: 1900px) and (max-width: 2500px){
+        .bg8{
+        background-position: 20% 35% !important;
+        height: 480px !important;
+        }
+      }  
+      @media (min-width: 2501px){
+        .bg8{
+        background-position: 20% 35% !important;
+        height: 620px !important;
+        }
+      }
+      @media (max-width: 768px){
+        .content-carousel h2 {
+            font-size: 2em;
+        }
+    }
+    .icon-resize{
+        width: 30%;
+    }
+    @media(max-width: 768px){
+        .icon-resize{
+            width: 20%;
+        }
+    }
+    </style>
+{% endblock css %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+
+{% block title %}Enjoy Lesson Discounts | Tuteria, Nigeria{% endblock title %}
+
+{% block carousel_content %}
+
+<div class="row ">
+  <div class="jumbo-header" style="margin-top: -20px">
+    <h2 class="myh2"><b class="white">Pay Less, Learn More</b></h2>
+
+    <p class="grey">Load your wallet and get up to 15% discount on all lessons</p>
+    {% if not request.is_featured %}
+    <div class="row">
+    <div class="col-md-3 col-sm-5 col-xs-12 padding-top-25 mobile-top-25">
+        <a href="{% url 'begin_deposit' %}" class="btn btn-primary btn-lg col-xs-12 big-btn">
+            Get discounts
+        </a>
+    </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+</div>
+{% endblock %}
+{% block main_content %}
+    <div class="container row">
+        <div class="row">
+            <div class="">
+                <div class="feature-hero row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 hidden-xs hidden-sm">
+        <div class="row-space-top-4">
+          <img src="{% static "img/backgrounds/discount_sample1.jpg" %}" alt="" width="90%">
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12 space-for-mobile">
+        <div class="row row-space-6">
+          <div class="col-md-12 text-left">
+            <h2>
+              How your discount works.
+            </h2>
+            <p class="text-lead">
+              It's simple. We help you save money on qualitative tutoring when you load your wallet.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+              <img src="{% static "img/tutor/clients.png" %}" alt="" class="icon-resize">
+              <h4 class="font-head padding-top-10">1. Make deposit</h4>
+              <p>Load up to &#x20A6;30,000 into your wallet to use as payment for any lessons you book.</p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <img src="{% static "img/gallery/discount.png" %}" alt="" class="icon-resize">
+              <h4 class="font-head padding-top-10">2. Receive discount</h4>
+              <p>Instantly receive 5%, 10% or 15% discount loaded ontop of your amount for free.</p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <img src="{% static "img/gallery/learning.png" %}" alt="" class="icon-resize">
+              <h4 class="font-head padding-top-10">3. Learn for less</h4>
+              <p>Pay from your wallet for all lessons with any tutor. Your discount never expires!</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+<div class="feature-hero panel row">
+  <div class="container">
+    <div class="row padding-bottom-50">
+      <div class="col-md-8 col-sm-12">
+        <div class="row row-space-6">
+          <div class="col-md-12 padding-top-25">
+            <h2>
+              Quality, affordable lessons.
+            </h2>
+            <p class="text-lead">
+              Choose from one of our 3 discount packages to save money on tutoring.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+              <img src="{% static "img/tutor/requests.png" %}" alt="" class="icon-resize">
+              <h4 class="font-head padding-top-10">5% discount</h4>
+              <p>Load &#x20A6;30,000 to your wallet and get &#x20A6;31,500. Perfect for short lessons.</p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+            <img src="{% static "img/tutor/requests.png" %}" alt="" class="icon-resize">
+              <h4 class="font-head padding-top-10">10% discount <small style="color:#00d1c1">(popular!)</small></h4>
+              <p>Load &#x20A6;70,000 to your wallet and get &#x20A6;77,000. Suitable for lessons of few months.</p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <img src="{% static "img/tutor/requests.png" %}" alt="" class="icon-resize">
+              <h4 class="font-head padding-top-10">15% discount</h4>
+              <p>Load &#x20A6;150,000 to your wallet and get &#x20A6;172,500. Parents' most preferred choice to sort out kids' lessons at once.</p>
+            </div>
+             <div class="desktop-padding-50">
+            {% if not request.is_featured %}
+            <div class="col-md-4 col-sm-5 col-xs-12 padding-top-25 mobile-top-25">
+                <a href="{% url 'begin_deposit' %}" class="btn btn-tutor btn-lg col-xs-12 big-btn">
+                    Get discounts
+                </a>
+            </div>
+            {% else %}
+            <div class="col-sm-12">
+            <div class="well bg-info">
+                Your browser doesn't support online payments which is required to get discounts. Please switch to Chrome or Firefox browser or contact us on <span class="font-head">{{tuteria_details.phone_number}}</span> or <span class="font-head">{{tuteria_details.email}}</span>
+                </div>
+            </div>
+            {% endif %}
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 hidden-xs hidden-sm">
+        <div class="row-space-top-4">
+          <img src="{% static "img/backgrounds/discount_sample.jpg" %}" alt="" width="90%">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block request_section %}
+<section class="row protection large-padding">
+    <div class="page-container-full">
+      <div class="row">
+        <div class="col-lg-6 col-sm-8 col-sm-push-2 col-lg-push-3 text-center">
+          <div class="media-photo">
+                <img width="85" height="85"
+                     src="{% static "img/gallery/policy.png" %}">
+            </div>
+          <h2>
+            <span class="font-head">
+              Refund Policy
+            </span>
+          </h2>
+          <p>
+            As always, if you're not 100% satisfied with the lessons, we'll promptly replace the tutor or refund your balance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

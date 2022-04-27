@@ -1,0 +1,530 @@
+{% extends 'bookings/includes/base_summary.html' %}
+{% load staticfiles activelink cloudinary add_attr humanize %}
+{% block css %}
+    {{ block.super }}
+
+    <style>
+        .order-header-info {
+            margin-top: 10px !important;
+            margin-left: 95px !important;
+        }
+
+    </style>
+{% endblock %}
+{% block tabs %}
+    <li role="presentation">
+        <a href="#resolution" aria-controls="profile" role="tab" data-toggle="tab">
+            Resolution <span class="hidden-xs">Center</span></a>
+    </li>
+{% endblock %}
+{% block tab_content %}
+    <div role="tabpanel" class="tab-pane" id="resolution">
+        <div class="panel">
+            <article class="panel-body db-order-resolution-center js-page-tab-content js-page-tab-resolution-center">
+
+                <div class="cf row">
+                    <span class="col-sm-4 col-xs-12">Booking: #{{ object.order }}</span>
+
+                    <time class="col-sm-5 col-xs-12" datetime="{{ object.created | date:'Y-m-j' }}">
+                        Booked on {{ object.created | date:'M j, Y' }} ({{ object.created|naturaltime }})
+                    </time>
+                    <span class="col-sm-3 col-xs-12">Tutor: {{ object.get_tutor.first_name }}</span>
+                </div>
+            </article>
+        </div>
+        <div class="panel" id="default-section">
+            <div class="panel-body">
+                {% if object.status < 2 %}
+                    {% if object.can_cancel %}
+                        <div id="available">
+                            <h4>Need to make some changes?</h4>
+
+                            <p>If you need to cancel one or more lessons, you can do so below provided you have informed
+                                your tutor and <span class="font-head">{{ object.policy.condition }}</span> of your next
+                                lesson according to the tutor's <a
+                                        href="{{ object.policy.get_absolute_url }}"
+                                        target="_blank">{{ object.policy.option }} Cancellation Policy.</a> Simply
+                                select the lessons you wish to cancel and click "Cancel". Call <span
+                                        class="font-head">{{ tuteria_details.phone_number }}</span> if you need any
+                                help.
+                            </p>
+
+                            <p><em>Please note that you will be charged a cancellation fee if you cancel late or cancel
+                                the entire booking.
+                            </em></p>
+
+                            <div class="db-filters row  row-space-2 row-space-top-4">
+                                <div class="filter-select col-sm-12">
+                                    <a id="cancel-btn" href="javascript:void(0)" class="btn btn-default"
+                                       disabled>Cancel</a>
+                                </div>
+                            </div>
+                            <!-- <div class="cancel_table">
+                                <div class="table-responsive">
+                                    <table id="booking-table" class="table">
+                                        <thead>
+                                        <tr>
+                                            <td>
+                                                <label class="fake-check-grey" data-filter="cbx">
+                                                    <input id="check-all-box" type="checkbox"><span
+                                                        class="chk-img"></span>
+                                                </label>
+                                            </td>
+                                            <td>Session</td>
+                                            <td>Time</td>
+                                            <td class="amount">Amount.</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for session in object.bookingsession_set.can_be_cancelled %}
+                                            {#                                        {% for session in object.bookingsession_set.all %}#}
+                                            <tr>
+                                                <td><label class="fake-check-grey" data-filter="cbx">
+                                                    <input id="{{ session.id }}" class="check-opt" type="checkbox"><span
+                                                        class="chk-img"></span>
+                                                </label></td>
+                                                <td class="">{{ session.start | date:'l, M j' }} </td>
+                                                <td>{{ session.start | date:'gA'|lower }}
+                                                    - {{ session.end | date:'gA'|lower }}</td>
+                                                <td class="amount">&#x20a6;{{ session.price|floatformat:0 }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> -->
+                        </div>
+                    {% else %}
+                        <div>You have previously placed a cancellation on one or more sessions in this booking.</div>
+                    {% endif %}
+
+                {% endif %}
+                {% if object.status == 2 and object.cancellation_message %}
+                    <div id="pending">
+                        <h4>{{ object.get_tutor.first_name|title }} has requested to cancel this booking.</h4>
+
+                        <div class="well">{{ object.cancellation_message }}</div>
+                        <div class="col-xs-offset-6 col-sm-offset-8 col-sm-4 col-xs-6">
+                            <form action="{% url 'users:client_confirm_request' object.order %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-block btn-primary" id="confirm-cancel-btn"
+                                        data-loading-text="Processing...">Confirm Cancellation
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if object.status == 3 %}
+                    <div id="completed">
+                        <h4>Interesting...?</h4>
+
+                        <div id="completed-text">
+
+                            <p>We can see this booking was delivered on 01/03/14. It is now marked
+                                as completed</p>
+
+                            <p>A booking is automatically marked as completed 1 day after being
+                                delivered or after you submit a review. If you have any issues with the booking, please get in touch with us on this number:
+                                <strong>{{ tuteria_details.phone_number }}</strong>
+                                or by email <a class="href"
+                                               mailto="{{ tuteria_details.email }}">{{ tuteria_details.email }}</a>.
+                            </p>
+
+                            <p>We are always here to help.</p>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if object.status == 4 %}
+                    <div id="cancelled">
+                        <h4>Hmm...interesting</h4>
+
+                        <div id="completed-text">
+
+                            <p>We can see this lesson was cancelled on {{ object.modified | date:'d/m/y' }}, and has now
+                                been marked as cancelled.</p>
+
+                            <p>A booking is marked as cancelled when the client cancel's the lessons or when you as a
+                                tutor request to cancel the booking and the client confirms the request. If you need
+                                further assistance, please get in touch with us on:
+                                <strong>{{ tuteria_details.phone_number }}</strong>
+                                or by email
+                                <a class="href" mailto="{{ tuteria_details.email }}">{{ tuteria_details.email }}</a>.
+                            </p>
+
+                            <p>We are always here to help.</p>
+                        </div>
+
+                    </div>
+                {% endif %}
+                {% if object.invalid_state_for_resolution %}
+                    <div id="non-resolvable">
+                    <hr>
+                        <p>We are very sorry this didn't work out. Your payment will be refunded 100% to your wallet. Would you like us to help you find another tutor? Please call us on <span class="font-head">{{ tuteria_details.phone_number }}</span> or email <a class="href" mailto="{{ tuteria_details.email }}">{{ tuteria_details.email }}</a> to request another tutor.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if object.status < 2 %}
+            <div class="panel hide" id="cancel-section-box">
+                <div class="panel-body">
+                    <div class="col-xs-12">
+                        <h3>Please confirm cancellation</h3>
+                        <ul class="list-inline">
+                            <li>Policy: <a target="_blank"
+                                           href="{% url 'cancellation' %}">{{ object.policy.option }}</a>
+                            </li>
+                            <li id="">Status: {% if object.policy.complied %}Met{% else %}Unmet{% endif %}</li>
+                            {% if object.policy.option != self.policy.LONG_TERM %}
+                                <li>Notice Required: {{ object.policy.hours }}hrs</li>
+                            {% endif %}
+                            <li>Lessons: <span class="no-of-lessons"></span></li>
+                        </ul>
+                        <div class="col-sm-8 col-xs-12">
+                            <div class="row">
+                                <table class="table refund-table">
+                                    <thead class="table-head-color">
+                                    <tr>
+                                        <td>Refund Details</td>
+                                        <td class="amount">Amount</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="">
+                                            Total price for <span class="no-of-lessons"></span> lesson<span
+                                                id="pluralize"></span>
+                                        </td>
+                                        <td class="amount" id="lesson_total"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">Cancellation Penalty <span id="policy-percent"></span></td>
+
+                                        <td class="amount" id="cancellation_fee"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-head">Refund Amount</td>
+                                        <td class="amount font-head"><strong class="refund_fee"></strong></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <h4>Reason for cancellation?</h4>
+
+                                <div class="form-group">
+                                    {{ res_form.cancellation_reason|add_attributes:'class:form-control' }}
+                                </div>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-xs-12">
+                            <div class="row">
+                                <p class="text-warning">All selected lessons will be marked as
+                                    cancelled and <span class="refund_fee"></span> will be
+                                    refunded to your wallet which you can withdraw or use to hire
+                                    other tutors</p>
+
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-4">
+                                        <button id="dont-cancel-btn" class="btn btn-danger btn-block">Don't Cancel
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-0">
+                                        <button id="submit-sessions-for-cancellation" data-loading-text="Cancelling..."
+                                                class="btn btn-primary btn-block">Confirm
+                                            <span class="hidden-xs">Cancellation</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block side_content %}
+           <div style="margin-top: 0px">
+            <div class="col-sm-12 col-xs-12 blue-bg">
+            <div class="padding-bottom-25 padding-top-25">
+                <h3 class="text-center font-head" style="color: red">How this works</h3>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">1</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">Tutor has been sent details of this lesson, along with your phone
+                            number and vicinity. We don't tell tutors your exact home address.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">2</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">After teaching, tutor will submit each lesson which changes the status
+                            from <span class="label label-default" style="font-weight: normal">Not Started</span> to
+                            <span class="label label-primary" style="font-weight: normal">Delivered</span> You'll be
+                            able to confirm lessons or raise complaints if any entry is inaccurate.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">3</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">Once all lessons are submitted, we'll notify you via SMS to confirm
+                            lessons and authorize payments in 24 hours.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">4</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">When you confirm lesson or 1 day after tutor's submission, funds will
+                            be paid to tutor. If you raise a complaint, we'll hold off payment.
+                        </p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">5</div>
+                    </div>
+                    <div class="media-body">
+<p class="media-heading">
+    <h4>
+
+        {% comment %} <strong>
+            For any complain or issues regarding your booking, kindly call or text Tunde on 08179265673
+
+        </strong> {% endcomment %}
+    </h4>
+                        </p>
+                    </div>
+                </div>
+                <hr class="hr-styled">
+                <div>
+                    <div style="display: inline-block; padding-right: 5px">
+                        <img src="{% static 'img/cards/gfg.png' %}" class="img-responsive center-block gfg-icon"/>
+                    </div>
+                    <div style="display: inline-block">
+                                <span style="display: block; text-align: left; font-size: 14px; line-height: 1; margin-bottom: 2px;"
+                                      class="font-head blue-font">
+                                    100% Satisfaction Guaranteed
+                                </span>
+                                <span class="call-us font-head">
+Helpline:08179265673
+                                </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+{% block display_subject %}
+    <li><em>Tutor: <a href="{{ object.get_tutor.get_absolute_url }}">{{ object.get_tutor.first_name|title }}</a></em></li>
+    {{ block.super }}
+{% endblock %}
+{% block booking_table_summary %}
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Booking Summary</td>
+            <td class="amount">Amount</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="truncated">
+                &#x20a6;
+                    {{object.get_price|floatformat:0}} x {{ object.student_no }} stud<span
+                    class="hidden-xs">{{ object.student_no|pluralize:'ents' }}</span> x {{ object.total_hours }} h<span
+                    class="hidden-xs">ou</span>r{{ object.total_hours|pluralize }}
+                {% if object.supports_discount %}
+                    <span class="label label-success hidden-xs">Discounted</span>
+                {% endif %}
+            </td>
+            <td class="amount">&#x20a6;{{ object.total_price|floatformat:0 }}</td>
+        </tr>
+        <!--<tr>
+            <td class="truncated">
+                Booking Fee <span
+                    class="fa fa-question-circle"
+                    data-container="body"
+                    data-toggle="popover"
+                    data-placement="bottom"
+                    data-trigger="hover"
+                    data-content="This is used to process this booking."
+                    ></span>
+            </td>
+            <td class="amount">&#x20a6;{{ object.service_fee|floatformat:0 }}</td>
+        </tr>-->
+        {% if object.wallet_amount > 0 %}
+            <tr>
+                <td class="truncated">
+                    Wallet Used
+                </td>
+                <td class="amount" style="color: red">- &#x20a6;{{ object.wallet_amount|floatformat:0 }}</td>
+            </tr>
+
+        {% endif %}
+
+        <tr class="boldify">
+            <td class="truncated">
+                Total <span
+                    class="label label-success">Paid in full</span>
+            </td>
+            <td class="amount"> &#x20a6;{{ object.real_price|floatformat:0 }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
+{% block booking_started_text %}
+    <p class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">{{ object.get_tutor.first_name }} has been notified
+        about your booking and would contact you shortly.
+        This booking is expected to commence on {{ object.first_session|date:'l, N j' }} and end on
+        {{ object.due_date|date:'l, N j' }}.</p>
+
+{% endblock %}
+{% block client_info_text %}
+    <h4 class="font-head blue-font">Instructions for {{ object.get_tutor.first_name }}</h4>
+
+{% endblock %}
+{% block tutor_session_action %}
+    <article class=" db-order-activity js-page-tab-content js-page-tab-activity row">
+        <div class="order-gig-details">
+            <div class="order-gig-detail">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td>SESSIONS</td>
+                        <td class="">TIME</td>
+                        <td class="amount text-center">STATUS</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for session in object.bookingsession_set.all %}
+                        <tr>
+                            <td class="truncated">
+                                <span class="visible-xs">{{ session.start|date:'D, N j' }}</span>
+                                <span class="hidden-xs">{{ session.start|date:'l, F j' }}</span>
+                            </td>
+                            <td class=""> {{ session.start|date:'fA'|lower }} - {{ session.end|date:'fA'|lower }} </td>
+                            <td class="amount"><span
+                                    class="label label-{{ session.status_class }}">{{ session.get_status_display|title }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </article>
+
+{% endblock %}
+{% block standards %}
+{% endblock %}
+{% block pre_review_text %}
+    <i class="glyphicon glyphicon-bell fa-2x text-primary"></i>
+
+    <h4 class="text-primary font-head">BOOKING HAS BEEN DELIVERED</h4>
+
+    <p>{{ object.get_tutor.first_name|title }} has delivered the lessons and left you a review. {{ object.get_tutor.gender_string }}</p>
+{% endblock %}
+{% block rating_for %}
+    <h3 class="pad-down-5">Rate your experience with {{ object.get_tutor.first_name|title }}</h3>
+    <p>Would you be happy to hire this tutor again? Rate your experience</p>
+{% endblock %}
+{% block post_review_text %}
+    <h3 class="row-space-2 pad-down-5">Why did you give such a rating?</h3>
+
+    <p>Tell us what you liked or didn't like about your time with {{ object.get_tutor.first_name|title }}. How likely are you to recommend this tutor to other clients? Please be as detailed as possible. Honest reviews help maintain a trustworthy Tuteria community.</p>
+{% endblock %}
+
+{% block submit_section %}
+    <button class="btn btn-primary btn-block btn-lg">Submit Review</button>
+{% endblock %}
+
+    {% block request_section %}
+        <section class="row protection large-padding">
+        <div class="page-container-full">
+            <div class="row">
+                <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+                    <div class="media-photo padding-bottom-25">
+                        <img width="75" height="75"
+                        src="{% static "img/gallery/gift1.png" %}">
+                    </div>
+                    <h2>
+                        <span class="font-head">
+                          Invite friends to Tuteria!
+                      </span>
+                  </h2>
+                  <p class="padding-top-10">Earn 10% for 3 months for every friend you refer to Tuteria.</p>
+
+                <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+                    <a href="/invite" class="btn btn-danger btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+                        Invite friends
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    {% endblock request_section %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        window.bookingSummary = {
+            bookedDate: "{{ object.created|date:'M-j-Y' }}",
+            sessions_js: JSON.parse('{{ sessions_js|escapejs }}'),
+            complied: {% if object.policy.complied %}true{% else %}false{% endif %},
+            penalty:{{object.policy.penalty}},
+            booking_penalty:{{object.policy.booking_penalty}},
+            order: "{{ object.order }}",
+            condition: {{ object.policy.hours }},
+            policy_type: "{{ object.policy.option }}"
+            {#            can_be_cancelled: JSON.parse('{{ can_be_cancelled_sessions|escapejs }}'),#}
+        };
+        console.log(window.bookingSummary);
+
+    </script>
+    <script src="{% static "js/booking_summary.bundle.js" %}"></script>
+
+<!-- Facebook Conversion Code for Leads - Confirmed Bookings -->
+<script>(function() {
+var _fbq = window._fbq || (window._fbq = []);
+if (!_fbq.loaded) {
+var fbds = document.createElement('script');
+fbds.async = true;
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(fbds, s);
+_fbq.loaded = true;
+}
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6034110236355', {'value':'0.00','currency':'USD'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6034110236355&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+
+<!-- Twitter Conversion Code for Leads - Confirmed Bookings -->
+<!-- <script src="//platform.twitter.com/oct.js" type="text/javascript"></script> -->
+<!-- <script type="text/javascript">twttr.conversion.trackPid('l6lh5', { tw_sale_amount: 0, tw_order_quantity: 0 });</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l6lh5&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l6lh5&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" /> -->
+<!-- </noscript> -->
+
+{% endblock %}

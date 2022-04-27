@@ -1,0 +1,48 @@
+{% load staticfiles bootstrap_pagination humanize bootstrap3 add_attr cloudinary %}
+{{ filter_form.query }}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group row-space-4">
+            {% if request.is_featured %}
+                {% bootstrap_label filter_form.region.label label_class='control-label' %}
+
+            {% endif %}
+            {{ filter_form.region|add_attributes:'class:form-control' }}
+        </div>
+        <div class="form-group row-space-4 ">
+            {% if request.is_featured %}
+                {% bootstrap_label filter_form.location.label label_class='control-label' %}
+
+            {% endif %}
+            {{ filter_form.location|add_attributes:'class:form-control,placeholder: Enter your location e.g street or town' }}
+            {{ filter_form.latitude }}
+            {{ filter_form.longitude }}
+        </div>
+        <div class="form-group row-space-4">
+            {% if request.is_featured %}
+                <label class="control-label">Type your subject, exam or skill</label>
+
+            {% endif %}
+            <input id="skill_query" type="text" placeholder="Type your subject, exam or skill" class="form-control"
+                   name="query">
+        </div>
+
+        {#	    {% if not request.is_featured %}#}
+        {#        <div class="form-group row-space-4">#}
+        {#            {% if request.is_featured %}#}
+        {#                <label for="" class="control-label">Select Maximum Price</label>#}
+        {#            {% endif %}#}
+        {#            <select name="end_rate" id="id_end_rate" class="form-control">#}
+        {#                <option value="">Maximum price per hour</option>#}
+        {#                <option value="800">&#x20A6;800/hr</option>#}
+        {#                <option value="1500">&#x20A6;1500/hr</option>#}
+        {#                <option value="2000">&#x20A6;2000/hr</option>#}
+        {#                <option value="3000">&#x20A6;3000/hr</option>#}
+        {#                <option value="100000">above &#x20A6;3000/hr</option>#}
+        {#            </select>#}
+        {##}
+        {#        </div>#}
+        {#	    {% endif %}#}
+
+    </div>
+</div>

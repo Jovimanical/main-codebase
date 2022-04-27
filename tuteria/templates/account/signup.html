@@ -1,0 +1,195 @@
+
+    {% extends '_layouts/base-auth.html' %}
+    {% load staticfiles %}
+    {% load i18n %}
+    {% load account %}
+    {% block footer %}{% endblock %}
+    {% block title %}Signup | Tuteria Nigeria{% endblock title %}
+    {% block nav %}
+        {# {% include 'includes/nav/_navigation.html' with login_form=True login_page=True %} #}
+    {% endblock %}
+    {% block css %}
+        {{ block.super }}
+        <link rel="stylesheet" href="{% static 'intl-tel-input/css/intlTelInput.css' %}"/>
+        <style>
+    @media (min-width: 1200px) {
+        .container {
+            width: 1024px;
+        }
+    }
+    .large-padding {
+    padding: 80px 120px 60px 120px;
+}
+@media(max-width: 768px){
+    .large-padding {
+        padding: 20px 15px !important;
+    }
+}
+
+@media(max-width: 1100px) and (min-width: 960px){
+    .large-padding {
+        padding: 80px;
+    }
+}
+
+section.value-proposition {
+    font-size: 16px;
+    max-width: 1920px;
+    margin: 0 auto;
+    color: #5e5e5e;
+}
+@media (min-width: 768px) {
+    section.value-proposition.rtl-col .col {
+        float: right;
+    }
+}
+section.value-proposition .col {
+    padding: 0;
+    height: 650px;
+}
+section.value-proposition .col.col-higher {
+    height: 660px
+}
+section.value-proposition .col-text .area {
+    background-color: inherit;
+    height: 100%
+}
+section.value-proposition .col-image .area {
+    height: 100%;
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover
+}
+
+section.value-proposition .section-header>.heading {
+    margin-bottom: 28px
+}
+section.value-proposition .section-header::after {
+    content: "";
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    width: 50px;
+    border-bottom: solid #c3c4c5 4px
+}
+section.value-proposition .h4 {
+    margin: 45px 0 14px
+}
+section.value-proposition p {
+    color: #5e5e5e;
+}
+@media screen and (min-width: 768px) {
+            .carousel-caption {
+                left: 7% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1290px) and (min-width: 1280px) {
+            .carousel-caption {
+                left: 4% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1460px) and (min-width: 1420px) {
+            .carousel-caption {
+                left: 9% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1036px) and (min-width: 1016px) {
+            .carousel-caption {
+                left: 3% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1000px) and (min-width: 940px) {
+            .carousel-caption {
+                left: 10% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        .caption-text {
+            border: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            font-size: 15px;
+            padding: 10px;
+            padding-left: 25px !important;
+            padding-right: 25px !important;
+        }
+        .inline-block{
+            display: inline-block;
+        }
+</style>
+    {% endblock %}
+
+
+
+    {% block content %}
+{% if request.is_featured %}
+    {% include "account/operamini.html" %}
+    {% else %}
+    <section id="firstss">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-lg-6 col-lg-offset-3 col-text">
+        <div class="area large-padding">
+              {% block form_heading %}
+    <div id="signup_header_text" class="mp-header text-center">
+        <h2 class="below18 alignc font-head"><b> 
+        {% if request.is_featured %}
+        <b>{% if not mail_list %}WELCOME HOME <img src="{% static 'img/gallery/padlock.png' %}" width="5%">{% else %}Subscribe with Tuteria {% endif %}</b> 
+            {% else %}
+        {% if not mail_list %}WELCOME HOME <img src="{% static 'img/gallery/padlock.png' %}" width="5%">{% else %}Subscribe with Tuteria {% endif %}
+        {% endif %} </b></h2>
+        <p class="below36 alignc">{% blocktrans %}Join Tuteria to connect with qualified tutors and clients.{% endblocktrans %}</p>
+    </div>
+    <div id="maillist_header_text" class="hidden text-center">
+    <h2 style="color: #337ab7">Coming Soon</h2>
+        Be the first to know when Tuteria gets to your country.
+    </div>
+    <br>
+    {% endblock %}
+
+    {% block form_content %}
+        {% include 'includes/auth/signup.html' with form=form%}
+    {% endblock %}
+
+
+    <div class="padding-top-25 text-center">
+        <p class="inline-block"><a href="{{ login_url }}"><u>Login to your account</u></a></p>&nbsp; &nbsp; .
+        <p class="inline-block"><a target="_blank" href="{% url 'help:article_detail' 102 %}">&nbsp; &nbsp; <u>Can't log in?</u></a></span>
+    </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endif %}
+{% endblock content %}
+    
+{% block request_section %}{% endblock request_section %}
+
+{% block javascript %}  
+        {# {% if request.is_featured %} #}
+
+        {# {% else %} #}
+            <script> window.currentPage = "SignUp"; </script>
+            {{ block.super }}
+        {# {% endif %} #}
+    {% endblock %}    
+
+{% block opera_mini_section %}
+    {# {% include "account/operamini/signup.html" %} #}
+{% endblock opera_mini_section %}

@@ -1,0 +1,520 @@
+{% load humanize staticfiles add_attr %}
+<div>
+    <div id="{{ calendar_id }}" data-ng-controller="HelloCtrl" itemprop="offers" role="tabpanel" itemscope
+         itemtype="http://schema.org/Offer">
+        {%verbatim%}
+        <div data-ng-show="date_selected" class="custom-time-picker panel-sections">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-sections">
+                    <button type="button" data-ng-show="isNew" class="close pull-right"
+                            data-ng-click="cancel('dismiss')">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h3 class="modal-title font-head" style="padding-top: 7px">{{h3()}}</h3>
+                    <small>{{subheading(2)}}</small>
+                </div>
+                <div class="panel-body">
+                    <div data-ng-if="is_single">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <!--<label class="col-xs-5">?</label>-->
+                                    <select data-ng-model="selectedDate.start_time" class="form-control input-sm"
+                                            name="sss"
+                                            data-ng-options="item for item in getStartHours()"
+                                            data-ng-change="getEndHours(selectedDate.start_time)">
+                                        <option value="">Start time</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <select data-ng-show="booking_type === 'hour'" data-ng-model="selectedDate.end_time"
+                                            class="form-control input-sm" name="sss"
+                                            data-ng-options="item for item in getEndHours(selectedDate.start_time)">
+                                        <option value="">End time</option>
+                                    </select>
+                                    <input ng-hide="booking_type === 'hour'" type="text" disabled readonly
+                                           ng-model="selectedDate.end_time" class="form-control input-sm"/>
+                                </div>
+                            </div>
+                            <div class="space-top-3 col-sm-12 col-xs-12">
+                                <small>If unsure, why not start with 2hrs? You'll only pay for actual hours taught.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="!is_single" ng-repeat="dt in pending_sessions">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <small>{{dt.ShortRepresentation()}}</small>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <!--<label class="col-xs-5">?</label>-->
+                                    <select ng-model="dt.start_time" class="form-control input-sm" name="sss"
+                                            ng-options="item for item in selections[$index].getHours()"
+                                            ng-change="dt.calculateEndTime(tutor.hours_per_day)">
+                                        <option value="">Start time</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <hr ng-hide="$last">
+                    </div>
+
+                </div>
+                <div class="panel-footer panel-sections clearfix">
+                    <div ng-show="isNew" class="col-sm-6 col-xs-12">
+                        <small ng-hide="validate()" class="text-danger invalid-times">
+                            {{error_message}}
+                        </small>
+                    </div>
+                    <div ng-show="isNew" class=" col-sm-6 col-xs-12">
+                        <button class="btn btn-success btn-sm btn-block" ng-click="ok()">{{submit_text()}}</button>
+                    </div>
+                    <div ng-hide="isNew" class="row-space-mobile-4 col-sm-6 col-sm-push-6 col-xs-12">
+                        <button class="btn btn-info btn-block" ng-click="ok()">Update Session</button>
+                    </div>
+                    <div ng-hide="isNew" class="col-sm-6 col-sm-pull-6 col-xs-12">
+                        <button class="btn btn-default btn-block" ng-click="cancel('cancel')">Cancel Session</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endverbatim%}
+        <ul id="{{ calendar_tab }}" class="header-color nav nav-tabs" ng-class="{'invisible':!select_dates_and_times}"
+            role="tablist">
+            {# <ul id="{{ calendar_tab }}" class="header-color nav nav-tabs" role="tablist"> #}
+            <li role="presentation" class="active">
+                <a href="#hourly{{ inc }}" aria-controls="hourly" role="tab"
+                   data-ng-click="bookingType('hour')" data-toggle="tab">Hourly</a></li>
+            <li ng-show="tutor.supports_monthly" role="presentation">
+                <a href="#monthly{{ inc }}" aria-controls="monthly"
+                   role="tab"
+                   data-ng-click="bookingType('month')"
+                   data-toggle="tab">Monthly</a>
+            </li>
+        </ul>
+        {% verbatim %}
+        <!--<div id="price_amount" ng-class="{'invisible':!select_dates_and_times}" itemprop="price"
+             class="pull-left h3 header-color text-special font-head">
+            {{ price_display | specialCurrency:"\u20A6":0}}
+        </div>-->
+        {% endverbatim %}
+        {% if tutor == request.user %}
+            {# <div class="tab-content"> #}
+            {# <div role="tabpanel" class="tab-pane fade in active" #}
+            {# id="hourly{{ inc }}"> #}
+            {# <div class="" style=" padding-bottom: 10px; border-bottom: 1px solid silver; "> #}
+            {# <i class="fa fa-2x fa-book"></i> #}
+
+            {# <p>Promote your subject</p> #}
+            {# <ul class="list-inline text-center"> #}
+            {# <li> #}
+            {# <a id="facebook-share" class="btn btn-social-icon btn-facebook share-popup" #}
+            {# href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri|urlencode}}"><i #}
+            {# class="fa fa-facebook"></i></a></li> #}
+            {# <li> #}
+            {# <a class="btn btn-social-icon btn-twitter share-popup" #}
+            {# href="https://twitter.com/home?status={{object|bitlify}}"><i #}
+            {# class="fa fa-twitter"></i></a></li> #}
+            {# <li> <a id="google-share" href="https://plus.google.com/share?url={{ request.build_absolute_uri|urlencode }}" class="share-popup"  #}
+            {# ><img #}
+            {# src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Share on Google+"/></a> #}
+            {# </li> #}
+            {# <li> #}
+            {# <a class="btn btn-social-icon btn-linkedin share-popup" #}
+            {# href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri|urlencode}}&title=Google%20is%20good&summary=this%20is%20realy%20nice&source="><i #}
+            {# class="fa fa-linkedin"></i></a></li> #}
+            {# </ul> #}
+
+            {# </div> #}
+
+            {# </div> #}
+            {# <div role="tabpanel" class="tab-pane fade in" #}
+            {# id="monthly{{ inc }}"></div> #}
+            {#  #}
+            {# </div> #}
+        {% else %}
+            <!-- Tab panes -->
+            <div ng-class="{'inv-22':date_selected}" class="tab-content">
+                <div ng-class="{'invisible_cloak': date_selected}" role="tabpanel" class="tab-pane fade in active"
+                     id="hourly{{ inc }}" style="margin-top: 2px">
+                    <div ng-hide="select_dates_and_times">
+                        <!--<p class="font-head"><span
+                                style="color:crimson">Select the dates you want lessons to hold.</span> Dates in <span
+                                style="color: #bbb"><u>grey</u></span> are not available.</p>-->
+                        <multiple-date-picker days-selected="hourlySelectedDays" day-click="dateClick"
+                                              sunday-first-day="true"
+                                              day-hover="hoverEvent" month-changed="logMonthChanged1" week-days-off="[]"
+                                              days-off="daysOff" disallow-back-past-months="true">
+                        </multiple-date-picker>
+                        {%verbatim%}
+                        <div class="col-xs-12">
+                            <div class="row visible-hours">
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <strong>Hours: <span
+                                                class="expected_hours ">{{ booking.TotalBookedHours()}}</span></strong>
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="row">
+                                        <strong class="pull-left pad-left-10">Cost: <span>{{ booking.TotalPayment() | specialCurrency:"\u20A6":0}}</span></strong>
+                                        <a href="javascript:void(0)"
+                                           class="pull-right"
+                                           ng-click="select_dates_and_times=true;"><span
+                                                ng-show="booking.TotalPayment() > 0">View Summary</span>
+                                            <span ng-show="booking.TotalPayment() <= 0">Refresh</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endverbatim%}
+                    </div>
+                </div>
+                <div ng-class="{'invisible_cloak': date_selected}" role="tabpanel" class="tab-pane fade in"
+                     id="monthly{{ inc }}">
+                    {% verbatim %}
+                    <div ng-hide="select_dates_and_times">
+                        <alert ng-repeat="alert in alerts" type="{{ alert.type }}"
+                               close="closeAlert($index)">{{ alert.msg }}
+                        </alert>
+                        <p><strong>Choose your preferred weekdays</strong></p>
+
+                        <div class="row hidden">
+                            <div class="col-xs-12 text-center day-selection">
+                                <a href="javascript:void(0)"
+                                   ng-click="toggleSelectedDay($index)"
+                                   data-ng-repeat="dayOfWeek in days" class="">
+                                    <h3><span
+                                            class="label label-default">{{ dayOfWeek }}</span></h3></a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <multiple-date-picker day-click="dateClick" sunday-first-day="true" day-hover="hoverEvent"
+                                                  month-changed="logMonthChanged2" week-days-off="[]" days-off="daysOff"
+                                                  days-selected="selectedDays"
+                                                  disallow-back-past-months="true"></multiple-date-picker>
+
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row visible-hours">
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <strong>Hours: <span
+                                                class="expected_hours ">{{ booking.TotalBookedHours()}}/{{ tutor.expected_hours }}</span></strong>
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="row">
+                                        <strong class="pull-left">Cost: <span>{{ booking.TotalPayment() | specialCurrency:"\u20A6":0}}</span></strong>
+
+                                        <a href="javascript:void(0)" ng-show="booking.TotalPayment() > 0"
+                                           class="pull-right"
+                                           ng-click="select_dates_and_times=true;">View Summary</a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {% endverbatim %}
+                    </div>
+                </div>
+            </div>
+            <div id="{{ hire_summary }}" ng-class="{'invisible_cloak':date_selected}" class="margin-top-2">
+                {# <div id="{{ hire_summary }}" class="row-space-top-5" ng-class="{'hidden':date_selected}"> #}
+                <div ng-show="select_dates_and_times">
+
+                    <div ng-show="!hasBeganBooking()">
+                        <div ng-show="booking_type=='hour'" class="pad-down-15">
+                            <!--<div class="fancy-dates-message-container va-container va-container-h space-top-3 hide-sm">
+                                <div class="illustration-container-h va-middle">
+                                    <div class="text pad-10 col-sm-9 col-xs-9" style="color:black">
+                                <span class="font-head">
+                                 Hire tutor from here!
+                                </span><br>
+                                        Click below to set your lesson dates and times.
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                        {% verbatim %}
+                        <div ng-show="booking_type=='month'" class="pad-up-down-15">
+                            <!--<div class="fancy-dates-message-container va-container va-container-h hide-sm row-space-4">
+                                <div class="illustration-container-m va-middle">
+                                    <div class="text pad-10 col-sm-9 col-xs-9" style="color:black">
+                                <span class="font-head">
+                                  Prefer to hire monthly?
+                                </span><br>
+                                        You can book up to {{max_no_of_months.length}} months of active lessons below.
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                        {% endverbatim %}
+                    </div>
+
+                    <button ng-show="booking_type=='hour' && !hasBeganBooking()" ng-click="beginBookingProcess()"
+                            class="btn-hire-intent btn-block btn btn-lg">
+                        <img src="{% static "img/gallery/click-icon.png" %}" class="center-block pull-left"
+                             width="20px"/>
+                        <span ng-show="!hasBeganBooking()">Set lesson dates and times</span></button>
+                    <div ng-show="booking_type=='month'">
+                        {% verbatim %}
+                        <div class="monthly-desktop" ng-show="first_step">
+                            <div class="row">
+                                <div class="col-sm-6 month-pad-down">
+                                    <select ng-model="user_actions.no_of_months" id="no_of_month" name="no_of-month"
+                                            class="input-sm form-control" ng-change="MonthSelectedChange()"
+                                            ng-options="no for no in max_no_of_months">
+                                        <option value="">No. of Months</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select ng-model="user_actions.hrs_per_day" id="no_of_month" name="no_of-month"
+                                            class="input-sm form-control" ng-change="MonthSelectedChange()"
+                                            ng-options="no for no in max_no_of_hours">
+                                        <option value="">No. of Hours</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row-space-top-5">
+                                <select class="form-control input-sm" ng-model="user_actions.weeks_up_front"
+                                        ng-change="WeekUpFront()"
+                                        ng-options="s.option as s.text for s in weeks_up_front_options">
+                                    <option value="">How soon should lessons start?</option>
+                                </select>
+                            </div>
+                            <hr class="hr-styled">
+                            <div>
+                                <p class="font-head">Set the lesson days and times each week. Tutor is available on:</p>
+
+                                <div class="row">
+                                    <div ng-repeat="option in days_taught_by_tutor">
+
+                                        <div class="col-xs-5 ">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-model="user_actions.days[$index].selected"
+                                                           name="monthCheck" id="monthCheck{{$index}}"
+                                                           ng-change="OnRequiredDateReached($index)">{{
+                                                    getNoOfWeekDays(user_actions.no_of_months) }} {{option}}{{
+                                                    weekdaysstring(user_actions.no_of_months) }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 row-space-2">
+                                            <select name="lesson2-start-time" class="form-control input-sm"
+                                                    id="lesson2-start-time"
+                                                    ng-model="user_actions.days[$index].selected_time"
+                                                    ng-options="times for times in user_actions.days[$index].times"
+                                                    ng-change="WeekDayTimeSelected()">
+                                                <option value="">Start time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<small>You have a maximum of {{remainingDaysToBook()}}
+                                    <ng-pluralize count="remainingDaysToBook()"
+                                                  when="{'0': 'days', 'one': 'day', 'other': 'days'}"></ng-pluralize>
+                                    left to select.
+                                </small>-->
+                            </div>
+                            <div class="row-space-top-5">
+                                <div ng-show="remainingDaysToBook() < 0 ">
+                                    <small class="booking-text text-danger">You have exceeded the tutor's maximum days
+                                        per week.
+                                    </small>
+                                </div>
+                                <div ng-hide="user_actions.ValidateMonth()">
+                                    <small class="booking-text text-danger" ng-hide="remainingDaysToBook() < 0">Please
+                                        set a lesson start time for each week day
+                                    </small>
+                                </div>
+                                <button ng-disabled="date_selected" ng-click="validMonthlyBooking()"
+                                        class="btn btn-block btn-lg btn-primary big-btn">
+                                    Continue &rarr;
+                                </button>
+
+                            </div>
+                        </div>
+                        <div ng-show="!first_step" class="hidden">
+                            <select name="lesson2-start-time" class="form-control" id="lesson2-start-time"
+                                    ng-model="user_actions.start_time"
+                                    ng-options="times for times in user_actions.start_times"
+                                    ng-change="PopulateDateForBooking()">
+                                <option value="">Select Time when lessons should start</option>
+                            </select>
+                        </div>
+                        {% endverbatim %}
+                    </div>
+                    <div ng-show="hasBeganBooking()" class="row-space-top-5">
+                        <p class="margin-top-0 font-head pull-left">Lesson Summary</p>
+
+                        <p class="margin-top-0 font-head pull-right" ng-click="beginBookingProcess()">
+                            <a href="javascript:void(0)" style="color: #ff5a5f;">+Add More Lessons?</a>
+                        </p>
+
+                        {% verbatim %}
+                        <table class="margin-bottom-0 table table-bordered row-space-top-5">
+                            <tr>
+                                <td>{{ booking.Summary()}}</td>
+                                <td class="text-left">{{ booking.Total() | specialCurrency:"\u20A6":0}}</td>
+                            </tr>
+                            <tr class="hidden">
+                                <td>Booking fee ({{ booking.BookingFeePercent()}}%) <i
+                                        popover="This is used to process this booking"
+                                        popover-placement="bottom"
+                                        popover-trigger="mouseenter"
+                                        class="glyphicon glyphicon-question-sign"></i>
+                                </td>
+                                <td class="text-left">{{ booking.BookingFee()| specialCurrency:"\u20A6":0}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td class="text-left">{{ booking.TotalPayment() | specialCurrency:"\u20A6":0}}</td>
+                            </tr>
+                        </table>
+                        <div class="col-xs-12 visible-hours">
+                            <div class="col-xs-4">
+                                <div class="row">
+                                    <strong class="pull-left">Days Booked: <span
+                                            class="expected_hours ">{{ booking.TotalDaysBooked() }}</span></strong>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-8">
+                                <div class="row">
+                                    <strong class="pad-left-25">Hours: <span
+                                            class="expected_hours ">{{ booking.TotalBookedHours()}}</span></strong>
+                                    <a class="pull-right" href="javascript:void(0)"
+                                       ng-click="select_dates_and_times=false;">View
+                                        Lessons</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endverbatim %}
+                    </div>
+                </div>
+
+                <div class="row" ng-show="hasBeganBooking() && select_dates_and_times">
+                    <div class="col-xs-6">
+                        <strong>No. of Students</strong>
+                    </div>
+                    <div class="col-xs-6 pull-right">
+                        <select ng-disabled="date_selected" ng-model="booking.students" class="form-control input-sm"
+                                ng-options="no for no in tutor.student_range()">
+                        </select>
+                    </div>
+                </div>
+                {%verbatim%}
+                <div ng-show="hasBeganBooking() && select_dates_and_times">
+                    <div ng-show="tutor.discount > 0 && tutor.max_student > 1" class="row-space-bottom">
+                        <span class="label label-success font-head">Discount: {{ tutor.discount }}%</span>
+                        <span class="discount-section"> Save &#8358;{{ tutor.dicounted_price()}}/hr for each extra student</span>
+                    </div>
+
+                </div>
+                <div class="row-space-bottom-5 row-space-top-5">
+                    <div ng-hide="canSubmit()">
+                        <small class="booking-text text-danger" ng-show="can_not_submit">{{remaining_hrs()}}</small>
+                    </div>
+                    <button ng-disabled="date_selected" ng-click="submitBooking()"
+                            ng-hide="first_step && booking_type=='month'" ladda="loading" data-style="expand-right"
+                            class="btn btn-block btn-lg btn-primary big-btn">
+                        Book Lessons
+                    </button>
+                    {%endverbatim%}
+                    <!--<hr class="hr-styled">
+                    <div>
+                        <div style="display: inline-block; padding-right: 5px">
+                            <div class="booking-support img-responsive center-block"></div>
+                        </div>
+                        <div style="display: inline-block">
+                                <span style="display: block; text-align: left; font-size: 14px; line-height: 1; margin-bottom: 2px;">
+                                    Need help or have questions?
+                                </span>
+                                <span class="call-us font-head">
+                                    Call us on {{ tuteria_details.phone_number }}
+                                </span>
+                        </div>
+                    </div>
+                    <small class="booking-text hide">You'll be able to review before booking
+                    </small>-->
+                </div>
+                {% if request.user|user_in_group:"Tutor Success" %}
+                
+                <div class="padding-top-10">
+                    <h4 class="font-head"><span class="red-text">Admin Section</span> <span class="pull-right">Status: <span class="blue-font">{{ object.tutor.can_tutor }}</span></span></h4>
+                    
+                    <hr class="hr-styled row pad-down-5">
+                    <!--<div>
+                        Social Verified: {{ object.tutor.social_verified }}
+                    </div>-->
+                    <h5 class="font-head">1. Update Price</h5>
+                    <form action="{% url 'users:validate_skill' object.pk %}" method="get">
+                        <input type="number" name="price" placeholder="new price"/>
+                        <input type="number" name="discount" placeholder="new discount"/>
+                        <button>Submit</button>
+                    </form>
+
+                </div>
+                <hr class="hr-styled row pad-down-5">
+                <div class="row col-xs-6 row-space-4">
+                    {% comment %}<h5 class="font-head">2. Deny Status</h5>{% endcomment %}
+                </div>
+                <div class="col-xs-6 row-space-4">
+                    {% comment %}<a href="{% url 'users:validate_skill' object.pk %}?status=deny_tutor" class="btn btn-danger btn-block">Deny Tutor</a>{% endcomment %}
+                </div>
+                {% endif %}
+            {% comment %} <div class="col-xs-6"></div> {% endcomment %}
+                {% if object.status != object.ACTIVE %}
+                 {% if request.user|user_in_group:"Tutor Success" %}
+                 <div class="row">
+                        <div class="col-xs-6 row-space-3">
+                             <a href="{% url 'users:validate_skill' object.pk %}?status=active"
+                                class="btn btn-primary btn-block">Approve Skill</a>
+                        </div>
+                        <div class="col-xs-6 row-space-3">
+                         <a href="{% url 'users:validate_skill' object.pk %}?status=deny"
+                             class="btn btn-danger btn-block">Deny Skill</a>
+                         </div>
+                         <div class="col-xs-6 row-space-3">
+                             <a href="{% url 'users:validate_skill' object.pk %}?status=modify"
+                                class="btn-block btn btn-warning">Modify Skill</a>
+                         </div>
+                         
+                        <div class="col-xs-6 row-space-3">
+                            <a href="{% url 'users:validate_skill' object.pk %}?status=reject" class="btn-block btn btn-warning">Reject Image</a>
+                        </div>
+
+                     </div>
+                 {% endif %}
+                {% endif %}
+
+
+            </div>
+        {% endif %}
+        {% if request.user.is_authenticated and request.user|requested_before:object %}
+        {% else %}
+            <!--<div class="panel wishlist-panel row-space-top-4"
+                 ng-class="{'hidden-md': days_taught_by_tutor.length > 4 && booking_type=='month'}">
+                <div class="panel-body panel-light">
+                    <div class="wishlist-wrapper hide-sm">
+                        <a href="{% url 'request_meeting_redirect' object.pk %}"
+                           class="btn btn-default btn-block row-space-2">Request to Meet</a>
+                    </div>
+                </div>
+            </div>-->
+        {% endif %}
+    </div>
+
+</div>

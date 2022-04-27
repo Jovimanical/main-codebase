@@ -1,0 +1,35 @@
+{% extends "pages/why-use.html" %}
+{% block sub_nav %}{% endblock sub_nav %}
+{% block footer %} {% endblock footer %}
+
+{% block carousel_content %}
+
+<div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0  text-center">
+  <div class="jumbo-header">
+    <h1 class="myh2 text-center" style="color:white;">You have been flagged for misconduct</h1>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block mm_c%}
+<div id="base" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <section class="panel">
+        <div class="panel-body no-padding-total row-space-bottom-5 mp-levels">
+          <div class="levels-wrap ">
+            <div id="heads" class="levels-intro row-space-3 col-sm-8 col-sm-offset-2 col-xs-12">
+              <p>Looks like you failed to comply to our terms, conditions and instructions.</p>
+              <p>If all these allegations are not true, please do not hesistate to contact us at {{tuteria_details.email}} or call our helpline {{tuteria_details.phone_number}}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load staticfiles add_attr bootstrap3 i18n %}
+{% load cache %}
+{% load crispy_forms_tags %}
+
+<div id="errorMessage"></div>
+{% bootstrap_field form.first_name %}
+<span class="input-hint">Please write only one name</span>
+{% bootstrap_field form.last_name %}
+{% if not object.id_verified %}	
+	{% bootstrap_field profile_form.gender %}
+	{% bootstrap_field profile_form.dob %}
+	{% if not object.is_tutor %}		
+	{% bootstrap_field form.tutor_intent %}
+	{% endif %}
+{% endif %}
+
+{% bootstrap_field primary_phone_form.number %}	
+{% bootstrap_field primary_phone_form.primary_phone_no1 %}	
+
+{# {{ address_form.management_form }} #}
+{% bootstrap_formset address_form %}
+<span class="input-hint">State should be where you live now. Town is the name of the area where you live.</span>
+<div class="hidden {% if not object.profile.application_status >= 2 and not object.user.tutor_intent %} {% else %}hidden {% endif %}">
+{% bootstrap_field profile_form.description %}
+</div>

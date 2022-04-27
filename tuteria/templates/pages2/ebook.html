@@ -1,0 +1,89 @@
+{% extends '_layouts/base-external.html' %}
+{% load staticfiles %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/resources.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container padding-top-3-percent">
+  <div class="info col-sm-6 col-xs-12">
+    <p class="description">Kickstart your marketing with <br><strong>100 tried &amp; tested growth
+      tactics</strong>
+    </p>
+
+    <p class="pullquote">Test. Evaluate. Repeat. <br>Todays modern companies use a variety of online marketing
+      tactics in order to grow. <br>This book gives you 100 of these tactics.</p>
+
+    <p class="cta padding-top-3-percent"><a
+        href="https://www.e-junkie.com/ecom/gb.php?i=1346948&c=single&cl=274359"
+        target="ejejcsingle"
+        class="btn btn-primary btn-lg">Get the Book</a></p>
+
+    <div class="about_the_author media padding-top-3-percent">
+      <a href="#" class="pull-left">
+        <img alt="Yongfook" class="img-circle"
+             src="{% static 'img/user/1.jpg' %}">
+      </a>
+
+      <div class="media-body">
+        <a href="http://yongfook.com/growth-hacking-handbook.html" target="_blank">Jon Yongfook</a> is a
+        tech
+        entrepreneur and marketer. <br>He has started and sold two startups, currently runs SaaS company <a
+          href="http://beatrixapp.com/" target="_blank">Beatrix</a> and is a mentor at Singapore
+        Management
+        University and True Incube Thailand, a 500 Startups Partner.
+      </div>
+
+    </div>
+  </div>
+  <div class="book col-sm-6 col-xs-12 padding-top-3-percent">
+    <div class="cover">
+      <a href="http://www.growthhackinghandbook.com/#buy_now">
+        <img alt="New_book_cover" class="cover"
+             src="{% static 'img/growth.png' %}"></a>
+    </div>
+  </div>
+
+  <div class="testimonials clearfix">
+
+    <div class="testimonial media">
+      <a href="#" pull-left>
+        <img alt="Logo_true"
+             src="./100 Growth Hacking Tactics - Growth Hacking Handbook_files/logo_true-e715499be4b06f71a73b6dc5acab59ab.png">
+      </a>
+      <div class="media-body">
+        <p>“The growth hacking sessions with Jon are must-learn knowledge for all businesses. Especially for
+          startups.”</p>
+        <cite>Saroj Ativitavas — General Manager, True Incube</cite>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="chapters_container">
+
+    <p class="title">Growth Hacking Handbook Full Chapter List</p>
+
+    <ul class="chapters">
+      <li class="chapter free_chapter">
+        <p><a href="http://www.growthhackinghandbook.com/intro-chapter.html">What is Growth
+          Hacking?</a><span>Free Chapter</span>
+        </p>
+      </li>
+      <li class="chapter free_chapter">
+        <p><a href="http://www.growthhackinghandbook.com/#buy_now">The Email Signature Hack</a><span>Free Chapter</span>
+        </p>
+      </li>
+      <li class="chapter free_chapter">
+        <p><a href="http://www.growthhackinghandbook.com/the-twitter-bio-hack.html">The Twitter Bio
+          Hack</a><span>Free Chapter</span></p>
+      </li>
+    </ul>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

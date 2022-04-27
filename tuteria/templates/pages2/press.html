@@ -1,0 +1,138 @@
+{% extends "pages/about.html" %}
+{% load activelink staticfiles %}
+{% block ng_app %}ng-app="tuteriaNews"{% endblock %}
+{% block mobile_crum %}
+    <ol class="breadcrumb visible-xs">
+        {% ifactive 'press' %}
+            <li class="active"> Tuteria News</li>
+            {% else %}
+            <li>
+                <a href="{% url 'press' %}">Tuteria News</a>
+            </li>
+        {% endifactive %}
+        {% ifactive 'media_resources' %}
+            <li class="active"> Media Resources</li>
+            {% else %}
+            <li class="active">
+                <a href="{% url 'media_resources' %}">Media Resources</a>
+            </li>
+        {% endifactive %}
+
+    </ol>
+{% endblock mobile_crum %}
+{% block title %}Tuteria News and Press Mentions{% endblock title %}
+
+{% block sidenav22 %}
+    <ul class="sidenav-list">
+        <li>
+            <a href="{% url 'press' %}"
+               aria-selected="{% ifactive 'press' %}true{% else %}false{% endifactive %}"
+               class="sidenav-item">Press Mentions</a>
+        </li>
+        <!--<li>
+        <a href="{% url 'media_resources' %}"
+        aria-selected="{% ifactive 'media_resources' %}true{% else %}false{% endifactive %}"
+        class="sidenav-item">Media Resources</a>
+    </li>-->
+    </ul>
+{% endblock sidenav22 %}
+
+{% block main_content2 %}
+    <div data-ng-cloak class="text-copy">
+        <h1 class="h2 row-space-6">Press Mentions</h1>
+
+        <div class="panel press-content row-space-6" ng-controller="NewsCtrl">
+            <div class="panel-body">
+                <div id="news-detail" class="row row-space-4">
+                    {% verbatim %}
+                    <div class="col-sm-6 news-items" data-ng-repeat="publication in data">
+                        <a ng-href="{{ publication.link }}"><img alt="" height="70" ng-src="/static/{{ publication.logo }}"
+                                                              width="300"></a><br>
+                        <a ng-href="{{ publication.link }}">{{ publication.text }}</a><br>
+                        <small>{{ publication.date }}</small>
+                    </div>
+                    {% endverbatim %}
+                </div>
+            </div>
+            <div class="panel-footer panel-dark press-pagination">
+                <ul class="pager">
+                    <li class="previous" ng-class="{'disabled': currentPage == 0}" ng-disabled="previousValid()"
+                        ng-click="previousValid() || getPage(currentPage=currentPage-1)"><a
+                            href="javascript:void(0)"><span aria-hidden="true">&larr;</span> Older</a></li>
+                    <li class="next" ng-class="{'disabled':currentPage >= numberOfPages()-1}" ng-disabled="nextValid()"
+                        ng-click="nextValid() || getPage(currentPage=currentPage+1)"><a href="javascript:void(0)">Newer
+                        <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        {# <h2 class="hidden row-space-6">Press Releases</h2> #}
+
+        {# <div class="panel hidden press-content row-space-6"> #}
+        {# <div class="panel-body"> #}
+        {# <div class="row row-space-4"> #}
+        {# <div class="col-sm-6"> #}
+        {# <a href="/press/news/airbnb-community-tops-1-15-billion-in-economic-activity-in-new-york-city">Airbnb Community Tops $1.15 billion in Economic Activity in New York City </a><br> #}
+        {# <small>May 12, 2015</small> #}
+        {# </div> #}
+        {# <div class="col-sm-6"> #}
+        {# <a href="/press/news/vamonos-americans-can-t-wait-to-get-to-cuba">¡Vámonos!: Americans Can’t Wait to Get to Cuba </a><br> #}
+        {# <small>Apr 30, 2015</small> #}
+        {# </div> #}
+        {# </div> #}
+        {# <div class="row row-space-4"> #}
+        {# <div class="col-sm-6"> #}
+        {# <a href="/press/news/airbnb-travels-to-tablet">Airbnb Travels to Tablet</a><br> #}
+        {# <small>Apr 29, 2015</small> #}
+        {# </div> #}
+        {# <div class="col-sm-6"> #}
+        {# <a href="/press/news/hospitality-havana-style-airbnb-opens-its-doors-in-cuba">Hospitality, Havana Style: Airbnb Opens Its Doors in Cuba</a><br> #}
+        {# <small>Apr 02, 2015</small> #}
+        {# </div> #}
+        {# </div> #}
+        {# <div class="row row-space-4"> #}
+        {# <div class="col-sm-6"> #}
+        {# <a href="/press/news/bulls-legend-scottie-pippen-to-host-once-in-a-lifetime-experience-at-the-united-center-home-of-the-chicago-bulls-exclusively-through-airbnb">Bulls Legend Scottie Pippen to host once-in-a-lifetime experience at the United Center, home of the Chicago Bulls, exclusively through Airbnb</a><br> #}
+        {# <small>Mar 30, 2015</small> #}
+        {# </div> #}
+        {# <div class="col-sm-6"> #}
+        {# <a href="/press/news/airbnb-takes-gold-with-the-rio-2016-olympic-games-providing-the-official-alternative-accommodations-service">Airbnb Takes Gold with the Rio 2016 Olympic Games Providing the Official Alternative Accommodations Service</a><br> #}
+        {# <small>Mar 27, 2015</small> #}
+        {# </div> #}
+        {# </div> #}
+        {# </div> #}
+        {# <div class="panel-footer panel-dark press-pagination"> #}
+        {# <i class="icon icon-chevron-left icon-light-gray icon-size-2 pull-left"></i> #}
+        {# <a class="paginate link-reset" href="#" data-prevent-default="" data-href="/press/content?content_type=2&amp;locale=en&amp;page=2"> #}
+        {# <i class="icon icon-chevron-right icon-gray icon-size-2 pull-right"></i> #}
+        {# </a> #}
+        {# <span> #}
+        {# 1 of 8 #}
+        {# </span> #}
+        {# </div> #}
+        {# </div> #}
+
+
+        {# <h2 class="row-space-6">Blogs</h2> #}
+
+        {# <div class="panel row-space-6"> #}
+        {# <div class="panel-body"> #}
+        {# Visit our <a href="http://nerds.airbnb.com">Engineering</a>, <a href="http://blog.airbnb.com">Travel</a>, and <a href="http://publicpolicy.airbnb.com">Public Policy</a> blogs. #}
+        {# </div> #}
+        {# </div> #}
+
+        <h2 class="row-space-6">Inquiries</h2>
+
+        <div class="panel row-space-6">
+            <div class="panel-body">
+                Please contact our founder directly at <a href="mailto:godwin@tuteria.com">godwin@tuteria.com</a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    {{ block.super }}
+    <script src="{% static "js/news.bundle.js" %}"></script>
+{% endblock javascript %}

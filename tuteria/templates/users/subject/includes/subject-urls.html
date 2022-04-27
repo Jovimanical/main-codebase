@@ -1,0 +1,44 @@
+{% load activelink %}
+
+<ul class="{{ url_class }}">
+    {% if subject_page %}
+
+    <li>
+        <a href="{% url 'users:tutor_subjects' %}"
+           aria-selected="{% ifactive 'users:tutor_subjects' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Manage Your Subjects</a>
+    </li>
+
+    <li class="hide">
+        <a href="#"
+           aria-selected="{% ifactive 'users:edit_verification' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Your Sales Analytics</a>
+    </li>
+  {% if request.user.tutorskill_set.active.exists %}
+    <li>
+        <a href="{% url 'users:promote' %}" 
+           aria-selected="{% ifactive 'users:promote' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Promote Your Business</a>
+    </li>
+    {% endif %}
+    {% else %}
+
+    <li>
+        <a href="{% url 'users:user_bookings' %}"
+           aria-selected="{% ifactive 'users:user_bookings' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Booked Lessons</a>
+    </li>
+    {% if request.user.tutor_verified %}
+    <li>
+        <a href="{% url 'users:tutor_bookings' %}"
+           aria-selected="{% ifactive 'users:tutor_bookings' %}true{% else %}false{% endifactive %}"
+           class="sidenav-item">Received Lessons</a>
+    </li>
+    <!--<li>
+        <a href="{% url 'client_meetings' %}" aria-selected="{% ifactive 'client_meetings' %}true{% else %}false{% endifactive %}"class="sidenav-item">
+        Meeting requests
+        </a>
+    </li>-->
+    {% endif %}
+    {% endif %}
+</ul>

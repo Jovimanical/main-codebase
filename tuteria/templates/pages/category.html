@@ -1,0 +1,55 @@
+{% extends "includes/search/category.html" %}
+{% load staticfiles humanize bootstrap3 add_attr cloudinary %}
+{% block title %}Private {{ skill.title }} Lesson Teachers | Tuteria {% endblock title %}
+{% block page_heading %}
+    {% block jumbotron %}
+        <div class="page-heading-one category-header-page panel">
+            <div class="jumbo-container-detail panel-body panel-height">
+                <div class="col-sm-3 hidden-xs container-thumbnail">
+                    <a href="#" class="thumbnail category-thumb">
+                        <img src="/static/img/ui/{{ skill.image }}" alt=""/>
+                    </a>
+                </div>
+                <div class="col-sm-9">
+                    <h2><b>{{ skill.title }}</b></h2>
+                   <p class="h4" style="color: #0769ad">Tutors have passed manual screening and identity verification</p>                   
+                    
+                    <form action="" method="get" class="row-space-4">
+                        <div class="col-md-12 col-lg-10">
+                            <div class="row">
+                            <hr class="hr-header hidden-xs"/>
+                                {#                                                            {% if request.is_phone %}#}
+                                <div class="visible-xs smart-forms">
+                                    <div class="section">
+                                        <!-- Label -->
+                                        <label class="field select">
+                                            <select name="dropdown"
+                                                    onchange="openUrl(this.value)">
+                                                <option value="">Related Topics
+                                                </option>
+                                                {% for sk in skill.tags %}
+                                                    <option value="?tags={{ sk }}">{{ sk }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <i class="arrow"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                {#                                                            {% else %}#}
+                                <p class="trans_label hidden-xs">
+                                    {% for cat in skill.tags %}
+                                        <a href="{% url 'skill_detail' skill.slug cat|lower|slugify %}"
+                                           class="label label-lg">{{ cat }}</a>
+                                    {% endfor %}
+                                </p>
+                                {#                                                            {% endif %}#}
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+       

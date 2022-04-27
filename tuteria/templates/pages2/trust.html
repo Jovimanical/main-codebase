@@ -1,0 +1,253 @@
+{% extends '_layouts/base-external.html' %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/trust.css' %}">
+{# <link rel="stylesheet" href="{% static 'css/custom-become-tutor.css' %}"> #}
+
+{# <link rel="stylesheet" href="{% static 'css/c_trust.css' %}"> #}
+{% endblock %}
+{% block title %}Trust & Safety at Tuteria{% endblock title %}
+{% block carousel_image %}
+<div class="item active">
+{% block jumbo1 %}
+    <div class="caro bg8"></div>
+{% endblock jumbo1 %}
+  {# <img src="{% static 'img/backgrounds/trust.jpg' %}" alt="tested and trusted privated tutoring"> #}
+</div>
+{% endblock carousel_image %}
+{% block carousel_content %}
+
+<div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0  text-center">
+  <div class="jumbo-header">
+    <h2 class="myh2"><b class="white">Safety means everything</b></h2>
+
+    <p class="grey">We have gone the extra mile to ensure your absolute peace of mind</p>
+
+  </div>
+
+</div>
+{% endblock %}
+{% block main_content %}
+{% block mm_c%}
+
+<div id="base" class="container">
+  <section class="panel row">
+    <div class="panel-body no-padding-total padding-top-50 space-for-mobile-20 row-space-bottom-5">
+      <div id="know-your-tutor" class="wrapper-full clearfix text-center ">
+        <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+          <h3 class="">We make it easy to discover amazing tutors like Adesua</h3>
+
+          <p style="text-align: center">Only the highest quality instructors are approved, and we have built in trust, safety and transparency as integral parts of your tutoring experience with Tuteria</p>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="section-1 row">
+
+          <div class="rating-container row-space-4">
+            <div class="rating-review hidden-xs">
+            </div>
+            <div class="pos">
+              <img src="{% static 'img/gallery/sample-mb.png' %}" class="img-resizer"alt="">
+            </div>
+          </div>
+          <div class="col-sm-8 col-sm-offset-4 col-xs-12 col-xs-offset-0 row-space-4">
+            <div class="row">
+              <div class="col-sm-5 col-sm-offset-1 text-left row-space-4">
+                <h4><a href="{% url 'help:article_detail' 14 %}">Verified IDs</a></h4>
+
+                <p>All tutors have verified their IDs by connecting to their social networks, uploading valid govt-issued IDs and confirming personal information with supporting documents.</p>
+              </div>
+              <div class="col-sm-5 col-sm-offset-1 text-left">
+                <h4><a href="{% url 'help:article_detail' 99 %}">Background Checks</a></h4>
+
+                <p>Clients may run up-to-date criminal checks on any tutor which goes back seven years. We've teamed up with the foremost background check company to legally conduct the checks.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <br><br>
+        <div class="section-x">
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+               <div class="col-sm-4">
+                <div class="">
+                    <div class="quality-img"></div>
+                      {# <img src="{% static 'img/tutor/quality.png' %}" class=" center-block"/> #}
+                    
+                </div>
+              </div>
+              <div class="col-sm-8 row-space-4">
+                <div class="text-left">
+                      <h4><a href="{% url 'help:article_detail' 74 %}">High Standards for Quality</a></h4>
+                      <p>
+                        All tutors are delicately assessed and manually verified against each subject to ensure that they don't only meet our high standards, but also meet yours. 
+                      </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12 col-xs-offset-0">
+                      <div class="col-sm-4  ">
+                      <div class="guarantee-img"></div>
+                        {# <div class=""> #}
+                            {# <img src="{% static 'img/cards/gfg.png' %}" class=" center-block" style="width:136px;"/> #}
+                        {# </div> #}
+                      </div>
+
+                      <div class="col-sm-8">
+                        <div class="text-left">
+                            <h4><a href="{% url 'help:article_detail' 44 %}">Good Fit Guarantee</a></h4>
+                            <p>
+                              Your first hour with any tutor is protected by our Good Fit Guarantee. You don't pay for lessons unless you've found a good fit. Tutors have guaranteed their services.
+                            </p>
+                        </div>
+                      </div>
+            </div>
+        </div>
+      </div>
+      <br><br><hr>
+        <div class="section-2">
+          <div class="rating-container row-space-4">
+            <div class="rating-review2 hidden-xs">
+            </div>
+            <div class="pos2">
+              <img src="{% static 'img/gallery/reviews.png' %}" alt="">
+            </div>
+          </div>
+          <div class="col-sm-8 col-xs-12">
+            <div class="row">
+              <div class="col-sm-5 text-left row-space-4">
+                <h4><a href="{% url 'help:article_detail' 17 %}">Tuteria Reputation</a></h4>
+
+                <p>Users cultivate their reputation score by being rewarded for trustworthy behaviour, which helps to identify the best clients and tutors based on their past activities on Tuteria.</p>
+              </div>
+              <div class="col-sm-5 col-sm-offset-1 text-left">
+                <h4><a href="{% url 'help:article_detail' 100 %}">Two-way Reviews</a></h4>
+
+                <p>Clients review the tutor's performance after each lesson which is publicly displayed on tutor profiles. Tutors also provide feedback for clients to encourage transparency.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="section-3">
+          <div class="rating-container row-space-4">
+            <div class="rating-review2">
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                <h4>SELLER LEVELS</h4>
+
+                <p>
+                  Sellers who consistently deliver high quality services and maintain high ratings
+                  earn new levels of status. They start as beginners, then progress to Level 1,
+                  Level 2 and Top Rated Seller. Read more about our levels here.</p>
+              </div>
+            </div>
+            <ul class="hidden-xs">
+              <li class="user-badge-round-lrg top_rated_seller"></li>
+              <li class="user-badge-round-med level_two_seller"></li>
+              <li class="user-badge-round-med level_one_seller"></li>
+            </ul>
+          </div>
+
+        </div>-->
+      </div>
+    </div>
+    <div id="worry-free" class="panel-body">
+    <section id="firstss">
+    <div class="no-padding-total row-space-bottom-5">
+        <div id="how-it-works" class="col-sm-8 col-sm-offset-2 wrapper-full clearfix text-center">
+            <h2 class="">
+          {% if request.is_featured %}<b>Learn and teach without worries</b>
+          {% else %}Learn and teach without worries
+          {% endif %}
+        </h2>
+        <p>Tuteria is a trusted community. We use best-in-class technologies and security measures to keep your transactions and data safe</p>
+        </div>
+
+        <div class="icon-box-6">            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">                    
+                     <i class="personal-img"></i>
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Personal Details</b>
+                      {% else %}
+                      Personal Details
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Your privacy is important to us. We ensure your data is secured at all times and never share them with third parties.
+                    </span>
+                </div>
+            </div>            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">  
+                <i class="secure-img"></i>                  
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Secure Payments</b>
+                      {% else %}
+                      Secure Payments
+                      {% endif %}
+                      <br></h3>
+
+                    <span class="inline-block">All transactions are conducted through Tuteria's secure platform which protects your payments and ensures lessons are delivered.
+                    </span>
+                </div>
+            </div>
+            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">     
+                <i class="support-img"></i>               
+                     {# <img src="{% static 'img/gallery/support.png' %}" alt="Trusted and Tested Tutoring Services"> #}
+                    <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Trust & Safety Team</b>
+                      {% else %}
+                      Trust & Safety Team
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Your safety is our first priority. Our trust and safety team works 24/7 to monitor activities on the site and keep you safe.              
+                    </span>
+                </div>
+            </div>            
+        </div>
+        </div>
+    </section>
+      <div class="col-sm-4 col-sm-offset-4 col-xs-12">
+        <div class="text-block">
+          <p class="text-center padding-bottom-50">
+          {% include "includes/special_button.html" %}
+            </p> 
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+  <section class="">
+    <div id="still_life" class="text-center hide-phone">
+      <div class="objects"></div>
+    </div>
+
+  </section>
+<section id="lys_cta">
+  <div class="text-contrast">
+    <div class="row add-height">
+      <div class="surface"></div>
+      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+        <div class="text-center">
+          <h3 style="color: white">If you ever need any help, just call <span style="color: #5e5e5e">{{ tuteria_details.phone_number }}</span> or email <span style="color: #5e5e5e">{{ tuteria_details.email }}</span>. We are delightfully friendly and always respond quickly.</h3>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock main_content %}
+{% block javascript %}
+<script>
+  window.currentPage = "Trust";
+</script>
+    {{ block.super }}
+    <script src="{% static 'js/static_pages.bundle.js' %}">
+    </script>
+{% endblock %}

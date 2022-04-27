@@ -1,0 +1,92 @@
+{% extends "helps/home.html" %}
+{% load template_utils activelink %}
+{% block sub_nav %}{% endblock %}
+{% block fixed %}{% endblock %}
+{% block sidebar_topics %}
+{% for category in parents %}
+<li class="sub-item {% if object.parent_cat == category %}active{% endif %}">
+    <a href="javascript:void(0)">{{ category.name }}</a>
+    <ul class="nav nav-stacked">
+
+        {% for sub_category in category.sub_categories.all %}
+        <li class="{% if object.parent and object.get_absolute_url == sub_category.get_absolute_url %}active{% endif %}"">
+            <a class="parentArticle" href="{{sub_category.get_absolute_url}}">
+                {{ sub_category.name }}
+            </a>
+            <ul class="spec nav-stacked hide">
+                {% for article in sub_category.article_set.all %}
+                <li><a class="active" href="{{article.get_absolute_url}}">
+                    {{article.question}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+
+        {% endfor %}
+
+    </ul>
+</li>
+{% endfor %}
+
+{% endblock sidebar_topics %}
+{% block breadcrumb %}
+{# <ol class="breadcrumb"> #}
+{# {% if object.parent %} #}
+{# <li><a href="{{ object.parent.get_absolute_url }}">{{ object.parent.name }}</a></li> #}
+{# {% endif %} #}
+{# <li><a class="active" href="{{ object.get_absolute_url }}">{{ object.name }}</a></li> #}
+{# </ol> #}
+{% endblock %}
+{% block article_block %}
+<div class="col-sm-8 col-sm-offset-1 col-xs-12 col-xs-offset-0 help-content text-copy navtree-content breadcrumbs-content">
+  <h1 class="h2">{{ object.name }}</h1>
+  {% if object.parent %}
+  <ul class="list-unstyled row-space-top-3 text-copy">  
+  {% if object.sub_categories.exists %}
+    {% for cat in object.sub_categories.all %}
+      <li>
+          <a href="{{ cat.get_absolute_url }}">
+            {{ cat.name }}
+        </a>
+        <hr>
+    </li>  
+    {% endfor %}
+    {% else %}
+    {% for article in object.article_set.all %}
+    <li>
+        <a href="{{ article.get_absolute_url }}">
+          {{ article.question }}
+      </a>
+      <hr>
+  </li>
+  {% endfor %}
+  {% endif %}
+</ul>  
+  
+{% else %}
+{% for section in object.content %}
+{% for category in section %}
+<div class="col-sm-6 col-xs-12">
+    <h4>{{ category.name }}</h4>
+    <ul class="list-unstyled">
+        {% for article in category.article_set.all %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">
+              {{ article.question }}
+          </a>
+          <hr>
+      </li>
+      {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+{% endfor %}
+
+
+{% endif %}
+
+
+
+</div>
+
+{% endblock %}

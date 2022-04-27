@@ -1,0 +1,374 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles i18n bootstrap3 add_attr activelink %}
+{% block css %}
+    {{ block.super }}
+    {#    <link href="{% static 'css/request_tutor.css' %}" rel="stylesheet">#}
+    <style>
+        .content-carousel {
+            margin-top: 0 !important;
+        }
+
+        .margin-down-5 {
+            margin-bottom: 7px !important;
+        }
+
+        .pad-down-20 {
+            padding-bottom: 20px;
+        }
+
+        .img-resized {
+            width: 40px;
+        }
+
+        .hr-styled {
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .padding-left-50 {
+                padding-left: 50px;
+
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}Request a Private Tutor | Tuteria{% endblock title %}
+{% block fixed %}profile-header{% endblock %}
+{% block carousel_content %}
+    <div class="col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center">
+        {% block custom_heading %}
+            <div class="jumbo-header row">
+                <h2 class="myh2"><b class="white">Request a Tutor</b></h2>
+
+                <p>
+                    Tell us what you need and we'll find qualified tutors in your area
+                </p>
+
+            </div>
+
+        {% endblock custom_heading %}
+
+    </div>
+{% endblock %}
+{% block big_section %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl">
+        <div class="">
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="">
+                    <div id="wizard-container" class="bordered spaced-bottom-lg">
+                        <div class="">
+                            <form id="request_tutor_form" action="{% url 'how_it_works' %}" class=""
+                                  novalidate method="post">
+                                {% csrf_token %}
+
+                                <div class="panel row-space-4">
+                                    <div class="panel-body">
+
+                                        {% if not request.user.is_authenticated %}
+                                            <div class="well bg-info">
+                                                <p>Already a member? <a class="login_nav2"
+                                                                        href="{% url 'account_login' %}">Log in here</a>
+                                                    to request faster or fill the form below and we'll create your
+                                                    account.</p>
+                                            </div>
+                                        {% endif %}
+                                        <section id="questions" class="smart-forms">
+                                            {% if form.errors %}
+                                                {% for field in form %}
+                                                    {% for error in field.errors %}
+                                                        <div class="alert alert-error">
+                                                            <strong>{{ error|escape }}</strong>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                                {% for error in form.non_field_errors %}
+                                                    <div class="alert alert-error">
+                                                        <strong>{{ error|escape }}</strong>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if request_form.errors %}
+                                                {% for field in request_form %}
+                                                    {% for error in field.errors %}
+                                                        <div class="alert alert-error">
+                                                            <strong>{{ error|escape }}</strong>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                                {% for error in request_form.non_field_errors %}
+                                                    <div class="alert alert-error">
+                                                        <strong>{{ error|escape }}</strong>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+{#                                            {% if request.is_featured %}#}
+{#                                                {% bootstrap_form request_form %}#}
+{#                                            {% else %}#}
+                                                <div class="form-group">
+                                                    {# {% bootstrap_label request_form.description.label %} #}
+                                                    <label class="margin-down-5">What do you hope to accomplish with
+                                                        this
+                                                        tutoring?</label>
+                                                    {{ request_form.description|add_attributes:"class:form-control,rows:5,placeholder:E.g 'I want to improve my daughter's confidence in Math and Physics for her A Level exams',required:true,data-parsley-error-message:Please enter a short goal for this lesson" }}
+                                                    <!--<span class="input-hint">What do you hope to accomplish with this tutoring?</span>-->
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="form-group">
+                                                            <label class="margin-down-5">Enter the subject(s) you need
+                                                                tutors for</label>
+                                                            {{ request_form.skill|add_attributes:"class:form-control,required:true,data-parsley-error-message:Type one subject at least" }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="form-group row-space-4 margin-bottom-40">
+                                                            {% if request.is_featured %}
+                                                                <label for="" class="control-label">Maximum
+                                                                    Price</label>
+                                                                <div class="form-inline">
+                                                                    <label for="">Max Price</label>
+                                                                    {{ request_form.end_rate|add_attributes:"class:form-control,required:true, data-parsley-error-message:You need to select an hourly price" }}
+                                                                </div>
+                                                            {% else %}
+                                                                <label class="margin-down-5" for="amount">What is your
+                                                                    maximum budget per hour?
+                                                                </label>
+                                                                {{ request_form.end_rate|add_attributes:"required:true, data-parsley-error-message:You need to select an hourly price" }}
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr class="no-margin-top">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="well bg-info">
+                                                            <small>Hello, you can hire tutors for a couple of hours or
+                                                                days,
+                                                                or for
+                                                                several months to thoroughly understand the subject and
+                                                                reach your goals. You also enjoy discounts when you hire
+                                                                for
+                                                                more than one student and you'll never again have to pay
+                                                                extra for transport fare!
+                                                            </small>
+
+                                                            <small class="monthly_budget">
+                                                                <br><br>
+                                                                <span style="color:crimson" class="font-head">Monthly Budget:</span>
+                                                                &#x20A6;<span id="t_price">0.00</span> per
+                                                                student/subject
+                                                                (max)
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="form-group row-space-4 margin-bottom-40">
+                                                            <label class="margin-down-5" for="amount">Prefer hourly or
+                                                                monthly lessons?
+                                                            </label>
+
+                                                            <div class="form-inline">
+                                                                {% for radio in request_form.booking_option %}
+                                                                    <div class="radio {% if forloop.last %}padding-left-50{% endif %}">
+                                                                        {{ radio }}
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                        <div id="booking_selection" class="row row-space-top-4">
+                                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                                <div class="form-group row-space-4">
+                                                                    {# {% bootstrap_label request_form.age.label %} #}
+                                                                    <label class="margin-down-5">Days per week</label>
+                                                                    {{ request_form.days|add_attributes:'class:form-control,required:true' }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                                                <div class="form-group row-space-4 margin-bottom-35">
+                                                                    {# {% bootstrap_label request_form.gender.label %} #}
+                                                                    <label class="margin-down-5">Hours per day</label>
+                                                                    {{ request_form.hours|add_attributes:'class:form-control,required:true' }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <hr class="no-margin-top">
+
+
+                                                <div class="row row-space-top-4">
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="form-group row-space-4">
+                                                            {# {% bootstrap_label request_form.age.label %} #}
+                                                            <label class="margin-down-5">Preferred age range of
+                                                                tutor</label>
+                                                            {{ request_form.age|add_attributes:'class:form-control' }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="form-group row-space-4 margin-bottom-35">
+                                                            {# {% bootstrap_label request_form.gender.label %} #}
+                                                            <label class="margin-down-5">Preferred gender of
+                                                                tutor</label>
+                                                            {{ request_form.gender|add_attributes:'class:form-control' }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="form-group row-space-4">
+                                                            <label for="id_no_of_students" class="margin-down-5">How
+                                                                many
+                                                                students?</label>
+                                                            {{ request_form.no_of_students|add_attributes:'class:form-control,min:1,max:100,required:true' }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <div class="form-group row-space-4">
+                                                            <label for="" class="margin-down-5">Where should lessons
+                                                                hold?</label>
+                                                            {{ request_form.tutoring_address|add_attributes:'required:true' }}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+{#                                            {% endif %}#}
+
+                                        </section>
+                                    </div>
+                                </div>
+                                {% if not request.user.is_authenticated %}
+                                    <div class="panel row-space-4">
+                                        <div class="panel-body">
+
+                                            {% if request.is_featured %}
+                                                {% bootstrap_field form.first_name %}
+                                                {% bootstrap_field form.last_name %}
+                                                {% bootstrap_field form.email %}
+                                                {% bootstrap_field form.confirm_email %}
+                                                <div class="form-group">
+                                                    {% bootstrap_label form.country.label label_class=label_text %}
+
+                                                    <input class="form-control" id="user_country"
+                                                           size="30"
+                                                           type="text" value="Nigeria" readonly>
+                                                    <input type="hidden" id="id_country" name="country"
+                                                           value="NG"/>
+                                                </div>
+                                                {% bootstrap_field form.phone_number %}
+                                                <div id="pass_group" class="form-group">
+                                                    {% bootstrap_field form.password1 %}
+                                                </div>
+                                            {% else %}
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            {% bootstrap_label form.first_name.label label_class=label_text %}
+                                                            {{ form.first_name|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please enter your first name e.g. Gbemisola" }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            {% bootstrap_label form.last_name.label label_class=label_text %}
+                                                            <small>(private)</small>
+                                                            {{ form.last_name|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please type your surname e.g. Shittu" }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            {% bootstrap_label form.email.label label_class=label_text %}
+                                                            <small>(private)</small>
+                                                            {{ form.email|add_attributes:"class:form-control,placeholder:Email Address,required:true,data-parsley-remote:,data-parsley-remote-validator:validate_email, data-parsley-error-message:Please enter your active email address" }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            {% bootstrap_label form.confirm_email.label label_class=label_text %}
+                                                            <small>(private)</small>
+                                                            {{ form.confirm_email|add_attributes:"class:form-control,required:true,data-parsley-equalto:#request_tutor_form #id_email, data-parsley-error-message:Email should be the same" }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <!--<div class="col-sm-6 col-xs-12 padding-right-0">
+                                                        <div class="form-group">
+                                                            {% bootstrap_label form.country.label label_class=label_text %}
+
+                                                            <input class="form-control" id="user_country"
+                                                                   size="30"
+                                                                   type="text" value="Nigeria" readonly>
+                                                            <input type="hidden" id="id_country" name="country"
+                                                                   value="NG"/>
+                                                        </div>
+                                                    </div>-->
+                                                    <div id="password_container" class="form-group col-sm-6 col-xs-12">
+                                                        {% bootstrap_label form.password1.label label_class=label_text %}
+                                                        <small>(private)</small>
+                                                        {{ form.password1|add_attributes:"class:form-control,placeholder:Password,required:true,data-parsley-minlength:6" }}
+                                                    </div>
+                                                    <div id="phone_container" class="col-sm-6 col-xs-12">
+                                                        {% bootstrap_label form.phone_number.label label_class=label_text %}
+                                                        <small>(private)</small>
+                                                        {{ form.phone_number|add_attributes:"class:form-control,required:true,data-parsley-valid_phone:,data-parsley-remote-validator:validate_duplicate_number,data-parsley-remote:, data-parsley-error-message:Please type your phone number" }}
+                                                    </div>
+                                                </div>
+
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12">
+                                                    <div class="form-group">
+                                                        {# {% bootstrap_label form.address.label label_class=label_text %}  #}
+                                                        <label>Home Address</label>
+                                                        <small>(private)</small>
+                                                        {{ form.address|add_attributes:"class:form-control,required:true,placeholder:E.g. 24 Bode Thomas Road Surulere, data-parsley-error-message:You need to enter a valid address" }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-xs-12">
+                                                    {% bootstrap_label form.state.label %}
+                                                    {{ form.state|add_attributes:"class:form-control" }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="row row-space-4 pad-down-20">
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <button id="submit_btn" data-loading-text="Loading..."
+                                                class="btn btn-lg btn-block btn-primary"
+                                                >{% trans "Submit Request" %}</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block footer %}{% endblock footer %}
+{% block bottom_footer %}{% endblock bottom_footer %}
+{% block request_section %}{% endblock request_section %}
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static "js/request_tutor.bundle.js" %}"></script>
+    {% if not request.user.is_authenticated %}
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?libraries=places&region=NG&sensor=false&callback=initializeCallback"></script>
+        {% block tracking_requests %}
+
+        {% endblock tracking_requests %}
+
+    {% endif %}
+{% endblock %}

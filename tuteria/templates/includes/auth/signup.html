@@ -1,0 +1,155 @@
+{% load add_attr %}
+{% load bootstrap3 %}
+{% load i18n activelink %}
+
+<div id="errorMessage" class="signupErrorMessage"></div>
+<form accept-charset="UTF-8" id="signup_form"
+      action="{% if mail_list %}{% url 'users:mailing_signup' %}{% else %}{% url 'account_signup' %}{% endif %}"
+      class="new_user {{ ex_class }}" method="post" {% if not request.is_featured %}data-parsley-validate=""{% endif %}>
+    {% csrf_token %}
+    {% if request.is_featured %}
+        {% bootstrap_field form.first_name %}
+        {% bootstrap_field form.last_name %}
+        {% bootstrap_field form.email %}
+        {% bootstrap_field form.confirm_email %}
+        {% if not wallet %}
+            {% bootstrap_field form.country %}
+            <div 
+            id="phone_no"
+            >
+                {% bootstrap_field form.phone_number %}
+            </div>
+        {% endif %}
+        <div id="pass_group" class="form-group">
+            {% bootstrap_field form.password1 %}
+        </div>
+        <div class="hidden">
+        {% bootstrap_field form.referral_code %}    
+        </div>
+        
+        {% if not wallet %}
+            {% if request.session.order_id %}
+            {% else %}
+                <div id="tutor_intent" class="checkbox">
+                    <label>
+                        <input type="checkbox" name="tutor_intent"> <b>Interested in tutoring?</b>
+                    </label>
+                </div>
+
+            {% endif %}
+            <input id="tutor_intent" type="hidden" name="tutor_intent" value="true"/>
+        {% endif %}
+
+    {% else %}
+        {% ifactive 'become_tutor' %}
+            <input type="hidden" name="tutor_intent" value="true"/>
+        {% endifactive %}
+        {% ifactive 'become_tutor1' %}
+            <input type="hidden" name="tutor_intent" value="true"/>
+        {% endifactive %}
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {% if request.is_featured %}
+                        {% bootstrap_label form.first_name.label label_class=label_text %} {% endif %}
+                    {{ form.first_name|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please input your first name" }}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {{ form.last_name|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please input your last name" }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.email|add_attributes:"class:form-control,placeholder:Email Address,required:true,data-parsley-remote:,data-parsley-remote-validator:validate_email,data-parsley-remote-message:This email already exists,data-parsley-trigger:keyup,data-parsley-required-message:Your email is required" }}
+        </div>
+        {% if not mail_list %}
+            <div class="form-group">
+                {% if dup_field %}
+                    {% if not with_modal %}
+                        {{ form.confirm_email|add_attributes:"class:form-control,required:true,data-parsley-equalto:.signup_form #id_email,data-parsley-required-message:This field is required" }}
+                    {% else %}
+                        {{ form.confirm_email|add_attributes:"class:form-control,required:true,data-parsley-equalto:#search_only_form2 .signup_form #id_email,data-parsley-required-message:This field is required" }}
+                    {% endif %}
+                {% else %}
+                    {{ form.confirm_email|add_attributes:"class:form-control,required:true,data-parsley-equalto:#id_email,data-parsley-required-message:This field is required" }}
+                {% endif %}
+
+            </div>
+        {% endif %}
+        {% if not wallet %}
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        {{ form.country|add_attributes:"class:form-control,required:true" }}
+                    </div>
+                </div>
+                {% if not mail_list %}
+                    <div id="phone_container" class="col-sm-6 col-xs-12">
+                        <div id="phone_no" class="form-group">
+                            {{ form.phone_number|add_attributes:"class:form-control,required:true,data-parsley-valid_phone:,data-parsley-remote-validator:validate_duplicate_number,data-parsley-remote:,data-parsley-remote-message:This phone number already exist.!,data-parsley-trigger:keyup,data-parsley-required-message:Your phone-number is required" }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+        {% endif %}
+        {% if not mail_list %}
+            <div id="password_container" class="form-group">
+                <div id="pass_group">
+                    {{ form.password1|add_attributes:"class:form-control,placeholder:Password,required:true,data-parsley-minlength:6,data-parsley-required-message:Please input a password,data-parsley-minlength-message:The password should be at least 6 characters" }}
+                </div>
+            </div>
+            <div class="form-group">
+                <small>If you have a referral code, enter it here. If not, then leave it blank.</small>
+                {{ form.referral_code|add_attributes:"class:form-control,placeholder:Referral code (Optional)" }}
+            </div>
+        {% endif %}
+    {% endif %}
+    {% if wallet %}
+        <div id="phone_no" class="form-group">
+            {{ form.phone_number|add_attributes:"class:form-control,required:true,data-parsley-valid_phone:,data-parsley-remote-validator:validate_duplicate_number,data-parsley-remote:" }}
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        {{ form.address|add_attributes:"class:form-control,required:true,placeholder:Enter your full address" }}
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                    <div class="form-group">
+                        <input class="form-control" id="user_country" size="30"
+                               type="text" value="Nigeria" readonly>
+                        <input type="hidden" id="id_country" name="country" value="NG"/>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                    <div class="form-group">
+                        {{ form.state|add_attributes:"class:form-control,required:true" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <button id="submit_btn" class="btn btn-primary btn-block btn-lg big-btn" data-loading-text="Registering..."
+                    name="commit" type="submit">Join in
+            </button>
+        </div>
+    </div>
+    <div class="last form-group agree-to">
+        <div class="form-group-meta">
+            <p class="small">
+                By registering you are agreeing to our <a href="{% url 'terms' %}" target="_blank">Terms</a> and <a
+                    href="{% url 'policies' %}" target="_blank">Policies</a>.
+            </p>
+        </div>
+    </div>
+</form>

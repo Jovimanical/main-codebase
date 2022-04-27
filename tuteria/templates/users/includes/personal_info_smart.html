@@ -1,0 +1,218 @@
+{% load staticfiles add_attr bootstrap3 i18n %}
+{% load cache %}
+
+{% comment %}
+{% if object.id_verified %}
+    {% include "users/includes/verified_user.html" %}
+    <div class="hidden">
+        {% bootstrap_form form %}
+    </div>
+{% else %}
+{% endcomment %}
+
+    <div class="row row-space-4">
+        <!-- Label -->
+        {% bootstrap_label form.first_name.label label_class="col-md-3 col-sm-3 text-right" %}
+        <div class="col-md-9 col-sm-9 space-for-mobile">
+            {{ form.first_name|add_attributes:"class:form-control,size:30,placeholder:Enter first name e.g John,data-parsley-group:default,required:" }}
+            <span class="input-hint">Please write only one name</span>
+        </div>
+    </div>
+
+    <div class="row  row-space-4">
+        {% bootstrap_label form.last_name.label label_class="col-md-3 col-sm-3 text-right" %}
+
+        <div class="col-md-9 col-sm-9 space-for-mobile">
+            {{ form.last_name|add_attributes:"class:form-control,size:30,placeholder:Enter last name e.g Smith,data-parsley-group:default,required:" }}            
+		<span class="input-hint">This is only shared when you have a confirmed
+			lesson with another Tuteria user. Please double-check to ensure it is correct.
+		</span>
+        </div>
+    </div>
+
+    <div class="row  row-space-4">
+        {% bootstrap_label profile_form.gender.label label_class="col-md-3 col-sm-3 text-right" %}
+        <div class="col-md-4 col-sm-4 space-for-mobile">
+            {{ profile_form.gender|add_attributes:"class:form-control input-medium,required:true,data-parsley-group:default,data-parsley-error-message:Pls select a sex from the dropdown" }}
+		<span id="helpBlock" class="input-hint">This is never shared, only used for analysis
+		</span>
+        </div>
+    </div>
+
+    <div class="row  row-space-4">
+        {% bootstrap_label profile_form.dob.label label_class="col-md-3 col-sm-3 text-right" %}
+        <div class="col-md-9 col-sm-9 space-for-mobile">
+            <div class="form-inline">
+                {{ profile_form.dob }}
+            </div>
+            <div class="input-hint">Only you can see this. We use this for analysis and never share with other users
+            </div>
+        </div>
+    </div>
+    {% comment %}
+{% endif %}
+{% endcomment %}
+
+
+<div class="row  row-space-4 ">
+    <label class="text-right col-md-3 col-sm-3" for="user_phone">
+        Phone Number <i class="icon icon-lock icon-pink" data-behavior="tooltip"
+                        aria-label="Private"></i>
+    </label>
+
+    <div class="col-md-9 col-sm-9 space-for-mobile">
+        <div class="phone-verification">
+            <div class="row">
+                <div class="form-group col-md-5 ">
+                    {{ primary_phone_form.number|add_attributes:"class:form-control,required:true,data-parsley-group:phone_verify,data-parsley-remote-validator:validate_changed_number,data-parsley-remote:" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    {{ primary_phone_form.primary_phone_no1|add_attributes:"class:form-control,placeholder:Confirm Primary Number,required:true,data-parsley-same_phone_number:#id_number,data-parsley-group:phone_verify,data-parsley-error-message:Ensure the phone numbers are similar" }}
+                </div>
+                <div class="col-md-6">
+                    <button id="verify_btn" data-loading-text="Verifying..." class="btn btn-primary">This is my number
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="phone-numbers-container hidden has-phone-numbers">
+                <div class="phone-numbers-hide-during-verify">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {% for phone in object.phonenumbers %}
+                                <span id="primary_verified_no" class="phone-number"
+                                      style="margin-right:2px">{{ phone.number }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <a class="add" href="javascript:void(0)">
+                        <i class=" glyphicon glyphicon-edit"></i>
+                        Edit number
+                    </a>
+                </div>
+                <div class="phone-number-verify-widget"></div>
+            </div>
+        </div>
+
+        <div class="input-hint row-space-top-1">This is only shared when you have a
+            lesson with another Tuteria user. It's how we all get in touch.
+        </div>
+    </div>
+</div>
+
+<div class="row  row-space-4">
+    <label class="text-right col-md-3 col-sm-3 hidden-xs" for="user_profile_info_current_city">
+        Address
+    </label>
+
+    <div class="col-md-9 col-sm-9">
+        {{ address_form.management_form }}
+        {% for a_form in address_form %}
+            {% if forloop.counter == 1 %}
+                <span class="font-head space-for-mobile padding-bottom-10">Current Location</span>
+                <p>Enter your current location. This should be the address where you will be attending lessons from. If you move to a new location, you must update it here. Please write it properly.</p>
+            {% endif %}
+            {% if forloop.counter == 2 %} <br>
+                <strong>Tutoring Address</strong>
+                <p>If where you teach from or where you are presently is different from your home address, then enter your current address as your tutoring address</p>
+                <br>
+            {% endif %}
+            {% for hidden in a_form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            <div><label>Street Address</label></div>
+            {{ a_form.address|add_attributes:"class:form-control,placeholder:E.g 28 Saint John Street Gowon Estate Ipaja,required:true,data-parsley-group:default" }}
+            <div class="form-inline row-space-top-1">
+            <div class="form-group">
+                <div><label>Town or City</label></div>
+                {{ a_form.vicinity|add_attributes:"class:form-control,placeholder:E.g. Ipaja,required:true,data-parsley-group:defalut" }}
+            </div>
+            <div class="form-group">
+                <div><label>State</label></div>
+                    {{ a_form.state|add_attributes:"class:form-control,placeholder:Input your state,required:true,data-parsley-group:default" }}
+                </div>
+
+            <div class="form-group {% if a_form.region.field.choices|length == 0 %}hidden{% endif %}">
+                <div class="">
+                    <label>Region</label>
+                </div>
+                {{ a_form.region|add_attributes:"class:form-control,placeholder:Input your region,required:true,data-parsley-group:default" }}                
+            </div>
+            </div>
+        {% endfor %}
+        <div class="input-hint">Only you can see this and it is never shared with anyone.
+        </div>
+    </div>
+</div>
+
+<div class="row  row-space-4 {% if not object.profile.application_status >= 2 and not object.user.tutor_intent %} {% else %}hidden {% endif %}">
+<label class="col-sm-3 text-right">
+        Interested in tutoring?</label>
+<div class="col-sm-9 col-md-9">
+            <div class="checkbox">
+            <label>                
+            {{ form.tutor_intent }}
+            </label>
+            </div>            
+</div>
+    </div>
+        
+
+    <div class="hidden row  row-space-4 {% if object.user.tutor_intent %}hidden{% endif %}">
+        {% bootstrap_label profile_form.description.label label_class="col-md-3 col-sm-3 text-right" %}
+
+        <div class="col-md-9 col-sm-9">
+            {{ profile_form.description|add_attributes:"cols:40,class:form-control,rows:8,data-parsley-group:default,data-parsley-trigger:keyup" }}
+
+            <div class="col-sm-12">
+                <small class="char-count pull-right"
+                       style="color: rgb(255, 77, 77);">
+                    <em>0</em> / 500 max
+                </small>
+            </div>
+            <div class="input-hint row-space-top-1">Tuteria is built on relationships. Help other people get to know
+                you.<br><br>
+                Tell them about the things you like: What 3 things make you happy that you can't do without? Share your
+                favorite subjects, books, movies, music, food etc.
+                <br><br>
+                Tell them what it'll feel like to have you as a tutor or client. What makes you special?
+            </div>
+        </div>
+    </div>
+</div>
+{# <div class="row hide row-space-4"> #}
+    {# <label class="text-right col-md-3 col-sm-3" for="user_sex"> #}
+        {# Languages You Speak #}
+    {# </label> #}
+
+    {# <div class="col-md-9 col-sm-9 languages"> #}
+
+        {# <div class="row "> #}
+            {# <div class="col-xs-12"> #}
+                {# {{ profile_form.languages|add_attributes:"class:form-control" }} #}
+            {# </div> #}
+
+            {# <div class="col-xs-12 lang-tags"></div> #}
+
+        {# </div> #}
+        {# <div class="row"> #}
+            {# <ul class="langs-list-drop col-xs-12"> #}
+                {# <li class="js-link-add-language link-add-language"> #}
+                {# <a href="javascript:void(0)">+ add language</a> #}
+
+                    {# <div id="select-container" class="col-sm-4"> #}
+                        {# <div class="form-group row"> #}
+                            {# <select class="form-control" name="" id="lang_select"> #}
+                                {# <option value="">Select Language</option> #}
+                            {# </select> #}
+                        {# </div> #}
+                    {# </div> #}
+                {# </li> #}
+                {# <li class="fake-dropdown langs-dropdown" style="visibility: visible"> #}
+                {# </li> #}
+            {# </ul> #}
+        {# </div> #}
+    {# </div> #}

@@ -1,0 +1,626 @@
+{% load staticfiles %}
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Tutor Request Emails</title>
+      <style type="text/css">
+         /* Client-specific Styles */
+         #outlook a {padding:0;} /* Force Outlook to provide a "view in browser" menu link. */
+         body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
+         /* Prevent Webkit and Windows Mobile platforms from changing default font sizes, while not breaking desktop design. */
+         .ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */
+         .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing.  More on that: http://www.emailonacid.com/forum/viewthread/43/ */
+         #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
+         img {outline:none; text-decoration:none;border:none; -ms-interpolation-mode: bicubic;}
+         a img {border:none;}
+         .image_fix {display:block;}
+         p {margin: 0px 0px !important;}
+
+         table td {border-collapse: collapse;}
+         table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
+         /*a {color: #e95353;text-decoration: none;text-decoration:none!important;}*/
+         /*STYLES*/
+         table[class=full] { width: 100%; clear: both; }
+
+         /*################################################*/
+         /*IPAD STYLES*/
+         /*################################################*/
+         @media only screen and (max-width: 640px) {
+         a[href^="tel"], a[href^="sms"] {
+         text-decoration: none;
+         color: #ffffff; /* or whatever your want */
+         pointer-events: none;
+         cursor: default;
+         }
+         .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+         text-decoration: default;
+         color: #ffffff !important;
+         pointer-events: auto;
+         cursor: default;
+         }
+         table[class=devicewidth] {width: 440px!important;text-align:center!important;}
+         table[class=devicewidthinner] {width: 420px!important;text-align:center!important;}
+         table[class="sthide"]{display: none!important;}
+         img[class="bigimage"]{width: 420px!important;height:219px!important;}
+         img[class="col2img"]{width: 420px!important;height:258px!important;}
+         img[class="image-banner"]{width: 440px!important;height:106px!important;}
+         td[class="menu"]{text-align:center !important; padding: 0 0 10px 0 !important;}
+         td[class="logo"]{padding:10px 0 5px 0!important;margin: 0 auto !important;}
+         img[class="logo"]{padding:0!important;margin: 0 auto !important;}
+
+         }
+         /*##############################################*/
+         /*IPHONE STYLES*/
+         /*##############################################*/
+         @media only screen and (max-width: 480px) {
+         a[href^="tel"], a[href^="sms"] {
+         text-decoration: none;
+         color: #ffffff; /* or whatever your want */
+         pointer-events: none;
+         cursor: default;
+         }
+         .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+         text-decoration: default;
+         color: #ffffff !important;
+         pointer-events: auto;
+         cursor: default;
+         }
+         table[class=devicewidth] {width: 280px!important;text-align:center!important;}
+         table[class=devicewidthinner] {width: 260px!important;text-align:center!important;}
+         table[class="sthide"]{display: none!important;}
+         img[class="bigimage"]{width: 260px!important;height:136px!important;}
+         img[class="col2img"]{width: 260px!important;height:160px!important;}
+         img[class="image-banner"]{width: 280px!important;height:68px!important;}
+
+         }
+      </style>
+
+
+   </head>
+<body>
+<div class="block">
+   <!-- Start of preheader -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="preheader">
+      <tbody>
+         <tr>
+            <td width="100%">
+               <table width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth">
+                  <tbody>
+                     <!-- Spacing -->
+                     <tr>
+                        <td width="100%" height="5"></td>
+                     </tr>
+                     <!-- Spacing -->
+                     <tr>
+                        <td align="right" valign="middle" height="40px" style="font-family: Helvetica, arial, sans-serif; font-size: 10px;color: #999999" st-content="preheader">
+                        </td>
+                     </tr>
+                     <!-- Spacing -->
+                     <tr>
+                        <td width="100%" height="5"></td>
+                     </tr>
+                     <!-- Spacing -->
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- End of preheader -->
+</div>
+<div class="block">
+   <!-- start of header -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="header">
+      <tbody>
+         <tr>
+            <td>
+               <table width="580" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" hlitebg="edit" shadow="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+
+                           <!-- logo -->
+                           <table width="280" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth">
+                              <tbody>
+                                 <tr>
+                                    <td valign="middle" width="270" style="padding: 10px 0 10px 20px;" class="logo">
+                                       <div class="imgpop">
+                                          <a href="//{{ site.domain }}{% url 'home' %}"><img src='{{ site.domain }}{% static "img/brave.png" %}' alt="logo" border="0" style="display:block; border:none; outline:none; text-decoration:none;" st-image="edit" class="logo"></a>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <!-- End of logo -->
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+
+   <!-- end of header -->
+</div>
+
+<div class="block">
+   <!-- Full + text -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="fullimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td width="100%" height="20"></td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table width="540" align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidthinner">
+                              <tbody>
+                                 <!-- title -->
+                                 <tr>
+                                    <td style="font-family: Helvetica, arial, sans-serif; font-size: 18px; color: #333333; text-align:center;line-height: 20px; color: rgb(219, 89, 64); font-weight: 600" st-title="rightimage-title">
+
+                                       TUTERIA TUTOR REQUEST
+                                    </td>
+                                 </tr>
+                                 <!-- end of title -->
+
+                                    <!-- Spacing -->
+                                 <tr>
+                                    <td width="100%" height="20"></td>
+                                 </tr>
+
+                                 <!-- Start of Welcome Content -->
+
+                                 <tr>
+                                    <td style="font-family: Helvetica, arial, sans-serif; font-size: 20px; color: #666666; text-align:left;line-height: 30px; font-weight: bold;" st-content="rightimage-paragraph">
+                                       Client: {{first_name}} {{last_name}}
+                                       <td>
+                                       </tr>
+                                       <tr>
+                                    <td style="font-family: Helvetica, arial, sans-serif; font-size: 12px; color: #666666; text-align:left;line-height: 18px; font-weight: bold;" st-content="rightimage-paragraph">
+                                       {{address}}
+                                    </td>
+
+                                 </tr>
+
+                                  <!-- Spacing -->
+                                 <tr>
+                                    <td width="100%" height="20"></td>
+                                 </tr>
+
+                                 <!-- button -->
+                                 <tr>
+                                    <td>
+                                       <table height="40" align="left" width="100%" valign="middle" border="0" cellpadding="0" cellspacing="0" class="tablet-button" st-button="edit">
+                                                                  <tbody style="border: 1px solid #ededed;">
+                                                                     <tr>
+                                                                        <td width="auto" align="center" valign="middle" height="30" style="background-color: #f8f8f8; border-top-left-radius:5px; border-top-right-radius:5px; background-clip: padding-box;font-size:12px; font-family:Helvetica, arial, sans-serif; text-align:left; color: #6e6e6e; font-weight: 300; padding-right: 15px; padding-left: 15px; padding-top:15px;">
+
+                                                                           <span style="font-weight: 700; text-align:left;text-decoration: none; color: rgb(219, 89, 64); font-size:18px;" href="#">Request Summary</span>
+
+                                                                           <p style="padding-top: 5px"><strong>
+                                                                           Date: 8:45 pm / January 4, 2015</strong><p>
+                                                                           <br>
+                                                                        </td>
+
+                                                                     </tr>
+                                                                  </tbody>
+                                                               </table>
+                                                        </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<!-- Booking Summary -->
+<div class="block">
+   <!-- start of left image -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="leftimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="540" bgcolor="#f8f8f8" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                              <tbody style="border:1px solid #ededed;">
+                                 <tr>
+                                    <td>
+                                       <!-- start of text content table -->
+                                       <table width="100%" align="left" height="30px" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                                          <tbody>
+                                             <!-- title -->
+                                             <tr>
+                                                <td style="font-family: Helvetica, arial, sans-serif; font-size: 13px; color: #95a5a6; padding-left: 15px; text-align:left;line-height: 20px;" st-title="leftimage-title">
+                                                   Subject Requested
+                                                   <span style="float:right; padding-right: 15px; color: #727272; font-weight: bolder;">#{{subject}}</span>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- end of left image -->
+</div>
+<div class="block">
+   <!-- start of left image -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="leftimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="540" bgcolor="#f8f8f8" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                              <tbody style="border:1px solid #ededed;">
+                                 <tr>
+                                    <td>
+                                       <!-- start of text content table -->
+                                       <table width="100%" align="left" height="30px" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                                          <tbody>
+                                             <!-- title -->
+                                             <tr>
+                                                <td style="font-family: Helvetica, arial, sans-serif; font-size: 13px; color: #95a5a6; padding-left: 15px; text-align:left;line-height: 20px;" st-title="leftimage-title">
+                                                   Price Range per hour
+                                                   <span style="float:right; padding-right: 15px; color: #727272; font-weight: bolder;">&#x20a6;{{start_rate}} - &#x20a6;{{end_rate}}</span>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- end of left image -->
+</div>
+<div class="block">
+   <!-- start of left image -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="leftimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="540" bgcolor="#f8f8f8" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                              <tbody style="border:1px solid #ededed;">
+                                 <tr>
+                                    <td>
+                                       <!-- start of text content table -->
+                                       <table width="100%" align="left" height="30px" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                                          <tbody>
+                                             <!-- title -->
+                                             <tr>
+                                                <td style="font-family: Helvetica, arial, sans-serif; font-size: 13px; color: #95a5a6; padding-left: 15px; text-align:left;line-height: 20px;" st-title="leftimage-title">
+                                                   No. of Students
+                                                   <span style="float:right; padding-right: 15px; color: #727272; font-weight: bolder;">#{{no_of_students}}</span>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- end of left image -->
+</div>
+<div class="block">
+   <!-- start of left image -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="leftimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="540" bgcolor="#f8f8f8" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                              <tbody style="border:1px solid #ededed;">
+                                 <tr>
+                                    <td>
+                                       <!-- start of text content table -->
+                                       <table width="100%" align="left" height="30px" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                                          <tbody>
+                                             <!-- title -->
+                                             <tr>
+                                                <td style="font-family: Helvetica, arial, sans-serif; font-size: 13px; color: #95a5a6; padding-left: 15px; text-align:left;line-height: 20px;" st-title="leftimage-title">
+                                                   Age Preference
+                                                   <span style="float:right; padding-right: 15px; color: #727272; font-weight: bolder;">#{{age_range}}</span>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- end of left image -->
+</div>
+<div class="block">
+   <!-- start of left image -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="leftimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="540" bgcolor="#f8f8f8" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                              <tbody style="border:1px solid #ededed;">
+                                 <tr>
+                                    <td>
+                                       <!-- start of text content table -->
+                                       <table width="100%" align="left" height="30px" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                                          <tbody>
+                                             <!-- title -->
+                                             <tr>
+                                                <td style="font-family: Helvetica, arial, sans-serif; font-size: 13px; color: #95a5a6; padding-left: 15px; text-align:left;line-height: 20px;" st-title="leftimage-title">
+                                                   Gender Preference
+                                                   <span style="float:right; padding-right: 15px; color: #727272; font-weight: bolder;">#{{gender_preference}}</span>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- end of left image -->
+</div>
+<div class="block">
+   <!-- start of left image -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="leftimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="540" bgcolor="#f8f8f8" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                              <tbody style="border:1px solid #ededed;">
+                                 <tr>
+                                    <td>
+                                       <!-- start of text content table -->
+                                       <table width="100%" align="left" height="30px" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                                          <tbody>
+                                             <!-- title -->
+                                             <tr>
+                                                <td style="font-family: Helvetica, arial, sans-serif; font-size: 13px; color: #95a5a6; padding-left: 15px; text-align:left;line-height: 20px;" st-title="leftimage-title">
+                                                   Best Time to Call
+                                                   <span style="float:right; padding-right: 15px; color: #727272; font-weight: bolder;">#{{time_to_call}}</span>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- end of left image -->
+</div>
+
+<!-- Message from Client Description -->
+
+<div class="block">
+   <!-- start of left image -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="leftimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td>
+                           <table width="540" bgcolor="#f8f8f8" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                              <tbody style="border:1px solid #ededed;">
+                                 <tr>
+                                    <td>
+                                       <!-- start of text content table -->
+                                       <table width="100%" align="left" border="0" height="80px" cellpadding="0" cellspacing="0" class="devicewidthinner">
+                                          <tbody>
+                                             <!-- title -->
+                                             <tr>
+                                                <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #727272; padding: 15px; font-weight: bolder; text-align:left;line-height: 20px;" st-title="leftimage-title">
+                                                   Description
+                                                   <br>
+                                                   <span style="font-size: 13px; color: #727272; line-height: 20px; font-weight: normal">{{description}}</span>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                       </table>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<!-- Button -->
+<div class="block">
+   <!-- Full + text -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="fullimage">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" modulebg="edit">
+                  <tbody>
+                     <tr>
+                        <td width="100%" height="10"></td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table width="540" align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidthinner">
+                              <tbody>
+                                 <!-- Spacing -->
+                                 <tr>
+                                    <td width="100%" height="10"></td>
+                                 </tr>
+                                 <!-- Spacing -->
+                                 <!-- button -->
+                                 <tr>
+                                    <td>
+                                       <a href="#"><table height="50" align="left" width="100%" valign="middle" border="0" cellpadding="0" cellspacing="0" class="tablet-button" st-button="edit">
+                                                                  <tbody>
+                                                                     <tr>
+
+                                                                        <td width="auto" align="center" valign="middle" height="30" style="background-color: rgb(219, 89, 64); border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:13px; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:18px; padding-right:18px;">
+
+                                                                           <span style="font-weight: 700; color: #ffffff; text-align:center;text-decoration: none;" href="{{tutor_search}}">View Suggested Tutors</span>
+
+                                                                        </td>
+
+                                                                     </tr>
+                                                                  </tbody>
+                                                               </table></a>
+
+                                    </td>
+
+                                 </tr>
+
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<div class="block">
+   <!-- start textbox-with-title -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="fulltext">
+      <tbody>
+         <tr>
+            <td>
+               <table bgcolor="#ffffff" width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth" modulebg="edit">
+                  <tbody>
+
+                     <tr>
+                        <td>
+                           <table width="540" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
+                              <tbody>
+                                 <!-- content -->
+                                 <div class="block">
+
+</div>
+                                 <!-- Spacing -->
+                              </tr>
+                              <!-- Spacing -->
+                                 <tr>
+                                    <td width="100%" height="30"></td>
+                                 </tr>
+                                 <!-- Spacing -->
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- end of textbox-with-title -->
+</div>
+
+<div class="block">
+   <!-- Start of preheader -->
+   <table width="100%" bgcolor="#f6f4f5" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
+      <tbody>
+         <tr>
+            <td width="100%">
+               <table width="580" cellpadding="0" cellspacing="0" border="0" align="center" class="devicewidth">
+                  <tbody>
+                     <!-- Spacing -->
+                     <tr>
+                        <td width="100%" height="40"></td>
+                     </tr>
+                     <!-- Spacing -->
+                     <tr>
+                        <td align="center" valign="middle" style="font-family: Helvetica, arial, sans-serif; font-size: 13px; color: #999999" st-content="preheader">
+                        </td>
+                     </tr>
+                     <!-- Spacing -->
+                     <tr>
+                        <td width="100%" height="5"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <!-- End of preheader -->
+</div>
+
+</body></html>

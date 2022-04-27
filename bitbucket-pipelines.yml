@@ -1,0 +1,20 @@
+# This is a sample build configuration for Python.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Dockerhub as your build environment.
+image: gbozee/python-postgresql
+
+pipelines:
+  default:          
+    - step:
+        script: # Modify the commands below to build your repository.
+          - pip install -r requirements/test.txt
+          - sh compose/tests/init_db.sh
+          - git remote -v
+          - mkdir -p ~/.ssh
+          - cat compose/tests/known_hosts >> ~/.ssh/known_hosts
+          - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
+          - git remote add upstream $DEPLOY_REPO
+          - git push upstream master
+          - python tuteria/manage.py test -k --configuration GodwinLocal
+          

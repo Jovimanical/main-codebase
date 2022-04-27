@@ -1,0 +1,15 @@
+{% load staticfiles %}
+{% if use_old %}
+<script src="{% static 'admin/dist/sales-app-modal.js' %}"> </script>
+<script src="{% static 'admin/dist/customer-success-app.js' %}"> </script>
+<script src="{% static 'admin/dist/renderAdminModal.js' %}"> </script>
+{% else %} 
+    <script src="{% static 'admin/dist/customer-success-app.js' %}"> </script>
+    {% include "users/includes/react-dev-server.html" with debug=debug s_host=tutor_client_cdn %}
+    {% if debug %} 
+    <script src="http://localhost:3000/js/renderAdminModal.js"></script>
+    {% else %} 
+        <script src="{{tutor_client_cdn}}/js/renderAdminModal.js"></script>
+    {% endif %}
+
+{% endif %}

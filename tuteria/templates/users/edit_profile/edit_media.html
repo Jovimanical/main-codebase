@@ -1,0 +1,312 @@
+{% extends "users/includes/profile_base.html" %}
+{% load staticfiles cloudinary embed_video_tags bootstrap3 add_attr %}
+{% block profile_url %}true{% endblock profile_url %}
+{% block title %}Photo and Video - Tuteria{% endblock title %}
+{% block main_content %}
+    {% if not object.profile.image %}
+        <div class="potential-tutors well bg-info row">
+            <div class="col-sm-8 col-xs-12 row-space-2">
+                <span class="font-head"><b>Upload a Great Profile Photo!</b></span><br>
+                {% if object.user.tutor_intent %}
+                    <span style="color:red" class="font-head"><b>Step 3 of 4:</b></span> Upload a clear facial photo
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="smart-forms">
+            <form action="{% url 'users:edit_media' %}" id="edit_media_form" method="post"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="dashboard-content">
+                    <div class="panel panel-default row-space-4">
+                        <div class="panel-heading">
+                            <h4>Profile Photo</h4>
+
+                        </div>
+                        <div class="panel-body photos-section">
+                            <div class="media row-space-4">
+                                <div id="image_container" class="media-left pull-left">
+                                    {% if object.profile.image %}
+                                        {% cloudinary object.profile.profile_pic SEARCH_THUMBNAIL %}
+                                    {% else %}
+                                        {% cloudinary object.profile.profile_pic PROFILE_THUMBNAIL %}
+                                    {% endif %}
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="media-body col-xs-12 col-sm-6 col-md-6 col-sm-offset-1">
+                                        {% if object.user.tutor_intent or object.is_tutor %}
+                                            {% if not object.profile.image %}
+                                                <p class="margin-up-mob-10">
+                                                    Tuteria is a professional community of exceptional tutors. Upload
+                                                    your very best photo to attract clients to you. It must clearly show
+                                                    your face,
+                                                    and ensure you have a smile!
+                                                </p>
+                                                <p>
+                                                    <span style="color:red" class="font-head"><b>PLEASE READ THIS
+                                                        FIRST!</b></span>
+                                                    <br>
+                                                    Look at the examples below before uploading yours. If your
+                                                    photo doesn't meet our standards, <u>it will be rejected:</u>
+                                                </p>
+
+                                                <ul style="list-style-position: inside; padding-left:0;">
+                                                    <li>Photo MUST be high quality, friendly and professional</li>
+                                                    <li>DON'T upload a passport, pdf, scanned or framed photo</li>
+                                                    <li>Photo must be bright and clear, NOT blurred or dark</li>
+                                                    <li>Photo background MUST look neat and presentable</li>
+                                                    <li>Photo should not be more than 2MB in size</li>
+                                                </ul>
+                                            {% else %}
+                                                <div class="well bg-info margin-up-mob-10">
+                                                    <p>
+                                                        <span style="color:red" class="font-head">THIS IS HOW CLIENTS SEE YOU</span>
+                                                        <br>
+                                                        Hope your photo looks friendly, clear and professional.
+                                                    </p>
+
+                                                    <ul style="list-style-position: inside; padding-left:0;">
+                                                        <li>Is any part of your face cut off?</li>
+                                                        <li>Does it look bright and presentable?</li>
+                                                        <li>Do you have a smile on your face?</li>
+                                                        <li>Will clients hire you looking like this?</li>
+                                                    </ul>
+                                                    <p>If it doesn't look great, then please upload a better one or move
+                                                        on to the the next step if it looks amazing.</p>
+                                                </div>
+
+                                            {% endif %}
+                                        {% else %}
+                                            <p class="margin-up-mob-10">
+                                                Tuteria is a friendly community of real people, and so it will feel
+                                                creepy dealing with you without a photo. Please upload a photo that
+                                                clearly shows your face.
+                                            </p>
+                                            <span style="color:red;" class="font-head">PHOTO GUIDELINE:</span>
+                                            <br>
+                                            Follow these guidelines to upload your photo. It's how we get to know each
+                                            other:</p>
+
+                                            <ul style="list-style-position: inside; padding-left:0;">
+                                                <li>Photo MUST be high quality, friendly and professional</li>
+                                                <li>DON'T upload a passport, pdf, scanned or framed photo</li>
+                                                <li>Photo must be bright and clear, NOT blurred or dark</li>
+                                                <li>Photo background MUST look neat and presentable</li>
+                                                <li>Photo should not be more than 2MB in size</li>
+                                            </ul>
+                                            </div>
+
+                                        {% endif %}
+                                    {% if request.is_featured %}
+                                        <div class="row">
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="form-group row">
+                                                    <label for="exampleInputFile">Upload Photo</label>
+                                                    {{ form.image }}
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <button class="btn btn-primary">Upload</button>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    {% if object.profile.image %}
+                                                        <a href="{{ object.tutor_req.get_next_url }}"
+                                                           class="btn btn-primary">Next
+                                                            Step &rarr;</a>
+                                                    {% endif %}
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    {% else %}
+                                        <div class="row row-condensed">
+                                            {% if object.user.tutor_intent %}
+                                                <div class="col-sm-6">
+                                                    {{ form.image }}
+                                               <span id="image-upload-btn" data-loading-text="Uploading..."
+                                                     class="btn btn-block btn-lg btn-default btn-file">
+                                                  Upload Photo
+                                              </span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    {% if object.profile.image %}
+                                                        <a href="{{ object.tutor_req.get_next_url }}"
+                                                           class="btn btn-block btn-lg btn-primary margin-up-mob-10 row-space-top-4">Next
+                                                            Step &rarr;</a>
+                                                    {% endif %}
+                                                </div>
+                                            {% else %}
+                                                <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                                                    {{ form.image }}
+                                                           <span id="image-upload-btn" data-loading-text="Uploading..."
+                                                                 class="btn btn-block btn-lg btn-default btn-file">
+                                                              Upload Photo
+                                                          </span>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-xs-offset-3">
+                                                    <span class="status_value hide"
+                                                          style='{padding-top:10px}'>Idle</span>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if object.user.tutor_intent or object.is_tutor %}
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <hr/>
+                                    <span class="font-head blue-font">Here are good examples from other tutors</span>
+
+                                    <p>A good photo should look bright, have a smile and make eye-contact that attracts
+                                        the
+                                        best clients to you!</p>
+
+                                    <div class="row">
+                                        <div class="col-sm-4 col-xs-6">
+                                            <div class="thumbnail">
+                                                <img src="{% static 'img/tuteria/media-sample1.jpg' %}" alt="...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-6">
+                                            <div class="thumbnail">
+                                                <img src="{% static 'img/tuteria/media-sample3.jpg' %}" alt="...">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-6 hidden-xs">
+                                            <div class="thumbnail">
+                                                <img src="{% static 'img/tuteria/media-sample2.jpg' %}" alt="...">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <small>
+                                        <em><span class="font-head red-text">Please note:</span> if you are having troubles uploading your photo, please use Chrome
+                                            or Firefox browser or email it to <a href="mailto:help@tuteria.com">help@tuteria.com</a></em>
+                                    </small>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    {% if object.profile.application_status == object.profile.VERIFIED %}
+        <!-- <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Profile Video </h4>
+                </div>
+                <div class="panel-body">
+                    <a name="video-profile"></a>
+
+                    <div id="video-container" class="row">
+                        <div class="container-with-delete col-md-7">
+                            <div id="parent-video-container"
+                                 class="panel panel-dark video col-md-middle text-center placeholder">
+                                {% if object.profile.video %}
+                                    <div class="embed-responsive embed-responsive-4by3">
+                                        {% video object.profile.video 'small' rel=0 modestbranding=1  showinfo=0 controls=0 allownetworking="internal" %}
+                                    </div>
+
+                                {% else %}
+                                    <video id="video_profile" class="video-js vjs-default-skin vjs-big-play-centered"
+                                           controls="" preload="auto" width="300" height="320">
+                                    </video>
+                                {% endif %}
+                            </div>
+                            <form id="video-upload-form" action="{% url 'users:edit_media' %}" method="post" novalidate>
+                                {% csrf_token %}
+                                {{ video_form.upload_type }}
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Youtube Embed Url</label>
+
+                                    <div class="input-group">
+                                        {{ video_form.video|add_attributes:"class:form-control,placeholder:Youtube Embed Url,required:true,data-parsley-errors-container:#err" }}
+                        <span class="input-group-btn">
+                            <button id="upload_btn" data-loading-text="Uploading..." class="btn btn-primary"
+                                    type="submit">Upload
+                            </button>
+                        </span>
+                                    </div>
+                                </div>
+                                <div id="err"></div>
+                            </form>
+                        </div>
+                        <div class="video-profile-tips col-md-5">
+                            <h3>Upload a Video</h3>
+
+                            <p>Tutors with clear videos get 3 times more clients.</p>
+                            <ul id="video-checklist" class="checklist">
+                                <li>Simply introduce yourself to potential clients. Be creative and friendly!
+                                </li>
+                                <li>If possible, make it 60 secs or less. Do your best to be concise.
+                                </li>
+                                <li>Try to keep the light in front of you, not behind you.
+                                </li>
+                                <li>Look into the camera to create that personal connection. Don't forget smile!
+                                </li>
+                                <li>Need help? Follow our simple guide to <a href="{% url 'help:article_detail' 25 %}">upload
+                                    your video.</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div> -->
+    {% endif %}
+{% endblock main_content %}
+
+{% block request_section %}
+    {% if not object.user.tutor_intent %}
+        {{ block.super }}
+    {% endif %}
+{% endblock request_section %}
+{% block notification_tawk %}
+{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        $('#image-upload-btn').click(function () {
+            $('.cloudinary-fileupload ').get(0).click();
+        });
+        var my_video = $('.embed-responsive iframe');
+        if (my_video.length > 0) {
+            var video_url = my_video.attr('src');
+            $('.embed-responsive iframe').attr('src', video_url.replace('http', 'https'));
+        }
+
+    </script>
+    <script>window.ProfileStep = 2;</script>
+    {% if object.user.tutor_intent %}
+        <script>window.TutorIntent = true;</script>
+    {% else %}
+        <script>window.TutorIntent = false;</script>
+    {% endif %}
+    {% cloudinary_includes %}
+    {% cloudinary_js_config %}
+
+    <script src="{% static 'js/user_profile.bundle.js' %}"></script>
+
+{% endblock javascript %}

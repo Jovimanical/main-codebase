@@ -1,0 +1,27 @@
+ <div class="modal2 panel">
+	<div class="panel-body">
+	    <form id="filterForm" action="{% url 'search' %}"
+	          method="get" class="smart-forms">
+	        {# {% cache 20000 search_form_page %} #}
+	        {% include "includes/search/search-form.html" %}
+            <input type="hidden" id="mobile" class="visible-xs" name="mobile" value="true"/>
+	        {# {% endcache %} #}
+	        <div class="row">
+	            <div class="col-xs-6">
+	                <button type="button"
+	                        class="cancel_button btn btn-warning pull-left btn-block btn-block-tablet-portrait">
+	                    Cancel filter
+	                </button>
+	            </div>
+	            <div class="col-xs-6">
+	                <button id="filter-result"
+	                        class="btn btn-primary pull-right btn-block btn-block-tablet-portrait">
+	                    Apply filter
+	                </button>
+
+	            </div>
+	        </div>
+
+	    </form>
+	</div>
+</div>

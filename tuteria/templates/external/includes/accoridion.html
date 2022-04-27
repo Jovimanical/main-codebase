@@ -1,0 +1,162 @@
+{% load add_attr %}
+{% if form.request_subjects.errors %}
+<div class="has-error">
+<span class="help-block">{{ form.request_subjects.errors|join:"<br \>" }}</span>    
+</div>
+{% endif %}
+<div class="row-space-4">
+    <div class="bs-example" data-example-id="collapse-accordion">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading padding-top-bottom-1" role="tab" id="heading_nursery">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_nursery"
+                           aria-expanded="false" aria-controls="collapse_nursery" class="collapsed"><p
+                                class="no-margin-padding-10"><span class="subject_class">KG & Nursery</span> <span
+                                class="pull-right brightgreen no_selected"></span></p></a>
+                    </h4>
+                </div>
+                <div id="collapse_nursery" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading_nursery" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="row">
+                            {% for subject in form.nursery %}
+                                <div class="col-sm-4 checkbox-space ccheck">
+                                    {{ subject }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <h5 style="padding-left: 12px;" class="font-head red-text">Please select class</h5>
+                            {% for cls in form.nursery_level %}
+                                <div class="col-sm-4 checkbox-space">
+                                    {{cls}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading padding-top-bottom-1" role="tab" id="heading_primary">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_primary"
+                           aria-expanded="false" aria-controls="collapse_primary" class="collapsed"><p
+                                class="no-margin-padding-10"><span class="subject_class">Primary</span> <span
+                                class="pull-right brightgreen no_selected"></span></p></a>
+                    </h4>
+                </div>
+                <div id="collapse_primary" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading_primary" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="row">
+                            {% for subject in form.primary %}
+                                <div class="col-sm-4 checkbox-space ccheck">
+                                    {{ subject }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <h5 style="padding-left: 12px;" class="font-head red-text">Please select class</h5>
+                            {% for cls in form.primary_level %}
+                                <div class="col-sm-4 checkbox-space">
+                                    {{cls}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading padding-top-bottom-1" role="tab" id="heading_jss">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_jss"
+                           aria-expanded="false" aria-controls="collapse_jss" class="collapsed"><p
+                                class="no-margin-padding-10"><span class="subject_class">JSS</span> <span
+                                class="pull-right brightgreen no_selected"></span></p></a>
+                    </h4>
+                </div>
+                <div id="collapse_jss" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading_jss" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="row">
+                            {% for subject in form.jss %}
+                                <div class="col-sm-4 checkbox-space ccheck">
+                                    {{ subject }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <h5 style="padding-left: 12px;" class="font-head red-text">Please select class</h5>
+                            {% for cls in form.jss_level %}
+                                <div class="col-sm-4 checkbox-space">
+                                    {{cls}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading padding-top-bottom-1" role="tab" id="heading_sss">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_sss"
+                           aria-expanded="false" aria-controls="collapse_sss" class="collapsed"><p
+                                class="no-margin-padding-10"><span class="subject_class">SSS</span> <span
+                                class="pull-right brightgreen no_selected"></span></p></a>
+                    </h4>
+                </div>
+                <div id="collapse_sss" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading_sss" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="row">
+                            {% for subject in form.sss %}
+                                <div class="col-sm-4 checkbox-space ccheck">
+                                    {{ subject }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <h5 style="padding-left: 12px;" class="font-head red-text">Please select class</h5>
+                            {% for cls in form.sss_level %}
+                                <div class="col-sm-4 checkbox-space">
+                                    {{cls}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading padding-top-bottom-1" role="tab" id="heading_music_language">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_music_language"
+                           aria-expanded="false" aria-controls="collapse_music_language" class="collapsed"><p
+                                class="no-margin-padding-10"><span class="subject_class">Music & Language</span> <span
+                                class="pull-right brightgreen no_selected"></span></p></a>
+                    </h4>
+                </div>
+                <div id="collapse_music_language" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading_music_language" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="row">
+                            {% for subject in form.music_language %}
+                                <div class="col-sm-4 checkbox-space ccheck">
+                                    {{ subject }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <h5 style="padding-left: 12px;" class="font-head red-text">Level of child</h5>
+                            {% for cls in form.music_level %}
+                                <div class="col-sm-4 checkbox-space">
+                                {{ cls }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

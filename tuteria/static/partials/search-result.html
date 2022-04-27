@@ -1,0 +1,176 @@
+<div class="panel panel-tutor">
+    <div class="panel-heading clearfix" style="position:relative;">
+        <h4 class="panel-title pull-left ">
+            {{ totalItems }} tutors
+            <small class="hidden-xs">around {{ location }}</small>
+        </h4>
+
+        <div class="btn-group pull-right">
+            <a href="javascript:void(0)" id="toggle-price-type"
+               class="btn btn-default btn-sm padding-top-bottom-14">Monthly</a>
+            <a id="displayFilterBtn" href="javascript:void(0)"
+               class="padding-top-bottom-14 btn btn-default btn-sm visible-sm"
+               style="margin-left:6px;"><i class="fa fa-sliders fa-rotate-90"></i>Filter</a>
+
+            <button ng-hide="sample" id="operaFilterBtn" type="button"
+                    class="padding-top-bottom-14 btn btn-default btn-sm "
+                    style="margin-left:6px;">Filter
+            </button>
+            <button ng-whow="sample" type="button" class="padding-top-bottom-14 btn btn-default btn-sm visible-xs"
+                    style="margin-left:6px;" data-toggle="modal" data-target="#myModal"><i
+                    class="fa fa-sliders fa-rotate-90"></i>Filter
+            </button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="result-display2" class="result-display row">
+            <div>
+                <div ng-show="!displayError && Loading" class="row-space-4">
+                    <!-- <div id="demo-holder" style="height:868px;" class="hidden"></div> -->
+                    <div id="result-display">
+                        <div class="row hidden-xs-2-special">
+                            <div id="tutor_list">
+                                <div ng-repeat="ts in result">
+                                    <div class="col-md-4 col-sm-4 col-xs-2-special tutor center-block tt-tutor-details">
+                                        <a class="tt" ng-href="{{ ts.url }}">
+                                            <div class="ticontain">
+                                                <img ng-src="{{ ts.image.desktop }}" alt="{{ ts.first_name }}">
+                                            </div>
+                                            <div class="tutor-profile-content">
+                                                <div class="profile-heading">
+                                                    <h3 class="">{{ ts.first_name }}</h3>
+
+                                                    <div class="rating">{{ ts.reveiws_count }} Reviews</div>
+                                                </div>
+                                                <hr/>
+                                                <p>{{ ts.heading }}</p>
+                                            </div>
+
+                                            <div class="sub-content">
+                        <span class="location">
+                            <i class="fa fa-map-marker"></i>
+                                {{ ts.location.addr.display|capfirst }}
+                                <span class="distance">
+                                    (~ {{ ts.location.distance }}km)
+                                </span>                            
+                        </span>
+                        <span class="degree pull-right"><i
+                                class="fa fa-graduation-cap"></i> {{ ts.education }}</span>
+                                            </div>
+                                            <div class="t-footer">
+                                                <div class="misc">
+                                    <span class="btn btn-primary btn-sm" href="#">
+                                        View More
+                                    </span>
+                                                </div>
+                                                <div class="price hourly_price">
+                                                    <b>&#8358;{{ ts.price }}</b>/hr
+                                                </div>
+                                                <div class="price hide monthly_price" id="monthly_price">
+                                                    <b>&#8358;{{ ts.monthly_price }}</b>/mth
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="visible-xs-2-special hidden-sm hidden-md hidden-lg">
+                            <div id="tutor_list" class="list-group">
+                                <div ng-init="vv=[1,2,3,4,5,6,7]" ng-repeat="x in vv">
+                                    <a id="tutor-details" href="#" class="list-group-item tt-tutor-details">
+                                        <div class="media tutor-mobile">
+                                            <div class="media-left">
+                                                <div>
+                                                    <img src="#" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">{{ result.ts.tutor.first_name }}
+                                                    <ul class="hide badges">
+                                                        <li class="glyphicon glyphicon-ok-sign"></li>
+                                                        <li class="hide pe-7s-medal pe-lg pe-va">1
+                                                        </li>
+                                                        <li class="hide pe-7s-config pe-lg pe-va"></li>
+                                                    </ul>
+                                                    <div class="rating hide">
+                                                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                                                        <span class="text-center">(10k)</span>
+                                                    </div>
+                                                </h4>
+
+                                                <div class="price hourly_price"><b
+                                                        class="amount">&#8358;{{ result.ts.price }}</b>/hr
+                                                </div>
+                                                <div class="price hide monthly_price" id="monthly_price"><b
+                                                        class="amount">&#8358;{{ result.ts.monthly_price }}</b>/mth
+                                                </div>
+                                                <div class="review-loc">{{ ts.rc }} Reviews</div>
+
+
+                                                <p class="tutor-caption">{{ result.ts.heading }} </p>
+
+                                                <div class="misc">
+                                <span class="location">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                    {{ user_location|capfirst }}
+                                        <span class="distance">
+                                            (~ {{ result.location.distance }}km)</span>
+                                </span>
+
+                                <span class="degree pull-right"><i
+                                        class="fa fa-graduation-cap"></i> Bsc, Msc
+                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div ng-show="!displayError && Loading" class="">
+                    <div class="pagination-container pull-right">
+                        <div class="results_count">
+                            <p>
+                                {{ firstPageNo(currentPage) }} – {{ lastPageNo(currentPage) }}
+                                of {{ totalItems }} Tutors
+                            </p>
+                        </div>
+                        <nav>
+                            <pagination direction-links="false" boundary-links="true" total-items="totalItems"
+                                        ng-change="pageChanged(currentPage)" ng-model="currentPage"
+                                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                        last-text="&raquo;" items-per-page="pageCount"></pagination>
+                        </nav>
+                    </div>
+                </div>
+                <div id="no-result" ng-show="displayError && Loading">
+                    <h2>Couldn't find what you need?</h2>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut doloremque
+                        dolores officiis quas quod repellendus.</p>
+                    <br/>
+
+                    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+
+                        <div class="center-block">
+                            <a class="btn btn-primary btn-block"
+                               href="#">
+                                Request a Tutor
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,102 @@
+{% extends 'skills/includes/base_booking_list.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary %}
+{% block title %}Promote Your Business - Tuteria{% endblock title %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        @media (min-height: 800px) {
+            .space_eater {
+                height: 200px;
+            }
+        }
+    </style>
+{% endblock css %}
+{% block sidebar %}
+    <div class="visible-xs row">
+        <div class="header-2 visible-xs">
+            <div class="navy">
+                {% include 'users/subject/includes/subject-urls.html' with subject_page=True %}
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs row">
+        <div class="sidenav ">
+            {% include 'users/subject/includes/subject-urls.html' with url_class='sidenav-list' subject_page=True %}
+        </div>
+    </div>
+{% endblock sidebar %}
+{#{% load activelink %}#}
+
+{% block footer2 %}{% endblock %}
+{% block request_section %}{% endblock request_section %}
+{% block main_content %}
+    {% if request.user.is_tutor %}
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Share Your Profile</h4>
+                </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3 col-xs-12 text-center">
+                    <img src="{% static 'img/gallery/promote.png' %}" class="img-responsive center-block"/>
+                </div>
+                <div class="col-sm-9 col-xs-12">
+                    <h4>Get clients from your network</h4>
+                    <p>We work hard to get you clients, but you can also share on Facebook, Twitter, LinkedIn and Google+ or any other medium in order to drive people directly to your profile beyond those searching on Tuteria. Click to share and ensure you write a strong content!</p>
+
+                    {% with public_url=request.user|get_full_url  %}
+            <div class="row row-space-4">
+            <div class="col-sm-12 col-md-12">
+                <div class="row col-sm-7 col-xs-12">
+                    <textarea readonly="readonly" style="height:35px;" class="form-control"> {{public_url}} </textarea>
+                </div>
+                <div class="row col-sm-5 col-xs-12">
+                 <ul class="list-inline space-for-mobile">
+                    <li>
+                        <a id="facebook-share" title="Share on Facebook" class="btn btn-social-icon btn-facebook share-popup" target="_blank"
+                           href="https://www.facebook.com/sharer/sharer.php?u={{public_url|urlencode}}"><i
+                                class="fa fa-facebook"></i></a></li>
+                    <li>
+                        <a target="_blank" title="Share on Twitter" class="btn btn-social-icon btn-twitter share-popup"
+                           href="https://twitter.com/home?status={{public_url|urlencode}}"><i
+                                class="fa fa-twitter"></i></a></li>
+                    <li> 
+                        <a id="google-share" title="Share on Google+" target="_blank" href="https://plus.google.com/share?url={{ public_url|urlencode }}" class="share-popup">
+                        <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Share on Google+"/></a>
+                   </li> 
+                   <li> 
+                    <a target="_blank" title="Share on LinkedIn" class="btn btn-social-icon btn-linkedin share-popup"
+                     href="https://www.linkedin.com/shareArticle?mini=true&url={{public_url|urlencode}}&source="><i
+                                        class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>    
+            {% endwith %}  
+            </div>
+                
+
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    </div>
+{% endblock main_content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>window.currentPage = "SubjectList";
+    function DeleteTS(skill_id, skill_name) {
+        var message = "Are you sure you want to delete " + skill_name;
+        var result = window.confirm(message);
+        if (result) {
+            window.location.href = Urls['users:delete_subject'](skill_id)
+        }
+    }
+    </script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+{% endblock javascript %}

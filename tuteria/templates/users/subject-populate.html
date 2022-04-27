@@ -1,0 +1,65 @@
+{% extends "users/includes/profile_base.html" %}
+{% load staticfiles add_attr bootstrap3 i18n %}
+{% load render_bundle from webpack_loader %}
+{% block title %}Select Subjects - Tuteria{% endblock title %}
+{% load cache %}
+{% block css %}
+    {{block.super}}
+    <style>
+    </style>
+{% endblock css %}
+{% block main_content %}
+    {% if not object.tutor_req.has_added_subjects %}
+        <div class="potential-tutors well bg-info row">
+            <div class="col-sm-8 col-xs-12 row row-space-2">
+                <span style="color:red" class="font-head"><b>Step 2 of 4:</b></span> Select only the subjects and class you typically teach.
+                <br><strong>Note that you MUST pass expert-level tests & assessments for each subject before you can receive students.</strong>
+            </div>
+        </div>
+        {% else %}
+        <div class="potential-tutors well bg-info row">
+            <div class="col-sm-8 col-xs-12 row row-space-2">
+                    <span class="font-head"><b>Go to the Next Step</b></span><br>
+                    You're almost done. Click <span style="color:red" class="font-head"><b>Continue</b></span> to complete
+                    your application
+            </div>
+                <div class="col-sm-4 col-xs-12">
+                    <a class="btn btn-block btn-primary" href="{{ object.tutor_req.get_next_url }}">Continue &#8594;</a>
+                </div>
+            
+        </div>
+
+    {% endif %}
+
+
+    <div class="row">
+        <div class="smart-forms">
+        <div id="react-content"></div>
+        <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch"></script>
+        <script>
+        window.SERVER_DATA = JSON.parse("{{sub_categories|escapejs}}")
+        window.SERVER_DATA.user_details = {
+            'slug':"{{object.user.slug}}",
+            'email':"{{object.user.email}}",
+            'next_url':{% if object.is_tutor %}''{% else %}"{{object.tutor_req.get_next_url}}"{% endif %},
+        }
+        </script>
+        {% render_bundle 'vendor' %}
+        {% render_bundle 'js' "js" %}
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% block request_section %}
+    {% if not object.user.tutor_intent %}
+        {{ block.super }}
+    {% endif %}
+{% endblock request_section %}
+{% block notification_tawk %}
+{% endblock notification_tawk %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="{% static 'js/user_profile.bundle.js' %}"></script>
+    {% endblock javascript %}

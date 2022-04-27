@@ -1,0 +1,173 @@
+stages:
+- test
+- build
+- deploy-staging
+- deploy
+
+variables:
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/tuteria/tuteria
+  CONTAINER_DEV_IMAGE: registry.gitlab.com/tuteria/tuteria/dev
+  CONTAINER_CELERY_NAME: registry.gitlab.com/tuteria/tuteria/celery
+  CONTAINER_WEBSERVER_NAME: registry.gitlab.com/tuteria/tuteria/webserver
+
+
+# test:
+#   stage: test
+#   image: python:3.6
+#   services:
+#   - redis
+#   - postgres:latest
+#   variables:
+#     POSTGRES_DB: tuteria
+#     POSTGRES_USER: tuteria
+#     POSTGRES_PASSWORD: punnisher
+#   script:
+#     - python -m pip install -r requirements/local.txt
+#     - export FACEBOOK_APP_ID=1425338884242543
+#     - export FACEBOOK_REDIRECT_URL=http://localhost:3000 
+#     - export FACEBOOK_APP_SECRET=a38570145408ad45a10094682a595198 
+#     - export DATABASE_URL=postgres://tuteria:punnisher@postgres/tuteria
+#     - export REPLICA_DATABASE_URL=postgres://tuteria:punnisher@postgres/tuteria
+#     - export DJANGO_CONFIGURATION=StagingDev
+#     - export BROKER_URL=redis://ci.tuteria.com:6379/
+#     - export CELERY_RESULT_BACKEND=redis://ci.tuteria.com/
+#     - export CLOUDINARY_URL=cloudinary://728568457692931:GUot9JhC1Rol3xfhen7dOLNif_k@tuteria
+#     - export HUBSPOT_CLIENT_ID=b726ad70-7cf9-4c43-80ec-4b0fb0d4e248
+#     - export HUBSPOT_CLIENT_SECRET=659a87f6-cce4-43bf-9ade-9c9615dd8fee
+#     - export HUBSPOT_API_KEY=5d47d98b-6f47-459a-a7fe-7980de321a2e
+#     - python tuteria/manage.py migrate 
+#     - python tuteria/manage.py test -k payroll.tests
+#     - python tuteria/manage.py test external.tests.admin.test_views --no-input
+#     - python tuteria/manage.py test external.tests.test_services.SingleRequestServiceTestCase --no-input
+#     - python tuteria/manage.py test -k skills.tests.admin.test_actions --no-input
+    # - python tuteria/manage.py test -k external.tests.admin.test_views.AdminViewsTestCase --no-input
+
+# build:
+#   image: docker:git
+#   services:
+#   - docker:dind
+#   stage: build
+#   script:
+#     - docker login -u gbozee -p abiola2321 registry.gitlab.com
+#     - docker build -t $CONTAINER_TEST_IMAGE -f compose/django/Dockerfile .
+#     # - docker push $CONTAINER_TEST_IMAGE:latest
+#     # - docker build -t $CONTAINER_DEV_IMAGE -f compose/local/Dockerfile-dev .
+#     - docker push $CONTAINER_TEST_IMAGE:latest
+#     # - docker push $CONTAINER_DEV_IMAGE:latest
+#     - docker build -t $CONTAINER_CELERY_NAME -f compose/celery/Dockerfile compose/celery
+#     - docker push  $CONTAINER_CELERY_NAME:latest
+#     - docker build -t $CONTAINER_WEBSERVER_NAME -f compose/webserver/Dockerfile compose/webserver
+#     - docker push $CONTAINER_WEBSERVER_NAME:latest
+#   only:
+#     - develop
+
+build:
+  stage: test
+  image: python:3.6
+  services:
+  - redis
+  - postgres:latest
+  variables:
+    POSTGRES_DB: tuteria
+    POSTGRES_USER: tuteria
+    POSTGRES_PASSWORD: punnisher
+  script:
+    - python -m pip install -r requirements/local.txt
+    - export FACEBOOK_APP_ID=1425338884242543
+    - export FACEBOOK_REDIRECT_URL=http://localhost:3000 
+    - export FACEBOOK_APP_SECRET=a38570145408ad45a10094682a595198 
+    - export DATABASE_URL=postgres://tuteria:punnisher@postgres/tuteria
+    - export REPLICA_DATABASE_URL=postgres://tuteria:punnisher@postgres/tuteria
+    - export DJANGO_CONFIGURATION=StagingDev
+    - export BROKER_URL=redis://ci.tuteria.com:6379/
+    - export CELERY_RESULT_BACKEND=redis://ci.tuteria.com/
+    - export CLOUDINARY_URL=cloudinary://728568457692931:GUot9JhC1Rol3xfhen7dOLNif_k@tuteria
+    - export HUBSPOT_CLIENT_ID=b726ad70-7cf9-4c43-80ec-4b0fb0d4e248
+    - export HUBSPOT_CLIENT_SECRET=659a87f6-cce4-43bf-9ade-9c9615dd8fee
+    - export HUBSPOT_API_KEY=5d47d98b-6f47-459a-a7fe-7980de321a2e
+    - python tuteria/manage.py migrate 
+    # - python tuteria/manage.py test -k payroll.tests
+    # - python tuteria/manage.py test external.tests.admin.test_views --no-input
+    - python tuteria/manage.py test -k external.tests.schema.admin --no-input
+    - python tuteria/manage.py test -k bookings.tests.refractor --no-input
+    - python tuteria/manage.py test -k config --no-input
+    # - python tuteria/manage.py test external.tests.test_services.SingleRequestServiceTestCase --no-input
+    # - python tuteria/manage.py test -k skills.tests.admin.test_actions.AdminActionTestCase.test_modification_notice_action_sends_email --no-input
+    # - python tuteria/manage.py test -k skills.tests.admin.test_actions.AdminActionTestCase.test_reminder_to_populate_content_sends_email --no-input
+    # - python tuteria/manage.py test -k external.tests.admin.test_views.AdminViewsTestCase --no-input
+  except:
+    - malik-develop
+    - usman-develop
+    - new-tutor-flow
+
+deploy-staging:
+  stage: deploy-staging
+  image: python:2.7
+  before_script:
+  ##
+  ## Install ssh-agent if not already installed, it is required by Docker.
+  ## (change apt-get to yum if you use an RPM-based image)
+  ##
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+  ##
+  ## Run ssh-agent (inside the build environment)
+  ##
+  - eval $(ssh-agent -s)
+
+  ##
+  ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+  ## We're using tr to fix line endings which makes ed25519 keys work
+  ## without extra base64 encoding.
+  ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+  ##
+  - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+  ##
+  ## Create the SSH directory and give it the right permissions
+  ##
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  script:
+    - python -m pip install fabric==1.13.2
+    - fab deploy_staging_django
+    - fab deploy_staging_server
+  
+  only:
+    - develop
+
+deploy:
+  stage: deploy
+  image: python:2.7
+  before_script:
+  ##
+  ## Install ssh-agent if not already installed, it is required by Docker.
+  ## (change apt-get to yum if you use an RPM-based image)
+  ##
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+  ##
+  ## Run ssh-agent (inside the build environment)
+  ##
+  - eval $(ssh-agent -s)
+
+  ##
+  ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+  ## We're using tr to fix line endings which makes ed25519 keys work
+  ## without extra base64 encoding.
+  ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+  ##
+  - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+  ##
+  ## Create the SSH directory and give it the right permissions
+  ##
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  script:
+    - python -m pip install fabric==1.13.2
+    - fab deploy_current
+    - fab w_images
+    - fab t_images
+  only:
+    - master

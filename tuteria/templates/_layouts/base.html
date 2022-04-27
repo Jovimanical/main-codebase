@@ -1,0 +1,473 @@
+{% load i18n cloudinary cache distance_estimate humanize %}
+{% load static from staticfiles %}
+{% load hijack_tags %}
+<!DOCTYPE html>
+<html style="font-size:16px" class="no-js" lang="en"{% block ng_app %}{% endblock %}>
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',4000,
+    {'GTM-TQF6VZM':true});</script>
+<!-- <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-63938620-1', 'auto');
+    ga('require', 'GTM-TQF6VZM');
+    ga('send', 'pageview');
+    </script> -->
+{% block mixpanel %}
+{% endblock mixpanel %}
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="facebook-domain-verification" content="wy9ifb8o47flyrff3oi9d15oyrore1" />
+<meta name="google-site-verification" content="CiBYeSUUmCYHeW0yCa7aF0YV5ckFzrKutS4Dryw3Vf0"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'hijack/hijack-styles.css' %}" />
+        <link rel=icon href="{% static 'favicon.ico'%}">
+    {% block meta_tags %}
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="{{ og_description }}"/>
+        <meta name="author" content="100s of Happy Clients"/>
+        <!-- for Google -->
+        <meta itemprop="name" content="{{ og_title }}"/>
+        <meta itemprop="description" content="{{ og_description }}"/>
+        <meta itemprop="image" content="https://{{ site.domain }}{% static "img/backgrounds/background1_pc.jpg" %}"/>
+        <meta name="description" content="{{ og_description }}"/>
+        <meta name="keywords" content=""/>
+        <meta name="copyright" content=""/>
+        <meta name="application-name" content=""/>
+        <!-- for Facebook -->
+        <meta property="fb:app_id" content="781136408623359"/>
+        <meta property="og:site_name" content="Tuteria"/>
+        <meta property="og:title" content="{{ og_title }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="https://{{ site.domain }}{% static "img/backgrounds/background2_pc.jpg" %}"/>
+        <meta property="og:url" content="https://{{ home_page_url }}"/>
+        <meta property="og:description" content="{{ og_description }}"/>
+        <!-- for Twitter -->
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@tuteriacorp"/>
+        <meta name="twitter:title" content="{{ og_title }}"/>
+        <meta name="twitter:description" content="{{ og_description }}"/>
+        <meta name="twitter:image" content="https://{{ site.domain }}{% static "img/backgrounds/background5_pc.jpg" %}"/>
+<meta name="twitter:creator" content="@tuteriacorp">
+    {% endblock %}
+    <title>{% block title %}Tuteria{% endblock title %}</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% block css %}
+        {# {% cache 20000 syles %} #}
+        {% include 'includes/_styles.html' %}
+        {# {% endcache %} #}
+
+    {% endblock %}
+    <style>
+
+        .no-padding-left {
+            padding-left: 0;
+        }
+    </style>
+    <style type="text/css">
+        .no-js {
+            display: none;
+        }
+
+        .collapsing {
+            -webkit-transition: none;
+            transition: none;
+        }
+
+    </style>
+
+    {#    {% if local_env %}#}
+    {#    {% else %}#}
+    {#        <script src="{% static 'django_js_reverse/js/reverse.js' %}"></script>#}
+    {#    {% endif %}#}
+
+    <script type="text/javascript">
+        document.documentElement.className =
+                document.documentElement.className.replace(/\bno-js\b/, 'js');
+
+        // add to document ready: $('.no-fouc').removeClass('no-fouc');
+    </script>
+    <!-- Hotjar Tracking Code for www.tuteria.com -->
+    {% block hotjar %}
+    
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:590230,hjsv:5};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    {% endblock hotjar %}
+    <script>
+    </script>
+    <!-- Modernizr -->
+    {#    <!-- <script src="{% static 'js/modernizer.custom.js' %}"></script> -->#}
+</head>
+
+<body {% block fouc %} id="fouc" {% endblock fouc %} {% block body_attr %}{% endblock body_attr %}>
+{% hijack_notification %}
+{% block tag_manager %}
+<!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NJQC9N"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NJQC9N');</script>
+    
+{% endblock tag_manager %}
+{% block body %}
+
+    {% block body_content %}
+    {% block modal %}
+        <!-- Modal -->
+        <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            {# {% cache 2000 auth_modal request.user %} #}
+            {% include 'includes/auth/modal.html' with modal_id="loginModal" login_form=login_form signup_form=signup_form reset_form=reset_form %}
+            {# {% endcache %} #}
+        </div>
+
+    {% endblock %}
+    {% block header %}
+        <div class="outer {% block nav_class %}{% endblock %}">
+
+            {% block opera_header %}
+
+            {% endblock opera_header %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if forloop.first %}
+                        <div id="alert-sections"
+                             class="alert {% if message.tags %} alert-{% if message.tags == 'error' %}danger
+                                 {% else %}{{ message.tags }} {% endif %}"{% endif %}
+                             alert-dismissible role='alert'>
+                            <button type="button" class="close" data-dismiss="alert"><span
+                                    aria-hidden="true">&times;</span><span
+                                    class="sr-only">Close</span></button>
+
+                            {% if "safe" in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% block containing_nav %}
+                {% with user_profile=request.user.profile %}
+
+                    {% if request.is_featured %}
+                        <div class="navbar navbar-default" role="navigation">
+                            {% include 'includes/nav/mobile/mobile-header.html' %}
+                        </div>
+                    {% else %}
+                        <div class="{% block fixed %}navbar-fixed-top{% endblock %} na hidden-xs ">
+                            {% block nav %}
+                                {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder invite=False %}
+                            {% endblock %}
+                            {% block sub_nav %}
+                                {# {% cache 20000 sub_nav_1 %} #}
+                                {% include 'includes/nav/sub-nav-1.html' %}
+                                {# {% endcache %} #}
+                            {% endblock %}
+                        </div>
+                        {% block mobile_navigation %}
+                            {# {% cache 1000 smart_nav request.user.email %} #}
+                            {% include "includes/nav/mobile/smart-nav.html" with btnn=True search=True %}
+                            {# {% endcache %}     #}
+                        {% endblock mobile_navigation %}
+
+                    {% endif %}
+                {% endwith %}
+            {% endblock containing_nav %}
+
+
+        </div>
+    {% endblock %}
+    {#    <div>#}
+    <div class="container-fluid">
+    {% if request.is_featured %}
+        <div class="visible-xs hidden">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}
+                         alert-dismissible
+                         role='alert'>
+                        <button type="button" class="close" data-dismiss="alert"><span
+                                aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                        {% if "safe" in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+    <div class="">
+        {% if not request.is_featured %}
+            <div id="mobile-sidebar"
+                 class="col-sx-10 col-xs-8 col-sm-3 col-md-2 sidebar sidebar-left sidebar-animate sidebar-show-lg visible-xs">
+                {% if display_search %}
+
+                    <form action="{% url 'skill_search' %}" id="mobile-nav-search-form"
+                          class="" role="search">
+                        <div class="input-group">
+                            <input type="text" id="mobile_skill_input" required="true" name="query"
+                                   class="gui-input form-control"
+                                   autofocus="" placeholder="Search for...">
+                 <span class="input-group-btn">
+                     <button class="btn btn-default" type="button"><span
+                             class="glyphicon glyphicon-search"></span></button>
+                     </span>
+                        </div>
+                    </form>
+                {% endif %}
+                <ul class="nav navbar-stacked row-space-top-2 row">
+                    {% if request.user.is_authenticated %}
+                        <li><a href="#public profile" id="user_det" class="dropdown-toggle profile-image"
+                               data-toggle="dropdown">
+                            {% cloudinary request.user.profile_pic AVATAR alt="pp" %}
+
+                            {{ request.user.get_short_name }}</a></li>
+
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        {% with user_profile=request.user.profile %}
+                            {% if user_profile.application_status < 2 %}
+                                <li><a href="{% url 'registration:tutor_landing' %}">Become a tutor</a></li>
+                            {% endif %}
+                            {% if user_profile.application_status == user_profile.PENDING %}
+                                <li><a href="{% url 'registration:tutor_landing' %}">Pending Review</a></li>
+                            {% endif %}
+                            {% if user_profile.application_status == user_profile.VERIFIED and user_profile.failed_skills_count %}
+                                <!-- <li><a href="{% url 'users:subject_creation_landing' %}">Create Subject</a></li> -->
+                            {% endif %}
+                        {% endwith %}
+
+                        <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'users:tutor_subjects' %}">Your Subjects</a></li>
+                        <li><a href="{% url 'users:requests' %}">My Requests</a></li>
+                        <li><a href="{% url 'users:user_bookings' %}">My Lessons</a></li>
+                        <li><a href="{% url 'users:user_jobs' %}">My Jobs</a></li>
+                        <li><a href="{% url 'users:edit_profile' %}">Edit Profile</a></li>
+                        <li><a href="{% url 'users:account' %}">Account Settings</a></li>
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'registration:tutor_landing' %}">Become
+                            a tutor</a></li>
+                        <li><a id="mobile_login_nav" href="{% url 'account_login' %}" class="">Login</a>
+                        </li>
+                        <!--<li><a href="{% url 'help:home' %}">Help</a></li>-->
+                        <li><a href="{% url 'trust_safety' %}">Trust & Safety</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="main">
+            <div class="hidden">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}
+                             alert-dismissible
+                             role='alert'>
+                            <button type="button" class="close" data-dismiss="alert"><span
+                                    aria-hidden="true">&times;</span><span
+                                    class="sr-only">Close</span></button>
+
+                            {% if "safe" in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div id="fb-root"></div>
+            <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=781136408623359";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
+            <div class="main-block">
+                {% block content %}
+                {% endblock content %}
+            </div>
+            {% block request_section %}
+                <div id="launch-section">
+                <!-- Request a Tutor Section -->
+                <div class="row padding-top-50 text-center padding-bottom-50 deepblue-bg space-bottom-mob-20 padding-top-mob-30">
+                    <h3 style="color:white" class="hidden-xs">Do you need help finding a tutor?</h3>
+
+                    <h3 style="color:white" class="visible-xs">Need help finding a tutor?</h3>
+                    <br>
+
+                    <div>
+                        <a href="{% url 'how_it_works' %}" class="btn-lg btn btn-primary">
+                            Request a tutor
+                            &nbsp;
+                            <i class="fa fa-chevron-circle-right"></i>
+                        </a>
+
+                        <div class="request-box">
+                            <div class="request-icon">
+                                <div class="request-icon-img">
+                                    <img src="{% static 'img/tutor/call.png' %}" class="img-responsive center-block"
+                                         style="width:30px"/>
+                                </div>
+                                <div style="display: inline-block">
+                                        <span class="request-call-icon">
+                                           <small style="color:aqua">{{ tuteria_details.email }}</small>
+                                        </span>
+                                        <span class="request-phone font-head">
+                                            {{ tuteria_details.phone_number }}
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                </div>
+
+
+                <!-- Pre Launch section
+                        <div id="launch_sec"
+                             class="row padding-top-50 space-for-mobile-20 space-bottom-mob-20 text-center">
+                            <div id="prelaunch_section">
+                                <h3 >Only {{LAUNCH_DAY_REMAINING}} days left to launch!!</h3>
+                                <h3>Tutors are now applying!!!</h3>
+                                <br>
+
+                                <div>
+                                    <a class="btn-lg btn btn-primary row-space-2 toggle_invite_section"
+                                       data-toggle="collapse" href="#invite_counter_section" aria-expanded="false"
+                                       aria-controls="invite_counter_section">
+                                        Tell friends!
+                                        {% if request.is_featured %}{% else %}&nbsp;
+                                            <i class="fa fa-chevron-circle-right"></i>
+                                        {% endif %}
+                                    </a>
+
+                                    <div class="invite-button">
+                                        <div class="invite-icon"></div>
+                                        <div style="display: inline-block">
+                                            <div class="invite-text">invites sent</div>
+                                            <div class="invitation-sent">
+                                                {{ total_invites.count|intcomma }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>-->
+
+
+                {% endblock request_section %}
+                <!-- /container -->
+
+            {% block footer %}
+                <div class="foot row">
+                    <div class="container">
+                        <div class="padding-top-50">
+                            {% block footer1 %}
+                                {% cache 200000 footer1 %}
+                                    {% include 'includes/footer/footer1.html' %}
+                                {% endcache %}
+                            {% endblock %}
+                            {% block footer2 %}
+                                {# {% cache 200000 footer2 %} #}
+                                {% include 'includes/footer/footer2.html' %}
+                                {# {% endcache %} #}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock footer %}
+            <!-- Footer Starts -->
+            {% block bottom_footer %}
+                {# {% cache 20000 bottom_footer %} #}
+                {% include 'includes/footer/_footer-small.html' %}
+                {# {% endcache %} #}
+            {% endblock bottom_footer %}
+        </div>
+    </div>
+    
+    {% endblock body_content %}
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    {% block javascript %}
+        {# {% cache 2000 script_files %} #}
+        {% include 'includes/_scripts.html' %}
+
+
+        {# {% endcache %} #}
+        <script>
+        </script>
+
+        {#    {% block angular %}#}
+        {#        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.js"></script>#}
+        {#        <script src="{% static "javascripts/vendor/angular/ui-bootstrap-tpls.min.js" %}"></script>#}
+        {#    {% endblock %}#}
+    {% endblock javascript %}
+    {% block notification_tawk %}
+
+        {% comment %}<script type="text/javascript">
+            var $_Tawk_API = {}, $_Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"),
+                        s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/559dfbd571d2178736e87fd6/default';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        </script>{% endcomment %}
+    {% endblock %}
+    {% if request.user.is_authenticated %}
+    {% with oo=request.user %}
+    
+    {% endwith %}
+     
+    {% endif %}
+{% endblock %}
+<script type="text/javascript">
+    _linkedin_partner_id = "3354097";
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    </script><script type="text/javascript">
+    (function(){var s = document.getElementsByTagName("script")[0];
+    var b = document.createElement("script");
+    b.type = "text/javascript";b.async = true;
+    b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+    s.parentNode.insertBefore(b, s);})();
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=3354097&fmt=gif" />
+    </noscript>
+</body>
+</html>
+ 

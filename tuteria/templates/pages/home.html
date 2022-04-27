@@ -1,0 +1,847 @@
+{% extends '_layouts/base-external.html' %}
+{% load static from staticfiles %}
+{% load account %}
+{% block fixed %}{% endblock %}
+{% block nav_class %}transparent-nav{% endblock %}
+{% block title %}Find Expert Private Tutors Near You | Tuteria Nigeria{% endblock title %}
+{% block css %}
+    {{ block.super }}
+    {#    <link rel="stylesheet" href="{% static "css/main.css" %}">#}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/carousel-css.css' %}"/>
+    <style>
+        .well.around {
+            border: 2px solid #d9edf7;
+        }
+
+        .well.styling {
+            background-color: rgba(250, 217, 32, 0.31);
+            border: none;
+        }
+
+        .pac-container {
+            background-color: #FFF;
+            z-index: 10000000;
+            position: fixed;
+            display: inline-block;
+            float: left;
+        }
+
+        {#            .modal {#}
+        {#                z-index: 20;#}
+        {#            }#}
+        {##}
+        {#            .modal-backdrop {#}
+        {#                z-index: 10;#}
+        {#            }#}
+
+        @media (max-width: 768px) {
+            .well.styling {
+                text-align: center;
+            }
+
+            .input-addon {
+                display: table;
+                width: 100%;
+            }
+
+            .fake-search-field {
+                background-color: #fff;
+            }
+
+            .input-large {
+                font-size: 15px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .input-stem {
+                display: table-cell;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .btn.fa.icon-full {
+                font-size: 19px;
+            }
+
+            .input-suffix.btn {
+                padding-top: 11px;
+                padding-bottom: 11px;
+                margin-left: -44px;
+            }
+
+            .pac-container {
+                background-color: #FFF;
+            {#                z-index: 20;#} position: fixed;
+                display: inline-block;
+                float: left;
+            }
+
+            .modal {
+                z-index: 20;
+            }
+
+            .modal-backdrop {
+                z-index: 10;
+            }
+
+            ​
+        }
+
+.fancy-dates-message-container {
+  background: #FFFF99;
+  min-height: 84px;
+}
+
+.space-top-3 {
+  margin-top: 6.75px;
+}
+
+.large-padding {
+    padding: 80px 60px !important;
+}
+@media(max-width: 768px){
+    .large-padding {
+        padding: 50px 30px !important;
+    }
+}
+
+section.value-proposition {
+    font-size: 16px;
+    max-width: 1920px;
+    margin: 0 auto;
+    color: #fff;
+}
+@media (min-width: 768px) {
+    section.value-proposition.rtl-col .col {
+        float: right;
+    }
+}
+section.value-proposition .col {
+    padding: 0;
+    height: 600px;
+}
+section.value-proposition .col.col-higher {
+    height: 660px
+}
+section.value-proposition .col-text .area {
+    background-color: #393c3d;
+    height: 100%
+}
+section.value-proposition .col-image .area {
+    height: 100%;
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover
+}
+
+section.value-proposition .section-header>.heading {
+    margin-bottom: 28px
+}
+section.value-proposition .section-header::after {
+    content: "";
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    width: 50px;
+    border-bottom: solid #c3c4c5 4px
+}
+section.value-proposition .h4 {
+    margin: 45px 0 14px
+}
+section.value-proposition p {
+    color: #c3c4c5
+}
+@media screen and (min-width: 768px) {
+            .carousel-caption {
+                left: 7% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1290px) and (min-width: 1280px) {
+            .carousel-caption {
+                left: 4% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1460px) and (min-width: 1420px) {
+            .carousel-caption {
+                left: 9% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1036px) and (min-width: 1016px) {
+            .carousel-caption {
+                left: 3% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 1000px) and (min-width: 940px) {
+            .carousel-caption {
+                left: 10% !important;
+                right: 0%;
+                padding-bottom: 30px;
+            }
+        }
+
+        .caption-text {
+            border: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            font-size: 15px;
+            padding: 10px;
+            padding-left: 25px !important;
+            padding-right: 25px !important;
+        }
+        .relative-pos{
+            position: relative !important;
+        }
+        .black-text{
+            color:black;
+        }
+        .font-text{
+            color:#5e5e5e;
+        }
+        .deep-blue-bg{
+            background-color: #007a87;
+            color: #fff;
+        }
+
+        .panel-body-your-trips {
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+    </style>    
+{% endblock %}
+
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder invite=True hide_invite=True %}
+{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block data-ride %}data-ride="carousel"{% endblock data-ride %}
+{% block carousel_image %}
+    {% if request.is_phone %}
+        <div class="item active">
+            <div class="caro bg1"></div>
+        </div>
+    {% else %}
+        {% for carousel_content in carousels %}
+            <div class="item {% if forloop.first %}active{% endif %}">
+                <div class="caro {{ carousel_content.icon_class }}"></div>
+                <div id="how-it-works" class="carousel-caption pull-left trans-label">
+                <span class="reset-this caption-text">{{ carousel_content.caption }}
+                </span>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock carousel_image %}
+{% block carousel_content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-9 padding-top-25">
+            <div class="row">
+                <div class="jumbo-header"><h2 id="header_title">
+                {% if not request.is_featured %}Find your perfect tutor{% else %}<b>Find your perfect tutor</b>{% endif %}
+                </h2>
+
+                    <p class="grey font-head">
+                    {% if not request.is_featured %}Book one-on-one lessons with verified instructors in your area{% else %}<b>Book one-on-one lessons with verified instructors in your area</b>{% endif %}                    
+                    </p>
+                    <br>
+                </div>
+            </div>
+
+                <div class="row col-sm-12 col-md-10">
+                    <form action="{% url 'skill_search' %}" method="get" id="home_search_form" novalidate class="">
+
+                        <div class="smart-forms clearfix">
+                            <div>
+                                <div class="row searcbox">
+                                    <div class="inpp">
+                                        <label class="field">
+                                            <!-- Input box -->
+                                            <input type="text" name="query" id="skill_search"
+                                                   class="gui-input typeahead" required="true"
+                                                   placeholder="What do you want to learn?"
+                                                   min-length="2"
+                                                   data-parsley-errors-container="#err"
+                                                   data-parsley-error-message="Must be at least two characters long.">
+                                        </label>
+                                    </div>
+                                    <!--<div class="inpp ssm">
+                                        <label class="field ">-->
+                                            <!-- Input box -->
+                                            <!--<input type="text" name="location" id="location_search" list="location_list"
+                                                   class="gui-input" placeholder="Where do you live?">
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="latitude" id="l_latitude"/>
+                                    <input type="hidden" name="longitude" id="l_longitude"/>-->
+
+                                    <div class="pull-right but">
+                                        <button class="btn btn-primary btn-lg btn-block no-border-radius"
+                                                ><i class="input-suffix fa icon-full fa-search no-border-radius"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="carousel-error-container" class="text-left search-hint hidden-xs">
+                                <small id="err"></small>
+                            </div>
+                            <input type="hidden" id="geocoded" name="geocoded" value="false"/>
+                        </div>
+                    </form>
+
+                    <!--<img src="{% static "img/backgrounds/starthere.png" %}" class="icon-pos hidden-xs"/>-->
+                </div>
+
+        </div>
+    </div>
+{% endblock carousel_content %}
+{% block main_content %}
+
+    {% if request.user.is_tutor %}        
+
+    <!--- Linking Tutors to Tutoring Jobs Page -->
+    <!--<section id="firstss" class="padding-bottom-50 padding-top-25 padding-top-mob-0 row deep-blue-bg hide" style="margin-top:-3px">
+    <div class="container mobile-top-25 no-padding-total">
+    <div class="row">
+        <div id="how-it-works" class="col-sm-7 col-md-7 padding-top-50 padding-bottom-25 wrapper-full clearfix ">
+            <h1 class="">
+          {% if request.is_featured %}<b>Tutoring Jobs</b>
+          {% else %}Tutoring jobs
+          {% endif %}
+        </h1>
+        <p>See all available opportunities in your area and indicate those you are interested in.</p>
+        </div>
+        <div id="how-it-works" class="col-sm-5 col-md-5 padding-top-50 padding-bottom-25 wrapper-full clearfix padding-top-mob-0">
+            <div class="col-md-8 col-md-offset-4 col-lg-8 col-lg-offset-4 col-sm-11 col-sm-offset-1 col-xs-12 padding-top-10 row">
+                <div class="">
+                    <a href="{% url 'tutoring-jobs' %}" class="btn btn-success btn-lg col-xs-12 big-btn">
+                        See available jobs &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>-->
+
+    <!-- End of Link to Tutoring jobs page -->
+
+    {% endif %}
+
+    <section id="firstss" class="padding-bottom-50 padding-top-25 padding-top-mob-0 row white-bg">
+    <div class="container mobile-top-25 no-padding-total">
+    <div class="row">
+        <div id="how-it-works" class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2 padding-top-50 padding-bottom-25 wrapper-full clearfix text-center">
+            <h2 class="">
+          {% if request.is_featured %}<b>Welcome{% if request.user.is_authenticated %} {{ request.user.first_name|title }}{% else %}, let's walk you through{% endif %}</b>
+          {% else %}Welcome{% if request.user.is_authenticated %} {{ request.user.first_name|title }}{% else %}, let's walk you through{% endif %}
+          {% endif %}
+        </h2>
+        <p>Tuteria helps you connect with qualified tutors in your area to master the subjects, skills and exams that matter to you.</p>
+        </div>
+        <div class="icon-box-6">            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">                    
+                     <i class="pro-img"></i>
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Trusted Professionals</b>
+                      {% else %}
+                      Trusted Professionals
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Every tutor is experienced, friendly, manually screened, and thoroughly vetted for highest quality.
+                    </span>
+                </div>
+            </div>            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">  
+                <i class="pace-img"></i>                  
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Learn at Your Pace</b>
+                      {% else %}
+                      Learn at Your Pace
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Book online in about 60 seconds and plan your private lessons according to your own schedule.
+                    </span>
+                </div>
+            </div>
+            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">     
+                <i class="budget-img"></i>               
+                    <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>Safe and Secure</b>
+                      {% else %}
+                      Safe and Secure
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Trusted by 100s of happy parents, professionals and students with more than 90% success rate.        
+                    </span>
+                </div>
+            </div>           
+        </div>
+        <!--<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 padding-top-25">
+            <a href="{% url 'how_it_works' %}">
+            <div class="fancy-dates-message-container va-container va-container-h space-top-3">
+                <div class="illustration-container-h va-middle">
+                    <div class="text pad-10 col-sm-9 col-xs-9" style="color:black">
+                        <span class="font-head">
+                        Need home tutors for your kids?
+                        </span><br>
+                        Click here for tutors well-experienced with kids.
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>-->
+        
+        </div>
+    </section>
+
+
+    <section id="firstss" class="value-proposition page-container-full rtl-col">
+    <div class="row">
+      <div class="col-md-7 col-sm-5 col-lg-7 col col-image hidden-xs">
+        <div class="area" style="background-image: url({% static "img/backgrounds/hometutor.jpg" %}); background-position-x: left;"></div>
+      </div>
+      <div class="col-md-5 col-sm-7 col-lg-5 col col-text">
+        <div class="area large-padding">
+          <div class="section-header">
+            <div class="h2 heading">
+              <span class="font-head">
+                Need home tutors for your kids?
+              </span>
+            </div>
+          </div>
+          <div class="h4">
+            Put your kids ahead early
+          </div>
+          <p>
+            Improve performance in class, get help with homework, build confidence in weak areas, be proud of your kids' results.
+          </p>
+          <div class="h4">
+            Hire tutors you can trust
+          </div>
+          <p>
+            Get fully vetted home tutors who're specifically experienced in teaching, mentoring and inspiring kids like yours.
+          </p>
+
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 padding-top-25 row">
+                <div class="">
+                    <a href="{% url 'how_it_works' %}" class="btn btn-tutor btn-lg col-xs-12 big-btn">
+                        Get a Home Tutor &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ <section class="value-proposition page-container-full rtl-col visible-xs">
+    <div class="padding-top-25">
+    <h4 class="black-text font-head">Other top categories</h4>
+    </div>
+    <div class="padding-space-4">
+    <a href="/explore?category=mathematics" style="text-decoration: none">
+        <div class="panel checkbox-space">
+            <div class="panel-body no-padding-total">
+
+                <div class="media">
+                  <div class="media-left">
+                    <div>
+                      <img class="media-object relative-pos" src="{% static "img/ui/math1.jpg" %}" width="50">
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading black-text">Mathematics</h4>
+                    <small class="font-text">Basic Math &nbsp; F/Math &nbsp; SAT Math</small>                                        
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+        </a>
+
+
+    <a href="/explore?category=exam preparation" style="text-decoration: none">
+        <div class="panel checkbox-space">
+            <div class="panel-body no-padding-total">
+
+                <div class="media">
+                  <div class="media-left">
+                    <div>
+                      <img class="media-object relative-pos" src="{% static "img/ui/exam1.jpg" %}" width="50">
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading black-text">Exam Preparation</h4>
+                    <small class="font-text">SAT &nbsp; GMAT &nbsp; ICAN &nbsp; IELTS</small>                                        
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+        </a>
+
+        <a href="/explore?category=music" style="text-decoration: none">
+        <div class="panel checkbox-space">
+            <div class="panel-body no-padding-total">
+
+                <div class="media">
+                  <div class="media-left">
+                    <div>
+                      <img class="media-object relative-pos" src="{% static "img/ui/music1.jpg" %}" width="50">
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading black-text">Musical Instruments</h4>
+                    <small class="font-text" style="line-height:1">Guitar &nbsp; Piano &nbsp; Drums &nbsp; Trumpet</small>                                        
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+        </a>
+
+        <a href="/explore?category=beauty" style="text-decoration: none">
+        <div class="panel checkbox-space">
+            <div class="panel-body no-padding-total">
+
+                <div class="media">
+                  <div class="media-left">
+                    <div>
+                      <img class="media-object relative-pos" src="{% static "img/ui/beauty.jpg" %}" width="50">
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading black-text">Beauty & Lifestyle</h4>
+                    <small class="font-text" style="line-height:1">Makeup &nbsp; Beadmaking &nbsp; Sewing</small>                                        
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+        </a>
+
+        <!--<a href="#" style="text-decoration: none">
+        <div class="panel checkbox-space">
+            <div class="panel-body no-padding-total">
+
+                <div class="media">
+                  <div class="media-left">
+                    <div>
+                      <img class="media-object img-circle relative-pos" src="{% static "img/gallery/godwin.jpg" %}" width="45">
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading black-text">Cooking</h4>
+                    <small class="font-text" style="line-height:1">Cakemaking &nbsp; Soups &nbsp; Snacks</small>                                        
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+        </a>-->
+        </div>
+    </div>
+</section>
+<section id="top-business" class="row container-fluid visible-xs padding-bottom-mob-0">
+        <div class="col-sm-12">
+        <h5><em>Some of our support, media and awards</em></h5>
+        </div>
+</section>
+
+
+
+
+    <section id="top-business-section" class="hidden-xs">
+        <div class="mypanel row" style="z-index: 2">
+            <!-- Panel heading -->
+            <section id="top-business" class="container-fluid padding-top-50 padding-bottom-mob-0">
+            <div class="col-sm-12">
+                <div class=" text-center ">
+                    <br>
+                    {% if request.is_featured %}
+                        <h2 class="">
+                            <b>Learn from Experts</b>
+                        </h2>
+                    {% else %}
+                        <h2 class="">
+                            Learn from Experts
+                        </h2>
+                    {% endif %}
+                    <p>No need to struggle. Get an experienced tutor.</p>
+                </div>
+                <!-- Panel body -->
+                <div class="panel-body padding-bottom-50 padding-bottom-mob-0 ">
+                    {% for business in top_businesses %}
+                        <div class="col-sm-4 col-md-3 padding-0">
+                            <a href="{{ business.url }}" class="blue">
+                                <div class="featured_category boox center-block thumbnail">
+                                    <img src="{{ business.img }}">
+
+                                    <div class="box-content bg-white padd-5 blue-hover">
+                                        <h4>{{ business.heading }}</h4>
+
+                                        <div class="help-block row">
+                                            {% for tag in business.tags %}
+                                                <span class="col-xs-4">{{ tag }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+                
+            </section>
+        </div>
+    </section>
+     <section id="top-business" class="row container-fluid hidden-xs padding-bottom-mob-0 white-bg">
+        <div class="col-sm-12">
+        <div class="col-sm-12">
+        <h4><em>Some of our support, media and awards</em></h4>
+        </div>
+    </div>
+    </section>
+    <hr class="hr-styled" style="margin: 0;">
+    {% include "includes/achievments.html" %}
+    <hr class="hr-styled" style="margin: 0;">
+
+    <section class="testimonials-one padding-top-50 padding-top-mob-0 row-space-bottom-5 row">
+        <div class="row-space-bottom-5">
+            <br>
+            {% if request.is_featured %}
+                <h2 class="black text-center"><b>Trusted by 100s of parents, professionals and students</b></h2>
+            {% else %}
+                <h2 class="black text-center">Trusted by 100s of parents, professionals and students</h2>
+            {% endif %}
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for testimonial in testimonials %}
+                    <div class="col-sm-6 col-xs-12 row-space-4">
+                        <div class="media ">
+                            <div class="media-photo media-round pull-left text-center">
+                                <img alt="{{ testimonial.alt }}" height="69" class="img-circle"
+                                     src="{{ testimonial.img }}" width="69">
+                            </div>
+                            <div class="media-body">
+                                <div class="panel panel-quote panel-light">
+                                    <div class="panel-body">
+                                        <p>{{ testimonial.content }}
+                                        </p>
+
+                                        <p class="text-muted">
+                                            <span class="person pull-left">{{ testimonial.alt }}</span>
+                                            <span class="location pull-right">{{ testimonial.location }}</span></p>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+                <style>
+                    .panel-your-trips {
+    border: none;
+    border-radius: 1px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.panel-body-your-trips {
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+.no-trips .meta {
+    padding: 40px;
+}
+@media(max-width: 768px){
+    .no-trips .meta{
+    padding: 40px 20px;
+}
+}
+.panel-body>*:first-child {
+    margin-top: 0;
+}
+.meta {
+    width: 100%;
+    height: 100%;
+    /*padding: 20px 320px 0 20px;*/
+}
+.no-trips .title {
+    font-size: 40px;
+    width: 50%;
+}
+@media(max-width: 768px){
+    .no-trips .title {
+    font-size: 40px;
+    width: 100%;
+    }
+}
+@media (min-width: 1100px){
+.show-lg {
+    display: block !important;
+    }
+}
+@media(min-width: 768px){
+.no-trips .sub-title {
+    font-size: 16px;
+    width: 450px;
+    }
+}
+.space-top-2 {
+    margin-top: 12.5px;
+}
+.space-top-5 {
+    margin-top: 31.25px;
+}
+
+.no-trips-img {
+    background: url({% static "img/backgrounds/winning.png" %}); no-repeat center bottom;
+    background-size: 300px 310px;
+}
+.no-trips .pin {
+    width: 280px;
+    margin: 0;
+}
+
+.pin {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 87%;
+    width: 300px;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    font-weight: bold;
+    color: #fff;
+}
+.btn-large {
+    padding: 9px 27px;
+    font-size: 16px;
+}
+                </style>
+                <!--{% if not request.user.is_tutor %}
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                      <div class="row no-trips">
+                        <div class="panel panel-your-trips">
+                          <div class="panel-body panel-body-your-trips">
+                            <div class="meta">
+                              <div class="title show-lg font-head">
+                                  Refer a Friend!
+                              </div>
+                              <div class="space-top-2 sub-title">
+                                Invite friends to try Tuteria and you'll get 10% commission for 3 months for every client you refer.
+                              </div>
+                              <div class="space-top-5 btn btn-large btn-danger">
+                                <a href="{% url 'request_meeting_redirect' %}" style="color:white; text-decoration:none">
+                                  <div class="text-white invite">
+                                    Invite Friends to Tuteria
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                              <div class="pin no-trips-img hidden-xs"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}-->
+
+            </div>
+        </div>
+    </section>
+    <!--<section id="tutor-action" class="row white-bg">
+        {% with button_text="Become a tutor today" carousel_title="Passionate about teaching?" %}
+            {% include "includes/tutor_carousel.html" %}
+        {% endwith %}
+    </section>-->
+
+    {% if not request.is_featured %}
+        {% include "includes/search/search-modal.html" %}
+    {% endif %}
+
+
+{% endblock %}
+{% block request_section %}
+<section class="row protection large-padding">
+  <div class="page-container-full">
+    <div class="row">
+    {% if not request.user.is_tutor %}
+      <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+        
+        <h2>
+          <span class="font-head">
+            Experienced in teaching?
+          </span>
+        </h2>
+
+        <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+         <a href="{% url 'become_tutor' %}" class="btn btn-tutor btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+          Apply to tutor
+        </a>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+        <div class="media-photo padding-bottom-25">
+            <img width="75" height="75"
+            src="{% static "img/gallery/gift1.png" %}">
+        </div>
+        <h2>
+            <span class="font-head">
+              Make Extra Money
+          </span>
+      </h2>
+      <p>Earn 10% for 3 months for every client you refer to Tuteria.</p>
+        
+    <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+        <a href="{% url 'request_meeting_redirect' %}" class="btn btn-danger btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+            Learn More
+        </a>
+    </div>
+</div>
+{% endif %}
+ 
+  </div>
+</div>
+</section>
+{% endblock request_section %}
+
+{% block javascript %}
+    {{ block.super }}
+
+ <script src="{% static 'js/home.bundle.js' %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script>
+{% endblock %}
+

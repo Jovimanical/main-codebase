@@ -1,0 +1,33 @@
+<div class="modal modal2 fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="filterForm" method="get" class="smart-forms">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Filter Tutors</h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include="'/static/partials/search-form.html'"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-xs-6">
+                        <button id="filter-result"
+                                class="btn btn-primary margin-top-15 pull-right btn-block btn-block-tablet-portrait">
+                            Filter
+                        </button>
+
+                    </div>
+                    <div class="col-xs-6">
+                        <button data-dismiss="modal" type="button"
+                                class="btn btn-cancelmargin-top-15 pull-right btn-block btn-block-tablet-portrait">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

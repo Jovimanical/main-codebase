@@ -1,0 +1,222 @@
+{% extends '_layouts/base-internal.html' %}
+{% load staticfiles tuteria_thumbnail cache %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
+{% endblock %}
+{% block title %}Dashboard - Tuteria{% endblock title %}
+
+{% block content %}
+    <div class="container row-space-top-4 row-space-4">
+        <div class="row">
+        {# {% cache LONG_TTL 'dashboard_sidebar' object.email %} #}
+            <div class="visible-xs">
+               {% if usdetails.user.profile.registration_level < 1 %}
+                    {% include "users/includes/tutor_intent2.html" %}                                             
+                {% endif %}
+                    
+                <div class="row">
+                    <div class="col-xs-12">
+                    <div class="media row-space-4">
+                        <a class="pull-left" href="#">
+                            <img src="{{usdetails.user.profile.profile_pic_mobile}}" alt="{{usdetails.user.first_name}}" class="img-responsive">
+                        </a>
+                        <div class="media-body">
+                            <h2 class="text-center">
+                                {{ usdetails.user.first_name }}
+                            </h2>
+                            <ul class="list-unstyled text-center">
+                                <li>
+                                    <a href="{{ usdetails.urls.profile }}">View profile</a>
+                                </li>
+                                <li>
+                                    <a href="{{usdetails.urls.edit_profile}}"
+                                        id="edit-profile">Edit profile</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-3">
+                <div class="panel panel-default row-space-4">
+                    <div class="media media-photo-block">
+                        <a href="#" title="View Profile"><img src="{{usdetails.user.profile.profile_pic}}" alt="{{usdetails.user.first_name}}" class="img-responsive center-block">
+                        </a>
+                    </div>
+                    {% block hide_detail %}
+                        <div class="panel-body">
+                            <h2 class="text-center">
+                                {{ usdetails.user.first_name }}
+                            </h2>
+                            <ul class="list-unstyled text-center">
+                                <li>
+                                    <a href="{{ usdetails.urls.profile }}">View Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{{usdetails.urls.edit_profile}}"
+                                       id="edit-profile">Edit Profile</a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endblock %}
+                </div>
+                
+                {% block side_panel %}
+                    {# {% cache LONG_TTL 'quick_links' %} #}
+                    {% include "users/includes/quick_links2.html" %}
+                    {# {% endcache %} #}
+                {% endblock %}
+            </div>
+        {# {% endcache %} #}
+            <div class="col-sm-9 col-xs-12">	
+                <div class="hidden-xs">
+                    {% if usdetails.user.profile.registration_level < 1 %}
+                        {% include "users/includes/tutor_intent2.html" %}
+                    {% endif %}
+                </div>
+                     
+                <div class="row">
+                    {% block main_content %}
+                        <div class="visible-xs">                            
+                            {% include "users/includes/progress-bar2.html" %}
+                        </div>
+                        <div class="panel panel-default row-space-4">
+                            <h4 class="panel-heading">Notifications </h4>
+
+                            <div class="panel-body">
+                                <ul class="list-unstyled  hdb-light-bg">
+                                    {% if usdetails.user.notifications|length > 0 %}
+                                        {% for notification in usdetails.user.notifications %}
+                                            <li class="default airplane removeable alert0 ">
+                                                        <div class="row row-space-2 row-table ">
+                                                            <div class="col-sm-12 col-xs-12">
+                                                                <a href="{{notification.link}}">{{notification.text}}
+                                                                &nbsp;<i class="fa fa-caret-right"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        {% if not forloop.last %}
+                                                            <hr class="section-divider"> 
+                                                        {% endif %}
+                                                    </li>
+                                        {% endfor %}
+                                        {% else %}
+                                        <li class="default airplane removeable  alert0 ">
+                                                <div class="row row-space-2 row-table ">
+                                                    <div class="col-xs-12 col-md-middle">
+                                                        You have no notifications yet. When activities happen on your account, they will show up here.
+                                                    </div>
+                                                </div>
+                                            </li>
+                                    {% endif %}
+                                    {% if usdetails.user.is_tutor %}
+                                    <hr class="section-divider">
+                                    
+                                    <li class="default airplane removeable  alert0 ">
+                                        <div class="row row-space-2 row-table ">
+                                            <a href="{{usdetails.urls.how_tutoring_works}}"> 
+                                            <div class="col-sm-10  col-xs-8">
+                                                <strong>Tuteria terms and conditions</strong>
+                                            </div>
+                                            <div class="col-sm-2 col-xs-4">
+                                                <a href="{{usdetails.urls.how_tutoring_works}}"
+                                                    class="btn btn-block btn-primary">
+                                                    Click Here </a>
+                                            </div>
+                                            </a>
+                                            
+                                        </div>
+                                    </li>
+                                    <hr class="section-divider">
+                                    
+                                    <li class="default airplane removeable  alert0 ">
+                                        <div class="row row-space-2 row-table ">
+                                            <a href="https://t.me/+WldGsWHbgOmjZy1e" target="_blank"> <div class="col-sm-10  col-xs-8">
+                                                <strong> Tutor Telegram channel.</strong>
+                                            </div>
+                                            <div class="col-sm-2 col-xs-4">
+                                                <a href="https://t.me/+WldGsWHbgOmjZy1e" target="_blank"
+                                                    class="btn btn-block btn-primary">
+                                                    Join</a>
+                                            </div>
+                                            </a>
+                                            
+                                        </div>
+                                    </li>
+
+                                    {% endif %}
+                                    
+                                </ul>
+                                
+
+                                </ul>
+                            </div>
+                        </div>
+                      
+                        {% if usdetails.user.reputations|length > 0 %}
+                        <!-- <div class="panel panel-default row-space-4">
+                            <h4 class="panel-heading clearfix">
+                                Reputation
+                                <small class="pull-right"><span class="badge reputation_badge">{{ usdetails.user.reputation }}</span> Points</small>
+                            </h4>
+                            <div class="panel-body">
+                                <div class="well">
+                                    <p>
+                                        Tuteria is a community built on trust. Your reputation point helps give the best clients and tutors confidence to transact with you. The most important actions needed to build your reputation are listed below. <a href="{{usdetails.urls.help_article}}" target="_blank">Learn more</a>
+                                    </p>
+                                </div>
+
+                                <ul class="list-unstyled  hdb-light-bg">
+                                    {% for reputation in usdetails.user.reputations %}
+                                        <li class="default airplane removeable  alert0 ">
+                                            <div class="row row-space-2 row-table ">
+                                                <div class="col-sm-10  col-xs-8">
+                                                    {{ reputation.condition }}
+                                                </div>
+                                                <div class="col-sm-2 col-xs-4">
+                                                    <a href="{{ reputation.url }}"
+                                                       class="btn btn-block btn-primary">{% if reputation.score > 0 %}
+                                                        +{% endif %}{{ reputation.score }} <span class="hidden-xs">points</span></a>
+                                                </div>
+                                            </div>
+                                            {% if not forloop.last %} 
+                                            <hr class="section-divider">
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+
+
+                                </ul>
+                            </div>
+                        </div> -->
+                    {% endif %}
+                        
+                        <div class="visible-xs">
+                            {# {% cache LONG_TTL 'quick_links' %} #}
+                            {% include "users/includes/quick_links2.html" %}
+                            {# {% endcache %} #}
+                        </div>
+                    {% endblock %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block notification_tawk %}
+{% endblock %}
+{% block request_section %}
+ {% if not object.user.tutor_intent %}
+ {{block.super}}
+ {% endif %}
+{% endblock request_section %}
+{% block footer2 %}{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'js/dashboard.bundle.js' %}"></script>    
+   
+{% endblock %}

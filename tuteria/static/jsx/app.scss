@@ -1,0 +1,15 @@
+// @import "animate.css";
+
+#__p_ew_l td {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+@media (min-width: 768px) {
+  #__paga_btn.__proceed {
+    position: absolute;
+    right: 0;
+    margin-top: -33px;
+    margin-right: 25px;
+  }
+}

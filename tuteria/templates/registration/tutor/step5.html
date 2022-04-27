@@ -1,0 +1,38 @@
+{% extends 'registration/tutor/step4.html' %}
+{% load staticfiles i18n add_attr %}
+{% block css %}
+{{ block.super }}
+{% endblock %}
+{% block title %}Schedule Chat - Tuteria Application{% endblock title %}
+{% block wizard_title %} <h2 class="padding-top-15">Schedule a Chat</h2> {% endblock wizard_title %}
+{% block left_column %}
+<div class="col-sm-12">
+    <form id="interview-form" action="{% url 'registration:schedule_interview' %}" method="post" novalidate>
+        {% csrf_token %}
+        <h4><b>Lastly, can we have a brief chat?</b></h4>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12 text-center">
+            <img src="{% static 'img/tutor/interview.png' %}" class="img-responsive center-block"/>
+          </div>
+          <div class="col-sm-7 col-xs-12">
+            <h4>Tell us the best time to call you</h4>
+            <p>We recognise you're busy. Please select a timeslot when you're free to receive calls. If we think it's necessary, we'll call you on any day between Monday and Saturday.</p>
+
+            <div class="form-group row-space-4">
+                {{form.interview_slot|add_attributes:'class:form-control,required:true'}}
+            </div>  
+            <button class="btn btn-lg btn-block btn-primary"
+            >{% trans "Submit" %}</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block request_section %}{% endblock request_section %}
+{% block custom_js %}
+<script>
+    window.CreateStep = 4;
+</script>
+
+{% endblock %}

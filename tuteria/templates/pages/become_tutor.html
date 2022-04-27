@@ -1,0 +1,682 @@
+{% extends '_layouts/base-external.html' %}
+{% load staticfiles %}
+{% block fixed %}{% endblock %}
+{% block title %}Become a Tutor and Make Money with Tuteria{% endblock title %}
+{% block nav_class %}transparent-nav{% endblock %}
+{% block footer %}{% endblock %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with tutor_registration_view=True display_phone_number=True %}
+{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/become_tutor.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/carousel-css.css' %}"/>
+
+    <style>
+        .get-font {
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .get-font {
+                font-size: 14px;
+            }
+        }
+
+        #alert-sections {
+            z-index: 1000;
+            position: absolute;
+            width: 100%;
+        }
+        section#TotalPaid {
+    margin-bottom: 0px;
+}
+section#TotalPaid {
+    border-top: solid 1px #CCC;
+    border-bottom: solid 1px #CCC;
+    font-family: 'Calibri', sans-serif;
+    font-weight: bold;
+    padding: 20px 0 20px;
+    text-align: center;
+}
+#TotalPaid .Dark {
+    color: #00d1c1;
+    font-size: 30px;
+    line-height: 66px;
+    margin: 0 20px 0 0;
+    vertical-align: top;
+}
+#TotalPaid #Dollar {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    color: #00d1c1;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
+    font-family: 'Calibri', sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    line-height: 60px;
+}
+@media(max-width: 768px){
+    #TotalPaid #Dollar{
+        font-size: 20px;
+    }
+    .LargeCounter span.Digit, .LargeCounter span.Comma{
+        font-size: 20px !important;
+    }
+    .LargeCounter span.Digit{
+        width: 38px !important;
+    }
+}
+@media(max-width: 330px){
+
+    .LargeCounter span.Digit, .LargeCounter span.Comma{
+        font-size: 18px !important;
+    }
+    .LargeCounter span.Digit{
+        width: 33px !important;
+    }
+}
+.LargeCounter span.Digit {
+    background-image: linear-gradient(to bottom, #ececec, #eaeaea);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    border: 1px solid #d8d8d8;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    padding: 1px 0 0 13px;
+    width: 55px;
+    height: 66px;
+}
+
+.LargeCounter span.Digit, .LargeCounter span.Comma {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    color: #00d1c1;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
+    font-family: 'Calibri', sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    line-height: 60px;
+    text-align: left;
+}
+@media screen and (min-width: 768px){
+
+.carousel-indicators {
+    bottom: 83px;
+}
+}
+    </style>
+{% endblock %}
+{% block carousel_image %}
+    <div class="item active">
+
+        <div class="caro bg7"></div>
+        {# <img src="{% static "img/backgrounds/teach.jpg" %}" alt="Tutoring Jobs in Nigeria"> #}
+    </div>
+{% endblock carousel_image %}
+{% block carousel_content %}
+    
+    <div class="row padding-top-25">
+        <div class="col-sm-10 col-sm-offset-1 text-center remove-top-margin-65">
+        <div class="row">
+            <div class="jumbo-header xs-padding-top-50"><h2 class="myh2"><b class="white">TEACH WHAT YOU LOVE</b></h2>
+
+            <p class="grey font-head">Earn extra money with your free time by teaching people around you</p>
+            <br>
+        </div>
+        <div class="col-sm-4 col-sm-offset-4">
+            <p class="text-center">
+                
+                {% if request.user.is_authenticated %}
+                    {% if request.user.tutor_intent %}
+                        <a href="{{request.user.tutor_req.get_next_url}}" class="btn btn-primary btn-lg big-btn full-width">Complete Application &#8594;</a>
+                        {% elif request.user.is_tutor %}
+                                <!-- <a href="{% url 'users:subject_creation_landing' %}" class="btn btn-primary btn-lg big-btn full-width">Create Subjects &#8594;
+                                </a> -->
+                        {% else %}
+
+                            <a href="{% url 'registration:tutor_landing' %}" class="btn btn-primary btn-lg big-btn full-width">Get started for free
+                                    &#8594;
+                                </a>                
+                        
+                    {% endif %}
+                {% else %}
+                    <a id="signup_nav" href="{% url 'account_signup' %}" class="signup_nav btn btn-primary btn-lg big-btn full-width">Get
+                        started for free &#8594;
+                    </a>
+                    <div><a style="color:white" href="{% url 'account_login' %}" class="visible-xs">or Login</a></div>
+                    
+                {% endif %}
+            </p>
+        </div>
+        </div>
+        
+    </div>
+    </div>
+
+    
+{% endblock %}
+{% block main_content %}
+{% block press %}
+{% endblock press %}
+{% block reason %}
+    <section>
+        <div class="container no-padding-total row-space-bottom-5">
+            <div id="how-it-works" class="wrapper-full padding-top-50 clearfix text-center">
+                {% if request.is_featured %}
+                    <h2 class="font-head"><b>Join the largest network of tutors</b></h2>
+                {% else %}
+                    <h2 class="font-head">Join the largest network of tutors</h2>
+                {% endif %}
+                <p style="font-size:15px">Turn your passion to a source of money while making impact in your
+                    community</p>
+            </div>
+            <br>
+
+            <div class="icon-box-6">
+                {% for info in ic %}
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="{{ info.icon_class }}"></i>
+                            <!-- <img src="/static/img/tuteria/{{info.tag}}" alt=""> -->
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>{{ info.heading }}</b>
+                                {% else %}
+                                    {{ info.heading }}
+                                {% endif %}
+                                <br>
+                            </h3>
+                                        <span class="inline-block">{{ info.content }}
+                                        </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock reason %}
+{% block carousel %}
+{% endblock carousel %}
+{% block howitworks %}
+	<section id="TotalPaid" class="row font-head hidden">
+	  <div class="container row" style="color:#00d1c1">
+	    <span class="Dark col-xs-12">
+	      Total hours logged by our tutors is over:
+	    </span>
+	    <!--<span id="Dollar">-->
+	      <!--&#x20A6;-->
+	    <!--</span>-->
+	    <span class="LargeCounter">
+        {% for number in total_no_of_hours %}     {% if forloop.revcounter == 3 or forloop.revcounter == 6 or forloop.revcounter == 9 %}            
+          <span class="Comma">,</span>
+        {% endif %}  
+          <span class="Digit Number{{number}}">
+        {{number}}  </span>        
+        {% endfor %}
+
+	  </span>
+	  </div>
+	</section>
+    <section id="tutor-action" class="row">
+        {% with button_text="Join our community" carousel_title="Welcome, you belong here." %}
+            {% include "includes/tutor_carousel.html" %}
+        {% endwith %}
+    </section>  
+{% endblock howitworks %}
+{% block marketplace %}
+    <!--<section id="one-on-one-first" class="padding-top-50 row">
+        <div class="container sidebar_by_side row-space-top-1 row-space-4" style="">
+            <div class="row">
+                <div class="col-sm-6  row-space-4">
+                <img src="{% static 'img/tutor/teach.jpg' %}" class="img-responsive center-block"/>
+                </div>
+                <div class="col-sm-6 icon-content space-for-mobile padding-top-50">
+                    <h3 class="">
+                        {% if request.is_featured %}
+                            <b>The tutoring marketplace everyone trusts</b>
+                        {% else %}
+                            The tutoring marketplace everyone trusts{% endif %}
+                    </h3>
+                    <ul class="list-unstyled list-mobile list-with-icons no-margin-bottom">
+                        <li class="">Exceptional tutors are the bedrock of our trusted community. Clients use Tuteria to
+                            find and schedule lessons with their preferred tutors who then physically connect with clients
+                            to deliver one-on-one tutoring on almost any subject. Tutors and clients provide ratings and
+                            feedback after every lesson, and Tuteria handles all payments, administration and disbursements.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </section>-->
+{% endblock marketplace %}
+{% block pricing %}
+    <!--<section id="one-on-one-second" class="padding-bottom-50 white-bg padding-top-50 row">
+        <div class="container side_by_side">
+            <div class="row">
+                
+            <div class="col-sm-5 icon-content row-space-4 space-for-mobile padding-top-50 padding-bottom-50">
+                <h3 class="">
+                    {% if request.is_featured %}
+                        <b>Pricing and earnings</b>
+                    {% else %} Pricing and earnings
+                    {% endif %}
+                </h3>
+                <ul class="list-unstyled list-mobile list-with-icons no-margin-bottom">
+                    <li class="">It's absolutely free to become a private tutor with Tuteria. As a tutor, you set hourly
+                        prices for each subject you teach, and clients schedule lessons at your price. Also, you'll
+                        always earn majority of the booking fee which increases steadily as you teach more hours; and you may offer discounts for
+                        group bookings if you so desire. But our favorite part is that you can withdraw all your
+                        earnings to your bank at any time and go shopping! No need to wait till month end!
+                    </li>
+                </ul>
+                <br>
+
+                <div class="fb-like" data-href="https://www.facebook.com/tuteriacorp" data-layout="standard"
+                     data-width="300px" data-action="recommend" data-show-faces="false" data-share="false" allowtransparency="true" frameborder="0" scrolling="no"></div>
+            </div>
+            <div class="col-sm-4 col-sm-offset-2">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <h4 class="text-center" style="color:#3572b0">
+                            {% if request.is_featured %}
+                                <b>See How Much You Can Make</b>
+                            {% else %}See How Much You Can Make
+                            {% endif %}
+                        </h4>
+
+                        <div class="form-group">
+                            <label for="" class="control-label">Enter your average hourly price</label>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">&#8358;</span>
+                                <input type="number" id="price" class="form-control">
+                                <span class="input-group-addon">per hour</span>
+                            </div>
+                            {% if request.is_featured %}
+                                <button id="calculate-val" class="btn btn-primary">Calculate</button>
+                            {% endif %}
+                        </div>
+                        <hr>
+                        <div class="row row-space-2">
+                            <div class="col-xs-5" style="margin-top: 7px;">In 1 month</div>
+                            <div class="col-xs-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">&#8358;</div>
+                                    <input type="number" id="one-point-five-months" class="form-control" disabled="true"
+                                           readonly="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space-2">
+                            <div class="col-xs-5" style="margin-top: 7px;">In 4 months</div>
+                            <div class="col-xs-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">&#8358;</div>
+                                    <input type="number" id="four-months" class="form-control" disabled="true"
+                                           readonly="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space-2">
+                            <div class="col-xs-5" style="margin-top: 7px;">In 7 months</div>
+                            <div class="col-xs-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">&#8358;</div>
+                                    <input type="number" class="form-control" id="seven-months" disabled="true"
+                                           readonly="true">
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-warning hide">This is only an estimate of what you can earn. How much you
+                            actually make may vary depending on your pricing, number of subjects, location, demand and
+                            other factors.
+                        </small>
+                        <hr>-->
+                        <!--<div class="form-group">
+                            <p class="text-info hide"><i class="glyphicon-plus-sign glyphicon"></i> Exposure to more clients</p>
+                            <p class="text-info hide"><i class="glyphicon-plus-sign glyphicon"></i> Impacting knowledge to your community</p>
+                        </div>-->
+                        <!--<div class="col-sm-offset-1 col-sm-10">
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.tutor_intent %}
+
+                                <a href="{{request.user.tutor_req.get_next_url}}" class="btn btn-primary center-block btn-lg">Complete Application &#8594;</a>
+                                {% elif request.user.is_tutor %}
+                                <a href="{% url 'users:subject_creation_landing' %}" class="btn btn-primary center-block btn-lg">Create Subjects &#8594;
+                                </a>
+                                    {% else %}
+                                <a href="{% url 'registration:tutor_landing' %}" class="btn btn-primary center-block btn-lg">Start Teaching Today! </a>
+                                {% endif %}
+                            {% else %}
+                                <a id="signup_nav" href="{% url 'account_signup' %}"
+                                   class="btn btn-primary signup_nav center-block btn-lg">
+                                    Start Teaching Today!
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>-->
+{% endblock pricing %}
+{% block expert %}{% endblock expert %}
+{% block requirements %}
+{% endblock requirements %}
+{% block subjects %}
+    <!--<section id="one-on-one-second"
+             class="padding-bottom-50 white-bg padding-top-50 padding-bottom-mob-0 row xs-no-margin-left-right">
+        <div class="container side_by_side">
+        <div class="row">            
+            <div class="col-sm-5  col-sm-offset-1 col-sm-push-6">
+                <div class="bt2"></div>
+                {# <img src="{% static 'img/tutor/subjects.png' %}" class="img-responsive center-block"/> #}
+            </div>
+            <div class="col-sm-6 col-sm-pull-6 icon-content">
+                <h3>
+                    {% if request.is_featured %}
+                        <b>Tutoring subjects</b>
+                    {% else %}
+                        Tutoring subjects
+                    {% endif %}
+                </h3>
+                <ul class="list-unstyled list-mobile list-with-icons no-margin-bottom">
+                    <li class="">You can teach almost any subject on Tuteria! Over 500 subjects, skills and exams are
+                        currently supported including academic subjects like Math, Physics, English etc., non-academic
+                        like Public Speaking, Dance, Horse-riding, Design, Cooking, Makeup, Swimming, Photography etc.,
+                        and exams like GRE, SAT, ICAN, CCNA, ACCA, IGCSE etc. The more subjects you offer, the more
+                        clients you're likely to receive. Plus you can turn off any subject if you need to take a break,
+                        and turn it back on when you're ready to continue accepting clients. With Tuteria, you're always
+                        in control!
+                    </li>
+                    <br>
+            </div>
+        </div>
+        </div>
+    </section>-->
+{% endblock subjects %}
+{% block flexible %}
+    <!--<section id="one-on-one-tutoring" class="padding-top-50 row padding-bottom-50 blue-bg">
+        <div class="text-center row-space-bottom-5">
+            {% if request.is_featured %}
+                <h2 class="">
+                    <b>Tuteria is totally <span style="color:red">flexible</span>, you control everything</b>
+                </h2>
+            {% else %}
+                <h2 class="">
+                    Tuteria is totally <span style="color:red">flexible</span>, you control everything
+                </h2>
+            {% endif %}
+            <div class="col-sm-8 col-sm-offset-2">
+                <p class="get-font">For example, let's say you set only Saturdays 2pm to 6pm for tutoring, clients will
+                    only be able to book lessons with you within that period. You also state how far you're willing to
+                    travel for lessons or if you prefer clients come to you; and if you won't be available on a
+                    particular Saturday, just turn it off on your calendar and no one can hire you.</p>
+            </div>
+        </div>
+    </section>-->
+{% endblock flexible %}
+{% block schedule %}
+    <!--<section id="one-on-one-first" class="padding-top-50 row">
+        <div class="container sidebar_by_side row-space-top-1 row-space-4" style="">
+            <div class="row">
+                
+            <div class="col-sm-5  row-space-4">
+                <div class="bt3"></div>
+                {# <img src="{% static 'img/tutor/schedule.png' %}" class="img-responsive center-block"/> #}
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 icon-content">
+                <h3>
+                    {% if request.is_featured %}
+                        <b>Days and hours</b>
+                    {% else %}
+                        Days and hours
+                    {% endif %}
+                </h3>
+                <ul class="list-unstyled list-mobile list-with-icons no-margin-bottom">
+                    <li class="">You choose your own schedule! Once you set your calendar, we ensure that you only
+                        receive bookings when you're available. When you're booked, we prevent others from booking that
+                        same timeslot so you're never overwhelmed. You also set cancellation and travel policies, and
+                        since we are nationwide, you'll be able to receive clients anywhere you are in the country. So
+                        feel free to take Tuteria everywhere you go, like your very own PA. Don't forget to always keep
+                        your calendar up-to-date!
+                    </li>
+                </ul>
+                <br>
+            </div>
+            </div>
+        </div>
+    </section>-->
+{% endblock schedule %}
+{% block apply %}
+    <!--<section id="one-on-one-second"
+             class="padding-bottom-50 white-bg padding-bottom-mob-0 padding-top-50 row xs-no-margin-left-right">
+        <div class="container side_by_side">
+            <div class="row">
+                
+            <div class="col-sm-5 col-sm-offset-1 col-sm-push-6">
+                <div class="bt4"></div>
+                {# <img src="{% static 'img/tutor/apply.png' %}" class="img-responsive center-block"/> #}
+            </div>
+            <div class="col-sm-6 icon-content col-sm-pull-6">
+                <h3>
+                    {% if request.is_featured %}
+                        <b>So who can apply?</b>
+                    {% else %}
+                        So who can apply?
+                    {% endif %}
+                </h3>
+                <ul class="list-unstyled list-mobile list-with-icons no-margin-bottom">
+                    <li class="">Tuteria tutors come from all walks of life and are friendly members of your community
+                        who primarily love to teach! Some are graduates, postgraduates and undergraduates who want to
+                        help others and earn extra cash with their free time. Other applicants are certified teachers,
+                        experienced instructors, trainers or mentors who have years of teaching background in schools
+                        and institutes. Other tutors are corporate, working professionals and entrepreneurs who want to
+                        share their knowledge and make an impact. Anyone who's smart, lives in Nigeria, has a passion to
+                        teach and an exceptional tutoring service mentality can join in on the action!
+                    </li>
+                </ul>
+                <br>
+            </div>
+            </div>
+
+        </div>
+    </section>-->
+{% endblock apply %}
+{% block steps %}
+    <!--<section id="tutor-action"
+             class="padding-space-4 blue-bg space-for-mobile-20 padding-top-50 white-bg row xs-no-margin-left-right">
+        <div class="container">
+            <div class=" text-center ">
+                <h2 style="font-size: 35px; color:#3572b0">
+                    {% if request.is_featured %}
+                        <b>Sounds Great! So What Next?</b>
+                    {% else %}
+                        Sounds Great! So What Next?
+                    {% endif %}
+                </h2>
+
+                <p style="font-size:15px">Apply to become a tutor in 4 simple steps. We’ll be with you each step of the
+                    way</p>
+            </div>
+            <div class="row">
+                <div class="icon-box-6">
+                    {% for info in gs %}
+                        <div class=" col-sm-3 col-md-3 row-space-4">
+                            <div class="icon-box-6-item text-center">
+                                <i class="{{ info.icon_class }}"></i>
+
+                                <h3 class="text-center">
+                                    {% if request.is_featured %}
+                                        <b>{{ info.heading }}</b>
+                                    {% else %}
+                                        {{ info.heading }}
+                                    {% endif %}
+                                    <br>
+                                </h3>
+                                                <span class="inline-block">{{ info.content }}
+                                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <p class="text-center padding-top-50 padding-bottom-50">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.tutor_intent %}
+
+                        <a href="{{request.user.tutor_req.get_next_url}}" class="btn btn-primary btn-lg">Complete Application &#8594;</a>
+                        {% elif request.user.is_tutor %}
+                                <a href="{% url 'users:subject_creation_landing' %}" class="btn btn-primary btn-lg">Create Subjects &#8594;
+                                </a>
+                            {% else %}
+                    <a href="{% url 'registration:tutor_landing' %}" class="btn btn-primary btn-lg">Apply for free right
+                        now! &#8594;</a>
+                    {% endif %}
+                    
+                {% else %}
+                    <a id="signup_nav" href="{% url 'account_signup' %}" class="btn-lg btn btn-primary signup_nav">
+                        Apply for free right now! &#8594;
+                    </a>{% endif %}<br><br>
+                <b>Applications are open for now. Hurry!</b>
+            </p>
+        </div>
+        </div>
+    </section>-->
+    <section id="one-on-one-tutoring" class="white-bg row">
+        <div class="space-for-mobile-20">
+        <hr class="hr-styled" style="margin: 0;">
+            <div class="col-sm-10 col-sm-offset-1">                
+                {% include "includes/achievments.html" %}
+            </div>            
+        </div>
+        <hr class="hr-styled" style="margin: 0;">
+    </section>
+    <section id="one-on-one-fourth" class="padding-top-50 padding-bottom-50 space-for-mobile row">
+        <div class="container side_by_side">
+            <div class="row">           
+                <div class="col-sm-12 icon-content space-for-mobile-20">
+                    <h2 class="padding-bottom-20 blue-font">
+                        {% if request.is_featured %}<b>Frequently asked questions</b>
+                        {% else %}Frequently asked questions{% endif %}
+                    </h2>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                    {% if not request.is_featured %}Who can teach on Tuteria?{% else %}<b>Who can teach on Tuteria?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">For you to teach with Tuteria, you must have previous experience teaching people either formally or informally - whether privately or in an institution, and have a strong track record of producing results. You must also be excellent at relating with people, be able to verify your identity and pass all our assessments.
+                                    <br><br>
+                                    Our teachers come from all walks of life. Some are teachers from various schools around you, others are working professionals and trainers who love to share their knowledge, while some are exceptional post-graduate and undergraduate students. If teaching is your thing, then join us!</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                    {% if not request.is_featured %}What subjects can I teach?{% else %}<b>What subjects can I teach?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">You can teach almost any subject or skill! From academic subjects like Math, Physics, English etc., to non-academic like Public Speaking, Dance, Graphic Design, Cooking, Makeup, Swimming, Photography etc., and exams like CFA, GRE, SAT, ICAN, CCNA, ACCA, IGCSE etc. The more subjects you offer, the more clients you'll receive.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                    {% if not request.is_featured %}Is the teaching done online or offline?{% else %}<b>Is the teaching done online or offline?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">Most lessons take place offline at a location you agree with your client, but you can also offer online lessons depending on the subject you teach.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                    {% if not request.is_featured %}How do I get paid?{% else %}<b>How do I get paid?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">Tuteria will direct deposit your earnings into your bank account as soon as the lesson is completed. We'll ask you to link your bank to your profile, so that once you complete the lesson and submit it on the site, you'll receive payments within 24 hours. No more chasing customers for money.
+                                    <br><br>
+                                    You also set your prices, and earn majority of whatever you charge the client. Most active tutors earn between &#x20A6;35k - &#x20A6;120k per month. You can track all transactions in one place so that the whole process is transparent.</div>
+                                </div>
+                            </div>                            
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                    {% if not request.is_featured %}How quickly would I get a client?{% else %}<b>How quickly would I get a client?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">Most tutors get a client within 3-14 days after completing their profiles. However, this varies depending on the demand in your location, the subject you teach and your availability. If you complete your profile on time, and add your subjects then you're more likely to get clients faster. Please use a smart browser to complete your profile, we don't support low-end browsers.
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                    {% if not request.is_featured %}Does Tuteria operate in my area?{% else %}<b>Does Tuteria operate in my area?</b>{% endif %}
+                                    </div>
+                                    <div class="answer-value">Tuteria connects tutors and clients nationwide, so yes we operate in your area. However, we also focus on the main cities. When you have a client, you'll get an email, SMS or phone call from us.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock steps %}
+{% endblock %}
+{% block javascript %}
+    <script>
+        
+        function open_signup_overlay() {
+ 
+                // Code to open your overlay
+            
+                // Hotjar Virtual Page View trigger.
+                hj('vpv',/sign-up/);
+            
+            }
+        
+        window.currentPage = "BecomeTutor"
+    </script>
+    {{ block.super }}
+    <script>
+        $('a#signup_nav').click(function(e){
+            open_signup_overlay();
+        })
+    </script>
+    <script src="{% static 'js/static_pages.bundle.js' %}"></script>
+{% endblock %}
+{% block request_section %}{% endblock request_section %}
+{% block referral %}{% endblock referral %}
+{% block bottom_footer %} {% endblock %}
+{% block notification_tawk %}{% endblock %}

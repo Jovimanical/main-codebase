@@ -1,0 +1,94 @@
+{% extends '_layouts/base-internal.html' %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary%}
+{% load activelink %}
+{% block css %}
+{{ block.super }}
+{% if request.is_featured %}
+    <link rel="stylesheet" href="{% static "css/external-opera.css" %}">
+{% else %}
+    <link rel="stylesheet" href="{% static 'css/external.css' %}"/>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container row-space-top-4 row-space-4">
+    <div class="row">
+        <div class="col-sm-3">
+            {% block sidebar %}
+            <div class="visible-xs row">
+                <div class="header-2 visible-xs">
+                    <div class="navy">
+                        {% include 'users/subject/includes/subject-urls.html' %}
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-xs row">
+                <div class="sidenav ">
+                    {% include 'users/subject/includes/subject-urls.html' with url_class='sidenav-list' %}
+                </div>
+            </div>
+            {% endblock sidebar %}
+        </div>
+        <div class="col-sm-9 col-xs-12" >
+            {% block main_content %}
+            <div class="row" id="root">
+            <div class="panel panel-default row">
+                <div class="panel-heading">
+                    <h4>{% block page_title %}{% endblock %}</h4>
+                </div>
+                <div class="panel-body mp-box">
+                    {% block db_summary %}
+                    <div class="db-summary db-order-stats">
+                        {% for url in urls %}                                    
+                        {% if url.count > 0 %} <a{% else %}<span{% endif %}
+                            href="{{url.url}}">{{url.count}}
+                            <small class="hidden-xs">{{url.url_text|safe}}</small>
+                            <small class="visible-xs">{{url.mobile_text}}</small>
+                            </a>
+                        {% if url.count > 0 %}</a>{% else %}</span>{% endif %} 
+                        {% endfor %}
+                    </div> 
+                    <div class="db-filters row  row-space-4">
+                        <div class="filter-select col-sm-12">
+                            <div class="dropdown pull-left">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Filter By
+                                    <span class="caret"></span>
+                                </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                {% for url in urls %}
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{url.url}}">{{url.filter_text}}</a></li>
+                               {% endfor %}
+                           </ul>
+                       </div>
+                       {% block filter_right_section %}{% endblock %}
+                   </div>    
+                    {% endblock db_summary %}                    
+               </div>
+               {% block object_table %}{% endblock %}
+           </div> 
+        </div>
+           
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+{% block subject_js %}
+<script>
+    $(window).resize(function () {
+        var table = $('table.table');
+        console.log(window.innerWidth);
+        if (window.innerWidth < 421) {
+            table.parent().addClass('table-responsive');
+        } else {
+            table.parent().removeClass('table-responsive');
+        }
+    });
+
+</script>    
+{% endblock subject_js %}
+
+{% endblock %}
+{% block notification_tawk %}
+{% endblock %}

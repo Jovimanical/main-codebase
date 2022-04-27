@@ -1,0 +1,40 @@
+{% extends "_layouts/base-internal.html" %}
+{% load staticfiles %}
+{% load render_bundle from webpack_loader %}
+
+{% block css %}
+    {# <link href="{% static 'css/internal.css' %}" rel="stylesheet"> #}
+    {% render_bundle 'subject_create' 'css' %}
+    <script type="text/javascript"
+                    src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            
+	
+{% endblock css %}
+{% block mobile_subnav_2.2 %}
+	{% include "includes/nav/mobile/smart-nav.html" with btnn=True search=True mobile_display=True %}
+        
+{% endblock mobile_subnav_2.2 %}
+{% block fixed %}nno hidden {% endblock fixed %}
+{% block black_nav %} {% endblock black_nav %}
+{% load staticfiles add_attr bootstrap3 i18n cloudinary bootstrap_pagination %}
+{% block content %}
+		<div id="subject-home" class=""></div>
+		{% render_bundle 'vendor' %}
+        {% render_bundle 'subject_create' 'js' %}
+	
+{% endblock content %}
+{% block javascript %}
+	<script src="{% url 'js_reverse' %}" type="text/javascript"></script>
+   <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+
+	<script src="{% static "js/mobile2.bundle.js"  %}"></script>
+{% endblock javascript %}
+{% block request_section %}
+	
+{% endblock request_section %}
+{% block footer %}
+	
+{% endblock footer %}
+{% block bottom_footer %}
+	
+{% endblock bottom_footer %}

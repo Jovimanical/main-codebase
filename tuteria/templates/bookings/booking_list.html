@@ -1,0 +1,47 @@
+{% extends 'bookings/includes/base_booking_list.html'%}
+{% load cloudinary %}
+{% block page_title %}Bookings You Made{% endblock page_title %}
+{% block title %}Manage Bookings - Tuteria{% endblock title %}
+
+{% block object_table %}
+<div class="table-responsive">
+    <table class="table">
+        <thead> 
+            <tr>
+                <td class="hidden-xs"> &nbsp;
+                </td>
+                <td colspan="2" class="hidden-xs">Booking Detail
+                </td>
+                <td class="visible-xs">Detail</td>
+                <td><span class="hidden-xs">Booking</span> Date
+                </td>
+                <td class="hidden-xs">Due On</td>
+                <td>Amount
+                </td>
+                <td class="hidden-xs">Status</td>
+            </tr>
+        </thead>
+
+        <tbody>
+           {% for booking in object_list %}
+           <tr>
+            <td class="hidden-xs"></td>
+            <td class="gig-pic-thumb hidden-xs">
+                <span class="gig-pict-45">
+                    {%cloudinary booking.get_tutor.profile_pic TUTOR_THUMBNAIL%}
+                </span>
+            </td>
+            <td class="db-title"><a
+                href="{{booking.get_absolute_url}}"><span class="hidden-xs">{{booking.booking_detail}}</span><span class="visible-xs">{{booking.ts.skill.name}}</span></a>
+            </td>
+            <td>{{booking.created|date:'M d, Y'}}</td>
+            <td class="hidden-xs">{{booking.due_date|date:'M d, Y'}}</td>
+            <td class="db-amount">&#x20a6;{{booking.real_price|floatformat:"0"}}</td>
+            <td class="hidden-xs"><span class="label label-{{booking.status_class}}">{% if booking.is_delivered %}Awaiting review{%else%}{{booking.get_status_display|title}}{% endif %}</span></td>
+        </tr>    
+        {% endfor %}
+
+    </tbody>
+</table>
+</div>    
+{% endblock object_table %}

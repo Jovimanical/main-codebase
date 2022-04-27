@@ -1,0 +1,584 @@
+{% extends '_layouts/base.html' %}
+{% load staticfiles activelink cloudinary add_attr %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/booking_summary.css' %}"/>
+{% endblock %}
+{% block fixed %}{% endblock %}
+{% block title %}Booking Summary | Tuteria Nigeria{% endblock title %}
+{% block sub_nav %}
+    <div id="action-bar" class="hidden-xs mp-box action-bar-gig {% if object.status < 2 %}hidden{% endif %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        {% block sub_nav_content %}
+                            {% if object.status < 2 %}
+                                {#                            <div class="action-steps cf">#}
+                                {#                                <h3 class="pull-left">Bring your friends to Tuteria.</h3>#}
+                                {##}
+                                {#                                <div class="step-end">#}
+                                {#                                    <a href="{{ object.ts.get_absolute_url }}"#}
+                                {#                                       class="btn btn-primary btn-default" data-gtm-action="order-again"#}
+                                {#                                       data-gtm-label="FO122C1C6AE6" data-gtm-event="order">Invite friends</a>#}
+                                {#                                </div>#}
+                                {##}
+                                {#                            </div>#}
+                            {% endif %}
+                            {% if object.status == 3 %}
+                                <div class="action-steps cf">
+                                    {% block hire-again %}
+                                    {# <div class="step-end"> #}
+                                        {# <a href="{{ object.ts.get_absolute_url }}" #}
+                                           {# class="btn btn-primary btn-default" data-gtm-action="order-again" #}
+                                           {# data-gtm-label="FO122C1C6AE6" data-gtm-event="order">Hire Again</a> #}
+                                    {# </div> #}
+                                    {% endblock hire-again %}
+
+                                    <div class="step ca-green">
+                                        <h5 class="with-check">&nbsp;</h5>
+
+                                        <p>
+                                            Booking<br>Started
+                                        </p>
+                                    </div>
+                                    <!--
+                                                                    <div class="step ca-green">
+                                                                        <h5>+$5</h5>
+
+                                                                        <p>
+                                                                            Gig Extra<br>Ordered
+                                                                        </p>
+                                                                    </div> -->
+
+                                    <div class="step ca-green">
+                                        <h5 class="with-check">&nbsp;</h5>
+
+                                        <p>
+                                            Booking<br>Submitted
+                                        </p>
+                                    </div>
+
+                                    <div class="step ca-green">
+                                        <h5 class="with-check">&nbsp;</h5>
+
+                                        <p>
+                                            Booking<br>Reviewed
+                                        </p>
+                                    </div>
+
+                                    <div class="step ca-green">
+                                        <h5 class="with-check">&nbsp;</h5>
+
+                                        <p>
+                                            Booking<br>Completed
+                                        </p>
+                                    </div>
+
+
+                                </div>
+                            {% endif %}
+                            {% if object.status == 2 %}
+                                <div class="action-steps cf">
+                                    <h3 class="pull-left text-warning"><i
+                                            class="glyphicon glyphicon-exclamation-sign"></i>
+                                        This booking has been placed on pending.</h3>
+                                    {% block resolve %}
+                                        <div class="step-end">
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-warning resolve-btn" id="resolve-booking">Resolve</a>
+                                        </div>
+
+                                    {% endblock %}
+
+                                </div>
+
+                            {% endif %}
+                            {% if object.status == 4 %}
+                                <div class="action-steps cf">
+                                    <h3 class="pull-left text-danger"><i class="glyphicon glyphicon-remove"></i>
+                                        This booking has been cancelled.</h3>
+                                    {% block rehire %}
+                                        <div class="step-end">
+                                            <a href="{% if object.ts %}{{ object.ts.get_absolute_url }}{% else %}{{object.get_tutor.get_absolute_url}}
+                                            {% endif %}"
+                                               class="btn btn-primary btn-default" data-gtm-action="order-again"
+                                               data-gtm-label="FO122C1C6AE6" data-gtm-event="order">Re-hire?</a>
+                                        </div>
+
+                                    {% endblock %}
+
+                                </div>
+
+                            {% endif %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row row-space-top-4">
+            <div id="invite-center"
+                 class="col-xs-12 {% if object.status < 2 %}hidden{% else %}visible-xs {% endif %} well">
+                <div>
+                    {% if object.status < 2 %}
+
+                        <h4 class="pull-left text-warning">Invite friends to Tuteria</h4>
+                        <a href="#" class="btn btn-primary pull-right">Invite</a>
+
+                    {% endif %}
+                    {% if object.status == 2 %}
+                        <h4 class="pull-left text-warning"><i class="glyphicon glyphicon-exclamation-sign"></i>
+                            Booking Pending</h4>
+                        <a href="javascript:void(0)" class="resolve-btn btn btn-warning pull-right">Resolve</a>
+
+                    {% endif %}
+
+                    {% if object.status == 3 %}
+                        <h4 class="pull-left text-success"><i class="glyphicon glypicon-ok"></i> Booking Completed</h4>
+                        {% block hire_again_mob %}
+                        <p>To hire again, please contact the customer representative at 09091060780</p>
+                        <!-- <a href="#" class="btn btn-primary pull-right">Hire again</a> -->
+                        {% endblock hire_again_mob %}
+                    {% endif %}
+                    {% if object.status == 4 %}
+                        <h4 class="pull-left text-danger"><i class="glyphicon glyphicon-remove"></i> Booking Cancelled
+                        </h4>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-sm-8 col-xs-12">
+                <div class="row">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                                    {% block main_tab_heading %}
+                                        Booking <span class="hidden-xs">Summary</span>
+                                    {% endblock main_tab_heading %} </a>
+                            </li>
+                            {% block tabs %}
+                            {% endblock %}
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="home">
+                                <section class="db-content db-content-order-detail" data-user-type="buyer"
+                                         data-order-status="completed"
+                                         data-order-seller="pro_ebookcovers">
+                                    {% block booking_summary %}
+                                        <div class="db-tabs-wrapper ">
+                                            <article
+                                                    class=" db-order-activity js-page-tab-content js-page-tab-activity">
+                                                <header class="order-header with-thumb cf row-space-4">
+                                                    {% block booking_summary_heading %}
+                                                    {% if object.ts %}
+                                                        
+                                                        <div class="gig-pict-102">
+                                                            {% cloudinary object.get_tutor.profile_pic PAYMENT_THUMBNAIL alt=object.ts.heading %}
+                                                            {#                                                            <div class="tutor-name">{{ object.ts.tutor.get_full_name|title }}</div>#}
+                                                        </div>
+                                                        <h4></h4>
+                                                        <h1>
+                                                            <span class="order-price pull-right hidden-xs hidden-sm">&#x20a6;{{ object.real_price|floatformat:0 }}</span>
+                                                            {{ object.ts.heading }}
+                                                            {% if object.status == object.SCHEDULED %}
+                                                                <span class="phone_number">({{ object.get_tutor.phone_number_details }})</span>
+                                                            {% endif %}
+                                                        </h1>                             
+                                                    {% else %}         
+                                                        <div class="gig-pict-102">
+                                                            {% cloudinary object.get_tutor.profile_pic PAYMENT_THUMBNAIL alt="doesnt-matter" %}
+                                                        </div>
+                                                        <h4></h4>
+                                                        <h1>
+                                                            <span class="order-price pull-right hidden-xs hidden-sm">&#x20a6;{{ object.real_price|floatformat:0 }}</span>
+                                                            {{object.rq_heading}}
+                                                            {% if object.status == object.SCHEDULED %}
+                                                                <span class="phone_number">({{ object.get_tutor.phone_number_details }})</span>
+                                                            {% endif %}
+                                                        </h1>
+                                                                  
+                                                    {% endif %}{% endblock %}
+                                                    <ul class="order-header-info cf">
+                                                        {% block display_subject %}
+                                                        {% if object.ts %}                                                  
+                                                            <li><em>Subject: <a
+                                                                    href="{{ object.ts.get_absolute_url }}">{{ object.ts.skill.name|title }}</a>
+                                                            </em></li>
+                                                            {% else %}
+
+                                                            <!--<li><em>Subject: <a
+                                                                    href="#">{{ object.skill_display }}</a>
+                                                            </em></li>-->
+                                                        {% endif %}
+                                                        {% endblock %}
+                                                        {% block extra_info %}
+                                                            <li>
+                                                                <time datetime="{{ object.created|date:'M. d, o' }}">
+                                                                    <em>{{ object.created|date:'M. d, o' }}</em></time>
+                                                            </li>
+                                                            {#                                                        <li><em>Students: {{ object.student_no }} </em></li>#}
+                                                            <li><em>Booking:#{{ object.order }}</em></li>
+                                                        {% endblock extra_info %}
+
+                                                    </ul>
+                                                </header>
+                                                <div class="order-gig-details">
+                                                    <div class="order-gig-detail">
+                                                        <div class="table-responsive">
+
+                                                            {% block booking_table_summary %}
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <td>Booking Summary</td>
+                                                                        <td class="amount">Amount</td>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td class="truncated">
+                                                                            &#x20a6;1500 x 2 stud<span
+                                                                                class="hidden-xs">ents</span>
+                                                                            x
+                                                                            4 h<span class="hidden-xs">ou</span>rs
+                                                                            <span class="label label-info hidden-xs">Discounted</span>
+                                                                        </td>
+                                                                        <td class="amount">&#x20a6;1500</td>
+                                                                    </tr>
+                                                                    <tr class="hidden">
+                                                                        <td class="truncated">
+                                                                            Booking Fee <span
+                                                                                class="fa fa-question-circle"
+                                                                                data-container="body"
+                                                                                data-toggle="popover"
+                                                                                data-placement="bottom"
+                                                                                data-content="This is used to process this booking."
+                                                                                ></span>
+                                                                        </td>
+                                                                        <td class="amount">&#x20a6;1500</td>
+                                                                    </tr>
+
+                                                                    <tr class="boldify">
+                                                                        <td class="truncated">
+                                                                            Total <span class="label label-info">Paid in full</span>
+                                                                        </td>
+                                                                        <td class="amount"> &#x20a6;7500</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            {% endblock %}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    {% endblock %}
+                                    {% block remaining_booking_content %}
+                                        <div id="booking-container" class="panel row-space-top-4">
+                                            {% if object.status != 4 %}
+                                                {% if object.status != 2 %}
+                                                    <div id="booking-status-section" class="panel-body">
+                                                        <div class="text-center">
+                                                            <i class="text-primary glyphicon glyphicon-send fa-2x"></i>
+                                                            <h4 class="text-primary font-head">BOOKING STARTED</h4>
+                                                            {% block booking_started_text %}
+                                                                <p class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+                                                                    Godwin has been notified about your booking and
+                                                                    would contact
+                                                                    you
+                                                                    shortly.
+                                                                    This booking is expected to commence on Friday, Jan
+                                                                    2 and end on
+                                                                    Monday August 2.</p>
+                                                            {% endblock %}
+                                                            <br>
+
+                                                            <div class="headers col-xs-12">
+                                                                <h5>Time left to Start lesson</h5>
+
+                                                                <div class="clock"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                                <hr/>
+
+                                            {% endif %}
+                                            <div id="booking-instruction-and-status" class="panel-body">
+                                                <div class="row message-to-tutor">
+                                                    <div class="col-xs-1">
+                                                        <div class="text-center">
+                                                            {% cloudinary object.user.profile_pic MINI_AVATAR alt="irrelevant" %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-9 col-xs-offset-1 margin-bottom-5 col-sm-10 col-sm-offset-0">
+                                                        {% block client_info_text %}
+                                                            <h4 class="blue-font font-head">Instructions
+                                                                for {{ object.ts.tutor.first_name|title }}</h4>
+                                                        {% endblock %}
+                                                        <div>{{ object.user.vicinity }}, {{ object.user.location_set.home_address.state }}</div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-11 col-sm-offset-1">
+                                                        <p id="the_message" class="col-xs-12 well bg-info">
+                                                            {% if object.message_to_tutor %}
+                                                                {{ object.message_to_tutor }}!
+                                                            {% else %}
+                                                                No extra message from client.
+                                                            {% endif %}
+
+                                                        </p></div>
+                                                </div>
+                                                <div id="tutor-section" class="col-xs-12 col-sm-offset-1 col-sm-11">
+                                                    {% block tutor_session_action %}
+                                                        <div class=" panel panel-default row">
+                                                            <div class="panel-heading clearfix">
+                                                                <div class="col-xs-4 col-sm-5 no-padding">SESSIONS</div>
+                                                                <div class="col-xs-4 col-sm-3 text-center-small">Time
+                                                                </div>
+                                                                <div class="col-xs-4 col-sm-2 text-center-small col-sm-offset-2">
+                                                                    action
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="panel-body list-of-sessions">
+                                                                <div class="panel-group" id="accordion" role="tablist"
+                                                                     aria-multiselectable="true">
+                                                                    {% include "bookings/includes/tutor-session-row.html" with index="one" %}
+                                                                    {% include "bookings/includes/tutor-session-row.html" with index="two" started="default" started_text="Not started" %}
+                                                                    {% include "bookings/includes/tutor-session-row.html" with index="two" started="success" started_text="Submitted" %}
+                                                                </div>
+                                                            </div>
+
+                                                            
+                                                        </div>
+                                                        {% endblock %}
+                                                       
+                                                </div>
+                                            </div>
+                                            {% if object.status == 2 %}
+                                                <div id="booking-completion-badge" class="panel-body">
+                                                    <div class="text-center col-sm-8 col-sm-offset-2 col-xs-12">
+                                                        <i class="fa fa-exclamation-triangle fa-2x text-warning"></i>
+                                                        <h4 class="text-warning font-head">BOOKING PLACED ON PENDING</h4>
+                                                    </div>
+                                                </div>
+
+                                            {% endif %}
+                                            {% if object.cleared %}
+                                                <div id="review-tutor-section" class="panel-body">
+                                                    <div class="">
+                                                        <div class="rate-message text-center col-sm-10 col-sm-offset-1 col-xs-12">
+                                                            {% block pre_review_text %}
+                                                            {% endblock %}
+                                                        </div>
+                                                    </div>
+                                                    {% block review_form %}
+                                                        {% if not object.reviewed and object.reviews_given.count > 0 %}
+                                                            <form id="review_form" action="." method="post" novalidate>
+                                                                {% csrf_token %}
+                                                                <div class="rate-form text-center col-xs-12">
+                                                                    {% block rating_for %}
+                                                                        <h3>Rate your class with Godwin</h3>
+                                                                    {% endblock %}
+
+                                                                    <div class="rate-tutor"></div>
+                                                                    <div id="hint"></div>
+                                                                    {{ form.rating|add_attributes:'type:hidden' }}
+                                                                </div>
+                                                                <div class="row-space-top-4 comment-form text-center col-sm-8 col-sm-offset-2 col-xs-12 hide">
+                                                                    {% block post_review_text %}
+                                                                        <h3 class="row-space-2">How do you feel about
+                                                                            your
+                                                                            class</h3>
+
+                                                                        <p>{{ object.user.first_name|title }} will also
+                                                                            give his
+                                                                            feedback on you</p>
+
+                                                                    {% endblock %}
+                                                                    <div class="form-group">
+                                                                        {{ form.review|add_attributes:'class:form-control,required:true,data-parsley-no_link:,data-parsley-no_email:,data-parsley-trigger:keyup,placeholder:Explain how you feel about the lessons' }}
+                                                                    </div>
+                                                                    {% block submit_section %}
+
+                                                                        <button class="btn btn-primary btn-block btn-lg">
+                                                                            Submit
+                                                                            Booking
+                                                                        </button>
+                                                                    {% endblock %}
+                                                                </div>
+                                                            </form>
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                </div>
+                                            {% endif %}
+                                            <div class="hh">
+                                                {% block review_section %}
+                                                    {% if object.reviewed %}
+                                                        <div id="reviews-section" class="panel-body">
+                                                            {% for review in object.reviews_given.all %}
+                                                                <div id="tutor-review" class="media">
+                                                                    <div class="media-left">
+                                                                        {% cloudinary review.commenter.profile_pic MINI_AVATAR alt="irrelevant" %}
+                                                                    </div>
+                                                                    <div class="media-body">
+                                                                        <h4 class="media-heading">{{ review.commenter.first_name }}
+                                                                        <span class="rating">
+                                                                           {% if request.is_featured %}
+                                                                               {% for score in review.score_array %}
+                                                                                   <span>★</span>{% endfor %}
+                                                                           {% else %}
+                                                                               {% for score in review.score_array %}
+                                                                                   <i class="glyphicon glyphicon-star"></i>
+                                                                               {% endfor %}
+                                                                           {% endif %}
+                                                                        </span>
+                                                                        </h4>
+
+                                                                        <p>{{ review.review }}</p>
+                                                                    </div>
+                                                                </div>
+                                                                {% if not forloop.last %}
+                                                                    <hr/>{% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endblock %}
+                                                {% if object.status == 3 %}
+                                                    <div id="booking-completion-badge" class="panel-body">
+                                                        <div class="text-center col-sm-8 col-sm-offset-2 col-xs-12">
+                                                            <i class="fa fa-book fa-2x text-primary"></i>
+                                                            <h4 class="text-primary font-head">BOOKING COMPLETED</h4>
+
+                                                            <p>Thank you so much for using Tuteria!</p>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {% if object.status == 4 %}
+                                                    <div id="booking-completion-badge" class="panel-body">
+                                                        <div class="text-center col-sm-8 col-sm-offset-2 col-xs-12">
+                                                            <i class="fa fa-remove fa-2x text-danger"></i>
+                                                            <h4 class="text-danger font-head">BOOKING CANCELLED</h4>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endblock remaining_booking_content %}
+
+                                </section>
+                            </div>
+                            {% block tab_content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="sidebar2 panel">
+                        {% block side_content %}
+
+                            <div class="panel-body text-center">
+                                <p class="">
+                                    <img src="{% static "img/cards/gfg.png" %}" alt=""/>
+
+                                </p>
+
+                                <h4 class="media-heading">Good Fit Guarantee</h4>
+
+                                <p>Your booking is protected by our Good Fit Guarantee. If you're not satisfied with the
+                                    lessons, we'll help you find another tutor or refund any unused payments.</p>
+                                <hr class="hr-styled">
+                                <div class="row-space-2">
+
+                                    <h4 style="text-align: left">If you need help:</h4>
+
+                                    <p style="text-align: left"> Call us on {{ tuteria_details.phone_number }} or email
+                                        <a href="mailto:info@tuteria.com">{{ tuteria_details.email }}</a></p>
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="standards" class="panel-body col-xs-12">
+                {% block standards %}
+                    <div class="text-center row-space-4">
+                        <h4><i class="fa fa-exclamation-circle"></i> TUTORING STANDARDS</h4>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim,
+                            nobis.</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12 row-space-4 text-center">
+
+                            <h5><strong><i class="fa fa-cloud"></i>PERSONAILITY</strong>
+                            </h5>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
+                                molestiae.</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 row-space-4 text-center">
+                            <h5><strong><i class="fa fa-cloud"></i>PERSONAILITY</strong>
+                            </h5>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
+                                molestiae.</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 row-space-4 text-center">
+                            <h5><strong><i class="fa fa-cloud"></i>PERSONAILITY</strong>
+                            </h5>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
+                                molestiae.</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 row-space-4 text-center">
+                            <h5><strong><i class="fa fa-cloud"></i>PERSONAILITY</strong>
+                            </h5>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
+                                molestiae.</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 row-space-4 text-center">
+                            <h5><strong><i class="fa fa-cloud"></i>PERSONAILITY</strong>
+                            </h5>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
+                                molestiae.</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 row-space-4 text-center ">
+                            <h5><strong><i class="fa fa-cloud"></i>PERSONAILITY</strong>
+                            </h5>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et,
+                                molestiae.</p>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+            <hr/>
+
+        </div>
+    </div>
+{% endblock %}
+{% block request_section %}
+    {% include 'includes/request_section2.html' %}
+{% endblock request_section %}
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        //YYYY-MM-DD hh:mmA
+        window.startDate = "{{ object.first_session|date:'Y-m-j h:iA' }}"
+    </script>
+{% endblock %}
+{% block footer2 %} {% endblock %}

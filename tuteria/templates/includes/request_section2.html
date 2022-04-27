@@ -1,0 +1,84 @@
+{% load staticfiles i18n bootstrap3 add_attr activelink humanize distance_estimate %}
+<!--<div id="launch_sec"
+     class="row padding-top-50 space-for-mobile-20 space-bottom-mob-20 text-center">
+    <div id="prelaunch_section">
+        <h3>Invite friends to use Tuteria</h3>
+        <br>
+
+        <div>
+            <a class="btn-lg btn btn-primary row-space-2 toggle_invite_section"
+               data-toggle="collapse" href="#invite_counter_section" aria-expanded="false"
+               aria-controls="invite_counter_section">
+                Tell friends!
+                {% if request.is_featured %}{% else %}&nbsp;
+                    <i class="fa fa-chevron-circle-right"></i>
+                {% endif %}
+            </a>
+
+            <div class="invite-button">
+                <div class="invite-icon"></div>
+                <div style="display: inline-block">
+                    <div class="invite-text">invites sent</div>
+                    <div class="invitation-sent">
+                        {{ total_invites.count|intcomma }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <div id="invite_counter_section" class="collapse fade">
+        <h3>Be the one to spread the good news!</h3>
+        <br>
+
+        <div>
+            <a id="facebook-share"
+               href="https://www.facebook.com/sharer/sharer.php?u={{ site.domain|urlencode }}"
+               class="btn-lg btn btn-primary share-popup">
+                Facebook
+                &nbsp; <span
+                    class="counter-btn-color">{{ facebook_counter.count|tintword }}</span>
+            </a>
+            <a id="twitter-share"
+               href="https://twitter.com/home?status=Come%20check%20out%20http://www.tuteria.com%20Earn%20money%20teaching%20people%20what%20you%20love%20%26%20find%20great%20tutors%20near%20you%20for%20whatever%20you%20wish%20to%20learn!"
+               class="btn-lg btn btn-primary share-popup">
+                Twitter
+                &nbsp; <span
+                    class="counter-btn-color">{{ twitter_counter.count|tintword }}</span>
+            </a>
+            <a id="google-share"
+               href="https://plus.google.com/share?url={{ site.domain|urlencode }}"
+               class="btn-lg btn btn-primary share-popup">
+                Google+
+                &nbsp; <span
+                    class="counter-btn-color">{{ google_counter.count|tintword }}</span>
+            </a>
+        </div>
+        <br>
+    </div>
+</div>-->
+<section class="row protection large-padding">
+        <div class="page-container-full">
+            <div class="row">
+                <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+                    <div class="media-photo padding-bottom-15">
+                        <img width="70" height="70"
+                        src="{% static "img/gallery/gift1.png" %}">
+                    </div>
+                    <h2>
+                        <span class="font-head">
+                          Earn Extra Money
+                      </span>
+                  </h2>
+                  <p class="padding-top-10">Get 10% for 3 months for every client you refer to Tuteria</p>
+
+                <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+                    <a href="{% url 'request_meeting_redirect' %}" class="btn btn-danger btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+                        Invite friends
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

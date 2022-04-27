@@ -1,0 +1,255 @@
+{% extends "pages/search.html" %}
+{% load staticfiles bootstrap_pagination cache %}
+{% block css %}
+{{block.super}}
+<link rel="stylesheet" href="{% static "css/skill-search.css" %}">
+{% endblock css %}
+{% block title %}Find Expert Tutors & Instructors&reg; | Tuteria Nigeria{% endblock title %}
+{% block nav %}
+        {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder tutor_registration_view=False display_help=True %}
+{% endblock nav %}
+
+{% block content %}
+<section id="challenges-explore">
+
+
+	<div id="main">
+		<div class="container">
+
+
+			<section class="container">
+				<div class="row">
+
+					<div class="col-md-12 col-sm-12">
+						<h2 id="title"></h2>
+
+						<nav class="navbar-mobile hidden-md hidden-lg">
+				<!--<div class="select">
+					<label>Stage</label>
+					<div class="control">
+						<select class="form-control" id="mobile-select-stage">
+							<option value="all">All Challenges</option>
+							<option value="funding">Needs Funding</option>
+							<option value="enter">Enter the Challenge</option>
+							<option value="won">Won</option>
+							<option value="coming-soon">Coming soon</option>
+						</select>
+					</div>
+				</div>-->
+				<div class="select">
+					<label>Categories</label>
+					<div class="control">
+						<select class="form-control" onchange="openUrl2(this.value)" id="mobile-select-category">
+							<option value="all">All Categories</option>
+							{% for ff in categories %}
+							<option value="{{ff.name}}">{{ff.name}}</option>	
+							{% endfor %}					
+							
+						</select>
+					</div>
+				</div>
+			</nav>
+
+			<div class="nav mobile-create-btn hidden-md hidden-lg">
+				
+				<!--<button class="btn btn-primary invite-create-challenge">
+					<div>NOMINATE A FRIEND</div>
+					<div>to create a challenge</div>
+				</button>-->
+			</div>
+		</div>
+
+
+
+		<div class="col-md-3 col-sm-12 sidebarbb hidden-xs hidden-sm padding-top-25">
+			
+			<div class="nav">
+				
+				<!--<button class="btn btn-primary invite-create-challenge">
+					<div>NOMINATE A FRIEND</div>
+					<div>to create a challenge</div>
+				</button>-->
+			</div>
+
+			<div class="list-group" id="navCategory">
+				<span class="list-group-item list-group-heading">SEARCH BY CATEGORY</span>
+				{% for ff in categories %}
+
+				<a data-category="{{ff.slug}}" href="{% url 'skill_search' %}?category={{ff.name}}" class="list-group-item ">{{ff.name}}</a>
+				{% endfor %}	
+			</div>
+			
+		</div>
+		<div class="col-lg-9 col-md-9 col-sm-12 main-content padding-top-25">
+			<nav class="navbar navbar-default navbar-filter-container hidden-xs hidden-sm">
+				<div class="container-fluid">
+
+					<ul class="nav navbar-nav list-stages" id="navStage">
+						<li class="active" style="padding-left:15px">
+							<a data-stage="all">
+								Active Subjects</a>
+							</li>
+						<!--<li class="">
+							<a data-stage="funding" href="/explore/funding">
+							Needs Funding </a>
+						</li>
+						<li class="">
+							<a data-stage="enter" href="/explore/enter">
+							Enter the Challenge </a>
+						</li>
+						<li class="">
+							<a data-stage="won" href="/explore/won">
+							Won </a>
+						</li>
+						<li class="">
+							<a data-stage="coming-soon" href="/explore/coming-soon">
+							Coming soon </a>
+						</li>-->
+					</ul>
+
+					<!--<div id="navSortBy" class="nav navbar-nav navbar-right nav-sort-by">
+						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">Sort by <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">Sort by <b class="caret-up"></b></li>
+								
+									<li class="active"><a href="?sort=relevance&amp;search=education">
+										Relevance
+									</a></li>
+								
+								<li class=""><a href="?sort=popularity&amp;search=education">
+									Popularity
+								</a></li>
+								<li class=""><a href="?sort=newest&amp;search=education">
+									Newest
+								</a></li>
+							</ul>
+						</li>
+					</div>-->
+
+				</div><!-- /.container-fluid -->
+			</nav>
+			
+
+			{% if search_query %}
+				<div class="search-results">Search results for "{{search_query}}"</div>				
+			{% endif %}
+			{% if category_query and not search_query %}				
+				<div class="search-results">Search results for subjects in "{{category_query}}" category</div>				
+			{% endif %}
+			
+
+			<section class="challenges">
+				<div class="row">
+					{% if paginator.count > 0 %}
+										{% for skill_detail in tutors %}
+						<div class="challenge col-xs-12 col-sm-4 col-md-4" data-unique="challenge-6">
+						<div class="challenge-holder">
+							<a href=" {% url 'skill_only_view' skill_detail.slug %}" class="challenge-wrap">
+								<div class="embed-responsive embed-responsive-16by9">
+									<img class="embed-responsive-item" src="{{ STATIC_URL }}img/subject_images/search/{{skill_detail.get_background_image}}">
+								</div>
+								<div class="caption clearfix">
+									<div class="caption-title font-head">
+										{{skill_detail.name}}
+
+									</div>
+									<div class="caption-body is-truncated" style="height: 71px; word-wrap: break-word;">
+										{% if namoo %}
+										<span class="font-head" style="display: inline;">140 lessons taught</span>  <br style="display: inline;">  	
+										{% endif %}										
+
+										{{skill_detail.get_caption}}</div>
+									</div>
+
+									<!--<div class="challenge-metrics clearfix">	
+										<div class="status clearfix">
+											<div class="card-label">
+												Tutoring:
+											</div>-->
+
+					<!--<span class="fa-stack fa-sm">
+						<i class="fa fa-circle fa-stack-2x text-primary"></i>
+						<i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
+					</span>-->
+
+					<!--Offline
+				</div>
+
+				<div class="cash">
+					<div class="prize">
+						<div class="card-label">
+							Price:
+						</div>
+						<span class="amount">From &#x20A6;{{skill_detail.price | floatformat:0}}/hr</span>
+					</div>
+				</div>
+
+			</div>-->
+		</a>
+
+
+	</div>
+</div>
+
+
+					{% endfor %}
+
+					<div class="col-sm-12">
+    <div class="pagination-container pull-left margin-top-15">
+        <div class="results_count">
+            <p>
+                {{ tutors.start_index }} – {{ tutors.end_index }}
+                of {{ paginator.count }} Skills
+            </p>
+        </div>
+        <nav class="pagination-margin">
+            {% bootstrap_paginate tutors range=5 show_prev_next="false" show_first_last="true" %}
+        </nav>
+    </div>
+</div>
+					{% else %}			
+					 <div id="no-result" class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-9 col-md-9 col-xs-12">
+                                <h2>No Results, Place Request</h2>
+
+                                <p>Don't worry if your search comes out empty. Please click the button below to request a tutor and tell us about your needs. We'll help you find qualified tutors in your area in no time.</p>
+                                <br/>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+
+                                        <div class="center-block">
+                                            <a class="btn btn-primary btn-lg btn-block"
+                                               href="{% url 'how_it_works' %}">
+                                                Request a Tutor &rarr;
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-md-3 col-xs-12 hidden-xs">
+                                <img class="pull-right " src="{% static "img/gallery/request.png" %}">
+                            </div>
+                        </div>
+
+                    </div>		
+					{% endif %}
+	
+					
+					</section>
+					
+
+				</div>
+			</div>
+		</section>
+
+
+	</div>
+</div>
+
+
+</section>
+{% endblock %}

@@ -1,0 +1,639 @@
+{% extends "pages/how-it-works.html" %}
+{% load staticfiles %}
+
+{% block meta_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Hire experienced home tutors at affordable rates."/>
+    <meta name="author" content="Tuteria Ltd."/>
+    <!-- for Facebook -->
+    <meta property="fb:app_id" content="781136408623359"/>
+    <meta property="og:site_name" content="Tuteria"/>
+    <meta property="og:title" content="Get the Best Home Tutors in {{ region }}® | Tuteria NG"/>
+    <meta property="og:description" content="Hire experienced home tutors at affordable rates"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://{{ site.domain }}{% static "img/backgrounds/howitwork.jpg" %}?t=12345?"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@tuteriacorp"/>
+    <meta name="twitter:title" content="Get the Best Home Tutors in {{ region }}® | Tuteria NG"/>
+    <meta name="twitter:description" content="Hire experienced home tutors at affordable rates"/>
+    <meta name="twitter:image" content="https://{{ site.domain }}{% static "img/backgrounds/howitwork.jpg" %}?t=12345?"/>
+    <meta name="twitter:creator" content="@tuteriacorp">
+{% endblock meta_tags %}
+
+{% block title %}Get the best home tutors in {{ region }}® | Tuteria NG{% endblock title %}
+{% block css %}
+    {{ block.super }}
+    {#    <link rel="stylesheet" href="{% static "css/main.css" %}">#}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/carousel-css.css' %}"/>
+    <style>
+
+        @media (min-width: 1020px) and (max-width: 1240px){
+            .content-carousel h2 {
+                font-size: 50px;
+            }
+        }
+         @media (min-width: 1020px) and (max-width: 1240px){
+            .content-carousel p {
+                font-size: 20px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 990px){
+            .content-carousel h2 {
+                font-size: 55px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .media-object {
+                position: relative !important;
+            }
+        }
+        .icon-pos {
+            width: 150px;
+            position: absolute;
+            top: 390px;
+            left: 390px;
+        }
+
+        @media (max-width: 1050px) and (min-width: 1020px) {
+            .icon-pos {
+                top: 410px;
+                left: 300px;
+            }
+        }
+
+        @media (max-width: 1450px) and (min-width: 1400px) {
+            .icon-pos {
+                top: 390px;
+                left: 465px;
+            }
+        }
+
+        @media (min-width: 2400px) {
+            .icon-pos {
+                top: 390px;
+                left: 1015px;
+            }
+        }
+        @media (max-width: 768px){
+            .mobile-top-spacing{
+                margin-top: 60px;
+            }
+        }
+        .img-resizer{
+            width: 10%;
+        }
+        @media(max-width: 768px){
+            .img-resizer{
+                width: 20%;
+            }
+        }
+        .padding-top-70{
+            padding-top: 70px;
+        }
+        @media(min-width: 768px){
+            .left-pull{
+                float: left !important;
+            }
+        }
+    </style>
+{% endblock %}
+{% block sub_nav %}{% endblock sub_nav %}
+{% block nav %}
+        {% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block carousel_content %}
+    <div class="row">
+        <div class="col-sm-8 col-md-5 up-margin">
+            <div class="panel bg-babu">
+                <div class="jumbo-header"><h2 id="header_title" class="font-head"><b>Put your kids ahead of their peers</b></h2>
+
+                <p class="font-18">Get quality help from vetted home tutors in {{region}} who are well-experienced with kids like yours.</p>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-12 padding-top-25 mobile-top-25">
+                 {% if not request.is_featured %}
+                    <a href="javascript:void(0)" class="scrollable-link btn btn-danger btn-lg col-xs-12">
+                        Get a home tutor
+                    </a>
+                {% else %}
+                    <a href="#book" class="scrollable-link btn btn-danger btn-lg col-xs-12">
+                        Get a home tutor
+                    </a>
+                {% endif %}
+                </div>
+            </div>
+            </div>            
+            </div>
+        </div>
+        <!--<img src="{% static "img/backgrounds/inspire.png" %}" class="icon-pos hidden-xs"/>-->
+    </div>
+{% endblock carousel_content %}
+{% block press %}
+{% endblock press %}
+{% block safety %}
+<section id="firstss" class="padding-bottom-50 padding-top-25 padding-top-mob-0 row">
+    <div class="container mobile-top-25 no-padding-total padding-bottom-50">
+    <div class="row padding-bottom-50">
+        <div id="how-it-works" class="col-sm-8 col-md-8 col-md-offset-2 col-sm-offset-2 padding-top-50 padding-bottom-25 wrapper-full clearfix text-center">
+            <h2 class="font-head">
+                <b>Join 1000s of families using Tuteria</b>
+            </h2>
+        </div>
+        <div class="icon-box-6">            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+             <div class="icon-box-6-item text-center">                    
+                     <i class="pro-img"></i>
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>1. High Quality Tutors</b>
+                      {% else %}
+                      1. High Quality Tutors
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Our home tutors are experienced, friendly, manually screened, and thoroughly vetted.
+                    </span>
+                </div>                
+            </div>            
+            <div class=" col-sm-4 col-md-4 row-space-4">
+                <div class="icon-box-6-item text-center">     
+                    <i class="budget-img"></i>               
+                        <h3 class="text-center">
+                          {% if request.is_featured %}
+                          <b>2. Safe and Trusted</b>
+                          {% else %}
+                          2. Safe and Trusted
+                          {% endif %}
+                          <br></h3>
+                        <span class="inline-block">Trusted by 100s of happy clients for their kids' tutoring needs with more than 90% success rate.        
+                        </span>
+                </div>               
+            </div>
+            
+            <div class=" col-sm-4 col-md-4 row-space-4">                
+                <div class="icon-box-6-item text-center">  
+                <i class="learn-img"></i>                  
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>3. Learning at Kid's Pace</b>
+                      {% else %}
+                      3. Learning at Kid's Pace
+                      {% endif %}
+                      <br></h3>
+                    <span class="inline-block">Classroom teaching can leave your kids behind. We help them learn, understand & stay ahead.
+                    </span>
+                </div>
+            </div> 
+            <div class="padding-top-50 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                <div class="media ">
+                            <div class="media-photo media-round pull-left text-center">
+                                <img height="80" class="img-circle"
+                                     src="{% static "img/user/alice.jpg" %}" width="80">
+                            </div>
+                            <div class="media-body">
+                                <div class="panel panel-quote panel-light">
+                                    <div class="panel-body">
+                                        <p>The lessons have been very productive. My son's grades have really improved, and even his school teachers comment on his new confidence. He now answers questions in class, and scores higher than most of his class mates. His tutor keeps to time & they bonded well together. I've already recommended Tuteria to some friends.
+                                        </p>
+
+                                        <p class="text-muted">
+                                            <span class="person pull-left">Alice Onuoha (Mrs.)</span>
+                                            <span class="location pull-right">2 Months Lessons</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media ">
+                            <div class="media-photo media-round pull-left text-center">
+                                <img height="80" class="img-circle"
+                                     src="{% static "img/user/helen.jpg" %}" width="80">
+                            </div>
+                            <div class="media-body">
+                                <div class="panel panel-quote panel-light">
+                                    <div class="panel-body">
+                                        <p>I was searching for a Maths teacher for my son to prepare for his NECO exams in three weeks, and hired one from Tuteria. He was really good, he took the time to explain topics perfectly. Today my son has passed his exams and gained admission into Federal Science and Technology College. I am happy about my son's performance and the service rendered.
+                                        </p>
+
+                                        <p class="text-muted">
+                                            <span class="person pull-left">Helen Offiong (Mrs.)</span>
+                                            <span class="location pull-right">3 Weeks Lessons</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media ">
+                            <div class="media-photo media-round pull-left text-center">
+                                <img height="80" class="img-circle"
+                                     src="{% static "img/user/rosemary.jpg" %}" width="80">
+                            </div>
+                            <div class="media-body">
+                                <div class="panel panel-quote panel-light">
+                                    <div class="panel-body">
+                                        <p>Besidone takes her time to explain to my kids, she builds in them the confidence they need to be able to understand each topic she teaches. She uses teaching aids to make the subject easier for them to learn and understand especially numbers. She keeps to time. I will recommend this tutor to clients for the above reasons and because my kids are gradually improving in the subjects she is taking them, especially the numbers.
+                                        </p>
+
+                                        <p class="text-muted">
+                                            <span class="person pull-left">Rosemary Ajato (Mrs.)</span>
+                                            <span class="location pull-right">6 Months Lessons</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>           
+        </div>
+    </div>
+        
+        </div>
+</section>
+<section id="one-on-one-fourth" class="padding-top-25 padding-bottom-50 tutor-bg row blue-bg">
+        <div class="container side_by_side padding-bottom-50">
+            <div class="row">
+              <div class="padding-top-50 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                    <div id="book" class="space-for-mobile" style="margin-top: -200px">
+                    <div class="panel col-sm-12 padding-bottom-25">
+                    
+                    <div class="row">
+                    <img src="{% static "img/gallery/arrow.png" %}" class="arrow-pos hidden-xs"/>            
+                        <div class="panel-head col-sm-12 padding-bottom-25">
+                            <div class="package row">
+                                <div class="headtext font-head">                                    
+                                Fill this form
+                                </div>
+                                <div class="subtext">                                    
+                                To be filled by parents only
+                                </div>                                
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="form-padding">                        
+                        {% include "includes/request_form1.html" with parent_form=True %} 
+                    </div>              
+                    </div>
+                    <!--<div class="padding-top-25">
+                        <div class="fb-like" data-href="https://www.facebook.com/tuteriacorp" data-layout="standard"
+                             data-width="300px" data-action="recommend" data-show-faces="false" data-share="false" allowtransparency="true" frameborder="0" scrolling="no"></div>
+                </div>-->
+            </div>
+              </div>
+         
+       </div>
+    </div>
+</section>
+<section id="one-on-one-fourth" class="padding-top-50 padding-bottom-50 row white-bg">
+        <div class="container side_by_side">
+            <div class="row">
+                <div class="col-sm-12 icon-content space-for-mobile">
+                    <h1 class="">
+                    {% if not request.is_featured %}How do I get a home tutor in {{ region }} for my kids?{% else %}<b>How do I get a home tutor in {{ region }} for my kids?</b>{% endif %}          
+                    </h1>
+                </div>
+            
+                <div class="col-sm-12">
+                    <div class="row">
+                    <div class="col-sm-7 col-md-6 padding-top-25">
+                        <div class="item-box">
+                            <div class="item-bullet">{% if not request.is_featured %}1.{% else %}<b>1.</b>{% endif %}</div>
+                            <div class="item-wrapper">
+                                <div class="item-head">
+                                {% if not request.is_featured %}Request a Tutor{% else %}<b>Request a Tutor</b>{% endif %}
+                                </div>
+                                <div class="item-body"><a href="javascript:void(0)" class="scrollable-link">Please fill the short form above</a> and tell us about your needs. Our Tuition Manager will work together with you to get deeper insights into your kid, know what subjects need help and then create a personalized lesson plan just for your child, in line with the school's or exam's curriculum to ensure we can reach your goals and produce amazing results.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-1 col-md-5 col-md-offset-1 space-for-mobile">
+                        <img height="160" class="img-circle center-block move-img-down hidden-xs" src="{% static "img/infographics/1.png" %}" width="160" style="position:relative"/>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                <div class="row">
+                <hr>
+                    <div class="col-sm-4 col-md-5 padding-top-25">
+                        <img height="160" class="img-circle center-block hidden-xs" src="{% static "img/infographics/2.png" %}" width="160" style="position:relative"/>                   
+                    </div>
+                    <div class="col-sm-7 col-sm-offset-1 col-md-6 col-md-offset-1 space-for-mobile">
+                        <div class="item-box">
+                            <div class="item-bullet">{% if not request.is_featured %}2.{% else %}<b>2.</b>{% endif %}</div>
+                            <div class="item-wrapper">
+                                <div class="item-head">
+                                 {% if not request.is_featured %}We get the most qualified home tutor{% else %}<b>We get the most qualified home tutor</b>{% endif %}                                
+                                </div>
+                                <div class="item-body">Once we receive your request, we search our database of verified home tutors in {{ region }} for the one who is most qualified, lives near you and can give you exactly what you need. This will be someone who has proven years of experience and a track record of helping kids like yours. Our home tutors in {{ region }} are mentors who understand how to motivate and inspire kids, turning fear into confidence, C’s into A’s, and strugglers into high achievers.</div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                <div class="row">
+                    <hr>
+                    <div class="col-sm-7 col-md-6 padding-top-25">
+                        <div class="item-box">
+                            <div class="item-bullet">{% if not request.is_featured %}3.{% else %}<b>3.</b>{% endif %}</div>
+                            <div class="item-wrapper">
+                                <div class="item-head">{% if not request.is_featured %}Watch your kids improve tremendously!{% else %}<b>Watch your kids improve tremendously!</b>{% endif %}</div>
+                                <div class="item-body">We know you want the best for your kids in school and life, and choosing Tuteria is about giving them an edge above their peers. We go beyond just setting up lessons to closely monitoring and managing the tutoring, so that every time of lesson spent with your child can be duely accounted for even in your absense. 95% of children perform better with a home tutor, so don't delay on your child's success.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-1 col-md-5 col-md-offset-1 space-for-mobile">
+                        <img height="160" class="img-circle center-block move-img-down hidden-xs" src="{% static "img/infographics/3.png" %}" width="160" style="position:relative"/>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+               <div class="text-center padding-bottom-50 padding-top-50">
+                <div class="col-sm-4 col-sm-offset-4">                    
+                    {% if not request.is_featured %}
+                    <a href="javascript:void(0)" class="scrollable-link btn btn-primary btn-lg col-xs-12 big-btn">
+                        Get a home tutor
+                    </a>
+                {% else %}
+                    <a href="#book" class="scrollable-link btn btn-primary btn-lg col-xs-12 big-btn">
+                        Get a home tutor
+                    </a>
+                {% endif %}
+                </div>
+                <img src="{% static "img/gallery/booster.png" %}" class="padding-top-25">
+            </div>
+        </div>
+    </section>
+{% endblock safety %}
+{% block howitworks %}{% endblock howitworks %}
+{% block testimonials %}
+    <!--<section id="one-on-one-fourth" class="padding-top-50 padding-bottom-50 row blue-bg">
+        <div class="container side_by_side">
+        <div class="row">           
+            <div class="col-sm-7 col-md-8 icon-content row-space-4">
+            <img src="http://www.iconsplace.com/icons/preview/white/two-hearts-256.png" class="center-block subject-icon-size"/>
+                <h1 class="text-center" style="padding-top: 20px">
+                    {% if request.is_featured %}<b>Trusted by 100s of Happy Parents</b>
+                    {% else %}Trusted by 100s of Happy Parents{% endif %}</h1>
+                        <p class="tweak padding-bottom-25">
+                            Tuteria is a leading provider of quality home tutoring services in {{ region }}. Whether you need help to prepare for exams, learn a skill, get homework done or build confidence in weak areas, we have your back.
+                        </p>
+
+                        <hr class="hr-styled">
+                            <div class="media">
+                                <div class="media-photo media-round left-pull text-center">
+                                    <img class="img-circle testimonial-face-size" src="{% static "img/user/helen.jpg" %}" style="position:relative"/>
+                                      <p class="visible-xs text-center" style="padding-top: 5px">Mrs. Helen</p>
+                                </div>
+                                <div class="media-body">
+                                    <div class="">
+                                        <div class="panel-body">
+                                            <p><em>I was searching for a Maths teacher for my son to prepare for his NECO exams in three weeks, and hired from Tuteria. My son's tutor was really good, he took the time to explain every topic perfectly. Today, my son has passed his exams and gained admission into Federal Science and Technology College. I'm happy about my son's performance and the service rendered.</em>
+                                            </p>
+                                            <p class="hidden-xs" style="padding-top: 2px">Mrs. Helen</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <hr class="hr-styled" style="margin-top:0">
+
+                        <p class="tweak blue-font padding-top-25" style="text-align: left">What is included in the lessons?</p>
+
+                        <div class="row col-sm-12 makefont-15">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <ul class="list-mobile list-unstyled list-with-icons no-margin-bottom">
+                                        <li class="">
+                                             {% if not request.is_featured %}<i class="fa fa-check check-size blue-font"></i>{% else %}1.{% endif %}
+                                            &nbsp;
+                                            High quality tutors only
+                                        </li>
+                                        <li class="">
+                                             {% if not request.is_featured %}<i class="fa fa-check check-size blue-font"></i>{% else %}2.{% endif %}
+                                            &nbsp;
+                                            Detailed lesson plans
+                                        </li>
+                                        <li class="">
+                                             {% if not request.is_featured %}<i class="fa fa-check check-size blue-font"></i>{% else %}3.{% endif %}
+                                            &nbsp;
+                                            Safety & security
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-5 col-sm-offset-2">
+                                    <ul class="list-mobile list-unstyled list-with-icons no-margin-bottom">
+                                        <li class="">
+                                             {% if not request.is_featured %}<i class="fa fa-check check-size blue-font"></i>{% else %}4.{% endif %}
+                                            &nbsp;
+                                            Affordable pricing
+                                        </li>
+                                        <li class="">
+                                             {% if not request.is_featured %}<i class="fa fa-check check-size blue-font"></i>{% else %}5.{% endif %}
+                                            &nbsp;
+                                            100% satisfaction
+                                        </li>
+                                        <li class="">
+                                             {% if not request.is_featured %}<i class="fa fa-check check-size blue-font"></i>{% else %}6.{% endif %}
+                                            &nbsp;
+                                            Refund policy
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>                            
+                        </div>        
+            </div>
+            <div id="book" class="col-sm-5 col-md-4 space-for-mobile">
+            <div class="panel col-sm-12">
+            <div class="row">
+            <img src="{% static "img/backgrounds/arrow.png" %}" class="arrow-pos"/>                
+                <div class="panel-head col-sm-12">
+                    <h3 class="text-center">
+                        {% if request.is_featured %}<b>Get a Tutor</b>
+                        {% else %}Get a Tutor{% endif %}</h3>
+                </div> 
+            </div>                              
+            {# {% include "includes/request_form1.html" with parent_form=True %}                   #}
+            </div>
+            <div class="padding-top-25">
+                <div class="fb-like" data-href="https://www.facebook.com/tuteriacorp" data-layout="standard"
+                     data-width="300px" data-action="recommend" data-show-faces="false" data-share="false" allowtransparency="true" frameborder="0" scrolling="no"></div>
+        </div>
+            </div>
+        </div>
+        </div>
+</section>-->
+{% endblock testimonials %}
+{% block more_info %}
+<section class="row white-bg">
+        <div class="container side_by_side">
+        <hr style="margin:0">
+        
+            {% include "includes/achievments.html" with clickable=True %}
+        <hr class="hr-styled "style="margin:0">
+        </div>
+    </section>
+{% endblock more_info %}
+{% block quality %}
+<section id="one-on-one-fourth" class="padding-top-25 padding-bottom-50 row white-bg">
+        <div class="container side_by_side">
+            <div class="row">           
+                <div class="col-sm-12 icon-content space-for-mobile-20">
+                    <h2 class="padding-bottom-20">
+                        {% if request.is_featured %}<b>Questions our clients asked</b>
+                        {% else %}Questions our clients asked{% endif %}
+                    </h2>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">
+                                    {% if not request.is_featured %}Where will the lessons hold?{% else %}<b>Where will the lessons hold?</b>{% endif %}</div>
+                                    <div class="answer-value">Most parents prefer lessons in the comfort of their homes but you can chose any venue that works best for you. All lessons are delivered in-person by our verified home tutors in {{ region }} and you can choose your preferred tutor.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How much does it cost?{% else %}<b>How much does it cost?</b>{% endif %}</div>
+                                    <div class="answer-value">Lesson cost will depend on your area, length of lessons and the number of students. You can book lessons for a few weeks or for several months. You'll also enjoy discounts for more than one child, and addition discounts when you pay ahead! We cover from pre-school to adult levels. 
+                                    <br><br>
+                                    <em>Please note that we require a one-time fee of &#x20A6;{{tuteria_details.processing_fee}} in order to process your request. If we can't find a tutor, we'll fully refund your payment.</em></div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How do I pay for my lessons?{% else %}<b>How do I pay for my lessons?</b>{% endif %}</div>
+                                    <div class="answer-value">You can pay securely online or via bank transfer. Our online payments are secured by PayStack & Access Bank. Apart from the service fee, you only pay for lesson when we have found your perfect home tutor and you're ready to begin. We closely monitor lesson delivery and support you in any emergencies.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How do you ensure quality and safety?{% else %}<b>How do you ensure quality and safety?</b>{% endif %}</div>
+                                    <div class="answer-value">Our home tutors in {{ region}} have undergone various screening phases including offline and online identity verification, and subject competency tests. Only the top performers were interviewed and the very bests were hand-picked. We also facilitate criminal background checks on behalf of clients, and request up to two reputable guarantors for each tutor.</div>
+                                    <br>
+                                    <div class="answer-value">Beyond that, clients also rate tutors' performance and tutors whose overall rating falls below 70% are not allowed to continue. So your tutor will either be newly approved or have been rated above 70% by previous clients.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}Is there a Refund Policy or Guarantee?{% else %}<b>Is there a Refund Policy or Guarantee?</b>{% endif %}</div>
+                                    <div class="answer-value">Yes there is. If you're not fully satisfied with the lessons, we will replace the tutor at no cost to you or refund your balance. We keep our words.</div>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="question-bullet">Q:</div>
+                                <div class="faq-question">
+                                    <div class="question-value">{% if not request.is_featured %}How quickly can I get a tutor in my area?{% else %}<b>How quickly can I get a tutor in my area?</b>{% endif %}</div>
+                                    <div class="answer-value">We have hundreds of approved home tutors in {{ region }}, so you can get one by tomorrow. If we don't yet have one near you, it may take up to 2 weeks for us to find one that meets our standards. Just place a request using the form above and we'll take it up from there.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock quality %}
+{% block learn %}
+    <!--<section id="testimonialz" class="row testimonials-one padding-top-25 padding-top-mob-0 row-space-bottom-5 row">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 row-space-top-5">
+                    {% if request.is_featured %}
+                        <h2 class="black text-center"><b>Popular subjects hired in {{ region }}</b></h2>
+                    {% else %}
+                        <h2 class="black text-center">Popular subjects hired in {{ region }}</h2>
+                    {% endif %}
+                    <p class="text-center">Don't struggle with results, get a qualified tutor today to help you
+                        succeed</p>
+                </div>
+            </div>
+        </div>
+        {% for sub_category in cached_categories %}
+            <div class="container sidebar_by_side row-space-4 padding-top-25">
+                {% for mini_category in sub_category %}
+                    <div class="col-sm-4 col-md-3 col-md-offset-1 icon-content holla padding-top-mob-0">
+                        {% if request.is_featured %}
+                            <h4 class="space-for-mobile">
+                                <b>{{ mini_category.name }}</b>
+                            </h4>
+                        {% else %}
+                            <h4 class="space-for-mobile">
+                                {{ mini_category.name }}
+                            </h4>
+                        {% endif %}
+                        <hr class="hr-styled">
+                        <ul class="list-unstyled list-mobile list-with-icons no-margin-bottom">
+                            {% for cat_skill in mini_category.skills %}
+                                <li class=""><a
+                                        href="{% url 'state_skill_view' cat_skill.name|slugify region|slugify %}">{{ cat_skill.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>-->
+{% endblock learn %}
+{% block request_section %}
+                <div id="launch-section">
+                <!-- Request a Tutor Section -->
+                <div class="row padding-top-50 text-center padding-bottom-50 deepblue-bg space-bottom-mob-20 padding-top-mob-30">
+                     {% if not request.is_featured %}
+                        <a href="javascript:void(0)" class="scrollable-link"><h3 style="color:white">
+                            Home tutors in {{region}}</h3></a>
+                        {% else %}
+                        <a href="#book" class="scrollable-link"><h3 style="color:white">
+                            Home tutors in {{region}}</h3></a>
+                        {% endif %}
+                    <br>
+                    <div>
+                        <div class="request-box" >
+                            <div class="request-icon" style="padding-right: 50px; padding-left: 50px">
+                                <div class="request-icon-img">
+                                    <img src="{% static 'img/tutor/call.png' %}" class="img-responsive center-block"
+                                         style="width:30px"/>
+                                </div>
+                                <div style="display: inline-block">
+                                        <span class="request-call-icon">
+                                            <small style="color:aqua">{{ tuteria_details.email }}</small>
+                                        </span>
+                                        <span class="request-phone font-head">
+                                            {{ tuteria_details.phone_number }}
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div id="map-canvas" class="hidden"></div>
+{% endblock request_section %}
+{% block referral %}{% endblock referral %}
+{% block javascript %}
+{{block.super}}
+{% block global_js %}
+<script src="{% static 'js/request_form1.bundle.js' %}"></script>
+    
+{% endblock global_js %}
+
+{% endblock javascript %}

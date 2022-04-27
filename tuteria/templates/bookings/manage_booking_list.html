@@ -1,0 +1,47 @@
+{% extends 'bookings/includes/base_booking_list.html'%}
+{%load cloudinary %}
+{% block title %}Bookinsg You Received - Tuteria{% endblock title %}
+
+{% block object_table %}
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<td> &nbsp;
+				</td>
+				<td colspan="2">Client
+				</td>
+				<td>Skill
+				</td>
+				<td>Due On
+				</td>
+				<td>Total</td>
+				<td>Status</td>
+			</tr>
+		</thead>
+
+		<tbody>
+
+			{% for booking in object_list %}
+			<tr>
+			<td></td>
+				<td class="user-image-thumb"><span class="user-pict-24">
+					{% cloudinary booking.user.profile_pic SUBJECT_THUMBNAIL alt="subject" %}
+				</td>
+				<td>{{booking.user.first_name}}</td>
+
+				<td class="db-title"><a
+					href="{{booking.get_tutor_absolute_url}}">{{booking.ts.skill.name}}</a>
+				</td>
+
+				<td>{{booking.due_date|date:'M d, y'}}</td>
+				<td class="db-amount">&#x20a6;{{booking.tutor_pricing|floatformat:"0"}}</td>
+				<td><span class="label label-{{booking.status_class}}">{{booking.get_status_display|title}}</span></td>
+
+			</tr>    
+			{% endfor %}
+		</tbody>
+	</table>
+</div>    
+{% endblock object_table %}
+ {% block footer2 %}{% endblock %}

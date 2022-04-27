@@ -1,0 +1,31 @@
+- model: socialaccount.SocialApp
+  pk: 1
+  fields:
+    provider: Facebook
+    name: Facebook
+    client_id: 781136408623359
+    secret: 1ac818cea186fd98effb5db615dfef27
+
+- model: socialaccount.SocialApp
+  pk: 2
+  fields:
+    provider: Twitter
+    name: Twitter
+    client_id: ojPofeQb0QhG35q4kyRKxhUfx
+    secret: fwrmMufMPMkZMtMPNCHnHsAs9PQpFLIVJW7QddYZ2CfxMQ6IzQ
+
+- model: socialaccount.SocialApp
+  pk: 3
+  fields:
+    provider: LinkedIn
+    name: LinkedIn
+    client_id: 13807263-4f40-4a3d-9a36-e4da7388e3e9
+    secret: 315815f0-cc6b-4341-a0d3-6b585d899fca
+
+- model: socialaccount.SocialApp
+  pk: 4
+  fields:
+    provider: Google
+    name: Google
+    client_id: 455663748160-ofc9p9s7gcsev69uq1b36l2vd7uobuiu.apps.googleusercontent.com
+    secret: mrvfM0HQqF7ReNFeB4lLKM5K

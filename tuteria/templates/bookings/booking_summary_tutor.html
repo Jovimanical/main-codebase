@@ -1,0 +1,474 @@
+{% extends "bookings/includes/base_summary.html" %}
+{% load staticfiles activelink cloudinary add_attr %}
+{% block tabs %}
+<li role="presentation">
+    <a href="#resolution" aria-controls="profile" role="tab" data-toggle="tab">
+        Resolution <span class="hidden-xs">Center</span></a>
+</li>
+{% endblock %}
+{% block hire-again %}
+<div class="step-end">
+    <a href="{% url 'users:revenue_transactions' %}" class="btn btn-primary btn-default">Earnings</a>
+</div>
+{% endblock hire-again %}
+{% block hire_again_mob %}
+<a href="{% url 'users:revenue_transactions' %}" class="btn btn-primary pull-right">Earnings</a>
+{% endblock hire_again_mob %}
+{% block rehire %}{% endblock %}
+{% block resolve %}{% endblock %}
+{% block tab_content %}
+<div role="tabpanel" class="tab-pane" id="resolution">
+    <div class="panel">
+        <article class="panel-body db-order-resolution-center js-page-tab-content js-page-tab-resolution-center">
+            <div class="cf row">
+                <span class="col-sm-4 col-xs-12">Booking: #{{ object.order }}</span>
+                <time class="col-sm-5 col-xs-12" datetime="{{ object.created | date:'Y-m-j' }}">
+                    Booked on {{ object.created | date:'M j, Y' }} <span id="date-ago"></span>
+                </time>
+                <span class="col-sm-3 col-xs-12">Client: {{ object.user.first_name|title }}</span>
+                _ </div>
+        </article>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+            {% if object.not_started %}
+            {% if object.status == object.PENDING %}
+            <div class="well">Awaiting confirmation from client</div>
+            {% elif object.status == object.CANCELLED %}
+            <!-- <h4>Hmm...interesting</h4> -->
+
+            <!-- <div id="completed-text">
+
+                <p>We can see this lesson was cancelled on {{ object.modified | date:'d/m/y' }}, and has now
+                    been marked as cancelled.</p>
+
+
+                <p>A booking is marked as cancelled when the client cancel's the lessons or when you as a
+                    tutor request to cancel the booking and the client confirms the request. If you need
+                    further assistance, please get in touch with us on:
+                    <strong>{{ tuteria_details.phone_number }}</strong>
+                    or by email
+                    <a class="href" mailto="{{ tuteria_details.email }}">{{ tuteria_details.email }}</a>.
+                </p>
+
+                <p>We are always here to help.</p>
+            </div> -->
+            {% else %}
+            <!-- <div class="col-xs-12">
+                <h4>Hmm...interesting</h4>
+
+                <div id="completed-text">
+
+                    <p>We can see this lesson was cancelled on {{ object.modified | date:'d/m/y' }}, and has now
+                        been marked as cancelled.</p>
+
+
+                    <p>A booking is marked as cancelled when the client cancel's the lessons or when you as a
+                        tutor request to cancel the booking and the client confirms the request. 
+For any complain or issues regarding your booking, kindly call <strong>
+Tunde on 08179265673.
+</strong>
+                    </p>
+
+                    <p>We are always here to help.</p>
+                    <!-- <form action="{% url 'users:request_to_cancel_booking' object.order %}" method="post">
+                                {% csrf_token %}
+                                <div class="well bg-info">
+                                    <p>
+                                        The Resolution Center is where you can send requests to clients to cancel a
+                                        booking if you won't be able to teach the lesson. If you wish to cancel, please
+                                        make sure you have already informed your client before now, and note that you
+                                        may also face some <a href="/help/topic/54/">cancellation penalties.</a>
+                                    </p>
+
+                                    <p>
+                                        To cancel booking, please clearly explain your reason for requesting
+                                        cancellation in the field below.
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    {{ cancellation_form.cancellation_message|add_attributes:"placeholder:Why do you want to cancel this booking?,class:form-control,required:true,data-parsley-no_link:,data-parsley-no_email:,data-parsley-trigger:keyup" }}
+
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-4">
+                                            <button class="btn btn-primary btn-block">Request to Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> -->
+
+                <!-- </div> -->
+                {% endif %}
+
+                {% elif object.status == object.COMPLETED %}
+                <div id="completed">
+                    <h4>Interesting...?</h4>
+
+                    <div id="completed-text">
+
+                        <p>We can see this booking was delivered on {{ object.modified }}, and has now marked
+                            been marked as completed</p>
+
+                        <p>A booking is automatically marked as complete 24 hours after being
+                            delivered or after
+                            you submit a review within 24 hours. If you have any issus with the
+                            tutor
+                            or the booking,
+                            Please get in touch with us on this number:
+                            <strong>{{ tuteria_details.phone_number }}</strong>
+                            or by email
+                            <a class="href" mailto="{{ tuteria_details.email }}">{{ tuteria_details.email }}</a>. </p>
+
+                        <p>We are always here to help</p>
+                    </div>
+                </div>
+                {% else %}
+                <h4>This booking is marked as {{ object.get_status_display | title }}</h4>
+                {% endif %}
+            </div> -->
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block display_subject %}
+    <li><em>Location: {{ object.user.vicinity }} </em></li>
+    {% endblock %}
+    {% block booking_summary_heading %}
+    {% if object.ts %}
+    <div class="gig-pict-102">
+        {% cloudinary object.user.profile_pic PAYMENT_THUMBNAIL alt="hello" %}
+        <!--<div class="tutor-name">{{ object.user.get_full_name|title }}</div>-->
+    </div>
+    <h4></h4>
+    <span style="
+    position: absolute;
+    right: 28px;
+    top: 12px;
+    color: green;
+    font-size: 15px;
+">YOUR
+        EARNING</span>
+    <h3>
+        <span class="order-price pull-right hidden-xs hidden-sm">&#x20a6;{{ object.tutor_pricing|floatformat:0 }}</span>
+
+        Client: <a href="{{ object.user.get_absolute_url }}">{{ object.user.first_name|title }}</a>
+        {% if object.status != object.COMPLETED %}
+
+        <span class="phone_number">({{ object.user.primary_phone_no.number }})</span>
+        {% endif %}</h3>
+    <p>Subject: <a href="{{ object.ts.get_absolute_url }}">{{ object.ts.skill.name|title }}</a></p>
+    {% else %}
+    <div class="gig-pict-102">
+        {% cloudinary object.user.profile_pic PAYMENT_THUMBNAIL alt="sample" %}
+        <!--<div class="tutor-name">{{ object.user.get_full_name|title }}</div>-->
+    </div>
+    <h4></h4>
+
+    <span style="
+    position: absolute;
+    right: 28px;
+    top: 12px;
+    color: green;
+    font-size: 15px;
+">YOUR
+        EARNINGS</span>
+    <h3>
+        <span class="order-price pull-right hidden-xs hidden-sm">&#x20a6;{{ object.tutor_pricing|floatformat:0 }}</span>
+        Client: <a href="{{ object.user.get_absolute_url }}">{{ object.user.first_name|title }}</a>
+        {% if object.status != object.COMPLETED %}
+        <span class="phone_number">({{ object.user.primary_phone_no.number }})</span>
+        {% endif %}</h3>
+    <p>Subject: <a href="{{ object.ts.get_absolute_url }}">{{ object.skill_display }}</a></p>
+
+    {% endif %}
+
+    {% endblock %}
+    {% block booking_table_summary %}
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Booking Summary</td>
+                <td class="amount">Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="truncated">
+                    {{object.bookingsession_set.count}} lessons
+                    {% if object.supports_discount %}
+                    <span class="label label-success hidden-xs">Discounted</span>
+                    {% endif %}
+                </td>
+                <td class="amount">&#x20a6;{{ object.tutor_pricing|floatformat:0 }}</td>
+            </tr>
+            <tr class="boldify">
+                <td class="truncated">
+                    Total
+                </td>
+                <td class="amount"> &#x20a6;{{ object.tutor_pricing|floatformat:0 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endblock %}
+    {% block booking_started_text %}
+    <p>The client has made full payment for the lesson.
+        This booking is expected to commence on {{ object.first_session|date:'l, N j' }} and end on
+        {{ object.due_date|date:'l, N j' }}.</p>
+    {% endblock %}
+    {% block client_info_text %}
+    <h4 class="blue-font">Instructions from {{ object.user.first_name|title }}</h4>
+    {% endblock %}
+    {% block tutor_session_action %}
+    {% if object.status == object.PENDING %}
+    <div class="panel">
+        This booking has been placed on hold to further instructions
+        from the client
+    </div>
+    {% else %}
+    <div class=" panel panel-default row">
+        <div class="panel-heading clearfix">
+            <div class="col-xs-4 col-sm-5 no-padding">SESSION</div>
+            <div class="col-xs-4 col-sm-3 text-center-small">TIME</div>
+            <div class="col-xs-4 col-sm-2 text-center-small col-sm-offset-2">
+                STATUS
+            </div>
+
+        </div>
+        <div class="panel-body list-of-sessions">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                {% for session in object.bookingsession_set.all %}
+                {% include "bookings/includes/tutor-session-row.html" with index=forloop.counter %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endblock %}
+    {% block standards %}
+    {% endblock %}
+    {% block pre_review_text %}
+    <i class="fa fa-check-circle-o fa-2x text-primary"></i>
+
+    <h4 class="text-primary font-head">BOOKING DELIVERED</h4>
+
+    <p class="text-center">{{ object.user.first_name|title }} will have up to 24 hours to confirm before payments are
+        available to you.</p>
+    {% endblock %}
+    {% block review_section %}
+    {% if object.reviews_given.count > 0 %}
+    <div id="reviews-section" class="panel-body">
+        {% for review in object.reviews_given.all %}
+        <div id="tutor-review" class="media">
+            <div class="media-left">
+                {% cloudinary review.commenter.profile_pic MINI_AVATAR alt="review.commenter.first_name" %}
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{ review.commenter.first_name }}
+                    {% if review.review_type != 3 %}
+                    <span class="rating">
+                        {% if request.is_featured %}
+                        {% for score in review.score_array %}<span>★</span>{% endfor %}
+                        {% else %}review.commenter.first_name
+                        {% for score in review.score_array %}<i class="glyphicon glyphicon-star"></i>
+                        {% endfor %}
+                        {% endif %}
+                    </span>
+
+                    {% endif %}
+                </h4>
+
+                <p>{{ review.review }}</p>
+            </div>
+        </div>
+        {% if not forloop.last %}
+        <hr />{% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+    {% endblock %}
+    {% block review_form %}
+    {% if object.reviews_given.count == 0 %}
+    <form id="review_form" action="." method="post" novalidate>
+        {% csrf_token %}
+        <div class="rate-form text-center col-xs-12">
+            {% block rating_for %}
+            <h3 class="pad-down-5">Rate your experience with {{ object.user.first_name|title }}</h3>
+            <p>Would you be happy to take on this client again? Rate your experience</p>
+            {% endblock %}
+
+            <div class="rate-tutor"></div>
+            <div id="hint"></div>
+            {{ form.rating|add_attributes:'type:hidden' }}
+        </div>
+        <div class="row-space-top-4 comment-form text-center col-sm-8 col-sm-offset-2 col-xs-12 hide">
+            <h3 class="row-space-2 pad-down-5">Why did you give such a rating?</h3>
+
+            <p>Tell us what you liked or didn't like about your time with {{ object.user.first_name|title }}. How
+                likely are you to recommend this client to other tutors? Please be as detailed as possible. Honest
+                reviews help maintain a trustworthy Tuteria community.</p>
+
+            <div class="form-group">
+                {{ form.review|add_attributes:'class:form-control,required:true,data-parsley-no_link:,data-parsley-no_email:,data-parsley-trigger:keyup,placeholder:Explain how you feel about this client' }}
+            </div>
+            {% block submit_section %}
+
+            <button class="btn btn-primary btn-block btn-lg">Submit
+                Booking
+            </button>
+            {% endblock %}
+        </div>
+    </form>
+    {% endif %}
+
+    {% endblock %}
+    {% block side_content %}
+    <div style="margin-top: 0px">
+        <div class="col-sm-12 col-xs-12 blue-bg">
+            <div class="padding-bottom-25 padding-top-25">
+                <h3 class="text-center font-head" style="color: red">Read this first!</h3>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">1</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">
+                            Client has paid for this lesson so you don't need to request any form of payment. Please
+                            call client immediately to plan the lesson.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">2</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">After each lesson, you <span class="font-head">must</span> return here
+                            to submit the lesson so that we can know that it has held, you'll see a 'Submit' button
+                            when
+                            lesson ends. This helps to process payments.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">3</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">Once all lessons are submitted, we will notify your client and allow 3
+                            days for them to confirm the lessons or raise a complaint.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">4</div>
+                    </div>
+                    <div class="media-body">
+                        <p class="media-heading">Payments will be available to you immediately after client confirms
+                            lesson or after the 24 hours elapse. If there's a complaint, we'll hold off payment till
+                            it's
+                            resolved.
+                        </p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <div class="numberCircle">5</div>
+                    </div>
+                    <div class="media-body">
+<p class="media-heading">
+    <h4>
+
+        {% comment %} <strong>
+        For any complain or issues regarding your booking, kindly call or text Tunde on 08179265673
+    
+    </strong> {% endcomment %}
+    </h4>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {% endblock %}
+    {% block request_section %}
+    <section class="row protection large-padding">
+        <div class="page-container-full">
+            <div class="row">
+                <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+                    <div class="media-photo padding-bottom-25">
+                        <img width="100" height="100" src="{% static 'img/gallery/2nd-lesson.png' %}">
+                    </div>
+                    <h2>
+                        <span class="font-head">
+                            Earn More Money
+                        </span>
+                    </h2>
+                    <p class="padding-top-10">Get 10% for 3 months for every client you refer to Tuteria.</p>
+
+                    <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+                        <a href="/invite" class="btn btn-danger btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+                            Invite friends
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock request_section %}
+    {% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'js/booking_summary_tutor.bundle.js' %}"></script>
+    {% cloudinary_includes %}
+    {% cloudinary_js_config %}
+
+    <!-- Facebook Conversion Code for Leads - Tutors Who Received Confirmed Bookings -->
+    <script>
+        (function () {
+            var _fbq = window._fbq || (window._fbq = []);
+            if (!_fbq.loaded) {
+                var fbds = document.createElement('script');
+                fbds.async = true;
+                fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(fbds, s);
+                _fbq.loaded = true;
+            }
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', '6034110309155', {
+            'value': '0.00',
+            'currency': 'USD'
+        }]);
+
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6034110309155&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" />
+    </noscript>
+
+
+    <!-- Twitter Conversion Code for Leads - Tutors Who Received Confirmed Bookings -->
+    <!-- <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        twttr.conversion.trackPid('l6lh6', {
+            tw_sale_amount: 0,
+            tw_order_quantity: 0
+        });
+
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l6lh6&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+        <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l6lh6&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+    </noscript> -->
+
+    {% endblock %}

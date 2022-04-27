@@ -1,0 +1,166 @@
+{% extends '_layouts/base.html' %}
+{% load i18n cloudinary cache distance_estimate humanize %}
+{% load static from staticfiles %}
+{% load hijack_tags %}
+<!DOCTYPE html>
+<html class="no-js" lang="en"{% block ng_app %}{% endblock %}>
+{% block mixpanel %}  
+{% endblock mixpanel %}
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+    <title>{% block title %}Tuteria{% endblock title %}</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      {% block css %}
+      {# {% cache 20000 syles %} #}
+      {% include 'includes/_styles.html' %}
+      <link href="{% static 'css/external.css' %}" rel="stylesheet">
+      {# {% endcache %} #}
+      <style>
+      ._3-8y {
+        margin-top: 12px;
+    }
+    ._585n {
+        background-color: red;
+        border: 1px solid red;
+        border-radius: 3px;
+        overflow: hidden;
+        padding: 0 0 0 40px;
+    }
+    ._4mim {
+        text-align: left;
+    }
+
+    .sp__TVnXU4gELp {
+        background-size: auto;
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+    }
+    ._585p {
+        float: left;
+        margin: 9px 0 0 -29px;
+        color: white;
+    }
+    ._585r {
+        background: #fff;
+        margin: 0;
+        padding: 1px 10px;
+    }
+
+
+      </style>
+
+      {% endblock %}
+
+  </head>
+
+  <body id="fouc" {% block body_attr %}{% endblock body_attr %}>
+
+    {% block body %}
+
+    {% block body_content %}
+
+    {% block header %}
+    <div class="outer {% block nav_class %}{% endblock %}">
+
+
+
+        {% block containing_nav %}
+
+        {% with user_profile=request.user.profile %}
+        <div class="navbar navbar-default" role="navigation">
+            {% load staticfiles activelink %}
+
+            <div class="navbar-header">
+
+
+        <div class="navbar-brand hidden-xxs">
+            <span class="nav-logo"></span></div>
+
+        </div>
+
+<div id="navbar" class="collapse navbar-collapse">
+
+</div>
+</div>
+
+
+{% endwith %}
+{% endblock containing_nav %}
+
+
+</div>
+{% endblock %}
+{#    <div>#}
+<div class="container-fluid">
+
+    <div class="">
+
+        <div class="main">
+
+            <div class="main-block">
+                {% block content %}
+                <div class="_3-8y visible-xs"><div class="_585n _4mim"><i alt="Notice" class="_585p img sp__TVnXU4gELp sx_586b9f fa fa-exclamation-circle" aria-hidden="true"></i><div class="_585r _50f3"><div><h4>Browser not supported</h4></div></div></div></div>
+                <br>
+                <div class="space-for-mobile padding-bottom-50">
+                    <div class="">
+                        <p>In order to give you the very best experience on this site, we recommend you use another browser to signup or login.</p>
+
+                        <p>Here are some suggestions:</p>
+                        <p class="font-15 font-head">1. If you use an Android Phone</p>
+                        
+                       <p>Please use the default browser that came with your phone, or use Chrome. If you don't have Chrome browser, <a href="http://www.google.com/chrome">just click here to download it</a>. It's small and works perfectly.</p>
+
+                       <p class="font-15 font-head">2. If you use a Blackberry or Lumia</p>
+                        
+                       <p>Also try using your default browser, or download the latest version of Smart Opera Mini for your phone. Just search on Google and you'll find it.
+                       </p>
+
+                       <p class="font-15 font-head">3. If you use other featured phones</p>
+                        
+                       <p>The functionalities on the site will not work on your phone. You may consider using a friend's phone or a cafe.
+                       </p>
+
+                       <br>
+                       <p>We apologize for any inconvenience caused.</p>
+                    </div>
+                </div>
+
+                {% endblock content %}
+            </div>
+            {% block request_section %}
+
+            {% endblock request_section %}
+            <!-- /container -->
+
+            {% block footer %}
+
+            {% endblock footer %}
+            <!-- Footer Starts -->
+            {% block bottom_footer %}
+            {% endblock bottom_footer %}
+        </div>
+    </div>
+    
+    {% endblock body_content %}
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    {% block javascript %}       
+    {% endblock javascript %}
+    {% block notification_tawk %}
+    {% endblock %}
+
+    {% endblock %}
+
+</body>
+</html>

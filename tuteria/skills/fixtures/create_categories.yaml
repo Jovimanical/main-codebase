@@ -1,0 +1,114 @@
+- model: skills.Category
+  pk: 1
+  fields:
+    slug: mathematics
+    name: Mathematics
+    priority: 1
+    caption:
+
+- model: skills.Category
+  pk: 2
+  fields:
+    slug: english
+    name: English
+    priority: 2
+    caption:
+
+- model: skills.Category
+  pk: 3
+  fields:
+    slug: languages
+    name: Languages
+    priority: 6
+    caption:
+
+- model: skills.Category
+  pk: 4
+  fields:
+    slug: science
+    name: Science
+    priority: 4
+    caption:
+
+- model: skills.Category
+  pk: 5
+  fields:
+    slug: exam-preparation
+    name: Exam Preparation
+    priority: 3
+    caption:
+
+- model: skills.Category
+  pk: 6
+  fields:
+    slug: special-needs
+    name: Special Needs
+    caption:
+
+- model: skills.Category
+  pk: 7
+  fields:
+    slug: computer-software
+    name: Computer & Software
+    priority: 8
+    caption:
+
+- model: skills.Category
+  pk: 8
+  fields:
+    slug: arts-religion
+    name: Arts & Religion
+    caption:
+
+- model: skills.Category
+  pk: 9
+  fields:
+    slug: beauty-lifestyle
+    name: Beauty & Lifestyle
+    priority: 10
+    caption:
+
+- model: skills.Category
+  pk: 10
+  fields:
+    slug: business-commercial
+    name: Business & Commercial
+    priority: 7
+    caption:
+
+- model: skills.Category
+  pk: 11
+  fields:
+    slug: sports-fitness
+    name: Sports & Fitness
+    caption:
+
+- model: skills.Category
+  pk: 12
+  fields:
+    slug: dance-crafts
+    name: Dance & Crafts
+    priority: 9
+    caption:
+
+- model: skills.Category
+  pk: 13
+  fields:
+    slug: cooking
+    name: Cooking
+    caption:
+
+- model: skills.Category
+  pk: 14
+  fields:
+    slug: programming
+    name: Programming
+    caption:
+
+- model: skills.Category
+  pk: 15
+  fields:
+    slug: music
+    name: Music
+    priority: 5
+    caption:

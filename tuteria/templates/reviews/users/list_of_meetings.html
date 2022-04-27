@@ -1,0 +1,39 @@
+{% extends 'bookings/includes/base_booking_list.html'%}
+{% load cloudinary staticfiles %}
+{% block page_title %}Pending Meeting Requests{% endblock %}
+{% block title %}Meeting Requests - Tuteria{% endblock title %}
+{% block fiverr_url %}{% endblock fiverr_url %}
+{% block object_table %}
+<div class="col-xs-12">
+<div class="table-responsive">
+    <table class="table">
+        <thead> 
+            <tr>
+                <td class="hidden-xs"> &nbsp;
+                </td>
+                <td colspan="2">Request Summary</td>
+                <td class="">Date issued</td>
+            </tr>
+        </thead>
+
+        <tbody>
+           {% for rq in object_list %}
+           <tr>
+            <td class="hidden-xs"></td>
+            <td colspan="2" class="db-title">
+                <a href="{{rq.get_absolute_url}}">
+                    <span class="">{{rq.client.first_name}}</span>
+                </a>
+            </td>
+            <td>{{rq.created|date:'M d, Y'}}</td>
+        </tr>    
+        {% endfor %}
+
+    </tbody>
+</table>
+</div>     
+</div>
+
+{% endblock %}
+{% block request_section %}
+{% endblock request_section %}

@@ -1,0 +1,229 @@
+{% extends "pages/parent-request.html" %}
+{% load staticfiles i18n bootstrap3 add_attr activelink %}
+{% block title %}Confirm Price | Tuteria {% endblock title %}
+{% block css %}
+{{ block.super }}
+<style>  
+        .package{
+            background: #53c1cd left no-repeat;
+            color: #FFF;
+            text-align: center;
+            padding: 50px 20px 60px 0px;            
+        }
+        
+        .package .headtext{
+            font-size: 35px;
+            line-height: 55px;
+        }
+        .package .subtext{
+            font-size: 45px;
+            line-height: 55px;
+        }
+        .package .minitext{
+            font-size: 12px;
+            line-height: 10px;
+        }
+        .bd-group li {
+		    border-bottom: 1px solid #e1e1e1;
+		    padding: 20px 0;		    
+		}
+</style>
+{% endblock %}
+
+{% block big_section %}
+<div id="content" class="spaced-top-xl spaced-bottom-xl padding-top-50">
+	 <div class="row">
+        <div class="col-sm-12 no-padding-for-xs">
+            <div class="">
+                <div id="wizard-container" class="bordered spaced-bottom-lg">
+                    <div class="">
+                    	<div id="react-content"></div> 
+                    	<form id="request_parent_form" action="{% url 'request_tutor_skill' object.slug %}" method="post" novalidate>
+                            {% csrf_token %}
+
+                            <div class="panel row-space-4">
+								<div id="mobile_navigation" class="price-display navbar navbar-subnav-1 visible-xs " style="top:0px;height:54px;" >
+									<div class="container-fluid">
+										<div class="navbar-header" >
+											<button type="button" class="hidden search toggle-right navbar-toggle" data-toggle="sidebar" data-target=".sidebar" >
+												<span class="glyphicon glyphicon-search" ></span>
+											</button>
+											<div class="col-xs-5" style="font-size:14px;padding-top:10px;">
+												<div class="font-head" >Lesson Fee</div>
+												<div>Estimated Price</div>
+											</div>
+											<div class="col-xs-7">
+												<span class="brightblue font-head pull-right" style="font-size:19px; padding-top:10px;" >₦100000 - ₦150000</span>
+											</div>
+										</div>
+									</div>
+								</div>
+                                <div class="panel-head col-sm-12 row-space-3">
+                                    <div class="row hidden-xs">
+                                        <div class="text-center">
+                                            <div class="col-sm-12">
+                                                <div class="package row">
+                                                <div class="headtext font-head">                                    
+                                                Your lesson fee estimate
+                                                </div>
+                                                <div class="subtext font-head blue-font">                                 
+                                                &#x20A6;48,000 &mdash; &#x20A6;60,000
+                                                </div> 
+                                                <a class="adjust-paramters" href = "#"style="color:green;">
+	                                            	Adjust Parameters
+	                                            </a>
+                                            </div>
+                                            </div>
+                                        </div>                                
+                                    </div>
+                                                                                         
+                                </div>
+                                <div class="panel-body">
+                                    {# {{form.possible_subjects}} #}
+                                        <section id="questions" class="smart-forms">
+                                        <a class="adjust-paramters text-center visible-xs center-block" href = "#"style="color:green;"> Adjust Parameters </a>
+							            	
+                                        <div id="breakdown" class="js-breakdown hidden" style="display: block;">
+											<ul class="bd-group list-unstyled"> 
+							                    <li class="bd-item clearfix">
+							                        <div class="media">
+							                            <div class="pull-left">
+							                                <img class="media-object" src="{% static "img/ICONS/invite.png" %}" alt="" width="50">
+							                            </div>
+							                            <div class="media-body">
+							                                <p class="bd-question">How many students would be involved in the tutoring?</p>
+							                                {{form.no_of_students|add_attributes:'class:form-control'}}
+							                            </div>
+							                        </div>
+							                    </li> 
+							                    <li class="bd-item clearfix">
+							                        <div class="media">
+							                            <div class="pull-left">
+							                                <img class="media-object" src="{% static "img/ICONS/invite.png" %}" alt="" width="50">
+							                            </div>
+							                            <div class="media-body">
+							                                <p class="bd-question">How many hours in a day would a class hold?</p>
+							                                {{form.hours_per_day|add_attributes:'class:form-control'}}
+							                            </div>
+							                        </div>
+							                    </li>
+							                    <li class="bd-item clearfix">
+							                        <div class="media">
+							                            <div class="pull-left">
+							                            	<img class="media-object" src="{% static "img/ICONS/invite.png" %}" alt="" width="50">
+							                            </div>
+							                            <div class="media-body">
+							                                <p class="bd-question">What are the days in a week, the tutor(s) would come?</p>
+							                                {% for weekday in form.available_days %}
+					                                            <div class="col-xs-6 col-sm-3 checkbox-space">
+					                                                {{ weekday }}
+					                                            </div>
+					                                            {% endfor %}
+					                                        <br>
+				                                            {% if form.available_days.errors %}
+				                                            <div class="col-sm-12">                                        
+				                                                <div class="has-error">
+				                                                    <span class="help-block">{{ form.available_days.errors|join:"<br \>" }}</span>
+				                                                </div>
+				                                            </div>
+				                                            {% endif %}  
+							                            </div>
+							                        </div>
+							                    </li>
+							                    <li class="bd-item clearfix">
+							                        <div class="media">
+							                            <div class="pull-left">
+							                            <img class="media-object" src="{% static "img/ICONS/invite.png" %}" alt="" width="50">
+							                            </div>
+							                            <div class="media-body">
+							                                <p class="bd-question">What is the duration of the whole lesson?</p>
+							                                {{form.days_per_week|add_attributes:'class:form-control'}}
+							                            </div>
+							                        </div>
+							                    </li>
+                                        	</ul> 
+                                        </div> 
+                                        <div class="row">
+                                        <div class="">
+                                            <div class="col-sm-12 padding-bottom-25 padding-top-25">
+                                                <button id="submit_btn" data-loading-text="Loading..."
+                                                class="btn btn-lg btn-block btn-primary big-btn"
+                                                >{% trans "Submit" %}</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+{% endblock big_section %}
+{% block first_request_summary %}
+    <div class="col-sm-4 col-xs-12 padding-top-50 mobile-top-25">
+        <div class="row panel">
+            {% if object.agent %}
+            {% with agent=object.agent %}                                    
+                <img src="{{STATIC_URL}}img/user/{{agent.image}}" width="100%">
+                <div class="panel-body no-padding-total img-resize">
+                    <div class="media">
+                        <div class="">
+                                <p class="font-head">{{agent.name}}, {{agent.title}}</p>
+                                <hr class="row" style="margin-top:10px; margin-bottom:10px">
+                                <small>Hi {{ user.first_name|title }}, I'm your main contact at Tuteria and in charge of processing your request. If you have any questions or difficulties, please contact me.
+                                </small>
+                                <br><br>
+                                <small class="margin-top-15">
+                                    <span class="pull-left"><a href="tel:{{ agent.phone_number.as_national }}"><i
+                                            class="fa fa-phone-square"></i>{{ agent.phone_number.as_national }}</a></span>
+                                    <span class="pull-right"><a href="mailto:{{ agent.email }}"><i class="fa fa-envelope"></i> {{ agent.email }}</a></span>
+                                </small>
+                            </div>
+                    </div>
+                </div>            
+            {% endwith %}
+{% else %}
+            <img src="{% static "img/user/godwin.jpg" %}" width="100%">
+
+            <div class="panel-body no-padding-total img-resize">
+                <div class="media">
+                    <div class="">
+                        <p class="font-head">Godwin Benson, Tuition Manager</p>
+                        <hr class="row" style="margin-top:10px; margin-bottom:10px">
+                        <small>Hi {{ user.first_name|title }}, I'm your main contact at Tuteria. I head the team which processes your request. If you have any questions or difficulties, please contact me.
+                        </small>
+                        <br><br>
+                        <small class="margin-top-15">
+                            <span class="pull-left"><a href="tel:{{ tuteria_details.phone_number }}"><i
+                                    class="fa fa-phone-square"></i> {{ tuteria_details.phone_number }}</a></span>
+                            <span class="pull-right"><a href="mailto:{{ tuteria_details.ceo_email }}"><i class="fa fa-envelope"></i> {{ tuteria_details.ceo_email }}</a></span>
+                        </small>
+                    </div>                    
+                </div>
+            </div>
+
+                {% endif %}
+        </div>
+    </div>
+{% endblock first_request_summary %}
+
+{% block javascript %}
+	{% include 'includes/_scripts.html' %}
+	<script>
+	$(function(){
+		$('.adjust-paramters').click(function(){
+			$('#breakdown').removeClass('hidden');
+			$(this).addClass('hidden');
+		})
+		// var mq = window.matchMedia( "(max-width: 768px)" );
+		// if(mq){
+		// 	$('breakdown').removeClass('hidden');
+		// }
+	})
+	</script>
+
+{% endblock javascript %}

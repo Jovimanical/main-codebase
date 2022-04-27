@@ -1,0 +1,1393 @@
+{% extends '_layouts/base-internal.html' %}
+{% load cloudinary humanize bootstrap_pagination embed_video_tags activelink cache add_attr i18n %}
+{% load static from staticfiles %}
+
+{% block containing_nav %}
+    {% with user_profile=request.user.profile %}
+
+        {% if request.is_featured %}
+            <div class="navbar navbar-default" role="navigation">
+                {% include 'includes/nav/mobile/mobile-header.html' %}
+            </div>
+        {% else %}
+            <div class="{% block fixed %}profile-header{% endblock %} na hidden-xs ">
+                {% include 'includes/nav/_navigation.html' with search_form=True regular_layout=True placeholder=search_placeholder display_help=True ss_login=True %}
+                {% if object.tutor.email == request.user.email %}
+                    {% include 'skills/includes/subnav.html' %}
+                {% else %}
+                    {% spaceless %}
+                        <div class="hidden-tablets subnav" data-sticky="true" data-transition-at="#summary"
+                             aria-hidden="false">
+                            <div class="container subnaver">
+                                <ul class="nav list-inline">
+                                    <li>
+                                        <a href="#about-subject" class="subnav-item" aria-selected="true">
+                                            About this subject
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#credentials-section" class="subnav-item" aria-selected="false">
+                                            Credentials
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#price-and-policies" class="subnav-item" aria-selected="false">
+                                            Pricing & Policies
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#reviews" class="subnav-item" aria-selected="false">
+                                            Reviews
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    {% endspaceless %}
+                {% endif %}
+            </div>
+            {#            {% cache 1000 smart_nav request.user.email %}#}
+            {% include "includes/nav/mobile/smart-nav.html" %}
+            {#            {% endcache %}#}
+            {% spaceless %}
+                <div class="hidden hide-print subnav" data-sticky="true" data-transition-at="#summary"
+                     aria-hidden="false">
+                    <div class="container">
+                        <ul class="subnav-list subnaver">
+                            <li>
+                                <a href="#about-subject" class="subnav-item" aria-selected="true">
+                                    About this subject
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#credentials-section" class="subnav-item" aria-selected="false">
+                                    Credentials
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#price-and-policies" class="subnav-item" aria-selected="false">
+                                    Pricing & Policies
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#reviews" class="subnav-item" aria-selected="false">
+                                    Reviews
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            {% endspaceless %}
+        {% endif %}
+    {% endwith %}
+{% endblock containing_nav %}
+
+{% block title %}{{ object.heading }}{% endblock %}
+{% block meta_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Tuteria Limited">
+
+    <!-- for Google -->
+    <meta itemprop="name" content="{{ object.heading }}">
+    <meta itemprop="description" content="{{ object.description }}">
+    <meta itemprop="image" content="{% cloudinary_url object.profile_pic TS_THUMBNAIL %}">
+    <meta name="description" content="{{ object.description|slice:":155" }}"/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="{{ object.tutor.first_name }}"/>
+    <meta name="copyright" content=""/>
+    <meta name="application-name" content=""/>
+    <!-- for Facebook -->
+    <meta property="fb:app_id" content="781136408623359">
+    <meta property="og:site_name" content="Tuteria">
+    <meta property="og:title" content="{{ object.heading }}"/>
+    <meta property="og:type" content="tuteria:skills"/>
+    <meta property="og:image" content="{% cloudinary_url object.profile_pic SQUARE_PROFILE_THUMBNAIL %}"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:description" content="{{ object.description }}"/>
+    <meta property="tuteria:tt_hourly_price" content="&#8358;{{ object.price|floatformat }}"
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:url" content="{{ request.build_absolute_uri|urlencode }}"/>
+
+    <meta name="twitter:site" content="@tuteria"/>
+    <meta name="twitter:title" content="{{ object.heading }}"/>
+    <meta name="twitter:description" content="{{ object.description }}"/>
+    <meta name="twitter:image" content="{{ object.profile_pic }}"/>
+{% endblock %}
+{% block ng_app %}{% if request.is_featured %}{% else %}ng-app="myApp"{% endif %}itemscope
+    itemtype="http://schema.org/Person"{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/subject-profile.css' %}"/>
+    <style>
+        .disabled {
+            z-index: 1000;
+            background-color: lightgrey;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .large-padding {
+        padding: 60px
+        }
+
+        section.protection {
+            color: #fff;
+            background: #36648B;
+            font-size: 18px
+        }
+        section.protection .media-photo {
+            background: transparent
+        }
+    </style>
+    {% include "includes/_scripts.html" %}
+    <script src="{% static "js/angular/angular.js" %}"></script>
+    <script>
+        var TutorResponse = JSON.parse('{{ ts_json|escapejs }}');
+        console.log(TutorResponse);
+        angular.module('json_response', []).value('TutorSkill', TutorResponse);
+        window.request_tutor = "{% url 'request_meeting_redirect' object.pk %}";
+    </script>
+    {% if request.is_featured %}
+        <script src="{% static "js/featured.bundle.js" %}"></script>
+    {% else %}
+        <script src="{% static "js/tutor_skill_profile.bundle.js" %}"></script>
+    {% endif %}
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+{% endblock %}
+
+{# {% block body_attr %}data-spy="scroll" data-target=".subnaver"{% endblock body_attr %} #}
+{% block sub_nav %}
+{% endblock %}
+{% block content %}
+    {% spaceless %}
+        <div class="row">
+            <div id="summary" class="panel tutor-summary-section">
+                <div class="container">
+                    <div class="special-row-element">
+                        <div id="tutor-impression" class="col-md-8 col-xs-12">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3 text-center row-space-2-xs">
+                                        <div class="media-photo media-round">
+                                            {% cloudinary object.profile_pic TS_THUMBNAIL alt=object.tutor.username %}
+                                            <!--{% if not request.is_featured %}
+                                                <img data-toggle="tooltip" data-placement="top"
+                                                     title="Photo has been verified"
+                                                     src="{% static "img/gallery/verified.png" %}" class="icon-pos"
+                                                     alt="{{ object.tutor.first_name }}"/>
+                                            {% endif %}-->
+
+                                            <div class="tutor-img-name text-muted text-wrap">{{ object.tutor.first_name }}</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-9 col-xs-12 tutor-intro-heading">
+                                        <div class="heading-address">
+
+                                            <h2 itemprop="name"
+                                                class="special-center-for-tablets overflow h4 row-space-1 font-head"
+                                                id="listing_name"
+                                                title="{{ object.heading }}"><b>{{ object.heading|capfirst }}</b>
+                                            </h2>
+
+                                            <div id="display-address"
+                                                 class="row-space-2 special-center-for-tablets"
+                                                 itemprop='aggregateRating' itemscope
+                                                 itemtype="http://schema.org/AggregateRating"
+                                                 data-location="{{ object.location }}">
+
+                                                <div>
+                                                    <span class="link-reset">{{ object.location }}</span>
+                                                    &nbsp;
+                                                    {% if object.reviews_count|length > 0 %}
+                                                        {% if request.is_featured %}
+                                                            <div class="rating">
+                                                                {% for star in object.rating_integer %}
+                                                                    {# {% for star in "****" %} #}
+                                                                    <span class="opera-star">★</span>
+                                                                {% endfor %}
+                                                                {% if object.rating_decimal %}
+                                                                    <i class="fa fa-star-half-full"></i>
+                                                                {% endif %}
+                                                                <span class="review-text"> ({{ object.reviews.count }})</span>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="rating">
+                                                                {% for star in object.rating_integer %}
+                                                                    {# {% for star in "****" %} #}
+                                                                    <span class="fa fa-star"></span>
+                                                                {% endfor %}
+                                                                {% if object.rating_decimal %}
+                                                                    <span class="fa fa-star-half-full"></span>
+                                                                {% endif %}
+                                                                {# <span class="review-text"> Review{{ reviews.count| pluralize }}</span> #}
+                                                                <span class="review-text"> ({{ object.reviews.count }})</span>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% else %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div id="badge-row" class="row row-condensed text-center">
+                                            <div class="col-xs-4">
+                                                <i class="icons verified_id"
+                                                   data-toggle="tooltip" data-placement="right"
+                                                   title="{{ object.tutor.first_name }} has verified online and offline identity"></i>
+                                                {#                                                <i class="fa fa-car fa-2x"></i>#}
+
+                                                <div class="badge-text">ID Verified</div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="badge-pill">
+                                                    <span class="badge-pill-count">{{ object.tutor.reputation }}</span>
+                                                </div>
+                                                <div class="rep badge-text">Reputation</div>
+                                            </div>
+                                            {% if object.skill.testable %}
+                                                <div class="col-xs-4">
+                                                    <i class="icons tested"
+                                                       data-toggle="tooltip" data-placement="right"
+                                                       title="{{ object.tutor.first_name }} passed the {{ object.skill.name }} test"></i>
+
+                                                    <div class="badge-text">Passed Test</div>
+                                                </div>
+
+                                            {% endif %}
+                                            <!--<div class="col-xs-4">
+                                                {% if object.tutor.background_check %}
+                                                    <i class="icons background_check"></i>
+                                                    <div class="badge-text">Background</div>
+                                                {% endif %}
+                                            </div>-->
+                                            {# <div class="col-xs-3"> #}
+                                            {# <i class="icons level_2"></i> #}
+                                            {# <div class="badge-text">Level</div> #}
+                                            {# </div> #}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block calendar %}
+            {% if not request.is_featured %}
+                <div id="book_it_form" class="hidden-xs hidden-tablets" data-ng-cloak>
+                    {% if request.user.is_staff %}                        {% include 'skills/includes/calendar.html' with calendar_id="pricing" hire_summary="hire-summary" calendar_tab="calender-tab" %}
+        
+                        {% else %}
+                        <div class="panel">
+                            <div class="panel-body">
+                                <form action="{{ request.path }}" method="post" id="base_request_form" novalidate>
+                                {% csrf_token %}
+
+                                <div class="form-group {% if form.request_subjects.errors %}has-error{% endif %}">
+                                    <label class="control-label">Select a subject</label>
+                                    {{ form.subject|add_attributes:"class:form-control input-sm,required:true" }}
+                                    {% if form.request_subjects.errors %}
+                                        <span class="help-block">{{ form.request_subjects.errors|join:"<br \>" }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div style="padding-top: 5px"></div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
+                                        <div class="form-group {% if form.no_of_students.errors %}has-error{% endif %}">
+                                            <label for="id_no_of_students"
+                                                   class="control-label">Students</label>
+                                            {{ form.no_of_students|add_attributes:"class:form-control input-sm,required:true" }}
+                                            {% if form.no_of_students.errors %}
+                                                <span class="help-block">{{ form.no_of_students.errors|join:"<br \>" }}</span>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-8 col-sm-8 col-md-8">
+                                        <div class="form-group {% if form.class_urgency.errors %}has-error{% endif %}">
+                                        <label class="margin-down-5 ">Lessons should start?</label>
+                                        {{ form.class_urgency|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please select start time" }}
+                                        {% if form.class_urgency.errors %}
+                                            <span class="help-block">{{ form.class_urgency.errors|join:"<br \>" }}</span>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {% if not parent_form %}
+
+                                    <div class="form-group {% if form.tutoring_location.errors %}has-error{% endif %}">
+                                        <label for="" class="margin-down-5"
+                                               style="padding-top: 5px">Where should lessons
+                                            hold?</label>
+                                        {{ form.tutoring_location|add_attributes:'required:true,class:form-control input-sm,required:true' }}
+                                        {% if form.tutoring_location.errors %}
+                                            <span class="help-block">{{ form.tutoring_location.errors|join:"<br \>" }}</span>
+                                        {% endif %}
+                                    </div>
+
+                                {% endif %}
+                                <hr class="hr-styled">
+                                <p>Tell us how best to reach you</p>
+                                <div class="form-group {% if form.number.errors %}has-error{% endif %}">
+                                    <!--<label for="" class="margin-down-5">Phone number</label>-->
+                                    <div class="input-group">
+                                        <div class="input-group-addon">+234</div>
+                                        {{ form.number|add_attributes:"class:form-control input-sm,required:true,data-parsley-error-message:Please enter a valid phone number" }}
+                                    </div>
+                                    {% if form.number.errors %}
+                                        <span class="help-block">{{ form.number.errors|join:"<br \>" }}</span>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group {% if form.time_to_call.errors %}has-error{% endif %}">
+                                    {{ form.time_to_call|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Please choose a time" }}
+                                    {% if form.time_to_call.errors %}
+                                        <span class="help-block">{{ form.time_to_call.errors|join:"<br \>" }}</span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group {% if form.email.errors %}has-error{% endif %}"
+                                     style="margin-bottom: 2px">
+                                    {{ form.email|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your email address name,placeholder:Enter active email address" }}
+                                    {% if form.email.errors %}
+                                        <span class="help-block">{{ form.email.errors|join:"<br \>" }}</span>
+                                    {% endif %}
+                                </div>
+                                <!--<small style="color:silver"><i class="glyphicon glyphicon-lock"></i> 100% secure. We respect your privacy.</small>-->
+
+                                {% if request.user.is_authenticated %}
+                                    <input type="hidden" id="pk" name="pk"
+                                           value={{ instance_pk }}>
+                                {% endif %}
+                                <div class="form-group padding-top-10">
+                                    <button id="submit_btn" data-loading-text="Loading..."
+                                            class="btn btn-lg btn-block btn-primary big-btn"
+                                            >{% trans "Book Lessons" %}</button>
+                                </div>
+                            </form>
+                                                    
+                            </div>
+                        </div>
+        
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endblock %}
+        <div id="details" class="details-section webkit-render-fix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8" id="details-column">
+                        <div class="row">
+                            <!--<div class="panel tutor-catch hidden-xs">
+                                <div class="panel-heading clearfix">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="col-xs-4 text-left">{{ object.skill.name }} tutor</div>
+                                            <div class="col-xs-4">
+                                                {# <div class="text-center"><i class="glyphicon glyphicon-list-alt"></i> 10 #}
+                                                {# Hours taught #}
+                                                {# </div> #}
+                                            </div>
+                                            <div class="col-xs-4 text-right">
+                                                <i class="glyphicon glyphicon-time"></i>Responds
+                                                {{ object.get_response_time }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div role="tabpanel" class="pad-top-40">
+                                {# <ul class="visible-xs nav nav-tabs" role="tablist"> #}
+                                {# <li role="presentation" class="active"> #}
+                                {# <a href="#about-subject" aria-controls="home" #}
+                                {# role="tab" data-toggle="tab">Description</a> #}
+                                {# </li> #}
+                                {# <li role="presentation"><a href="#credentials-section" aria-controls="profile" #}
+                                {# role="tab" data-toggle="tab">Credentials</a></li> #}
+                                {# <li role="presentation"><a href="#price-and-policies" aria-controls="messages" #}
+                                {# role="tab" data-toggle="tab">Pricing</a></li> #}
+                                {# </ul> #}
+
+                                <!-- Tab panes -->
+                                {# <div class="tab-content"> #}
+                                <div id="about-subject">
+
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="pull-left font-head text-center-sm"><b>About this
+                                            subject, {{ object.skill.name }}</b></h4>
+                                        <!--<div class="pull-right text-center panel-heading-right">
+                                        {% if object.status == object.ACTIVE %}
+                                            <i class="fa fa-eye block-icon"></i>
+
+                                            <div class="reviewed">Reviewed</div>
+                                        {% endif %}
+                                    </div>-->
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="well well-dark col-sm-12">
+                                            Tuteria helps you can find experienced tutors for any subject, skill or exam.
+                                            The details below summarize this tutor's experience which has been manually reviewed by our quality team. We will contact you shortly to proceed with scheduling lessons.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        {{ object.video.thumbnail }}
+                                        {# {% if True %} #}
+                                        {% if object.has_exhibition %}
+                                            <div id="tutor-video" class="">
+                                                <div class="row-space-4">
+                                                    <div class="flexslider">
+                                                        <ul class="slides">
+                                                            {% comment %} {% if object.has_video %}
+                                                                {% if not request.is_featured %}
+                                                                    {% video object.video as my_video %}
+                                                                    <li data-thumb="{{ my_video.thumbnail }}">
+                                                                        <div class="embed-responsive embed-responsive-16by9">
+                                                                            {% video my_video '100% x 50%' rel=0 modestbranding=1 showinfo=0 controls=0 %}
+                                                                                </div>
+                                                                                </li>
+                                                                            {% endvideo %}
+                                                                {% endif %}
+                                                            {% endif %} {% endcomment %}
+                                                            {% for exhibition in object.tutor_exhibitions %}
+                                                                {# {% for exhibition in "**" %} #}
+                                                                {# <li data-thumb="{% static 'img/backgrounds/background5_pc.jpg' %}"> #}
+                                                                <li data-thumb="{% cloudinary_url exhibition.image crop="fill" height=121 width=161 %}">
+                                                                    <img class="img-responsive"
+                                                                         src="{% cloudinary_url exhibition.image crop="fill" height=520 width=692 %}"/>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="panel-body no-padding-top">
+                                        <hr class="hr-styled">
+                                        <div class="row">
+                                            <div class="col-md-3 no-pad-left">
+                                                <p class="text-muted font-head"><b>Experience</b></p>
+                                                {% with pro=object.tutor.profile  %}
+                                                    {% if pro.years_of_teaching %}
+                                                        <p>{{pro.get_years_of_teaching_display}}</p> 
+                                                    {% endif %}
+                                                {% endwith %}
+                                            </div>
+
+                                            <div class="col-md-9 expandable expandable-trigger-more">
+                                                <div class="space-for-mobile">
+                                                    <p>{{ object.description|capfirst|linebreaksbr }} </p>
+                                                    {% if other_subjects|length > 0 %}
+                                                        <p class="font-head row-space-top-1"><b>Other approved
+                                                            subjects</b></p>
+                                                        <p>{{ object.tutor.first_name }} also teaches
+                                                            {% for sk in other_subjects %}
+                                                                <a href="{{ sk.get_absolute_url }}"
+                                                                   style="text-decoration: none; color: #5e5e5e">{{ sk.skill.name }}</a>{% if not forloop.last %}, {% endif %}
+                                                            {% endfor %}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% with pro=object.tutor.profile  %}  
+                                        {% if pro.classes|length > 0 %}                                                                                      
+                                        <hr class="hr-styled">
+                                        <div class="row">
+                                            <div class="col-md-3 no-pad-left">
+                                                <p class="text-muted font-head"><b>Student Level</b></p>
+                                            </div>
+
+                                            <div class="col-md-9 expandable expandable-trigger-more">
+                                                <div class="">
+                                                    <p>{% for x in pro.classes %}
+                                                        {% if forloop.last %} and {{x|title}} {% else %} {{x|title}}
+                                                        {% if forloop.revcounter0 == 1%}{% else %},{% endif %}{% endif %}
+                                                    {% endfor %}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if pro.curriculum_used|length > 0 %}                                            
+                                        <hr class="hr-styled">
+                                        <div class="row">
+                                            <div class="col-md-3 no-pad-left">
+                                                <p class="text-muted font-head"><b>Curriculum Used</b></p>
+                                            </div>
+
+                                            <div class="col-md-9 expandable expandable-trigger-more">
+                                                <div class="">
+                                                    <p class="font-head">{{pro.curriculum_display|join:","}}</p>
+                                                    {% if pro.curriculum_explanation %}
+                                                    <p>{{pro.curriculum_explanation}}</p>    
+                                                    {% endif %}                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                                {% with my_educations=object.tutor.education_set.all workexperiences=object.tutor.workexperience_set.all certificate_awards=object.skillcertificate_set.active %}
+                                    {% if my_educations|length > 0 or workexperiences|length > 0 or certificate_awards|length > 0 %}
+                                        <div id="credentials-section">
+                                            <div class=" panel-heading clearfix">
+                                                <h4 class="pull-left font-head "><b>Credentials</b></h4>
+                                            </div>
+                                            <div class="panel-body pad-top-0">
+                                                {% if my_educations|length > 0 %}
+                                                    <hr class="hr-head pad-top-0">
+                                                    <div class="row">
+                                                        <div class="col-md-3 no-pad-left">
+                                                            <p class="text-muted section-head">
+                                                                <b>Education</b>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-9 expandable expandable-trigger-more">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    {% for school in my_educations %}
+                                                                        <div class="credential-details">
+                                                                            <h4 class="capitalize-text">{{ school.school }}</h4>
+
+                                                                            <p class="pad-down-5 capitalize-text">{{ school.course }}, {{ school.degree }}
+                                                                            </p>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                                {% if workexperiences|length > 0 %}
+                                                    <hr class="hr-styled">
+                                                    <div class="row">
+                                                        <div class="col-md-3 no-pad-left">
+                                                            <p class="text-muted section-head">
+                                                                <b>Work History</b>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-9 expandable expandable-trigger-more">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    {% for we in workexperiences %}
+                                                                        <div class="credential-details">
+                                                                            <h4 class="capitalize-text">{{ we.name }}</h4>
+
+                                                                            <p class="pad-down-5 capitalize-text">{{ we.role }}
+                                                                            </p>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {% if certificate_awards|length > 0 %}
+                                                    <hr class="hr-styled">
+                                                    <div class="row">
+                                                        <div class="col-md-3 no-pad-left">
+                                                            <p class="text-muted section-head">
+                                                                <b>Certificates & Awards</b>
+                                                            </p>
+
+                                                        </div>
+                                                        <div class="col-md-9 expandable expandable-trigger-more">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    {% for certification in certificate_awards %}
+                                                                        <div class="credential-details">
+                                                                            <h4 class="capitalize-text">{{ certification.award_name }}</h4>
+
+                                                                            <p class="pad-down-5 capitalize-text">{{ certification.award_institution }}
+                                                                            </p>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                {% endwith %}
+
+                                <div id="price-and-policies">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="font-head"><b>Pricing & Policies</b></h4>
+                                    </div>
+                                    <div class="panel-body pad-top-0">
+                                        <hr class="hr-head">
+                                        <div class="row">
+                                            <div class="col-md-3 no-pad-left">
+                                                <p class="text-muted section-head">
+                                                    <b>Prices</b>
+                                                </p>
+
+                                            </div>
+                                            <div class="col-md-9 expandable2">
+                                                <div>
+                                                    <!--<p><strong>Hourly Price per Student</strong></p>-->
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12 pad-down-2">
+                                                            <div class="row">
+                                                                <div class="col-xs-6">Hourly <span
+                                                                        class="hidden-xs"> Price</span>:
+                                                                <span class="font-head"><b>
+                                                                    &#8358;{{ object.price|floatformat|intcomma }}</b></span>
+                                                                </div>
+                                                                {% if object.monthly_booking %}
+                                                                    <div class="col-xs-6">Monthly <span
+                                                                            class="hidden-xs"> Price</span>: <span
+                                                                            class="font-head"><b>
+                                                                        <!--&#8358;{{ object.monthly_price|floatformat|intcomma }}-->Based on request</b></span>
+                                                                    </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+
+                                                        <!--{% if object.monthly_booking %}
+                                                            <div class="col-sm-12 pad-down-2">
+                                                                <div class="row">
+                                                                    <div class="col-xs-6">Days/week:
+                                                            <span class="font-head"><b>{{ object.days_per_week }}
+                                                                day{{ object.days_per_week|pluralize }}</b></span>
+                                                                    </div>
+                                                                    <div class="col-xs-6">Hours/day:
+                                                            <span class="font-head"><b>{{ object.hours_per_day }}
+                                                                hour{{ object.hours_per_day|pluralize }}</b></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}-->
+
+                                                        <div class="col-sm-12 pad-down-2">
+                                                            <div class="row">
+                                                                <div class="col-xs-6">Extra students: <!--<strong>
+                                                            &#8358;{{ object.extra_student|floatformat|intcomma }} </strong>-->
+                                                                    <span class="font-head"> <b> {{ object.discount }}%
+                                                                        discount</b></span>
+                                                                </div>
+                                                                <div class="col-xs-6">Max.
+                                                                    Students: <span
+                                                                            class="font-head"><b>{{ object.max_student }}</b></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <hr class="hr-styled">
+                                        <div class="row">
+                                            <div class="col-md-3 no-pad-left">
+                                                <p class="text-muted section-head">
+                                                    <b>Availability</b>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <p> {% if object.monthly_booking %}
+                                                    {{ object.tutor.first_name }} is available for hourly, weekly or
+                                                    monthly lessons.<!--can be hired for a few hours at a
+                                                    time, or
+                                                    for monthly lessons of up to {{ object.days_per_week }} day{{ object.days_per_week|pluralize }} per week and
+                                                    {{ object.hours_per_day }} hour{{ object.hours_per_day|pluralize }}
+                                                    per lesson.-->{% endif %}{% if not object.monthly_booking %}
+                                                    {{ object.tutor.first_name }} is only available for hourly
+                                                    lessons.{% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr class="hr-styled">
+                                        <div class="row">
+                                            <div class="col-md-3 no-pad-left">
+                                                <p class="text-muted section-head">
+                                                    <b>Cancellation</b>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <p><span
+                                                        class="font-head"><b>{{ object.cancellation_policy }}:</b> </span> {{ object.cancellation_policy_text }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr class="hr-styled">
+                                        <div class="row">
+                                            <div class="col-md-3 no-pad-left">
+                                                <p class="text-muted section-head">
+                                                    <b>Travel Policy</b>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <p><span class="font-head">{{ object.travel_policy }}</span></p>
+                                                {% if object.tutor.tutoring_address == 'user' %}
+                                                    <p>{{ object.travel_policy_text }}</p>
+                                                {% endif %}
+                                                {% if object.tutor.tutoring_address == 'neutral' %}
+                                                    When you book lessons, they'll be delivered at your home or
+                                                    anywhere else
+                                                    you both agree - whichever works best for you.
+                                                {% endif %}
+                                                {% if object.tutor.tutoring_address == 'tutor' %}
+                                                    <p>Reason: {{ object.tutor.profile.address_reason|title }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <!--<hr class="hr-styled">
+                                        <div class="row">
+                                            <div class="col-xs-3 no-pad-left">
+                                                <i class="icons gfg row-space-4"></i>
+                                            </div>
+                                            <div class="col-xs-9 expandable expandable-trigger-more">
+                                                <div>
+                                                    <p><span class="font-head"><b>Good Fit Guarantee</b></span></p>
+
+                                                    <p>Your first hour is free if you are not fully satisfied.
+                                                        We'll cancel the lesson and help find another tutor or refund
+                                                        your payment.</p>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if can_client_viewing%}
+                        {% if request.user != object.tutor %}
+                            {% block calendar2 %}
+
+                                <div id="hire-tutor" class="visible-xs visible-sm panel" data-ng-cloak>
+                                    <div class=" panel-book clearfix">
+                                        <h4 class="pull-left font-head deep-blur"><b>Hire {{ object.tutor.first_name }}
+                                            to
+                                            Get Started</b></h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="small-screen-calendar" class="">
+                                            {% if not request.is_featured %}
+                                                {% include 'skills/includes/calendar.html' with inc=1 %}
+                                            {% else %}
+                                                {% verbatim %}
+                                                <div ng-controller="HiringCtrl">
+                                                    <div class="row-space-4" ng-show="hour_steps.first">
+                                                        <p class="font-head"><b>When should lessons start?</b></p>
+
+                                                        <p>Let's help you schedule lesson periods that work for you and
+                                                            your tutor. Firstly, do you want hourly or monthly
+                                                            lessons?</p>
+
+                                                        <div class="col-xs-6 no-padding-side radio"
+                                                             style="margin-top: 10px;"
+                                                             ng-repeat="option in booking_options">
+                                                            <label>
+                                                                <input type="radio"
+                                                                       ng-model="user_actions.booking_option"
+                                                                       name="optionsRadios" id="optionsRadios{{$index}}"
+                                                                       value="{{option}}"
+                                                                       ng-change="BookingOptionSelected()">{{option}}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div ng-show="user_actions.booking_option=='Hourly'">
+                                                        <div class="row-space-4" ng-show="hour_steps.second">
+                                                            <p><b>Alright. So how many hours are you considering per
+                                                                lesson?</b></p>
+                                                            <small class="font-head">Hint: if you're unsure, why not
+                                                                start with 2hrs?
+                                                            </small>
+                                                            <select name="hours_per_day" id="hours_per_day"
+                                                                    ng-model="user_actions.hrs_per_day"
+                                                                    class="form-control"
+                                                                    ng-options="no for no in no_of_days"
+                                                                    ng-change="HoursPerDaySelected(hr_per_day)">
+                                                                <option value="">Select number of hours</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="row-space" ng-class="{disabled: valid_no_of_days}"
+                                                             ng-show="hour_steps.third">
+                                                            <p>Great choice! Now select your preferred weekdays so we
+                                                                can reserve your lesson dates. {{tutor.first_name}} is
+                                                                available on: </p>
+
+                                                            <div class="checkbox"
+                                                                 ng-repeat="option in days_taught_by_tutor">
+                                                                <label>
+                                                                    <input type="checkbox"
+                                                                           ng-model="user_actions.days[$index].selected"
+                                                                           name="startCheck" id="startCheck{{$index}}"
+                                                                           ng-change="WeekDaysSelected($index)">{{option}}
+                                                                </label>
+                                                            </div>
+                                                            <small ng-hide="can_display_times.defaultmsg && can_display_times.no_error"
+                                                                   class="show-error">Please select one or more lesson
+                                                                days
+                                                            </small>
+                                                            <button class="btn btn-primary col-xs-12"
+                                                                    ng-click="GetDates()">Get Dates
+                                                            </button>
+                                                        </div>
+                                                        <div class="row-space-4" ng-show="hour_steps.fourth">
+                                                            <p>You're almost done. Please select the exact dates you
+                                                                want lessons to hold e.g.
+                                                                {{user_actions.selectedDays()[0].dates[0].r_format}}</p>
+                                                            <small class="font-head">This helps tutor plan and prepare
+                                                                for lessons
+                                                            </small>
+                                                            <div ng-repeat="day in user_actions.selectedDays()"
+                                                                 class="row-space-4">
+                                                                <div class="">
+                                                                    <select class="form-control" ng-model="day.date"
+                                                                            ng-options="s.date as s.r_format for s in day.dates"
+                                                                            ng-change="DateSelectionComplete()">
+                                                                        <option value="">Select date for
+                                                                            {{day.weekday}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row-space-4" ng-if="hour_steps.fifth">
+                                                            <p>Lastly, what time of the day should lessons start? Please
+                                                                select from the tutor's available times below.</p>
+                                                            <small class="font-head">You'll be able to review all your
+                                                                lessons
+                                                            </small>
+                                                            <div ng-repeat="day in user_actions.selectedDays()"
+                                                                 class="row-space-4">
+                                                                <div class="">
+                                                                    <select class="form-control"
+                                                                            ng-model="day.selected_time"
+                                                                            name="lesson-start-time"
+                                                                            id="lesson-start-time"
+                                                                            ng-options="times for times in day.times"
+                                                                            ng-change="TimeSelectedForClass()">
+                                                                        <option value="">Select start time for
+                                                                            {{day.date}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <!--<select name="lesson-start-time" class="form-control"
+                                                                    id="lesson-start-time"
+                                                                    ng-model="user_actions.start_time"
+                                                                    ng-options="times for times in user_actions.start_times"
+                                                                    ng-change="TimeSelectedForClass()">
+                                                                <option value="">Select lesson start time</option>
+                                                            </select>-->
+                                                        </div>
+                                                        <div class="row-space-4" ng-show="hour_steps.fifth">
+                                                            <div ng-hide="user_actions.HasSelectedStartTimes()">
+                                                                <small ng-show="no_time_set" class="show-error">Please
+                                                                    select a start time.
+                                                                </small>
+                                                            </div>
+                                                            <button class="btn btn-primary col-xs-12 center-block btn-lg"
+                                                                    ng-click="ProceedToCheckout()">Book Lessons
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                    <div ng-show="user_actions.booking_option=='Monthly'">
+                                                        <div class="row-space-4" ng-show="monthly_steps.second">
+                                                            <p>Awesome. So how many months are you considering for
+                                                                lessons, and how many hours should each lesson last?</p>
+                                                            <small class="font-head">Hint: if you're unsure, why not
+                                                                start with one month and 1-2 hours per lesson?
+                                                            </small>
+                                                            <select ng-model="user_actions.no_of_months"
+                                                                    class="form-control input-sm"
+                                                                    ng-options="no for no in max_no_of_months"
+                                                                    ng-change="NoOfMonthSelected()">
+                                                                <option value="">No of months</option>
+                                                            </select>
+
+                                                            <div class="pad-down-10"></div>
+                                                            <select ng-model="user_actions.hrs_per_day"
+                                                                    class="form-control input-sm"
+                                                                    ng-options="no for no in hrs_per_day_range"
+                                                                    ng-change="NoOfMonthSelected()">
+                                                                <option value="">How many hours?</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="row-space-4" ng-show="monthly_steps.second">
+                                                            <select class="form-control input-sm"
+                                                                    ng-model="user_actions.weeks_up_front"
+                                                                    ng-change="WeekUpFront()"
+                                                                    ng-options="s.option as s.text for s in weeks_up_front_options">
+                                                                <option value="">When should lessons start?
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="row-space-4" ng-show="monthly_steps.third">
+                                                            <p>Great choice! Please select <span class="font-head">at most {{tutor.days_per_week}} day(s)</span>
+                                                                per week so we can reserve your lesson dates.
+                                                                {{tutor.first_name}} is available on:</p>
+
+                                                            <div class="checkbox"
+                                                                 ng-repeat="option in days_taught_by_tutor">
+                                                                <label>
+                                                                    <input type="checkbox"
+                                                                           ng-model="user_actions.days[$index].selected"
+                                                                           name="monthCheck" id="monthCheck{{$index}}"
+                                                                           ng-change="MonthWeekDaysSelected($index)">{{option}}
+                                                                </label>
+                                                            </div>
+                                                            <small ng-hide="can_display_times.defaultmsg && can_display_times.no_error">
+                                                                <span ng-show="user_actions.selectedDays().length == 0">Please select at least a weekday</span>
+                                                                <span ng-show="user_actions.selectedDays().length > days_per_week">Please ensure you select no more than the maximum days allowed by the tutor.</span>
+                                                            </small>
+                                                            <button class="btn btn-primary col-xs-12"
+                                                                    ng-click="GetDatesForMonth()">Get Dates
+                                                            </button>
+                                                        </div>
+                                                        <div class="row-space-4" ng-if="monthly_steps.fourth">
+                                                            <p>Lastly, what time of the day should lessons start? Please
+                                                                select from the tutor's available times below.</p>
+                                                            <small class="font-head">You'll be able to review all your
+                                                                lessons
+                                                            </small>
+                                                            <div class="row-space-4"
+                                                                 ng-repeat="option in user_actions.getSelectedWeekDays()">
+                                                                <select name="lesson2-start-time" class="form-control"
+                                                                        id="lesson2-start-time"
+                                                                        ng-model="user_actions.selectedDays()[$index].selected_time"
+                                                                        ng-options="times for times in user_actions.selectedDays()[$index].times">
+                                                                    <option value="">Select lesson start time for
+                                                                        {{option}}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row-space-4" ng-show="monthly_steps.fourth">
+                                                            <div ng-hide="user_actions.HasSelectedStartTimes()">
+                                                                <small ng-show="no_time_set" class="show-error">Please
+                                                                    select a start time.
+                                                                </small>
+                                                            </div>
+                                                            <button class="btn btn-primary col-xs-12 center-block btn-lg"
+                                                                    ng-click="ProceedToCheckout()">Book Lessons
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endverbatim %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+        <div id="reviews" class="room-section webkit-render-fix ">
+            <div class="special-row-element row">
+                <div class="panel">
+                    <div class="container margin-bottom-5">
+                        <div class="row">
+                            <div class="col-md-8 padding-top-25">
+                                {% if reviews_count > 0 %}
+                                    {# {% if object.reviews.count == 0 %} #}
+                                    <div class="panel-body">
+                                        <h4 class="row-space-4 font-head">
+                                            {{ object.reviews.count }} Review{{ reviews.count| pluralize }}
+                                            {# 5 Reviews #}
+                                            {% if request.is_featured %}
+                                                <div class="rating pull-right">
+                                                    {% for star in object.rating_integer %}
+                                                        {# {% for star in "****" %} #}
+                                                        <span class="opera-star icon-resize">★</span>
+                                                    {% endfor %}
+                                                    {% if object.rating_decimal %}
+                                                        <i class="fa fa-star-half-full icon-resize"></i>
+                                                    {% endif %}
+                                                    <span class="review-text">{{ reviews.count }} Review{{ reviews.count| pluralize }}</span>
+                                                    {# <span class="review-text"> (4)</span> #}
+                                                </div>
+                                            {% else %}
+                                                <div class="star-rating pull-right">
+                                                <span class="foreground">
+                                                    {% for star in object.rating_integer %}
+                                                        {# {% for star in "****" %} #}
+                                                        <i class="fa fa-star icon-resize"></i>
+                                                    {% endfor %}
+                                                    {% if object.rating_decimal %}
+                                                        <i class="fa fa-star-half-full icon-resize"></i>
+                                                    {% endif %}
+                                                    {# </span> (4.52) #}
+                                                </span> ({{ object.reviews.average_score|floatformat }})
+                                                </div>
+                                            {% endif %}
+                                        </h4>
+                                    </div>
+                                    <div class="review-content">
+                                        <div class="panel-body">
+                                            {% for rater in ratings %}
+                                                {# {% for rater in "**" %} #}
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="pull-left review-image">
+                                                            {% if rater.commenter.is_staff %}
+                                                            {% else %}
+                                                                <a href="{{ rater.commenter.get_absolute_url }}"
+                                                                   class="media-photo media-round row-space-1 pull-right"
+                                                                   name="review_23339042" target="blank">
+                                                                    {% cloudinary rater.reviewer_image RATING_THUMBNAIL alt="{{rater.commenter.first_name}}" %}
+                                                                    <div class="text-center">{{ rater.commenter.first_name }}</div>
+                                                                </a>
+                                                            {% endif %}
+
+                                                            {# <a href="#" class="media-photo media-round row-space-1 pull-right"     name="review_23339042" target="blank"> #}
+                                                            {# <img src="{% static 'img/user/3.jpg' %}" class="img-circle" height="68" width="68"> #}
+                                                            {# <div class="text-center review-name">Olamide</div> #}
+                                                            {# </a> #}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="row-space-2">
+                                                            <!--{# <div data-review-id="23339042" data-original-text="{{ rater.review }}"
+                                                                 class="review-text expandable expandable-trigger-more row-space-2"> #}
+
+                                                                {# <div class="expandable-content"> #}
+                                                                    {# <p></p> #}
+                                                                {# </div> #}
+                                                            {# </div> #}-->
+                                                            <div data-review-id="23339042"
+                                                                 data-original-text="{{ rater.review }}"
+                                                                 class="review-text expandable expandable-trigger-more row-space-2">
+
+                                                                <div class="expandable-content">
+                                                                    <p class="min-space">{{ rater.review }}</p>
+
+                                                                    <div class="text-muted review-subtext margin-top-15">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row">
+                                                                                {# <div class="location pull-left"> #}
+                                                                                {# <i class="fa fa-map-marker"></i> #}
+                                                                                {# </div> #}
+                                                                                <div class="location pull-left">
+                                                                                    <i class="fa fa-map-marker"></i>{{ rater.commenter.location }}
+                                                                                </div>
+                                                                                <div class="date pull-right">{{ rater.modified }}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% if not forloop.last %}
+                                                    <div class="row row-space-2">
+                                                        <div class="col-md-9 col-md-offset-3">
+                                                            <hr class="hr-styled">
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="pagination-container pull-left">
+                                                <nav>
+                                                    {% bootstrap_paginate ratings range=5 show_prev_next="false" show_first_last="true" %}
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="review-content">
+                                        <div class="panel-body">
+                                            <h4 class="row-space-4 text-center-sm font-head margin-10">
+                                                <b>Book Lessons</b>
+                                            </h4>
+
+                                            <p>
+                                                Book a lesson with this tutor and you could give the very first review!
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="host-profile" class="room-section webkit-render-fix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 pad-top-40 padding-bottom-50">
+                        <h4 class="row-space-4 text-center-sm font-head pad-down-10">
+                            <b>About the tutor, {{ object.tutor.first_name }}</b>
+                        </h4>
+
+                        <div class="row">
+                            <div class="col-md-3 text-center pad-down-10">
+                                <a href="{{ object.tutor.get_absolute_url }}" class="media-photo media-round">
+                                    {% cloudinary object.tutor.profile_pic USER_PROFILE_THUMBAIL alt=object.tutor.first_name %}
+                                </a>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="row space-2 col-sm-12">
+                                    {% if object.tutor.profile.description %}
+                                        {{ object.tutor.profile.description|capfirst }}
+                                    {% else %} No description given.
+                                    {% endif %}
+
+                                    <div class="pad-top-15 pad-down-2">
+                                        <div class="row">
+                                            <div class="col-sm-12 no-pad-left">Private {{ object.skill.name }} Tutor
+                                                in {{ object.location }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="pad-down-2">
+                                        <div class="row">
+                                            <div class="col-xs-6 no-pad-left">Joined
+                                                in {{ object.tutor.last_visit|date:"F o" }}
+                                            </div>
+                                            <div class="col-xs-6">Responds {{ object.get_response_time }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if request.user != object.tutor %}
+                                    <div id="contact_wrapper">
+                                        {% if request.user.is_staff %}
+                                            Phone no: {{ object.tutor.primary_phone_no.number }}<br/>
+                                            Email: {{ object.tutor.email }}<br/>
+                                            Tags: {{object.tag_display}} <br/>
+                                            {% if object.skill.testable %}
+                                            Score: {{ object.sitting.first.score }}<br/>
+                                            {% endif %}
+                                            <strong>Guarantors</strong> <br>
+                                            {% for guarantor in object.tutor.guarantor_set.all %}
+                                                Email: {{guarantor.email}} <br>
+                                                Phone nO: ({{guarantor.phone_no}}) <br>
+                                                first name: {{guarantor.first_name}} <br>
+                                                last_name : {{guarantor.last_name}} <br>
+                                                organization: {{guarantor.organization}} <br>
+                                                No of years: {{guarantor.no_of_years}} <br>
+                                            {% endfor %}
+                                                <form action="{{request.path}}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="text" name="request_pk"/>
+                                                    <select name="request_action" id="rq">
+                                                        <option value="1">Link Tutor</option>
+                                                        <option value="2">Schedule Meeting</option>
+                                                        <option value="3">Notify_client of tutor profile</option>
+                                                    </select>
+                                                    <button>Submit</button>
+                                                </form>
+                                                {% if not object.tutor.profile.request_pool %}
+                                                    <a class="btn btn-primary btm-sm" href="{% url 'users:request_pool' object.tutor_id object.id %}">Add to Request Pool</a>
+                                                {% endif %}
+                                            
+                                        {% else %}
+                                            <!--<a {% if not request.is_authenticated %}id="signup_nav"
+                                               href="{% url 'account_signup' %}"{% else %}
+                                               href="{% url 'request_meeting_redirect' object.pk %}"
+                                               id="host-profile-contact-btn"{% endif %}
+                                               class="{% if not request.is_authenticated %}signup_nav{% else %}req-button{% endif %} btn btn-primary btn-small">
+                                                <i class="fa fa-search {% if request.is_featured %}hidden{% endif %}"></i>Request
+                                                a meeting
+                                            </a>-->
+                                        {% endif %}
+                                        {#                                        <a href="#}
+                                        {#                                                #}
+                                        {#                                                #}
+                                        {#                                                #}
+                                        {#                                                #}
+                                        {#                                                {% if request.is_authenticated %}{% url 'request_meeting_redirect' object.pk %}{% else %}{% url "account_signup" %}?next={% url 'request_meeting_redirect' object.pk %}{% endif %}"#}
+                                        {#                                           class="btn btn-small btn-primary req-button">#}
+                                        {#                                            Request a Meeting#}
+                                        {#                                        </a>#}
+                                        <!--<a href="javascript:void(0)" id="request_info" style="padding-left: 10px;">What
+                                            does this mean?</a>
+
+                                        <div class="padding-top-15 hidden request_info_detail">You would be required to
+                                            signup and make a down
+                                            payment to meet with this tutor.
+                                        </div>
+                                    </div>-->
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if request.user == object.tutor %}
+        {% else %}
+            <!--<section id="tutor-action" class="padding-space-4 padding-top-40 row xs-no-margin-left-right white-bg">
+                <div class="col-sm-12 col-md-12 col-xs-12">
+                    <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2 col-xs-12 row-space-4">
+                        <h2 class="text-center font-head">Book lessons with {{ object.tutor.first_name }}
+                        </h2>
+
+                        <p class="text-center pad-down-15">{{ object.tutor.profile.gender|gender_display }} won't be
+                            paid till you confirm all lessons have been fully
+                            delivered</p>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12 text-center row-space-4">
+                                <i class="infographs book row-space-4"></i>
+
+                                <div class="help-margin">
+                                    <h4 class="profile-help"><b>1. Schedule lessons</b></h4>
+
+                                    <p class="inline-block font-15">
+                                        Set the days and times you want lessons to hold using the tutor's calendar
+                                        above.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12 text-center row-space-4">
+                                <i class="infographs load row-space-4"></i>
+
+                                <div class="help-margin">
+                                    <h4 class="profile-help"><b>2. Load wallet</b></h4>
+
+                                    <p class="inline-block font-15">
+                                        Easily pay for lessons online or via bank which is stored safely in your Tuteria
+                                        wallet.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12 text-center row-space-4">
+                                <i class="infographs learn row-space-4"></i>
+
+                                <div class="help-margin">
+                                    <h4 class="profile-help"><b>3. Start learning!</b></h4>
+
+                                    <p class="inline-block font-15">
+                                        Tutor connects with you to plan and deliver lessons, and only gets paid at the
+                                        end.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <div id="launch-section">
+                <!-- Request a Tutor Section -->
+                <!--<div class="row padding-top-50 text-center padding-bottom-50 deepblue-bg space-bottom-mob-20 padding-top-mob-10">
+                    <h3 style="color:white" class="hidden-xs">Not sure this tutor is perfect for you?</h3>
+
+                    <h3 style="color:white" class="visible-xs">Need help finding a tutor?</h3>
+
+                    <div>
+
+                        <button type="button" class="btn btn-lg btn-primary margin-sides"
+                                data-toggle="modal" data-target="#search_only_form"><i
+                                class="fa fa-search {% if request.is_featured %}hidden{% endif %}"></i>&nbsp;Find
+                            another tutor
+                        </button>
+
+                        
+                            Place a request
+                            &nbsp;
+                            <i class="fa fa-chevron-circle-right {% if request.is_featured %}hidden{% endif %}"></i>
+                        </a>
+
+                        <!--<div style="display: inline-block; padding-top: 0.4em; padding-left: 0.6em; vertical-align: top; padding:2px; padding-right: 20px; padding-left: 10px; border: 2px solid #59afe1; border-radius: 5px;">
+                            <div style="display: inline-block; padding-right: 5px">
+                                <img src="{% static 'img/tutor/call.png' %}" class="img-responsive center-block"
+                                     style="width:30px"/>
+                            </div>
+                            <div style="display: inline-block">
+                                        <span style="display: block; text-align: left; font-size: 14px; line-height: 1; margin-bottom: 2px; color:white;">
+                                            or simply
+                                        </span>
+                                        <span style="display: block; font-size: 18px; text-align: left; font-weight: 800; line-height: 1; color:white;">
+                                            Request an Interview
+                                        </span>
+                            </div>
+                        </div>-->
+<section class="row protection large-padding">
+    <div class="page-container-full">
+      <div class="row">
+        <div class="col-lg-6 col-sm-8 col-sm-push-2 col-lg-push-3 text-center">
+          <div class="media-photo">
+            <img width="85" height="85" src="https://a2.muscache.com/airbnb/static/business-travel/company_onboard_flow/guarantee-8f08072a2b624c31813fb62843560702.png">
+          </div>
+          <h2>
+            <span class="font-head">
+              Guaranteed Satisfaction
+            </span>
+          </h2>
+          <p>
+            If you're not completely satisfied with the lessons received, we'll replace the tutor at no extra cost to you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+        </div>
+
+    {% endspaceless %}
+    {{ y.management_form }}
+{% endblock %}
+{% block request_section %}
+{% endblock request_section %}
+{% block javascript %}
+    <script>
+        $('#request_info').click(function () {
+            $('.request_info_detail').toggleClass('hidden');
+        })
+    </script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&sensor=false&callback=initializeCallback"></script>
+
+    <script>
+        window.___gcfg = {
+            lang: 'en-US',
+            parsetags: 'onload'
+        };
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+    </script>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block bottom_footer %}
+{% endblock %}
+{% block footer2 %}{% endblock footer2 %}

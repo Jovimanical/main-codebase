@@ -1,0 +1,110 @@
+{% extends 'skills/new-subject-wizard/1-describe-subject.html' %}
+{% load staticfiles i18n bootstrap3 add_attr %}
+{% block main_content %}
+<div class="row">
+	<div class="col-sm-12">
+		<form action="{% url 'users:set_price' quiz_url %}" id='subject-price-form' method="post" novalidate>
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-md-6 col-sm-8">
+					<div class="form-group">
+						{% bootstrap_label form.price.label label_class='control-label' %}
+						<div class="input-group">
+							<span class="input-group-addon">&#8358;</span>
+							{{form.price|add_attributes:"class:form-control"}}
+							<span class="hidden-xs input-group-addon">per hour per student</span>
+						</div>
+						<div class="visible-xs">per hour</div>
+
+						<div class="input-hint">
+							How to behave with pricing when iwn ewow wo
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<div class="form-group">
+						{% bootstrap_label form.max_student.label label_class="control-label" %}
+						{{ form.max_student|add_attributes:"class:form-control" }}
+						<div class="input-hint">
+							How to behave with pricing when iwn ewow wo
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						{% bootstrap_label form.discount.label label_class="control-label" %}
+						{{form.discount|add_attributes:"class:form-control"}}
+						<div class="input-hint">
+							Clients pay &#8358;<span id="discount_price">500</span> for each extra student
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+
+					<div class="checkbox">
+						<label>
+							{{form.monthly_booking}} <strong>Allow Monthly Booking?</strong>
+						</label>
+					</div>
+					<div class="input-hint">
+						How to behave with pricing when iwn ewow wo
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<br>
+			<div id='monthly_support' class="row">
+				<div id='calc-container' class='col-sm-12 row'>
+					<div class="col-sm-6">
+						<div class="form-group">
+							{% bootstrap_label form.hours_per_day.label label_class='control-label' %}
+							{{form.hours_per_day|add_attributes:"class:form-control"}}
+						</div>
+						<div class="form-group">
+							<label class="control-label">
+								Weekly price
+							</label>
+							<h3 style="margin-top:0">
+								<span class="label label-grey">&#8358;<span id="weekly_price">0</span> /student</span>
+							</h3>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group ">
+							{% bootstrap_label form.days_per_week.label label_class='control-label' %}
+							{{form.days_per_week|add_attributes:"class:form-control"}}
+						</div>
+						<div class="form-group">
+							<label class="control-label">
+								Monthly price
+							</label>
+							<h3 style="margin-top:0">
+								<span class="label label-grey">&#8358;<span  id="monthly_price">0</span> /student</span>
+							</h3>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<br><br>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-8">
+					<input class="btn btn-lg btn-block btn-primary" type="submit" value="{% trans "Submit" %}"/>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock main_content %}
+{% block request_section %}{% endblock request_section %}
+{% block custom_js %}
+    <script>
+        window.CreateStep = 2;
+    </script>
+    <script>
+        $('#body-container').removeClass('hidden');
+    </script>
+{% endblock custom_js %}

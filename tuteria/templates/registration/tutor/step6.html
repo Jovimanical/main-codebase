@@ -1,0 +1,147 @@
+{% extends 'registration/tutor/step4.html' %}
+{% load staticfiles %}
+{% block css %}
+    {{ block.super }}
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+{% endblock css %}
+{% block wizard_progress %}{% endblock %}
+{% block title %}Application Completed!{% endblock title %}
+{% block body %}
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=781136408623359&version=v2.3";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    {{ block.super }}
+{% endblock body %}
+{% block wizard_title %}
+    <div class="col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0">
+        <img src="{% static 'img/tutor/final.png' %}" class="img-responsive center-block"/>
+    </div>
+{% endblock %}
+{% block process %}{% endblock process %}
+{% block wizard_container %}
+    <div class="col-sm-10 col-xs-12 col-sm-offset-1 col-xs-offset-0 padding-bottom-50">
+        <h2 class="text-center">Thanks {{ request.user.first_name }}!</h2>
+        <div class="row-space-top-4 row-space-4">
+            {% if request.user.profile.application_status == 2 %}
+
+                <div class="well bg-info">
+                    We'll review your application shortly and respond within 48 hours to let you know if your
+                    application has been approved so we can get you started!
+                    {% if request.user.is_authenticated and not request.user.email_verified %}
+                        <br><br>
+                        <span style="color:red" class="font-head">IMPORTANT:</span> Please go to your inbox (or spam)
+                        now to confirm your email. All applications with unconfirmed
+                        emails are automatically denied by our system after 48 hours.
+                    {% endif %}
+                </div>
+
+            {% endif %}
+        </div>
+        <div class="col-xs-12 well">
+
+            <h4><b>I've confirmed my email, what next?</b></h4>
+            <div class="row-space-4">
+                <ol>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        If your application is approved, you must return to the site to add the subjects you
+                        want to teach, and set your prices. You can teach any number of subjects with your profile, but you need to pass the test for each subject.
+                    </li>
+                    <li>Please note you that must verify your identity before you can create subjects. Verified IDs help clients feel safe to hire you.
+                    </li>
+                    <li style="margin-top:5px; margin-bottom: 10px;">
+                        Keep in touch on social media! We'll share new tutoring opportunities in your area, and you can
+                        talk to us directly from there.
+                        <div class="row row-space-top-4">
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <div class="fb-like" data-href="https://www.facebook.com/tuteriacorp"
+                                     data-layout="button_count" data-action="like" data-show-faces="false"
+                                     data-share="false"></div>
+                            </div>
+
+                            <div class="col-sm-4"><a class="twitter-follow-button"
+                                                     href="https://twitter.com/tuteriacorp"
+                                                     data-dnt="true" data-show-screen-name="false">Follow on Twitter</a>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <a class="g-plusone" data-href="https://plus.google.com/114015908906926908587/"></a>
+                            </div>
+
+                        </div>
+                    </li>
+                    <!--<li style="margin-top:5px; margin-bottom: 10px;">
+			If approved to tutor, we help you grow your earnings from 65% to 85% per booking based on your performance with clients. <a href="{% url 'tutor_levels' %}">Learn more about levels</a>
+			</li>-->
+                    <!--<li style="margin-top:15px; margin-bottom: 5px;">-->
+                    <!--    <span class="font-head">Invite people to Tuteria!</span> Apart from what you earn through-->
+                    <!--    tutoring, you earn more money by referring people to Tuteria!-->
+                    <!--</li>-->
+                </ol>
+            </div>
+
+            <!--<div class="col-sm-6 col-sm-offset-6 col-xs-12">-->
+
+            <!--    <a href="{% url 'tutor_levels' %}" class="pull-right btn btn-primary btn-block btn-lg"> See How You Earn-->
+            <!--        &#8594;-->
+            <!--    </a>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+
+    </div>
+{% endblock %}
+{% block infographics %}{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static "social-likes.min.js" %}"></script>
+    <script>window.twttr = (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+        if (d.getElementById(id))return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        t._e = [];
+        t.ready = function (f) {
+            t._e.push(f);
+        };
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
+    <!-- Facebook Conversion Code for Tutors who Completed the Application Process -->
+    <script>(function () {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+        }
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', '6031671702755', {'value': '0.00', 'currency': 'USD'}]);
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none"
+                   src="https://www.facebook.com/tr?ev=6031671702755&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1"/>
+    </noscript>
+
+    <!-- Twitter Conversion Code for Tutors who Completed the Application Process -->
+    <!-- <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        twttr.conversion.trackPid('l69wl', {tw_sale_amount: 0, tw_order_quantity: 0});</script>
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt=""
+             src="https://analytics.twitter.com/i/adsct?txn_id=l69wl&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0"/>
+        <img height="1" width="1" style="display:none;" alt=""
+             src="//t.co/i/adsct?txn_id=l69wl&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0"/></noscript> -->
+{% endblock javascript %}
+{% block notification_tawk %}{% endblock %}

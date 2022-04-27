@@ -1,0 +1,150 @@
+{% extends 'pages/state_view.html' %}
+{# {% block ng_app %}ng-app=referralBtn{% endblock %} #}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc %}
+{% block title %}Partnerships | Tuteria Nigeria{% endblock title %}
+{% block nav %}
+{% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block fixed %} {% endblock fixed %}
+
+{% block carousel_image %}
+{% if request.is_phone %}
+<div class="item active">
+    <div class="caro partnership"></div>
+    {# <img src="{% static "img/backgrounds/background_mobile.jpg" %}" alt="Private home lesson tutors" class="src"> #}
+</div>
+{% else %}
+<div class="item active">
+    <div class="caro partnership"></div>
+</div>
+{% endif %}
+{% endblock carousel_image %}
+{% block css %}
+{{block.super}}
+<style>
+
+    .login-prompt {
+        position: relative;
+        padding-left: 165px;
+    }
+
+    .resolution-slab {
+        position: relative;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        padding-left: 4.5em;
+        padding-right: 4.5em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media(max-width: 768px){
+        .resolution-slab {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+    }
+    .resolution-slab-header {
+        margin-top: 0.3125em;
+        margin-bottom: 1.5625em;
+    }
+    .content-carousel p {
+        padding-top: 10px;
+        font-size: inherit;
+        color: inherit;
+    }
+</style>
+{% endblock css%}
+{% block carousel_content %}
+<div class="row text-center padding-bottom-50">
+	<div class="jumbo-header padding-bottom-50" style="margin-top: -20px">
+		
+		<h2 class="myh2 referrals-heading text-special row-space-3 space-for-mobile-20">
+			<b class="white font-head">
+				You & Tuteria.
+			</b>        
+		</h2>
+		<h3 style="color:white">
+			What can we accomplish better together?
+		</h3>
+
+    </div>
+    {% endblock %}
+    {% block main_content %}
+    <section class="padding-bottom-50 row white-bg">
+        <div class="col-sm-12 col-xs-12 padding-bottom-50" style="margin-top: -50px">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-lg-6 col-xs-12 col-lg-offset-3 col-xs-offset-0 col-sm-8 col-sm-offset-2">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="small-12 resolution-slab">
+                                <div class="text-center ">
+                                    <img alt="Icon-question" src="{% static "img/backgrounds/icon-question.png" %}">
+                                </div>
+                                <div class="padding-top-bottom-10">
+                                    <h3 class="h4 text-center font-head blue-font"><b>Tell us how we can partner</b></h3>
+                                    {# <p>Thank you for partnering with us. We will be in touch shortly.</p> #}
+                                </div>
+                                <form action="{{ request.path }}" method="post" id="base_request_form" novalidate>
+                                    {% csrf_token %}
+                                    <div class="form-group {% if form.name.errors %} has-error {% endif %}">
+                                        {{form.name|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please input your name" }} {% if form.name.errors %}
+                                        <span class="help-block">{{ form.name.errors|join:"<br \>" }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                                        {{ form.email|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your email address name" }}
+                                        {% if form.email.errors %}
+                                        <span class="help-block">{{ form.email.errors|join:"<br \>" }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group {% if form.company_name.errors %} has-error {% endif %}">
+                                        {{form.company_name|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please input your company name" }}
+                                    </div>
+                                    <div class="form-group {% if form.state.errors %}has-error{% endif %}">
+                                        {{ form.state|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please select a state" }}
+                                        {% if form.state.errors %}
+                                        <span class="help-block">{{ form.state.errors|join:"<br \>" }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group {% if form.body.errors %}has-error{% endif %}">
+                                        {{ form.body|add_attributes:"class:form-control,rows:6,required:true,data-parsley-error-message:How can we work together" }}
+                                        {% if form.body.errors %}
+                                        <span class="help-block">{{ form.body.errors|join:"<br \>" }}</span>
+                                        {% endif %}
+                                    </div>                         
+                                    <div class="form-group padding-top-10">
+                                        <button id="submit_btn" data-loading-text="Loading..."
+                                        class="btn btn-lg btn-block btn-primary big-btn"
+                                        >{% trans "Send" %}</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section> 
+
+    {% endblock %}
+    {% block request_section %}{% endblock request_section %}
+    {% block notification_tawk %}{% endblock notification_tawk %}
+    {% block footer %}{% endblock footer%}
+    {% block javascript %}
+    {% include "includes/_scripts.html" %}
+
+    <script>
+        window.INVITEES = JSON.parse("{{invitees|escapejs}}");
+    </script>
+    <script src="{% static "js/angular/angular.js" %}"></script>    
+    <script>
+        window.currentPage = "Referrals";
+    </script>
+    <script src="//apis.google.com/js/client.js"></script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+
+    {% endblock javascript %}

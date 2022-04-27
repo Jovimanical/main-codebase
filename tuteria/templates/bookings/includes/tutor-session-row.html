@@ -1,0 +1,52 @@
+{% load add_attr %}
+<div class="panel row">
+    <div class="panel-heading clearfix single-session"
+         role="tab" id="heading{{ index }}">
+        <div class="row">
+            <div class="col-xs-4 col-sm-5 no-padding-right">
+                <div class="hidden-xs">{{ session.start|date:'l, F j' }}</div>
+                <div class="visible-xs eleven-font">{{ session.start|date:'D, N j' }}</div>
+            </div>
+            <div class="col-xs-4 col-sm-3 eleven-font">
+                {{ session.start|date:'fA'|lower }}-{{ session.end|date:'fA'|lower }}</div>
+            <div class="col-xs-4 col-sm-3 no-padding-left col-sm-offset-1 text-center">
+                {% if session.is_due and session.possible_status %}
+                    <a class="no-underline btn btn-sm btn-primary collapsed"
+                       data-toggle="collapse" data-parent="#accordion" href="#collapse{{ index }}"
+                       aria-expanded="true" aria-controls="collapseOne">Submit</a>
+                {% else %}
+                    <span class="label label-{{ session.status_class }}">{{ session.get_status_display|title }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="collapse{{ index }}" class="panel-collapse collapse" role="tabpanel"
+         aria-labelledby="   heading{{ index }}">
+        <div class="panel-body">
+            <h4>Welcome Back</h4>
+
+            <p>Indicate that this lesson was taught. Your client would be able to confirm it.</p>
+
+            <form action="{% url 'users:update_session_status' session.pk %}" method="post" id="session_form">
+                {% csrf_token %}
+                {{ session_form.lesson_taught }}
+                <div class="row row-space-2">
+                    <div class="col-sm-4 col-sm-offset-8 col-xs-6 col-xs-offset-0">
+                        <button class="btn btn-block btn-success" id="taught-btn">
+                            Lesson Taught
+                        </button>
+                    </div>
+                </div>
+                <div class="had-issues">
+                    <a class="issues-toggle pull-right" href="javascript:void(0)">Had any issues?</a>
+
+                    <div id="issue-form-group" class="form-group hide">
+                        {{ session_form.issue|add_attributes:'class:form-control' }}
+                        <small class="help-block">Your response helps us provide a solution</small>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

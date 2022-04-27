@@ -1,0 +1,120 @@
+{% load staticfiles %}
+    <section id="firstss" class="padding-bottom-50 padding-top-25 padding-top-mob-0 row white-bg">
+    <div class="container mobile-top-25 no-padding-total">
+        <div class="row">
+            <div class="icon-box-6 text-center"> 
+            <h2 class="text-special row-space-3 font-head padding-top-25">
+      				<b>
+      					How it works
+      				</b>        
+      			</h2>       
+	                <div class=" col-sm-4 col-md-4 row-space-4">
+                    <div class="icon-box-6-item text-center">                    
+                     <i class="invite"></i>
+                     <h3 class="text-center">
+                      {% if request.is_featured %}
+                      <b>1. Invite People</b>
+                      {% else %}
+                      1. Invite People
+                      {% endif %}
+                      <br></h3>
+                      <span class="inline-block">Invite clients to hire tutors on Tuteria, and they will enjoy &#8358;1,500 discount off their first lesson.
+                      </span>
+                        </div>
+                    </div>
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="fifth"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>2. Earn Money</b>
+                                {% else %}
+                                    2. Earn Money
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">You'll get 10% commission for the first 3 months if they continue their lessons every month. 
+                      </span>
+                        </div>
+                    </div>
+
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="shopping"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>3. Go Shopping!</b>
+                                {% else %}
+                                    3. Go Shopping!
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">Easily withdraw earnings to your bank and go shopping, or use them as discount to hire tutors. 
+                      </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   <section id="firstss" class="value-proposition page-container-full rtl-col">
+    <div class="row">
+      <div class="col-md-7 col-sm-7 col-lg-7 col col-image hidden-xs">
+        <div class="area" style="background-image: url({% static "img/backgrounds/invite.jpg" %}); background-position-x: left;"></div>
+      </div>
+      <div class="col-md-5 col-sm-5 col-lg-5 col col-text">
+        <div class="area large-padding">
+          <div class="section-header">
+            <div class="h2 heading">
+              <span class="font-head">
+                How much you earn for every referral
+              </span>
+            </div>
+          </div>
+          <div class="h4 font-head">
+            By referring a client
+          </div>
+          <p>
+            For example, if they spend &#8358;40,000/mth, you'll get &#8358;4,000 for 3 months - making &#8358;12,000 - if they continue lessons.
+          </p>
+          <div class="h4 font-head">
+            By referring a tutor
+          </div>
+          <p>
+            If the tutor is approved, we will send you additional &#8358;2,000 when they deliver their first lesson of ₦15,000 and above. 
+          </p>
+
+
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 padding-top-25 row">
+                <div class="">
+
+		        {% if request.user.is_authenticated %}
+		                        <a href="{% url 'referral_confirm' %}" class="btn btn-danger btn-lg col-xs-12 big-btn">
+		                                Start inviting friends
+		                            </a>
+		            
+		            {% else %}
+		                   
+                    <a href="{% url 'account_login' %}?next=/invite" class="btn btn-danger btn-lg col-xs-12 big-btn login_nav2">
+                        Login to invite
+                    </a>
+		            
+		        {% endif %}  
+                </div>   
+            </div>
+            <div class="row col-sm-12 col-xs-12 padding-top-10 " style="font-size: 12px">                	
+                	<p>Earnings are paid after a completed lesson</p>
+                </div>           	
+            
+            
+        </div>
+      </div>
+    </div>
+  </section>   
+    <section id="one-on-one-fourth" class="row white-bg">
+        <div class="container side_by_side">
+            {% include "includes/achievments.html" %}
+            <hr class="hr-styled "style="margin:0">
+        </div>
+    </section>
+    {# {% endif %} #}

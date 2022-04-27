@@ -1,0 +1,22 @@
+<h4 class="font-head row-space-4 brightgreen" style="line-height:0">
+{% if not request.is_featured %}Region{% else %}<b>Region</b>{% endif %}
+</h4>
+<label class="control-label margin-bottom-5">Select a region that best captures your location</label><br>
+<div class="">
+    <div class="list-group">
+        {% for rr in miniRegion %}
+            <a class="list-group-item">
+                <div class="radio" style="margin-top: 0; margin-bottom: 0"> 
+                    <label for="id_region_{{forloop.counter}}"> 
+                        <input style="height: 30px; width: 22px; margin-right: 10px;" 
+                            type="radio" name="region" id="id_region_{{forloop.counter}}" value="{{rr.title}}">
+                        <h5 style="margin-left: 10px" class="list-group-item-heading">
+                            {{rr.title}}</h5>
+                        <small style="margin-left: 10px" class="list-group-item-text">
+                            {{rr.areas|join:", "}}</small>
+                    </label>
+                </div>
+            </a>
+        {% endfor %} 
+    </div> 
+</div>

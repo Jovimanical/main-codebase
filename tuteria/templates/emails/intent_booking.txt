@@ -1,0 +1,36 @@
+Hi {{ booking.user.first_name }},
+
+Take another look at {{ booking.ts.tutor.first_name }}: {{ booking.ts.skill.name }} tutor in {{ booking.ts.tutor.vicinity }}. You can review the tutor's experience, credentials and teaching methods to see if they meet your standards, and you can easily book hourly or monthly appointments with tutor for your upcoming lessons.
+http://{{ site.domain }}{{ booking.ts.get_absolute_url }}
+
+If the tutor isn't quite right for you, maybe you would like these similar {{ booking.ts.skill.name|title }} tutors.
+
+ {% if first %}
+{{first.tutor.get_full_name}}. ₦{{first.price|floatformat:0}}
+{{first.reviews.count}} Review{{first.reviews.count|pluralize}} | {{first.tutor.vicinity}} {{first.credentials}}
+http:////{{ site.domain }}{{ first.get_absolute_url }}
+{% endif %}
+
+{% if second %}
+{{second.tutor.get_full_name}}. ₦{{second.price|floatformat:0}}
+{{second.reviews.count}} Review{{second.reviews.count|pluralize}} | {{second.tutor.vicinity}} {{second.credentials}}
+http:////{{ site.domain }}{{ second.get_absolute_url }}
+{% endif %}
+
+{% if third %}
+{{third.tutor.get_full_name}}. ₦{{third.price|floatformat:0}}
+{{third.reviews.count}} Review{{third.reviews.count|pluralize}} | {{third.tutor.vicinity}} {{third.credentials}}
+http:////{{ site.domain }}{{ third.get_absolute_url }}
+{% endif %}
+
+{% if fourth %}
+{{fourth.tutor.get_full_name}}. ₦{{fourth.price|floatformat:0}}
+{{fourth.reviews.count}} Review{{fourth.reviews.count|pluralize}} | {{fourth.tutor.vicinity}} {{fourth.credentials}}
+http:////{{ site.domain }}{{ fourth.get_absolute_url }}
+{% endif %}
+
+
+We are here to help! If you need any assistance with your booking, or for urgent or unexpected situations, please email {{ tuteria_details.email }} or call us on {{ tuteria_details.phone_number }}
+
+Thanks,
+The Tuteria Team

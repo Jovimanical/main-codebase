@@ -1,0 +1,29 @@
+{% load socialaccount %}
+
+{% get_providers as socialaccount_providers %}
+
+{% for provider in socialaccount_providers %}
+{% if provider.id == "linkedin_oauth2" %}
+<li>
+  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn " style="background:#1686B0;color:white;" 
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+     <i class="fa fa-linkedin-square" style="padding-right: 10px"></i>{{provider.name}}</a>	
+</li>
+
+{% endif %}
+{% if provider.id == "facebook" %}	
+<li>	
+  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn" style="background:#3b5998;color:white;" 
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+     <i class="fa fa-facebook" style="padding-right: 10px"></i>{{provider.name}}</a>
+</li>
+{% endif %}
+{% if provider.id == "google" %}	
+<li>
+<a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn" style="background:#dd4b39;color:white;"
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+     <i class="fa fa-google" style="padding-right: 10px"></i>{{provider.name}}</a>	
+</li>
+  
+{% endif %}
+{% endfor %}

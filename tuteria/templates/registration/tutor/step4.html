@@ -1,0 +1,120 @@
+{% extends 'registration/tutor/step2.html' %}
+{% load staticfiles i18n add_attr activelink bootstrap3 %}
+{% block css %}
+    {{ block.super }}    
+{% endblock %}
+{% block wizard_progress %}
+    <ul>
+        <li>
+            <a href="#" class="{% ifactive 'registration:tutor_credentials' %}active{% else %}{% endifactive %}">Credentials</a>
+        </li>
+        <li>
+            <a href="#" class="{% ifactive 'registration:tutor_preferences' %}active{% else %}{% endifactive %}">Preferences</a>
+        </li>
+        <li>
+            <a href="#" class="{% ifactive 'registration:schedule_interview' %}active{% else %}{% endifactive %}"
+               style="margin-right:0;">Schedule Chat</a>
+        </li>
+    </ul>
+{% endblock wizard_progress %}
+{% block title %}Agreements - Tuteria Application{% endblock title %}
+{% block wizard_title %} <h2 class="padding-top-15">Agreements</h2> {% endblock wizard_title %}
+{% block left_column %}
+    <div class="col-sm-12">
+        <form accept-charset="UTF-8" action="{{request.path}}"
+              class="simple_form form" id="g-form" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/education.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4 class="br-bottom-md"><b>Education</b></h4>
+                </div>
+            </div>
+            <p>Enter your highest education first, whether in-view or completed. You can add up to two schools. Please write in full, do not abbreviate. E.g. write 'University of Lagos' not 'UNILAG'</p>
+            {% if request.is_featured %}
+                <div id="guarantor-form" class="row-space-4">
+                    {% bootstrap_formset form %}
+                </div>
+            {% else %}
+                 <div id="guarantor-form">
+                                {{ form.management_form }}
+                                {% for form in form %}
+                                    <div id="{{ form.prefix }}-row" class="form-base">
+                                        {{ form.id }}
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                            <label class="pad-down-5">First Name</label>
+                                                <div class="form-group">
+                                                    {% bootstrap_label form.first_name.label label_class="sr-only" %}
+                                                    {{ form.first_name|add_attributes:"class:form-control,required:true" }}
+                                                </div>                                                        
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label class="pad-down-5">Last Name</label>
+                                                    {% bootstrap_label form.last_name.label label_class="sr-only" %}
+                                                    {{ form.last_name|add_attributes:"class:form-control,required:true" }}
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label class="pad-down-5">Email Address</label>
+                                                    {% bootstrap_label form.email.label label_class="sr-only" %}
+                                                    {{ form.email|add_attributes:"class:form-control" }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                            <label class="pad-down-5">Phone Number</label>
+                                                <div class="form-group">
+                                                    {% bootstrap_label form.phone_no.label label_class="sr-only" %}
+                                                    {{ form.phone_no|add_attributes:"class:form-control,required:true" }}
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row margin-bottom-5">
+                                                <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label class="pad-down-5">No. of Years Known</label>
+                                                    {% bootstrap_label form.no_of_years.label label_class="sr-only" %}
+                                                    {{ form.no_of_years|add_attributes:"class:form-control,required:true" }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label class="pad-down-5">Organization</label>
+                                                {{ form.organization|add_attributes:"class:form-control,required:true" }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{ form.DELETE }}
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+            {% endif %}
+         
+
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-8">
+                    <button id="submit-btn" class="btn btn-lg btn-block btn-warning" data-loading-text="Rapping Up"
+                            >{% trans "Done" %}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}
+{% block request_section %}{% endblock request_section %}
+{% block custom_js %}
+    <script>
+        window.CreateStep = 3;
+    </script>
+
+{% endblock %}

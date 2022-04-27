@@ -1,0 +1,264 @@
+{% load staticfiles add_attr bootstrap3 i18n %}
+
+<div class="panel panel-default row-space-4" id="credential-section">
+    <div class="panel-heading">
+        <h4>Credentials</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row row-space-4">
+            <label class="col-md-3 text-right font-head margin-bottom-5">Education</label>
+
+            <div class="col-md-9">
+                <div class="padding-bottom-25">
+                    Enter your highest educational qualifications, whether in-view or completed. You can add up to 2. Please write in full, no abbreviations. E.g. write 'University of Lagos' not 'UNILAG'
+                </div>
+                <div id="education-form">
+                    {{ education_formset.management_form }} {% for form in education_formset %}
+                    <div id="{{ form.prefix }}-row" class="form-base">
+                        {{ form.id }}
+                        <div class="form-group {% if form.school.errors %}has-error{% endif %}">
+                            <label class="pad-down-5">Name of School or Institute</label>
+                            {% bootstrap_label form.school.label label_class="sr-only" %}
+                            {{ form.school|add_attributes:"class:form-control" }}
+                            {% if form.school.errors %}
+                            <div class="has-error">
+                                <span class="help-block">
+                                    {{form.school.errors|join:"<br />"}}
+                                </span>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="row row-space-2">
+                            <div class="col-sm-6">
+                                <div class="form-group {% if form.course.errors %}has-error{% endif %}">
+                                    <label class="pad-down-5">Course of Study</label>
+                                    {% bootstrap_label form.course.label label_class="sr-only" %}
+                                    {{ form.course|add_attributes:"class:form-control" }}
+                                    {% if form.course.errors %}
+                                    <div class="has-error">
+                                        <span class="help-block">
+                                         {{form.course.errors|join:"<br />"}}
+                                     </span>
+                                 </div>
+                                 {% endif %}
+                             </div>
+                         </div>
+                         <div class="col-sm-6">
+                            <div class="form-group {% if form.degree.errors %} has-error {% endif %}">
+                                <label class="pad-down-5">Degree</label>
+                                {% bootstrap_label form.degree.label label_class="sr-only" %}
+                                {{ form.degree|add_attributes:"class:form-control" }}
+                                {% if form.degree.errors %}
+                                <div class="has-error"><span class="help-block">
+                                    {{form.degree.errors|join:"<br />"}}
+                                </span></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {{ form.DELETE }}
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    <hr class="row hr-styled row-space-2 ">
+    <div class="row row-space-4">
+        <label class="col-md-3 text-right font-head margin-bottom-5">
+            Work Experience
+        </label>
+
+        <div class="col-md-9">
+            <div class="padding-bottom-25">
+                Enter your most recent work experience if any, and indicate if you currently work there. Please note that you may be required to provide proof.
+            </div>
+
+            <div id="we-form">
+                {{ we_formset.management_form }} {% for form in we_formset %}
+                <div id="{{ form.prefix }}-row" class="form-base">
+                    {{ form.id }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group {% if form.name.errors %} has-error {% endif %}">
+                                <label class="pad-down-5">Name of Company or Organization</label>
+                                {% bootstrap_label form.name.label label_class="sr-only" %}
+                                {{ form.name|add_attributes:"class:form-control" }}
+                                {% if form.name.errors %}
+                                <div class="has-error"><span class="help-block">
+                                    {{form.name.errors|join:"<br />"}}
+                                </span></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group {% if form.role.errors %}has-error {% endif %}">
+                                <label class="pad-down-5">Your Role</label>
+                                {% bootstrap_label form.role.label label_class="sr-only" %}
+                                {{ form.role|add_attributes:"class:form-control" }}
+                                {% if form.role.errors %}
+                                <div class="has-error"><span class="help-block">
+                                    {{form.role.errors|join:"<br />"}}
+                                </span></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-bottom-5">
+                        <div class="col-sm-6 checkbox">
+                            <label>
+                                {{ form.currently_work }} I currently work here
+                            </label>
+                        </div>
+                    </div>
+                    {{ form.DELETE }}
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <hr class="row hr-styled row-space-2 ">
+    <div class="row row-space-4">
+        <label class="col-md-3 text-right font-head margin-bottom-5">
+            Teaching Experience
+        </label>
+
+        <div class="col-md-9">
+            <div class="row row-space-bottom-5">
+                <label class="col-md-3 text-right margin-bottom-5">
+                    {{preference_form.years_of_teaching.label}}
+                </label>
+                <div class="col-md-9">
+                    {{preference_form.years_of_teaching|add_attributes:"form-control"}}
+                </div>
+            </div>
+            <div id="curr" class="row row-space-4">
+                <label class="col-md-3 text-right margin-bottom-5">
+                    What class of students do you teach?
+                </label>
+                <div class="col-md-9">
+                    {% for rr in preference_form.classes %}
+                    <div class="col-sm-4 checkbox-space">
+                        {{ rr }}
+                    </div>
+                    {% endfor %} {% if preference_form.classes.errors %}
+                    <div class="has-error">
+                        <span class="help-block">
+                            {{preference_form.classes.errors}}
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="well bg-info">
+                <span class="font-head">Academic Curriculum</span>
+                <br>If you teach academic subjects for nursery, primary or secondary, then select the curriculum you can teach
+                with. Skip this if you teach non-academic subjects or skills.
+            </div>
+            <div>
+                <div class="row row-space-4">
+                    <label class="col-md-3 text-right margin-bottom-5">
+                        Select Curriculum
+                    </label>
+                    <div class="col-md-9">
+                        {% for rr in preference_form.curriculum_used %}
+                        <div class="col-sm-4 checkbox-space">
+                            {{ rr }}
+                        </div>
+                        {% endfor %}
+                        {% if preference_form.curriculum_used.errors %}
+                        <div class="has-error">
+                            <span class="help-block">
+                                {{preference_form.curriculum_used.errors}}
+                            </span>
+
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div {% if preference_form.errors %} {% else %}id="curriculum_pref"{% endif %}  class="row row-space-4 {% if preference_form.curriculum_explanation.errors %}has-error {% else %} hidden {% endif %}">
+                    <label class="col-md-3 text-right">
+                        British or American Curriculum
+                    </label>
+                    <div class="col-md-9">
+                        <p>Please tell us about your experience with this curriculum</p>
+                        <div class="form-group">
+                            {{preference_form.curriculum_explanation|add_attributes:"class:form-control,rows:4"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space-4">
+                   <label class="col-md-3 text-right margin-bottom-5">
+                    Where should lessons hold?
+                </label>
+                <div class="col-md-9">
+                    {{preference_form.tutoring_address|add_attributes:"form-control"}}
+
+                </div>
+
+            </div>
+            <div id="tutoring_address_section" class="{% if preference_form.address_reason.errors %} has-error {% else %} hide {% endif %}">
+                <div class="row row-space-4">
+                    <label class="col-md-3 text-right margin-bottom-5">
+                        {% bootstrap_label preference_form.address_reason.label label_class='control-label' %}
+
+                    </label>
+                    <div class="col-md-9">
+                    {{ preference_form.address_reason|add_attributes:"class:form-control,placeholder:Let clients know why they should come over to your location instead. Do you have a studio? A workshop? A conducive learning environment? Don't enter your address." }}
+                    {% if preference_form.address_reason.errors %}
+                        <div class="has-error">
+                            <span class="help-block">
+                                {{preference_form.address_reason.errors}}
+                            </span>
+
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="row hr-styled row-space-2">
+<div class="row row-space-4">
+    {# {% bootstrap_label preference_form.tutor_description.label label_class="col-md-3 col-sm-3 text-right font-head" %} #}
+    <label class="col-md-3 text-right font-head margin-bottom-5">
+        Introduce Yourself to Clients
+    </label>
+
+    <div class="col-md-9 col-sm-9 form-group {% if preference_form.tutor_description.errors %}has-error {% endif %}">
+
+        <div class="well bg-info padding-bottom-25">
+            <p>Your tutor profile is your best opportunity to "sell yourself" as a tutor on Tuteria. Students often look at multiple tutor profiles before selecting a tutor to contact, so you need to be thorough, yet concise in describing your tutoring abilities, qualifications, experience and teaching style.</p>
+            <p><strong class="font-head">Follow these important guidelines</strong></p>
+            <ol style="padding-left: 10px">
+                <li>
+                    Write at least 2-4 paragraphs describing your tutoring and teaching qualifications and experience. Be sure to include any awards or trainings you’ve received that support your teaching credentials.
+                </li>
+                <li>
+                    Outline the subjects you specialize in and explain your teaching method. Include any degrees or awards that make you standout and qualified to teach those subjects or skills.
+                </li>
+                <li>
+                     Write as though you are talking to the client directly and encourage them to book a lesson with you.
+                </li>
+            </ol>
+            <br><br><span class="font-head">
+                <a href=" https://www.tuteria.com/ng/busybenson/trained-teacher-msc-with-over-6-years-teaching-experience/" rel="noopener noreferrer" target="_blank">Click here for an example to inspire yours</a></span>
+            <br>
+            <span style="font-size: 12px">NOTE: Do not copy</span>
+            
+        </div>
+        {{ preference_form.tutor_description|add_attributes:"cols:40,class:form-control,rows:8,data-parsley-group:default,data-parsley-trigger:keyup" }}
+
+        {% if preference_form.tutor_description.errors %}
+        <div class="has-error">
+            <span class="help-block">
+                {{preference_form.tutor_description.errors|join:"<br />"}}
+            </span>
+        </div>
+        {% endif %}
+    </div>

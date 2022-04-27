@@ -1,0 +1,265 @@
+{% extends 'registration/tutor/landing.html' %}
+{# {% extends 'registration/tutor/step2.html' %} #}
+{% load staticfiles i18n bootstrap3 add_attr activelink %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/bootstrap-timepicker.css" %}">
+    <link rel="stylesheet" href="{% static "css/small-calendar.css" %}">
+    <style>
+        .need-to-know img {
+            width: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .need-to-know img {
+                width: 24px;
+                margin-top: 6px;
+            }
+        }
+
+        .blue_color {
+            color: #337ab7;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block title %}Preferences - Tuteria Application{% endblock title %}
+{% block wizard_title %} <h2 class="padding-top-15">Preferences</h2> {% endblock wizard_title %}
+{% block wizard_progress %}
+    <ul>
+        <li>
+            <a href="#" class="{% ifactive 'registration:tutor_credentials' %}active{% else %}{% endifactive %}">Credentials</a>
+        </li>
+        <li>
+            <a href="#" class="{% ifactive 'registration:tutor_preferences' %}active{% else %}{% endifactive %}">Preferences</a>
+        </li>
+        <li>
+            <a href="#" class="{% ifactive 'registration:schedule_interview' %}active{% else %}{% endifactive %}"
+               style="margin-right:0;">Schedule</a>
+        </li>
+    </ul>
+{% endblock wizard_progress %}
+{% block left_column %}
+    <div class="col-sm-12 need-to-know">
+        <form action="{% url 'registration:tutor_preferences' %}" id="preference-form" method="post">
+            {% csrf_token %}
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/set-schedule.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4><b>Choose Your Schedule</b></h4>
+                </div>
+            </div>
+            <p class="padding-bottom-15">Set the days and times you're available for tutoring. Mornings (before 12pm),
+                Afternoon (12-4pm), Evenings (after 4pm). You can edit this later to keep it up-to-date.
+            </p>
+
+
+
+            {{ schedule_formset.management_form }}
+            <div class="match-page match-page-availabilityquestion text-center">
+                <div class="match-step-wrapper">
+                    <div class="match-step">
+                        <div class="match-page-input-wrapper">
+                            <div class="availability-selector-wrapper">
+                                <div class="availability-selector text-noselect medium-spc-s">
+                                    <div class="row">
+                                        <div class="column-days column col-xs-3">
+                                            <div class="row spc-sm-s spc-med-n">
+                                                <div class="column col-xs-12">&nbsp;</div>
+                                            </div>
+                                            {% for form in schedule_formset %}
+                                                <div class="row">
+                                                    {{ form.weekday }}
+                                                    <div class="column col-xs-12">{{ form.weekday.value|upper|slice:":3" }}
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="column-times column col-xs-9">
+                                            <div class="row spc-sm-s spc-med-n">
+                                                <div class="column col-xs-4 ">MORNING</div>
+                                                <div class="column col-xs-4 ">AFTERNOON</div>
+                                                <div class="column col-xs-4 ">EVENING</div>
+                                            </div>
+
+                                            {% for form in schedule_formset %}
+                                                <div class="row">
+                                                    {% for time_slot in form.time_slot %}
+                                                        <div class="column col-xs-4">
+                                                            <label for="{{ time_slot.id_for_label }}"
+                                                                   class="tap-selector">
+                                                                <input id="{{ time_slot.id_for_label }}" type="checkbox"
+                                                                       name="{{ time_slot.name }}"
+                                                                       value="{{ time_slot.choice_value }}"
+                                                                       {% if time_slot.choice_value in form.time_slot.value %}checked="checked" {% endif %}
+                                                                       data-checkbox-exclusive=".im-flexible">
+                                                        <span>
+                                                            {{ form.weekday.value|upper }} {{ time_slot.choice_value|title }}
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
+                                                            </label>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <hr>
+
+            {% if not request.is_featured %}
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="{% static 'img/tutor/cancellation.png' %}" class=" center-block"/>
+                            </div>
+                            <div class="media-body">
+                                <h4><b>Cancellation Policy</b></h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <p class="row-space-4">Tutors can select one among three cancellation policies (Flexible, Moderate &
+                    Strict) which indicate how much notice clients must give before canceling a lesson, and the
+                    accompanying penalties if they cancel late. Please review the options and set a policy below.
+                    Flexible cancellation policy is default.</p>
+
+                {% include 'includes/policy.html' %}
+            {% endif %}
+
+            <div id="cancellation_form" class="row-space-4 {% if request.is_featured %} hidden{% endif %}">
+                <div class="form-group">
+                    <div class="row">
+                        {% bootstrap_label policy_form.cancellation.label label_class='control-label col-xs-3' %}
+                        <div class="col-xs-6 col-sm-4">
+                            {{ policy_form.cancellation|add_attributes:"class:form-control,required:true" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/travel.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4><b>Travel Policy</b></h4>
+                </div>
+            </div>
+            <p>Select where you prefer lessons hold and the distance you're willing to travel from your location to
+                deliver lessons. Depending on the subject, most clients prefer lessons at their own homes.</p>
+
+            <div id="travel_form" class="row-space-2">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {% bootstrap_label policy_form.tutoring_address.label label_class="control-label" %}
+                            {{ policy_form.tutoring_address|add_attributes:"class:form-control,required:true" }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {% bootstrap_label policy_form.tutoring_distance.label label_class="control-label" %}
+                            {{ policy_form.tutoring_distance|add_attributes:"class:form-control,required:true" }}
+                        </div>
+                    </div>
+                    <div id='your-location' class="col-xs-12">
+                        <!--For Example, from <em>Magodo</em> to <em>Iyana Ipaja</em>-->
+                    </div>
+                </div>
+            </div>
+
+            <div id="tutoring_address_section" class="hide">
+                <div class="form-group">
+                    {% if request.is_featured %}
+                        {% bootstrap_field policy_form.address_reason %}
+                    {% else %}
+
+                        {% bootstrap_label policy_form.address_reason.label label_class='control-label' %}
+                        {{ policy_form.address_reason|add_attributes:"class:form-control,required:true,disabled:true,placeholder:Let clients know why they should come over to your location instead. Do you have a studio? A workshop? A conducive learning environment? Don't enter your address." }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <hr>
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/address.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4><b>Tutoring Address</b></h4>
+                </div>
+            </div>
+            <p>If where you are now or where you will attend lessons from is different from your home address, then
+                enter your current tutoring address. <span class="font-head">Please LEAVE BLANK if both addresses are the same.</span>
+            </p>
+
+            <div id="tutoring-address-location">
+                <div class="row">
+                    <div class="col-sm-8 col-xs-12">
+
+                        <div class="form-group">
+                            <label class="control-label">Where would you attend tutoring from?</label>
+                            {# {% bootstrap_label address_form.address.label label_class='control-label' %} #}
+                            {{ address_form.address|add_attributes:"class:form-control,placeholder:Tutoring address ONLY if different from home address" }}
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            {% bootstrap_label address_form.state.label label_class='control-label' %}
+                            {{ address_form.state|add_attributes:"class:form-control" }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-8 padding-top-25">
+                    <button id="submit-btn" class="btn btn-lg big-btn btn-block btn-warning"
+                            data-loading-text="Almost Done"
+                    >{% trans "Last Step" %} &#8594;</button>
+                </div>
+            </div>
+            <div class="padding-bottom-25"></div>
+            <hr/>
+            <small><em>If you encounter any difficulty completing this page, please use Chrome or Firefox browser or
+                email <a href="mailto:help@tuteria.com">help@tuteria.com</a>.</em>
+            </small>
+        </form>
+        </form>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script>
+        window.loc_distances = JSON.parse('{{ location|escapejs }}');
+        (function () {
+            window.CreateStep = 2;
+
+        })();
+    </script>
+
+{% endblock %}
+{% block request_section %}{% endblock request_section %}
+{% block after_main %}
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&region=NG&sensor=false&callback=initializeCallback"></script>
+
+{% endblock after_main %}

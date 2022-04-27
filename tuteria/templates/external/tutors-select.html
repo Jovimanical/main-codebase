@@ -1,0 +1,314 @@
+{% extends 'pages/why-use.html' %}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc bootstrap_pagination embed_video_tags activelink cache %}
+{% block title %}Select Preferred Tutor | Tuteria Nigeria{% endblock title %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True making_booking=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block fixed %} {% endblock fixed %}
+{% block nav %}
+<div class="header-2 hidden-xs">
+        <!-- Container -->
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default padding-side-15" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    <span class="logo" href="{% url 'home' %}">
+                        <span class="nav-logo"></span>
+                    </span>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.is_authenticated %}
+                                {# <li><a class="wallet_price">Balance: #}
+                                    {# &#x20a6;{{ request.user.wallet.displayable_amount|floatformat:"2" }}</a></li> #}
+                                <li class="dropdown navdropdown">
+                                    <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+                                        {% if request.user.profile.image %}
+                                            {% cloudinary request.user.profile.image AVATAR alt="exclude" %}
+                                        {% else %}
+                                            <img src="http://placehold.it/30x30" class="img-circle">
+                                        {% endif %}
+                                        {{ request.user.get_short_name }} <b class="caret"></b></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+{% endblock nav %}
+{% block ng_app %}{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <style>
+
+        .wallet_price {
+            padding-bottom: 4px !important;
+            background-color: #5cb85c;
+            color: white !important;
+            font-size: 15px;
+            margin-top: 8px;
+            padding-top: 4px !important;
+            border-radius: 25px;
+        }
+
+        .wallet_price:hover {
+            background-color: green !important;
+        }
+
+        .large-padding {
+            padding: 60px 40px;
+        }
+
+        section.protection {
+            color: #fff;
+            background: #36648B;
+            font-size: 18px
+        }
+
+        section.protection .media-photo {
+            background: transparent
+        }
+    </style>
+    <style>
+        ul {
+            padding-left: 0;
+        }
+
+        ul li {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .subject-detail {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .subject-detail {
+                display: block;
+                padding-left: 0 !important;
+            }
+
+            .image-section {
+                display: block;
+
+            }
+        }
+
+        .recommendations__result-name {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .starter-template {
+            margin-top: 20px;
+        }
+
+        .recommendations__result-actions a {
+            margin-top: 16px;
+        }
+
+        .recommendations__result-actions a.profile_link {
+            display: block;
+            margin-top: 3px;
+            text-align: center;
+        }
+
+        @media (min-width: 601px) {
+            .recommendations__result-price {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+
+        .recommendations__result-price {
+            margin-bottom: 2rem;
+            font-size: 1.8em;
+        }
+
+        .recommendations__pill--tasker-price {
+            background-color: #dcf3f8;
+            color: #0d7488;
+        }
+
+        .recommendations__pill {
+            display: inline-block;
+            line-height: 3.5rem;
+            border-radius: 1.25rem;
+            padding: 0 1rem;
+            vertical-align: middle;
+
+        }
+        @media(max-width: 768px){
+        .center-xs{
+            text-align: center !important;
+        }
+        .recommendations__pill {
+            width: 100%;
+        }
+    }
+    .top-choice{
+        padding: 3px 8px; 
+        border-radius: 2px; 
+        background-color: #d52685; 
+        color:white;
+        position: absolute;
+    }
+    @media(max-width: 768px){
+        .top-choice{
+            margin-left: 3%;
+        }
+    }
+    @media(min-width: 356px) and (max-width: 768px){
+        .top-choice{
+            margin-left: 9%;
+        }
+    }
+      @media(min-width: 383px) and (max-width: 767px){
+        .top-choice{
+            margin-left: 11%;
+        }
+    }
+    @media(min-width: 560px) and (max-width: 620px){
+        .top-choice{
+            margin-left: 25%;
+        }
+    }
+     @media(min-width: 400px) and (max-width: 540px){
+        .top-choice{
+            margin-left: 14%;
+        }
+    }
+    @media(min-width: 768px) and (max-width: 800px){
+        .top-choice{
+            margin-left: 30%;
+        }
+    }
+    .foreground {
+        color: #f5be4e;
+    }
+    .headpane {
+        border: none !important;
+    }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/tutor-select.css' %}"/>
+
+{% endblock %}
+{% block jumbotron %}{% endblock %}
+{% block main_content %}
+    <div class="row">
+        <div class="body-content clearfix">
+
+            <div class="bg-color2">
+                <div class="container">
+                    <div class="row">
+                        {% if teach_all_subject %}
+                            {% if count > 1 %}
+                                {% include 'external/includes/single-tutor-select.html' %}
+                            {% else %}
+                                {% if the_tutor_list %}
+                                    {% include 'external/includes/single-tutor-select.html' %}
+                                {% else %}
+
+                                    {% include 'external/includes/multiple-tutor-select.html' %}
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {% include 'external/includes/multiple-tutor-select.html' %}
+                        {% endif %}
+                    </div>
+                    
+                    
+                    {% if teach_all_subject %}
+                            {% if count > 1 %}
+                    <div class="starter-template col-md-offset-0 col-md-12 col-lg-10 col-lg-offset-1 col-xs-12 padding-top-25">
+                              <div class="panel headpane row">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                        <div class="col-sm-12 col-xs-12">
+                                           <div class="col-sm-2">
+                                            <div class="text-center">
+                                                <img width="100" height="100" src="{% static "img/gallery/support.png" %}">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-8 col-sm-offset-1 row-space-4">
+                                            <div class="text-left">
+                                                  <h3 class="font-head brightgreen">We're here to help!</h3>
+                                                  <p class="">
+                                                    <span class="font-15">Call our Customer Support now for 1-on-1 guidance: (+234)-9094526878</span>
+                                                </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                    </div>
+                    {% endif %}{% endif %}
+                    
+                    
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block request_section %}{% endblock %}
+{% block footer %}
+    <section id="my-custom-footer" class="row protection large-padding">
+        <div class="page-container-full">
+            <div class="row">
+                <div class="col-lg-6 col-sm-8 col-sm-push-2 col-lg-push-3 text-center">
+                    <div class="media-photo">
+                        <img width="85" height="85"
+                             src="{% static "img/gallery/policy.png" %}">
+                    </div>
+                    <h2>
+            <span class="font-head">
+              Refund Policy
+            </span>
+                    </h2>
+
+                    <p>
+                        If you are not completely satisfied with the lessons, we will promptly replace the tutor or
+                        refund your balance directly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock footer %}
+{% block bottom_footer %}
+{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static "js/angular/angular.js" %}"></script>
+    <script>
+        var TutorResponse = JSON.parse('{{ ts_json|escapejs }}');
+        console.log(TutorResponse);
+        angular.module('json_response', []).value('TutorSkill', TutorResponse);
+        window.request_tutor = "{% url 'request_meeting_redirect' object.id %}";
+    </script>
+
+    <script src="{% static "js/tutor_skill_profile.bundle.js" %}"></script>
+    
+{% endblock javascript %}

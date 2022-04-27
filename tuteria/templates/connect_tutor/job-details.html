@@ -1,0 +1,861 @@
+{% extends 'external/tutoring-jobs.html' %}
+{% load staticfiles bootstrap_pagination humanize add_attr cloudinary bootstrap3 %}
+{% block title %}{% if object.is_parent_request %}Home Tutor in {{ object.get_vicinity }}
+    {% else %}{{ object.request_subjects.0 }} Teacher in {{ object.get_vicinity }} {% endif %}| Tuteria
+    Nigeria{% endblock %}
+{% block jumbotron %}{% endblock %}
+{% block fixed %}
+
+{% endblock fixed %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with tutor_registration_view=True %}
+{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+
+{% block meta_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# <meta name="description" content=""> #}
+    <meta name="author" content="Earn extra money">
+
+    <!-- for Google -->
+    <meta itemprop="name" content="Apply Now! {% if object.gender == "M" %}Male {% elif object.gender == "F" %}Female {% else %}{% endif %} {% if object.is_parent_request %}Home
+
+
+
+        {% else %}{{ object.request_subjects.0 }} {% endif %} Tutor needed in {{ object.get_vicinity }}, {{ object.state }} starting at N{{ object.budget|intcomma|floatformat:"0" }} at Tuteria Nigeria.">
+    <meta itemprop="description" content="Apply Now! {{ request.build_absolute_uri }} {% if object.is_parent_request %}Home
+
+
+
+        {% else %}{{ object.request_subjects.0 }} {% endif %} Tutor needed in {{ object.get_vicinity }}, {{ object.state }} starting at N{{ object.budget|intcomma|floatformat:"0" }} at Tuteria Nigeria.">
+    <meta name="description" content="Apply Now! {% if object.is_parent_request %}Home
+
+
+
+        {% else %}{{ object.request_subjects.0 }} {% endif %} Tutor needed in {{ object.get_vicinity }}, {{ object.state }} starting at N{{ object.budget|intcomma|floatformat:"0" }} at Tuteria Nigeria."/>
+    <meta name="keywords" content=""/>
+    <meta name="copyright" content=""/>
+    <meta name="application-name" content=""/>
+    <!-- for Facebook -->
+    <meta property="fb:app_id" content="781136408623359">
+    <meta property="og:site_name" content="Tuteria">
+    <meta property="og:title" content="Apply Now! {% if object.is_parent_request %}Home
+
+
+
+        {% else %}{{ object.request_subjects.0 }} {% endif %} Tutor needed in {{ object.get_vicinity }}, {{ object.state }} starting at N{{ object.budget|intcomma|floatformat:"0" }} at Tuteria Nigeria."/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:description" content="Apply Now! {% if object.is_parent_request %}Home
+
+
+
+        {% else %}{{ object.request_subjects.0 }} {% endif %} Tutor needed in {{ object.get_vicinity }}, {{ object.state }} starting at N{{ object.budget|intcomma|floatformat:"0" }} at Tuteria Nigeria."/>
+    <meta property="tuteria:tt_hourly_price" content="&#8358;{{ object.price|floatformat }}"/>
+{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        #map-canvas {
+            width: 100%;
+            height: 400px;
+            border: 1px solid black;
+            float: left;
+        }
+
+        table.adp-directions, table.adp-placemark {
+            display: none;
+        }
+    </style>
+    <script>
+    function hello(){}
+    </script>
+{% endblock css %}
+{% block main_content %}
+    <div class="row">
+        <div class="body-content clearfix">
+
+            <div class="bg-color2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+
+                            <!-- box item details -->
+                            <div class="block-section box-item-details mobile-padding-top">
+                                <div class="">
+                                      {% widthratio object.budget 100 70  as pricings %}
+                                    <span class="h3 per-hour-pricing">Earning: &#x20A6;{{ pricings|floatformat:0 }}</span>
+                                </div>
+                                <div class="clear-fix"></div>
+                                <h2 class="title font-head bright-blue">{% if object.gender == "M" %}Male {% elif object.gender == "F" %}Female {% else %}{% endif %}{% if object.is_parent_request %}Home Tutor in
+                                    {{ object.get_vicinity }}, {{object.state}}
+                                    {% else %}{{ object.request_subjects.0 |title }} Tutor in
+                                    {{ object.get_vicinity |title }}, {{object.state}}
+                                {% endif %}
+                                    <br>
+                                    <span class="h5 font-head brightblue">Client: {{ object.first_name|capfirst }},</span>
+                                    <span class="h5 color-white-mute ">{{ object.created|naturaltime }}</span>
+                                </h2>
+
+                                <div class="job-meta">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-calendar"></i>
+                                            Starts {{ object.get_class_urgency_display|lower }}
+                                        </li>
+                                        {% if object.request.can_apply and object.status != 4 %}
+                                            <li class="font-head blue-text">Still open!</li>
+                                        {% else %}
+                                            <li class="font-head red-text">Now closed</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                {% if object.is_split %}
+                                    <div class="alert alert-danger">
+                                      <a class="close" data-dismiss="alert">×</a>
+                                      Please note that you must teach all the subjects listed here and ensure you are available on the stated days.
+                                    </div>    
+                                {% endif %}
+                                
+                                <h4 class="font-head">Client's Goal</h4>
+
+                                <p><em>{{ object.expectation |capfirst }}</em></p>
+                                <h4 class="font-head">Lesson Details</h4>
+
+                                <div class="row padding-bottom-25">
+                                    <div class="col-sm-6 col-md-6">
+                                        <h5 class="font-head brightgreen">Student Information</h5>
+                                        <ul class="list-unstyled">
+                                            <li><span
+                                                    class="color-white-mute">No. of Students:</span> {{ object.no_of_students }}
+                                                student{{ object.no_of_students|pluralize }}</li>
+                                            {% if object.coc|length >= 1 %}
+                                                <li><span
+                                                        class="color-white-mute">Student Level:</span> {{ object.coc|capfirst }}
+                                                </li>
+                                            {% endif %}
+                                            {% if object.curriculum %}
+                                                <li><span
+                                                        class="color-white-mute">Curriculum used:</span> {{ object.get_curriculum_display }}
+                                                </li>
+                                            {% endif %}
+                                            <li><span class="color-white-mute">Preferred Tutor's Gender:</span> <strong>{{ object.gen }}</strong>
+                                            </li>
+                                            {% if object.request_subjects|length > 1 %}
+                                                <li><span class="color-white-mute">Subjects Needed:</span>
+                                                    <ul>
+                                                        {% for subject in object.request_subjects %}
+                                                            <li>{{ subject |capfirst }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <h5 class="font-head brightgreen">Lesson Information</h5>
+                                        <ul class="list-unstyled">
+
+                                            <li>
+                                                <span class="color-white-mute">Earning:</span>
+                                                &#x20A6;{{ pricings|floatformat:0 }} for
+                                                {% if object.days_per_week <= 3 %}
+                                                    {{ object.get_days_per_week_display }} {% else %}1 month
+                                                {% endif %}
+                                            </li>
+                                            <li><span
+                                                    class="color-white-mute">Hours:</span> {{ object.hours_per_day }}
+                                                hour{{ object.hours_per_day|pluralize }} per day
+                                            </li>
+                                            <li><span class="color-white-mute">Days:</span>
+                                                {% for x in object.available_days %}{% if forloop.last %}
+                                                {% if object.available_days|length > 1 %}
+                                                 and
+{% endif %}
+                                                    {{ x|title }} {% else %}
+                                                    {{ x|title }}{% if forloop.revcounter0 == 1 %}{% else %},
+                                                    {% endif %}{% endif %}
+                                                {% endfor %}</li>
+                                            <li><span class="color-white-mute">Time:</span>
+                                                {{ object.time_of_lesson }}</li>
+                                            <li><span
+                                                    class="color-white-mute">Venue:</span> {{ object.get_tutoring_location_display }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="get_alert">
+                                    <div class="row ">
+                                        {% if object.request.can_apply and condition %}
+
+                                            {% if request.user.is_authenticated %}
+                                                {% if request.user.applications.applied_for_today %}
+                                                    <div class="col-md-9">
+                                                        <h4 class="no-padding-top">Sorry! you have maxed out your entry for today</h4>
+
+                                                        <p class="font-head space-for-mobile">
+                                                            We'll follow-up with client and get back to you when they're ready to start. Kindly note that we can only contact tutors selected by client. 
+                                                        </p>
+
+                                                    </div>
+                                                    <div class="col-md-3 mobile-padding space-for-mobile">
+                                                        <div style="padding: 6px 12px; border-radius: 3px; border: 1px solid silver; background-color: silver"
+                                                             class="text-center font-head">
+                                                            Entry Sent
+                                                        </div>
+                                                    </div>
+                                                
+                                                {% elif has_applied_before %}
+                                                    <div class="col-md-9">
+                                                        <h4 class="no-padding-top">Thanks! Your entry has been
+                                                            sent.</h4>
+
+                                                        <p class="font-head space-for-mobile">
+                                                            We'll follow-up with client and get back to you when they're ready to start. Kindly note that we can only contact tutors selected by client. 
+                                                        </p>
+
+                                                        <p class="font-head space-for-mobile">
+                                                            <a href="{% url 'tutoring-jobs' %}" class="blue-font">
+                                                                &#8592;
+                                                                See other available jobs</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-3 mobile-padding space-for-mobile">
+                                                        <div style="padding: 6px 12px; border-radius: 3px; border: 1px solid silver; background-color: silver"
+                                                             class="text-center font-head">
+                                                            Entry Sent
+                                                        </div>
+                                                    </div>
+                                                {% elif not_qualified %}
+                                                    <div class="col-md-9">
+                                                    <h4 class="no-padding-top">Sorry! you don't have the necessary requirements for this job</h4>
+
+
+                                                        <!-- <p class="font-head space-for-mobile">
+                                                           You can only apply for jobs that are . Kindly note that we can only contact tutors selected by client. 
+                                                        </p> -->
+
+                                                        <p class="font-head space-for-mobile">
+                                                            <a href="{% url 'tutoring-jobs' %}" class="blue-font">
+                                                                &#8592;
+                                                                See other available jobs</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-3 mobile-padding space-for-mobile">
+                                                        <div style="padding: 6px 12px; border-radius: 3px; border: 1px solid silver; background-color: silver"
+                                                             class="text-center font-head">
+                                                            Not qualified
+                                                        </div>
+                                                    </div>
+                                                {% else %}
+                                                 {#   {% if subjects_taught|length > 0 %} #}
+                                                    {% if request.user.is_tutor %}
+                                                        <div class="row">
+                                                            <div class="col-md-9 col-sm-8 col-xs-12">
+                                                                <h4 class="no-padding-top">Interested in helping this
+                                                                    client?</h4>
+
+                                                                <small class="font-head text-danger space-for-mobile">
+                                                                    {% with remaining_slots=object.request.remaining_slots %}
+                                                                        {% if remaining_slots > 0 and object.status != object.PENDING %}
+                                                                            Only {{ remaining_slots }} slot{{ remaining_slots|pluralize }} left
+                                                                        {% endif %}
+                                                                    {% endwith %}</small>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-4 col-xs-12 space-for-mobile">
+
+                                                                {% if not price_error %}
+                                                                   {% comment %}
+                                                                    {% if not no_subject %}
+                                                                    <div >
+                                                                        <a target="_blank" href="{% url "users:tutor_subjects" %}" 
+                                                                           class="btn btn-theme btn-warning btn-lg"
+                                                                           style="width:100%">Populate subjects!</a>
+                                                                    </div>
+                                                                    {% else %}
+                                                                {% endcomment %}
+                                                                    <div class="show-button">
+                                                                        <button 
+                                                                           class="btn btn-theme btn-primary intersetbtn btn-lg"
+                                                                           style="width:100%">I am interested!</button>
+                                                                    </div>
+                                                                   {# {% endif %} #}
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+
+                                                        <div id="form-element"
+                                                             class="{% if price_error or form.non_field_errors %}{% else %}hidden{% endif %} padding-top-25">
+                                                            {% comment %}
+                                                             {% if object.request_subjects|length == 1 %}
+                                                                <form action="{{ request.path }}" method="post">
+                                                                    {% csrf_token %}
+
+                                                                    <div class="col-sm-12">
+                                                                        <div class="row">
+                                                                            <div class="well bg-info">
+                                                                                <h4 class="font-head no-padding-top red-text">
+                                                                                    Important note</h4>
+
+                                                                                <p>
+                                                                                    By indicating your interest, we'll send your profile to the client who will have the opportunity to
+                                                                                choose their preferred tutor. The amount shown above is what will be paid to you in full if chosen.
+                                                                                </p>
+                                                                            </div>
+
+
+                                                                            <div class="form-group {% if price_error %}has-error{% endif %} hidden">
+                                                                                <label for="" class="font-head">Preferred
+                                                                                    Hourly Price</label>
+
+                                                                                <p>Price can be above or below client's
+                                                                                    proposed budget shown</p>
+
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group-addon">
+                                                                                        &#8358;</div>
+                                                                                    {{ form.cost|add_attributes:"class:form-control" }}
+                                                                                    <div class="input-group-addon">per
+                                                                                        hour
+                                                                                    </div>
+                                                                                </div>
+                                                                                {% if price_error %}
+                                                                                    <span class="help-block">{{ error_msg }}</span>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-sm-12">
+
+                                                                        <div class="row space-for-mobile">
+
+
+                                                                            <div class="form-group">
+                                                                                <label for="" class="font-head">Comments
+                                                                                    (optional)</label>
+
+                                                                                <p>
+                                                                                    If there is any important
+                                                                                    information
+                                                                                    you'll like us to know concerning
+                                                                                    your
+                                                                                    entry, please tell us below.
+                                                                                </p>
+                                                                                {{ form.remarks|add_attributes:"class:form-control,rows:10" }}
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                    </div>
+                                                                    <div class="">
+                                                                        <div class="checkbox text-danger">
+                                                                            <label for="id_agree">
+                                                                                {{form.agree}}{{form.agree.label}}
+
+                                                                                {% if not request.is_featured %}
+                                                                                <br><em>
+                                                                                    (Hint: Use the map below to determine how far your location is.)
+                                                                                </em>
+                                                                                    
+                                                                                {% endif %}
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-5 col-sm-offset-7 col-xs-12 col-xs-offset-0">
+                                                                        <div class="form-group row">
+                                                                            <button id="oldEntryBtn" class="btn btn-primary btn-theme row-space-top-4 pull-right btn-lg"
+                                                                                    style="width:100%">Send My Entry
+                                                                            </button>
+                                                                            <div id="entryBtn"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            {% else %}
+                                                            {% endcomment %}
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="well bg-info">
+                                                                            <h4 class="font-head no-padding-top red-text">
+                                                                                Important note</h4>
+
+                                                                            <p>
+                                                                                By indicating your interest, we'll send your profile to the client who will have the opportunity to
+                                                                                choose their preferred tutor. The amount shown above is what will be paid to you in full if chosen.
+                                                                            </p>
+
+                                                                        </div>
+                                                                        <form id="request_detail_form" action="{{ request.path }}" method="post">
+                                                                            {% csrf_token %}
+                                                                            <p class="no-padding-top font-head">Please
+                                                                                select only the subject(s) you can
+                                                                                teach</p>
+
+                                                                            <div class="row">
+                                                                                {% for subject in form.subjects %}
+                                                                                    <div class="col-sm-4 checkbox-space">
+                                                                                        {{ subject }}
+                                                                                    </div>
+                                                                                {% endfor %}
+                                                                                {% if form.non_field_errors %}
+                                                                                    <!-- <div class="has-error">
+                                                                                        <div class="text-danger">{{form.non_field_errors|join:''}}. <a class="text-primary" href="{% url "users:subject_creation_landing" %}" target="_blank">Create subject now</a></div>
+                                                                                    </div> -->
+                                                                                {% endif %}
+                                                                            </div>
+                                                                            <div class="row padding-top-25">
+                                                                                <div class="col-sm-6 hidden ">
+                                                                                    <div class="">
+                                                                                        <div class="form-group">
+                                                                                            <label for=""
+                                                                                                   class="font-head">Preferred
+                                                                                                Hourly price</label>
+
+                                                                                            <p>
+                                                                                                State your preferred
+                                                                                                price
+                                                                                                below considering your
+                                                                                                transport fare and
+                                                                                                Tuteria's {{ request.user.level_percent }}%
+                                                                                                commission for <a
+                                                                                                    href="/levels"
+                                                                                                    target="_blank"
+                                                                                                    class="blue-font">your
+                                                                                                current level.</a> Price
+                                                                                                can
+                                                                                                be above or below
+                                                                                                client's
+                                                                                                proposed budget.
+                                                                                            </p>
+
+                                                                                            <div class="input-group">
+                                                                                                <div class="input-group-addon">
+                                                                                                    &#8358;</div>
+                                                                                                {{ form.cost|add_attributes:"class:form-control" }}
+                                                                                                <div class="input-group-addon">
+                                                                                                    per hour
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            {% if price_error %}
+                                                                                                <span class="help-block text-danger">{{ error_msg }}</span>
+                                                                                            {% endif %}
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- <div class="col-sm-12 ">
+                                                                                    <div class="">
+                                                                                        <div class="form-group">
+                                                                                            <label for=""
+                                                                                                   class="font-head">Comments
+                                                                                                (optional)</label>
+                                                                                            <p>
+                                                                                                If there is any
+                                                                                                important
+                                                                                                information you'll like
+                                                                                                us
+                                                                                                to know concerning your
+                                                                                                entry, please tell us.
+                                                                                            </p>
+                                                                                            {{ form.remarks|add_attributes:"class:form-control,rows:3" }}
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div> -->
+                                                                                <div class="col-sm-12 ">
+                                                                                    <div class="">
+                                                                                        <div class="form-group">
+                                                                                            <label for=""
+                                                                                                   class="font-head">Agreement & Undertaking</label>
+                                                                                            <p>
+                                                                                                The earnings, schedule, and details of this lesson are <strong>NON-NEGOTIABLE</strong>. To apply for this job, please agree to the terms
+                                                                                                below by checking all boxes.
+                                                                                            </p>
+                                                                                            <p>I undertake that: </p>
+                                                                                            <div class="checkbox">
+                                                                                                <label for="id_student_need">
+                                                                                                    <input type="checkbox" name="student_need" required="" id="id_student_need">
+                                                                                                    I understand this student’s needs and I’m willing and qualified to work with them
+                                                                                                </label>
+                                                                                            </div>
+                                                                                            <div class="checkbox">
+                                                                                                <label for="id_availability">
+                                                                                                    <input type="checkbox" name="availability" required="" id="id_availability">
+                                                                                                    I’m fully available on {% for x in object.available_days %}{% if forloop.last %}
+                                                                                                    {% if object.available_days|length > 1 %}
+                                                                                                    and
+                                                                                                    {% endif %}
+                                                                                                    {{ x|title }} {% else %}
+                                                                                                    {{ x|title }}{% if forloop.revcounter0 == 1 %}{% else %},
+                                                                                                    {% endif %}{% endif %}
+                                                                                                    {% endfor %} from {{ object.time_of_lesson }} for the lessons
+                                                                                                </label>
+                                                                                            </div>
+                                                                                            <div class="checkbox">
+                                                                                                <label for="id_earning">
+                                                                                                    <input type="checkbox" name="earning" required="" id="id_earning">
+                                                                                                    I understand I will earn &#x20A6;{{ pricings|floatformat:0 }} for
+                                                                                                    {% if object.days_per_week <= 3 %}
+                                                                                                    {{ object.get_days_per_week_display }} {% else %}1 month
+                                                                                                    {% endif %}. This price and the student’s location are fine by me
+                                                                                                </label>
+                                                                                            </div>
+                                                                                            <div class="checkbox">
+                                                                                                <label for="id_no_job">
+                                                                                                    <input type="checkbox" name="no_job" required="" id="id_no_job">
+                                                                                                    I understand that if I cancel lessons or the student is unhappy, I may not get more jobs from Tuteria
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- <div class="col-sm-12">
+                                                                                    <div class="checkbox text-danger">
+                                                                                        <label for="id_agree">
+                                                                                            {{form.agree}}{{form.agree.label}}.
+                                                                                            {% if not request.is_featured %}
+                                                                                            Please note that if client hires you, you cannot cancel. <em>(Hint: use the map below to estimate your distance)</em>
+                                                                                        {% endif %}
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div> -->
+                                                                                <div class="col-sm-5 col-sm-offset-7 col-xs-12 col-xs-offset-0 padding-top-25">
+                                                                                    <div class="form-group">
+                                                                                        <button id="submit-btn" disabled class="btn btn-primary btn-theme pull-right btn-lg"
+                                                                                                style="width:100%">
+                                                                                            Send
+                                                                                            My Entry
+                                                                                        </button>
+                                                                                        <div id="entryBtn">
+
+                                                                                        </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                </div>
+
+                                                          {#  {% endif %} #}
+
+                                                            <!--<div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <hr class="row">
+                                                                    <p><em>Please consider carefully before applying. If
+                                                                        client hires you, you cannot cancel. You'll be
+                                                                        able
+                                                                        to speak with client to further discuss the
+                                                                        lesson
+                                                                        before it starts.</em></p>
+                                                                </div>
+                                                            </div>-->
+                                                        </div>
+
+                                                    {% else %}
+                                                        <div class="col-md-9 mobile-padding">
+                                                            <h4 class="no-padding-top">You haven't added the relevant
+                                                                subject to apply for this job</h4>
+
+
+                                                            <small class="font-head text-danger space-for-mobile">
+                                                                {% with remaining_slots=object.request.remaining_slots %}
+                                                                    {% if remaining_slots > 0 %}
+                                                                        Only {{ remaining_slots }} slot
+                                                                        {{ remaining_slots|pluralize }} left
+                                                                    {% endif %}
+                                                                {% endwith %}</small>
+                                                        </div>
+
+
+                                                        <div class="completed_profile_applicationcol-md-3 mobile-padding space-for-mobile">
+                                                            {# {% if request.user.is_tutor %} #}
+                                                                <!-- <div class="show-button">
+                                                                    <button class="btn btn-theme btn-primary intersetbtn btn-lg" style="width:100%">I am interested!</button>
+                                                                </div> -->
+                                                                <!-- <a href="{% url "users:tutor_subjects" %}"
+                                                                   target="_blank"
+                                                                   class="btn btn-theme btn-primary btn-block btn-lg"
+                                                                   style="width:100%">
+                                                                    Add Subject</a> -->
+                                                          {#  {% else %} #}
+                                                                <a href="{% url 'registration:tutor_landing' %}"
+                                                                   class="btn btn-theme btn-primary btn-block btn-lg"
+                                                                   style="width:100%">Become a tutor</a>
+                                                          {#  {% endif %} #}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% else %}
+                                                <div class="col-md-9 mobile-padding">
+                                                    <h4 class="no-padding-top"><a id="login_nav"
+                                                                                  href="{% url 'account_login' %}?next={{ request.path }}"
+                                                                                  class="blue-font" style="width:100%">Login
+                                                        to apply</a> for this job or signup to become a tutor.</h4>
+
+
+                                                    <small class="font-head text-danger space-for-mobile">
+                                                        {% with remaining_slots=object.request.remaining_slots %}
+                                                            {% if remaining_slots > 0 %}
+                                                                Only {{ remaining_slots }} slot
+                                                                {{ remaining_slots|pluralize }} left
+                                                            {% endif %}
+                                                        {% endwith %}</small>
+                                                </div>
+
+                                                <div class="col-md-3 mobile-padding space-for-mobile">
+                                                    <a href="{% url 'registration:tutor_landing' %}"
+                                                       class="btn btn-theme btn-primary btn-block btn-lg">Become a
+                                                        tutor</a>
+                                                </div>
+                                            {% endif %}
+                                        {% else %}
+                                            <div class="col-md-9">
+                                                <h4 class="no-padding-top">Sorry! This request is now closed.</h4>
+
+                                                <p class="font-head space-for-mobile">
+                                                    <a href="{% url 'tutoring-jobs' %}" class="blue-font">
+                                                        &#8592;
+                                                        See other available jobs</a>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3 mobile-padding space-for-mobile">
+                                                <div style="padding: 6px 12px; border-radius: 3px; border: 1px solid silver; background-color: silver"
+                                                     class="text-center font-head">
+                                                    Request Closed
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                {% if object.latitude and object.longitude %}
+                                    {% if not request.is_featured %}
+                                        <h2 class="font-head padding-top-50 no-padding-bottom">Estimate your distance</h2>
+                                        <p>Enter your address and click "Get distance" to see how far you are from the
+                                            client's location</p>
+
+
+                                        <div class="row row-space-4">
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    {% if request.user.is_authenticated %}
+
+                                                        <input type="text " id="tutor_address" class="form-control"
+                                                               placeholder="my address"
+                                                               value="{{ request.user.location }}">
+                                                    {% else %}
+
+                                                        <input type="text " id="tutor_address" class="form-control"
+                                                               placeholder="my address">
+                                                    {% endif %}
+                                                    <span class="input-group-btn">
+                                                      <button id="routeGo" class="btn btn-default" type="button">Get
+                                                          distance
+                                                      </button>
+                                                  </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div id="directions" class="h5"></div>
+                                            </div>
+                                            <div class="col-xs-12 padding-top-25">
+                                                <div id="map-canvas" class=""></div>
+
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+
+
+                            </div>
+                            <!-- end box item details -->
+
+                        </div>
+                        <div class="col-md-3">
+
+                            <!-- box affix right -->
+                            <div class="block-section affix-top box-list" id="affix-box" style="position: relative;">
+                                <div class="item">
+                                    <p><a href="{% url 'tutoring-jobs' %}"
+                                          class="btn btn-theme btn-line dark btn-block-xs blue-font">&#8592; See all
+                                        available jobs</a></p>
+
+                                    <h5 class="padding-top-25 font-head">Know a friend for this job?</h5>
+
+                                    <p>Share it on social media and don't forget to tag your friend!</p>
+
+
+                                    <p class="row share-btns padding-top-10">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
+                                           id="facebook-share" class="btn btn-primary share-popup"><i
+                                                class="fa fa-facebook"></i></a>
+                                        <a href="https://twitter.com/home?status=Apply Now! {{ request.build_absolute_uri }} {% if object.is_parent_request %}Home
+
+
+
+                                            {% else %}{{ object.request_subjects.0 }} {% endif %} Tutor needed in {{ object.get_vicinity }}, {{ object.state }} starting at N{{ object.budget|intcomma|floatformat:"0" }} @tuteriacorp"
+                                           class="btn btn-info share-popup"><i class="fa fa-twitter"></i></a>
+
+                                        <!-- <a href="https://plus.google.com/share?url={{ request.build_absolute_uri|urlencode }}"
+                                           id="google-share share-popup" class="btn btn-danger"><i
+                                                class="fa fa-google-plus"></i></a> -->
+                                    </p>
+                                </div>
+                                <div class="padding-top-50">                    
+                               <!--  <a href="{% url 'request_meeting_redirect' %}" target="_blank">
+                                  <img src="{% static "img/referral/advert.jpg" %}" width="100%">
+                                </a> -->
+                              </div>
+                            </div>
+                            <!-- box affix right -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block request_section %}{% endblock %}
+{% block footer %}
+{% endblock footer %}
+{% block bottom_footer %}
+{% endblock %}
+{% block javascript %}
+    {{ block.super }}
+    {% if use_new_tutor_flow %}
+    {% include "users/includes/react-dev-server.html" with debug=debug s_host=tutor_client_cdn %}
+    <script>
+        async function getResult(payload){
+            let response = await fetch("{% url 'users:new_flow_post' %}",{
+                method: "POST",headers:{"Content-type":"application/json"},body:JSON.stringify({
+                    path: "/api/tutors/populate-subject-for-job",
+                    data:payload
+                })
+            })
+            let result = await response.json()
+            return result.data
+        }
+        function isSimilar(array1, array2){
+            let condition1 =  array1.length === array2.length && array1.every((value, index) => value === array2[index])
+            let condition2 = array2.length < array1.length && array2.every((value,index)=>array1.includes(value))
+            return condition1 || condition2
+        }
+        async function onSubmitAction(callback){
+            // check the valid completed subjects
+            let checked = getCheckedValues()
+            let r = await getResult({
+                "email": "{{user.email}}",
+                "request_slug": "{{object.slug}}",
+                // "subjects_to_add": checked,
+                "tutor": true
+            })
+            if(isSimilar(r, checked)&&  checked.length > 0){
+                let formElement = $("#request_detail_form")
+                formElement.submit()
+            }else{
+                // add all the checked subjects
+                let result = await getResult({
+                    'email':'{{user.email}}',
+                    'request_slug':'{{object.slug}}',
+                    "subjects_to_add":checked,
+                    'process':true
+                })
+                callback(result)
+            }
+        }
+        function initializeReact(){
+            const initialData = JSON.parse('{{ record_data|escapejs }}')
+            if(initialData){
+                window.renderJobApplicationButton({baseUrl:"{% url 'users:new_flow_post' %}", initialData,onSubmit:async (callback)=>{
+                    await onSubmitAction(callback)
+                }});
+            }
+        }
+
+    </script>
+    {% endif %}
+    <script>
+        $('#affix-box').affix({
+            offset: {
+                top: function () {
+                    return ( this.top = $('#affix-box').offset().top)
+                },
+                bottom: function () {
+                    return ( this.bottom = $('#my-custom-footer').outerHeight(true) + 120)
+                }
+            }
+        });
+        function getCheckedValues(){
+            var selected = [];
+            $('input[name="subjects"]:checked').each(function () {
+                selected.push($(this).val());
+            });
+            return selected
+        }
+        $('.intersetbtn').click(async function () {
+            $('#form-element').removeClass('hidden');
+            $('.show-button').addClass('hidden');
+            // initializeReact()
+        })
+        {% if object.latitude and object.longitude %}
+            window.has_coordinate = true;
+        {% else %}
+            window.has_coordinate = false;
+        {% endif %}
+        window.map_latitude = "{{object.latitude}}";
+        window.map_longitude = "{{object.longitude}}";
+        let student_need = $('input[name="student_need"]')
+        let availability = $('input[name="availability"]')
+        let earning = $('input[name="earning"]')
+        let no_job = $('input[name="no_job"]')
+        let button = $('#submit-btn')
+
+        function allChecked(){
+            return student_need.prop("checked") && availability.prop('checked') &&
+            earning.prop('checked') && no_job.prop('checked')
+        }
+        function enableDisableBtn(){
+            if (allChecked() && getCheckedValues().length > 0) {
+                button.prop('disabled', false)
+                button.addClass("hidden")
+                initializeReact()
+            } else {
+                button.removeClass("hidden")
+                button.prop('disabled', true)
+                window.unMountJobApplication()
+            }
+        }
+
+        function checkboxEvents(){
+            student_need.change(function(event){
+                enableDisableBtn()
+            })
+            availability.change(function(event){
+                enableDisableBtn()
+            })
+            earning.change(function(event){
+                enableDisableBtn()
+            })
+            no_job.change(function(event){
+                enableDisableBtn()
+            })
+            $('input[name="subjects"]').change(function(event){
+                enableDisableBtn()
+            })
+        }
+        checkboxEvents()
+
+    </script>
+    <script src="{% static "js/job_details.bundle.js" %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script>
+
+{% endblock javascript %}

@@ -1,0 +1,45 @@
+{% verbatim %}
+<script type="text/ng-template" id="myModalContent.html">
+    
+    <div class="modal-header blue-bg">
+        <h3 class="modal-title font-head">Invite from Email</h3>
+        <p>Send friends &#x20A6;1,500 free credit to hire a tutor and get up to &#x20A6;6,500 for each invite!</p>
+    </div>
+    <div class="modal-body">
+        <span id="live-search">
+            <input title="Search for a name or email address..." type="text" ng-model="cc.search_email" id="contact-filter" class="textinput suggestion-input">
+        </span>
+        <div id="contact-list">
+            <div id="contact-header-rec" class="contact-header">
+                <span class="contact-header-check"> <input ng-change='cc.toggleAllCheckboxes()' ng-model="cc.all_checked" type="checkbox" id="contact-rec-check"></span>
+                <span class="contact-header-title">All Contacts</span>
+                <span class="contact-header-count">{{cc.selectedContacts().length}} Contacts selected</span>
+            </div> 
+            <div id="contact-list-rec">
+                <div class="contact-row clearfix selected" ng-repeat="item in cc.contacts| filter:cc.search_email">
+                    <label for="contact_row_0" title="{{item.name}} {{item.email}}" style="width:100%">                                   
+                        <span  class="contact-check"><input ng-if="!item.is_user" type="checkbox" ng-change="cc.onChecked()" ng-model="item.checked" class="email" value="{{item.email}}" id="contact_row_{{$index}}"> 
+                            <img ng-if="item.is_user" src="https://tuteria.com/static/img/tutor/user-17.png" alt="Already a Tuteria user!" data-hi-res="https://tuteria.com/static/img/tutor/user-34.png">
+                        </span>
+                        <span class="contact-name hidden-xs">{{item.name}}</span>
+                        <span class="contact-email">{{item.email}}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-xs-3">
+                <button class="btn btn-cancel pull-left" type="button" ng-click="cc.cancel()">Cancel</button>
+            </div>
+                
+            <div class="col-xs-5 col-xs-offset-4">
+                <button class="btn btn-primary pull-right full-width" type="button" ng-click="cc.sendEmails(cc.contacts)">Send Invite</button>
+            </div>
+    </div>
+        
+                
+    </div>
+</script>
+{% endverbatim %}

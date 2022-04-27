@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load djangular_tags %}
+{% block angular %}
+    {{block.super}}
+    <script src="{% static "js/vendor/angular/ui-utils.min.js" %}"></script>
+    <script src="{% static "djangular/js/django-angular.js" %}"></script>
+
+    <script>angular.module('ng.django.urls').constant('patterns', {% load_djng_urls %})    
+</script>
+<script>
+    var payload = {
+        csrf_token: "{{csrf_token}}",
+        next: "{{ request.REQUEST.next }}",
+        utils: "{{ request.get_host }}{{ STATIC_URL }}js/utils.js",        
+    };    
+</script>
+{% endblock angular %}
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static "js/vendor/intlTelInput.min.js" %}"></script>
+    <script src="{% static "js/vendor/bootstrap-timepicker.js" %}"></script>
+    <script src="{% static "js/vendor/lodash.min.js" %}"></script>
+    <script src="{% static "js/vendor/moment.js" %}"></script>
+    <script src="{% static "js/polyfill/local-storage.js" %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        {% verbatim %}
+        <alert ng-repeat="alert in alerts" type="{{ alert.type }}"
+               close="alerters.closeAlert($index)">{{ alert.msg }}
+        </alert>
+        {% endverbatim %}
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="sidenav-list nav">
+                    <li>
+                        <a href="{% url 'users:update' %}" aria-selected="true"
+                           class="sidenav-item">Edit Profile</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users:update_media' %}" aria-selected="false"
+                           class="sidenav-item">Photos and Video</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users:verify' %}" aria-selected="false"
+                           class="sidenav-item">Trust and Verification</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'tutors:tutor_landing' %}" aria-selected="false"
+                           class="sidenav-item">How Tutoring Works</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'tutors:school_we' %}" aria-selected="false"
+                           class="sidenav-item">School & Work</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'tutors:schedule' %}" aria-selected="false"
+                           class="sidenav-item">Schedule</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'tutors:policy' %}" aria-selected="false"
+                           class="sidenav-item">Tutor Policies</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'tutors:terms' %}" aria-selected="false">Tutoring Agreement</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                {% block main_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

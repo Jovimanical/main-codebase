@@ -1,0 +1,541 @@
+{% extends 'pages/state_view.html' %}
+{% load tuteria_thumbnail staticfiles i18n humanize bootstrap3 add_attr pricing_calc %}
+{# {% block ng_app %}ng-app=referralBtn{% endblock %} #}
+{% block meta_tags %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description"
+          content="Get the best tutors at Tuteria for any subject, skill or exam & use {{ referral_code|upper }} to get ₦1,500 discount!"/>
+{#    <meta name="author" content=""/>#}
+    <!-- for Facebook -->
+    <meta property="fb:app_id" content="781136408623359"/>
+    <meta property="og:site_name" content="Tuteria"/>
+    <meta property="og:title" content="{{ meta_title }}"/>
+    <meta property="og:description" content="{{ meta_description }}"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://{{ site.domain }}{% static "img/social/social-invite.jpg" %}?t=12345?"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@tuteriacorp"/>
+    <meta name="twitter:title" content="{{ meta_title }}"/>
+    <meta name="twitter:description" content="{{ meta_description }}"/>
+    <meta name="twitter:image" content="https://{{ site.domain }}{% static "img/social/social-invite.jpg" %}?t=12345?"/>
+    <meta name="twitter:creator" content="@tuteriacorp">
+{% endblock meta_tags %}
+
+{% block title %}Get a Tutor & Discount{% endblock title %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block fixed %} {% endblock fixed %}
+{% block css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% static "css/referral-landing.css" %}">
+    <style>
+        .myh2 {
+            font-size: 40px;
+            color: white;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .myh2 {
+                font-size: 30px;
+                color: white;
+            }
+
+            .pp_image {
+                width: 84px;
+            }
+        }
+
+        #discovery-container {
+            margin-top: 100px;
+        }
+
+        .jumbo-header p {
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .jumbo-header p {
+                font-size: 14px;
+            }
+        }
+        .big-font{
+          font-size: 20px !important;
+        }
+        .btn-padding{
+          padding: 20px 50px !important;
+        }
+        @media(max-width: 768px){
+          .btn-padding{
+          padding: 15px 20px !important;
+          }
+          .big-font{
+          font-size: 16px !important;
+        }
+        }
+        .padding-top-100{
+          padding-top: 100px !important;
+        }
+    </style>
+
+{% endblock css %}
+{% block carousel_image %}
+    {% if request.is_phone %}
+        <div class="item active">
+            <div class="caro rfl"></div>
+            {# <img src="{% static "img/backgrounds/background_mobile.jpg" %}" alt="Private home lesson tutors" class="src"> #}
+        </div>
+    {% else %}
+        <div class="item active">
+            <div class="caro rfl"></div>
+        </div>
+    {% endif %}
+{% endblock carousel_image %}
+{% block carousel_content %}
+    <div class="row text-center">
+        <div class="jumbo-header upmargin row">
+            <!--0{% if object.id_verified %}
+                <div class="profile-circle-responsive media-photo media-round profile-img-responsive">
+                    <a href="{% url 'users:profile' object.slug %}?referral_code={{ object.ref_instance.referral_code }}"
+                       target="_blank" title="{{ object.first_name }}">
+                        <img src="{% cloudinary_url object.profile_pic width=176 crop="fill" quality=85 %}"
+                             class="pp_image">
+                    </a>
+                </div>
+            {% endif %}-->
+            {% if request.user.is_authenticated %}
+                <h2 class="myh2 referrals-heading text-special row-space-3 space-for-mobile-20 text-white normal-font padding-top-100">
+                        GET A PRIVATE TUTOR
+                </h2>
+                {% if used_credit %}                    
+                    <p style="color:white" class="big-font">Place a request below or call <span class="font-head"><b>{{tuteria_details.phone_number}}</b></span> to get a tutor near you.</p>
+                {% else %}
+                    <p style="color:white" class="big-font">Click below or call <span class="font-head"><b>{{tuteria_details.phone_number}}</b></span>, and enjoy your discount of &#x20A6;1,500!</p>
+                {% endif %}
+            {% else %}
+                <h2 class="myh2 referrals-heading text-special row-space-3 space-for-mobile-20 text-white normal-font padding-top-50">
+                  GET A PRIVATE TUTOR
+                </h2>
+                <p style="color:white" class="big-font">Learn from the best tutors, and enjoy &#x20A6;1,500 off your first lesson!</p>
+                <div class="text-center padding-top-25 mobile-top-25 row">
+                    <a id="signup_nav" href="{% url 'account_signup' %}"
+                       class="signup_nav btn btn-primary btn-lg text-center big-btn btn-padding">
+                        Sign up to claim your credit
+                    </a>
+                </div>
+                <div class="padding-top-10">
+                    <span class="brightblue">Trusted by 100s of Happy Clients</span>
+                    <!--<a href="{% if request.is_featured %}{% else %}javascript:void(0){% endif %}" class="brightblue"
+                            {% if not request.is_featured %} data-toggle="modal"
+                       data-target="#terms-and-condition"{% endif %}  style="font-size: 12px">Terms & Conditions</a>-->
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block main_content %}
+    <div class="container-fluid no-padding-mobile no-margin-mobile" id="discovery-container">
+        <div class="container no-padding-mobile no-margin-mobile" id="discover-recommendations">
+            <div class="col-sm-12 no-padding-mobile no-margin-mobile">
+                
+
+                <div class="row">
+
+
+                    <div class="col-lg-8 col-md-8 col-sm-12 rm-padding-sm">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/hometutor1.jpg" %});">
+                            <a href="
+
+
+                                    {% url 'how_it_works' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Get an Experienced Home Tutor
+                                            </strong>
+                                        </div>
+                                        <div>Nursery. Primary. Secondary</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 rm-padding-sm row-space-4 space-for-mobile">
+                        <div class="">
+                            <div class="darken-on-hover-container">
+                                <a href="{{ t_model.1.get_absolute_url }}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                                   class="text-normal link-reset">
+                                    <div class="discovery-card darken-on-hover discovery-listing"
+                                         style="background-image:url({% static "img/referral/math.jpg" %})">
+                                        <div class="va-container va-container-v va-container-h">
+                                            <div class="va-middle text-center text-contrast">
+                                                <div class="media-photo media-round row-space-2 card-profile-picture">
+                                                    {# <img alt="Original" height="50" src="https://a1.muscache.com/ac/users/5386426/profile_pic/1362841785/original.jpg?interpolation=lanczos-none&amp;crop=w:w;*,*&amp;crop=h:h;*,*&amp;resize=68:*&amp;output-format=jpg&amp;output-quality=70" width="50"> #}
+                                                    <img alt="Original" height="50"
+                                                         src="{% cloudinary_url t_model.1.profile_pic width=50 crop="fill" quality=70 %}"
+                                                         width="50">
+                                                </div>
+                                                <div class="h3 font-head">
+                                                    <strong>
+                                                        Need Math Help?
+                                                    </strong>
+                                                </div>
+                                                <div>Akinkunmi, Math Tutor</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 rm-padding-sm space-for-mobile">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/piano.jpg" %});">
+                            <a href="{% url 'skill_only_view' 'piano' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Play the Piano
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 rm-padding-sm space-for-mobile">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/cakemaking.jpg" %});">
+                            <a href="{% url 'skill_only_view' 'cake-making' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Make Amazing Cakes
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 rm-padding-sm space-for-mobile">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/gmat.jpg" %});">
+                            <a href="{% url 'skill_only_view' 'gmat' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Pass GMAT Exams
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6 rm-padding-sm row-space-4 hidden-xs">
+                        <div class="">
+                            <div class="darken-on-hover-container">
+                                <a href="{{ t_model.0.get_absolute_url }}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                                   class="text-normal link-reset">
+                                    <div class="discovery-card darken-on-hover discovery-listing"
+                                         style="background-image:url({% static "img/referral/english.jpg" %})">
+
+                                        <div class="va-container va-container-v va-container-h">
+                                            <div class="va-middle text-center text-contrast">
+                                                <div class="media-photo media-round row-space-2 card-profile-picture">
+                                                    <img alt="Original" height="50"
+                                                         src="{% cloudinary_url t_model.0.profile_pic width=50 crop="fill" quality=70 %}"
+                                                         width="50">
+                                                </div>
+                                                <div class="h3 font-head strong">Perfect Your English</div>
+                                                <div>Nnenna, English Tutor</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-8 col-sm-6 rm-padding-sm space-for-mobile">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/makeup.jpg" %});">
+                            <a href="{% url 'skill_only_view' 'makeup' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Do Professional Make Up
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 rm-padding-sm space-for-mobile">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/ankara.jpg" %});">
+                            <a href="{% url 'skill_only_view' 'ankara-craft' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Learn Ankara Craft
+                                            </strong>
+                                        </div>
+                                        <div>Bags. Shoes. Accessories</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 rm-padding-sm space-for-mobile">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/spanish.jpg" %});">
+                            <a href="{% url 'skill_only_view' 'french' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Speak French
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 rm-padding-sm space-for-mobile">
+                        <div class="discovery-card rm-padding-sm row-space-4 darken-on-hover "
+                             style="background-image:url({% static "img/referral/cooking.jpg" %});">
+                            <a href="{% url 'skill_only_view' 'general-cooking' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="link-reset">
+                                <div class="va-container va-container-v va-container-h">
+                                    <div class="va-middle text-center text-contrast">
+                                        <div class="h2 font-head">
+                                            <strong>
+                                                Cook Delicious Meals
+                                            </strong>
+                                        </div>
+                                        <div>Native Soups. Continental Dishes</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {% if not request.user.is_authenticated %}
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                        <div class="text-center padding-top-50 mobile-top-25 padding-bottom-50 row">
+                            <h3 class="font-head padding-bottom-25">What do you want to learn?</h3>
+
+                            <a id="signup_nav" href="{% url 'account_signup' %}"
+                               class="signup_nav btn btn-danger btn-lg full-width big-btn text-center">
+                                Signup to claim your credit
+                            </a>
+
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                        <div class="text-center padding-top-50 mobile-top-25 padding-bottom-50 row">
+                            <h3 class="font-head padding-bottom-25">What do you want to learn?</h3>
+
+                            <a href="/" class="btn btn-danger btn-lg full-width big-btn text-center">
+                                Search for other tutors
+                            </a>
+
+                        </div>
+                    </div>
+                {% endif %}
+
+
+
+                <div class="row-space-6">
+                    <div class="show-more-section"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <section id="firstss" class="padding-bottom-50 padding-top-25 padding-top-mob-0 row white-bg">
+        <div class="container mobile-top-25 no-padding-total">
+            <div class="row">
+                <div class="icon-box-6">
+                    <h2 class="text-center text-special row-space-3 font-head padding-top-25">
+                        <b>
+                            How it works
+                        </b>
+                    </h2>
+
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="request"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>1. Request</b>
+                                {% else %}
+                                    1. Request
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">Tell us what you want to learn or where you need help.
+                      </span>
+                        </div>
+                    </div>
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="evaluate"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>2. Evaluate</b>
+                                {% else %}
+                                    2. Evaluate
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">We find the perfect tutors that match your requirements.
+                      </span>
+                        </div>
+                    </div>
+
+                    <div class=" col-sm-4 col-md-4 row-space-4">
+                        <div class="icon-box-6-item text-center">
+                            <i class="book"></i>
+
+                            <h3 class="text-center">
+                                {% if request.is_featured %}
+                                    <b>3. Book</b>
+                                {% else %}
+                                    3. Book
+                                {% endif %}
+                                <br></h3>
+                      <span class="inline-block">Book lessons and start learning. We'll handle everything else.        
+                      </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block request_section %}
+
+    <section class="row protection large-padding">
+        <div class="page-container-full">
+            <div class="row">
+                {% if not request.user.is_tutor %}
+                    <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+
+                        <h2>
+          <span class="font-head">
+            Experienced in teaching?
+          </span>
+                        </h2>
+
+                        <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+                            <a href="
+
+
+                                    {% url 'become_tutor' %}{% if not request.user.is_authenticated %}?referral_code={{ object.ref_instance.referral_code }}{% endif %}"
+                               class="btn btn-danger btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+                                Apply to become a tutor
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-lg-8 col-sm-10 col-sm-push-1 col-lg-push-2 text-center">
+
+                        <h2>
+          <span class="font-head">
+            Find tutoring jobs
+          </span>
+                        </h2>
+
+                        <div class="padding-top-25 col-sm-6 col-sm-offset-3">
+                            <a href="{% url 'tutoring-jobs' %}"
+                               class="btn btn-danger btn-lg col-sm-12 col-xs-12 big-btn" style="padding: 10px 40px">
+                                View tutoring jobs
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock request_section %}
+
+{% block notification_tawk %}{% endblock notification_tawk %}
+{% block javascript %}
+    {% include "includes/_scripts.html" %}
+    <script>
+        window.currentPage = "Referrals2";
+    </script>
+    <script src="//apis.google.com/js/client.js"></script>
+    <script src="{% static "js/static_pages.bundle.js" %}"></script>
+
+{% endblock javascript %}
+{% block modal %}
+    {{ block.super }}
+    <div class="modal fade" id="terms-and-condition" tabindex="-1" role="dialog" aria-labelledby="termsAndCondition"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div id="signup_header_text">
+                        <h4 class="modal-title text-center" id="ss">Terms</h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <p>By signing up, you will be credited with &#x20A6;1,500 which will be automatically applied as
+                        discount from your first lesson for free if the total lesson fee is &#x20A6;15,000 or more.</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Got It!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock modal %}

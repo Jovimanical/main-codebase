@@ -1,0 +1,85 @@
+<ul class="list-unstyled ">
+    {% if  object.email_verified%}
+    <li class="row-condensed">
+        <div class="media">
+            <i class="fa fa-check-circle-o fa-lima fa-2x pull-left"></i>
+            <div class="media-body">
+                <div>
+                    Email Address
+                </div>
+                <div class="text-muted">
+                    Verified
+                </div>
+            </div>
+        </div>
+    </li>    
+    {% endif %}                                
+    <li class="row-condensed">
+        <div class="media">
+            <i class="fa fa-check-circle-o fa-lima fa-2x pull-left"></i>
+
+            <div class="media-body">
+                <div>
+                    Phone Number
+                </div>
+                {% with object.primary_phone_no as phone_number %}
+                {% if phone_number %}
+                <div class="text-muted">
+                    ▒▒▒▒▒▒▒▒▒▒▒
+                    {{phone_number.last_two_digits}}
+                </div>                                                
+                {% endif %}
+                
+                {% endwith %}
+            </div>
+        </div>
+    </li>
+    <li class="row-condensed">
+        <div class="media">
+            <i class="fa fa-check-circle-o fa-lima fa-2x pull-left"></i>
+
+            <div class="media-body">
+                <div>
+                    Google
+                </div>
+                <div class="text-muted">
+                    Validated
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="row-condensed">
+        <div class="media">
+            <i class="fa fa-check-circle-o fa-2x fa-lima fa- pull-left"></i>
+
+            <div class="media-body">
+                <div>
+                    Offline ID
+                </div>
+                <div class="text-muted">
+                    Personal Info
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="row-condensed">
+        <div class="media">
+            <i class="fa fa-check-circle-o fa-lima fa-2x pull-left"></i>
+
+            <div class="media-body">
+                <div>
+                    Offline ID
+                </div>
+                <div class="text-muted">
+                    Passport
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<div class="add-more-link">
+    <a href="#">
+        Add More
+    </a>
+</div>

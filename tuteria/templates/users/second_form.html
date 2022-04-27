@@ -1,0 +1,765 @@
+{% extends 'pages/why-use.html' %}
+{% load render_bundle from webpack_loader %}
+{% load staticfiles i18n bootstrap3 add_attr activelink cloudinary humanize %}
+{% block css %}
+    {{ block.super }}
+    {# <link href="{% static 'css/request_tutor.css' %}" rel="stylesheet"> #}
+
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        .content-carousel {
+            margin-top: 0 !important;
+        }
+
+        .margin-down-5 {
+            margin-bottom: 7px !important;
+        }
+
+        .pad-down-20 {
+            padding-bottom: 20px;
+        }
+
+        .img-resized {
+            width: 40px;
+        }
+
+        .hr-styled {
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .padding-left-50 {
+                padding-left: 50px;
+
+            }
+        }
+
+        .resume-block {
+            position: relative;
+            padding-left: 100px
+        }
+
+        @media (max-width: 768px) {
+            .resume-block {
+                padding-left: 0px
+            }
+        }
+
+        .resume-block .img-profile {
+            position: absolute;
+            left: 0;
+            z-index: 2;
+            top: 0
+        }
+
+        @media (max-width: 768px) {
+            .resume-block .img-profile {
+                position: relative;
+            }
+
+            .center-img {
+                margin: 0 auto;
+                display: block;
+                padding-top: 10px;
+                text-align: center;
+            }
+        }
+
+        .desc-spacing {
+            padding-left: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .desc-spacing {
+                padding-left: 0px;
+            }
+        }
+
+        .rate {
+            margin-right: 10px;
+            color: #f5be4e;
+            font-size: 13px;
+        }
+        .form-control {
+    width: 100%;
+    height: 40px;
+    border-radius: 1px;
+            
+        }
+    .nmargin {
+        margin-left: 10px !important;
+    }
+    .table>thead>tr>th, .table>thead>tr>td, .table>tbody>tr>th, .table>tbody>tr>td, .table>tfoot>tr>th, .table>tfoot>tr>td {
+    padding: 8px;
+    border-top: 1px solid #dce0e0;
+    vertical-align: top;
+}
+.price-item__header {
+    font-weight: normal;
+}
+.hide-border-top {
+    border-top: 0 !important;
+}
+th {
+    text-align: left;
+}
+.price-item__price {
+    white-space: nowrap;
+}
+.hide-border-top {
+    border-top: 0 !important;
+}
+.text-right {
+    text-align: right;
+}
+.book-it__subtotal table {
+    border-left: 0;
+    border-right: 0;
+}
+.table {
+    width: 100%;
+    border-collapse: separate;
+    margin-bottom: 15px;
+}
+.table {
+    max-width: 100%;
+}
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.bookit-message__container {
+    margin-top: -10px;
+}
+.text-muted {
+    color: #767676;
+}
+.container_avg348-o_O-mediumAndAbove_1fqrq3n {
+    display: block !important;
+}
+.img-resize img {
+    width: 15px;
+    margin-top: -3px;
+}
+    </style>
+{% endblock %}
+{% block jumbotron %}{% endblock jumbotron %}
+{% block title %}Complete your request | Tuteria{% endblock title %}
+{% block fixed %}profile-header{% endblock %}
+{% block carousel_content %}{% endblock %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True making_booking=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block nav %}
+    {% include 'includes/nav/_navigation.html' with search_form=False regular_layout=True placeholder=search_placeholder tutor_registration_view=True display_help=True %}
+{% endblock nav %}
+{% block base77 %}
+    <div class="col-md-12 col-lg-10 col-xs-12 col-lg-offset-1 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+        {{ block.super }}
+    </div>
+{% endblock base77 %}
+{% block big_section %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl padding-top-50">
+        {% if form.errors %}
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="row">
+                    <div class="well bg-danger">
+                        <div class="has-error">
+                            Some parts of the form were not filled correctly, please check and submit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row padding-bottom-50">
+            <div class="col-sm-12 no-padding-for-xs">
+                <div class="">
+                    <div id="wizard-container" class="bordered spaced-bottom-lg">
+                        <div class="">
+                            <form id="request_parent_form" action="{{ request.path }}"
+                                  method="post" novalidate>
+                                {% csrf_token %}
+
+                                <div class="panel row-space-4">
+
+                                    <div class="panel-head col-sm-12 row-space-3">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="resume-block">
+                                                    <div class="img-profile">
+                                                        {% if specific_skill %}
+                                                            <span class="center-img">{% cloudinary specific_skill.profile_pic REQUEST_AVATAR alt=object.first_name %}</span>
+                                                        {% else %}
+                                                            <span class="center-img">{% cloudinary object.profile_pic REQUEST_AVATAR alt=object.first_name %}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="desc">
+                                                        {% if specific_skill %}
+                                                            <div class="desc-spacing">
+                                                                <h2>{{ object.first_name | title }} <span
+                                                                        class="h5 brightgreen">(ID Verified)</span></h2>
+                                                                <h4 class="font-head">{{ specific_skill.heading }}</h4>
+                                                                <ul class="list-inline list-unstyled">
+                                                                    <li>
+                                                                        <i class="fa fa-map-marker brightblue"></i> {{ object.location | title }}
+                                                                    </li>
+                                                                    {% if specific_skill.review_count > 0 %}
+                                                                        <li>
+                                                        <span class="rate">
+                                                            {% for star in specific_skill.rating_integer %}
+                                                                <i class="fa fa-star"></i>
+                                                            {% endfor %}
+                                                            {% if specific_skill.rating_decimal %}
+                                                                <i class="fa fa-star-half-o"></i>
+                                                            {% endif %}
+                                                        </span> 
+                                                        ({% widthratio specific_skill.reviews.count 2 1 %}
+                                                                            {% comment %}({{ specific_skill.reviews.count }}{% endcomment %}
+                                                                            Review{% if specific_skill.reviews.count > 2 %}s{% else %} {% endif %})
+                                                                        </li>
+                                                                    {% endif %}
+                                                                </ul>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="desc-spacing">
+                                                                <h2>{{ object.first_name | title }} <span
+                                                                        class="h5 brightgreen">(ID Verified)</span></h2>
+                                                                <h4 class="font-head">{{ object.custom_header }}</h4>
+                                                                <ul class="list-inline list-unstyled">
+                                                                    <li>
+                                                                        <i class="fa fa-map-marker brightblue"></i> {{ object.location | title }}
+                                                                    </li>
+                                                                    {% if object.my_reviews|length > 0 %}
+                                                                        <li>
+                                                          <span class="rate">
+                                                            {% for star in object.rating_integer %}
+                                                                <i class="fa fa-star"></i>
+                                                            {% endfor %}
+                                                              {% if object.rating_decimal %}
+                                                                  <i class="fa fa-star-half-o"></i>
+                                                              {% endif %}
+                                                        </span>
+                                                                            ({{ object.my_reviews.count }}
+                                                                            Review{{ object.my_reviews.count|pluralize }})
+                                                                        </li>
+                                                                    {% endif %}
+                                                                </ul>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="row hr-styled">
+                                    </div>
+
+                                    <div class="panel-body ">
+                                        <div class="hidden {% if form.possible_subjects|length == 1 or from_skill_page %}hidden{% endif %}">
+
+                                            <h4 class="font-head row-space-4" style="line-height:0">Subjects</h4>
+                                            <p class="no-padding-top">Select any other subject that needs
+                                                help</p>
+
+                                            {% if form.possible_subjects.errors %}
+                                                <div class="has-error">
+                                                    <span class="help-block">{{ form.possible_subjects.errors|join:"<br \>" }}</span>
+                                                </div>
+                                            {% endif %}
+                                            <div class="row row-space-4">
+                                                {% for subject in form.possible_subjects %}
+                                                    <div class="col-sm-6 col-md-4 checkbox-space">
+                                                        {{ subject }}
+                                                    </div>
+                                                {% endfor %}
+
+                                            </div>
+                                            <hr class="row hr-styled padding-bottom-25">
+                                        </div>
+
+
+                                        <h4 class="font-head row-space-4" style="line-height:0">
+                                            {% if not request.is_featured %}Lesson details{% else %}
+                                                <b>Lesson details</b>{% endif %}
+                                        </h4>
+                                        <div class="form-group {% if form.days_per_week.errors %}has-error{% endif %}">
+                                            <label class="control-label padding-top-10">Select the days you want
+                                                lessons to hold</label><br>
+                                            <small class="text-info"><em>For example, if you want lessons 3 times a
+                                                week, then check 3 days</em></small>
+
+                                        </div>
+                                        <div class="row row-space-4 no-margin-bottom-mob">
+                                            {% for weekday in form.available_days %}
+                                                <div class="col-sm-4 checkbox-space">
+                                                    {{ weekday }}
+                                                </div>
+                                            {% endfor %}
+                                            <br>
+                                            {% if form.available_days.errors %}
+                                                <div class="has-error">
+                                                    <span class="help-block">{{ form.available_days.errors|join:"<br \>" }}</span>
+                                                </div>
+                                            {% endif %}
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group {% if form.days_per_week.errors %}has-error{% endif %}">
+                                                    <label for="id_{{ form.days_per_week.name }}"
+                                                           class="control-label margin-bottom-5">For how
+                                                        long?</label><br>
+                                                    <small class="text-info"><em>If unsure, why not start with 1
+                                                        month?</em></small>
+                                                    <br>
+                                                    {{ form.days_per_week|add_attributes:"class:form-control,required:true" }}
+                                                    {% if form.days_per_week.errors %}
+                                                        <span class="help-block">{{ form.days_per_week.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group {% if form.time_of_lesson.errors %}has-error{% endif %}">
+                                                    <label for="id_{{ form.time_of_lesson.name }}"
+                                                           class="control-label margin-bottom-5">What time should
+                                                        lessons start?</label><br>
+                                                    <small class="text-info"><em>E.g. 4:00pm or 5:30pm</em></small>
+                                                    <br>
+                                                    {{ form.time_of_lesson|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please set a valid start time, e.g. 5:00pm not 5pm,placeholder:11 30 AM" }}
+                                                    {% if form.time_of_lesson.errors %}
+                                                        <span class="help-block">{{ form.time_of_lesson.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row-space-4">
+                                                <div class="col-sm-6 col-md-6">
+                                                    <div class="form-group {% if form.hours_per_day.errors %}has-error{% endif %}">
+                                                        <label for="id_{{ form.hours_per_day.name }}"
+                                                               class="control-label">{{ form.hours_per_day.label }}</label><br>
+                                                        <small class="text-info"><em>If unsure, 2 hours should be
+                                                            fine</em></small>
+                                                        <br>
+                                                        {{ form.hours_per_day|add_attributes:"class:form-control,required:true" }}
+                                                        {% if form.hours_per_day.errors %}
+                                                            <span class="help-block">{{ form.hours_per_day.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {% if form.classes.errors %}has-error{% endif %}">
+                                                        <label for="id_subjects" class="control-label margin-bottom-5">Level
+                                                            of student(s)</label><br>
+                                                        <small class="text-info"><em>E.g. Nursery 2, Basic 4, SSS 2,
+                                                            Adult etc.</em></small>
+                                                        <br>
+                                                        {{ form.classes|add_attributes:"class:form-control" }}
+                                                        {% if form.classes.errors %}
+                                                            <span class="help-block">{{ form.classes.errors|join:"<br \>" }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12" style="margin-left: 20px">
+                                                <div class="checkbox blue-font">
+                                                    {{ form.other_tutors }} If {{ object.first_name | title }} is
+                                                    unavailable, contact similar tutors (recommended)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        {# <hr class="row hr-styled"> #}
+
+                                        {# <div class="pull-left"> #}
+                                            {# <div class="media"> #}
+                                                {# <div class="media-body"> #}
+                                                    {# <h4 class="font-head row-space-4 padding-top-25" #}
+                                                        {# style="line-height:0"> #}
+                                                        {# {% if not request.is_featured %}Home address{% else %} #}
+                                                            {# <b>Home address</b>{% endif %} #}
+                                                    {# </h4> #}
+                                                {# </div> #}
+                                                {# <div class="media-right"> #}
+                                                    {# <img src="{% static 'img/gallery/padlock.png' %}" #}
+                                                         {# style="padding-top: 20px" class="safety-icon" width="50%"> #}
+                                                {# </div> #}
+                                            {# </div> #}
+                                        {# </div> #}
+
+                                        {% comment %}<div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group {% if form.home_address.errors %}has-error{% endif %}">
+                                                    <label for="id_home_address" class="control-label margin-bottom-5">Please
+                                                        where is your home address?</label>
+                                                    {{ form.home_address|add_attributes:"class:form-control,required:true, data-parsley-error-message:Please enter your home address" }}
+                                                    {% if form.home_address.errors %}
+                                                        <span class="help-block">{{ form.home_address.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                    {{ form.latitude|add_attributes:"type:hidden" }}{{ form.longitude|add_attributes:"type:hidden" }}
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group {% if form.vicinity.errors %}has-error{% endif %}">
+                                                    <label for="id_{{ form.state.name }}"
+                                                           class="control-label">Nearest bus stop or town</label>
+                                                    {{ form.vicinity|add_attributes:"class:form-control input-sm,required:true, data-parsley-error-message:Input a town/city,placeholder:Town/City" }}
+                                                    {% if form.vicinity.errors %}
+                                                        <span class="help-block">{{ form.vicinity.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group {% if form.state.errors %}has-error{% endif %}">
+                                                    <label for="id_{{ form.state.name }}"
+                                                           class="control-label margin-bottom-5">{{ form.state.label }}</label>
+                                                    {{ form.state|add_attributes:"class:form-control ,required:true, data-parsley-error-message:Please select a state" }}
+                                                    {% if form.state.errors %}
+                                                        <span class="help-block">{{ form.state.errors|join:"<br \>" }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                        </div>{% endcomment %}
+                                        
+                                               <hr class="row hr-styled padding-bottom-25">
+
+                                        <h4 class="font-head row-space-4" style="line-height:0">
+                                            {% if not request.is_featured %}Personal details{% else %}
+                                                <b>Personal details</b>{% endif %}
+                                        </h4>
+        								<div class="row row-space-3">
+        									<div class="col-sm-6">
+                            <div class="form-group {% if form.first_name.errors %}has-error{% endif %}">
+                  						<label for="id_{{ form.first.name }}" class="control-label margin-bottom-5">First name</label>
+                              {{ form.first_name|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your first name,placeholder:First name" }}
+                              {% if form.first_name.errors %}
+                  						  <span class="help-block">{{ form.first_name.errors|join:"<br \>" }}</span>
+                              {% endif %}
+                  					</div>
+        									</div>
+        									<div class="col-sm-6">
+                            <div class="form-group {% if form.last_name.errors %}has-error{% endif %}">
+                  						<label for="id_{{ form.last.name }}" class="control-label margin-bottom-5">Last name</label>
+                              {{ form.last_name|add_attributes:"class:form-control,required:true,data-parsley-error-message:Please enter your last name,placeholder:Last name" }}
+                              {% if form.last_name.errors %}
+                  						  <span class="help-block">{{ form.last_name.errors|join:"<br \>" }}</span>
+                              {% endif %}
+                  					</div>
+        									</div>
+        									
+        				<div class="col-md-12">
+                            
+        							<div class="">
+        								<p class="font-head padding-top-10">Message to {{ object.first_name | title }}</p>
+        					<div class="form-group ">
+                                <label for="id_expectation" class="control-label">What is your specific goal for this lesson? Be as detailed as possible to help us get the most suitable tutor.</label>
+                                <br>
+                                <small class="text-info"><em>E.g. "I need help to prepare for P1 in next ACCA exam" or "I want to play the piano as a beginner" or "I need help with assignments for my kids especially in Math"</em></small>
+                                        {{form.expectation|add_attributes:"class:form-control,rows:5,required:true"}}
+                            </div>
+                            			</div>
+        								</div>
+        				<div class="col-sm-6 pad-up-18">
+                            <div class="form-group {% if form.days_per_week.errors %}has-error{% endif %}">
+                  						<label for="id_{{form.where_you_heard.label}}" class="control-label margin-bottom-5">How did you hear about us?</label>						{{form.where_you_heard|add_attributes:"class:form-control"}}
+                  					</div>
+                                            </div>
+                                            
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="referral_code" class="control-label margin-bottom-5">Referral Code (Optional)</label><br>
+                                            <small class="text-info"><em>If you have an invite code, enter it here</em></small><br>
+                                            
+                                            <input type="text" name="referral_code" class="form-control" placeholder="Referral Code">
+                                        </div>
+                                    </div>
+        								</div>
+        						
+                                        {% if displayRegion %}
+                                        <hr class="row hr-styled">
+                                <div class="row padding-top-25">
+                                    <div class="col-sm-12 col-md-12 col-xs-12">
+                                        <h4 class="font-head row-space-4 brightgreen" style="line-height:0">
+                                        {% if not request.is_featured %}Region{% else %}<b>Region</b>{% endif %}
+                                        </h4>
+                                        <label class="control-label margin-bottom-5">Select a region that best captures your location</label><br>
+                                        <div class="">
+                                            <div class="list-group">
+                                                {% for rr in miniRegion %}
+                                                    <a class="list-group-item">
+                                                        <div class="radio" style="margin-top: 0; margin-bottom: 0"> 
+                                                            <label for="id_region_{{forloop.counter}}"> 
+                                                                <input style="height: 30px; width: 22px; margin-right: 10px;" 
+                                                                    type="radio" name="region" id="id_region_{{forloop.counter}}" value="{{rr.title}}">
+                                                                <h5 style="margin-left: 10px" class="list-group-item-heading">
+                                                                    {{rr.title}}</h5>
+                                                                <small style="margin-left: 10px" class="list-group-item-text">
+                                                                    {{rr.areas|join:", "}}</small>
+                                                            </label>
+                                                        </div>
+                                                    </a>
+                                                {% endfor %} 
+                                            </div> 
+                                        </div>                   
+                                  </div> 
+                              </div>
+                                {% endif %}
+                                        
+                                        
+
+                                        <!--<div class="row row-space-4 pad-up-18">-->
+                                        <!--    <div class="col-sm-12">-->
+                                        <!--        <button id="submit_btn" data-loading-text="Loading..."-->
+                                        <!--                class="btn btn-lg btn-block btn-primary big-btn pad-up-18"-->
+                                        <!--        >{% trans "Book Now" %}</button>-->
+                                        <!--    </div>-->
+                                        <!--</div>-->
+                                        </section>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block first_request_summary %}
+    <div class="col-sm-4 col-xs-12 padding-top-50 mobile-top-25">
+        {% block small_section %}
+
+        {% endblock %}
+        <div class="row panel">
+            <div class="panel-body no-padding-total img-resize">
+                
+                <div class="media">
+                    <div class="">
+                        <div class="fa-ul nmargin">
+                            {% if specific_skill %}
+                            
+                                <div class="margin-top-15 font-head blue-font h3">
+                                    {{currency}}{{price|floatformat|intcomma}}<span class="h4">/hr</span>
+                                    <span class="pull-right h5">per student</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="">
+                        <ul class="fa-ul row-space-4">
+                            <!--{% if specific_skill %}
+                                <li class="margin-top-15 font-head"><i
+                                        class="fa-li glyphicon glyphicon-bookmark lightblue"></i>{{ specific_skill.skill.name }}
+                                </li>
+                            {% else %}
+                                <li class="margin-top-15 font-head"><i
+                                        class="fa-li glyphicon glyphicon-bookmark lightblue"></i>{{ request_instance.request_subjects.0 }}
+                                </li>
+                            {% endif %}-->
+
+                            <li class="margin-top-15"><i
+                                    class="fa-li glyphicon glyphicon-user lightblue"></i>{{ request_instance.no_of_students }}
+                                student{{ request_instance.no_of_students|pluralize }}</li>
+                            <!--<li class="margin-top-15"><i class="fa-li glyphicon glyphicon-time lightblue"></i>{{request_instance.hours_per_day}} hour{{request_instance.hours_per_day|pluralize}} per lesson</li>-->
+                            <li class="margin-top-15"><i
+                                    class="fa-li fa fa-clock-o lightblue"></i>Starts {{ request_instance.get_class_urgency_display|lower }}
+                            </li>
+                        </ul>
+                        
+                        <div class="book-it__subtotal">
+                            <div class="">
+                                <table class="table">
+                                    <thead class="font-head"><tr><th scope="col" class="hide-border-top hide-padding"><span class="screen-reader-only"><span>Price description</span></span></th>
+                                    <th scope="col" class="hide-border-top hide-padding"><span class="screen-reader-only pull-right"><span id="mdisplay">1 month</span></span></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="price-item one_hour padding-top-25">
+                                            <th class="brightgreen  price-item__header hide-border-top" scope="row"><span id="span_hours">1</span> hour lessons are billed at<span aria-hidden="true">&nbsp;</span>
+                                            </th>
+                                            <td class="brightgreen text-right price-item__price hide-border-top"><div class=""><span> {{currency}}<span id="for-1-hour">{{price|floatformat:"0"}}</span>/hr</span></div></td></tr>
+                                            
+                                                                                        <th class="price-item__header hide-border-top" scope="row"> {{currency}}<span id="i_hr_price">{{price|floatformat:"0"}}</span> x <span id="the_no_of_hours">1</span>hrs x <span id="no_of_lessons">1</span> lessons<span aria-hidden="true">&nbsp;</span></th>
+                                            <td class="text-right price-item__price hide-border-top"><div class=""><span> {{currency}}<span id="the-total-price">{{price|floatformat:"0"}}</span></span></div></td></tr>
+                                                <tr class="price-item"></tr>
+                                                <tr class="price-item"><th class="price-item__header" scope="row">Service fee (one-time)<span aria-hidden="true">&nbsp;</span></th>
+                                                <td class="text-right price-item__price"><div class=""><span>{{currency}}{{processing_fee}}</span></div></td></tr>
+                                                
+                                                <tr class="font-head h4"><th class="price-item__header" scope="row"><span><b>Total</b></span></th><td class="text-right"><span>{{currency}}<span id="final-total">{{processing_fee}}</span></span></td></tr></tbody></table></div></div>
+                                                
+                    </div>
+                </div>
+                 <div class="row row-space-4 pad-up-18">
+                        <div class="col-sm-12">
+                            <button id="submit_btn" data-loading-text="Loading..."
+                                    class="btn btn-lg book_btn btn-block btn-primary big-btn pad-up-18"
+                            >{% trans "Book Now" %}</button>
+                        </div>
+                    </div>
+                    <div class="no-margin-top">
+                        <small>
+                            <img src="{% static "img/gallery/urgency.png" %}">
+                            Transport fee may apply. You won't be charged yet.
+                        </small>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="map-canvas" class="hidden"></div>
+{% endblock first_request_summary %}
+</div>
+{% block footer %}{% endblock footer %}
+{% block bottom_footer %}{% endblock bottom_footer %}
+{% block request_section %}{% endblock request_section %}
+{% block javascript %}
+    {{ block.super }}
+    {% block cutsom_script %}
+        <script>
+            window.mixpanel = {}
+            window.NOOFSTUDENTS = {{request_instance.no_of_students}};
+            window.defState = JSON.parse("{{regions|escapejs}}");
+            function getPriceRate(){
+                return 1
+            }
+            function determineHours(hours, rate){
+                if (hours == 1){
+                    return 1 + rate;
+                }
+                if (hours == 1.5){
+                    return 1 + (rate/2)
+                }
+                if (hours >= 3){
+                    return hours - rate;
+                }
+                return hours;
+            }
+            function determineStudentNo(no, rate){
+                if(no){
+                    var new_no = parseFloat(no)
+                    return new_no ===1 ? new_no : 1 + ((new_no-1)* rate)   
+                }
+                return 1
+            }
+            function calculatePrice(price, studentNo, hrs, days, wks){
+                // debugger;
+                var basePrice = price;
+                if($('#id_hours_per_day').val()<2){
+                    basePrice = price * $('#id_hours_per_day').val()
+                }
+                var totalPrice = basePrice * studentNo * hrs * days * wks;
+                if(totalPrice < 100){
+                    return totalPrice
+                }
+                var total = Math.ceil(totalPrice / 100) * 100;
+                return total;
+            };
+            function determineTotalPrice(){
+                var processing_fee = {{processing_fee}};
+                var rate = parseFloat("{{rates.student_no_rate}}")
+                var h_rate = parseFloat("{{rates.hour_rate}}")
+                var student = determineStudentNo(window.NOOFSTUDENTS, rate);
+                var hrs = determineHours($('#id_hours_per_day').val(),h_rate)
+                var weeks = $('#id_days_per_week').val()
+                if(weeks){
+                    weeks = parseInt(weeks) >= 4 ? 4: parseInt(weeks)
+                }else{
+                    weeks = 1
+                }
+                var days = $('input[name="available_days"]').toArray().filter(function(x){return x.checked}).length
+                if(days == 0){
+                    days = 1
+                }
+                var price = parseInt("{{price|floatformat}}")
+                if(price < 200){
+                    hrs = $('#id_hours_per_day').val() || 1
+                }
+                // hrs = $('#id_hours_per_day').val()
+                var the_total = calculatePrice(price, student, hrs, days, weeks)
+                $('#the-total-price').text(the_total);
+                $('#final-total').text(the_total + processing_fee)
+                var hours = $('#id_hours_per_day').val() || 1
+                $('#no_of_lessons').text(weeks*days)
+                $('#the_no_of_hours').text(hours)
+                var display = price*determineHours($('#id_hours_per_day').val(), h_rate)
+                if(price < 100){
+                    display = price
+                }
+                $('#for-1-hour').text(display);
+                if(parseFloat(hours) > 1.5){
+                    display = price
+                }
+                $('#i_hr_price').text(display)
+                $('#span_hours').text(hours)
+                if(hours > 1.5){
+                    $('.one_hour').hide()
+                }else{
+                    $('.one_hour').show()
+                }
+
+            }
+            function determineDisplay(x){
+                if(x){
+                    if(parseInt(x)<4){
+                        $('#mdisplay').text(x + " weeks")
+                    }else{
+                        $('#mdisplay').text("1 month")
+                    }
+                }else{
+                    $('#mdisplay').text("1 week")
+                }
+            }
+            determineTotalPrice()
+            determineDisplay($('#id_days_per_week').val())
+            $('#id_hours_per_day').change(function(x){
+                determineTotalPrice()
+            })
+            $('#id_days_per_week').change(function(e){
+                determineTotalPrice()
+                var x = e.target.value
+                determineDisplay(x)
+            })
+            $('input[name="available_days"]').change(function(o){
+                console.log("triggered")
+                determineTotalPrice()
+                }
+    )
+
+            $('.book_btn').click(function(){
+                $('#request_parent_form').submit()
+            })
+        </script>
+    {% endblock cutsom_script %}
+    <script>
+        
+        window.tutor_request = "Noo"
+    </script>
+    {#{% render_bundle 'vendor' %}#}
+    {#{% render_bundle 'region' "js" %}#}
+    <script src="{% static "js/request_parent.bundle.js" %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&region=NG&key=AIzaSyAkEDJcOnQRw9sDDENqa4zeAvLMmD35_fk&callback=initializeCallback"></script>
+
+
+{% endblock %}

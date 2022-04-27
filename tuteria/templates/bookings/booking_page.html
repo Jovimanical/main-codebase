@@ -1,0 +1,836 @@
+{% extends '_layouts/base-wizard.html' %}
+{% load staticfiles i18n cloudinary humanize bootstrap3 add_attr pricing_calc %}
+{% block opera_header %}
+{% endblock opera_header %}
+{% block mobile_navigation %}
+    {# {% cache 1000 smart_nav request.user.email %} #}
+    {% include "includes/nav/mobile/smart-nav.html" with btnn=True display_sidebar=True making_booking=True %}
+    {# {% endcache %}     #}
+{% endblock mobile_navigation %}
+{% block title %}Place Your Booking | Tuteria{% endblock title %}
+{% block nav %}
+    <div class="header-2 hidden-xs">
+        <!-- Container -->
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default padding-side-15" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    <span class="logo" href="{% url 'home' %}">
+                        {# <img src="{% static "img/logo.png" %}" height="47px"/> #}
+                        <span class="nav-logo"></span>
+                    </span>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.is_authenticated %}
+                                <li><a class="wallet_price">Balance:
+                                    &#x20a6;{{ user_service.wallet_amount_available|floatformat:"2" }}</a></li>
+                                <li class="dropdown navdropdown">
+                                    <a href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+                                        {% if user_service.profile_pic %}
+                                            {% cloudinary user_service.profile_pic AVATAR alt="client-pic" %}
+                                        {% else %}
+                                            <img src="http://placehold.it/30x30" class="img-circle">
+                                        {% endif %}
+                                        {{ user_service.user.first_name }} <b class="caret"></b></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block ng_app %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'intl-tel-input/css/intlTelInput.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/booking_page.css' %}"/>
+    <style>
+        .heads {
+            margin-top: 0;
+        }
+        
+        .wallet_price {
+            padding-bottom: 4px !important;
+            background-color: #5cb85c;
+            color: white !important;
+            font-size: 15px;
+            margin-top: 8px;
+            padding-top: 4px !important;
+            border-radius: 25px;
+        }
+
+        .wallet_price:hover {
+            background-color: green !important;
+        }
+
+.large-padding {
+    padding: 60px
+}
+
+section.protection {
+    color: #fff;
+    background: #36648B;
+    font-size: 18px
+}
+section.protection .media-photo {
+    background: transparent
+}
+    </style>
+    {% include "includes/_scripts.html" %}
+    {% block js_extra %}
+        <script>
+            window.StepCount = 1;
+        </script>
+    {% endblock js_extra %}
+    <script src="{% static "js/booking_page.bundle.js" %}"></script>
+
+{% endblock %}
+{% block content %}
+    <div id="content" class="spaced-top-xl spaced-bottom-xl">
+        <div class="container">
+            <div class="row">
+                {% if can_book %}
+                    <div class="pull-left">
+                        <div class="media">
+                            <div class="media-body">
+                                <h2>{% if request.is_featured %}<b>Load Your Wallet</b>{% else %}Load Your Wallet{% endif %}</h2>
+                            </div>
+                            <div class="media-right">
+                                <img src="{% static 'img/gallery/padlock.png' %}" class="safety-icon">
+                            </div>
+                        </div>
+                        <p class="font-resize">{{ object.tutor.first_name }} will not be paid till you confirm that
+                            all lessons have been fully delivered.</p>
+                    </div>
+                    <div class="pull-right tab-margin">
+                        <div class="media-left">
+                            <img src="{% static 'img/gallery/support.png' %}" class="call-icon hidden-xs">
+                            <small class="visible-xs" style="margin-top: 17px">Help:</small>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="no-margin-bottom hidden-xs">We are here to help</h5>
+                            <h2 class="no-margin-top-sm">{{ tuteria_details.phone_number }}</h2>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="pull-left">
+                        <div class="media">
+                            <div class="media-body">
+                                <h2>{% if request.is_featured %}<b>Review Your Booking</b>{% else %}Review Your Booking{% endif %}</b></h2>
+                            </div>
+                            <div class="media-right">
+                                <img src="{% static 'img/gallery/padlock.png' %}" class="safety-icon">
+                            </div>
+                        </div>
+                        <p class="font-resize">Review your lessons before booking. {{ object.ts.tutor.first_name }}
+                            would call you {{ object.ts.response_time }} to discuss your goals.</p>
+                    </div>
+                    <div class="pull-right tab-margin">
+                        <div class="media-left">
+                            <img src="{% static 'img/gallery/support.png' %}" class="call-icon hidden-xs">
+                            <small class="visible-xs" style="margin-top: 17px">Help:</small>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="no-margin-bottom hidden-xs">We are here to help</h5>
+
+                            <h2 class="no-margin-top-sm">{{ tuteria_details.phone_number }}</h2>
+                        </div>
+                    </div>
+
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="row">
+                    <div id="wizard-container"
+                         class="{% if not can_book %}col-sm-7 col-xs-12 col-md-8 bordered spaced-bottom-lg row-space-4{% endif %}
+                                {% if can_book %}col-sm-12 col-md-8 col-xs-12 bordered spaced-bottom-lg row-space-4{% endif %}">
+                        <div class="row-space-4 br-bottom-md">
+                            <div class="processbar">
+                                <div class="processbar-steps">
+                                    {% block wizard_progress %}
+                                        <ul>
+                                            <li>
+                                                <a class="{% if not can_book %}active{% endif %}">Review Booking</a>
+                                            </li>
+                                            <li>
+                                                <a class="{% if can_book %}active{% endif %}" style="margin-right:0;">Load Wallet</a>
+                                            </li>
+                                        </ul>
+                                    {% endblock wizard_progress %}
+                                </div>
+                            </div>
+                        </div>
+                        {# <div class="row row-space-4 br-bottom-md">#}
+                        {#                            <div class="processbar">#}
+                        {#                                <div class="processbar-steps">#}
+                        {#                                    {% block wizard_progress %}#}
+                        {#                                        <ul>#}
+                        {#                                            <li>#}
+                        {#                                                <a class="{% if not can_book %}active{% endif %}">Lesson Summary</a>#}
+                        {#                                            </li>#}
+                        {#                                            <li>#}
+                        {#                                                <a class="{% if can_book %}active{% endif %}" style="margin-right:0;">Make#}
+                        {#                                                    Payment</a>#}
+                        {#                                            </li>#}
+                        {#                                        </ul>#}
+                        {#                                    {% endblock wizard_progress %}#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+
+                        <section class="db-content db-content-order-detail">
+                            <div class="db-tabs-wrapper">
+                                <article class=" db-order-activity js-page-tab-content js-page-tab-activity">
+                                    {% include 'bookings/includes/booking-summary.html' %}
+                                    <div class="order-gig-details">
+                                        <div class="order-gig-detail">
+                                            {% if object.booking_type == 1 %}
+                                                <div class="table-responsive">
+
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <td><span class="hidden-xs"></span>Lesson Date</td>
+                                                            <td class="date hidden-xs">Start</td>
+                                                            <td class="hidden-xs date">
+                                                                <span>Duration</span>
+                                                            </td>
+                                                            <td class="amount">Amount</td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for session in object.bookingsession_set.all %}
+                                                            <tr>
+                                                                <td class="truncated">
+                                                                    {% if object.ts.discount > 0 and session.student_no > 1 %}
+
+                                                                        <span class="label label-success hidden-xs hidden-sm">{{ object.ts.discount }}% Discount</span>
+                                                                    {% endif %}
+                                                                    <span class="hidden-xs hidden-sm">        {{ session.start|date:"l, j N" }}</span>
+                                                                    <span class="hidden-md hidden-lg">{{ session.start|date:"D, j N" }}</span>
+                                                                    <small class="visible-xs">
+                                                                        Duration: {{ session.duration }}hr{{ session.duration|pluralize }}</small>
+                                                                    <small class="visible-xs">
+                                                                        Starts: {{ session.start|date:"gA"|lower }}</small>
+                                                                </td>
+                                                                <td class="date hidden-xs">
+                                                                    {{ session.start|date:"gA"|lower }}<span
+                                                                        class="visible-xs duration">({{ session.duration }}hr{{ session.duration|pluralize }})</span>
+                                                                </td>
+                                                                <td class="date hidden-xs"
+                                                                    style="text-align: center;">{{ session.duration }}
+                                                                    hr{{ session.duration|pluralize }}</td>
+                                                                <td class="amount">
+                                                                    &#x20a6;{{ session.price|floatformat:"0"|intcomma }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        {% if object.wallet_amount > 0 %}
+                                                            <tr>
+                                                                <td class="visible-xs date" colspan="1" style="color:green">
+                                                                    Wallet Balance  <span
+                                                                        class="fa fa-question-circle"
+                                                                        data-container="body"
+                                                                        data-toggle="popover"
+                                                                        data-placement="bottom"
+                                                                        data-trigger="hover"
+                                                                        data-content="This is the amount remaining in your wallet."
+                                                                        ></span>
+                                                                </td>
+                                                                <td colspan="3" class="date hidden-xs"
+                                                                    style="color:green">
+                                                                    Wallet Balance
+                                                                <span class="fa fa-question-circle"
+                                                                      data-container="body"
+                                                                      data-toggle="popover"
+                                                                      data-placement="bottom"
+                                                                      data-trigger="hover"
+                                                                      data-content="This is the amount remaining in your wallet."
+                                                                        ></span>
+                                                                </td>
+                                                                <td class="amount" style="color:green;">
+                                                                    (&#x20a6;{{ object.wallet_amount|floatformat:"2" }})
+                                                                </td>
+                                                            </tr>
+                                                        {% endif %}
+                                                        <tr class="hidden">
+                                                            <td class="visible-xs date" colspan="2">
+                                                                Booking Fee
+                                                            <span class="fa fa-question-circle"
+                                                                  data-container="body"
+                                                                  data-toggle="popover"
+                                                                  data-placement="bottom"
+                                                                  data-trigger="hover"
+                                                                  data-content="This is used to process this booking."
+                                                                    ></span>
+                                                            </td>
+                                                            <td colspan="3" class="date hidden-xs">
+                                                                Booking Fee
+                                                            <span class="fa fa-question-circle"
+                                                                  data-container="body"
+                                                                  data-toggle="popover"
+                                                                  data-placement="bottom"
+                                                                  data-trigger="hover"
+                                                                  data-content="This is used to process this booking."
+                                                                    ></span>
+                                                            </td>
+                                                            <td class="amount">
+                                                                &#x20a6;{{ object.service_fee|floatformat:"2" }}</td>
+                                                        </tr>
+                                                        <tr class="total">
+                                                            <td class="visible-xs font-head" colspan="3">
+                                                                {#                                                                <span class="label label-success pull-left">{{ object.ts.discount }}% Discount</span>#}
+                                                                Total
+                                                                <em>
+                                                                    &#x20a6;{{ object.payable_price|floatformat:"0"|intcomma }}</em>
+                                                            </td>
+                                                            <td colspan="4" class="hidden-xs font-head">
+                                                                Total <em>
+                                                                &#x20a6;{{ object.bank_price|floatformat:"2"|intcomma }}</em>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            {% else %}
+                                                <div class="font-head">
+                                                    <strong>
+                                                        {#                                                    <span>Start time: {{ sessions.0.start|date:"gA"|lower }}</span> |#}
+                                                        <span>Duration: {{ sessions.0.duration }}hr{{ sessions.0.duration|pluralize }}</span>
+                                                        |
+                                                        {% regroup month_sessions by month as b_months %}
+                                                        {% if object.ts %}                                                            
+                                                        <span>Months: {{ b_months|length }}</span>
+                                                        {% else %}
+                                                        {% if object.baserequesttutor_set.first.days_per_week > 3 %}<span>Months: {{ b_months|length }}</span>
+                                                        {% else %}                                                      
+                                                        <span>Weeks: {{ object.baserequesttutor_set.first.days_per_week }}</span>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                        <span class="visible-xs inline-block"> | Lessons: {{ sessions|length }}</span>
+                                                    </strong>
+
+                                                </div>
+                                                <div class="table-responsive">
+                                                    {% regroup sessions by weekday as booked_months %}
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <td><span class="hidden-xs"></span>Start Date</td>
+                                                            <td class="">End Date</td>
+                                                            <td class="date hidden-xs">
+                                                                <span>Lessons</span>
+                                                            </td>
+                                                            <td class="amount">Amount</td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {# {% regroup sessions by month as booked_months %} #}
+                                                        {# <tr data-toggle="collapse" data-target=".{{month.grouper}}"> #}
+                                                        <tr>
+                                                            <td class="">
+                                                                <span class="hidden-xs">{{ first_session.start|date:"l, j N" }}</span>
+                                                                <small class="visible-xs">{{ first_session.start|date:"D, j N" }}</small>
+
+                                                                {# <small><a href="javascript:void(0)"> view summary</a></small> #}
+                                                            </td>
+                                                            <td class="date"><span
+                                                                    class="hidden-xs">{{ last_session.start|date:"l, j N" }}</span>
+                                                                <small class="visible-xs">{{ last_session.start|date:"D, j N" }}</small>
+                                                            </td>
+                                                            <td class="date hidden-xs"> {{ sessions|length }} </td>
+                                                            <td class="amount">
+                                                                &#x20a6;{{ sessions|month_price|floatformat:"0"|intcomma }} </td>
+                                                        </tr>
+
+                                                        {% if object.wallet_amount > 0 %}
+                                                            <tr>
+                                                                <td class="visible-xs date" colspan="2">
+                                                                    Deducted from Wallet
+                                                                                          <span class="fa fa-question-circle"
+                                                                                                data-container="body"
+                                                                                                data-toggle="popover"
+                                                                                                data-placement="bottom"
+                                                                                                data-trigger="hover"
+                                                                                                data-content="You had some money remaining in your wallet which has been deducted from this lesson fee. So you only pay the balance."
+                                                                                                  ></span>
+                                                                </td>
+                                                                <td colspan="3" class="date hidden-xs"
+                                                                    style="color:green; padding-left: 15px">
+                                                                    Deducted from Wallet
+                                                                <span class="fa fa-question-circle"
+                                                                      data-container="body"
+                                                                      data-toggle="popover"
+                                                                      data-placement="bottom"
+                                                                      data-trigger="hover"
+                                                                      data-content="You had some money remaining in your wallet which has been deducted from this lesson fee. So you only pay the balance."
+                                                                        ></span>
+                                                                </td>
+                                                                <td class="amount" style="color:green;">
+                                                                    (&#x20a6;{{ object.wallet_amount|floatformat:"0" }})
+                                                                </td>
+                                                            </tr>
+                                                        {% endif %}
+                                                        <tr class="hidden">
+                                                            <td class="visible-xs date" colspan="2">
+                                                                Booking Fee
+                                                            <span class="fa fa-question-circle"
+                                                                  data-container="body"
+                                                                  data-toggle="popover"
+                                                                  data-placement="bottom"
+                                                                  data-trigger="hover"
+                                                                  data-content="This is used to process this booking."
+                                                                    ></span>
+                                                            </td>
+                                                            <td colspan="3" class="date hidden-xs">
+                                                                Booking Fee
+                                                            <span class="fa fa-question-circle"
+                                                                  data-container="body"
+                                                                  data-toggle="popover"
+                                                                  data-placement="bottom"
+                                                                  data-trigger="hover"
+                                                                  data-content="This is used to process this booking."
+                                                                    ></span>
+                                                            </td>
+                                                            <td class="amount">
+                                                                &#x20a6;{{ object.service_fee|floatformat:"2" }}</td>
+                                                        </tr>
+                                                        <tr class="total">
+                                                            <td class="visible-xs font-head" colspan="3">
+                                                            {% if object.get_rq_discount > 0 and session.0.student_no > 1 %}
+                                                                <span class="label label-success pull-left">{{ object.get_rq_discount }}% Discount</span>
+                                                            {% endif %}
+                                                                Total
+                                                                <em>
+                                                                    &#x20a6;{{ object.payable_price|floatformat:"0"|intcomma }}</em>
+                                                            </td>
+                                                            <td colspan="4" class="hidden-xs font-head">
+                                                            {% if object.get_rq_discount > 0 and sessions.0.student_no > 1 %}
+                                                                <span class="label label-success pull-left">{{ object.get_rq_discount }}% Discount</span>
+                                                            {% endif %}
+                                                                &#x20a6;{{ object.bank_price|floatformat:"2"|intcomma }}</em>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div><span class="font-head">Lessons hold on:</span>
+                                                    {% for mm in booked_months %}
+                                                        <div>{{ mm.grouper }}s
+                                                            at {{ mm.list.0.start|date:"gA"|lower }} </div>
+                                                    {% endfor %}</div>
+                                            {% endif %}
+                                        </div>
+                                        {% if not can_book %}
+                                            <!--<div class="col-sm-12">
+                                                <ul class="order-header-info cf list-inline padding-left-15">
+                                                    <li><span class="font-head">Trust:</span></li>
+                                                    <li><i class="icons verified_id"></i></i> Verified ID</li>
+                                                    <li><div class="badge-pill">
+                                                    <span class="badge-pill-count">{{ object.tutor.reputation }}</span>
+                                                    </div> Reputation</li>
+                                                    <li><i class="icons passed_test"></i> Passed Test</li>
+                                                    <li><i class="icons background_check"></i> Background Checked</li>
+                                                </ul>                                                                     
+                                            <hr class="hr-styled hidden-xs">
+                                            </div>-->
+                                            <div class="media good-fit">
+                                                <div class="media-left">
+                                                    <img class="media-object img-circle"
+                                                         src="{% static 'img/cards/gfg.png' %}"
+                                                         alt="...">
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading font-head"><b>100% Satisfaction Guarantee</b></h4>
+
+                                                    <p>If you're not fully satisfied with {{ object.ts.tutor.first_name }} after the first hour, we'll discontinue the lesson and help you find another tutor or
+                                                        refund your unused payment at no extra cost.</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </article>
+                            </div>
+                            {% if booking.status == 6 %}
+                                <div class="row row-space-top-4">
+                                    <div class="col-sm-12 col-md-12 col-xs-12">
+                                        <div class="well bg-info">
+                                            This booking has already been scheduled for bank payment. Click <a
+                                                href="{% url 'bank_processing' object.order %}">here to view payment
+                                            details</a> or pay online below.
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </section>
+                    </div>
+                    <div class="col-md-4 col-sm-5 col-xs-12">
+                        {% if not can_book %}
+                            {% if not request.is_featured %}
+                                <div class="visible-xs ">
+                                    <button type="button"
+                                            class="row-space-4 btn btn-primary btn-lg col-xs-12 visible-xs"
+                                            data-toggle="modal" data-target="#search_only_form2">Login to proceed &rarr;
+                                    </button>
+                                </div>
+
+                            {% endif %}
+                            <div class="authentication_form panel {% if not request.is_featured %}hidden-xs {% endif %}">
+
+                                <div id="reg_form" class="hide panel-body">
+                                    <h3 class="modal-title text-center blue-font" id="myModalLabel">Log in to
+                                        proceed</h3>
+
+                                    <p class="modal-subheader">Enter your email and password to complete booking</p>
+                                    {% if request.is_featured %}
+                                        {% include 'includes/auth/login.html' with label_text="control-label" form=login_form redirect_field_value=object.book_url redirect_field_name='next' %}
+                                    {% else %}
+                                        {% include 'includes/auth/login.html' with label_text="control-label sr-only" form=login_form redirect_field_value=object.book_url redirect_field_name='next' %}
+                                    {% endif %}
+                                    <div class="text-center">
+                                        <hr>
+                                        Don't have an account? <a class="book_register"
+                                                                  href="javascript:void(0)">Register</a>
+                                    </div>
+                                </div>
+                                <div id="sig_form" class="panel-body">
+                                    <h3 class="modal-title text-center blue-font" id="myModalLabel">Complete Your Booking</h3>
+
+                                    <div class="text-center">
+                                        Fill this form to sign up and complete your booking, or <a class="book_signin"
+                                                                                                   href="javascript:void(0)">Log
+                                        in</a> if you're already a member
+                                    </div>
+                                    <hr class="hr-styled">
+                                    {% if request.is_featured %}
+                                        {% include 'includes/auth/signup.html' with label_text="control-label" form=signup_form redirect_field_value=object.book_url ex_class='signup_form' dup_field=True redirect_field_name='next' wallet=True %}
+                                    {% else %}
+                                        {% include 'includes/auth/signup.html' with label_text="control-label sr-only" form=signup_form redirect_field_value=object.book_url dup_field=True ex_class='signup_form' redirect_field_name='next' wallet=True %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <!--<div class="panel-body text-center hidden-xs">
+                                <div class="padding-bottom-25">
+                                    <h3 class="font-head"><b>Client Testimonials</b></h3>
+                                </div>
+                                <p class="">
+                                    <img src="{% static "img/user/mubarak.jpg" %}" alt="" class="testimony-resize"/>
+
+                                </p>
+
+                                <h4 class="media-heading"><b>Mubarak Abdulrazak</b></h4>
+
+                                <p class="testimonial-text"><em>"My IELTS teacher is very good. He made me understand how to write different types of essays, read and understand passages, and also write good summaries. I took the IELTS exam with confidence, and I passed."</em></p>
+                                <small>Mubarak hired an IELTS tutor on Tuteria</small>
+                            </div>-->
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            {% if can_book %}
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-xs-12">
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+
+                                    <h4 class="font-head">Choose a Payment Option</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <div class="methods col-sm-3 col-xs-12">
+                                            <form class="form">
+                                                {#                                                {% if not request.is_featured %}#}
+                                                <label class="radio">
+                                                    <input name="payment_method" type="radio"
+                                                           value="credit_card"
+                                                           id="payment_method1" checked="true">
+                                                    Online Payment
+                                                </label>
+                                                {#                                                {% endif %}#}
+                                                    <label class="radio">
+                                                        <input type="radio" name="payment_method"
+                                                               value="bank_transfer"
+                                                               id="payment_method2"
+                                                               {% if request.is_featured %}checked="true"{% endif %}>
+                                                        Bank Payment
+                                                    </label>
+                                                    <label class="radio">
+                                                        <input type="radio" name="payment_method"
+                                                               value="paypal"
+                                                               id="payment_method4">
+                                                        Paypal
+                                                    </label>
+                                                {% if can_use_wallet %}
+                                                    <label class="radio">
+                                                        <input type="radio" name="payment_method"
+                                                               value="use_wallet" id="payment_method3">Use Wallet
+                                                    </label>
+
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                        <div class="col-sm-9 col-xs-12">
+                                            <div class="row well credit-card-option">
+                                                {#                                                {% if not request.is_featured %}#}
+                                                <div class="payment_method1 {% if request.is_featured %}hide{% endif %}">
+                                                    {% if not request.is_featured %}
+                                                        <h4>Safe, Fast and Convenient</h4>
+                                                        <style>
+                                                            #__p_ew_l td {
+                                                                border-top: 0 !important;
+                                                                border-bottom: 0 !important;
+                                                            }
+
+                                                            @media (min-width: 768px) {
+                                                                #__paga_btn.__proceed {
+                                                                    position: absolute;
+                                                                    right: 0;
+                                                                    margin-top: -33px;
+                                                                    margin-right: 25px;
+                                                                }
+                                                            }
+
+
+                                                        </style>
+                                                        <form>
+
+                                                            {{ paga_form }}
+                                                        </form>
+                                                        <script type="text/javascript"
+                                                                src="https://www.mypaga.com/paga-web/epay/ePay-button.paga?k=bffe463e-d4f8-4b16-a2eb-6a54a0d614c0&e=false&layout=V"></script>
+
+                                                    {% else %}
+                                                        <div>
+                                                        <h4><b>Online Payment Not Supported</b></h4>
+
+                                                        <p>You are using a browser such as Opera mini, which our online payment does not support. Do you have Chrome? Simply copy the URL below and paste it your Chrome browser. You'll be able to proceed easily.</p>
+
+                                                        <p>Copy to Chrome: <a href="//{{ site.domain }}{{ request.get_full_path }}">//{{ site.domain }}{{ request.get_full_path }}</a>
+                                                        </p>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                    <div class="{% if not request.is_featured %}hide{% endif %} payment_method2">
+                                                        <h4><b>Secure Bank Payment</b></h4>
+
+                                                        <p>By choosing this option, we'll save your booking details and
+                                                            place it on hold for a maximium of 5 hours to enable you make
+                                                            bank payments or transfer.</p>
+
+                                                        <div><strong>Supported banks</strong></div>
+                                                        <div class="accepted-cards row-space-2">
+                                                            <img src="{% static 'img/cards/uba1.png' %}"
+                                                                 alt="">
+                                                            <img src="{% static 'img/cards/gtb.png' %}"
+                                                                 alt="">
+                                                            <!--<img src="{% static 'img/cards/firstbank.jpg' %}"
+                                                             alt="">-->
+
+                                                        </div>
+
+                                                        <div class="col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-xs-12 need-help ">
+                                                            <form action="{% url 'booking_page' object.order %}"
+                                                                  method="post">
+                                                                {% csrf_token %}
+                                                                {% if booking.status != 6 %}
+                                                                    <input type="hidden" name="p_method" value="bank"/>
+
+                                                                    <button id="payment-form-submit" type="submit"
+                                                                            class="btn btn-primary btn-block">
+                                                                        Proceed &rarr;
+                                                                    </button>
+
+                                                                {% endif %}
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                {% if can_use_wallet %}
+                                                    <div class="hide payment_method3">
+                                                        <div class="credit-card-option">
+                                                            <h4>Pay with Wallet</h4>
+
+                                                            <p>Use your available wallet balance to complete this
+                                                                booking. Click the "Pay with Wallet" button below to
+                                                                proceed.</p>
+
+
+                                                            <div class="col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-xs-12 need-help ">
+                                                                <!-- begin Paga ePay widget code -->
+                                                                <form action="{% url 'booking_page' object.order %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="p_method"
+                                                                           value="wallet"/>
+
+                                                                    <button id="payment-form-submit" type="submit"
+                                                                            class="btn btn-primary btn-block">
+                                                                        Pay with Wallet
+                                                                    </button>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                                 <div class="hide payment_method4">
+                                                        <div class="credit-card-option">
+                                                            <h4>Pay with Paypal</h4>
+
+                                                            <p>Use your available wallet balance to complete this
+                                                                booking. Click the "Pay with Wallet" button below to
+                                                                proceed.</p>
+
+                                                            <div class="col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-xs-12 need-help ">
+                                                                <!-- begin Paga ePay widget code -->
+                                                                {{paypal_form.render}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            {% if request.user.is_staff %}
+                                <form action="{{ request.path }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" name="request_pk" placeholder="request_id"/>
+                                    <input type="text" name="user_email" placeholder="user_email"/>
+                                    <button>Submit</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-5 col-md-4 col-xs-12">
+                        <div class="panel-body text-center">
+                            <div class="visible-xs">
+                                <h4 class="font-head"><b>Client Testimonial</b></h4>
+                            </div>
+                            <p class="">
+                                <img src="{% static "img/user/helen.jpg" %}" alt="" class="testimony-resize"/>
+
+                            </p>
+
+                            <h4 class="media-heading"><b>Helen Offiong</b></h4>
+
+                            <p class="testimonial-text"><em>"I was searching for a Maths teacher for my son to prepare for his NECO exams in three weeks, and hired one from Tuteria. He was really good, he took the time to explain any topic perfectly. Today my son has passed his exams and gained admission into Federal Science and Technology College. I am happy about my son's performance and the service rendered."</em></p>
+                            <small>Helen hired a Maths tutor on Tuteria</small>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="pad-down-40"></div>
+            {% endif %}
+        </div>
+    </div>
+    {% if not request.is_featured %}
+        <div class="modal fade" id="search_only_form2" tabindex="-1" role="dialog"
+             aria-labelledby="search_only_form">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="sig_form ">
+                            <h4 class="modal-title text-center blue-font" id="myModalLabel">Complete Booking</h4>
+
+                            <div class="text-center">
+                                Signup and complete your booking, or <a class="book_signin" href="javascript:void(0)">Log
+                                in</a> if you're already a member
+                            </div>
+                        </div>
+                        <div class="reg_form hide">
+                            <h4 class="modal-title text-center blue-font" id="myModalLabel">Login to Complete
+                                Booking</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div id="hire-tutor" class="">
+                            <div class="">
+                                <div id="small-screen-calendar" class="">
+                                    <div class="reg_form hide">
+                                        {% include 'includes/auth/login.html' with label_text="control-label sr-only" form=login_form redirect_field_value=object.book_url redirect_field_name='next' %}
+                                        <div class="text-center">
+                                            Don't have an account?
+                                            <a class="book_register" href="javascript:void(0)">Register</a>
+                                        </div>
+                                    </div>
+                                    <div class="sig_form ">
+                                        {% include 'includes/auth/signup.html' with label_text="control-label sr-only" form=signup_form redirect_field_value=object.book_url redirect_field_name='next' dup_field=True wallet=True ex_class="signup_form" with_modal=True %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+    {% if can_book %}        
+        <section class="row protection large-padding">
+    <div class="page-container-full">
+      <div class="row">
+        <div class="col-lg-6 col-sm-8 col-sm-push-2 col-lg-push-3 text-center">
+          <div class="media-photo">
+            <img width="85" height="85" src="https://a2.muscache.com/airbnb/static/business-travel/company_onboard_flow/guarantee-8f08072a2b624c31813fb62843560702.png">
+          </div>
+          <h2>
+            <span class="font-head">
+              Guaranteed Satisfaction
+            </span>
+          </h2>
+          <p>
+            There's no risk. If you're not completely satisfied with the lessons received, we will replace the tutor at no extra cost to you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+    {% endif %}
+{% endblock %}
+
+{% block bottom_footer %}{% endblock %}
+
+{% block javascript %}
+    {# {{ block.super }} #}
+    {# {% block js_extra %} #}
+    {#  <script>#}
+    {#     window.StepCount = 1;#}
+    {# </script>#}
+    {#{% endblock js_extra %}#}
+    {#<script src="{% static "js/booking_page.bundle.js" %}"></script>#}
+    <script>
+        $('#__paga_btn').on('click',function(){
+            })
+        $('#payment-form-submit').on('submit',function(){
+        })
+    </script>
+
+
+{% endblock javascript %}
+{% block request_section %}
+{% endblock request_section %}
+

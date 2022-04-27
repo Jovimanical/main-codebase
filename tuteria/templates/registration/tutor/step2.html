@@ -1,0 +1,300 @@
+{% extends 'registration/tutor/landing.html' %}
+{% load staticfiles i18n activelink bootstrap3 add_attr %}
+{% block css %}
+    {{ block.super }}
+    <style>
+        .need-to-know img {
+            width: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .need-to-know img {
+                width: 24px;
+                margin-top: 6px;
+            }
+        }
+        label {
+            font-weight: normal !important;
+        }
+    </style>
+{% endblock %}
+{% block title %}Credentials - Tuteria Application{% endblock title %}
+{% block wizard_title %} <h2 class="padding-top-15">Credentials</h2> {% endblock wizard_title %}
+{% block wizard_progress %}
+    <ul>
+        <li>
+            <a href="#" class="{% ifactive 'registration:tutor_credentials' %}active{% else %}{% endifactive %}">Credentials</a>
+        </li>
+        <li>
+            <a href="#" class="{% ifactive 'registration:tutor_preferences' %}active{% else %}{% endifactive %}">Preferences</a>
+        </li>
+        <li>
+            <a href="#" class="{% ifactive 'registration:schedule_interview' %}active{% else %}{% endifactive %}"
+               style="margin-right:0;">Schedule</a>
+        </li>
+    </ul>
+{% endblock wizard_progress %}
+
+{% block left_column %}
+    <div class="col-sm-12 need-to-know">
+
+        <form accept-charset="UTF-8" action="{% url 'registration:tutor_credentials' %}"
+              class="simple_form form" id="credential-form" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/education.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4 class="br-bottom-md"><b>Education</b></h4>
+                </div>
+            </div>
+            <p>Enter your highest education first, whether in-view or completed. You can add up to two schools. Please write in full, do not abbreviate. E.g. write 'University of Lagos' not 'UNILAG'</p>
+            {% if request.is_featured %}
+                <div id="education-form" class="row-space-4">
+                    {% bootstrap_formset education_formset %}
+                </div>
+            {% else %}
+                <div id="education-form" class="row-space-4">
+                    {{ education_formset.management_form }}
+                    {% for form in education_formset %}
+                        <div id="{{ form.prefix }}-row" class="form-base">
+                            {{ form.id }}
+                            <div class="form-group">
+                                {% bootstrap_label form.school.label label_class="control-label" %}
+                                {{ form.school|add_attributes:"class:form-control,required:true,placeholder:E.g. University of Ibadan,data-parsley-error-message: This field is required." }}
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {% bootstrap_label form.course.label label_class="control-label" %}
+                                        {{ form.course|add_attributes:"class:form-control,required:true,placeholder:E.g. Petroleum Engineering,data-parsley-error-message:This field is required" }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {% bootstrap_label form.degree.label label_class="control-label" %}
+                                        {{ form.degree|add_attributes:"class:form-control,required:true,data-parsley-error-message:This field is required" }}
+                                    </div>
+                                </div>
+                            </div>
+                            {# <div class="form-group"> #}
+                                {# {% bootstrap_label form.certificate.label label_class="control-label" %} #}
+                                {# {{ form.certificate|add_attributes:"required:true,data-parsley-error-message:This field is required" }} #}
+                            {# </div> #}
+                            {{ form.DELETE }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+            <hr class="row hr-styled">
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/work.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4 class="br-bottom-md"><b>Work Experience</b></h4>
+                </div>
+            </div>
+            <p>Enter your most recent work experience if any, and indicate if you currently work there or leave blank if not applicable. Please note that you may be required to provide some proof afterwards.</p>
+
+            <div id="we-form">
+                {% if  request.is_featured %}
+                    {% bootstrap_formset we_formset %}
+                {% else %}
+
+                    {{ we_formset.management_form }}
+                    {% for form in we_formset %}
+                        <div id="{{ form.prefix }}-row" class="form-base">
+                            {{ form.id }}
+
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div class="form-group no-margin-bottom">
+                                        <label class="control-label">Name of Organisation</label>
+                                        {# {% bootstrap_label form.name.label label_class="control-label" %} #}
+                                        {{ form.name|add_attributes:"class:form-control,placeholder:E.g. Green Springs School Lekki Lagos State" }}
+                                        {% if form.name.errors %}
+                                            <ol style="color:red;">
+                                                {% for error in form.name.errors %}
+                                                    <li><strong>{{ error|escape }}</strong></li>
+                                                {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group no-margin-bottom">
+                                        <label class="control-label">Your Role</label>
+                                        {# {% bootstrap_label form.role.label label_class="control-label" %} #}
+                                        {{ form.role|add_attributes:"class:form-control,placeholder:E.g. Chemistry Teacher" }}
+                                        {% if form.role.errors %}
+                                            <ol style="color:red;">
+                                                {% for error in form.role.errors %}
+                                                    <li><strong>{{ error|escape }}</strong></li>
+                                                {% endfor %}
+                                            </ol>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row margin-bottom-5">                                            
+                                <div class="col-sm-6 checkbox">
+                                     <label>
+                                        {{ form.currently_work }} I currently work here
+                                    </label>
+                                </div>
+                            </div>
+                            {{ form.DELETE }}
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <hr class="row hr-styled">
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/teaching.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4><b>Teaching Experience</b></h4>
+                </div>
+            </div>
+            <p class="row-space-3">Tell us about your teaching or training experience to help us understand you a bit more and tailor our service to suit you. Please be completely honest in order to get the best from Tuteria.</p>
+            <div class="row row-space-bottom-5">
+                <label class="col-md-3 text-right">
+                    {{description_form.years_of_teaching.label}}
+                </label>
+                <div class="col-md-9">
+                    {{description_form.years_of_teaching|add_attributes:"form-control"}}
+                </div>
+            </div>
+            <div id="curr" class="row row-space-4">
+                <label class="col-md-3 text-right">
+                    Select the class of students you teach
+                </label>
+                <div class="col-md-9">
+                    {% if description_form.classes.errors %}
+                        <div class="has-error">
+                            <div class="help-block">You must select at least one class.</div>
+                        </div>
+                    {% endif %}
+                    {% for rr in description_form.classes %}
+                    <div class="col-sm-4 checkbox-space">
+                        {{ rr }}
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+                <div >
+                    <div  class="row row-space-4">
+                    <div class="col-sm-9 col-sm-offset-3">
+                    <div class="well bg-info">
+                        <span class="font-head">Teaching Curriculum</span><br>
+                        If you selected Nursery, Primary, JSS or SSS classes, please indicate the curriculum(s) you teach with or skip this step if you don't teach those classes.
+                    </div>
+                    </div>
+                    <label class="col-md-3 text-right">
+                        
+                        Teaching Curriculum
+                    </label>
+                    <div class="col-md-9">                        
+                    {% if description_form.errors %}
+                        <div class="has-error">
+                            <div class="help-block">
+                                You must select a curriculum if teaching 'nursery','primary' or 'jss'.
+                            </div>
+                        </div>
+                    {% endif %}
+                        {% for rr in description_form.curriculum_used %}
+                        <div class="col-sm-4 checkbox-space">
+                            {{ rr }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>    
+                <div id="curriculum_pref" class="row row-space-4 hidden">
+                    <label class="col-md-3 text-right">
+                        British or American Curriculum
+                    </label>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                        <label class="margin-bottom-5">Please tell us about your experience with this curriculum</label>
+                            {{description_form.curriculum_explanation|add_attributes:"class:form-control, rows:4"}}
+                        </div>
+                    </div>                    
+                </div>                            
+            </div>                            
+            
+            <hr class="row hr-styled">
+            <div class="media">
+                <div class="media-left">
+                    <img src="{% static 'img/tutor/meet-tutor.png' %}" class=" center-block"/>
+                </div>
+                <div class="media-body">
+                    <h4><b>Let's Meet You {{ request.user.first_name }}</b></h4>
+                </div>
+            </div>
+
+            <p>Tuteria is a big family and we all love to teach! So tell us why you love teaching as well. Tell us about the most memorable teaching experience you have had! <span class="font-head">Please be as detailed as possible.</span> Don't give a general response, be very specific and detailed. This is your moment!</p>
+            
+            {% if request.is_featured %}
+                {% bootstrap_field description_form.tutor_description %}
+            {% else %}
+                <div class="form-group">
+                    {{ description_form.tutor_description|add_attributes:"class:form-control,required:true,placeholder:Do you enjoy teaching? What makes it so special for you? This helps us learn more about you more and is part of your assessment...,data-parsley-required-message:This field is required" }}
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-8">
+                    <button id="submit-btn" class="btn btn-lg btn-block btn-warning" data-loading-text="Moving On"
+                            >{% trans "Next Step" %} &#8594;</button>
+                </div>
+            </div>
+            <div class="padding-bottom-50"></div>
+            <small><em>If you encounter any difficulty completing this page, please use Chrome or Firefox browser or email <a href="mailto:help@tuteria.com">help@tuteria.com</a> directly for a fast response.</em></small>
+        </form>
+    </div>
+{% endblock %}
+{% block request_section %}{% endblock request_section %}
+{% block custom_js %}
+      
+    <script>
+        window.CreateStep = 1;
+        {% if request.is_featured %}
+            $('.form-base input[type="checkbox"]').hide();
+        {% endif %}
+    </script>
+    <!-- Facebook Conversion Code for Tutors who Started the Application Process -->
+    <script>
+        (function() {
+            var _fbq = window._fbq || (window._fbq = []);
+            if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+            }
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', '6031671638155', {'value':'0.00','currency':'USD'}]);
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6031671638155&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+
+    <!--- Twitter Conversion Tracking Code for Tutors Who Started the Application Process -->
+
+    <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    twttr.conversion.trackPid('l69wh', { tw_sale_amount: 0, tw_order_quantity: 0 });</script>
+    <noscript>
+    <img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l69wh&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+    <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l69wh&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" /></noscript>
+
+{% endblock custom_js %}
+  

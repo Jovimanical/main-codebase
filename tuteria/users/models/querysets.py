@@ -228,19 +228,35 @@ class CountSubquery(models.Subquery):
 
 
 class CustomUserQuerySet(models.QuerySet):
-    def customers(self, year=None):
-        from bookings.models import Booking
+    def customers(self, year=None, _from=None, to=None):
+        from bookings.models import Booking, BookingSession
 
         tutor_booking = (
             Booking.objects.filter(user_id=models.OuterRef("id"))
             .order_by("created")
             .values("order", "created")
         )
+        booking_session = (
+            BookingSession.objects.filter(booking__user_id=models.OuterRef("id"))
+            .order_by("booking__created")
+            .values("price")
+        )
         if year:
             tutor_booking = tutor_booking.filter(created__year=year)
+            booking_session = booking_session.filter(booking__created__year=year)
+        if _from and to:
+            ff = datetime.datetime.strptime(_from, "%Y-%m-%d")
+            tt = datetime.datetime.strptime(to, "%Y-%m-%d")
+            tutor_booking = tutor_booking.filter(created__range=[_from, to])
+            booking_session = booking_session.filter(
+                booking__created__range=[_from, to]
+            )
         return (
             self.annotate(od=CountSubquery(tutor_booking, sum_field="'order'"))
             .filter(od__gte=1)
+            .annotate(
+                session_total_amount=SumSubquery(booking_session, sum_field="price")
+            )
             .annotate(
                 first_booking_date=models.Subquery(tutor_booking.values("created")[:1])
             )

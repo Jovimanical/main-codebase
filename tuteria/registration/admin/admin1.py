@@ -2422,13 +2422,52 @@ class YearFilter(admin.SimpleListFilter):
         return queryset
 
 
+class PassThroughFilter(admin.SimpleListFilter):
+    title = ""
+    parameter_name = "db_from"
+    template = "admin/hidden_filter.html"
+
+    def lookups(self, request, model_admin):
+        print(request.GET.get(self.parameter_name))
+        return ((request.GET.get(self.parameter_name), ""),)
+
+    def queryset(self, request, queryset):
+        return queryset
+
+
+class PassThroughToFilter(admin.SimpleListFilter):
+    title = ""
+    parameter_name = "db_to"
+    template = "admin/hidden_filter.html"
+
+    def lookups(self, request, model_admin):
+        print(request.GET.get(self.parameter_name))
+        return ((request.GET.get(self.parameter_name), ""),)
+
+    def queryset(self, request, queryset):
+        return queryset
+
+
 class CustomerAdmin(ExportMixin, admin.ModelAdmin):
-    list_display = ["email", "booking_count", "first_booking_date", "last_booking_date"]
+    list_display = [
+        "email",
+        "booking_count",
+        "first_booking_date",
+        "last_booking_date",
+        "total_amount",
+    ]
     # list_display = ["email", "booking_count", "total_earned"]
-    list_filter = ["profile__gender", YearFilter]
+    list_filter = [
+        "profile__gender",
+        YearFilter,
+        PassThroughFilter,
+        PassThroughToFilter,
+    ]
     search_fields = ["email"]
     resource_class = TutorResource
     actions = ["export_as_csv"]
+    _from = None
+    _to = None
 
     def export_as_csv(modeladmin, request, queryset):
         """A view that streams a large CSV file."""
@@ -2442,6 +2481,7 @@ class CustomerAdmin(ExportMixin, admin.ModelAdmin):
                 "Booking count",
                 "first booking date",
                 "last booking date",
+                "Total amount",
             ]
         ]
         rows = (
@@ -2450,6 +2490,7 @@ class CustomerAdmin(ExportMixin, admin.ModelAdmin):
                 idx.od,
                 idx.first_booking_date,
                 idx.last_booking_date,
+                idx.session_total_amount,
             ]
             for idx in queryset.all()
         )
@@ -2460,6 +2501,9 @@ class CustomerAdmin(ExportMixin, admin.ModelAdmin):
 
         response = streaming_response(output, "customer_stats")
         return response
+
+    def total_amount(self, obj):
+        return obj.session_total_amount
 
     def first_booking_date(self, obj):
         return obj.first_booking_date
@@ -2484,10 +2528,25 @@ class CustomerAdmin(ExportMixin, admin.ModelAdmin):
 
     total_earned.allow_tags = True
 
+    def get_search_results(self, request, queryset, search_term):
+        queryset, use_distinct = super().get_search_results(
+            request, queryset, search_term
+        )
+        self._from = request.GET.get("db_from")
+        self._to = request.GET.get("db_to")
+        if self._from and self._to:
+            queryset = queryset.customers(_from=self._from, to=self._to)
+        return queryset, use_distinct
+
     def get_queryset(self, request):
         from wallet.models import WalletTransactionType, WalletTransaction
 
+        self.full_path = request.get_full_path()
         query = super(CustomerAdmin, self).get_queryset(request).customers()
+        # if self._from and self._to:
+        #     query = query.customers(_from=self._from, to=self._to)
+        # else:
+        #     import pdb; pdb.set_trace()
         return query
         # kks = [x.pk for x in query]
         # self.transactions = (

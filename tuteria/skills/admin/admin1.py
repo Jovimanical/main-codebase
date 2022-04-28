@@ -402,6 +402,7 @@ class SkillAdmin(admin.ModelAdmin):
     ]
 
     def get_queryset(self, request):
+        from bookings.models import Booking
         qs = super(SkillAdmin, self).get_queryset(request)
         return qs.annotate(
             active_skills=Sum(

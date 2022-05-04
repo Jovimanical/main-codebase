@@ -11,7 +11,7 @@ resources:
 variables:
   tag: '$(Build.BuildId)'
   gitlabhub: 'Gitlab Tuteria'
-  imageName: 'tuteria/tuteria'
+  imageName: 'registry.gitlab.com/tuteria/tuteria'
 
 
 stages:

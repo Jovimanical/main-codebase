@@ -10,6 +10,9 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  gitlabhub: 'Gitlab Tuteria'
+  imageName: 'tuteria/tuteria'
+
 
 stages:
 - stage: Build
@@ -24,7 +27,17 @@ stages:
       displayName: Build an image
       inputs:
         command: build
+        repository: $(imageName)
         dockerfile: '$(Build.SourcesDirectory)/compose/django/Dockerfile'
         tags: |
           $(tag)
         buildContext: '$(Build.SourcesDirectory)'
+    - task: Docker@2
+      displayName: Push image
+      inputs:
+        containerRegistry: |
+          $(gitlabhub)
+        repository: $(imageName)
+        command: push
+        tags: |
+          $(tag)

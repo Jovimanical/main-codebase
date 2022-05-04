@@ -6,6 +6,7 @@ import cloudinary
 import requests
 from django.conf import settings
 from django.utils import timezone
+from django.db import models
 from config import const
 from config.signals import create_subjects
 from external.new_group_flow.services import (
@@ -467,7 +468,12 @@ class NewTutorFlowService:
         telegram_id = body.get("telegram_id")
 
         other_details = body.get("other_details") or {}
-        tutor: User = User.objects.filter(email__iexact=email).first()
+        tutor: User = User.objects.filter(
+            models.Q(email__iexact=email) | models.Q(slug__iexact=email)
+        ).first()
+        if tutor:
+            email = tutor.email
+            body['email'] = email
         auto_login = body.get("auto_login")
         is_admin = body.get("is_admin")
         verify_email = body.get("verify_email")

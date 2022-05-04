@@ -200,7 +200,7 @@ class TutorApplicantTrack(User):
 
     @property
     def get_application_link(self):
-        return f"{settings.BECOME_TUTOR_URL}/api/hijack-tutor?email={self.resolve_field('email')}&accessCode=TUTOR_SUCCESS_ACCESS&current_step={self.current_step}"
+        return f"{settings.BECOME_TUTOR_URL}/api/hijack-tutor?slug={self.slug}&id={self.pk}&accessCode=TUTOR_SUCCESS_ACCESS&current_step={self.current_step}"
 
     def add_remark_action(self, payload):
         all_remarks = self.admin_remarks

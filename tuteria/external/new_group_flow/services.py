@@ -324,6 +324,9 @@ class LoginService:
                     # get ratings and number of clients taught
                     result["unique_clients"] = user.t_bookings.different_client_count()
                     result["ratings"] = user.my_reviews.average_score()
+                    as_applicant = user.as_applicant()
+                    if as_applicant:
+                        result["application_url"] = as_applicant.get_application_link
                     return result
 
     @classmethod

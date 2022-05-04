@@ -845,7 +845,7 @@ class TuteriaUserMixin(VerificationMixin, BookingMixin, TutorSkillMixin):
     def as_applicant(self):
         from tutor_management.models import TutorApplicantTrack
 
-        found = TutorApplicantTrack.objects.filter(pk=self.pk).first()
+        found:TutorApplicantTrack = TutorApplicantTrack.objects.filter(pk=self.pk).first()
         return found
 
     def completed_profile_application(self):

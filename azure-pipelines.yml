@@ -12,6 +12,7 @@ variables:
   tag: '$(Build.BuildId)'
   gitlabhub: 'Gitlab Tuteria'
   imageName: 'registry.gitlab.com/tuteria/tuteria'
+  shortName: "tuteria/tuteria"
 
 
 stages:
@@ -23,21 +24,21 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        repository: $(imageName)
-        dockerfile: '$(Build.SourcesDirectory)/compose/django/Dockerfile'
-        tags: |
-          $(tag)
-        buildContext: '$(Build.SourcesDirectory)'
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     command: build
+    #     repository: $(imageName)
+    #     dockerfile: '$(Build.SourcesDirectory)/compose/django/Dockerfile'
+    #     tags: |
+    #       $(tag)
+    #     buildContext: '$(Build.SourcesDirectory)'
     - task: Docker@2
       displayName: Push image
       inputs:
         containerRegistry: |
           $(gitlabhub)
-        repository: $(imageName)
+        repository: $(shortName)
         command: push
         tags: |
           $(tag)

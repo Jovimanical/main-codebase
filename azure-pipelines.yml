@@ -27,3 +27,4 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/compose/django/Dockerfile'
         tags: |
           $(tag)
+        buildContext: '$(Build.SourcesDirectory)'

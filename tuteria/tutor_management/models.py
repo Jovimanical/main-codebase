@@ -33,9 +33,9 @@ from datetime import datetime
 
 def tuteria_cdn_action(path, payload):
     new_payload = copy.deepcopy(payload)
-    if settings.TEST_EMAIL:
-        if "email" in payload.get("payload", {}):
-            new_payload["payload"]["email"] = settings.TEST_EMAIL
+    # if settings.TEST_EMAIL:
+    #     if "email" in payload.get("payload", {}):
+    #         new_payload["payload"]["email"] = settings.TEST_EMAIL
     response = requests.post(f"{settings.CDN_SERVICE}/api/{path}", json=new_payload)
     if response.status_code < 400:
         result = response.json()

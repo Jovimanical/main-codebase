@@ -786,7 +786,7 @@ class Location(models.Model, LocationMixin):
         max_length=50, choices=NIGERIAN_STATES, null=True, blank=True, db_index=True
     )
     distances = JSONField(null=True, blank=True)
-    vicinity = models.CharField(max_length=80, null=True, blank=True)
+    vicinity = models.CharField(max_length=150, null=True, blank=True)
     vicinity_type = models.CharField(max_length=20, null=True, blank=True)
     addr_type = models.IntegerField(
         default=LocationMixin.USER_ADDRESS,

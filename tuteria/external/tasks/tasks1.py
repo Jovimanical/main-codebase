@@ -391,7 +391,7 @@ def send_phone_numbers_to_clients(pk):
     # email_and_sms_helper(sms_options=sms_options_tutor)
 
 
-def mail_sender(user, subject, approved_tutors, multiple, title, tutor=None):
+def mail_sender(user:BaseRequestTutor, subject, approved_tutors, multiple, title, tutor=None):
     from referrals.models import Referral
 
     password = user.first_name.lower() + user.last_name.lower()

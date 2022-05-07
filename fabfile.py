@@ -4,6 +4,7 @@ from fabric.decorators import hosts
 
 env.hosts = [
     "sama@tutor-search.tuteria.com",
+    "sama@beeola.tuteria.com"
     # 'sama@tutor-search.tuteria.com'
 ]
 # env.hosts = [
@@ -34,7 +35,13 @@ def common_code(code_dir, script, proceed=True, branch="master"):
             # sudo("docker exec -it tuteria_app_1 python manage.py migrate pricings")
             # sudo("docker-compose build celery")
             # sudo("docker-compose up -d celery")
-
+@hosts("sama@beeola.tuteria.com")
+def deploy_dev():
+    code_dir = "/home/sama/tuteria-projects/tuteria-deploy"
+    with settings(user="sama",password=password):
+        with cd(code_dir):
+            run("pwd")
+            run("docker-compose ps")
 
 def deploy_current(branch="master"):
     print("hello World")
@@ -204,9 +211,6 @@ def tuteria_bash():
     with settings(user="root", password=password):
         sudo("docker exec -i -t tuteria_app_1 python manage.py shell_plus")
 
-
-def deploy_dev():
-    pass
 
 
 def show_logs():

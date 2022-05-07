@@ -50,13 +50,31 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: SSH@0
-      inputs:
-        sshEndpoint: 'ssh_connect'
-        runOptions: 'commands'
-        commands: 'cd /home/sama/tuteria-projects/tuteria-deploy && dc pull app2'
-        interactiveSession: true
-        readyTimeout: '20000'
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '2.x'
+          addToPath: true
+          architecture: 'x64'
+        name: "pyTools"
+      - script: $(pyTools.pythonLocation)/bin/pip install fabric==1.14.1
+        displayName: Install Python-based tools.
+      
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '2.x'
+          architecture: 'x64'
+        displayName: Use cached Python for deployment.
+
+      - script: PRODUCTION_PASSWORD=$(prod_pasword) $(pyTools.pythonLocation)/bin/fab deploy_dev
+        displayName: run fab deploy_dev
+      
+    # - task: SSH@0
+    #   inputs:
+    #     sshEndpoint: 'ssh_connect'
+    #     runOptions: 'commands'
+    #     commands: 'cd /home/sama/tuteria-projects/tuteria-deploy && dc pull app2'
+    #     interactiveSession: true
+    #     readyTimeout: '20000'
    
     # - task: InstallSSHKey@0
     #   inputs:

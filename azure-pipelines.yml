@@ -52,7 +52,7 @@ stages:
     steps:
     - task: SSH@0
       inputs:
-        sshEndpoint: 'SSH Connection'
+        sshEndpoint: 'ssh_connect'
         runOptions: 'commands'
         commands: 'cd /home/sama/tuteria-projects/tuteria-deploy && dc pull app2'
         interactiveSession: true

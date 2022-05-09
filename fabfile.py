@@ -46,7 +46,17 @@ def deploy_dev(build_no=9):
             print(build_no)
             run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
             run("docker-compose up -d app2")
-            run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
+            run('docker image prune -f')
+            run('docker container prune -f')
+
+@hosts("sama@beeola.tuteria.com")
+def run_tests(build_no=9):
+    code_dir = "/home/sama/tuteria-projects/tuteria-deploy"
+    with settings(user="sama", password=password):
+        with cd(code_dir):
+            run("pwd")
+            run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
+            run("docker-compose run app2 source run_test.sh")
             run('docker image prune -f')
             run('docker container prune -f')
 

@@ -16,6 +16,38 @@ variables:
 
 
 stages:
+- stage: Test
+  displayName: Test
+  jobs:
+  - job: Run Tests
+    displayName: Run Tests
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.6.15'
+          addToPath: true
+          architecture: 'x64'
+        name: "pyTools"
+      - script: $(pyTools.pythonLocation)/bin/pip install -r requirements/python3.txt
+        displayName: Install main dependencies.
+      
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.6.15'
+          architecture: 'x64'
+        displayName: Install second test dependencies.
+      - script: $(pyTools.pythonLocation)/bin/pip install -r tuteria/requirements.txt
+
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.6.15'
+          architecture: 'x64'
+        displayName: Run tests.
+      - script: $(pyTools.pythonLocation)/bin/pytest -s tuteria
+
+
 - stage: Build
   displayName: Build image
   jobs:
@@ -42,6 +74,7 @@ stages:
         command: push
         tags: |
           $(tag)
+
 - stage: Deploy
   displayName: Deploy App
   jobs:
@@ -57,7 +90,7 @@ stages:
           architecture: 'x64'
         name: "pyTools"
       - script: $(pyTools.pythonLocation)/bin/pip install fabric==1.14.1
-        displayName: Install Python-based tools.
+        displayName: Install Fabric for deployment.
       
       - task: UsePythonVersion@0
         inputs:
@@ -65,51 +98,7 @@ stages:
           architecture: 'x64'
         displayName: Use cached Python for deployment.
 
-      - script: PRODUCTION_PASSWORD=$(prod_pasword) $(pyTools.pythonLocation)/bin/fab deploy_dev
-        displayName: run fab deploy_dev
+      - script: PRODUCTION_PASSWORD=$(prod_pasword) $(pyTools.pythonLocation)/bin/fab deploy_dev:build_no=$(tag)
+        displayName: deploy image with build_no $(tag)
       
-    # - task: SSH@0
-    #   inputs:
-    #     sshEndpoint: 'ssh_connect'
-    #     runOptions: 'commands'
-    #     commands: 'cd /home/sama/tuteria-projects/tuteria-deploy && dc pull app2'
-    #     interactiveSession: true
-    #     readyTimeout: '20000'
    
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: |
-    #       |1|WLAwqUnT+ZDSIBY/XS6WooLw4qg=|YRmGlJShAOsm0Adqn0ml2zMY3kg= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHLh7ud42JitRhvQnLlkYqI7LwnWVda6DdPJUi+ilykWnUOx3rkj+o5oyFz11lf979tLCpimuWoboYPOgcPhMas=
-    #       |1|pi9seEIqs5aQv9Iw5HmKtPeiwMQ=|4xG1WlI/+bOgLoOpl76A8sd682A= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHLh7ud42JitRhvQnLlkYqI7LwnWVda6DdPJUi+ilykWnUOx3rkj+o5oyFz11lf979tLCpimuWoboYPOgcPhMas=
-    #       |1|APKMp73Qtuw86rG5ecYj1WKJbIQ=|51KfiPJZSrbYEsYn/B6XoKBh8Fo= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFTwIbVp7YuXEtuCxP2DXaqZin2QTk/ack376DXZxMdxiH0vEwQJo7h3OsZLP9A1KwEYZEV3Lxsr+DmbFWe2gDU=
-    #       |1|GkIK2eT/EfakGHB0HaYZ4r9NAbQ=|MvSPUDZEEIUghvkyPKIygBTlhPc= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFTwIbVp7YuXEtuCxP2DXaqZin2QTk/ack376DXZxMdxiH0vEwQJo7h3OsZLP9A1KwEYZEV3Lxsr+DmbFWe2gDU=
-    #       |1|jyBrVVaNaIznt68eiRd9z5f4zQA=|aPRn3VXIe+iUaIFE9QqxTBYTD20= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
-    #       |1|gTz6yQG0aw004qG5Alti+PhKNyM=|U9YrdtK6enN5A5TTOZmxiuhl4Uk= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
-    #       |1|5Jl8BeYfDujWuKoYLVbYJPO7+nc=|cpxT3Wyl3aTCSEalKOzgETW+dog= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
-    #       |1|Fe/jtbUSH36dBMoQcy3BxKRsQ4A=|MCRgPxjeMhhNCZlwCSmASvIm0Ms= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
-    #       |1|A8HZhFvpAlvZ7U1fWuoFm9yN6So=|wOav6f7/EjE5naF/IDklb9/2CS4= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
-    #       |1|Vwey+LVXPCvUrPfW+RgbYOeeHl8=|dl7FLcQXaVYjUrsTb7jEPHEHQJQ= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCUU2Jv8YtRt41MM0yoYPXKmddK17c5xOWvfbw5T1xsaVPTrvBdZIbVnZt8KAuBEZKVDA4DBNJBEwMp5ZKZHF9U=
-    #       |1|/gm7+ncmZ8CrgeRFD76eaRzwYN4=|2U1b+9dzn/G2NSFNdBJ4rI+h6MQ= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCUU2Jv8YtRt41MM0yoYPXKmddK17c5xOWvfbw5T1xsaVPTrvBdZIbVnZt8KAuBEZKVDA4DBNJBEwMp5ZKZHF9U=
-    #       |1|UeBsPnsRdhHOL19C/0S6arl1C1E=|iSPsNIPujVVomKRJC+ZAUuhxh+g= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
-    #       |1|30/3PF4z3Pjf/Y0qEZwv7s5n248=|yxo9FX2Yb6ld5DmdYKfIZUqfFe4= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
-    #       |1|iYgj1P9xdoQAQGKtOu6X54BkHR4=|/psuzkmBc+JeapwPlKZZurw414U= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
-    #     sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDuhJS1UhvhXOq8CDcTlzIb5wHnQ2xDrWwgCO+jGdBiS/glnokBne877KJF5ES7aioLwIaVcqNskGBKkg0ejnsvAdKYcMhCMTKVn1M5OCjIguE5ontde3VwkYZSQqvSDRFpeB61ryxRMjyFs7yUGVQ0eOuW+D4aotDn/+HaPmI6OA4gt7hXtzYqegp56L/vph3QwJifhRrulH7V09LDwQd8PL0K1wS+BpMcU7OiwdHdgwJclfEcvl+yFSRI43iDPtuyTonvjxloGjDrytsP1VpZr5KqCADEfUGuN6V9kPl9hdnYAqwutsmGo60GjQFMUdILDuYrfr9ag55zdtP7FEDz4xcpaIQ5QHWbT1GJ4Qo23jcJtEZKTBWrtb4XxWqa6+EHKFXzSz7JPSADVYhEf+udlQ1F5r0Afkz+Upq8YPrerzjjaEh6jcDBGCeoU2sGOmK7gue41R8BLOv5WaQr5RVVyS1bfsAMq9xN72vtlQ9KVAP8we6wJc3HelUpK1mD+fM= beesama@beesama'
-    #     sshKeySecureFile: 'server_ssh'
-    # - task: UsePythonVersion@0
-    #   inputs:
-    #     versionSpec: '2.x'
-    #     addToPath: true
-    #     architecture: 'x64'
-    #   name: "pyTools"
-    # - script: $(pyTools.pythonLocation)/bin/pip install fabric==1.14.1
-    #   displayName: Install Python-based tools.
-    # - task: UsePythonVersion@0
-    #   inputs:
-    #     versionSpec: '$(python.version)'
-    #     architecture: 'x64'
-    #   displayName: Deploy current fabric container.
-
-    # - script: $(pyTools.pythonLocation)/bin/fab -e $(tox.env)
-    #   displayName: run tox -e $(tox.env)
-    
-      

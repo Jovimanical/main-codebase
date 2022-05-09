@@ -16,44 +16,6 @@ variables:
 
 
 stages:
-# - stage: Test
-#   displayName: Test
-#   jobs:
-#   - job: Test
-#     displayName: Run Tests
-#     pool:
-#       vmImage: ubuntu-latest
-#     steps:
-#       - task: UsePythonVersion@0
-#         inputs:
-#           versionSpec: '3.6'
-#           addToPath: true
-#           architecture: 'x64'
-#         name: "pyTools"
-#       - script: $(pyTools.pythonLocation)/bin/pip install -r requirements/python3.txt
-#         displayName: Install main dependencies.
-      
-#       - task: UsePythonVersion@0
-#         inputs:
-#           versionSpec: '3.6'
-#           architecture: 'x64'
-#         displayName: Install second test dependencies.
-#       - script: $(pyTools.pythonLocation)/bin/pip install -r tuteria/requirements.txt
-
-#       - task: UsePythonVersion@0
-#         inputs:
-#           versionSpec: '3.6'
-#           architecture: 'x64'
-#         displayName: Run tests.
-#       - script: $(pyTools.pythonLocation)/bin/pytest -s tuteria
-
-#       - task: UsePythonVersion@0
-#         inputs:
-#           versionSpec: '3.6.15'
-#           architecture: 'x64'
-#         displayName: Run tests.
-#       - script: $(pyTools.pythonLocation)/bin/pytest -s tuteria
-
 - stage: Build
   displayName: Build image
   jobs:
@@ -97,6 +59,15 @@ stages:
         name: "pyTools"
       - script: $(pyTools.pythonLocation)/bin/pip install fabric==1.14.1
         displayName: Install Fabric for deployment.
+      
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '2.x'
+          architecture: 'x64'
+        displayName: Run tests.
+
+      - script: PRODUCTION_PASSWORD=$(prod_pasword) $(pyTools.pythonLocation)/bin/fab run_tests:build_no=$(tag)
+        displayName: run tests with build_no $(tag)
       
       - task: UsePythonVersion@0
         inputs:

@@ -19,14 +19,14 @@ stages:
 - stage: Test
   displayName: Test
   jobs:
-  - job: Run Tests
+  - job: Test
     displayName: Run Tests
     pool:
       vmImage: ubuntu-latest
     steps:
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: '3.6.15'
+          versionSpec: '3.6'
           addToPath: true
           architecture: 'x64'
         name: "pyTools"
@@ -35,14 +35,14 @@ stages:
       
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: '3.6.15'
+          versionSpec: '3.6'
           architecture: 'x64'
         displayName: Install second test dependencies.
       - script: $(pyTools.pythonLocation)/bin/pip install -r tuteria/requirements.txt
 
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: '3.6.15'
+          versionSpec: '3.6'
           architecture: 'x64'
         displayName: Run tests.
       - script: $(pyTools.pythonLocation)/bin/pytest -s tuteria

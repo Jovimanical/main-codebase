@@ -30,7 +30,10 @@ class Production(Common):
         "staging-prod.tuteria.com",
         "dev.tuteria.com",
         "dev-django.tuteria.com",
-        "beeola.tuteria.com"
+        "beeola.tuteria.com",
+        "app",
+        "app-lb",
+        "webserver"
     ]
 
     INSTALLED_APPS = ("whitenoise",) + Common.INSTALLED_APPS

@@ -4,6 +4,9 @@
 
 trigger:
 - master
+- develop
+- feature/*
+- bug/*
 
 resources:
 - repo: self

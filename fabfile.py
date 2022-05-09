@@ -60,6 +60,9 @@ def run_tests(build_no=9):
             run('docker image prune -f')
             run('docker container prune -f')
 
+def sample():
+    pass
+
 @hosts("sama@tutor-search.tuteria.com")
 def deploy_current(branch="master"):
     print("hello World")

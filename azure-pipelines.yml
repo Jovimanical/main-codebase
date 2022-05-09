@@ -15,38 +15,37 @@ variables:
   shortName: "tuteria/tuteria"
 
 
-stages:
-- stage: Test
-  displayName: Test
-  jobs:
-  - job: Run Tests
-    displayName: Run Tests
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: '3.6.15'
-          addToPath: true
-          architecture: 'x64'
-        name: "pyTools"
-      - script: $(pyTools.pythonLocation)/bin/pip install -r requirements/python3.txt
-        displayName: Install main dependencies.
+# stages:
+# - stage: Test
+#   displayName: Test
+#   jobs:
+#   - job: Run Tests
+#     displayName: Run Tests
+#     pool:
+#       vmImage: ubuntu-latest
+#     steps:
+#       - task: UsePythonVersion@0
+#         inputs:
+#           versionSpec: '3.6.15'
+#           addToPath: true
+#           architecture: 'x64'
+#         name: "pyTools"
+#       - script: $(pyTools.pythonLocation)/bin/pip install -r requirements/python3.txt
+#         displayName: Install main dependencies.
       
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: '3.6.15'
-          architecture: 'x64'
-        displayName: Install second test dependencies.
-      - script: $(pyTools.pythonLocation)/bin/pip install -r tuteria/requirements.txt
+#       - task: UsePythonVersion@0
+#         inputs:
+#           versionSpec: '3.6.15'
+#           architecture: 'x64'
+#         displayName: Install second test dependencies.
+#       - script: $(pyTools.pythonLocation)/bin/pip install -r tuteria/requirements.txt
 
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: '3.6.15'
-          architecture: 'x64'
-        displayName: Run tests.
-      - script: $(pyTools.pythonLocation)/bin/pytest -s tuteria
-
+#       - task: UsePythonVersion@0
+#         inputs:
+#           versionSpec: '3.6.15'
+#           architecture: 'x64'
+#         displayName: Run tests.
+#       - script: $(pyTools.pythonLocation)/bin/pytest -s tuteria
 
 - stage: Build
   displayName: Build image

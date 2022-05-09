@@ -35,13 +35,20 @@ def common_code(code_dir, script, proceed=True, branch="master"):
             # sudo("docker exec -it tuteria_app_1 python manage.py migrate pricings")
             # sudo("docker-compose build celery")
             # sudo("docker-compose up -d celery")
+
+
 @hosts("sama@beeola.tuteria.com")
-def deploy_dev():
+def deploy_dev(build_no=9):
     code_dir = "/home/sama/tuteria-projects/tuteria-deploy"
-    with settings(user="sama",password=password):
+    with settings(user="sama", password=password):
         with cd(code_dir):
             run("pwd")
-            run("docker-compose ps")
+            print(build_no)
+            run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
+            run("docker-compose up -d app2")
+            run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
+            run('docker image prune -f')
+            run('docker container prune -f')
 
 def deploy_current(branch="master"):
     print("hello World")
@@ -210,7 +217,6 @@ def app_bash():
 def tuteria_bash():
     with settings(user="root", password=password):
         sudo("docker exec -i -t tuteria_app_1 python manage.py shell_plus")
-
 
 
 def show_logs():

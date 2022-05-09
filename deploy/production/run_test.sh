@@ -6,4 +6,4 @@ export DJANGO_CONFIGURATION=StagingDev
 export BROKER_URL=redis://redis:6379/
 export CELERY_RESULT_BACKEND=redis://redis/
 export CLOUDINARY_URL=cloudinary://728568457692931:GUot9JhC1Rol3xfhen7dOLNif_k@tuteria
-pytest -s tuteria --create-db
+pytest -s $1 --create-db

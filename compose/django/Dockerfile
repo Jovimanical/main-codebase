@@ -34,6 +34,7 @@ RUN pip install sentry-sdk==1.5.1
 COPY tuteria/ /home/app/source
 COPY deploy/production/invoke.sh /scripts/
 COPY deploy/production/invoke1.sh /scripts/
+COPY deploy/production/run_test.sh /scripts/
 COPY deploy/production/config.py /scripts/
 COPY deploy/production/newrelic.ini /scripts/
 COPY deploy/production/uwsgi_config.ini /scripts/

@@ -56,7 +56,7 @@ def run_tests(build_no=9):
         with cd(code_dir):
             run("pwd")
             run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
-            run("docker-compose run app2 /bin/bash run_test.sh")
+            run("docker-compose run app2 /bin/bash /scripts/run_test.sh /home/app/source")
             run('docker image prune -f')
             run('docker container prune -f')
 

@@ -1,4 +1,4 @@
-pip install pytest==6.2.4 pytest-django==4.4.0 pytest-mock==3.6.1 pytest-pythonpath==0.7
+pip install pytest==6.2.4 pytest-django==4.4.0 pytest-mock==3.6.1 pytest-pythonpath==0.7 django-debug-toolbar==1.9.1
 
 # export DATABASE_URL=postgres://tuteria:punnisher@127.0.0.1:5430/tuteria
 export DATABASE_URL=postgres://tuteria:punnisher@master/tuteria

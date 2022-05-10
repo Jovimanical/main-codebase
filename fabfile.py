@@ -37,9 +37,9 @@ def common_code(code_dir, script, proceed=True, branch="master"):
             # sudo("docker-compose up -d celery")
 
 
-@hosts("sama@beeola.tuteria.com")
+@hosts("sama@tutor-search.tuteria.com")
 def deploy_dev(build_no=9):
-    code_dir = "/home/sama/tuteria-projects/tuteria-deploy"
+    code_dir = "/home/sama/development/tuteria-deploy"
     with settings(user="sama", password=password):
         with cd(code_dir):
             run("pwd")

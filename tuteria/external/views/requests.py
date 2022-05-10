@@ -77,6 +77,15 @@ class HowView(RedirectView):
     permanent = True
     url = settings.PARENT_REQUEST_URL
 
+class GroupClass(RedirectView):
+    permanent = True 
+
+    def get_redirect_url(self, *args, **kwargs):
+        course_id = self.kwargs.get('course_id')
+        course_name = self.kwargs.get('course_name')
+        return f"{settings.GROUP_LESSONS_URL}/classes/{course_name}/{course_id}"
+        return super().get_redirect_url(*args, **kwargs)
+
 class BecomeTutor(RedirectView):
     permanent = True 
     url = settings.BECOME_TUTOR_URL

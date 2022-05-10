@@ -835,6 +835,7 @@ class Common(Configuration):
         # "/s/hometutors"
         # 'PARENT_REQUEST_URL', "/home-tutors-in-nigeria"
     )
+    GROUP_LESSONS_URL = os.getenv("GROUP_LESSONS_URL", "https://classes.tuteria.com")
     SCHEDULER_HOST_URL = os.getenv(
         "SCHEDULER_HOST_URL", "http://email-service.tuteria.com:8020"
     )

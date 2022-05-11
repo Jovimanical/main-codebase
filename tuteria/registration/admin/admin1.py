@@ -549,7 +549,9 @@ class DistanceMixin(admin.ModelAdmin):
         "remove_tutor_ability_to_teach_online",
         "update_price_for_selected_tutor",
         "deduct_writing_fee",
-        "freeze_tutor_profile" "sync_to_mailing_list"
+        "freeze_tutor_profile",
+        "sync_to_mailing_list",
+        "un_freeze_tutor_profile"
         #    'tutor_statistics',
         #    'send_emails_to_tutors_on_request2'
     ]
@@ -569,6 +571,17 @@ class DistanceMixin(admin.ModelAdmin):
             application_status=UserProfile.FROZEN
         )
         self.message_user(request, "Frozen account successful")
+
+    def un_freeze_tutor_profile(self, request, queryset):
+        for k in queryset.all():
+            TutorSkill.objects.filter(
+                tutor_id=k.id, status__in=[TutorSkill.ACTIVE, TutorSkill.PENDING]
+            ).update(status=TutorSkill.ACTIVE)
+        user_ids = queryset.values_list("pk", flat=True)
+        UserProfile.objects.filter(user_id__in=list(user_ids)).update(
+            application_status=UserProfile.VERIFIED
+        )
+        self.message_user(request, "Un Frozen account successful")
 
     def tutor_location(self, obj):
         return obj.location_set.actual_tutor_address()

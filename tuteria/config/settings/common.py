@@ -848,7 +848,7 @@ class Common(Configuration):
     MEDIA_FORMAT = "tuteria"
     # MEDIA_SERVICE = "http://localhost:8000"
     # MEDIA_SERVICE = "http://dev.tuteria.com:8020"
-    MEDIA_SERVICE = "https://sheet.tuteria.com"
+    MEDIA_SERVICE = "http://sheet.tuteria.com:8020"
     # USE_NEW_FLOW = True
     USE_NEW_FLOW = os.getenv("USE_NEW_FLOW") == "True"
     BECOME_TUTOR_URL = os.getenv("BECOME_TUTOR_URL", "https://tutors.tuteria.com")

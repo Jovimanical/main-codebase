@@ -2556,7 +2556,7 @@ async def loop_helper(callback):
 
 
 class GoogleSheetHelper:
-    COURSE_API = "https://sheet.tuteria.com"
+    COURSE_API = "http://sheet.tuteria.com:8020"
     COURSE_SHEET_API = "https://docs.google.com/spreadsheets/d/1Tnz8AP0cJjZO4JPCln2nyP3r7F3lIhM7fr8VrJ3ZLQo/edit?usp=sharing"
 
     @classmethod

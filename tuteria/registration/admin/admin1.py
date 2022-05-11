@@ -527,9 +527,9 @@ class CalculateDistanceForm(ActionForm):
     # lat = forms.DecimalField(required=False)
     # lon = forms.DecimalField(required=False)
     tax_id = forms.CharField(required=False)
-    request_pk = forms.IntegerField(required=False)
-    region = forms.ModelChoiceField(required=False, queryset=Constituency.objects.all())
-    price = forms.DecimalField(required=False)
+    # request_pk = forms.IntegerField(required=False)
+    # region = forms.ModelChoiceField(required=False, queryset=Constituency.objects.all())
+    # price = forms.DecimalField(required=False)
 
 
 class ActionForms(object):
@@ -553,7 +553,7 @@ class DistanceMixin(admin.ModelAdmin):
         #    'tutor_statistics',
         #    'send_emails_to_tutors_on_request2'
     ]
-    # action_form = CalculateDistanceForm
+    action_form = CalculateDistanceForm
 
     def sync_to_mailing_list(self, request, queryset):
         for i in queryset:

@@ -21,9 +21,17 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- template: azure-templates/frontend-deploy-stage.yml@templates
+- template: azure-templates/build-stage.yml@templates
   parameters:
     short_name: "tuteria/tuteria"
     tag: $(Build.BuildId)
     dockerfile: $(Build.SourcesDirectory)/compose/django/Dockerfile
     with_test: true
+    language: python 
+- template: azure-templates/deploy-all-stages.yml@templates
+  parameters:
+    dev_domain: dev-django.tuteria.com
+    uat_domain: release-django.tuteria.com
+    prod_domain: www.tuteria.com
+    short_name: "tuteria/tuteria"
+    tag: $(Build.BuildId)

@@ -34,6 +34,7 @@ class Production(Common):
         "app",
         "app-lb",
         "webserver"
+        "release-django.tuteria.com"
     ]
 
     INSTALLED_APPS = ("whitenoise",) + Common.INSTALLED_APPS

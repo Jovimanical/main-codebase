@@ -35,3 +35,4 @@ stages:
     prod_domain: www.tuteria.com
     short_name: "tuteria/tuteria"
     tag: $(Build.BuildId)
+    dockerfile: $(Build.SourcesDirectory)/compose/django/Dockerfile

@@ -33,7 +33,7 @@ class Production(Common):
         "beeola.tuteria.com",
         "app",
         "app-lb",
-        "webserver"
+        "webserver",
         "release-django.tuteria.com"
     ]
 

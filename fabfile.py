@@ -45,7 +45,7 @@ def deploy_dev(build_no=9):
             run("pwd")
             print(build_no)
             run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
-            run("docker-compose up -d app2")
+            run("DEV_DEPLOY_VERSION={} docker-compose up -d app2".format(build_no))
             run("docker image prune -f")
             run("docker container prune -f")
 
@@ -58,7 +58,9 @@ def run_tests(build_no=9):
             run("pwd")
             run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
             run(
-                "docker-compose run app2 /bin/bash /scripts/run_test.sh /home/app/source"
+                "DEV_DEPLOY_VERSION={} docker-compose run app2 /bin/bash /scripts/run_test.sh /home/app/source".format(
+                    build_no
+                )
             )
             run("docker image prune -f")
             run("docker container prune -f")

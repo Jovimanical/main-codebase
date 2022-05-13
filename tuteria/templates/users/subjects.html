@@ -226,6 +226,7 @@
                 ...JSON.parse('{{ initial_data|escapejs }}'),
             },
         };
+        window.initialData = initialData
         window.loadApplication(window.CLIENT_PAGES.SUBJECTS, initialData, "{% url 'users:new_flow_post' %}");
     </script>
     {% endif %}

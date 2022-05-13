@@ -36,12 +36,21 @@ urlpatterns = [
         BaseRequestTutorAutocomplete.as_view(),
         name="baserequesttutor-autocomplete",
     ),
-    url(regex=r"^become-a-tutor/$", view=views.BecomeTutor.as_view(), name="become_tutor"),
+    url(
+        regex=r"^become-a-tutor/$",
+        view=views.BecomeTutor.as_view(),
+        name="become_tutor",
+    ),
     url(
         regex=r"^hometutors/$",
         view=views.HowView.as_view(),
         # view=views.HowView.as_view(template_name="pages/how-it-works.html"),
         name="home_tutors",
+    ),
+    url(
+        regex=r"^classes/(?P<course_name>[\w.@+-]+)/(?P<course_id>[\w.@+-]+)",
+        view=views.GroupClass.as_view(),
+        name="group_classes",
     ),
     url(
         regex=r"^home-tutors-in-nigeria/$",

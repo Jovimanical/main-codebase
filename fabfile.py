@@ -4,6 +4,7 @@ from fabric.decorators import hosts
 
 env.hosts = [
     "sama@tutor-search.tuteria.com",
+    "sama@beeola.tuteria.com"
     # 'sama@tutor-search.tuteria.com'
 ]
 # env.hosts = [
@@ -36,6 +37,52 @@ def common_code(code_dir, script, proceed=True, branch="master"):
             # sudo("docker-compose up -d celery")
 
 
+@hosts("sama@tutor-search.tuteria.com")
+def deploy_dev(build_no=9):
+    code_dir = "/home/sama/development/tuteria-deploy"
+    with settings(user="sama", password=password):
+        with cd(code_dir):
+            run("pwd")
+            print(build_no)
+            run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
+            run("docker-compose up -d app2")
+            run("docker image prune -f")
+            run("docker container prune -f")
+
+
+@hosts("sama@beeola.tuteria.com")
+def run_tests(build_no=9):
+    code_dir = "/home/sama/tuteria-projects/tuteria-deploy"
+    with settings(user="sama", password=password):
+        with cd(code_dir):
+            run("pwd")
+            run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
+            run(
+                "docker-compose run app2 /bin/bash /scripts/run_test.sh /home/app/source"
+            )
+            run("docker image prune -f")
+            run("docker container prune -f")
+
+
+@hosts("sama@release.tuteria.com")
+def deploy_staging(build_no=9):
+    code_dir = "/home/sama/tuteria-projects/tuteria-deploy"
+    with settings(user="sama", password=password):
+        with cd(code_dir):
+            run("pwd")
+            print(build_no)
+            run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
+            run("docker-compose up -d app2")
+            run("docker image prune -f")
+            run("docker container prune -f")
+
+
+@hosts("sama@web2.tuteria.com")
+def deploy_production(build_no=9):
+    w_images()
+
+
+@hosts("sama@tutor-search.tuteria.com")
 def deploy_current(branch="master"):
     print("hello World")
     run("pwd")
@@ -114,29 +161,6 @@ def deploy_staging_server():
         run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
 
 
-@hosts("sama@ci.tuteria.com")
-def deploy_staging():
-    with cd("/home/sama/tuteria-deploy"):
-        run("git pull --no-edit")
-        run("docker-compose kill webserver assets")
-        run("docker-compose rm -f webserver assets")
-        run("docker volume rm tuteriadeploy_media_backups")
-        run("docker-compose pull assets")
-        run("docker-compose pull marketing-pages")
-        run("docker-compose up -d webserver")
-        run("docker-compose up -d marketing-pages")
-    run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
-
-
-@hosts("sama@ci.tuteria.com")
-def deploy_staging_django():
-    with cd("/home/sama/tuteria"):
-        run("git pull")
-        run("git checkout develop")
-        run("source boot_app_staging.sh")
-        run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
-
-
 @hosts("sama@web2.tuteria.com")
 def w_images():
     with cd("/home/sama/tuteria"):
@@ -203,10 +227,6 @@ def app_bash():
 def tuteria_bash():
     with settings(user="root", password=password):
         sudo("docker exec -i -t tuteria_app_1 python manage.py shell_plus")
-
-
-def deploy_dev():
-    pass
 
 
 def show_logs():

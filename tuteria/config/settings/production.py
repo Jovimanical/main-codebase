@@ -19,7 +19,22 @@ class Production(Common):
 
     # This ensures that Django will be able to detect a secure connection
     # properly on Heroku.
-    ALLOWED_HOSTS = ["tuteria.com","www.tuteria.com","app.tuteria.com","web2.tuteria.com","staging.tuteria.com","tutor-search.tuteria.com","vps483971.ovh.net","staging-prod.tuteria.com"]
+    ALLOWED_HOSTS = [
+        "tuteria.com",
+        "www.tuteria.com",
+        "app.tuteria.com",
+        "web2.tuteria.com",
+        "staging.tuteria.com",
+        "tutor-search.tuteria.com",
+        "vps483971.ovh.net",
+        "staging-prod.tuteria.com",
+        "dev.tuteria.com",
+        "dev-django.tuteria.com",
+        "beeola.tuteria.com",
+        "app",
+        "app-lb",
+        "webserver"
+    ]
 
     INSTALLED_APPS = ("whitenoise",) + Common.INSTALLED_APPS
 

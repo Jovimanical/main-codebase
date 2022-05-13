@@ -1,44 +1,38 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
+- develop
 - master
+- feature/*
+- bug/*
 
 resources:
-- repo: self
+# - repo: self
+  repositories: 
+    - repository: templates
+      type: git 
+      name: Tuteria/tuteria-deploy
+      ref: refs/heads/develop
 
-variables:
-  tag: '$(Build.BuildId)'
-  gitlabhub: 'Gitlab Tuteria'
-  imageName: 'registry.gitlab.com/tuteria/tuteria'
-  shortName: "tuteria/tuteria"
-
+pool:
+  vmImage: ubuntu-latest
 
 stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        repository: $(imageName)
-        dockerfile: '$(Build.SourcesDirectory)/compose/django/Dockerfile'
-        tags: |
-          $(tag)
-        buildContext: '$(Build.SourcesDirectory)'
-    - task: Docker@2
-      displayName: Push image
-      inputs:
-        containerRegistry: |
-          $(gitlabhub)
-        repository: $(shortName)
-        command: push
-        tags: |
-          $(tag)
+- template: azure-templates/build-stage.yml@templates
+  parameters:
+    short_name: "tuteria/tuteria"
+    tag: $(Build.BuildId)
+    dockerfile: $(Build.SourcesDirectory)/compose/django/Dockerfile
+    with_test: true
+    language: python 
+- template: azure-templates/deploy-all-stages.yml@templates
+  parameters:
+    dev_domain: dev-django.tuteria.com
+    uat_domain: release-django.tuteria.com
+    prod_domain: www.tuteria.com
+    short_name: "tuteria/tuteria"
+    tag: $(Build.BuildId)
+    dockerfile: $(Build.SourcesDirectory)/compose/django/Dockerfile

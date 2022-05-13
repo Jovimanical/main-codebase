@@ -743,7 +743,7 @@ class StateWithRegion(models.Model):
 
 def fetch_all_vicinities_from_sheet():
     response = requests.post(
-        "https://sheet.tuteria.com/fetch-groups",
+        "http://sheet.tuteria.com:8020/fetch-groups",
         json={
             "link": "https://docs.google.com/spreadsheets/d/1BBI6HUCpHkHk_AgxBEGACpL90dV_D4mySG3-c0ewGVY/edit?usp=sharing",
             "sheet": "Location",

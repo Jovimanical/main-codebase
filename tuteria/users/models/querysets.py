@@ -228,8 +228,9 @@ class CountSubquery(models.Subquery):
 
 
 class CustomUserQuerySet(models.QuerySet):
-    def customers(self, year=None, _from=None, to=None):
+    def customers(self, year=None, _from=None, to=None, is_academic=True):
         from bookings.models import Booking, BookingSession
+        from skills.models import Skill
 
         tutor_booking = (
             Booking.objects.filter(user_id=models.OuterRef("id"))
@@ -241,6 +242,13 @@ class CustomUserQuerySet(models.QuerySet):
             .order_by("booking__created")
             .values("price")
         )
+        if is_academic:
+            tutor_booking = tutor_booking.filter(
+                ts__skill__market_category=Skill.SCHOOL
+            )
+            booking_session = booking_session.filter(
+                booking__ts__skill__market_category=Skill.SCHOOL
+            )
         if year:
             tutor_booking = tutor_booking.filter(created__year=year)
             booking_session = booking_session.filter(booking__created__year=year)

@@ -6,6 +6,7 @@ Local Configurations
 - Uses console backend for emails
 - Use Django Debug Toolbar
 """
+import logging.config
 import os
 from configurations import values
 from .common import Common
@@ -219,90 +220,94 @@ class StagingProd(Common):
     #         },
     #     }
     # }
-
-    # Added in the advent of implementing Elastic APM Stack
-    LOGGING = {
+    LOGGING_CONFIG = None 
+    logging.config.dictConfig({
         "version": 1,
-        "disable_existing_loggers": True,
-        "filters": {
-            "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
-        },
-        "formatters": {
-            "verbose": {
-                "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
-            },
-            "simple": {"format": "%(levelname)s %(message)s"},
-        },
-        "handlers": {
-            # 'elasticapm': {
-            #     'level': 'WARNING',
-            #     'class': 'elasticapm.contrib.django.handlers.LoggingHandler',
-            # },
-            # "mail_admins": {
-            #     "level": "ERROR",
-            #     "filters": ["require_debug_false"],
-            #     "class": "django.utils.log.AdminEmailHandler",
-            # },
-            "console": {
-                "level": "DEBUG",
-                "class": "logging.StreamHandler",
-                "formatter": "verbose",
-            },
-            # 'logstash': {
-            #     'level':'DEBUG' if DEBUG else 'INFO',
-            #     'class': 'logging.handlers.SysLogHandler',
-            #     'address': (os.environ['SYSLOG_SERVER'],
-            #         int(os.environ['SYSLOG_PORT'])),
-            #     'socktype': socket.SOCK_STREAM if os.environ['SYSLOG_PROTO'] else socket.SOCK_DGRAM,
-            # }
-        },
-        "loggers": {
-            "django.request": {
-                "handlers": ["console"],
-                "level": "ERROR",
-                "propagate": True,
-            },
-            "skills": {
-                "handlers": ["console"],
-                "level": "INFO",
-                "filters": ["require_debug_false"],
-            },
-            "users": {"handlers": ["console"], "level": "INFO", "formatter": "simple"},
-            "registration": {
-                "handlers": ["console"],
-                "level": "INFO",
-                "formatter": "simple",
-            },
-            "rewards": {
-                "handlers": ["console"],
-                "level": "INFO",
-                "formatter": "simple",
-            },
-            "external": {
-                "handlers": ["console"],
-                "level": "INFO",
-                "formatter": "simple",
-            },
-            "helps": {"handlers": ["console"], "level": "INFO", "formatter": "simple"},
-            "django.db.backends": {
-                "level": "ERROR",
-                "handlers": ["console"],
-                "propagate": False,
-            },
-            # 'mysite': {
-            #     'level': 'WARNING',
-            #     'handlers': ['elasticapm'],
-            #     'propagate': False,
-            # },
-            # Log errors from the Elastic APM module to the console (recommended)
-            # 'elasticapm.errors': {
-            #     'level': 'ERROR',
-            #     'handlers': ['console'],
-            #     'propagate': False,
-            # },
-        },
-    }
-    # END LOGGING CONFIGURATION
+        "disable_existing_loggers": False,
+    })
+    # Added in the advent of implementing Elastic APM Stack
+    # LOGGING = {
+    #     "version": 1,
+    #     "disable_existing_loggers": True,
+    #     "filters": {
+    #         "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
+    #     },
+    #     "formatters": {
+    #         "verbose": {
+    #             "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+    #         },
+    #         "simple": {"format": "%(levelname)s %(message)s"},
+    #     },
+    #     "handlers": {
+    #         # 'elasticapm': {
+    #         #     'level': 'WARNING',
+    #         #     'class': 'elasticapm.contrib.django.handlers.LoggingHandler',
+    #         # },
+    #         # "mail_admins": {
+    #         #     "level": "ERROR",
+    #         #     "filters": ["require_debug_false"],
+    #         #     "class": "django.utils.log.AdminEmailHandler",
+    #         # },
+    #         "console": {
+    #             "level": "DEBUG",
+    #             "class": "logging.StreamHandler",
+    #             "formatter": "verbose",
+    #         },
+    #         # 'logstash': {
+    #         #     'level':'DEBUG' if DEBUG else 'INFO',
+    #         #     'class': 'logging.handlers.SysLogHandler',
+    #         #     'address': (os.environ['SYSLOG_SERVER'],
+    #         #         int(os.environ['SYSLOG_PORT'])),
+    #         #     'socktype': socket.SOCK_STREAM if os.environ['SYSLOG_PROTO'] else socket.SOCK_DGRAM,
+    #         # }
+    #     },
+    #     "loggers": {
+    #         "django.request": {
+    #             "handlers": ["console"],
+    #             "level": "ERROR",
+    #             "propagate": True,
+    #         },
+    #         "skills": {
+    #             "handlers": ["console"],
+    #             "level": "INFO",
+    #             "filters": ["require_debug_false"],
+    #         },
+    #         "users": {"handlers": ["console"], "level": "INFO", "formatter": "simple"},
+    #         "registration": {
+    #             "handlers": ["console"],
+    #             "level": "INFO",
+    #             "formatter": "simple",
+    #         },
+    #         "rewards": {
+    #             "handlers": ["console"],
+    #             "level": "INFO",
+    #             "formatter": "simple",
+    #         },
+    #         "external": {
+    #             "handlers": ["console"],
+    #             "level": "INFO",
+    #             "formatter": "simple",
+    #         },
+    #         "helps": {"handlers": ["console"], "level": "INFO", "formatter": "simple"},
+    #         "django.db.backends": {
+    #             "level": "ERROR",
+    #             "handlers": ["console"],
+    #             "propagate": False,
+    #         },
+    #         # 'mysite': {
+    #         #     'level': 'WARNING',
+    #         #     'handlers': ['elasticapm'],
+    #         #     'propagate': False,
+    #         # },
+    #         # Log errors from the Elastic APM module to the console (recommended)
+    #         # 'elasticapm.errors': {
+    #         #     'level': 'ERROR',
+    #         #     'handlers': ['console'],
+    #         #     'propagate': False,
+    #         # },
+    #     },
+    # }
+    # # END LOGGING CONFIGURATION
     # Elastic APM Configuration
     ELASTIC_APM = {
         "SERVICE_NAME": os.getenv("ELASTIC_APM_SERVICE_NAME", "tuteria"),

@@ -2096,7 +2096,7 @@ class BaseRequestTutor(TimeStampedModel):
     def no_of_month_to_display(self):
         if self.days_per_week < 4:
             return self.get_days_per_week_display()
-        return "1 month"
+        return "4 weeks"
 
     def tutor_price(self, per_hour):
         v = self.price_calculator(per_hour)

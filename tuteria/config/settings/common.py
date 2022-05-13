@@ -835,6 +835,7 @@ class Common(Configuration):
         # "/s/hometutors"
         # 'PARENT_REQUEST_URL', "/home-tutors-in-nigeria"
     )
+    GROUP_LESSONS_URL = os.getenv("GROUP_LESSONS_URL", "https://classes.tuteria.com")
     SCHEDULER_HOST_URL = os.getenv(
         "SCHEDULER_HOST_URL", "http://email-service.tuteria.com:8020"
     )
@@ -847,7 +848,7 @@ class Common(Configuration):
     MEDIA_FORMAT = "tuteria"
     # MEDIA_SERVICE = "http://localhost:8000"
     # MEDIA_SERVICE = "http://dev.tuteria.com:8020"
-    MEDIA_SERVICE = "https://sheet.tuteria.com"
+    MEDIA_SERVICE = "http://sheet.tuteria.com:8020"
     # USE_NEW_FLOW = True
     USE_NEW_FLOW = os.getenv("USE_NEW_FLOW") == "True"
     BECOME_TUTOR_URL = os.getenv("BECOME_TUTOR_URL", "https://tutors.tuteria.com")

@@ -98,8 +98,8 @@
                                 <h2 class="title font-head bright-blue">{% if object.gender == "M" %}Male {% elif object.gender == "F" %}Female {% else %}{% endif %}{% if object.is_parent_request %}
                                     {% if object.request_type == 3 %}Online Home tutoring{% else %} Home Tutor in
                                     {{ object.get_vicinity }}, {{object.state}} {%endif%}
-                                    {% else %}{{ object.request_subjects.0 |title }} Tutor in
-                                    {{ object.get_vicinity |title }}, {{object.state}}
+                                    {% else %}{% if object.request_type == 3 %}Online tutoring{% else %}{{ object.request_subjects.0 |title }} Tutor in
+                                    {{ object.get_vicinity |title }}, {{object.state}}{% endif %}
                                 {% endif %}
                                     <br>
                                     <span class="h5 font-head brightblue">Client: {{ object.first_name|capfirst }},</span>

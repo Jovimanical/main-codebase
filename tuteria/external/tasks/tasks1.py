@@ -89,6 +89,7 @@ def email_sent_after_completing_request(pk, email=None):
             "email": user.email,
             "agent_string": agent_string,
             "budget": user.budget,
+            "service_fee": 3000
         },
         "same_password": same_password,
         "agent_string": agent_string,

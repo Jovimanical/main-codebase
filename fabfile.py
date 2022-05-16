@@ -45,9 +45,10 @@ def deploy_dev(build_no=9):
             run("pwd")
             print(build_no)
             run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
-            run("docker-compose up -d app2")
-            run('docker image prune -f')
-            run('docker container prune -f')
+            run("DEV_DEPLOY_VERSION={} docker-compose up -d app2".format(build_no))
+            run("docker image prune -f")
+            run("docker container prune -f")
+
 
 @hosts("sama@beeola.tuteria.com")
 def run_tests(build_no=9):
@@ -56,12 +57,32 @@ def run_tests(build_no=9):
         with cd(code_dir):
             run("pwd")
             run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
-            run("docker-compose run app2 /bin/bash /scripts/run_test.sh /home/app/source")
-            run('docker image prune -f')
-            run('docker container prune -f')
+            run(
+                "DEV_DEPLOY_VERSION={} docker-compose run app2 /bin/bash /scripts/run_test.sh /home/app/source".format(
+                    build_no
+                )
+            )
+            run("docker image prune -f")
+            run("docker container prune -f")
 
-def sample():
-    pass
+
+@hosts("sama@release.tuteria.com")
+def deploy_staging(build_no=9):
+    code_dir = "/home/sama/tuteria-projects/tuteria-deploy"
+    with settings(user="sama", password=password):
+        with cd(code_dir):
+            run("pwd")
+            print(build_no)
+            run("DEV_DEPLOY_VERSION={} docker-compose pull app2".format(build_no))
+            run("docker-compose up -d app2")
+            run("docker image prune -f")
+            run("docker container prune -f")
+
+
+@hosts("sama@web2.tuteria.com")
+def deploy_production(build_no=9):
+    w_images()
+
 
 @hosts("sama@tutor-search.tuteria.com")
 def deploy_current(branch="master"):
@@ -139,29 +160,6 @@ def deploy_staging_server():
         run("docker-compose kill app3")
         run("docker-compose rm -f app3")
         run("docker-compose up -d app3")
-        run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
-
-
-@hosts("sama@ci.tuteria.com")
-def deploy_staging():
-    with cd("/home/sama/tuteria-deploy"):
-        run("git pull --no-edit")
-        run("docker-compose kill webserver assets")
-        run("docker-compose rm -f webserver assets")
-        run("docker volume rm tuteriadeploy_media_backups")
-        run("docker-compose pull assets")
-        run("docker-compose pull marketing-pages")
-        run("docker-compose up -d webserver")
-        run("docker-compose up -d marketing-pages")
-    run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
-
-
-@hosts("sama@ci.tuteria.com")
-def deploy_staging_django():
-    with cd("/home/sama/tuteria"):
-        run("git pull")
-        run("git checkout develop")
-        run("source boot_app_staging.sh")
         run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
 
 

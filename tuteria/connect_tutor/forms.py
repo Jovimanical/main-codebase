@@ -56,8 +56,10 @@ class RequestWithRelations(object):
 
     def subject_to_create(self):
         name_only = [x["name"] for x in self.tuteria_subjects]
-        self.relations = [o for o in self.relations if o in name_only]
-        self.skill_relations = [o for o in self.skill_relations if o in name_only]
+        self.relations = [o for o in self.relations if o in ", ".join(name_only)]
+        self.skill_relations = [
+            o for o in self.skill_relations if o in ", ".join(name_only)
+        ]
         if self.user:
             denied_tutor_subjects = (
                 self.user.tutorskill_set.exclude_denied_and_pending()

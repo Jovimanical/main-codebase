@@ -2205,6 +2205,8 @@ class GroupRequestService:
         for key, value in request_fields.items():
             setattr(instance, key, value)
         instance.slug = generate_code(BaseRequestTutor, "slug")
+        if not instance.last_name:
+            instance.last_name = ""
         instance.save()
         if user:
             instance.user = user

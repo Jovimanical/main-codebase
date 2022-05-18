@@ -95,12 +95,14 @@
                                     <span class="h3 per-hour-pricing">Earning: &#x20A6;{{ pricings|floatformat:0 }}</span>
                                 </div>
                                 <div class="clear-fix"></div>
-                                <h2 class="title font-head bright-blue">{% if object.gender == "M" %}Male {% elif object.gender == "F" %}Female {% else %}{% endif %}{% if object.is_parent_request %}
+                                <h2 class="title font-head bright-blue">
+                                {% include "connect_tutor/includes/display_summary.html" %}
+                                {% comment %} {% if object.gender == "M" %}Male {% elif object.gender == "F" %}Female {% else %}{% endif %}{% if object.is_parent_request %}
                                     {% if object.request_type == 3 %}Online Home tutoring{% else %} Home Tutor in
                                     {{ object.get_vicinity }}, {{object.state}} {%endif%}
                                     {% else %}{% if object.request_type == 3 %}Online tutoring{% else %}{{ object.request_subjects.0 |title }} Tutor in
                                     {{ object.get_vicinity |title }}, {{object.state}}{% endif %}
-                                {% endif %}
+                                {% endif %} {% endcomment %}
                                     <br>
                                     <span class="h5 font-head brightblue">Client: {{ object.first_name|capfirst }},</span>
                                     <span class="h5 color-white-mute ">{{ object.created|naturaltime }}</span>

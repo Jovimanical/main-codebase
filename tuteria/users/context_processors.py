@@ -18,6 +18,20 @@ from connect_tutor.models import BlogCategory, BlogArticle
 from external.models import SocialCount
 from skills.models import Category
 from gateway_client import TuteriaDetail
+import requests
+
+
+def get_static_assets():
+    result = {"css": [], "js": []}
+    response = requests.get(f"{settings.TUTERIA_CDN_URL}/asset-manifest.json")
+    if response.status_code < 400:
+        data = response.json()
+        result["css"] = [x for x in data["entrypoints"] if x.endswith(".css")]
+        result["js"] = [x for x in data["entrypoints"] if x.endswith(".js")]
+    return result
+
+
+static_assets = get_static_assets()
 
 
 # redis_con = get_redis_connection('default')
@@ -249,7 +263,7 @@ def consts(request):
             "tutors near you for whatever you wish to learn. From academic subjects to various exams "
             "and even skills like music, bead-making, photography, dance and more!"
         ),
-        meta_title=u"Get ₦1,500 off your first lesson!",
+        meta_title="Get ₦1,500 off your first lesson!",
         meta_description=(
             "Click here now to join {} on Tuteria and get the best tutors"
             " in your area for any subject, skill or exam."
@@ -258,6 +272,7 @@ def consts(request):
         # debug=True,
         debug=False,
         tutor_client_cdn=settings.TUTERIA_CDN_URL,
+        static_assets=static_assets
     )
 
     # og_title="Earn Extra Money Teaching People What You Love",

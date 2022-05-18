@@ -93,6 +93,10 @@
         var c = a;
         r();
       })([]);
-    </script><script src="{{s_host}}/static/js/2.d019133c.chunk.js"></script>
-    <script src="{{s_host}}/static/js/main.6cde10bf.chunk.js"></script>
+    </script>
+    {% for js_file in static_assets.js %}
+    <script src="{{s_host}}/{{js_file}}"></script>
+    {% endfor %}
+    {% comment %} <script src="{{s_host}}/static/js/2.d019133c.chunk.js"></script>
+    <script src="{{s_host}}/static/js/main.6cde10bf.chunk.js"></script> {% endcomment %}
 {% endif %}

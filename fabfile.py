@@ -81,7 +81,15 @@ def deploy_staging(build_no=9):
 
 @hosts("sama@web2.tuteria.com")
 def deploy_production(build_no=9):
-    w_images()
+    with cd("/home/sama/tuteria"):
+        # run("git pull upstream master")
+        run("docker-compose pull app")
+        run("docker-compose kill app2")
+        run("docker-compose rm -f app2")
+        # run("docker-compose run app2 python manage.py collectstatic --noinput")
+        run("docker-compose up -d --scale app2=2 app2")
+        run('docker rmi $(docker images --filter "dangling=true" -q --no-trunc)')
+
 
 
 @hosts("sama@tutor-search.tuteria.com")

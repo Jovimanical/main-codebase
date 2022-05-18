@@ -179,10 +179,12 @@
                         <div class="col-sm-9 col-md-9 col-lg-9">
                           <h3 class="no-margin-top">
                           <a href="{% url 'job-details' job.slug %}" class="">
-{% if job.gender == "M" %}Male {% elif job.gender == "F" %}Female {% else %}{% endif %}
+                            {% include "connect_tutor/includes/display_summary.html" with object=job %}
+{% comment %} {% if job.gender == "M" %}Male {% elif job.gender == "F" %}Female {% else %}{% endif %}
                           {% if job.is_parent_request %}Home Tutor in {{job.get_vicinity}}, {{job.state}}
                             {% else %}{{job.request_subjects.0 |title}} Tutor in {{job.get_vicinity|title}}, {{job.state}}
-                          {% endif %}</a></h3>
+                          {% endif %} {% endcomment %}
+                          </a></h3>
                           <p class="">{{job.expectation |capfirst}}</p>
                           {% if job.request_subjects|length > 1 or job.is_parent_request %}
                              

@@ -1,7 +1,10 @@
 {% if debug %}
 {% else %}
-    <link href="{{s_host}}/static/css/2.4a8ef3f6.chunk.css" rel="stylesheet">
-    <link href="{{s_host}}/static/css/main.b3b94338.chunk.css" rel="stylesheet">
+{% for js_file in static_assets.css %}
+<script src="{{s_host}}/{{js_file}}"></script>
+{% endfor %}
+    {% comment %} <link href="{{s_host}}/static/css/2.4a8ef3f6.chunk.css" rel="stylesheet">
+    <link href="{{s_host}}/static/css/main.b3b94338.chunk.css" rel="stylesheet"> {% endcomment %}
 
 {% endif %}
 

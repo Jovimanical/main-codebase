@@ -189,7 +189,7 @@
                                             <li><span class="color-white-mute">Time:</span>
                                                 {{ object.time_of_lesson }}</li>
                                             <li><span
-                                                    class="color-white-mute">Venue:</span> {{ object.get_tutoring_location_display }}
+                                                    class="color-white-mute">Venue:</span> {% if object.request_type == 3%} Online {% else %} {{ object.get_tutoring_location_display }}{% endif %}
                                             </li>
                                         </ul>
                                     </div>

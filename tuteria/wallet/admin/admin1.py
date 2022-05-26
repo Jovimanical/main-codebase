@@ -337,7 +337,8 @@ class WalletTransactionAdmin(ImportExportMixin, admin.ModelAdmin):
     def wallet_info(self, obj):
         if obj.wallet:
             owner = obj.wallet.owner
-            return f"{owner.first_name} {owner.last_name}"
+            if owner:
+                return f"{owner.first_name} {owner.last_name}"
         return ""
 
     def export_as_csv(modeladmin, request, queryset):
@@ -382,10 +383,11 @@ class WalletTransactionAdmin(ImportExportMixin, admin.ModelAdmin):
         return query
 
     def wallet_owner(self, obj):
-        email = obj.wallet.owner.email
-        return (
-            '<a href="/we-are-allowed/wallet/wallet/?q={}"' ' target="_blank">{}</a>'
-        ).format(email, email)
+        if obj.wallet.owner:
+            email = obj.wallet.owner.email
+            return (
+                '<a href="/we-are-allowed/wallet/wallet/?q={}"' ' target="_blank">{}</a>'
+            ).format(email, email)
 
     wallet_owner.allow_tags = True
 
@@ -524,13 +526,14 @@ class RequestToWithdrawAdmin(admin.ModelAdmin):
     def links_to_bookings(self, obj):
         result = []
         for a in obj.clients_not_paid:
-            email = a.wallet.owner.email
-            result.append(
-                (
-                    '<a href="/we-are-allowed/bookings/booking/?q={}"'
-                    ' target="blank">{}</a>'
-                ).format(email, email)
-            )
+            if a.wallet.owner:
+                email = a.wallet.owner.email
+                result.append(
+                    (
+                        '<a href="/we-are-allowed/bookings/booking/?q={}"'
+                        ' target="blank">{}</a>'
+                    ).format(email, email)
+                )
         return result
 
     links_to_bookings.allow_tags = True
@@ -538,12 +541,13 @@ class RequestToWithdrawAdmin(admin.ModelAdmin):
     def clients_not_paid(self, obj):
         result = []
         for a in obj.clients_not_paid:
-            result.append(
-                (
-                    '<a href="/we-are-allowed/wallet/bookingnotpaid/?q={}"'
-                    ' target="_blank">{}</a>'
-                ).format(a.wallet.owner.email, "Client yet to pay {}".format(a.total))
-            )
+            if a.wallet.owner:
+                result.append(
+                    (
+                        '<a href="/we-are-allowed/wallet/bookingnotpaid/?q={}"'
+                        ' target="_blank">{}</a>'
+                    ).format(a.wallet.owner.email, "Client yet to pay {}".format(a.total))
+                )
         return result
 
     clients_not_paid.allow_tags = True

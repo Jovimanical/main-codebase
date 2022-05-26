@@ -44,6 +44,20 @@ from external.subjects_2 import (
 
 
 class AgentStatistics:
+    @classmethod 
+    def general_performance(cls, year=None):
+        revenue_with_tutor_earning = WalletTransaction.objects.get_revenue_with_tutor_earning(year)
+        _year = year 
+        if _year == 'undefined':
+            _year = None
+        customers = User.objects.customers(year=_year).count()
+        return Result(data=[
+                { "label": "Revenue", "value": "${:,}".format(revenue_with_tutor_earning['revenue']) },
+                { "label": "Tutor Earnings", "value": "${:,}".format(revenue_with_tutor_earning['earnings']) },
+                { "label": "Unique Clients", "value": "{:,}".format(customers) },
+                { "label": "Total tutors", "value": "71,887" },
+                { "label": "Lesson booked", "value": "71,887" },
+                { "label": "Hours taught", "value": "71,887" },])
     @classmethod
     def performances(cls, body):
         _from = body.get("from")
@@ -405,9 +419,13 @@ class LoginService:
     @classmethod
     def update_tutor_identity(cls, user, identity):
         if identity.get("profilePhotoId"):
-            UserProfile.objects.filter(user=user).update(
-                image=identity["profilePhotoId"]
-            )
+            profile = user.profile
+            if profile.image:
+                profile.image.public_id = identity['profilePhotoId']
+            else:
+                UserProfile.objects.filter(user=user).update(
+                    image=identity["profilePhotoId"]
+                )
         if not identity.get("isIdVerified"):
             files = (identity.get("uploadStore") or {}).get("files")
             if files:
@@ -464,7 +482,7 @@ class LoginService:
             user: typing.Optional[User] = User.objects.filter(
                 slug__iexact=slug.strip()
             ).first()
-            if user and user.data_dump:
+            if user:
                 user_dump = user.data_dump or {}
                 tutor_dump = user_dump.get("tutor_update") or {}
                 tutor_dump.update(**data)

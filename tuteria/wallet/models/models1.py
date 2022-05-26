@@ -219,6 +219,17 @@ class WalletTransactionQueryset(models.QuerySet):
     #         't_amount':'(credit+amount)'
     #         })
 
+    def get_revenue_with_tutor_earning(self, year=None):
+        earnings = self.tutor_earning()
+        revenue = self.used_to_hire()
+        if year:
+            earnings = earnings.filter(created__year=year)
+            revenue = revenue.filter(created__year=year)
+        return {
+            'earnings': earnings.count(),
+            'revenue': revenue.count()
+        }
+
     def tutor_earning_statistics(self):
         from bookings.models import BookingSession
 
@@ -466,6 +477,8 @@ class WalletTransactionQueryset(models.QuerySet):
 
 
 class WalletTransactionManager(models.Manager):
+    def get_revenue_with_tutor_earning(self, *args, **kwargs):
+        return self.get_queryset().get_revenue_with_tutor_earning(*args,**kwargs)
     def get_queryset(self):
         return WalletTransactionQueryset(self.model, using=self._db).with_bookings()
 

@@ -43,8 +43,8 @@ class CustomUserManager(BaseUserManager):
     def get_queryset(self):
         return CustomUserQuerySet(self.model, using=self._db)
 
-    def customers(self):
-        return self.get_queryset().customers()
+    def customers(self,*args, **kwargs):
+        return self.get_queryset().customers(*args, **kwargs)
 
     def get_new_applicants(self):
         return self.get_queryset().get_new_applicants()
@@ -149,7 +149,7 @@ class CustomUserManager(BaseUserManager):
     def tutors_with_no_subjects(self):
         return self.get_queryset().t_with_no_subjects()
 
-    def customers(self):
+    def potential_customers(self):
         return self.get_queryset().potiential_customers()
 
     def get_duplicate_users(self):

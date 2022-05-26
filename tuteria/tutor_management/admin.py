@@ -358,7 +358,13 @@ class TutorApplicantTrackAdmin(admin.ModelAdmin):
         "update_not_approved_tutors_status",
         "update_current_step_for_existing_tutors",
         "sync_to_mailing_list",
+        "update_profile_picture"
     ]
+
+    def update_profile_picture(self, request,queryset):
+        for tutor in queryset.all():
+            tutor.update_profile_picture()
+        self.message_user(request, "profile picture updated")
 
     def get_actions(self, request: HttpRequest) -> OrderedDict:
         actions = super().get_actions(request)
@@ -762,6 +768,7 @@ class NewTutorApplicantAdmin(TutorApplicantTrackAdmin):
                 {"action": "approve_tutor", "remark": "", "staff": request.user.email}
             )
         self.message_user(request, "Applications approved")
+
 
     def deny_applicant(self, request, queryset):
         for tutor in queryset.all():

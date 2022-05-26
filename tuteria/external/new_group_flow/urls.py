@@ -217,4 +217,5 @@ urlpatterns = [
         name="add_tutor_to_pool",
     ),
     url(r"^agents/statistics/?$", views.agent_statistics, name="agent_statistics_v"),
+    url(r"^progress-stats/?$",views.progress_statistics,name="progress_statistics")
 ]

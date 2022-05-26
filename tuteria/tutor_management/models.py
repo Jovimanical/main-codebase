@@ -358,6 +358,11 @@ class TutorApplicantTrack(User):
         self.profile.approve_teaching_status()
         self.to_mailing_list()
 
+    def update_profile_picture(self):
+        result = LoginService.update_tutor_info(
+            self.slug, self.data_dump["tutor_update"], _process=True
+        )
+
     def remove_video_and_identity_resources(self, action):
         video_public_id = ""
         identity_public_id = ""

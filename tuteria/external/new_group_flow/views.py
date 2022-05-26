@@ -2,7 +2,7 @@ from decimal import Decimal
 import json
 import typing
 import datetime
-
+from django.shortcuts import render
 from dateutil.relativedelta import relativedelta
 
 from allauth.account.views import ResetPasswordForm
@@ -902,3 +902,11 @@ def agent_statistics(request: WSGIRequest):
     if result.errors:
         return JsonResponse({"status": False, "errors": result.errors}, status=400)
     return JsonResponse({"status": True, "data": result.data})
+
+def progress_statistics(request:WSGIRequest):
+    is_json = request.GET.get('json')
+    year = request.GET.get('year')
+    result:Result = AgentStatistics.general_performance(year)
+    if is_json:
+        return JsonResponse({"status":True,'data':result.data})
+    return render(request, "pages/progress-statistics.html",{'performance_data':json.dumps(result.data)})

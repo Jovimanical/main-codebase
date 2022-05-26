@@ -1,0 +1,31 @@
+{% load staticfiles add_attr bootstrap3 i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site statistics</title>
+</head>
+
+<body>
+    <div id="statsId"></div>
+    {% include "users/includes/react-dev-server.html" with debug=debug s_host=tutor_client_cdn %}
+    <script>
+        async function getStatistics(year) {
+            let result = await fetch(`/new-flow/progress-stats?json=true&year=${year}`)
+            if (result.status < 400) {
+                let payload = await result.json()
+                return payload.data
+            }
+            return []
+        }
+        window.renderStatisticsInfo({
+            data: JSON.parse('{{ performance_data|escapejs }}')
+            , getStatistics
+        })
+    </script>
+</body>
+
+</html>

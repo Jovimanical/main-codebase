@@ -661,7 +661,7 @@ class Wallet(WalletMixin, TimeStampedModel):
     )
     wallet_type = models.CharField(choices=WALLET_TYPE, default="user", max_length=10)
     authorization_code = models.CharField(max_length=50, blank=True, null=True)
-    owner = models.OneToOneField(User, related_name="wallet", on_delete=models.CASCADE)
+    owner = models.OneToOneField(User, related_name="wallet", on_delete=models.SET_NULL,null=True)
     auto_withdraw = models.BooleanField(default=False)
 
     objects = WalletQuerySet.as_manager()

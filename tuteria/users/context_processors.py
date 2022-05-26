@@ -269,7 +269,7 @@ def consts(request):
             " in your area for any subject, skill or exam."
         ).format(user_name),
         use_new_tutor_flow=settings.USE_NEW_FLOW,
-        debug=True,
+        debug=False,
         # debug=False,
         tutor_client_cdn=settings.TUTERIA_CDN_URL,
         static_assets=static_assets
